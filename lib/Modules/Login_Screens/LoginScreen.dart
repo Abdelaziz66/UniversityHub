@@ -90,18 +90,18 @@ class _loginscreenState extends State<loginscreen> {
 
                     children: [
                       SizedBox(
-                        height: 60,
+                        height: 40,
                       ),
                       Container(
                         alignment: AlignmentDirectional.center,
                         child: CircleAvatar(
-                          radius: 120,
+                          radius: 130,
 
                           backgroundColor: Colors.black.withOpacity(.08),
                           child: Padding(
                             padding: const EdgeInsets.all(30.0),
                             child: Image.asset(
-                              'assets/images/3.png',
+                              'assets/images/login.png',
                             ),
                           ),
                         ),

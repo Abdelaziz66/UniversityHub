@@ -13,3 +13,11 @@ Color c3 =HexColor('#415A77');
 Color c4 =HexColor('#778DA9');
 Color c5 =Colors.white;
 
+Color p1 =HexColor('#3D5CFF');
+Color p2 =HexColor('#FFE7EE');
+Color p3 =HexColor('#D8FFEF');
+
+
+
+// Color c1 =Colors.white;
+

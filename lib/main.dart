@@ -11,6 +11,13 @@ import 'Shared/Cubit/bloc_observed.dart';
 import 'Shared/Style/App_Style.dart';
 
 // from abdelaziz 31
+// git checkout -b zeko-branch
+// git pull origin main
+// code………
+// git add .
+// git commit -m 'new commit'
+// git push origin zeko-branch
+
 // from alfy
 
 void main() {
