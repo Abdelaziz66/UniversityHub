@@ -164,7 +164,7 @@ class App_cubit extends Cubit<App_state> {
      Home_screen(),
       switch_Courses_Fun(),
     const Chat_screen(),
-      switch_Tasks_Fun(),
+      Task_screen(),
       const Profile_screen()
   ];}
 

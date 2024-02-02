@@ -83,14 +83,14 @@ class LandScape_2 extends StatelessWidget {
                 Container(
                   alignment: AlignmentDirectional.center,
                   child: CircleAvatar(
-                    radius: 180,
+                    radius: 150,
 
                     backgroundColor: Colors.black.withOpacity(.0),
                     child: Padding(
                       padding: const EdgeInsets.all(0.0),
                       child: Image.asset(
-                        'assets/images/2.png',
-                        height: 350,
+                        'assets/images/w1.png',
+
                       ),
                     ),
                   ),
