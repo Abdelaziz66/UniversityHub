@@ -136,7 +136,7 @@ class App_cubit extends Cubit<App_state> {
 // Navigation Bar Start Here >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
-  bool? isStudent;
+  bool? isStudent=true;
   void switch_isStudent_Fun({required bool is_studentvalue}){
     isStudent=is_studentvalue;
     emit(Switch_stud_ins_bool_state());

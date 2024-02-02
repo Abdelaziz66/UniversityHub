@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:university_hup/Modules/LandScape_Screens/LandScape_1_Screen.dart';
 
 import 'Layout/Switch_Screen.dart';
 import 'Shared/Cubit/App_cubit.dart';
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
               themeMode: ThemeMode.light,
 
 // home:StartWidget,
-              home:  Switch_screen(),
+              home:  LandScape_1(),
             );
           }),
     );
