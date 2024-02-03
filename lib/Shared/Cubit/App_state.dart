@@ -51,4 +51,8 @@ class AddNewFile_Assign_Loading_State extends App_state{}
 class AddNewFile_Assign_Success_State extends App_state{}
 class AddNewFile_Assign_Error_State extends App_state{}
 
+//-----------------STU_Quiz_states-------------
+class Change_Quiz_Answer_State extends App_state{}
+
+
 

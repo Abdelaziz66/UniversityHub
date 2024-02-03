@@ -24,6 +24,7 @@ class Layout_Screen extends StatelessWidget {
           key: scafoldkey,
 
           drawer: Drawer(
+            width: 350,
             backgroundColor: Colors.transparent,
             shadowColor: Colors.black,
             elevation: 0,

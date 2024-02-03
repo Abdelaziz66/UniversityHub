@@ -86,7 +86,6 @@ class App_cubit extends Cubit<App_state> {
 
   ];
   List N_HomeScreen_Icon=[
-
     CircleAvatar(
       radius: 22,
       backgroundColor: Colors.white.withOpacity(.5),
@@ -123,8 +122,6 @@ class App_cubit extends Cubit<App_state> {
         size: 25,
       ),
     ),
-
-
   ];
 
   int? D_value=0;
@@ -143,7 +140,7 @@ class App_cubit extends Cubit<App_state> {
   }
 
   Widget switch_Courses_Fun(){
-    //emit(Switch_stud_ins_state());
+
     if(isStudent==true){
       return STU_Lecture_Screen();
     }else {
@@ -163,7 +160,7 @@ class App_cubit extends Cubit<App_state> {
     return[
      Home_screen(),
       switch_Courses_Fun(),
-    const Chat_screen(),
+      const Chat_screen(),
       Task_screen(),
       const Profile_screen()
   ];}
@@ -371,5 +368,18 @@ class App_cubit extends Cubit<App_state> {
       emit(AddNewFile_Assign_Error_State());
     }
   }
+
+
+
+  //-----------------STU Quizzes------------
+  List<bool> stu_Quiz_State = [false,false,true];
+  List<bool> stu_Quiz_isStart = [true,false,true];
+  final List<String> stu_Quiz_Ques_options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+  String selectedOption = '';
+  void Quiz_Select_answer(selectedOption){
+    this.selectedOption=selectedOption;
+    emit(Change_Quiz_Answer_State());
+  }
+
 
 }

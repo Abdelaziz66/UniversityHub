@@ -8,6 +8,7 @@ import '../../../../Shared/Cubit/App_cubit.dart';
 import '../../../../Shared/Cubit/App_state.dart';
 import 'In_Lecture_Screen.dart';
 import 'STU_Assign_Screen/STU_Assign_Screen.dart';
+import 'STU_Quizes_Screen/STU_Quizes_Screen.dart';
 
 class STU_About_course extends StatelessWidget {
   const STU_About_course({Key? key}) : super(key: key);
@@ -88,12 +89,10 @@ class STU_About_course extends StatelessWidget {
                                  ),
                                ),
                                Spacer(),
-                               IconButton(onPressed: (){
-                                 navigateTo(context,STU_Matrial_Screen() );
-                               }, icon: Icon(
+                              Icon(
                                  FontAwesomeIcons.arrowRight,
                                  size: 30,
-                               ))
+                               )
                              ],
                            ),
 
@@ -130,12 +129,10 @@ class STU_About_course extends StatelessWidget {
                             ),
                           ),
                           Spacer(),
-                          IconButton(onPressed: (){
-                             navigateTo(context,STU_Assign_Screen() );
-                          }, icon: Icon(
+                       Icon(
                             FontAwesomeIcons.arrowRight,
                             size: 30,
-                          ))
+                          )
                         ],
                       ),
                     ),
@@ -143,39 +140,42 @@ class STU_About_course extends StatelessWidget {
                 ),
                 SizedBox(height: 30,),
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsetsDirectional.all(15),
-
-                    width:double.infinity,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFD1FAE5),
-                      border: Border(
-                        left: BorderSide(width: 8, color: Color(0x9934D399)),
-                        top: BorderSide(color: Color(0x9934D399)),
-                        right: BorderSide(color: Color(0x9934D399)),
-                        bottom: BorderSide(color: Color(0x9934D399)),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Quizes',
-                          style: TextStyle(
-                            color: Color(0xFF3D5CFF),
-                            fontSize: 30,
-                            fontWeight: FontWeight.w500,
-                          ),
+                  child: InkWell(
+                    onTap: (){
+                        navigateTo(context,STU_Quizes_Screen());
+                    },
+                    child: Container(
+                      padding: EdgeInsetsDirectional.all(15),
+                      width:double.infinity,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFD1FAE5),
+                        border: Border(
+                          left: BorderSide(width: 8, color: Color(0x9934D399)),
+                          top: BorderSide(color: Color(0x9934D399)),
+                          right: BorderSide(color: Color(0x9934D399)),
+                          bottom: BorderSide(color: Color(0x9934D399)),
                         ),
-                        Spacer(),
-                        IconButton(onPressed: (){
-                          // navigateTo(context, )
-                        }, icon: Icon(
-                          FontAwesomeIcons.arrowRight,
-                          size: 30,
-                        ))
-                      ],
-                    ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Quizes',
+                            style: TextStyle(
+                              color: Color(0xFF3D5CFF),
+                              fontSize: 30,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          Spacer(),
 
+                          Icon(
+                            FontAwesomeIcons.arrowRight,
+                            size: 30,
+                          )
+                        ],
+                      ),
+
+                    ),
                   ),
                 ),
                 SizedBox(height: 30,),
@@ -206,12 +206,10 @@ class STU_About_course extends StatelessWidget {
                           ),
                         ),
                         Spacer(),
-                        IconButton(onPressed: (){
-                          // navigateTo(context, )
-                        }, icon: Icon(
+                    Icon(
                           FontAwesomeIcons.arrowRight,
                           size: 30,
-                        ))
+                        )
                       ],
                     ),
 
