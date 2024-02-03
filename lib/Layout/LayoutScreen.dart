@@ -432,7 +432,7 @@ class Layout_Screen extends StatelessWidget {
               // ),
               Positioned(
                   child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 80, sigmaY: 80),
+                filter: ImageFilter.blur(sigmaX: 60, sigmaY: 60),
                 child: const SizedBox(),
               )),
               Column(
