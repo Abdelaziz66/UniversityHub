@@ -148,7 +148,7 @@ Widget GlassBoxWithBorder_Gradiant2({
     );
 
 
-Widget Post() {
+Widget Post({required bool image}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 6.0),
     child: GlassBoxWithBorder_Gradiant2(BorderWidth: 0,BorderColor: Colors.black,
@@ -175,7 +175,7 @@ Widget Post() {
                           radius: 25,
                           backgroundColor: Colors.blue,
                           backgroundImage: AssetImage(
-                              'assets/images/profile.png'),
+                              'assets/images/avatar1.png'),
                         ),
                       ),
                       const SizedBox(
@@ -201,7 +201,7 @@ Widget Post() {
                               Icon(
                                 Icons.verified,
                                 size: 18,
-                                color: Colors.blue,
+                                color: Colors.blueGrey.withOpacity(.4),
                               ),
                             ],
                           ),
@@ -267,7 +267,7 @@ Widget Post() {
                           height: 0,
                         )),
                 ConditionalBuilder(
-                    condition: true,
+                    condition: false,
                     builder: (context) => Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5.0),
                           child: Row(
@@ -292,7 +292,7 @@ Widget Post() {
                           height: 10,
                         )),
                 ConditionalBuilder(
-                    condition: true,
+                    condition: image,
                     builder: (context) => Padding(
                           padding: const EdgeInsets.only(
                               left: 0, right: 0.0, top: 5),

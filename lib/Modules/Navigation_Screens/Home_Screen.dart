@@ -1,37 +1,16 @@
+
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-// import '../../Shared/Component/component.dart';
-//
-// class Home_screen extends StatelessWidget {
-//   const Home_screen({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return  Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 5.0),
-//       child: ListView.separated(
-//         itemBuilder: (context, index) => Post(),
-//         separatorBuilder: (context, index) => Container(
-//           height: 15,
-//           color: Colors.transparent,
-//         ),
-//         itemCount: 3,
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rive/rive.dart';
-
-
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
-
-
+import 'package:university_hup/Shared/constant.dart';
 
 
 class Home_screen extends StatelessWidget {
@@ -43,11 +22,11 @@ class Home_screen extends StatelessWidget {
       listener: (context, state) => {},
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
+        List<bool> image = [true, false, false, true, true, false, true, false];
         return Scaffold(
           backgroundColor: Colors.transparent,
           body: Stack(
             children: [
-
               Column(
                 children: [
                   Spacer(),
@@ -61,29 +40,114 @@ class Home_screen extends StatelessWidget {
               ),
               Positioned(
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
-                    child: const SizedBox(),
-                  )),
+                filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
+                child: const SizedBox(),
+              )),
               SafeArea(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 50,),
-                    Expanded(
-                      child: ListView.separated(
-                        itemBuilder: (context, index) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Post(),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 50.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                          child:  Container(
+                            width: double.infinity,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15.0,vertical: 15),
+                                    child: Row(
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                          children: [
+                                            const Text(
+                                              'Hi, Name Here !',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 25,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            SizedBox(height: 5,),
+                                            Text(
+                                              'Time Line Here.',
+                                              style: TextStyle(
+                                                // fontWeight: FontWeight.w800,
+
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500,
+                                                color: c1,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                             ),
+                                          child: Stack(
+                                            alignment: AlignmentDirectional.bottomEnd,
+                                            children: [
+
+                                              CircleAvatar(
+                                                radius: 50,
+                                                backgroundColor: Colors.blue,
+                                                backgroundImage: AssetImage(
+                                                    'assets/images/avatar1.png'),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.all(7.0),
+                                                child: CircleAvatar(
+                                                  radius: 8,
+                                                  backgroundColor: Colors.green,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+
+
+                                      ],
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
-                        separatorBuilder: (context, index) => Container(
-                          height: 15,
-                          color: Colors.transparent,
+                        ListView.separated(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+
+
+                          // physics: ,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Post(image: image[index]),
+                          ),
+                          separatorBuilder: (context, index) => Container(
+                            height: 0,
+                            color: Colors.transparent,
+                          ),
+                          itemCount: 8,
                         ),
-                        itemCount: 10,
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],
