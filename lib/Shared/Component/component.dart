@@ -4,6 +4,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../Modules/Student_Screens/Student_Courses_Screen/STU_Lecture_Screens/STU_Quizes_Screen/STU_Quiz_Ques.dart';
 import '../../Modules/instructor_Screens/Courses_Screens/Material_content_sec_or_lec.dart';
 import '../Cons_widget.dart';
 import '../Cubit/App_cubit.dart';
@@ -1374,3 +1375,111 @@ Widget BuildAssignFileViewWidget(
         ),
       ));
 }
+
+Widget Build_Quiz_Data_Widget(List<bool>quizState,List<bool>isQuizStart,int index)=> Container(
+      padding: EdgeInsetsDirectional.all(12),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: Colors.blue)
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+
+        children: [
+          Text('Parllel programming Quiz 1',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text('10 Points'),
+          SizedBox(height: 50,),
+          ConditionalBuilder(
+              condition: quizState[index],
+              builder: (context) =>
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 40.0),
+                    child: Text('Finished',
+
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                  ),
+                  ),
+              fallback: (context) => Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('From'),
+                      SizedBox(width: 10,),
+                      Container(
+                        height: 25,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: Colors.blue)
+                        ),
+                        child: Center(child: Text('10:00')),
+                      ),
+                      SizedBox(width: 10,),
+
+                      Text('To'),
+                      SizedBox(width: 10,),
+                      Container(
+                        height: 25,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: Colors.blue)
+                        ),
+                        child: Center(child: Text('10:00')),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 50,),
+                  Container(
+                    height: 40,
+                    width: 140,
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Center(child:
+                    isQuizStart[index]?TextButton(
+                        onPressed: (){
+                          navigateTo(context, STU_Quizes_Ques_Screen());
+                        },
+                       child:  Text('Start',
+                         style: TextStyle(
+                             color: Colors.white,
+                             fontWeight: FontWeight.bold,
+                             fontSize: 20
+                         ),
+
+                       ) ,
+                    ):
+                    Text('Waiting',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20
+                      ),
+
+                    )
+                    ),
+                  ),],
+              )
+
+          ),
+
+
+
+        ],
+      ),
+    );
+
+
+
