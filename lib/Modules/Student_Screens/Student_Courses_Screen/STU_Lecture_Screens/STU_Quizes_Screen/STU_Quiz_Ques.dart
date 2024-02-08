@@ -6,8 +6,23 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 
 import '../../../../../Shared/Component/component.dart';
+import '../../../../../Shared/Cons_widget.dart';
+import 'STU_Quiz_Finish_Screen.dart';
 
-class STU_Quizes_Ques_Screen extends StatelessWidget {
+
+
+class STU_Quizes_Ques_Screen extends StatefulWidget {
+
+
+  @override
+  State<STU_Quizes_Ques_Screen> createState() => _STU_Quizes_Ques_ScreenState();
+}
+
+class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
+  bool islast = false;
+  bool ismiddle =false;
+
+  var boardcontroller = PageController();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit,App_state>(
@@ -93,51 +108,47 @@ class STU_Quizes_Ques_Screen extends StatelessWidget {
                     color: Colors.grey[300],
                     ),
                     SizedBox(height: 25,),
-                    Text('Question1 : ',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Expanded(
+                      child: PageView.builder(
+                        physics: BouncingScrollPhysics(),
+                        onPageChanged: (index) {
+                          if (index == cubit.stu_Quiz_Ques_lis.length - 1) {
+                            setState(() {
+                              islast = true;
+                            });
+                          } else if(index == cubit.stu_Quiz_Ques_lis.length - 2)
+                          {
+                            setState(() {
+                              ismiddle = true;
+                            });
+                          }
+                          else{
+                            setState(() {
+                              islast = false;
+                              ismiddle = false;
+                            });
+                          }
+                        },
+                        controller: boardcontroller,
+                        itemBuilder: (context, index) =>
+                            Build_STU_Quiz_Ques(context,cubit.stu_Quiz_Ques_lis,cubit.stu_Quiz_Ques_options,index),
+                        itemCount: cubit.stu_Quiz_Ques_lis.length,
+                      ),
                     ),
-                    SizedBox(height: 25,),
-                    Container(width: double.infinity,
-                    padding: EdgeInsetsDirectional.all(12),
-                    height: 200,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.blue),
-                      ),
-                      child: Text('Officia illo aut nemo sequi dignissimos fugiat. '
-                          'Nam ut commodi sit. Voluptatem ?',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                      ),
-                      ),
-                    ),
-                    SizedBox(height: 30.0),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: cubit.stu_Quiz_Ques_options.length,
-                      itemBuilder: (context, index) {
-                        return RadioListTile(
-                          selectedTileColor:Colors.blue,
-                          title: Text(cubit.stu_Quiz_Ques_options[index],
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold
+                    TextButton(onPressed: (){
+                      if (islast) {
+                        navigateTo(context,STU_Quiz_Finish_Screen());
+                        // submit;
+                      } else {
+                        boardcontroller.nextPage(
+                          duration: Duration(
+                            milliseconds: 750,
                           ),
-                          ),
-                          value: cubit.stu_Quiz_Ques_options[index],
-                          groupValue: cubit.selectedOption,
-                          onChanged: (value) {
-                            cubit.Quiz_Select_answer(value) ;
-                            },
+                          curve: Curves.fastLinearToSlowEaseIn,
                         );
-                      },
-                    ),
-                    SizedBox(height: 70.0),
-                    TextButton(onPressed: (){}, child:
+                      }
+                    },
+                      child:
                     Container(
                       width: double.infinity,
                       height: 50,
@@ -146,7 +157,8 @@ class STU_Quizes_Ques_Screen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Center(
-                        child: Text('Next',
+                        child:
+                        Text(islast?'Submit':'Next',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

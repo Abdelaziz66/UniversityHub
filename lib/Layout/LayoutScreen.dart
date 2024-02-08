@@ -24,7 +24,6 @@ class Layout_Screen extends StatelessWidget {
           key: scafoldkey,
 
           drawer: Drawer(
-            width: 350,
             backgroundColor: Colors.transparent,
             shadowColor: Colors.black,
             elevation: 0,
@@ -433,19 +432,20 @@ class Layout_Screen extends StatelessWidget {
               // ),
               Positioned(
                   child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 60, sigmaY: 60),
+                filter: ImageFilter.blur(sigmaX: 80, sigmaY: 80),
                 child: const SizedBox(),
               )),
-              Column(
+              SafeArea(
+                  child: Column(
                 children: [
-              const SizedBox(
-                height: 0,
-              ),
-              Expanded(
-                child: cubit.Nav_Bar_Items_List()[cubit.Nav_Bar_index],
-              ),
+                  const SizedBox(
+                    height: 60,
+                  ),
+                  Expanded(
+                    child: cubit.Nav_Bar_Items_List()[cubit.Nav_Bar_index],
+                  ),
                 ],
-              ),
+              )),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -463,52 +463,52 @@ class Layout_Screen extends StatelessWidget {
                         ),
                       ),
                       Spacer(),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(right: 5.0, top: 30),
-                      //   child: IconButton(
-                      //       onPressed: () {},
-                      //       icon: FaIcon(
-                      //         FontAwesomeIcons.graduationCap,
-                      //         color: c1,
-                      //         size: 30,
-                      //       )),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(right: 15.0, top: 30),
-                      //   child: Row(
-                      //       mainAxisAlignment: MainAxisAlignment.center,
-                      //       crossAxisAlignment: CrossAxisAlignment.center,
-                      //       children: [
-                      //         Text(
-                      //           'E ',
-                      //           style: TextStyle(
-                      //               color: c5,
-                      //               fontSize: 22,
-                      //               fontWeight: FontWeight.bold),
-                      //         ),
-                      //         Text(
-                      //           'D U T',
-                      //           style: TextStyle(
-                      //               color: Colors.black,
-                      //               fontSize: 22,
-                      //               fontWeight: FontWeight.bold),
-                      //         ),
-                      //         Text(
-                      //           ' E ',
-                      //           style: TextStyle(
-                      //               color: c5,
-                      //               fontSize: 22,
-                      //               fontWeight: FontWeight.bold),
-                      //         ),
-                      //         Text(
-                      //           'C H ',
-                      //           style: TextStyle(
-                      //               color: Colors.black,
-                      //               fontSize: 22,
-                      //               fontWeight: FontWeight.bold),
-                      //         ),
-                      //       ]),
-                      // ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 5.0, top: 30),
+                        child: IconButton(
+                            onPressed: () {},
+                            icon: FaIcon(
+                              FontAwesomeIcons.graduationCap,
+                              color: c1,
+                              size: 30,
+                            )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15.0, top: 30),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'E ',
+                                style: TextStyle(
+                                    color: c5,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'D U T',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                ' E ',
+                                style: TextStyle(
+                                    color: c5,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'C H ',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ]),
+                      ),
                       const Spacer(),
                       // Padding(
                       //   padding: const EdgeInsets.only(right: 15.0, top: 30),

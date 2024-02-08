@@ -33,13 +33,6 @@ class STU_About_course extends StatelessWidget {
                     'Material name',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   ),
-                  // Text('instructor name',
-                  //   style: TextStyle(
-                  //     color: Colors.grey[600],
-                  //       fontWeight: FontWeight.w400,
-                  //       fontSize: 15
-                  //   ),
-                  // ),
                 ],
               ),
             ),
@@ -215,7 +208,7 @@ class STU_About_course extends StatelessWidget {
 
                   ),
                 ),
-                SizedBox(height: 300,),
+                SizedBox(height: 200,),
               ],
             ),
           ),
