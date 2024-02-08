@@ -374,6 +374,14 @@ class App_cubit extends Cubit<App_state> {
   //-----------------STU Quizzes------------
   List<bool> stu_Quiz_State = [false,false,true];
   List<bool> stu_Quiz_isStart = [true,false,true];
+
+  List<String> stu_Quiz_Ques_lis=[
+    'What is Parallel Computing?',
+    'What are the main challenges in Parallel Programming?',
+    'Compare and Contrast Shared Memory and Distributed Memory Models?',
+    'Explain the concept of Race Conditions and how they can be mitigated?',
+    'Compare and Contrast Shared Memory and Distributed Memory Models?'];
+
   final List<String> stu_Quiz_Ques_options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
   String selectedOption = '';
   void Quiz_Select_answer(selectedOption){

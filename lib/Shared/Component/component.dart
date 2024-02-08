@@ -1104,6 +1104,7 @@ Widget Build_Quezes_Ins(context) => Container(
 
 //------------------------------------------------
 Widget Build_STU_Lec() => Container(
+  padding:const EdgeInsets.only(top: 20.0, bottom: 20, left: 10, right: 10),
       height: 100,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -1112,60 +1113,65 @@ Widget Build_STU_Lec() => Container(
             color: Colors.blue,
             width: 1.5,
           )),
-      child: Padding(
-        padding:
-            const EdgeInsets.only(top: 20.0, bottom: 20, left: 10, right: 10),
-        child: Row(
+      child:  Row(
           children: [
-            Container(
-              height: 80,
-              width: 100,
-              // height: double.infinity,
-              // width:double.infinity,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                      image: NetworkImage(
-                        'https://th.bing.com/th/id/R.8a10e773efccd504248514e0ca6b0f7e?rik=Txi2Gf8RukK1lA&pid=ImgRaw&r=0',
-                      ),
-                      fit: BoxFit.cover)),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Parllel Programming ',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                Text(
-                  'Dr : Amr massoud ',
-                  style: TextStyle(
-                    //fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-              ],
-            ),
-            Spacer(),
-            Container(
-                height: 40,
-                width: 65,
+            Expanded(
+              child: Container(
+                height: 80,
+                width: 100,
+                // height: double.infinity,
+                // width:double.infinity,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.blue),
-                child: Icon(
-                  FontAwesomeIcons.arrowRight,
-                  color: Colors.white,
-                ))
+                    image: DecorationImage(
+                        image: NetworkImage(
+                          'https://th.bing.com/th/id/R.8a10e773efccd504248514e0ca6b0f7e?rik=Txi2Gf8RukK1lA&pid=ImgRaw&r=0',
+                        ),
+                        fit: BoxFit.cover)),
+              ),
+            ),
+            SizedBox(
+              width: 15,
+            ),
+            Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Parllel Programming ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    'Dr : Amr massoud ',
+                    style: TextStyle(
+                      //fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Expanded(
+              child: Container(
+                  height: 40,
+                  width: 65,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blue),
+                  child: Icon(
+                    FontAwesomeIcons.arrowRight,
+                    color: Colors.white,
+                  )),
+            )
           ],
         ),
-      ),
+
     );
 
 //--------------Assignments-----------------------------
@@ -1481,5 +1487,50 @@ Widget Build_Quiz_Data_Widget(List<bool>quizState,List<bool>isQuizStart,int inde
       ),
     );
 
-
+Widget Build_STU_Quiz_Ques(context,List<String>ques,List<String>answers,index)=>Column(
+  children: [
+    Text('Question${index+1} : ',
+      style: TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    SizedBox(height: 25,),
+    Container(width: double.infinity,
+      padding: EdgeInsetsDirectional.all(12),
+      height: 200,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.blue),
+      ),
+      child: Text('${ques[index]}',
+        style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold
+        ),
+      ),
+    ),
+    SizedBox(height: 30.0),
+    ListView.builder(
+      shrinkWrap: true,
+      itemCount: App_cubit.get(context).stu_Quiz_Ques_options.length,
+      itemBuilder: (context, index) {
+        return RadioListTile(
+          selectedTileColor:Colors.blue,
+          title: Text(App_cubit.get(context).stu_Quiz_Ques_options[index],
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+          value: App_cubit.get(context).stu_Quiz_Ques_options[index],
+          groupValue: App_cubit.get(context).selectedOption,
+          onChanged: (value) {
+            App_cubit.get(context).Quiz_Select_answer(value) ;
+          },
+        );
+      },
+    ),
+  ],
+);
 
