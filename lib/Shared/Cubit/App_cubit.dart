@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
-import 'package:university_hup/Modules/Navigation_Screens/Chat_Screen.dart';
+import 'package:university_hup/Modules/Navigation_Screens/Calendar_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Home_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Lecture_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Profile_Screen.dart';
@@ -160,7 +160,7 @@ class App_cubit extends Cubit<App_state> {
     return[
      Home_screen(),
       switch_Courses_Fun(),
-      const Chat_screen(),
+      const Calendar_screen(),
       Task_screen(),
       const Profile_screen()
   ];}

@@ -438,9 +438,9 @@ class Layout_Screen extends StatelessWidget {
               SafeArea(
                   child: Column(
                 children: [
-                  const SizedBox(
-                    height: 60,
-                  ),
+                  // const SizedBox(
+                  //   height: 60,
+                  // ),
                   Expanded(
                     child: cubit.Nav_Bar_Items_List()[cubit.Nav_Bar_index],
                   ),
@@ -563,9 +563,9 @@ class Layout_Screen extends StatelessWidget {
                                   label: 'Lecture'),
                               BottomNavigationBarItem(
                                   icon: FaIcon(
-                                    FontAwesomeIcons.whatsapp,
+                                    FontAwesomeIcons.calendarCheck,
                                   ),
-                                  label: 'Chat'),
+                                  label: 'Calendar'),
                               BottomNavigationBarItem(
                                   icon: FaIcon(FontAwesomeIcons.listCheck),
                                   label: 'Task'),
