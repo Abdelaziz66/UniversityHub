@@ -24,7 +24,7 @@ class Task_screen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 20,),
+                SizedBox(height: 70,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 0),
                   child: Container(
