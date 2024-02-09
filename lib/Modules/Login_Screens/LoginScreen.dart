@@ -106,7 +106,7 @@ class _loginscreenState extends State<loginscreen> {
                           height: 25,
                         ),
                         Text(
-                          'Hello Again!',
+                          'Wellcome !',
                           style: TextStyle(
                             fontSize:35,
                             fontWeight: FontWeight.bold,
@@ -115,8 +115,44 @@ class _loginscreenState extends State<loginscreen> {
                         SizedBox(
                           height: 15,
                         ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(right: 15.0, top: 30),
+                        //   child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.center,
+                        //       crossAxisAlignment: CrossAxisAlignment.center,
+                        //       children: [
+                        //         Text(
+                        //           'E ',
+                        //           style: TextStyle(
+                        //               color: Colors.blue,
+                        //               fontSize: 22,
+                        //               fontWeight: FontWeight.bold),
+                        //         ),
+                        //         Text(
+                        //           'D U T',
+                        //           style: TextStyle(
+                        //               color: Colors.black,
+                        //               fontSize: 22,
+                        //               fontWeight: FontWeight.bold),
+                        //         ),
+                        //         Text(
+                        //           ' E ',
+                        //           style: TextStyle(
+                        //               color: Colors.blue,
+                        //               fontSize: 22,
+                        //               fontWeight: FontWeight.bold),
+                        //         ),
+                        //         Text(
+                        //           'C H ',
+                        //           style: TextStyle(
+                        //               color: Colors.black,
+                        //               fontSize: 22,
+                        //               fontWeight: FontWeight.bold),
+                        //         ),
+                        //       ]),
+                        // ),
                         Text(
-                          'Wellcome back you\'ve \n         been missed!',
+                          'You can login here',
                           style: TextStyle(
                             fontSize:25,
                             color: Colors.black87,
@@ -130,7 +166,7 @@ class _loginscreenState extends State<loginscreen> {
                           height: 70,
                           decoration: BoxDecoration(
                             // border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(18),
                             color: Colors.blueGrey.withOpacity(.1),
                           ),
                           child: Padding(
@@ -177,7 +213,7 @@ class _loginscreenState extends State<loginscreen> {
                           height: 70,
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(18),
                             color: Colors.blueGrey.withOpacity(.1),
                           ),
                           child: Padding(
@@ -253,7 +289,7 @@ class _loginscreenState extends State<loginscreen> {
                           width: double.infinity,
                           height: 70,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(25),
                             color: Colors.blue,
                           ),
                           child: TextButton(

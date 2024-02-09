@@ -161,7 +161,7 @@ class App_cubit extends Cubit<App_state> {
      Home_screen(),
       switch_Courses_Fun(),
       const Calendar_screen(),
-      const Profile_screen()
+       Profile_screen()
   ];}
 
   int Nav_Bar_index = 0;
