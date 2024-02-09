@@ -14,7 +14,7 @@ import '../Shared/constant.dart';
 
 class Layout_Screen extends StatelessWidget {
   Layout_Screen({super.key});
-  var scafoldkey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit, App_state>(
@@ -102,7 +102,7 @@ class Layout_Screen extends StatelessWidget {
                                     Navigator.pop(context);
                                   },
                                   child: Text(
-                                    'Account information',
+                                    'Account',
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w700,
@@ -492,42 +492,7 @@ class Layout_Screen extends StatelessWidget {
                       //         size: 30,
                       //       )),
                       // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(right: 15.0, top: 30),
-                      //   child: Row(
-                      //       mainAxisAlignment: MainAxisAlignment.center,
-                      //       crossAxisAlignment: CrossAxisAlignment.center,
-                      //       children: [
-                      //         Text(
-                      //           'E ',
-                      //           style: TextStyle(
-                      //               color: c5,
-                      //               fontSize: 22,
-                      //               fontWeight: FontWeight.bold),
-                      //         ),
-                      //         Text(
-                      //           'D U T',
-                      //           style: TextStyle(
-                      //               color: Colors.black,
-                      //               fontSize: 22,
-                      //               fontWeight: FontWeight.bold),
-                      //         ),
-                      //         Text(
-                      //           ' E ',
-                      //           style: TextStyle(
-                      //               color: c5,
-                      //               fontSize: 22,
-                      //               fontWeight: FontWeight.bold),
-                      //         ),
-                      //         Text(
-                      //           'C H ',
-                      //           style: TextStyle(
-                      //               color: Colors.black,
-                      //               fontSize: 22,
-                      //               fontWeight: FontWeight.bold),
-                      //         ),
-                      //       ]),
-                      // ),
+
                       const Spacer(),
                       // Padding(
                       //   padding: const EdgeInsets.only(right: 15.0, top: 30),

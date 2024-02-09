@@ -130,9 +130,11 @@ Widget GlassBoxWithBorder_Gradiant({
             color: color,
             gradient: LinearGradient(
               colors: [
-                Colors.deepPurple.withOpacity(.7),
-                Colors.blueGrey.withOpacity(.5),
-                Colors.blue.withOpacity(.7)
+                // Colors.deepPurple.withOpacity(.7),
+                // Colors.blueGrey.withOpacity(.5),
+                // Colors.blue.withOpacity(.7)
+                Colors.white,
+                Colors.white,
               ],
             ),
             borderRadius: BorderRadius.circular(borderRadius),
