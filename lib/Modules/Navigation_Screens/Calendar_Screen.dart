@@ -67,7 +67,7 @@ class Calendar_screen extends StatelessWidget {
                               width: 3)),
                     ),
                     child: ListView.separated(
-                      // physics: NeverScrollableScrollPhysics(),
+                      physics: BouncingScrollPhysics(),
                       // shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
 
@@ -90,7 +90,7 @@ class Calendar_screen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: ListView.separated(
-                      // physics: NeverScrollableScrollPhysics(),
+                      physics: BouncingScrollPhysics(),
                       // shrinkWrap: true,
                       scrollDirection: Axis.vertical,
 

@@ -40,13 +40,14 @@ class Home_screen extends StatelessWidget {
               ),
               Positioned(
                   child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
+                filter: ImageFilter.blur(sigmaX: 120, sigmaY: 120),
                 child: const SizedBox(),
               )),
               SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 50.0),
                   child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,

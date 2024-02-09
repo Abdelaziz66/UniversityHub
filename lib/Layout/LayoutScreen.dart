@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:rive/rive.dart';
+import 'package:university_hup/Modules/Navigation_Screens/Task_Screen.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 import '../Shared/Cubit/App_cubit.dart';
 import '../Shared/Cubit/App_state.dart';
@@ -388,7 +389,7 @@ class Layout_Screen extends StatelessWidget {
                 borderRadius: 20,
                 x: 35,
                 y: 40),
-          ), // Choose the nav bar style with this property.,
+          ),
           backgroundColor: Colors.white,
           body: Stack(
             children: [
@@ -448,67 +449,85 @@ class Layout_Screen extends StatelessWidget {
               )),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+
                 children: [
                   Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 8.0, top: 30),
+                        padding: const EdgeInsets.only(left: 20.0, top: 0),
                         child: GestureDetector(
                           onTap: () => scafoldkey.currentState?.openDrawer(),
-                          child: Image.asset(
-                            'assets/images/f5.png',
-                            color: c1,
-                            width: 35,
+                          child: Container(
+                            height: 60,
+                            width: 45,
+
+                            // color: Colors.green,
+
+                            child: Stack(
+                              // alignment: AlignmentDirectional.topStart,
+
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 25.0),
+                                  child: FaIcon(FontAwesomeIcons.solidWindowMinimize,size: 25),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 0.0),
+                                  child: FaIcon(FontAwesomeIcons.windowMinimize,size: 40,),
+                                ),
+
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                      Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 5.0, top: 30),
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: FaIcon(
-                              FontAwesomeIcons.graduationCap,
-                              color: c1,
-                              size: 30,
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 15.0, top: 30),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'E ',
-                                style: TextStyle(
-                                    color: c5,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                'D U T',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                ' E ',
-                                style: TextStyle(
-                                    color: c5,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                'C H ',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ]),
-                      ),
+                      // Spacer(),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(right: 5.0, top: 30),
+                      //   child: IconButton(
+                      //       onPressed: () {},
+                      //       icon: FaIcon(
+                      //         FontAwesomeIcons.graduationCap,
+                      //         color: c1,
+                      //         size: 30,
+                      //       )),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(right: 15.0, top: 30),
+                      //   child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.center,
+                      //       crossAxisAlignment: CrossAxisAlignment.center,
+                      //       children: [
+                      //         Text(
+                      //           'E ',
+                      //           style: TextStyle(
+                      //               color: c5,
+                      //               fontSize: 22,
+                      //               fontWeight: FontWeight.bold),
+                      //         ),
+                      //         Text(
+                      //           'D U T',
+                      //           style: TextStyle(
+                      //               color: Colors.black,
+                      //               fontSize: 22,
+                      //               fontWeight: FontWeight.bold),
+                      //         ),
+                      //         Text(
+                      //           ' E ',
+                      //           style: TextStyle(
+                      //               color: c5,
+                      //               fontSize: 22,
+                      //               fontWeight: FontWeight.bold),
+                      //         ),
+                      //         Text(
+                      //           'C H ',
+                      //           style: TextStyle(
+                      //               color: Colors.black,
+                      //               fontSize: 22,
+                      //               fontWeight: FontWeight.bold),
+                      //         ),
+                      //       ]),
+                      // ),
                       const Spacer(),
                       // Padding(
                       //   padding: const EdgeInsets.only(right: 15.0, top: 30),
@@ -523,9 +542,11 @@ class Layout_Screen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 15.0, top: 30),
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Task_screen(),));
+                            },
                             icon: FaIcon(
-                              FontAwesomeIcons.solidBell,
+                              FontAwesomeIcons.bell,
                               color: c1,
                               size: 30,
                             )),
@@ -566,9 +587,6 @@ class Layout_Screen extends StatelessWidget {
                                     FontAwesomeIcons.calendarCheck,
                                   ),
                                   label: 'Calendar'),
-                              BottomNavigationBarItem(
-                                  icon: FaIcon(FontAwesomeIcons.listCheck),
-                                  label: 'Task'),
                               BottomNavigationBarItem(
                                   icon: FaIcon(FontAwesomeIcons.user),
                                   label: 'Profile'),

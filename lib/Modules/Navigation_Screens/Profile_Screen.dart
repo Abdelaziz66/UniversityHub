@@ -7,6 +7,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
@@ -65,7 +66,7 @@ class Profile_screen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'Cs',
+                                        '3',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w900,
                                           fontSize: 20,
@@ -76,7 +77,7 @@ class Profile_screen extends StatelessWidget {
                                         height: 7,
                                       ),
                                       Text(
-                                        'Department',
+                                        'GPA',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w900,
                                           fontSize: 16,
@@ -485,6 +486,144 @@ class Profile_screen extends StatelessWidget {
                         y: 40,
                       BorderWidth: .5,
                       BorderColor: Colors.blueGrey,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0,),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color:Colors.transparent,
+                        border: Border.all(color: Colors.white,width: 0)
+                      ),
+                      alignment: AlignmentDirectional.topStart,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Row(
+                          children: [
+                            SizedBox(width: 10),
+                            FaIcon(
+                              FontAwesomeIcons.solidUser,
+                              size: 25,
+                              color:Colors.blue,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              'Change User Name',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color:c1,
+                              ),
+                            ),
+                            Spacer(),
+                            FaIcon(
+                              FontAwesomeIcons.angleRight,
+                              size: 25,
+                              color:Colors.blue,
+                            ),
+                            SizedBox(
+                              width: 25,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0,),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color:Colors.transparent,
+                          border: Border.all(color: Colors.white,width: 0)
+                      ),
+                      alignment: AlignmentDirectional.topStart,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Row(
+                          children: [
+                            SizedBox(width: 10),
+                            FaIcon(
+                              FontAwesomeIcons.solidEnvelope,
+                              size: 25,
+                              color:Colors.blue,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              'Change Email',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color:c1,
+                              ),
+                            ),
+                            Spacer(),
+                            FaIcon(
+                              FontAwesomeIcons.angleRight,
+                              size: 25,
+                              color:Colors.blue,
+                            ),
+                            SizedBox(
+                              width: 25,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0,),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color:Colors.transparent,
+                          border: Border.all(color: Colors.white,width: 0)
+                      ),
+                      alignment: AlignmentDirectional.topStart,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Row(
+                          children: [
+                            SizedBox(width: 10),
+                            FaIcon(
+                              FontAwesomeIcons.key,
+                              size: 25,
+                              color:Colors.blue,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              'Change Password',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color:c1,
+                              ),
+                            ),
+                            Spacer(),
+                            FaIcon(
+                              FontAwesomeIcons.angleRight,
+                              size: 25,
+                              color:Colors.blue,
+                            ),
+                            SizedBox(
+                              width: 25,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],

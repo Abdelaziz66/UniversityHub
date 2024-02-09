@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,186 +20,247 @@ class Task_screen extends StatelessWidget {
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
         return Scaffold(
-          backgroundColor: Colors.transparent,
-          body: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: 70,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 0),
-                  child: Container(
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
+          backgroundColor: Colors.white,
+          body: Stack(
+            children: [
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          height: 150,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          height: 0,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              // Column(
+              //   children: [
+              //     Spacer(),
+              //     Container(
+              //       height: 600,
+              //       child: RiveAnimation.asset(
+              //         "assets/riveassets/shapes.riv",
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              Positioned(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 80, sigmaY: 80),
+                    child: const SizedBox(),
+                  )),
+              SafeArea(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+
+                    SizedBox(height: 30,),
+                    Row(
                       children: [
-                        // Text(
-                        //   cubit.N_HomeScreen_Text[cubit.Nav_HomeBar_index],
-                        //   style: TextStyle(
-                        //     fontSize: 30,
-                        //     fontWeight: FontWeight.bold,
-                        //     color: Colors.black,
-                        //   ),
-                        // ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30.0),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.pop(context);
+                            },
+                              child: FaIcon(FontAwesomeIcons.angleLeft,size: 30)),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 40,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 0),
+                      child: Container(
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            // cubit.N_HomeScreen_Icon[cubit.Nav_HomeBar_index],
-                            // SizedBox(width: 10,),
-                            cubit.N_HomeScreen_Text[cubit.Nav_HomeBar_index],
+                            // Text(
+                            //   cubit.N_HomeScreen_Text[cubit.Nav_HomeBar_index],
+                            //   style: TextStyle(
+                            //     fontSize: 30,
+                            //     fontWeight: FontWeight.bold,
+                            //     color: Colors.black,
+                            //   ),
+                            // ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // cubit.N_HomeScreen_Icon[cubit.Nav_HomeBar_index],
+                                // SizedBox(width: 10,),
+                                cubit.N_HomeScreen_Text[cubit.Nav_HomeBar_index],
 
 
 
 
 
-                          ],),
+                              ],),
 
-                      ],
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                SizedBox(height: 20,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 0.0, horizontal: 20),
-                  child: Container(
-                    height: 80,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            print('0');
-                            cubit.nav_home_bar_Function(index: 0);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: cubit.Nav_HomeBar_index == 0
-                                  ? c1
-                                  : Colors.white.withOpacity(.3),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(18.0),
+                    SizedBox(height: 20,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0.0, horizontal: 20),
+                      child: Container(
+                        height: 80,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                print('0');
+                                cubit.nav_home_bar_Function(index: 0);
+                              },
                               child: Container(
-                                height: 30,
-                                width: 30,
-
-                                alignment: Alignment.center,
-                                child: FaIcon(
-                                  FontAwesomeIcons.bookBookmark,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
                                   color: cubit.Nav_HomeBar_index == 0
-                                      ? c5
-                                      : c1,
-                                  size: 30,
+                                      ? c1
+                                      : Colors.white.withOpacity(.3),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(18.0),
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+
+                                    alignment: Alignment.center,
+                                    child: FaIcon(
+                                      FontAwesomeIcons.bookBookmark,
+                                      color: cubit.Nav_HomeBar_index == 0
+                                          ? c5
+                                          : c1,
+                                      size: 30,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            print('1');
-                            cubit.nav_home_bar_Function(index: 1);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: cubit.Nav_HomeBar_index == 1
-                                  ? c1
-                                  : Colors.white.withOpacity(.3),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(18.0),
-                              child:Container(
-                                height: 30,
-                                width: 30,
-
-                                alignment: Alignment.center,
-                                child: FaIcon(
-                                  FontAwesomeIcons.penClip,
+                            GestureDetector(
+                              onTap: () {
+                                print('1');
+                                cubit.nav_home_bar_Function(index: 1);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
                                   color: cubit.Nav_HomeBar_index == 1
-                                      ? c5
-                                      : c1,
-                                  size: 30,
+                                      ? c1
+                                      : Colors.white.withOpacity(.3),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(18.0),
+                                  child:Container(
+                                    height: 30,
+                                    width: 30,
+
+                                    alignment: Alignment.center,
+                                    child: FaIcon(
+                                      FontAwesomeIcons.penClip,
+                                      color: cubit.Nav_HomeBar_index == 1
+                                          ? c5
+                                          : c1,
+                                      size: 30,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            print('2');
-                            cubit.nav_home_bar_Function(index: 2);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: cubit.Nav_HomeBar_index == 2
-                                  ? c1
-                                  : Colors.white.withOpacity(.3),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(18.0),
+                            GestureDetector(
+                              onTap: () {
+                                print('2');
+                                cubit.nav_home_bar_Function(index: 2);
+                              },
                               child: Container(
-                                height: 30,
-                                width: 30,
-
-                                alignment: Alignment.center,
-                                child: FaIcon(
-                                  FontAwesomeIcons.featherPointed,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
                                   color: cubit.Nav_HomeBar_index == 2
-                                      ? c5
-                                      : c1,
-                                  size: 30,
+                                      ? c1
+                                      : Colors.white.withOpacity(.3),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(18.0),
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+
+                                    alignment: Alignment.center,
+                                    child: FaIcon(
+                                      FontAwesomeIcons.featherPointed,
+                                      color: cubit.Nav_HomeBar_index == 2
+                                          ? c5
+                                          : c1,
+                                      size: 30,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            print('3');
-                            cubit.nav_home_bar_Function(index: 3);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: cubit.Nav_HomeBar_index == 3
-                                  ? c1
-                                  : Colors.white.withOpacity(.3),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(18.0),
+                            GestureDetector(
+                              onTap: () {
+                                print('3');
+                                cubit.nav_home_bar_Function(index: 3);
+                              },
                               child: Container(
-                                height: 30,
-                                width: 30,
-                                alignment: Alignment.center,
-                                child: FaIcon(
-                                  FontAwesomeIcons.book,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
                                   color: cubit.Nav_HomeBar_index == 3
-                                      ? c5
-                                      : c1,
-                                  size: 30,
+                                      ? c1
+                                      : Colors.white.withOpacity(.3),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(18.0),
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    alignment: Alignment.center,
+                                    child: FaIcon(
+                                      FontAwesomeIcons.book,
+                                      color: cubit.Nav_HomeBar_index == 3
+                                          ? c5
+                                          : c1,
+                                      size: 30,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
 
 
-                Expanded(
-                  child: cubit.N_HomeScreen[cubit.Nav_HomeBar_index],
+                    Expanded(
+                      child: cubit.N_HomeScreen[cubit.Nav_HomeBar_index],
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },
