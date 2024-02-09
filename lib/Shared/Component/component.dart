@@ -4,7 +4,8 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../Modules/Student_Screens/Student_Courses_Screen/STU_Lecture_Screens/STU_Quizes_Screen/STU_Quiz_Ques.dart';
+import '../../Modules/Student_Screens/Student_Courses_Screen/STU_Course_Screens/STU_Quizes_Screen/STU_Quiz_Ques.dart';
+import '../../Modules/instructor_Screens/Courses_Screens/All_Ionstructor_Materials.dart';
 import '../../Modules/instructor_Screens/Courses_Screens/Material_content_sec_or_lec.dart';
 import '../Cons_widget.dart';
 import '../Cubit/App_cubit.dart';
@@ -470,40 +471,39 @@ Widget Lecture_C() => InkWell(
       ),
     );
 
-Widget Matrial_C({required index}) => GestureDetector(
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GlassBox(
-            widget: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FaIcon(
-                    FontAwesomeIcons.solidFolder,
-                    color: c1,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Lecture ${index + 1}',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: c2,
-                    ),
-                  ),
-                ],
+Widget Matrial_C({required index}) => Padding(
+  padding: const EdgeInsets.all(8.0),
+  child: GlassBox(
+      widget: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FaIcon(
+              FontAwesomeIcons.solidFolder,
+              color: c1,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Lecture ${index + 1}',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: c2,
               ),
             ),
-            color: c5.withOpacity(.3),
-            borderRadius: 20,
-            x: 50,
-            y: 50),
+          ],
+        ),
       ),
-    );
+      color: Colors.grey.withOpacity(.1),
+      borderRadius: 20,
+      x: 100,
+      y: 120
+  ),
+);
+
 
 Widget OngoingCourse_Card() => GlassBoxWithBorder(
       widget: Padding(
@@ -1163,6 +1163,77 @@ Widget Build_Lec_View_Widget(
   );
 }
 
+
+
+
+//------------------------------
+
+Widget STU_Build_Lec_View_Widget(
+    index,
+    context,
+    ) {
+  // final kb = file.size / 1024;
+  // final mb = kb / 1024;
+  // final fileSize =
+  // mb >= 1 ? '${mb.toStringAsFixed(2)} MB ' : '${kb.toStringAsFixed(2)} KB';
+  // final extension = file.extension ?? 'none';
+  final color = Colors.red;
+  return Container(
+    padding: EdgeInsets.all(8),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+            child: Container(
+              alignment: Alignment.center,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                '.jpg',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                ),
+              ),
+            )),
+        SizedBox(
+          height: 8,
+        ),
+        Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'lecture name',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  '40 MB',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey[700],
+                  ),
+                ),
+              ],
+            ),
+
+          ],
+        ),
+      ],
+    ),
+  );
+}
+//----------------------------------------
+//--------------------------------------
+
 Widget Build_Quezes_Ins(context) => Container(
     padding: EdgeInsetsDirectional.all(10),
     height: 170,
@@ -1220,7 +1291,7 @@ Widget Build_Quezes_Ins(context) => Container(
 //------------------------------------------------
 Widget Build_STU_Lec() => Container(
       padding:
-          const EdgeInsets.only(top: 20.0, bottom: 20, left: 10, right: 10),
+          const EdgeInsets.only(top: 20.0, bottom: 20, left: 10, right: 15),
       height: 100,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -1233,8 +1304,7 @@ Widget Build_STU_Lec() => Container(
         children: [
           Expanded(
             child: Container(
-              height: 80,
-              width: 100,
+
               // height: double.infinity,
               // width:double.infinity,
               decoration: BoxDecoration(
@@ -1242,8 +1312,10 @@ Widget Build_STU_Lec() => Container(
                   image: DecorationImage(
                       image: NetworkImage(
                         'https://th.bing.com/th/id/R.8a10e773efccd504248514e0ca6b0f7e?rik=Txi2Gf8RukK1lA&pid=ImgRaw&r=0',
+
                       ),
-                      fit: BoxFit.cover)),
+                      fit: BoxFit.cover
+                  )),
             ),
           ),
           SizedBox(
@@ -1251,6 +1323,7 @@ Widget Build_STU_Lec() => Container(
           ),
           Container(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -1270,21 +1343,16 @@ Widget Build_STU_Lec() => Container(
               ],
             ),
           ),
-          SizedBox(
-            width: 20,
-          ),
           Expanded(
             child: Container(
-                height: 40,
-                width: 65,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.blue),
-                child: Icon(
-                  FontAwesomeIcons.arrowRight,
-                  color: Colors.white,
-                )),
-          )
+              alignment: AlignmentDirectional.centerEnd,
+              child: FaIcon(
+                FontAwesomeIcons.circleRight,
+                color: Colors.teal,
+                size: 35,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -1294,10 +1362,11 @@ Widget Build_STU_pend_Tasks() => Container(
     width: double.infinity,
     height: 76.95,
     decoration: ShapeDecoration(
-      color: Color(0xFFFAFAFA),
       shape: RoundedRectangleBorder(
-        side: BorderSide(width: 2),
-        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(
+            color: Colors.blue,
+            width: 2),
+        borderRadius: BorderRadius.circular(15),
       ),
     ),
     child: Padding(
@@ -1343,7 +1412,7 @@ Widget Build_STU_pend_Tasks() => Container(
             ),
             child: Center(
               child: Text(
-                'Upload',
+                'more',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
@@ -1362,7 +1431,7 @@ Widget Build_STU_complete_Tasks() => Container(
     width: double.infinity,
     height: 95,
     decoration: ShapeDecoration(
-      color: Colors.green,
+      color: Colors.grey.withOpacity(.3),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -1372,52 +1441,33 @@ Widget Build_STU_complete_Tasks() => Container(
       child: Row(
         children: [
           Expanded(
-            child: Container(
-              width: 80,
+            child:  Container(
+              padding: EdgeInsets.only(left: 15),
+              width: 150,
               child: Text(
-                'Material name',
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                'Assignment 1',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
             ),
+
           ),
           Expanded(
             child: Container(
-              width: 80,
-              child: Text(
-                'instructor name',
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 30.0),
+              width: 120,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: 95,
-                    height: 25,
+                    width: 100,
                     child: Text(
-                      'Assignment 1',
+                      'Uploaded at',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: 80,
-                    height: 25,
-                    child: Text(
-                      'Uploaded',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
+                        fontSize: 15,
                       ),
                     ),
                   ),
@@ -1428,7 +1478,7 @@ Widget Build_STU_complete_Tasks() => Container(
                       '20/1/2024',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 12,
+                        fontSize: 15,
                       ),
                     ),
                   ),
@@ -1436,6 +1486,18 @@ Widget Build_STU_complete_Tasks() => Container(
               ),
             ),
           ),
+        // Spacer(),
+        Padding(
+              padding: const EdgeInsets.only(right: 18.0),
+              child:FaIcon(
+
+                FontAwesomeIcons.check,
+                color: Colors.green,
+                size: 30,
+              )
+              ),
+
+
         ],
       ),
     ));

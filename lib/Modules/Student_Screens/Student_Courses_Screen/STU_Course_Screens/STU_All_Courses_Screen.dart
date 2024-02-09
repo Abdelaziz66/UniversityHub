@@ -26,68 +26,73 @@ class STU_Lecture_Screen extends StatelessWidget {
                     child: Container(
                       child: Column(
                         children: [
-                          SizedBox(height: 60,),
+                          SizedBox(height: 50,),
                           Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                         //   crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                              Padding(
                                padding: const EdgeInsets.all(15.0),
-                               child: Column(
-                                 crossAxisAlignment: CrossAxisAlignment.start,
+                               child:  Row(
+                                 // crossAxisAlignment: CrossAxisAlignment.center,
+                                 // mainAxisAlignment: MainAxisAlignment.center,
                                  children: [
-                                   Text('Hello !',
-                                   style: TextStyle(
-                                     fontWeight: FontWeight.bold,
-                                     fontSize: 25
-                                   ),),
-                                   SizedBox(height: 10,),
-                                   Text('Wishing you',
+                                   Text('Enrolled',
                                      style: TextStyle(
-                                         fontWeight: FontWeight.w400,
-                                       color: Colors.grey[700],
-                                         fontSize: 15
-                                     ),
-                                   ),
-                                   Text('continued success',
-                                     style: TextStyle(
-                                         fontWeight: FontWeight.w400,
-                                         color: Colors.grey[700],
-                                         fontSize: 15
-                                     ),
-                                   ),
-                                   SizedBox(height:20,),
-                                   Row(
-                                     children: [
-                                       Text('Enrolled',
-                                       style: TextStyle(
                                          fontSize: 30,
                                          fontWeight: FontWeight.bold
-                                       ),
-                                       ),
-                                       Text(' 5 ',
-                                         style: TextStyle(
-                                             color: Colors.blue,
+                                     ),
+                                   ),
+                                   Text(' 5 ',
+                                     style: TextStyle(
+                                         color: Colors.blue,
 
-                                             fontSize: 30,
-                                             fontWeight: FontWeight.bold
-                                         ),
-                                       ),
-                                       Text('Courses',
-                                         style: TextStyle(
-                                             fontSize: 30,
-                                             fontWeight: FontWeight.bold
-                                         ),),
-                                     ],
-                                   )
+                                         fontSize: 30,
+                                         fontWeight: FontWeight.bold
+                                     ),
+                                   ),
+                                   Text('Courses',
+                                     style: TextStyle(
+                                         fontSize: 30,
+                                         fontWeight: FontWeight.bold
+                                     ),),
                                  ],
-                               ),
+                               )
+                               // Column(
+                               //   crossAxisAlignment: CrossAxisAlignment.start,
+                               //   children: [
+                               //     Text('Hello !',
+                               //     style: TextStyle(
+                               //       fontWeight: FontWeight.bold,
+                               //       fontSize: 25
+                               //     ),),
+                               //     SizedBox(height: 10,),
+                               //     Text('Wishing you',
+                               //       style: TextStyle(
+                               //           fontWeight: FontWeight.w400,
+                               //         color: Colors.grey[700],
+                               //           fontSize: 15
+                               //       ),
+                               //     ),
+                               //     Text('continued success',
+                               //       style: TextStyle(
+                               //           fontWeight: FontWeight.w400,
+                               //           color: Colors.grey[700],
+                               //           fontSize: 15
+                               //       ),
+                               //     ),
+                               //     SizedBox(height:20,),
+                               //
+                               //   ],
+                               // ),
                              ),
                               Spacer(),
                               Padding(
                                 padding: const EdgeInsets.all(20.0),
                                 child: Image.network('https://s3-alpha-sig.figma.com/img/d231/da63/0330da0307bd5fd4566c82a5540e92e7?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=X6HPHRLXnifODHEi9RGB9NohQhg2XSnIkJrCFFEZSyEoRXgyuNUf~-LIskTRWri4YwYHjpg5gVs88gFNXUTdesEZuX5vFCMXTLTwiVcbFI22doKTeeh1eHoZ3RqJeEy20bu5S8xyczELUEPXX-I5a2LfyoP3RC4pQSUACJjOXQEMUwJ0Ez8EaJJaic2ngEHskqiPR-MLdfJ9UPUnl1P94u2mw6wYr1NrcYTU-tByKYktPJIfdAOexL3s14MRQ71V4M6t7CdsMDc2MULvkNAGBxS~uFvDBqRhNoh0T5rsiNS4~t1CxYOVO5~x~A0YY4v-fzrpzCqGtXmSvX5DraKMcw__',
-                                  height: 90,
-                                  width: 90,
+
+                                  height: 95,
+                                  width: 95,
                                 ),
                               ),
                             ],
@@ -106,7 +111,7 @@ class STU_Lecture_Screen extends StatelessWidget {
                                      navigateTo(context,STU_About_course() );
                                   },
                                   child: Build_STU_Lec()),
-                              separatorBuilder: (context,index)=>SizedBox(height: 25,),
+                              separatorBuilder: (context,index)=>SizedBox(height: 20,),
                               itemCount: 5,
                             ),
                           ),

@@ -18,7 +18,7 @@ import 'package:university_hup/Modules/Student_Screens/Student_Home_Screen/Ongoi
 import 'package:university_hup/Modules/Student_Screens/Student_Home_Screen/Quizzes_Screen.dart';
 import 'package:university_hup/Modules/Student_Screens/Student_Home_Screen/UpcomingCourse_Screen.dart';
 import 'package:university_hup/Shared/constant.dart';
-import '../../Modules/Student_Screens/Student_Courses_Screen/STU_Lecture_Screens/STU_lectures_Screen.dart';
+import '../../Modules/Student_Screens/Student_Courses_Screen/STU_Course_Screens/STU_All_Courses_Screen.dart';
 import '../../Modules/Student_Screens/Student_Tasks_screen/Student_Tasks_Screen.dart';
 import '../../Modules/instructor_Screens/Courses_Screens/All_Ionstructor_Materials.dart';
 import '../../Modules/instructor_Screens/Tasks_Ins_screens/All_Tasks_Ins_Screen.dart';
