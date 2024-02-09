@@ -12,6 +12,7 @@ class UpcomingCourse_Screen extends StatelessWidget {
       child: Padding(
         padding:  EdgeInsets.all(15),
         child: ListView.separated(
+          physics: BouncingScrollPhysics(),
           itemBuilder: (context, index) => Upcoming_Courses_Card(),
           separatorBuilder: (context, index) => Container(
             height: 15,

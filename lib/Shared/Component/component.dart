@@ -76,6 +76,38 @@ Widget GlassBoxWithBorder({
       ),
     );
 
+Widget GlassBoxWithBorder_notification({
+  required Widget? widget,
+  required Color? color,
+  required double? borderRadius,
+  required double? x,
+  required double? y,
+  required Color? BorderColor,
+  required double? BorderWidth,
+}) =>
+    ClipRRect(
+      // borderRadius: BorderRadius.only(bottomRight: Radius.circular(borderRadius!),topRight: Radius.circular(borderRadius) ,topLeft: Radius.zero,bottomLeft:  Radius.circular(borderRadius)),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(
+          sigmaY: y!,
+          sigmaX: x!,
+          tileMode: TileMode.clamp,
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.only(bottomRight: Radius.circular(borderRadius!),topRight: Radius.circular(borderRadius) ,topLeft: Radius.zero,bottomLeft:  Radius.circular(borderRadius)),
+            border: Border.all(
+                color: BorderColor!,
+                style: BorderStyle.solid,
+                width: BorderWidth!),
+            // border: Border.all(color: c5!.withOpacity(.5),style: BorderStyle.solid,width: 1),
+          ),
+          child: widget,
+        ),
+      ),
+    );
+
 Widget GlassBoxWithBorder_Gradiant({
   required Widget? widget,
   required Color? color,
@@ -202,7 +234,7 @@ Widget Post({required bool image}) {
                               Icon(
                                 Icons.verified,
                                 size: 18,
-                                color: Colors.blueGrey.withOpacity(.4),
+                                color: c1.withOpacity(.5),
                               ),
                             ],
                           ),
@@ -505,7 +537,7 @@ Widget Matrial_C({required index}) => Padding(
 );
 
 
-Widget OngoingCourse_Card() => GlassBoxWithBorder(
+Widget OngoingCourse_Card() => GlassBoxWithBorder_notification(
       widget: Padding(
         padding:
             const EdgeInsets.only(bottom: 14, right: 30.0, top: 14, left: 30),
@@ -543,14 +575,14 @@ Widget OngoingCourse_Card() => GlassBoxWithBorder(
         ),
       ),
       color: Colors.blueGrey.withOpacity(.02),
-      borderRadius: 20,
+      borderRadius: 30,
       x: 30,
       y: 30,
       BorderColor: Colors.blue,
       BorderWidth: 1.5,
     );
 
-Widget Assignments_Card() => GlassBoxWithBorder(
+Widget Assignments_Card() => GlassBoxWithBorder_notification(
       widget: Padding(
         padding:
             const EdgeInsets.only(bottom: 14, right: 30.0, top: 14, left: 30),
@@ -604,14 +636,14 @@ Widget Assignments_Card() => GlassBoxWithBorder(
         ),
       ),
       color: Colors.blueGrey.withOpacity(.02),
-      borderRadius: 20,
+      borderRadius: 30,
       x: 30,
       y: 30,
       BorderColor: Colors.blue,
       BorderWidth: 1.5,
     );
 
-Widget Quizzes_Card() => GlassBoxWithBorder(
+Widget Quizzes_Card() => GlassBoxWithBorder_notification(
       widget: Padding(
         padding:
             const EdgeInsets.only(bottom: 14, right: 30.0, top: 14, left: 30),
@@ -675,14 +707,14 @@ Widget Quizzes_Card() => GlassBoxWithBorder(
         ),
       ),
       color: Colors.blueGrey.withOpacity(.02),
-      borderRadius: 20,
+      borderRadius: 30,
       x: 30,
       y: 30,
       BorderColor: Colors.blue,
       BorderWidth: 1.5,
     );
 
-Widget Upcoming_Courses_Card() => GlassBoxWithBorder(
+Widget Upcoming_Courses_Card() => GlassBoxWithBorder_notification(
       widget: Padding(
         padding:
             const EdgeInsets.only(bottom: 14, right: 30.0, top: 14, left: 30),
@@ -734,7 +766,7 @@ Widget Upcoming_Courses_Card() => GlassBoxWithBorder(
         ),
       ),
       color: Colors.blueGrey.withOpacity(.02),
-      borderRadius: 20,
+      borderRadius: 30,
       x: 30,
       y: 30,
       BorderColor: Colors.blue,

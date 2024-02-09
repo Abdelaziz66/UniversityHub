@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:university_hup/Layout/LayoutScreen.dart';
@@ -50,23 +51,23 @@ class _loginscreenState extends State<loginscreen> {
               ),
             ],
           ),
-          Positioned(
-            width: MediaQuery.of(context).size.width * 2,
-            left: -200,
-            bottom: -350,
-            child: Image.asset(
-              'assets/images/Spline.png',
-            ),
-          ),
-          Positioned.fill(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 0,
-                sigmaY: 0,
-              ),
-              child: SizedBox(),
-            ),
-          ),
+          // Positioned(
+          //   width: MediaQuery.of(context).size.width * 2,
+          //   left: -200,
+          //   bottom: -350,
+          //   child: Image.asset(
+          //     'assets/images/Spline.png',
+          //   ),
+          // ),
+          // Positioned.fill(
+          //   child: BackdropFilter(
+          //     filter: ImageFilter.blur(
+          //       sigmaX: 0,
+          //       sigmaY: 0,
+          //     ),
+          //     child: SizedBox(),
+          //   ),
+          // ),
           // RiveAnimation.asset(
           //   "assets/riveassets/shapes.riv",
           // ),
@@ -91,10 +92,10 @@ class _loginscreenState extends State<loginscreen> {
                         Container(
                           alignment: AlignmentDirectional.center,
                           child: CircleAvatar(
-                            radius:100,
-                            backgroundColor: Colors.black.withOpacity(.08),
+                            radius:130,
+                            backgroundColor: Colors.black.withOpacity(.0),
                             child: Padding(
-                              padding: const EdgeInsets.all(30.0),
+                              padding: const EdgeInsets.all(20.0),
                               child: Image.asset(
                                 'assets/images/login.png',
                               ),
@@ -253,7 +254,7 @@ class _loginscreenState extends State<loginscreen> {
                           height: 70,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
-                            color: c1,
+                            color: Colors.blue,
                           ),
                           child: TextButton(
                             onPressed: () {
@@ -271,7 +272,7 @@ class _loginscreenState extends State<loginscreen> {
                             child: Text(
                               'Sign in',
                               style: TextStyle(
-                                color: Colors.grey[300],
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25,
                               ),
