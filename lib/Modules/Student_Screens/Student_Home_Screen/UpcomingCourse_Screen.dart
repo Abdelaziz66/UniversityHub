@@ -18,7 +18,7 @@ class UpcomingCourse_Screen extends StatelessWidget {
             height: 15,
             color: Colors.transparent,
           ),
-          itemCount: 10,
+          itemCount: 1,
         ),
       ),
     );

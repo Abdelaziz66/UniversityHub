@@ -18,7 +18,7 @@ class Assignments_Screen extends StatelessWidget {
             height: 15,
             color: Colors.transparent,
           ),
-          itemCount: 10,
+          itemCount: 3,
         ),
       ),
     );
