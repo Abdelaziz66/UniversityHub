@@ -18,7 +18,14 @@ import 'Shared/Style/App_Style.dart';
 // git commit -m 'new commit'
 // git push origin zeko-branch
 
+
 // from alfy
+// git checkout -b alfy-branch
+// git pull origin main
+// code………
+// git add .
+// git commit -m 'new commit'
+// git push origin zeko-branch
 
 void main() {
   // new branch
