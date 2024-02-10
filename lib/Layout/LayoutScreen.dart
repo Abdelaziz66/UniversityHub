@@ -506,15 +506,28 @@ class Layout_Screen extends StatelessWidget {
                       // ),
                       Padding(
                         padding: const EdgeInsets.only(right: 15.0, top: 30),
-                        child: IconButton(
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Task_screen(),));
-                            },
-                            icon: FaIcon(
-                              FontAwesomeIcons.bell,
-                              color: c1,
-                              size: 30,
-                            )),
+                        child: Stack(
+                          alignment: Alignment.topRight,
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Task_screen(),));
+                                },
+                                icon: FaIcon(
+                                  FontAwesomeIcons.bell,
+                                  color: c1,
+                                  size: 30,
+                                )),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 8),
+                              child: CircleAvatar(
+                                radius: 8,
+                                backgroundColor: Colors.red,
+                                child: Text('3',style: TextStyle(color: Colors.white,fontSize: 13,fontWeight: FontWeight.w700),),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
