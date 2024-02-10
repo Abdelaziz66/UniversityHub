@@ -507,7 +507,7 @@ Widget Lecture_C() => InkWell(
 
 Widget Matrial_C({required index}) => Padding(
   padding: const EdgeInsets.all(8.0),
-  child: GlassBox(
+  child: GlassBoxWithBorder(
       widget: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Row(
@@ -515,7 +515,7 @@ Widget Matrial_C({required index}) => Padding(
           children: [
             FaIcon(
               FontAwesomeIcons.solidFolder,
-              color: c1,
+              color: c1.withOpacity(.9),
             ),
             const SizedBox(
               width: 10,
@@ -523,18 +523,20 @@ Widget Matrial_C({required index}) => Padding(
             Text(
               'Lecture ${index + 1}',
               style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: c2,
+                fontSize: 17,
+                fontWeight: FontWeight.w700,
+                color: c1,
               ),
             ),
           ],
         ),
       ),
-      color: Colors.grey.withOpacity(.1),
-      borderRadius: 20,
+      color: Colors.blueGrey.withOpacity(.01),
+      borderRadius: 15,
       x: 100,
-      y: 120
+      y: 120,
+    BorderColor: Colors.black.withOpacity(.3),
+    BorderWidth: 1,
   ),
 );
 
@@ -563,14 +565,12 @@ Widget OngoingCourse_Card() => GlassBoxWithBorder_notification(
               ],
             ),
             Spacer(),
-            Expanded(
-              child: Container(
-                alignment: AlignmentDirectional.centerEnd,
-                child: FaIcon(
-                  FontAwesomeIcons.circleRight,
-                  color: Colors.teal,
-                  size: 30,
-                ),
+            Container(
+              alignment: AlignmentDirectional.centerEnd,
+              child: FaIcon(
+                FontAwesomeIcons.circleRight,
+                color: Colors.teal,
+                size: 30,
               ),
             ),
           ],
@@ -1211,9 +1211,14 @@ Widget STU_Build_Lec_View_Widget(
   // final fileSize =
   // mb >= 1 ? '${mb.toStringAsFixed(2)} MB ' : '${kb.toStringAsFixed(2)} KB';
   // final extension = file.extension ?? 'none';
-  final color = Colors.red;
+  final color = Colors.blueGrey.withOpacity(.7);
   return Container(
-    padding: EdgeInsets.all(8),
+
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(12),
+      color: Colors.blueGrey.withOpacity(.15),
+    ),
+    padding: EdgeInsets.all(6),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1325,9 +1330,8 @@ Widget Build_Quezes_Ins(context) => Container(
 //------------------------------------------------
 Widget Build_STU_Lec() => Container(
       padding:
-          const EdgeInsets.only(top: 20.0, bottom: 20, left: 10, right: 15),
-      height: 100,
-      width: double.infinity,
+      const EdgeInsets.only(bottom: 10, right: 20.0, top: 10, left: 10),
+
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           border: Border.all(
@@ -1336,20 +1340,21 @@ Widget Build_STU_Lec() => Container(
           )),
       child: Row(
         children: [
-          Expanded(
-            child: Container(
+          Container(
 
-              // height: double.infinity,
-              // width:double.infinity,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                      image: NetworkImage(
-                        'https://th.bing.com/th/id/R.8a10e773efccd504248514e0ca6b0f7e?rik=Txi2Gf8RukK1lA&pid=ImgRaw&r=0',
-
-                      ),
-                      fit: BoxFit.cover
-                  )),
+           height: 50,
+            width:50,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                // image: DecorationImage(
+                //
+                //     image: NetworkImage(
+                //       '',
+                //
+                //     ),
+                //     fit: BoxFit.cover
+                // ),
+              color: Colors.blueGrey.withOpacity(.8),
             ),
           ),
           SizedBox(
@@ -1363,28 +1368,25 @@ Widget Build_STU_Lec() => Container(
                 Text(
                   'Parllel Programming ',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                      fontWeight: FontWeight.w700, color: c1, fontSize: 17
                   ),
                 ),
                 Text(
                   'Dr : Amr massoud ',
                   style: TextStyle(
-                    //fontWeight: FontWeight.bold,
-                    fontSize: 15,
+                      fontWeight: FontWeight.w400, color: c1, fontSize: 14
                   ),
                 ),
               ],
             ),
           ),
-          Expanded(
-            child: Container(
-              alignment: AlignmentDirectional.centerEnd,
-              child: FaIcon(
-                FontAwesomeIcons.circleRight,
-                color: Colors.teal,
-                size: 35,
-              ),
+          Spacer(),
+          Container(
+            alignment: AlignmentDirectional.centerEnd,
+            child: FaIcon(
+              FontAwesomeIcons.circleRight,
+              color: Colors.teal,
+              size: 35,
             ),
           ),
         ],
@@ -1407,41 +1409,57 @@ Widget Build_STU_pend_Tasks() => Container(
       padding: const EdgeInsets.all(10.0),
       child: Row(
         children: [
-          Icon(
-            FontAwesomeIcons.bookAtlas,
-            size: 35,
-          ),
-          SizedBox(
-            width: 35,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Parllel',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: [
-                    Text('Deadline'),
-                    Text(
-                      '1 more day',
-                      style: TextStyle(
-                        color: Colors.red,
-                      ),
-                    )
-                  ],
-                ),
-              ],
+          Container(
+
+            height: 50,
+            width:50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              // image: DecorationImage(
+              //
+              //     image: NetworkImage(
+              //       '',
+              //
+              //     ),
+              //     fit: BoxFit.cover
+              // ),
+              color: Colors.blueGrey.withOpacity(.8),
             ),
           ),
+          SizedBox(
+            width: 15,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Parallel',
+                style: TextStyle( fontWeight: FontWeight.w700, color: c1, fontSize: 17),
+              ),
+              Row(
+                children: [
+                  Text('Deadline', style: TextStyle(
+                    fontWeight: FontWeight.w400, color: c1, fontSize: 14,
+                  ),),
+                  SizedBox(width: 3,),
+                  Text(
+                    '1 more day',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500, color: Colors.red, fontSize: 14,
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+          Spacer(),
           Container(
             width: 85,
             height: double.infinity,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Color(0xFF3D5CFF),
+              color: Colors.blue,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
@@ -1463,74 +1481,68 @@ Widget Build_STU_pend_Tasks() => Container(
 
 Widget Build_STU_complete_Tasks() => Container(
     width: double.infinity,
-    height: 95,
+    height: 76.95,
     decoration: ShapeDecoration(
-      color: Colors.grey.withOpacity(.3),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(
+            color: Colors.blue,
+            width: 2),
+        borderRadius: BorderRadius.circular(15),
       ),
     ),
     child: Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(
         children: [
-          Expanded(
-            child:  Container(
-              padding: EdgeInsets.only(left: 15),
-              width: 150,
-              child: Text(
-                'Assignment 1',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ),
+          Container(
 
+            height: 50,
+            width:50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              // image: DecorationImage(
+              //
+              //     image: NetworkImage(
+              //       '',
+              //
+              //     ),
+              //     fit: BoxFit.cover
+              // ),
+              color: Colors.blueGrey.withOpacity(.8),
+            ),
           ),
-          Expanded(
-            child: Container(
-              width: 120,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+          SizedBox(
+            width: 15,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Parallel',
+                style: TextStyle( fontWeight: FontWeight.w700, color: c1, fontSize: 17),
+              ),
+              Row(
                 children: [
-                  Container(
-                    width: 100,
-                    child: Text(
-                      'Uploaded at',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      ),
+                  Text('Completed', style: TextStyle(
+                    fontWeight: FontWeight.w400, color: c1, fontSize: 14,
+                  ),),
+                  SizedBox(width: 3,),
+                  Text(
+                    '3/4/2024',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500, color: c1, fontSize: 14,
                     ),
-                  ),
-                  Container(
-                    width: 80,
-                    height: 25,
-                    child: Text(
-                      '20/1/2024',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ),
+                  )
                 ],
               ),
-            ),
+            ],
           ),
-        // Spacer(),
-        Padding(
-              padding: const EdgeInsets.only(right: 18.0),
-              child:FaIcon(
-
-                FontAwesomeIcons.check,
-                color: Colors.green,
-                size: 30,
-              )
-              ),
-
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: FaIcon(FontAwesomeIcons.circleCheck,size: 35,color: Colors.green,),
+          ),
 
         ],
       ),
@@ -1603,35 +1615,68 @@ Widget Build_Quiz_Data_Widget(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(
+            height: 20,
+          ),
           Text(
-            'Parllel programming Quiz 1',
+            'Parallel programming Quiz 1',
             style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w700, color: c1, fontSize: 17,
             ),
           ),
-          Text('10 Points'),
           SizedBox(
-            height: 50,
+            height: 10,
+          ),
+          Text('10 Points',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
+          SizedBox(
+            height: 20,
           ),
           ConditionalBuilder(
               condition: quizState[index],
-              builder: (context) => Padding(
-                    padding: const EdgeInsets.only(bottom: 40.0),
-                    child: Text(
-                      'Finished',
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
+              builder: (context) =>  Container(
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Center(
+                child: isQuizStart[index]
+                    ? Text(
+                  'Finished',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                )
+                    : Text(
+                  'Waiting',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                )),
+          ),
+
               fallback: (context) => Column(
                     children: [
+                      Text('From',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
+                      SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('From'),
+
+                          Container(
+                            height: 25,
+                            width: 60,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(color: Colors.green)),
+                            child: Center(child: Text('8:00')),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('To',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
                           SizedBox(
                             width: 10,
                           ),
@@ -1640,35 +1685,17 @@ Widget Build_Quiz_Data_Widget(
                             width: 60,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Colors.blue)),
-                            child: Center(child: Text('10:00')),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text('To'),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            height: 25,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Colors.blue)),
+                                border: Border.all(color: Colors.red)),
                             child: Center(child: Text('10:00')),
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 50,
-                      ),
+                      SizedBox(height: 25,),
                       Container(
                         height: 40,
-                        width: 140,
                         decoration: BoxDecoration(
                           color: Colors.blue,
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(15),
                         ),
                         child: Center(
                             child: isQuizStart[index]
