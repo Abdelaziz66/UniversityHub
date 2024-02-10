@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
+import 'package:university_hup/Shared/constant.dart';
 
 import '../../../../Shared/Cubit/App_cubit.dart';
 import '../../../../Shared/Cubit/App_state.dart';
@@ -20,47 +21,93 @@ class STU_About_course extends StatelessWidget {
       builder: (context, state) {
         App_cubit cubit=App_cubit.get(context);
         return Scaffold(
-          appBar: AppBar(
-            title: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Material name',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                  ),
-                ],
-              ),
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Image(
-                  image: NetworkImage(
-                      'https://s3-alpha-sig.figma.com/img/07b3/a7c9/c2125e7477b092a6b41eee3cbb5627cd?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=LSFzhb5MX20bm5v9pG3n1Lqu5K91VfFaQWA08MV3tZIr-uKjGcByqUBbmljKxlpoEMBhMNd0BPeNgR4EYO~5vCLiHPHXmElMRDj6uXz86SLBMiP~g9p53YydDzfpLmcGZqaN9-ji1169FinyPbjn1Z2h3EBaLuV-Yvxw-eC9KsLuPIloT73yerWbs7kKpOrkjKlLfqZiuZVNgA~7w6QuAYyFEs6T8Ng6LkhhVNUucnBwrquNsuxqNmuQUvvk-6N~7uBKQUw-slravD9XxeGtLp0gJINLfsiC1ZCrGNhl8YZoUdwqPuSPfJdHt~kZhsZpWbdtivJRMcjyF5ZwSQKm-Q__'
-                  ),
-                  fit: BoxFit.cover,
-                  height: 50,
-                  width: 50,
-                ),
-              ),
-            ],
-          ),
-          body:Padding(
-            padding: const EdgeInsets.all(12.0),
+          // appBar: AppBar(
+          //   title: Padding(
+          //     padding: const EdgeInsets.all(8.0),
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: [
+          //         SizedBox(
+          //           height: 10,
+          //         ),
+          //         Text(
+          //           'Material name',
+          //           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          //   actions: [
+          //     Padding(
+          //       padding: const EdgeInsets.all(12.0),
+          //       child: Image(
+          //         image: NetworkImage(
+          //           ''
+          //         ),
+          //         fit: BoxFit.cover,
+          //         height: 50,
+          //         width: 50,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          body:SafeArea(
             child: Column(
               children: [
-                Expanded(
-                   child: InkWell(
-                     onTap: (){
-                       navigateTo(context,STU_Matrial_Screen() );
-                     },
-                     child: Container(
-                       padding: EdgeInsetsDirectional.all(15),
+                SizedBox(height: 30,),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30.0),
+                      child: GestureDetector(
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                          child: FaIcon(FontAwesomeIcons.angleLeft,size: 30)),
+                    ),
+                    SizedBox(width: 15,),
+                    Text(
+                      'Parallel Programming ',textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700, color: c1, fontSize: 20
+                      ),
+                    ),
+                   Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 30.0),
+                      child: Container(
+
+                        height: 30,
+                        width:30,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          // image: DecorationImage(
+                          //
+                          //     image: NetworkImage(
+                          //       '',
+                          //
+                          //     ),
+                          //     fit: BoxFit.cover
+                          // ),
+                          color: Colors.deepPurpleAccent,
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+                SizedBox(height: 30,),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(children: [
+
+                    InkWell(
+                      onTap: (){
+                        navigateTo(context,STU_Matrial_Screen() );
+                      },
+                      child: Container(
+                        height: 100,
+                        padding: EdgeInsetsDirectional.all(15),
                         width:double.infinity,
                         decoration: BoxDecoration(
                           color: Color(0xFFD1FAE5),
@@ -70,41 +117,157 @@ class STU_About_course extends StatelessWidget {
                             right: BorderSide(color: Color(0x9934D399)),
                             bottom: BorderSide(color: Color(0x9934D399)),
                           ),
-                          ),
-                         child: Row(
-                           mainAxisAlignment: MainAxisAlignment.center,
-                             children: [
-                               Text('Course Material',
-                                 style: TextStyle(
-                                   color: Color(0xFF3D5CFF),
-                                   fontSize: 30,
-                                   fontWeight: FontWeight.w500,
-                                 ),
-                               ),
-                               Spacer(),
-                               Expanded(
-                                 child: Container(
-                                   alignment: AlignmentDirectional.centerEnd,
-                                   child: FaIcon(
-                                     FontAwesomeIcons.circleRight,
-                                     color: Colors.teal,
-                                     size: 35,
-                                   ),
-                                 ),
-                               ),
-                             ],
-                           ),
-
                         ),
-                   ),
-                 ),
-                SizedBox(height: 20,),
-                Expanded(
-                  child: InkWell(
-                    onTap: (){
-                      navigateTo(context, STU_Assign_Screen());
-                    },
-                    child: Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              alignment: AlignmentDirectional.centerEnd,
+                              child: FaIcon(
+                                FontAwesomeIcons.folderOpen,
+                                color: c1.withOpacity(.8),
+                                size: 40,
+                              ),
+                            ),
+                            SizedBox(width: 15,),
+                            Text('Course Material',
+                              style: TextStyle(
+                                color: c1.withOpacity(.8),
+                                fontSize: 25,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10.0),
+                              child: Container(
+                                alignment: AlignmentDirectional.centerEnd,
+                                child: FaIcon(
+                                  FontAwesomeIcons.angleRight,
+                                  color: c1.withOpacity(.8),
+                                  size: 35,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    InkWell(
+                      onTap: (){
+                        navigateTo(context, STU_Assign_Screen());
+                      },
+                      child: Container(
+                        height: 100,
+                        padding: EdgeInsetsDirectional.all(15),
+
+                        width:double.infinity,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFFAE8FF),
+                          border: Border(
+                            left: BorderSide(width: 8, color: Color(0x99DB2777)),
+                            top: BorderSide(color: Color(0x99DB2777)),
+                            right: BorderSide(color: Color(0x99DB2777)),
+                            bottom: BorderSide(color: Color(0x99DB2777)),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              alignment: AlignmentDirectional.centerEnd,
+                              child: FaIcon(
+                                FontAwesomeIcons.penClip,
+                                color: c1.withOpacity(.8),
+                                size: 40,
+                              ),
+                            ),
+                            SizedBox(width: 15,),
+                            Text('Assignments',
+                              style: TextStyle(
+                                color: c1.withOpacity(.8),
+                                fontSize: 25,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10.0),
+                              child: Container(
+                                alignment: AlignmentDirectional.centerEnd,
+                                child: FaIcon(
+                                  FontAwesomeIcons.angleRight,
+                                  color: c1.withOpacity(.8),
+                                  size: 35,
+                                ),
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    InkWell(
+                      onTap: (){
+                        navigateTo(context,STU_Quizes_Screen());
+                      },
+                      child: Container(
+                        height: 100,
+                        padding: EdgeInsetsDirectional.all(15),
+                        width:double.infinity,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFD1FAE5),
+                          border: Border(
+                            left: BorderSide(width: 8, color: Color(0x9934D399)),
+                            top: BorderSide(color: Color(0x9934D399)),
+                            right: BorderSide(color: Color(0x9934D399)),
+                            bottom: BorderSide(color: Color(0x9934D399)),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              alignment: AlignmentDirectional.centerEnd,
+                              child: FaIcon(
+                                FontAwesomeIcons.featherPointed,
+                                color: c1.withOpacity(.8),
+                                size: 40,
+                              ),
+                            ),
+                            SizedBox(width: 15,),
+                            Text('Quizzes',
+                              style: TextStyle(
+                                color: c1.withOpacity(.8),
+                                fontSize: 25,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10.0),
+                              child: Container(
+                                alignment: AlignmentDirectional.centerEnd,
+                                child: FaIcon(
+                                  FontAwesomeIcons.angleRight,
+                                  color: c1.withOpacity(.8),
+                                  size: 35,
+                                ),
+                              ),
+                            ),
+
+                          ],
+                        ),
+
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    Container(
+                      height: 100,
                       padding: EdgeInsetsDirectional.all(15),
 
                       width:double.infinity,
@@ -115,128 +278,52 @@ class STU_About_course extends StatelessWidget {
                           top: BorderSide(color: Color(0x99DB2777)),
                           right: BorderSide(color: Color(0x99DB2777)),
                           bottom: BorderSide(color: Color(0x99DB2777)),
+
                         ),
+
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Assignments',
-                            style: TextStyle(
-                              color: Color(0xFF3D5CFF),
-                              fontSize: 30,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Spacer(),
-                          Expanded(
-                            child: Container(
-                              alignment: AlignmentDirectional.centerEnd,
-                              child: FaIcon(
-                                FontAwesomeIcons.circleRight,
-                                color: Colors.teal,
-                                size: 35,
-                              ),
-                            ),
-                          ),
-
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20,),
-                Expanded(
-                  child: InkWell(
-                    onTap: (){
-                        navigateTo(context,STU_Quizes_Screen());
-                    },
-                    child: Container(
-                      padding: EdgeInsetsDirectional.all(15),
-                      width:double.infinity,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFD1FAE5),
-                        border: Border(
-                          left: BorderSide(width: 8, color: Color(0x9934D399)),
-                          top: BorderSide(color: Color(0x9934D399)),
-                          right: BorderSide(color: Color(0x9934D399)),
-                          bottom: BorderSide(color: Color(0x9934D399)),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Quizes',
-                            style: TextStyle(
-                              color: Color(0xFF3D5CFF),
-                              fontSize: 30,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Spacer(),
-
-                          Expanded(
-                            child: Container(
-                              alignment: AlignmentDirectional.centerEnd,
-                              child: FaIcon(
-                                FontAwesomeIcons.circleRight,
-                                color: Colors.teal,
-                                size: 35,
-                              ),
-                            ),
-                          ),
-
-                        ],
-                      ),
-
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20,),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsetsDirectional.all(15),
-
-                    width:double.infinity,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFFAE8FF),
-                      border: Border(
-                        left: BorderSide(width: 8, color: Color(0x99DB2777)),
-                        top: BorderSide(color: Color(0x99DB2777)),
-                        right: BorderSide(color: Color(0x99DB2777)),
-                        bottom: BorderSide(color: Color(0x99DB2777)),
-
-                      ),
-
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Grades',
-                          style: TextStyle(
-                            color: Color(0xFF3D5CFF),
-                            fontSize: 30,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Spacer(),
-                        Expanded(
-                          child: Container(
+                          Container(
                             alignment: AlignmentDirectional.centerEnd,
                             child: FaIcon(
-                              FontAwesomeIcons.circleRight,
-                              color: Colors.teal,
-                              size: 35,
+                              FontAwesomeIcons.squarePollVertical,
+                              color: c1.withOpacity(.8),
+                              size: 40,
                             ),
                           ),
-                        ),
+                          SizedBox(width: 15,),
+                          Text('Grades',
+                            style: TextStyle(
+                              color: c1.withOpacity(.8),
+                              fontSize: 25,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10.0),
+                            child: Container(
+                              alignment: AlignmentDirectional.centerEnd,
+                              child: FaIcon(
+                                FontAwesomeIcons.angleRight,
+                                color: c1.withOpacity(.8),
+                                size: 35,
+                              ),
+                            ),
+                          ),
 
 
-                      ],
+                        ],
+                      ),
+
                     ),
 
-                  ),
+                  ],),
                 ),
-                SizedBox(height: 200,),
+
+
               ],
             ),
           ),

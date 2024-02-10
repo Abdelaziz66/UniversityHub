@@ -25,54 +25,149 @@ class STU_Assign_Screen extends StatelessWidget {
       builder: (context, state) {
         App_cubit cubit=App_cubit.get(context);
         return Scaffold(
-          appBar: AppBar(
-            title: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Material name',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                  ),
-                  // Text('instructor name',
-                  //   style: TextStyle(
-                  //     color: Colors.grey[600],
-                  //       fontWeight: FontWeight.w400,
-                  //       fontSize: 15
-                  //   ),
-                  // ),
-                ],
-              ),
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Image(
-                  image: NetworkImage(
-                      'https://s3-alpha-sig.figma.com/img/07b3/a7c9/c2125e7477b092a6b41eee3cbb5627cd?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=LSFzhb5MX20bm5v9pG3n1Lqu5K91VfFaQWA08MV3tZIr-uKjGcByqUBbmljKxlpoEMBhMNd0BPeNgR4EYO~5vCLiHPHXmElMRDj6uXz86SLBMiP~g9p53YydDzfpLmcGZqaN9-ji1169FinyPbjn1Z2h3EBaLuV-Yvxw-eC9KsLuPIloT73yerWbs7kKpOrkjKlLfqZiuZVNgA~7w6QuAYyFEs6T8Ng6LkhhVNUucnBwrquNsuxqNmuQUvvk-6N~7uBKQUw-slravD9XxeGtLp0gJINLfsiC1ZCrGNhl8YZoUdwqPuSPfJdHt~kZhsZpWbdtivJRMcjyF5ZwSQKm-Q__'
-
-                          //'https://s3-alpha-sig.figma.com/img/d231/da63/0330da0307bd5fd4566c82a5540e92e7?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=J63YbqUJG4~63Q6d5hwEqu3tJAI~012Z3wt3kH03TzaxbPJV4dw-ICasQIcTcQ0CtXSIODocBY7-mJoDxKOdvk~qxLK9~Ouxq5GxPxHrwv6UkMN2TaYWEsi9JCTnTbVOVHQTpzLamoqryU62-W-0H4Noh5W1DQFu1oIqmeFk7Pjldr~RsrNx4aByu~Kim87HDgzZfUVxf3n1F8ONO6iIVJ~5O8IWTJI7HEvjAs9D3hs0uC20cwBq43JH-Cv0d6HE9eHELQ5Rdu1MEWFb9-Slv5q9NKLQaZ-3WNl6gbHB4~9txFsm8fOMBa7qNkonJyUVEzxWMdAL4uRtRaKHFDIlVQ__'
-                  ),
-                  fit: BoxFit.cover,
-                  height: 50,
-                  width: 50,
-                ),
-              ),
-            ],
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(8.0),
+          // appBar: AppBar(
+          //   title: Padding(
+          //     padding: const EdgeInsets.all(8.0),
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: [
+          //         SizedBox(
+          //           height: 10,
+          //         ),
+          //         Text(
+          //           'Material name',
+          //           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+          //         ),
+          //         // Text('instructor name',
+          //         //   style: TextStyle(
+          //         //     color: Colors.grey[600],
+          //         //       fontWeight: FontWeight.w400,
+          //         //       fontSize: 15
+          //         //   ),
+          //         // ),
+          //       ],
+          //     ),
+          //   ),
+          //   actions: [
+          //     Padding(
+          //       padding: const EdgeInsets.all(12.0),
+          //       child: Image(
+          //         image: NetworkImage(
+          //             'https://s3-alpha-sig.figma.com/img/07b3/a7c9/c2125e7477b092a6b41eee3cbb5627cd?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=LSFzhb5MX20bm5v9pG3n1Lqu5K91VfFaQWA08MV3tZIr-uKjGcByqUBbmljKxlpoEMBhMNd0BPeNgR4EYO~5vCLiHPHXmElMRDj6uXz86SLBMiP~g9p53YydDzfpLmcGZqaN9-ji1169FinyPbjn1Z2h3EBaLuV-Yvxw-eC9KsLuPIloT73yerWbs7kKpOrkjKlLfqZiuZVNgA~7w6QuAYyFEs6T8Ng6LkhhVNUucnBwrquNsuxqNmuQUvvk-6N~7uBKQUw-slravD9XxeGtLp0gJINLfsiC1ZCrGNhl8YZoUdwqPuSPfJdHt~kZhsZpWbdtivJRMcjyF5ZwSQKm-Q__'
+          //
+          //                 //'https://s3-alpha-sig.figma.com/img/d231/da63/0330da0307bd5fd4566c82a5540e92e7?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=J63YbqUJG4~63Q6d5hwEqu3tJAI~012Z3wt3kH03TzaxbPJV4dw-ICasQIcTcQ0CtXSIODocBY7-mJoDxKOdvk~qxLK9~Ouxq5GxPxHrwv6UkMN2TaYWEsi9JCTnTbVOVHQTpzLamoqryU62-W-0H4Noh5W1DQFu1oIqmeFk7Pjldr~RsrNx4aByu~Kim87HDgzZfUVxf3n1F8ONO6iIVJ~5O8IWTJI7HEvjAs9D3hs0uC20cwBq43JH-Cv0d6HE9eHELQ5Rdu1MEWFb9-Slv5q9NKLQaZ-3WNl6gbHB4~9txFsm8fOMBa7qNkonJyUVEzxWMdAL4uRtRaKHFDIlVQ__'
+          //         ),
+          //         fit: BoxFit.cover,
+          //         height: 50,
+          //         width: 50,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          body: SafeArea(
             child: SingleChildScrollView(
               child: Container(
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 40,
+                    SizedBox(height: 30,),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30.0),
+                          child: GestureDetector(
+                              onTap: (){
+                                Navigator.pop(context);
+                              },
+                              child: FaIcon(FontAwesomeIcons.angleLeft,size: 30)),
+                        ),
+                        SizedBox(width: 15,),
+                        Text(
+                          'Parallel Programming ',textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, color: c1, fontSize: 20
+                          ),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 30.0),
+                          child: Container(
+
+                            height: 30,
+                            width:30,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              // image: DecorationImage(
+                              //
+                              //     image: NetworkImage(
+                              //       '',
+                              //
+                              //     ),
+                              //     fit: BoxFit.cover
+                              // ),
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+
+                      ],
                     ),
+                    SizedBox(height: 30,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: GlassBox(
+                          widget: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+
+
+                                FaIcon(
+                                  FontAwesomeIcons.featherPointed,
+                                  color: c1.withOpacity(.9),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'Assignments',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                    color: c1,
+                                  ),
+                                ),
+                                Spacer(),
+                                FaIcon(
+                                  FontAwesomeIcons.angleRight,
+                                  color: c1.withOpacity(.9),
+                                ),
+                                Spacer(),
+                                FaIcon(
+                                  Icons.add_task,
+                                  color: c1.withOpacity(.9),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'State',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                    color: c1,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          color: Colors.blueGrey.withOpacity(.15),
+                          borderRadius: 15,
+                          x: 0,
+                          y: 0
+                      ),
+                    ),
+                    SizedBox(height: 15,),
                     // Stack(
                     //  alignment: Alignment.topRight,
                     //   children:[
@@ -115,313 +210,240 @@ class STU_Assign_Screen extends StatelessWidget {
                     //
                     //   ]
                     // )
-                    Container(
-                      height: 200,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        gradient: RadialGradient(
-                          radius: 1.1,
-                          center: Alignment.topRight,
-                          colors: [
-                            Colors.blue,
-                            Colors.indigo
-                            //HexColor('051875FF'),
-                          ],
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Container(
+                        // height: 200,
+                        // width: double.infinity,
+                        decoration: BoxDecoration(
+                          gradient: RadialGradient(
+                            radius: 1.1,
+                            center: Alignment.topRight,
+                            colors: [
+                              Colors.blue,
+                              Colors.indigo
+                              //HexColor('051875FF'),
+                            ],
+                          ),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
                         ),
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'You are aa superb warrior!',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 22),
-                                ),
-                                SizedBox(height: 20),
-                                Row(
-                                  children: [
-                                    Container(
-                                      height: 26,
-                                      width: 26,
-                                      decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius: BorderRadius.circular(5),
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'You are a super warrior !',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 17),
+                                  ),
+                                  SizedBox(height: 20),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        height: 18,
+                                        width: 18,
+                                        decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius: BorderRadius.circular(4),
+                                        ),
+                                        child: Icon(
+                                          FontAwesomeIcons.check,
+                                          size: 14,
+                                          color: Colors.indigo,
+                                        ),
                                       ),
-                                      child: Icon(
-                                        FontAwesomeIcons.check,
-                                        size: 16,
-                                        color: Colors.indigo,
+                                      SizedBox(
+                                        width: 8,
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      'Done 4 task today',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 15),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      height: 26,
-                                      width: 26,
-                                      decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius: BorderRadius.circular(5),
+                                      Text(
+                                        'Done 4 task today',
+                                        style: TextStyle(
+                                            color: Colors.grey[300], fontSize: 14,fontWeight: FontWeight.w500),
                                       ),
-                                      child: Icon(
-                                        FontAwesomeIcons.check,
-                                        size: 16,
-                                        color: Colors.indigo,
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        height: 18,
+                                        width: 18,
+                                        decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius: BorderRadius.circular(4),
+                                        ),
+                                        child: Icon(
+                                          FontAwesomeIcons.check,
+                                          size: 14,
+                                          color: Colors.indigo,
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      'Done 10 task yesterday',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 15),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      height: 26,
-                                      width: 26,
-                                      decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius: BorderRadius.circular(5),
+                                      SizedBox(
+                                        width: 8,
                                       ),
-                                      child: Icon(
-                                        FontAwesomeIcons.check,
-                                        size: 16,
-                                        color: Colors.indigo,
+                                      Text(
+                                        'Done 10 task yesterday',
+                                        style: TextStyle(
+                                            color: Colors.grey[300], fontSize: 14,fontWeight: FontWeight.w500),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      'Done 100 task last month',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 15),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        height: 18,
+                                        width: 18,
+                                        decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius: BorderRadius.circular(4),
+                                        ),
+                                        child: Icon(
+                                          FontAwesomeIcons.check,
+                                          size: 14,
+                                          color: Colors.indigo,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      Text(
+                                        'Done 100 task last month',
+                                        style: TextStyle(
+                                            color: Colors.grey[300], fontSize: 14,fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Expanded(
+                                child: Image(
+                                  image: AssetImage('assets/images/R.png'),
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            ),
-                            Image(
-                              image: NetworkImage(
-                                  'https://th.bing.com/th/id/R.7257f2e854761a78bcaf430e867f766b?rik=kz0lcmm7sQ1Yaw&riu=http%3a%2f%2fwww.digital360shop.com%2fimages%2fdigital-rocket.png&ehk=HaygRr9RNO0ld%2bt4w%2fWc%2bJ31TDqfAw%2f0z1WeKKaqZTs%3d&risl=&pid=ImgRaw&r=0'),
-                              height: 140,
-                              width: 140,
-                            ),
-                          ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
+
                     Padding(
-                      padding: const EdgeInsets.only(left: 15, top: 20,right: 10),
+                      padding: const EdgeInsets.only(left: 15, top: 10, right: 15),
                       child: Row(
                         children: [
                           Expanded(
-                              child:    GestureDetector(
+                              child: GestureDetector(
                                 onTap: () {
-                                  cubit.pend_Complete_Function(pe: true);                                },
+                                  cubit.pend_Complete_Function(pe: true);
+                                },
                                 child: Container(
-                                  height: 50,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: cubit.pend
-                                        ? Colors.indigo
-                                        : Colors.grey.withOpacity(.2),
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: cubit.pend ? Colors.blue :  c1.withOpacity(.8),
+
+                                    boxShadow: [BoxShadow(color:cubit.pend ? Colors.grey: Colors.white,
+                                      spreadRadius: 1,
+                                      blurRadius: 7,
+
+                                    )],
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      height: 30,
-                                      width: 30,
-
-                                      alignment: Alignment.center,
-                                      child: Text('Pending',
-                                      style: TextStyle(
-                                        fontSize: 25,
-                                        color: cubit.pend
-                                            ? c5
-                                            : c1,
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Center(
+                                      child: Text(
+                                        'Pending',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: cubit.pend ? c5 : c5,
+                                        ),
                                       ),
-                                      )
                                     ),
                                   ),
                                 ),
-                              ),
-                              // GestureDetector(
-                              //   onTap: () {
-                              //     cubit.pend_Complete_Function(pe: true);
-                              //   },
-                              //   child: Center(
-                              //     child: Column(
-                              //       children: [
-                              //         Text(
-                              //           'Pending',
-                              //           style: TextStyle(
-                              //             fontSize: 23,
-                              //             fontWeight: FontWeight.bold,
-                              //             color:Colors.red
-                              //             // cubit.pend? c5:c1,
-                              //           ),
-                              //         ),
-                              //          cubit.pend? Container(
-                              //           color: Colors.red,
-                              //            height: 3,
-                              //            width: 120,
-                              //          ):
-                              //              SizedBox(),
-                              //
-                              //       ],
-                              //     ),
-                              //   ),
-                              //   // Container(
-                              //   //   decoration: BoxDecoration(
-                              //   //     borderRadius: BorderRadius.circular(20),
-                              //   //     color: cubit.pend? c2:c4,
-                              //   //   ),
-                              //   //   child: Padding(
-                              //   //     padding: const EdgeInsets.all(8.0),
-                              //   //     child: Center(
-                              //   //       child:
-                              //   //     ),
-                              //   //   ),
-                              //   // ),
-                              // )
-                          ),
+                              )),
                           const SizedBox(
                             width: 15,
                           ),
                           Expanded(
-                              child:  GestureDetector(
+                              child: GestureDetector(
                                 onTap: () {
-                                  cubit.pend_Complete_Function(pe: false);                                },
+                                  cubit.pend_Complete_Function(pe: false);
+                                },
                                 child: Container(
-                                  height: 50,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: cubit.pend
-                                        ? Colors.grey.withOpacity(.2)
-                                        : Colors.indigo
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: cubit.pend ? c1.withOpacity(.8):Colors.blue ,
+
+                                    boxShadow: [BoxShadow(color:cubit.pend ? Colors.grey: Colors.white,
+                                      spreadRadius: 1,
+                                      blurRadius: 7,
+
+                                    )],
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child:Container(
-                                      height: 30,
-                                      width: 30,
-
-                                      alignment: Alignment.center,
-                                      child: Text('Completed',
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Center(
+                                      child: Text(
+                                        'Completed',
                                         style: TextStyle(
-                                          fontSize: 25,
-                                          color: cubit.pend
-                                              ? c1
-                                              : c5,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: cubit.pend ? c5 : c5,
                                         ),
-                                      )
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-
-                            // GestureDetector(
-                              //   onTap: () {
-                              //     cubit.pend_Complete_Function(pe: false);
-                              //   },
-                              //   child:  Center(
-                              //     child: Column(
-                              //       children: [
-                              //         Text(
-                              //           'Completed',
-                              //           style: TextStyle(
-                              //             fontSize: 23,
-                              //             fontWeight: FontWeight.bold,
-                              //             color: Colors.green
-                              //             //cubit.pend? c1:c5,
-                              //           ),
-                              //         ),
-                              //         !cubit.pend? Container(
-                              //           color: Colors.grey,
-                              //           height: 3,
-                              //           width: 120,
-                              //         ):
-                              //         SizedBox(),
-                              //       ],
-                              //     ),
-                              //   ),
-                              //   // Container(
-                              //   //   decoration: BoxDecoration(
-                              //   //     borderRadius: BorderRadius.circular(20),
-                              //   //     color:  cubit.pend? c4:c2,
-                              //   //   ),
-                              //   //   child: Padding(
-                              //   //     padding: const EdgeInsets.all(8.0),
-                              //   //     child: Center(
-                              //   //       child:
-                              //   //     ),
-                              //   //   ),
-                              //   // ),
-                              // )
-                          ),
+                              )),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 30,),
-                    ConditionalBuilder(condition: cubit.pend,
-                      builder: (context) =>Container(
-                        height: 500,
-                        child: ListView.separated(
-                          physics: BouncingScrollPhysics(),
-                          itemBuilder:(context,index)=>InkWell(
-                              onTap: (){
-                                cubit.all_assign_files_List=[];
 
-                                navigateTo(context,STU_About_Assign_Screen() );
-                              },
-                              child: Build_STU_pend_Tasks()),
-                          separatorBuilder: (context,index)=>SizedBox(height: 15,),
-                          itemCount: 5,
+                    const SizedBox(height: 20,),
+                    ConditionalBuilder(condition: cubit.pend,
+                      builder: (context) =>Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Container(
+                          height: 500,
+                          child: ListView.separated(
+                            physics: BouncingScrollPhysics(),
+                            itemBuilder:(context,index)=>InkWell(
+                                onTap: (){
+                                  cubit.all_assign_files_List=[];
+
+                                  navigateTo(context,STU_About_Assign_Screen() );
+                                },
+                                child: Build_STU_pend_Tasks()),
+                            separatorBuilder: (context,index)=>SizedBox(height: 10,),
+                            itemCount: 3,
+                          ),
                         ),
                       ) ,
-                      fallback: (context) => Container(
-                        height:500,
-                        child: ListView.separated(
-                          physics: BouncingScrollPhysics(),
-                          itemBuilder:(context,index)=>InkWell(
-                              onTap: (){
-                                // navigateTo(context,STU_Assign_Screen() );
-                              },
-                              child: Build_STU_complete_Tasks()),
-                          separatorBuilder: (context,index)=>SizedBox(height: 15,),
-                          itemCount: 8,
+                      fallback: (context) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Container(
+                          height:500,
+                          child: ListView.separated(
+                            physics: BouncingScrollPhysics(),
+                            itemBuilder:(context,index)=>InkWell(
+                                onTap: (){
+                                  // navigateTo(context,STU_Assign_Screen() );
+                                },
+                                child: Build_STU_complete_Tasks()),
+                            separatorBuilder: (context,index)=>SizedBox(height: 10,),
+                            itemCount: 2,
+                          ),
                         ),
                       ),
                     ),

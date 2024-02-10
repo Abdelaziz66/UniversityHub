@@ -18,6 +18,7 @@ Color p1 =HexColor('#3D5CFF');
 Color p2 =HexColor('#FFE7EE');
 Color p3 =HexColor('#D8FFEF');
 var scafoldkey = GlobalKey<ScaffoldState>();
+Color p4 =HexColor('#6DBBF3');
 
 
 // Color c1 =Colors.white
