@@ -63,7 +63,7 @@ class Home_screen extends StatelessWidget {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 15.0,vertical: 15),
+                                        horizontal: 10.0,vertical: 15),
                                     child: Row(
                                       children: [
                                         Column(
