@@ -1635,6 +1635,7 @@ Widget Build_Quiz_Data_Widget(
               condition: quizState[index],
               builder: (context) =>  Container(
             height: 40,
+            width: 180,
             decoration: BoxDecoration(
               color: Colors.blue,
               borderRadius: BorderRadius.circular(15),
@@ -1693,8 +1694,10 @@ Widget Build_Quiz_Data_Widget(
                       SizedBox(height: 25,),
                       Container(
                         height: 40,
+                        width: 180,
                         decoration: BoxDecoration(
-                          color: Colors.blue,
+                          color: isQuizStart[index]
+                              ? Colors.green:Colors.blue,
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Center(
@@ -1730,27 +1733,56 @@ Widget Build_STU_Quiz_Ques(
         context, List<String> ques, List<String> answers, index) =>
     Column(
       children: [
-        Text(
-          'Question${index + 1} : ',
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Question',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(width: 5,),
+            Text(
+              '${index + 1}',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue
+              ),
+            ),
+          ],
         ),
         SizedBox(
           height: 25,
         ),
-        Container(
-          width: double.infinity,
-          padding: EdgeInsetsDirectional.all(12),
-          height: 200,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.blue),
-          ),
-          child: Text(
-            '${ques[index]}',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsetsDirectional.all(15),
+            height: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.blue),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+
+                Icon(FontAwesomeIcons.circleInfo,size: 22,),
+                SizedBox(width: 10,),
+                Expanded(
+                  child: Text(
+                    '${ques[index]}',
+                    maxLines: 5,
+
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         SizedBox(height: 30.0),

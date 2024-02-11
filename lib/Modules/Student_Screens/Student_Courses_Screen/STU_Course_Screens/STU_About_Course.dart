@@ -127,7 +127,7 @@ class STU_About_course extends StatelessWidget {
                               child: FaIcon(
                                 FontAwesomeIcons.folderOpen,
                                 color: c1.withOpacity(.8),
-                                size: 40,
+                                size: 30,
                               ),
                             ),
                             SizedBox(width: 15,),
@@ -182,7 +182,7 @@ class STU_About_course extends StatelessWidget {
                               child: FaIcon(
                                 FontAwesomeIcons.penClip,
                                 color: c1.withOpacity(.8),
-                                size: 40,
+                                size: 30,
                               ),
                             ),
                             SizedBox(width: 15,),
@@ -236,7 +236,7 @@ class STU_About_course extends StatelessWidget {
                               child: FaIcon(
                                 FontAwesomeIcons.featherPointed,
                                 color: c1.withOpacity(.8),
-                                size: 40,
+                                size: 30,
                               ),
                             ),
                             SizedBox(width: 15,),
@@ -290,7 +290,7 @@ class STU_About_course extends StatelessWidget {
                             child: FaIcon(
                               FontAwesomeIcons.squarePollVertical,
                               color: c1.withOpacity(.8),
-                              size: 40,
+                              size: 30,
                             ),
                           ),
                           SizedBox(width: 15,),

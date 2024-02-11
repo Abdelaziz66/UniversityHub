@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:university_hup/Modules/LandScape_Screens/LandScape_2_Screen.dart';
 import 'package:university_hup/Modules/Login_Screens/LoginScreen.dart';
 import 'package:university_hup/Shared/constant.dart';
@@ -18,15 +19,19 @@ class LandScape_1 extends StatelessWidget {
     0,1,2,
   ];
   List LandScape_Text1 = [
-    'All lectures and videos',
-    'Quizzes and tracking grades',
-    'Access all Material easy',
+
+
+    'Access Material easy',
+    'Events and News',
+    'Access material offline',
 
   ];
    List LandScape_Text2 = [
-     'All lectures, pdf and exams',
-     'You can know the grades, lecture dates, and schedule',
-     'courses,tasks,quizzes & calender',
+
+
+     'Courses, tasks, quizzes \n and calendar',
+     'Timeline contain Posts about events and news',
+     'Last Lectures, labs and assignments',
 
    ];
 
@@ -105,7 +110,7 @@ class LandScape_1 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  flex: 3,
+                  flex: 5,
                   child: PageView.builder(
                     itemBuilder: (context, index) => Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -157,35 +162,8 @@ class LandScape_1 extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Spacer(),
+                      Spacer(flex: 2,),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.circle,
-                            color: index==0?Colors.blue:Colors.black.withOpacity(.1),
-                            size: 20,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Icon(
-                            Icons.circle,
-                            color: index==1?Colors.blue:Colors.black.withOpacity(.1),
-                            size: 20,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Icon(
-                            Icons.circle,
-                            color: index==2?Colors.blue:Colors.black.withOpacity(.1),
-                            size: 20,
-                          ),
-                        ],
-                      ),
-                      Spacer(),
                     ],
                   ),
                     physics: BouncingScrollPhysics(),
@@ -209,9 +187,22 @@ class LandScape_1 extends StatelessWidget {
 
 
                 Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: Column(
                     children: [
+                      SmoothPageIndicator(
+                          controller: LandScape_controller,
+                          effect: ExpandingDotsEffect(
+                            dotColor: Colors.grey.withOpacity(.5),
+                            activeDotColor: Colors.blue,
+                            dotHeight: 10,
+                            dotWidth: 10,
+                            spacing: 5,
+                            expansionFactor: 4,
+                          ),
+                          count: 3),
+                      SizedBox(height: 40),
+
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
