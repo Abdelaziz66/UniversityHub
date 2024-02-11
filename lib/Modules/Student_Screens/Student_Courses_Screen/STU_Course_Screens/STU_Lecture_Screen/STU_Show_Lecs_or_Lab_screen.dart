@@ -34,44 +34,52 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 30,),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30.0),
-                      child: GestureDetector(
-                          onTap: (){
-                            Navigator.pop(context);
-                          },
-                          child: FaIcon(FontAwesomeIcons.angleLeft,size: 30)),
-                    ),
-                    SizedBox(width: 15,),
-                    Text(
-                      'Parallel Programming ',textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700, color: c1, fontSize: 20
-                      ),
-                    ),
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 30.0),
-                      child: Container(
+                Stack(
+                  alignment: FractionalOffset.center,
 
-                        height: 30,
-                        width:30,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          // image: DecorationImage(
-                          //
-                          //     image: NetworkImage(
-                          //       '',
-                          //
-                          //     ),
-                          //     fit: BoxFit.cover
-                          // ),
-                          color: Colors.deepPurpleAccent,
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30.0),
+                          child: GestureDetector(
+                              onTap: (){
+                                Navigator.pop(context);
+                              },
+                              child: FaIcon(FontAwesomeIcons.angleLeft,size: 30)),
+                        ),
+
+                      ],
+                    ),
+                    Center(
+                      child: Text(
+                        'Parallel Programming ',textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700, color: c1, fontSize: 20
                         ),
                       ),
                     ),
+
+                    // Padding(
+                    //   padding: const EdgeInsets.only(right: 30.0),
+                    //   child: Container(
+                    //
+                    //     height: 30,
+                    //     width:30,
+                    //     decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(10),
+                    //       image: DecorationImage(
+                    //
+                    //           image: AssetImage(
+                    //             'assets/images/book_.png',
+                    //
+                    //           ),
+                    //           fit: BoxFit.cover
+                    //       ),
+                    //       color: Colors.transparent,
+                    //     ),
+                    //   ),
+                    // ),
 
                   ],
                 ),

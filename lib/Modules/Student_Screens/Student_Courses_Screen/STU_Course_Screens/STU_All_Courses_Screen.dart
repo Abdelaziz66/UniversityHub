@@ -28,10 +28,10 @@ class STU_Lecture_Screen extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 50,
+                      height: 30,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                      padding: const EdgeInsets.only(left: 10.0,right: 0),
                       child: Container(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
@@ -41,7 +41,7 @@ class STU_Lecture_Screen extends StatelessWidget {
                               Text(
                                 'Enrolled',
                                 style: TextStyle(
-                                  fontSize: 25,
+                                  fontSize: 23,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),
@@ -59,24 +59,22 @@ class STU_Lecture_Screen extends StatelessWidget {
                               Text(
                                 'Courses',
                                 style: TextStyle(
-                                  fontSize: 25,
+                                  fontSize: 23,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),
                               ),
-                              Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 10.0),
+                              SizedBox(width: 8,),
+                              // Spacer(),
+                              Expanded(
                                 child: Container(
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                   ),
-                                  child: CircleAvatar(
-                                    radius: 50,
-                                    backgroundColor: Colors.deepPurpleAccent[50],
-                                    backgroundImage: AssetImage(
-                                        ''),
-                                  ),
+                                  child:
+                                    Image.asset(
+                                        'assets/images/bluebook.png'),
+
                                 ),
                               ),
 
