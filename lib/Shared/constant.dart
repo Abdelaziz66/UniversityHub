@@ -58,14 +58,7 @@ Widget constant_Size()=> Column(
             color: Colors.black,
           ),
         ),
-        Text(
-          'ew commit',
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
+
       ],
     ),
   ],
