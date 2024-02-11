@@ -112,62 +112,62 @@ class STU_Assign_Screen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 30,),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: GlassBox(
-                          widget: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-
-
-                                FaIcon(
-                                  FontAwesomeIcons.featherPointed,
-                                  color: c1.withOpacity(.9),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  'Assignments',
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w700,
-                                    color: c1,
-                                  ),
-                                ),
-                                Spacer(),
-                                FaIcon(
-                                  FontAwesomeIcons.angleRight,
-                                  color: c1.withOpacity(.9),
-                                ),
-                                Spacer(),
-                                FaIcon(
-                                  Icons.add_task,
-                                  color: c1.withOpacity(.9),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  'State',
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w700,
-                                    color: c1,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          color: Colors.blueGrey.withOpacity(.15),
-                          borderRadius: 15,
-                          x: 0,
-                          y: 0
-                      ),
-                    ),
-                    SizedBox(height: 15,),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    //   child: GlassBox(
+                    //       widget: Padding(
+                    //         padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 15),
+                    //         child: Row(
+                    //           mainAxisAlignment: MainAxisAlignment.center,
+                    //           children: [
+                    //
+                    //
+                    //             FaIcon(
+                    //               FontAwesomeIcons.featherPointed,
+                    //               color: c1.withOpacity(.9),
+                    //             ),
+                    //             const SizedBox(
+                    //               width: 10,
+                    //             ),
+                    //             Text(
+                    //               'Assignments',
+                    //               style: TextStyle(
+                    //                 fontSize: 17,
+                    //                 fontWeight: FontWeight.w700,
+                    //                 color: c1,
+                    //               ),
+                    //             ),
+                    //             Spacer(),
+                    //             FaIcon(
+                    //               FontAwesomeIcons.angleRight,
+                    //               color: c1.withOpacity(.9),
+                    //             ),
+                    //             Spacer(),
+                    //             FaIcon(
+                    //               Icons.add_task,
+                    //               color: c1.withOpacity(.9),
+                    //             ),
+                    //             const SizedBox(
+                    //               width: 10,
+                    //             ),
+                    //             Text(
+                    //               'State',
+                    //               style: TextStyle(
+                    //                 fontSize: 17,
+                    //                 fontWeight: FontWeight.w700,
+                    //                 color: c1,
+                    //               ),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //       color: Colors.blueGrey.withOpacity(.15),
+                    //       borderRadius: 15,
+                    //       x: 0,
+                    //       y: 0
+                    //   ),
+                    // ),
+                    // SizedBox(height: 15,),
                     // Stack(
                     //  alignment: Alignment.topRight,
                     //   children:[
@@ -385,7 +385,7 @@ class STU_Assign_Screen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(15),
                                     color: cubit.pend ? c1.withOpacity(.8):Colors.blue ,
 
-                                    boxShadow: [BoxShadow(color:cubit.pend ? Colors.grey: Colors.white,
+                                    boxShadow: [BoxShadow(color:cubit.pend ? Colors.white: Colors.grey,
                                       spreadRadius: 1,
                                       blurRadius: 7,
 
