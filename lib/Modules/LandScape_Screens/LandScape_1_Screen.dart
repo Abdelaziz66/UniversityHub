@@ -8,39 +8,34 @@ import 'package:university_hup/Modules/Login_Screens/LoginScreen.dart';
 import 'package:university_hup/Shared/constant.dart';
 import 'package:university_hup/Shared/constant.dart';
 
-
+import '../../Shared/Cons_widget.dart';
 
 class LandScape_1 extends StatelessWidget {
-   LandScape_1({Key? key}) : super(key: key);
-   bool islast = false;
+  LandScape_1({Key? key}) : super(key: key);
+  bool islast = false;
 
-   var LandScape_controller = PageController();
+  var LandScape_controller = PageController();
   List LandScape_index = [
-    0,1,2,
+    0,
+    1,
+    2,
   ];
   List LandScape_Text1 = [
-
-
     'Access Material easy',
     'Events and News',
     'Access material offline',
-
   ];
-   List LandScape_Text2 = [
+  List LandScape_Text2 = [
+    'Courses, tasks, quizzes \n and calendar',
+    'Timeline contain Posts about events and news',
+    'Last Lectures, labs and assignments',
+  ];
 
-
-     'Courses, tasks, quizzes \n and calendar',
-     'Timeline contain Posts about events and news',
-     'Last Lectures, labs and assignments',
-
-   ];
-
-   List LandScape_Image = [
-     'w2.png',
-     'w1.png',
-     '3.png',
-
-   ];
+  List LandScape_Image = [
+    'w2.png',
+    'w1.png',
+    '3.png',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +94,7 @@ class LandScape_1 extends StatelessWidget {
           // ),
           Positioned.fill(
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 100, sigmaY:100),
+              filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
               child: SizedBox(),
             ),
           ),
@@ -113,79 +108,62 @@ class LandScape_1 extends StatelessWidget {
                   flex: 5,
                   child: PageView.builder(
                     itemBuilder: (context, index) => Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Spacer(flex: 2,),
-                      Container(
-                        alignment: AlignmentDirectional.center,
-                        child: CircleAvatar(
-                          radius: 150,
-
-                          backgroundColor: Colors.black.withOpacity(.0),
-                          child: Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: Image.asset(
-                              'assets/images/${LandScape_Image[index]}',
-
-
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Spacer(
+                          flex: 2,
+                        ),
+                        Container(
+                          alignment: AlignmentDirectional.center,
+                          child: CircleAvatar(
+                            radius: 150,
+                            backgroundColor: Colors.black.withOpacity(.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(0.0),
+                              child: Image.asset(
+                                'assets/images/${LandScape_Image[index]}',
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 30,),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                        child: Text(
-                          textAlign: TextAlign.center,
-
-                          '${LandScape_Text1[index]}',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.w900,
-                            color: c1,
-                          ),
+                        SizedBox(
+                          height: 30,
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                        child: Text(
-                          '${LandScape_Text2[index]}',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: c1.withOpacity(.7),
-                          ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Text(
+                              textAlign: TextAlign.center,
+                              '${LandScape_Text1[index]}',
+                              style: Theme.of(context).textTheme.bodyText1),
                         ),
-                      ),
-                      Spacer(flex: 2,),
-
-                    ],
-                  ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Text('${LandScape_Text2[index]}',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.subtitle1),
+                        ),
+                        Spacer(
+                          flex: 2,
+                        ),
+                      ],
+                    ),
                     physics: BouncingScrollPhysics(),
                     onPageChanged: (index) {
-                      if (index ==  2) {
-                          islast = true;
-                      }
-                      else{
-                          islast = false;
+                      if (index == 2) {
+                        islast = true;
+                      } else {
+                        islast = false;
                       }
                     },
                     controller: LandScape_controller,
                     scrollDirection: Axis.horizontal,
                     itemCount: 3,
-
-
-
                   ),
-
                 ),
-
-
                 Expanded(
                   flex: 2,
                   child: Column(
@@ -202,55 +180,76 @@ class LandScape_1 extends StatelessWidget {
                           ),
                           count: 3),
                       SizedBox(height: 40),
-
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: 70,
-
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            border: Border.all(color: Colors.blue.withOpacity(1),width: 2.5,style: BorderStyle.solid),
-                            color:Colors.blue,
-                          ),
-                          width: double.infinity,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TextButton(
-                              onPressed: () {
-                                if(islast){
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => loginscreen()));
-                                }
-                                else{
-                                  LandScape_controller.nextPage(
-                                    duration: Duration(
-                                      milliseconds: 750,
-                                    ),
-                                    curve: Curves.fastLinearToSlowEaseIn,
-                                  );
-                                }
-
-                              },
-                              child: Text(
-                                'Next',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
-                                  color: c5,
+                        child:
+                        Default_Button(
+                          textFontSize: 30,
+                          onPressed: () {
+                            if (islast) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => loginscreen()));
+                            } else {
+                              LandScape_controller.nextPage(
+                                duration: Duration(
+                                  milliseconds: 750,
                                 ),
-                              ),
-                            ),
-                          ),
+                                curve: Curves.fastLinearToSlowEaseIn,
+                              );
+                            }
+                          },
+                          text: 'Next',
                         ),
+
+
+
+                        // Container(
+                        //   height: 70,
+                        //
+                        //   decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(25),
+                        //     border: Border.all(color: Colors.blue.withOpacity(1),width: 2.5,style: BorderStyle.solid),
+                        //     color:Colors.blue,
+                        //   ),
+                        //   width: double.infinity,
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.all(8.0),
+                        //     child: TextButton(
+                        //       onPressed: () {
+                        //         if(islast){
+                        //           Navigator.push(
+                        //               context,
+                        //               MaterialPageRoute(
+                        //                   builder: (context) => loginscreen()));
+                        //         }
+                        //         else{
+                        //           LandScape_controller.nextPage(
+                        //             duration: Duration(
+                        //               milliseconds: 750,
+                        //             ),
+                        //             curve: Curves.fastLinearToSlowEaseIn,
+                        //           );
+                        //         }
+                        //
+                        //       },
+                        //       child: Text(
+                        //         'Next',
+                        //         textAlign: TextAlign.center,
+                        //         style: TextStyle(
+                        //           fontSize: 30,
+                        //           fontWeight: FontWeight.bold,
+                        //           color: c5,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                       ),
                     ],
                   ),
                 ),
-
               ],
             ),
           ),

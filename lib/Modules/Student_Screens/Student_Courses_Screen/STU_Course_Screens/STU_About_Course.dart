@@ -55,62 +55,61 @@ class STU_About_course extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: 30,),
-                Stack(
-                  alignment: FractionalOffset.center,
-
-                  children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 30.0),
-                          child: GestureDetector(
-                              onTap: (){
-                                Navigator.pop(context);
-                              },
-                              child: FaIcon(FontAwesomeIcons.angleLeft,size: 30)),
-                        ),
-
-                      ],
-                    ),
-                    Center(
-                      child: Text(
-                        'Parallel Programming ',textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700, color: c1, fontSize: 20
-                        ),
-                      ),
-                    ),
-
-                    // Padding(
-                    //   padding: const EdgeInsets.only(right: 30.0),
-                    //   child: Container(
-                    //
-                    //     height: 30,
-                    //     width:30,
-                    //     decoration: BoxDecoration(
-                    //       borderRadius: BorderRadius.circular(10),
-                    //       image: DecorationImage(
-                    //
-                    //           image: AssetImage(
-                    //             'assets/images/book_.png',
-                    //
-                    //           ),
-                    //           fit: BoxFit.cover
-                    //       ),
-                    //       color: Colors.transparent,
-                    //     ),
-                    //   ),
-                    // ),
-
-                  ],
-                ),
+                defaultAppbar(context),
+                // Stack(
+                //   alignment: FractionalOffset.center,
+                //
+                //   children: [
+                //     Row(
+                //       children: [
+                //         Padding(
+                //           padding: const EdgeInsets.only(left: 30.0),
+                //           child: GestureDetector(
+                //               onTap: (){
+                //                 Navigator.pop(context);
+                //               },
+                //               child: FaIcon(FontAwesomeIcons.angleLeft,size: 30)),
+                //         ),
+                //
+                //       ],
+                //     ),
+                //     Center(
+                //       child: Text(
+                //         'Parallel Programming ',textAlign: TextAlign.center,
+                //         style: TextStyle(
+                //             fontWeight: FontWeight.w700, color: c1, fontSize: 20
+                //         ),
+                //       ),
+                //     ),
+                //
+                //     // Padding(
+                //     //   padding: const EdgeInsets.only(right: 30.0),
+                //     //   child: Container(
+                //     //
+                //     //     height: 30,
+                //     //     width:30,
+                //     //     decoration: BoxDecoration(
+                //     //       borderRadius: BorderRadius.circular(10),
+                //     //       image: DecorationImage(
+                //     //
+                //     //           image: AssetImage(
+                //     //             'assets/images/book_.png',
+                //     //
+                //     //           ),
+                //     //           fit: BoxFit.cover
+                //     //       ),
+                //     //       color: Colors.transparent,
+                //     //     ),
+                //     //   ),
+                //     // ),
+                //
+                //   ],
+                // ),
                 SizedBox(height: 30,),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Column(children: [
-                    Container(
-                     
-                      child: Row(
+                     Row(
                         children: [
                           Expanded(
                             child: InkWell(
@@ -225,7 +224,6 @@ class STU_About_course extends StatelessWidget {
 
                         ],
                       ),
-                    ),
                     SizedBox(height: 15,),
                     Container(
 

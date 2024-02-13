@@ -181,7 +181,9 @@ Widget GlassBoxWithBorder_Gradiant2({
       child: widget,
     );
 
-Widget Post({required bool image}) {
+Widget Post({required bool image,
+  context
+}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 6.0),
     child: GlassBoxWithBorder_Gradiant2(
@@ -222,13 +224,16 @@ Widget Post({required bool image}) {
                         children: [
                           Row(
                             children: [
-                              const Text(
+                               Text(
                                 'Name Here',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 18,
+                                style: Theme.of(context).textTheme.subtitle1?.copyWith(
                                   color: Colors.black,
                                 ),
+                                // TextStyle(
+                                //   fontWeight: FontWeight.w900,
+                                //   fontSize:20,
+                                //   color: Colors.black,
+                                // ),
                               ),
                               const SizedBox(
                                 width: 4,

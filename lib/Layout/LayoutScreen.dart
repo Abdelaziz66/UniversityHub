@@ -561,9 +561,7 @@ class Layout_Screen extends StatelessWidget {
                                   icon: FaIcon(FontAwesomeIcons.book),
                                   label: 'Lecture'),
                               BottomNavigationBarItem(
-                                  icon: FaIcon(
-                                    FontAwesomeIcons.calendarCheck,
-                                  ),
+                                  icon: FaIcon(FontAwesomeIcons.calendarCheck,),
                                   label: 'Calendar'),
                               BottomNavigationBarItem(
                                   icon: FaIcon(FontAwesomeIcons.user),
@@ -578,7 +576,8 @@ class Layout_Screen extends StatelessWidget {
                         color: Colors.black,
                         borderRadius: 25,
                         x: 10,
-                        y: 10),
+                        y: 10
+                    ),
                   ),
                 ],
               ),

@@ -6,6 +6,7 @@ import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
+import 'package:university_hup/Shared/remote/DioHelper.dart';
 
 class Profile_screen extends StatelessWidget {
   Profile_screen({super.key});
@@ -470,6 +471,19 @@ class Profile_screen extends StatelessWidget {
                         Expanded(
                           child: InkWell(
                             onTap: () {
+                              print('aaaaa');
+                              Dio_Helper.PostData(
+                                  url:
+                                  //'Ahttps://crudapi20240209215103.azurewebsites.net/api/'
+                                      'Account/login',
+                                  data: {
+                                    'email': 'abdulmajeedsallam@gmail.com',
+                                    'password': 'P@ssw0rd'
+                                  });
+                              // cubit.UserLogin(
+                              //     email: 'abdulmajeedsallam@gmail.com',
+                              //     password: 'P@ssw0rd');
+
                               // cubit.image=null;
                               // Navigator.push(
                               //     context,
