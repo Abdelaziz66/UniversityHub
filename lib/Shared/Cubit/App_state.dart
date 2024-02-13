@@ -1,3 +1,5 @@
+import '../../Models/STU_Model/User_Model/STU_Login_Model.dart';
+
 abstract class App_state {}
 
 class App_ini_state extends App_state{}
@@ -54,5 +56,22 @@ class AddNewFile_Assign_Error_State extends App_state{}
 //-----------------STU_Quiz_states-------------
 class Change_Quiz_Answer_State extends App_state{}
 
+//-----------------------API---------------------
+//Login:
+class STU_LoginInitialState extends App_state {}
+
+class STU_LoginLoadingState extends App_state {}
+
+class STU_LoginSuccessState extends App_state {
+  final STU_Login_Model loginmodel;
+
+  STU_LoginSuccessState(this.loginmodel);
+
+}
+
+class STU_LoginErrorState extends App_state {
+  String? error;
+  STU_LoginErrorState(this.error);
+}
 
 

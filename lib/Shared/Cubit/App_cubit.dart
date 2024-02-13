@@ -18,10 +18,12 @@ import 'package:university_hup/Modules/Student_Screens/Student_Home_Screen/Ongoi
 import 'package:university_hup/Modules/Student_Screens/Student_Home_Screen/Quizzes_Screen.dart';
 import 'package:university_hup/Modules/Student_Screens/Student_Home_Screen/UpcomingCourse_Screen.dart';
 import 'package:university_hup/Shared/constant.dart';
-import '../../Modules/Student_Screens/Student_Courses_Screen/STU_Course_Screens/STU_All_Courses_Screen.dart';
+import '../../Models/STU_Model/User_Model/STU_Login_Model.dart';
+import '../../Modules/Navigation_Screens/STU_All_Courses_Screen.dart';
 import '../../Modules/Student_Screens/Student_Tasks_screen/Student_Tasks_Screen.dart';
 import '../../Modules/instructor_Screens/Courses_Screens/All_Ionstructor_Materials.dart';
 import '../../Modules/instructor_Screens/Tasks_Ins_screens/All_Tasks_Ins_Screen.dart';
+import '../remote/DioHelper.dart';
 import 'App_state.dart';
 
 class App_cubit extends Cubit<App_state> {
@@ -386,6 +388,28 @@ class App_cubit extends Cubit<App_state> {
   void Quiz_Select_answer(selectedOption){
     this.selectedOption=selectedOption;
     emit(Change_Quiz_Answer_State());
+  }
+//----------------------------------------------------------
+//------------API ------------------------------------
+  STU_Login_Model ?stu_login_Model;
+  void UserLogin({
+    required String email,
+    required String password,
+  }){
+    emit(STU_LoginLoadingState());
+    Dio_Helper.PostData(
+        url: 'Account/login',
+        data:{
+          'email':email,
+          'password':password,
+        }).then((value) {
+      stu_login_Model= STU_Login_Model.fromJson(value.data);
+      emit(STU_LoginSuccessState(stu_login_Model!));
+      print(value.data);
+    }).catchError((Error){
+      print(Error.toString());
+      emit(STU_LoginErrorState(Error.toString()));
+    });
   }
 
 

@@ -50,6 +50,8 @@ dependencies:
   rive: ^0.9.1
   flutter_svg: ^2.0.5
   smooth_page_indicator: ^1.1.0
+  dio: ^5.4.0
+
 
 
 

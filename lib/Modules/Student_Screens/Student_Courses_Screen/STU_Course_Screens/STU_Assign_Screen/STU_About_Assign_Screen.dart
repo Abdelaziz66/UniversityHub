@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:university_hup/Shared/constant.dart';
 
 import '../../../../../Shared/Component/component.dart';
+import '../../../../../Shared/Cons_widget.dart';
 import '../../../../../Shared/Cubit/App_cubit.dart';
 import '../../../../../Shared/Cubit/App_state.dart';
 
@@ -38,55 +39,7 @@ class STU_About_Assign_Screen extends StatelessWidget {
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 30,),
-                Stack(
-                  alignment: FractionalOffset.center,
-
-                  children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 30.0),
-                          child: GestureDetector(
-                              onTap: (){
-                                Navigator.pop(context);
-                              },
-                              child: FaIcon(FontAwesomeIcons.angleLeft,size: 30)),
-                        ),
-
-                      ],
-                    ),
-                    Center(
-                      child: Text(
-                        'Parallel Programming ',textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700, color: c1, fontSize: 20
-                        ),
-                      ),
-                    ),
-
-                    // Padding(
-                    //   padding: const EdgeInsets.only(right: 30.0),
-                    //   child: Container(
-                    //
-                    //     height: 30,
-                    //     width:30,
-                    //     decoration: BoxDecoration(
-                    //       borderRadius: BorderRadius.circular(10),
-                    //       image: DecorationImage(
-                    //
-                    //           image: AssetImage(
-                    //             'assets/images/book_.png',
-                    //
-                    //           ),
-                    //           fit: BoxFit.cover
-                    //       ),
-                    //       color: Colors.transparent,
-                    //     ),
-                    //   ),
-                    // ),
-
-                  ],
-                ),
+                defaultAppbar(context),
                 SizedBox(height: 30,),
 
                 // Padding(

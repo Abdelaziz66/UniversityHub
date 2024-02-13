@@ -6,10 +6,10 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
-import '../../../../Shared/Component/component.dart';
-import '../../../../Shared/Cons_widget.dart';
-import 'STU_About_Course.dart';
-import 'STU_Assign_Screen/STU_Assign_Screen.dart';
+import '../../Shared/Component/component.dart';
+import '../../Shared/Cons_widget.dart';
+import '../Student_Screens/Student_Courses_Screen/STU_Course_Screens/STU_About_Course.dart';
+import '../Student_Screens/Student_Courses_Screen/STU_Course_Screens/STU_Assign_Screen/STU_Assign_Screen.dart';
 
 class STU_Lecture_Screen extends StatelessWidget {
   const STU_Lecture_Screen({Key? key}) : super(key: key);

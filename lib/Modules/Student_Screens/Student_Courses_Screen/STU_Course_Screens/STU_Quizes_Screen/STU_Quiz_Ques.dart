@@ -76,55 +76,7 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 30,),
-                Stack(
-                  alignment: FractionalOffset.center,
-
-                  children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 30.0),
-                          child: GestureDetector(
-                              onTap: (){
-                                // Navigator.pop(context);
-                              },
-                              child: FaIcon(FontAwesomeIcons.angleLeft,size: 30)),
-                        ),
-
-                      ],
-                    ),
-                    Center(
-                      child: Text(
-                        'Parallel Programming ',textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700, color: c1, fontSize: 20
-                        ),
-                      ),
-                    ),
-
-                    // Padding(
-                    //   padding: const EdgeInsets.only(right: 30.0),
-                    //   child: Container(
-                    //
-                    //     height: 30,
-                    //     width:30,
-                    //     decoration: BoxDecoration(
-                    //       borderRadius: BorderRadius.circular(10),
-                    //       image: DecorationImage(
-                    //
-                    //           image: AssetImage(
-                    //             'assets/images/book_.png',
-                    //
-                    //           ),
-                    //           fit: BoxFit.cover
-                    //       ),
-                    //       color: Colors.transparent,
-                    //     ),
-                    //   ),
-                    // ),
-
-                  ],
-                ),
+                defaultAppbar(context),
                 SizedBox(height: 30,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -191,39 +143,62 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: TextButton(onPressed: (){
-                    if (islast) {
-                      navigateTo(context,STU_Quiz_Finish_Screen());
-                      // submit;
-                    } else {
-                      boardcontroller.nextPage(
-                        duration: Duration(
-                          milliseconds: 750,
-                        ),
-                        curve: Curves.fastLinearToSlowEaseIn,
-                      );
-                    }
-                  },
-                    child:
-                  Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Center(
-                      child:
-                      Text(islast?'Submit':'Next',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25
-                        ),
+                  child:
 
-                      ),
-                    ),
-                  ) ,                    ),
+
+
+                  Default_Button(
+                    containerWidth:  double.infinity,
+                      containerHeight: 50,
+                    onPressed: () {
+        if (islast) {
+        navigateTo(context,STU_Quiz_Finish_Screen());
+        // submit;
+        } else {
+        boardcontroller.nextPage(
+        duration: Duration(
+        milliseconds: 750,
+        ),
+        curve: Curves.fastLinearToSlowEaseIn,
+        );
+        }
+                    },
+                    text: islast?'Submit':'Next',
+                  ),
+                  // TextButton(onPressed: (){
+                  //   if (islast) {
+                  //     navigateTo(context,STU_Quiz_Finish_Screen());
+                  //     // submit;
+                  //   } else {
+                  //     boardcontroller.nextPage(
+                  //       duration: Duration(
+                  //         milliseconds: 750,
+                  //       ),
+                  //       curve: Curves.fastLinearToSlowEaseIn,
+                  //     );
+                  //   }
+                  // },
+                  //   child:
+                  //
+                  // Container(
+                  //   width: double.infinity,
+                  //   height: 50,
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.blue,
+                  //     borderRadius: BorderRadius.circular(20),
+                  //   ),
+                  //   child: Center(
+                  //     child:
+                  //     Text(islast?'Submit':'Next',
+                  //       style: TextStyle(
+                  //           color: Colors.white,
+                  //           fontWeight: FontWeight.bold,
+                  //           fontSize: 25
+                  //       ),
+                  //
+                  //     ),
+                  //   ),
+                  // ) ,                    ),
                 )
               ],
             ),

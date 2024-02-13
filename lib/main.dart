@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:university_hup/Modules/LandScape_Screens/LandScape_1_Screen.dart';
+import 'package:university_hup/Shared/remote/DioHelper.dart';
 
 import 'Layout/Switch_Screen.dart';
 import 'Shared/Cubit/App_cubit.dart';
@@ -22,7 +23,7 @@ import 'Shared/Style/App_Style.dart';
 
 
 // from alfy
-
+// base url https://crudapi20240209215103.azurewebsites.net/api/
 
 void main() {
   // new branch
@@ -35,6 +36,8 @@ void main() {
   ));
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
+
+  Dio_Helper.init();
 }
 
 class MyApp extends StatelessWidget {

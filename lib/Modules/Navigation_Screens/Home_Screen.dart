@@ -1,5 +1,3 @@
-
-
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -11,7 +9,6 @@ import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
-
 
 class Home_screen extends StatelessWidget {
   const Home_screen({Key? key}) : super(key: key);
@@ -52,10 +49,9 @@ class Home_screen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                          child:  Container(
+                          child: Container(
                             width: double.infinity,
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -63,45 +59,56 @@ class Home_screen extends StatelessWidget {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 10.0,vertical: 15),
+                                        horizontal: 10.0, vertical: 15),
                                     child: Row(
                                       children: [
                                         Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                              MainAxisAlignment.center,
                                           children: [
-                                            const Text(
+                                             Text(
                                               'Hi, Name Here !',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 25,
-                                                color: Colors.black,
+                                              style:Theme.of(context).textTheme.bodyText1?.copyWith(
+                                                fontSize: 25
                                               ),
+
+                                              // TextStyle(
+                                              //   fontWeight: FontWeight.w700,
+                                              //   fontSize: 25,
+                                              //   color: Colors.black,
+                                              // ),
                                             ),
-                                            SizedBox(height: 5,),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
                                             Text(
                                               'Time Line Here.',
-                                              style: TextStyle(
-                                                // fontWeight: FontWeight.w800,
+                                              style:Theme.of(context).textTheme.subtitle1?.copyWith(
 
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500,
-                                                color: c1,
-                                              ),
+                                               ),
+
+
+        // TextStyle(
+                                              //   // fontWeight: FontWeight.w800,
+                                              //
+                                              //   fontSize: 18,
+                                              //   fontWeight: FontWeight.w500,
+                                              //   color: c1,
+                                              // ),
                                             ),
                                           ],
                                         ),
                                         Spacer(),
                                         Container(
                                           decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                             ),
+                                            shape: BoxShape.circle,
+                                          ),
                                           child: Stack(
-                                            alignment: AlignmentDirectional.bottomEnd,
+                                            alignment:
+                                                AlignmentDirectional.bottomEnd,
                                             children: [
-
                                               CircleAvatar(
                                                 radius: 50,
                                                 backgroundColor: Colors.blue,
@@ -109,7 +116,8 @@ class Home_screen extends StatelessWidget {
                                                     'assets/images/avatar1.png'),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.all(7.0),
+                                                padding:
+                                                    const EdgeInsets.all(7.0),
                                                 child: CircleAvatar(
                                                   radius: 8,
                                                   backgroundColor: Colors.green,
@@ -118,12 +126,9 @@ class Home_screen extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-
-
                                       ],
                                     ),
                                   ),
-
                                 ],
                               ),
                             ),
@@ -134,11 +139,10 @@ class Home_screen extends StatelessWidget {
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
 
-
                           // physics: ,
                           itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.all(5.0),
-                            child: Post(image: image[index]),
+                            child: Post(image: image[index],context: context),
                           ),
                           separatorBuilder: (context, index) => Container(
                             height: 0,
