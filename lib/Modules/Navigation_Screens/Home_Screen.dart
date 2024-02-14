@@ -1,14 +1,16 @@
+
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:rive/rive.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
-import 'package:university_hup/Shared/constant.dart';
+
 
 class Home_screen extends StatelessWidget {
   const Home_screen({Key? key}) : super(key: key);
@@ -26,10 +28,10 @@ class Home_screen extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   Container(
                     height: 600,
-                    child: RiveAnimation.asset(
+                    child: const RiveAnimation.asset(
                       "assets/riveassets/shapes.riv",
                     ),
                   ),
@@ -44,7 +46,7 @@ class Home_screen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 50.0),
                   child: SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -80,7 +82,7 @@ class Home_screen extends StatelessWidget {
                                               //   color: Colors.black,
                                               // ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 5,
                                             ),
                                             Text(
@@ -100,12 +102,12 @@ class Home_screen extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                        Spacer(),
+                                        const Spacer(),
                                         Container(
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             shape: BoxShape.circle,
                                           ),
-                                          child: Stack(
+                                          child: const Stack(
                                             alignment:
                                                 AlignmentDirectional.bottomEnd,
                                             children: [
@@ -117,7 +119,7 @@ class Home_screen extends StatelessWidget {
                                               ),
                                               Padding(
                                                 padding:
-                                                    const EdgeInsets.all(7.0),
+                                                    EdgeInsets.all(7.0),
                                                 child: CircleAvatar(
                                                   radius: 8,
                                                   backgroundColor: Colors.green,
@@ -135,7 +137,7 @@ class Home_screen extends StatelessWidget {
                           ),
                         ),
                         ListView.separated(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
 

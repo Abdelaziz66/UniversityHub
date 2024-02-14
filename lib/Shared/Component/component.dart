@@ -3,18 +3,16 @@ import 'dart:ui';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:university_hup/Modules/Instructor/Courses_Screens/Material_content_sec_or_lec.dart';
+import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
 
-import '../../Modules/Student_Screens/Student_Courses_Screen/STU_Course_Screens/STU_Quizes_Screen/STU_Quiz_Ques.dart';
-import '../../Modules/instructor_Screens/Courses_Screens/All_Ionstructor_Materials.dart';
-import '../../Modules/instructor_Screens/Courses_Screens/Material_content_sec_or_lec.dart';
 import '../Cons_widget.dart';
 import '../Cubit/App_cubit.dart';
 import '../constant.dart';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-// import 'package:mystore_app/modules/Doc_Eng_Screens/Courses_Screens/moreScreen.dart';
+
+
 
 // Abdealziz ------------------------------------------------------------------------------
 
@@ -128,7 +126,7 @@ Widget GlassBoxWithBorder_Gradiant({
         child: Container(
           decoration: BoxDecoration(
             color: color,
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               colors: [
                 // Colors.deepPurple.withOpacity(.7),
                 // Colors.blueGrey.withOpacity(.5),
@@ -208,7 +206,7 @@ Widget Post({required bool image,
                             spreadRadius: 2,
                           ),
                         ]),
-                        child: CircleAvatar(
+                        child: const CircleAvatar(
                           radius: 25,
                           backgroundColor: Colors.blue,
                           backgroundImage:
@@ -385,11 +383,11 @@ Widget Calender_Event({
           children: [
             Row(
               children: [
-                FaIcon(
+                const FaIcon(
                   FontAwesomeIcons.circlePlay,
                   size: 17,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 ),
                 Text('Parallel Programming - Dr Amr Masoud',
@@ -399,16 +397,16 @@ Widget Calender_Event({
                         fontSize: 12)),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Row(
               children: [
-                FaIcon(
+                const FaIcon(
                   FontAwesomeIcons.circleQuestion,
                   size: 17,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 ),
                 Text('Second Quiz',
@@ -418,16 +416,16 @@ Widget Calender_Event({
                         fontSize: 12)),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Row(
               children: [
-                FaIcon(
+                const FaIcon(
                   FontAwesomeIcons.clock,
                   size: 17,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 ),
                 Text('9:00 AM - 10:00 AM',
@@ -467,7 +465,7 @@ Widget Calender_Item(
                       color:iselected?Colors.black.withOpacity(.9): Colors.black.withOpacity(.5),
                       fontWeight: FontWeight.w600,
                       fontSize: 30)),
-              SizedBox(
+              const SizedBox(
                 height: 3,
               ),
               Text('${Calender_Day}',
@@ -561,7 +559,7 @@ Widget OngoingCourse_Card() => GlassBoxWithBorder_notification(
                   style: TextStyle(
                       fontWeight: FontWeight.w700, color: c1, fontSize: 17),
                 ),
-                SizedBox(height: 1),
+                const SizedBox(height: 1),
                 Text(
                   'DR : Amr Masoud',
                   style: TextStyle(
@@ -569,10 +567,10 @@ Widget OngoingCourse_Card() => GlassBoxWithBorder_notification(
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Container(
               alignment: AlignmentDirectional.centerEnd,
-              child: FaIcon(
+              child: const FaIcon(
                 FontAwesomeIcons.circleRight,
                 color: Colors.teal,
                 size: 30,
@@ -604,7 +602,7 @@ Widget Assignments_Card() => GlassBoxWithBorder_notification(
                   style: TextStyle(
                       fontWeight: FontWeight.w700, color: c1, fontSize: 17),
                 ),
-                SizedBox(height: 1),
+                const SizedBox(height: 1),
                 Text(
                   'DR : Amr Masoud',
                   style: TextStyle(
@@ -612,7 +610,7 @@ Widget Assignments_Card() => GlassBoxWithBorder_notification(
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Expanded(
               child: Container(
                 alignment: AlignmentDirectional.centerEnd,
@@ -625,10 +623,10 @@ Widget Assignments_Card() => GlassBoxWithBorder_notification(
                       color: c1,
                       size: 20,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
-                    Text(
+                    const Text(
                       'Pending',
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
@@ -665,7 +663,7 @@ Widget Quizzes_Card() => GlassBoxWithBorder_notification(
                   style: TextStyle(
                       fontWeight: FontWeight.w700, color: c1, fontSize: 17),
                 ),
-                SizedBox(height: 1),
+                const SizedBox(height: 1),
                 Text(
                   'DR : Amr Masoud',
                   style: TextStyle(
@@ -673,7 +671,7 @@ Widget Quizzes_Card() => GlassBoxWithBorder_notification(
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Expanded(
               child: Container(
                 alignment: AlignmentDirectional.centerEnd,
@@ -686,20 +684,20 @@ Widget Quizzes_Card() => GlassBoxWithBorder_notification(
                       color: c1,
                       size: 20,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 4,
                     ),
-                    Text(
+                    const Text(
                       '7:30 PM',
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
                           color: Colors.teal,
                           fontSize: 12),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 1,
                     ),
-                    Text(
+                    const Text(
                       '9:30 PM',
                       style: TextStyle(
                           fontWeight: FontWeight.w900,
@@ -736,7 +734,7 @@ Widget Upcoming_Courses_Card() => GlassBoxWithBorder_notification(
                   style: TextStyle(
                       fontWeight: FontWeight.w700, color: c1, fontSize: 17),
                 ),
-                SizedBox(height: 1),
+                const SizedBox(height: 1),
                 Text(
                   'DR : Amr Masoud',
                   style: TextStyle(
@@ -744,7 +742,7 @@ Widget Upcoming_Courses_Card() => GlassBoxWithBorder_notification(
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Expanded(
               child: Container(
                 alignment: AlignmentDirectional.centerEnd,
@@ -757,7 +755,7 @@ Widget Upcoming_Courses_Card() => GlassBoxWithBorder_notification(
                       color: c1,
                       size: 25,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Text(
@@ -801,13 +799,13 @@ Widget element_in_drawer(
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               FaIcon(
                 FontAwesomeIcons.hatCowboy,
                 size: 20,
                 color: D_value == index ? Colors.white : c1,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               TextButton(
@@ -843,7 +841,7 @@ Widget BuildLevelsWidget() => Padding(
           color: Colors.grey.withOpacity(.5),
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Center(
+        child: const Center(
           child: Text(
             'year 1',
             style: TextStyle(
@@ -866,7 +864,7 @@ Widget BuildMatrialsWidget() => Padding(
           color: Colors.grey.withOpacity(.5),
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Center(
+        child: const Center(
           child: Text(
             'Material name 1',
             style: TextStyle(
@@ -895,14 +893,14 @@ Widget BuildCoursesWidget(context) => InkWell(
               children: [
                 Row(
                   children: [
-                    Text('Lec1'),
-                    Spacer(),
+                    const Text('Lec1'),
+                    const Spacer(),
                     DropdownButton<Widget>(
                       elevation: 20,
                       menuMaxHeight: 100,
                       alignment: AlignmentDirectional.topEnd,
                       borderRadius: BorderRadius.circular(5),
-                      icon: Icon(Icons.more_vert),
+                      icon: const Icon(Icons.more_vert),
                       // Value is the selected item
                       // value: AppCubit.get(context).Material_More_selectedItem,
                       // List of items for the dropdown
@@ -1013,7 +1011,7 @@ Widget BuildCoursesWidget(context) => InkWell(
                   ],
                 ),
 
-                Expanded(
+                const Expanded(
                     child: Text(
                   'Cyber Security',
                   style: TextStyle(fontSize: 20),
@@ -1021,7 +1019,7 @@ Widget BuildCoursesWidget(context) => InkWell(
 
                 Expanded(
                   child: Container(
-                      child: Text(
+                      child: const Text(
                     'comment',
                     style: TextStyle(color: Colors.white),
                   )),
@@ -1029,7 +1027,7 @@ Widget BuildCoursesWidget(context) => InkWell(
 
                 //Spacer(),
 
-                Container(child: Text('added at 12/11/2023')),
+                Container(child: const Text('added at 12/11/2023')),
               ],
             ),
           )),
@@ -1051,7 +1049,7 @@ Widget BuildFileViewWidget(
   return InkWell(
       onTap: () => App_cubit.get(context).openFile_Fun(file),
       child: Container(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1065,18 +1063,18 @@ Widget BuildFileViewWidget(
               ),
               child: Text(
                 '.${extension}',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 28,
                 ),
               ),
             )),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Text(
               file.name,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 14,
               ),
@@ -1143,7 +1141,7 @@ Widget Build_Lec_View_Widget(
   // final extension = file.extension ?? 'none';
   final color = Colors.red;
   return Container(
-    padding: EdgeInsets.all(8),
+    padding: const EdgeInsets.all(8),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1155,7 +1153,7 @@ Widget Build_Lec_View_Widget(
             color: color,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Text(
+          child: const Text(
             '.jpg',
             style: TextStyle(
               color: Colors.white,
@@ -1163,7 +1161,7 @@ Widget Build_Lec_View_Widget(
             ),
           ),
         )),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         Row(
@@ -1171,7 +1169,7 @@ Widget Build_Lec_View_Widget(
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'lecture name',
                   style: TextStyle(
                     color: Colors.black,
@@ -1188,10 +1186,10 @@ Widget Build_Lec_View_Widget(
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.delete,
                   size: 18,
                 )),
@@ -1223,7 +1221,7 @@ Widget STU_Build_Lec_View_Widget(
       borderRadius: BorderRadius.circular(12),
       color: Colors.blueGrey.withOpacity(.15),
     ),
-    padding: EdgeInsets.all(6),
+    padding: const EdgeInsets.all(6),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1235,7 +1233,7 @@ Widget STU_Build_Lec_View_Widget(
                 color: color,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Text(
+              child: const Text(
                 '.jpg',
                 style: TextStyle(
                   color: Colors.white,
@@ -1243,7 +1241,7 @@ Widget STU_Build_Lec_View_Widget(
                 ),
               ),
             )),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         Row(
@@ -1251,7 +1249,7 @@ Widget STU_Build_Lec_View_Widget(
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'lecture name',
                   style: TextStyle(
                     color: Colors.black,
@@ -1279,7 +1277,7 @@ Widget STU_Build_Lec_View_Widget(
 //--------------------------------------
 
 Widget Build_Quezes_Ins(context) => Container(
-    padding: EdgeInsetsDirectional.all(10),
+    padding: const EdgeInsetsDirectional.all(10),
     height: 170,
     width: double.infinity,
     decoration: BoxDecoration(
@@ -1290,18 +1288,18 @@ Widget Build_Quezes_Ins(context) => Container(
       children: [
         Row(
           children: [
-            Text(
+            const Text(
               'Quiz Status',
               style: TextStyle(fontSize: 15),
             ),
-            Spacer(),
+            const Spacer(),
             DropdownButton<Widget>(
               elevation: 0,
               underline: Container(),
               menuMaxHeight: 100,
               alignment: AlignmentDirectional.topEnd,
               //qborderRadius: BorderRadius.circular(15),
-              icon: Icon(Icons.more_vert),
+              icon: const Icon(Icons.more_vert),
               // Value is the selected item
               // value: AppCubit.get(context).Material_More_selectedItem,
               // List of items for the dropdown
@@ -1320,15 +1318,15 @@ Widget Build_Quezes_Ins(context) => Container(
             ),
           ],
         ),
-        Center(
+        const Center(
           child: Text(
             'Material name',
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
         ),
-        Spacer(),
-        Text('Start at : 20/10 at 3:30'),
-        Text('Deadline : 30 minutes')
+        const Spacer(),
+        const Text('Start at : 20/10 at 3:30'),
+        const Text('Deadline : 30 minutes')
       ],
     ));
 
@@ -1362,7 +1360,7 @@ Widget Build_STU_Lec() => Container(
               color: Colors.blueGrey.withOpacity(.8),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 15,
           ),
           Container(
@@ -1385,10 +1383,10 @@ Widget Build_STU_Lec() => Container(
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Container(
             alignment: AlignmentDirectional.centerEnd,
-            child: FaIcon(
+            child: const FaIcon(
               FontAwesomeIcons.circleRight,
               color: Colors.teal,
               size: 35,
@@ -1404,7 +1402,7 @@ Widget Build_STU_pend_Tasks() => Container(
     height: 76.95,
     decoration: ShapeDecoration(
       shape: RoundedRectangleBorder(
-        side: BorderSide(
+        side: const BorderSide(
             color: Colors.blue,
             width: 2),
         borderRadius: BorderRadius.circular(15),
@@ -1431,7 +1429,7 @@ Widget Build_STU_pend_Tasks() => Container(
               color: Colors.blueGrey.withOpacity(.8),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 15,
           ),
           Column(
@@ -1447,8 +1445,8 @@ Widget Build_STU_pend_Tasks() => Container(
                   Text('Deadline', style: TextStyle(
                     fontWeight: FontWeight.w400, color: c1, fontSize: 14,
                   ),),
-                  SizedBox(width: 3,),
-                  Text(
+                  const SizedBox(width: 3,),
+                  const Text(
                     '1 more day',
                     style: TextStyle(
                         fontWeight: FontWeight.w500, color: Colors.red, fontSize: 14,
@@ -1458,7 +1456,7 @@ Widget Build_STU_pend_Tasks() => Container(
               ),
             ],
           ),
-          Spacer(),
+          const Spacer(),
           Container(
             width: 85,
             height: double.infinity,
@@ -1467,7 +1465,7 @@ Widget Build_STU_pend_Tasks() => Container(
               color: Colors.blue,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Center(
+            child: const Center(
               child: Text(
                 'more',
                 style: TextStyle(
@@ -1489,7 +1487,7 @@ Widget Build_STU_complete_Tasks() => Container(
     height: 76.95,
     decoration: ShapeDecoration(
       shape: RoundedRectangleBorder(
-        side: BorderSide(
+        side: const BorderSide(
             color: Colors.blue,
             width: 2),
         borderRadius: BorderRadius.circular(15),
@@ -1516,7 +1514,7 @@ Widget Build_STU_complete_Tasks() => Container(
               color: Colors.blueGrey.withOpacity(.8),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 15,
           ),
           Column(
@@ -1532,7 +1530,7 @@ Widget Build_STU_complete_Tasks() => Container(
                   Text('Completed', style: TextStyle(
                     fontWeight: FontWeight.w400, color: c1, fontSize: 14,
                   ),),
-                  SizedBox(width: 3,),
+                  const SizedBox(width: 3,),
                   Text(
                     '3/4/2024',
                     style: TextStyle(
@@ -1543,9 +1541,9 @@ Widget Build_STU_complete_Tasks() => Container(
               ),
             ],
           ),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
+          const Spacer(),
+          const Padding(
+            padding: EdgeInsets.only(right: 10.0),
             child: FaIcon(FontAwesomeIcons.circleCheck,size: 35,color: Colors.green,),
           ),
 
@@ -1567,7 +1565,7 @@ Widget BuildAssignFileViewWidget(
   return InkWell(
       onTap: () => App_cubit.get(context).openFile_Fun(file),
       child: Container(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -1581,18 +1579,18 @@ Widget BuildAssignFileViewWidget(
               ),
               child: Text(
                 '.${extension}',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 28,
                 ),
               ),
             )),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Text(
               file.name,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 14,
               ),
@@ -1613,14 +1611,14 @@ Widget BuildAssignFileViewWidget(
 Widget Build_Quiz_Data_Widget(
         List<bool> quizState, List<bool> isQuizStart, int index) =>
     Container(
-      padding: EdgeInsetsDirectional.all(12),
+      padding: const EdgeInsetsDirectional.all(12),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           border: Border.all(color: Colors.blue)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Text(
@@ -1629,11 +1627,11 @@ Widget Build_Quiz_Data_Widget(
                 fontWeight: FontWeight.w700, color: c1, fontSize: 17,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text('10 Points',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           ConditionalBuilder(
@@ -1647,14 +1645,14 @@ Widget Build_Quiz_Data_Widget(
             ),
             child: Center(
                 child: isQuizStart[index]
-                    ? Text(
+                    ? const Text(
                   'Finished',
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 20),
                 )
-                    : Text(
+                    : const Text(
                   'Waiting',
                   style: TextStyle(
                       color: Colors.white,
@@ -1666,7 +1664,7 @@ Widget Build_Quiz_Data_Widget(
               fallback: (context) => Column(
                     children: [
                       Text('From',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -1677,13 +1675,13 @@ Widget Build_Quiz_Data_Widget(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 border: Border.all(color: Colors.green)),
-                            child: Center(child: Text('8:00')),
+                            child: const Center(child: Text('8:00')),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text('To',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Container(
@@ -1692,11 +1690,11 @@ Widget Build_Quiz_Data_Widget(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 border: Border.all(color: Colors.red)),
-                            child: Center(child: Text('10:00')),
+                            child: const Center(child: Text('10:00')),
                           ),
                         ],
                       ),
-                      SizedBox(height: 25,),
+                      const SizedBox(height: 25,),
                       Container(
                         height: 40,
                         width: 180,
@@ -1712,7 +1710,7 @@ Widget Build_Quiz_Data_Widget(
                                       navigateTo(
                                           context, STU_Quizes_Ques_Screen());
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       'Start',
                                       style: TextStyle(
                                           color: Colors.white,
@@ -1720,7 +1718,7 @@ Widget Build_Quiz_Data_Widget(
                                           fontSize: 20),
                                     ),
                                   )
-                                : Text(
+                                : const Text(
                                     'Waiting',
                                     style: TextStyle(
                                         color: Colors.white,
@@ -1741,17 +1739,17 @@ Widget Build_STU_Quiz_Ques(
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Question',
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(width: 5,),
+            const SizedBox(width: 5,),
             Text(
               '${index + 1}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
                 color: Colors.blue
@@ -1759,14 +1757,14 @@ Widget Build_STU_Quiz_Ques(
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 25,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4.0),
           child: Container(
             width: double.infinity,
-            padding: EdgeInsetsDirectional.all(15),
+            padding: const EdgeInsetsDirectional.all(15),
             height: 200,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -1776,21 +1774,21 @@ Widget Build_STU_Quiz_Ques(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
-                Icon(FontAwesomeIcons.circleInfo,size: 22,),
-                SizedBox(width: 10,),
+                const Icon(FontAwesomeIcons.circleInfo,size: 22,),
+                const SizedBox(width: 10,),
                 Expanded(
                   child: Text(
                     '${ques[index]}',
                     maxLines: 5,
 
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),
                   ),
                 ),
               ],
             ),
           ),
         ),
-        SizedBox(height: 30.0),
+        const SizedBox(height: 30.0),
         ListView.builder(
           shrinkWrap: true,
           itemCount: App_cubit.get(context).stu_Quiz_Ques_options.length,
@@ -1799,7 +1797,7 @@ Widget Build_STU_Quiz_Ques(
               selectedTileColor: Colors.blue,
               title: Text(
                 App_cubit.get(context).stu_Quiz_Ques_options[index],
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               value: App_cubit.get(context).stu_Quiz_Ques_options[index],
               groupValue: App_cubit.get(context).selectedOption,
