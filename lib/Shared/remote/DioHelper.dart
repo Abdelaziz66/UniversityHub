@@ -11,7 +11,7 @@ class Dio_Helper {
      );
    }
 
-   static Future<Response> GetDaata(
+   static Future<Response> GetData(
    {
      required String url,
       Map<String, dynamic>? query,
@@ -25,6 +25,7 @@ class Dio_Helper {
      // };
      return await dio.get(url,queryParameters: query);
    }
+
 
    static Future<Response> PostData({
      required String url,
