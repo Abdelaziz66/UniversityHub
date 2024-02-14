@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
@@ -67,7 +66,7 @@ class Calendar_screen extends StatelessWidget {
                               width: 3)),
                     ),
                     child: ListView.separated(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       // shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
 
@@ -90,7 +89,7 @@ class Calendar_screen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: ListView.separated(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       // shrinkWrap: true,
                       scrollDirection: Axis.vertical,
 

@@ -1,11 +1,11 @@
 import 'dart:ui';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:rive/rive.dart';
-import 'package:university_hup/Modules/Navigation_Screens/Task_Screen.dart';
+import 'package:university_hup/Modules/Student/Student_Notification/Notification_Screen.dart';
+
+
 import 'package:university_hup/Shared/Component/component.dart';
 import '../Shared/Cubit/App_cubit.dart';
 import '../Shared/Cubit/App_state.dart';
@@ -36,11 +36,11 @@ class Layout_Screen extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          SizedBox(height: 50,),
-                          CircleAvatar(
+                          const SizedBox(height: 50,),
+                          const CircleAvatar(
                             backgroundColor: Colors.white,
                             radius: 80,
-                            child: const CircleAvatar(
+                            child: CircleAvatar(
                               radius: 75.0,
                               backgroundColor: Colors.blue,
                               backgroundImage: AssetImage(
@@ -86,13 +86,13 @@ class Layout_Screen extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 FaIcon(
                                   FontAwesomeIcons.user,
                                   size: 20,
                                   color:cubit.D_value==0? Colors.white:c1,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 5,
                                 ),
                                 TextButton(
@@ -130,13 +130,13 @@ class Layout_Screen extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 FaIcon(
                                   FontAwesomeIcons.calendar,
                                   size: 20,
                                   color:cubit.D_value==1? Colors.white:c1,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 5,
                                 ),
                                 TextButton(
@@ -174,13 +174,13 @@ class Layout_Screen extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 FaIcon(
                                   FontAwesomeIcons.bookBookmark,
                                   size: 20,
                                   color:cubit.D_value==2? Colors.white:c1,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 5,
                                 ),
                                 TextButton(
@@ -218,13 +218,13 @@ class Layout_Screen extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 FaIcon(
                                   FontAwesomeIcons.penClip,
                                   size: 20,
                                   color:cubit.D_value==3? Colors.white:c1,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 5,
                                 ),
                                 TextButton(
@@ -262,13 +262,13 @@ class Layout_Screen extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 FaIcon(
                                   FontAwesomeIcons.featherPointed,
                                   size: 20,
                                   color:cubit.D_value==4? Colors.white:c1,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 5,
                                 ),
                                 TextButton(
@@ -306,13 +306,13 @@ class Layout_Screen extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 FaIcon(
                                   FontAwesomeIcons.gear,
                                   size: 20,
                                   color:cubit.D_value==5? Colors.white:c1,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 5,
                                 ),
                                 TextButton(
@@ -350,13 +350,13 @@ class Layout_Screen extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 FaIcon(
                                   FontAwesomeIcons.rightFromBracket,
                                   size: 20,
                                   color:cubit.D_value==6? Colors.white:c1,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 5,
                                 ),
                                 TextButton(
@@ -463,16 +463,16 @@ class Layout_Screen extends StatelessWidget {
 
                             // color: Colors.green,
 
-                            child: Stack(
+                            child: const Stack(
                               // alignment: AlignmentDirectional.topStart,
 
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 25.0),
+                                  padding: EdgeInsets.only(top: 25.0),
                                   child: FaIcon(FontAwesomeIcons.solidWindowMinimize,size: 25),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 0.0),
+                                  padding: EdgeInsets.only(top: 0.0),
                                   child: FaIcon(FontAwesomeIcons.windowMinimize,size: 40,),
                                 ),
 
@@ -511,15 +511,15 @@ class Layout_Screen extends StatelessWidget {
                           children: [
                             IconButton(
                                 onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Task_screen(),));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Notification_Screen(),));
                                 },
                                 icon: FaIcon(
                                   FontAwesomeIcons.bell,
                                   color: c1,
                                   size: 30,
                                 )),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 8),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 10.0,horizontal: 8),
                               child: CircleAvatar(
                                 radius: 8,
                                 backgroundColor: Colors.red,

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,21 +7,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
+import 'package:university_hup/Modules/Instructor/Courses_Screens/All_Ionstructor_Materials.dart';
+import 'package:university_hup/Modules/Instructor/Tasks_Ins_screens/All_Tasks_Ins_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Calendar_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Home_Screen.dart';
-import 'package:university_hup/Modules/Navigation_Screens/Lecture_Screen.dart';
+
 import 'package:university_hup/Modules/Navigation_Screens/Profile_Screen.dart';
-import 'package:university_hup/Modules/Navigation_Screens/Task_Screen.dart';
-import 'package:university_hup/Modules/Student_Screens/Student_Home_Screen/Assignments_Screen.dart';
-import 'package:university_hup/Modules/Student_Screens/Student_Home_Screen/Ongoing_Screen.dart';
-import 'package:university_hup/Modules/Student_Screens/Student_Home_Screen/Quizzes_Screen.dart';
-import 'package:university_hup/Modules/Student_Screens/Student_Home_Screen/UpcomingCourse_Screen.dart';
+import 'package:university_hup/Modules/Student/Student_Notification/Assignments_Screen.dart';
+import 'package:university_hup/Modules/Student/Student_Notification/Ongoing_Screen.dart';
+import 'package:university_hup/Modules/Student/Student_Notification/Quizzes_Screen.dart';
+import 'package:university_hup/Modules/Student/Student_Notification/UpcomingCourse_Screen.dart';
+
 import 'package:university_hup/Shared/constant.dart';
 import '../../Models/STU_Model/User_Model/STU_Login_Model.dart';
-import '../../Modules/Navigation_Screens/STU_All_Courses_Screen.dart';
-import '../../Modules/Student_Screens/Student_Tasks_screen/Student_Tasks_Screen.dart';
-import '../../Modules/instructor_Screens/Courses_Screens/All_Ionstructor_Materials.dart';
-import '../../Modules/instructor_Screens/Tasks_Ins_screens/All_Tasks_Ins_Screen.dart';
+import '../../Modules/Navigation_Screens/Course_Screen.dart';
+
+
 import '../remote/DioHelper.dart';
 import 'App_state.dart';
 
@@ -40,10 +40,10 @@ class App_cubit extends Cubit<App_state> {
   }
 
   List N_HomeScreen=[
-    Ongoing_Screen(),
-    Assignments_Screen(),
-    Quizzes_Screen(),
-    UpcomingCourse_Screen(),
+    const Ongoing_Screen(),
+    const Assignments_Screen(),
+    const Quizzes_Screen(),
+    const UpcomingCourse_Screen(),
 
   ];
   List N_HomeScreen_Text=[
@@ -52,7 +52,7 @@ class App_cubit extends Cubit<App_state> {
       // 'Assignments',
       // 'Quizzes',
       // 'UpcomingCourse',
-    Text(
+    const Text(
       'Ongoing Courses',
       style: TextStyle(
         fontSize: 25,
@@ -60,7 +60,7 @@ class App_cubit extends Cubit<App_state> {
         color: Colors.black,
       ),
     ),
-    Text(
+    const Text(
       'Assignments',
       style: TextStyle(
         fontSize: 25,
@@ -68,7 +68,7 @@ class App_cubit extends Cubit<App_state> {
         color: Colors.black,
       ),
     ),
-    Text(
+    const Text(
       'Quizzes',
       style: TextStyle(
         fontSize: 25,
@@ -76,7 +76,7 @@ class App_cubit extends Cubit<App_state> {
         color: Colors.black,
       ),
     ),
-    Text(
+    const Text(
       'Upcoming Course',
       style: TextStyle(
         fontSize: 25,
@@ -144,7 +144,7 @@ class App_cubit extends Cubit<App_state> {
   Widget switch_Courses_Fun(){
 
     if(isStudent==true){
-      return STU_Lecture_Screen();
+      return const STU_Lecture_Screen();
     }else {
       return AllMaterials();
     }
@@ -152,18 +152,18 @@ class App_cubit extends Cubit<App_state> {
 
   Widget switch_Tasks_Fun(){
     if(isStudent==true){
-      return All_Tasks_Student_Screen();
+      return const All_Tasks_ins_Screen();
     }else {
-      return All_Tasks_ins_Screen();
+      return const All_Tasks_ins_Screen();
     }
   }
 
   List<Widget> Nav_Bar_Items_List(){
     return[
-     Home_screen(),
+     const Home_screen(),
       switch_Courses_Fun(),
       const Calendar_screen(),
-       Profile_screen()
+       const Profile_screen()
   ];}
 
   int Nav_Bar_index = 0;
@@ -198,16 +198,16 @@ class App_cubit extends Cubit<App_state> {
   List<Widget> items = [
     Row(
       children: [
-        TextButton(onPressed: (){}, child: Text('Edit' ,style: TextStyle(fontSize: 12),)),
-        Icon(Icons.edit,size: 16),
+        TextButton(onPressed: (){}, child: const Text('Edit' ,style: TextStyle(fontSize: 12),)),
+        const Icon(Icons.edit,size: 16),
       ],
     ),
     Row(
       children: [
-        TextButton(onPressed: (){}, child: Text('material name 1',
+        TextButton(onPressed: (){}, child: const Text('material name 1',
           style: TextStyle(fontSize: 12),
         )),
-        Icon(CupertinoIcons.delete,size: 16,),
+        const Icon(CupertinoIcons.delete,size: 16,),
       ],
     ),
   ];
