@@ -154,7 +154,6 @@ class STU_About_course extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-
                                   ],
                                 ),
 

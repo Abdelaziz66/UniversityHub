@@ -473,9 +473,9 @@ class Profile_screen extends StatelessWidget {
                             onTap: () {
                               print('aaaaa');
                               Dio_Helper.PostData(
-                                  url:
+                                  url:'https://crudapi20240209215103.azurewebsites.net/api/Account/login',
                                   //'Ahttps://crudapi20240209215103.azurewebsites.net/api/'
-                                      'Account/login',
+                                     // 'Account/login',
                                   data: {
                                     'email': 'abdulmajeedsallam@gmail.com',
                                     'password': 'P@ssw0rd'
