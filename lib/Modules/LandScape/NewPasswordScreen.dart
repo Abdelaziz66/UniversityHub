@@ -4,23 +4,25 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:university_hup/Layout/LayoutScreen.dart';
 import 'package:university_hup/Modules/LandScape/ForgetPasswordScreen.dart';
+import 'package:university_hup/Modules/LandScape/SuccessfulResetPasswordScreen.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
 
-class loginscreen extends StatefulWidget {
-  const loginscreen({Key? key}) : super(key: key);
+class NewPasswordScreen extends StatefulWidget {
+  const NewPasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<loginscreen> createState() => _loginscreenState();
+  State<NewPasswordScreen> createState() => _loginscreenState();
 }
 
-class _loginscreenState extends State<loginscreen> {
+class _loginscreenState extends State<NewPasswordScreen> {
   var emailcontroller = TextEditingController();
   var passwordcontroller = TextEditingController();
   var formkey = GlobalKey<FormState>();
@@ -97,9 +99,11 @@ class _loginscreenState extends State<loginscreen> {
                           key: formkey,
                           child: Column(
                             children: [
-                              const SizedBox(
-                                height: 40,
-                              ),
+                              Row(children: [
+                                IconButton(onPressed: (){Navigator.pop(context);}, icon:  FaIcon(FontAwesomeIcons.angleLeft,size: 30,),),
+                                Spacer(),
+                              ],),
+                              const SizedBox(height: 10,),
                               Container(
                                 alignment: AlignmentDirectional.center,
                                 child: CircleAvatar(
@@ -108,7 +112,7 @@ class _loginscreenState extends State<loginscreen> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(20.0),
                                     child: Image.asset(
-                                      'assets/images/login.png',
+                                      'assets/images/newpassword.png',
                                     ),
                                   ),
                                 ),
@@ -117,7 +121,7 @@ class _loginscreenState extends State<loginscreen> {
                                 height: 25,
                               ),
                               Text(
-                                  'Welcome !',
+                                  'Reset password',textAlign: TextAlign.center,
                                   style: Theme.of(context).textTheme.bodyText1?.copyWith(
                                       fontSize: 35
                                   )
@@ -162,7 +166,7 @@ class _loginscreenState extends State<loginscreen> {
                               //       ]),
                               // ),
                               Text(
-                                  'You can login here',
+                                  'Enter New Password',
                                   style: Theme.of(context).textTheme.subtitle1?.copyWith(
                                       fontSize: 25
                                   )
@@ -174,53 +178,7 @@ class _loginscreenState extends State<loginscreen> {
                               const SizedBox(
                                 height: 30,
                               ),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 70,
-                                decoration: BoxDecoration(
-                                  // border: Border.all(color: Colors.white),
-                                  borderRadius: BorderRadius.circular(18),
-                                  color: Colors.blueGrey.withOpacity(.1),
-                                ),
-                                child: Padding(
-                                  padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: TextFormField(
-                                    controller: emailcontroller,
-                                    keyboardType: TextInputType.emailAddress,
-                                    onFieldSubmitted: (value) {
-                                      print(value);
-                                    },
-                                    onChanged: (value) {
-                                      print(value);
-                                    },
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return 'Email can\'t be empty';
-                                      }
-                                      return null;
-                                    },
-                                    // toolbarOptions:
-                                    //     ToolbarOptions(paste: true, copy: true),
-                                    cursorColor: c1,
-                                    style: const TextStyle(
-                                      fontSize: 25,
-                                    ),
-                                    decoration: InputDecoration(
-                                      prefixIcon: Icon(
-                                        Icons.email,
-                                        color: c1,
-                                        size: 30,
-                                      ),
-                                      hintText: 'email',
-                                      border: InputBorder.none,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
+
                               Container(
                                 alignment: Alignment.center,
                                 height: 70,
@@ -271,67 +229,30 @@ class _loginscreenState extends State<loginscreen> {
                                           size: 30,
                                         ),
                                       ),
-                                      hintText: 'password',
+                                      hintText: 'New Password',
                                       border: InputBorder.none,
                                     ),
                                   ),
                                 ),
                               ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => ForgetPasswordScreen(),
-                                          ));
-                                    },
-                                    child: const Text(
-                                      'Forget Password ?',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.blue,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                              const SizedBox(
+                                height: 15,
                               ),
                               Default_Button(
 
                                 onPressed: (){
-                                  cubit.UserLogin(
-                                      email: 'abdulmajeedsallam@gmail.com',
-                                      password: 'P@ssw0rd');
 
-                                  if (formkey.currentState!.validate()) {
-                                    print(emailcontroller.text);
-                                    print(passwordcontroller.text);
-                                  } else {
-
-                                    // Dio_Helper.PostData(
-                                    //     url: 'https://crudapi20240209215103.azurewebsites.net/api/Account/logins',
-                                    //     data: {
-                                    //       'email':'abdulmajeedsallam@gmail.com',
-                                    //       'password' : 'P@ssw0rd',
-                                    //     }).then((value) {
-                                    //       print(value.data);
-                                    // }).catchError((error){
-                                    //   print('error ${error.toString()}');
-                                    // });
 
 
 
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => Layout_Screen(),
+                                          builder: (context) => SuccessfulResetPasswordScreen(),
                                         ));
-                                  }
+
                                 },
-                                text:'Sign in',
+                                text:'Submit',
                               ),
                               // Container(
                               //   width: double.infinity,
