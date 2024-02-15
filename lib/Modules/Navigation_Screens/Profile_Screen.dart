@@ -9,7 +9,7 @@ import 'package:university_hup/Shared/constant.dart';
 import 'package:university_hup/Shared/remote/DioHelper.dart';
 
 class Profile_screen extends StatelessWidget {
-  Profile_screen({super.key});
+  const Profile_screen({super.key});
 
   @override
   Widget build(BuildContext context) {

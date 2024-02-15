@@ -9,6 +9,7 @@ import 'package:university_hup/Modules/LandScape/LoginScreen.dart';
 import 'package:university_hup/Shared/constant.dart';
 
 
+import '../../Layout/Switch_Screen.dart';
 import '../../Shared/Cons_widget.dart';
 
 class LandScape_Screen extends StatelessWidget {
@@ -191,7 +192,7 @@ class LandScape_Screen extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const loginscreen()));
+                                      builder: (context) => const Switch_screen()));
                             } else {
                               LandScape_controller.nextPage(
                                 duration: const Duration(
@@ -206,47 +207,7 @@ class LandScape_Screen extends StatelessWidget {
 
 
 
-                        // Container(
-                        //   height: 70,
-                        //
-                        //   decoration: BoxDecoration(
-                        //     borderRadius: BorderRadius.circular(25),
-                        //     border: Border.all(color: Colors.blue.withOpacity(1),width: 2.5,style: BorderStyle.solid),
-                        //     color:Colors.blue,
-                        //   ),
-                        //   width: double.infinity,
-                        //   child: Padding(
-                        //     padding: const EdgeInsets.all(8.0),
-                        //     child: TextButton(
-                        //       onPressed: () {
-                        //         if(islast){
-                        //           Navigator.push(
-                        //               context,
-                        //               MaterialPageRoute(
-                        //                   builder: (context) => loginscreen()));
-                        //         }
-                        //         else{
-                        //           LandScape_controller.nextPage(
-                        //             duration: Duration(
-                        //               milliseconds: 750,
-                        //             ),
-                        //             curve: Curves.fastLinearToSlowEaseIn,
-                        //           );
-                        //         }
-                        //
-                        //       },
-                        //       child: Text(
-                        //         'Next',
-                        //         textAlign: TextAlign.center,
-                        //         style: TextStyle(
-                        //           fontSize: 30,
-                        //           fontWeight: FontWeight.bold,
-                        //           color: c5,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
+
                       ),
                     ],
                   ),
