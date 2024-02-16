@@ -273,119 +273,7 @@ class STU_About_course extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            // Row(
-                            //   children: [
-                            //     InkWell(
-                            //       onTap: (){
-                            //         navigateTo(context,STU_Quizes_Screen());
-                            //       },
-                            //       child: Container(
-                            //         height: 100,
-                            //         padding: EdgeInsetsDirectional.all(15),
-                            //         width:double.infinity,
-                            //         decoration: BoxDecoration(
-                            //           color: Color(0xFFD1FAE5),
-                            //           border: Border(
-                            //             left: BorderSide(width: 8, color: Color(0x9934D399)),
-                            //             top: BorderSide(color: Color(0x9934D399)),
-                            //             right: BorderSide(color: Color(0x9934D399)),
-                            //             bottom: BorderSide(color: Color(0x9934D399)),
-                            //           ),
-                            //         ),
-                            //         child: Row(
-                            //           mainAxisAlignment: MainAxisAlignment.center,
-                            //           children: [
-                            //             Container(
-                            //               alignment: AlignmentDirectional.centerEnd,
-                            //               child: FaIcon(
-                            //                 FontAwesomeIcons.featherPointed,
-                            //                 color: c1.withOpacity(.8),
-                            //                 size: 30,
-                            //               ),
-                            //             ),
-                            //             SizedBox(width: 15,),
-                            //             Text('Quizzes',
-                            //               style: TextStyle(
-                            //                 color: c1.withOpacity(.8),
-                            //                 fontSize: 25,
-                            //                 fontWeight: FontWeight.w900,
-                            //               ),
-                            //             ),
-                            //             Spacer(),
-                            //             Padding(
-                            //               padding: const EdgeInsets.only(right: 10.0),
-                            //               child: Container(
-                            //                 alignment: AlignmentDirectional.centerEnd,
-                            //                 child: FaIcon(
-                            //                   FontAwesomeIcons.angleRight,
-                            //                   color: c1.withOpacity(.8),
-                            //                   size: 35,
-                            //                 ),
-                            //               ),
-                            //             ),
-                            //
-                            //           ],
-                            //         ),
-                            //
-                            //       ),
-                            //     ),
-                            //     SizedBox(height: 20,),
-                            //     Container(
-                            //       height: 100,
-                            //       padding: EdgeInsetsDirectional.all(15),
-                            //
-                            //       width:double.infinity,
-                            //       decoration: BoxDecoration(
-                            //         color: Color(0xFFFAE8FF),
-                            //         border: Border(
-                            //           left: BorderSide(width: 8, color: Color(0x99DB2777)),
-                            //           top: BorderSide(color: Color(0x99DB2777)),
-                            //           right: BorderSide(color: Color(0x99DB2777)),
-                            //           bottom: BorderSide(color: Color(0x99DB2777)),
-                            //
-                            //         ),
-                            //
-                            //       ),
-                            //       child: Row(
-                            //         mainAxisAlignment: MainAxisAlignment.center,
-                            //         children: [
-                            //           Container(
-                            //             alignment: AlignmentDirectional.centerEnd,
-                            //             child: FaIcon(
-                            //               FontAwesomeIcons.squarePollVertical,
-                            //               color: c1.withOpacity(.8),
-                            //               size: 30,
-                            //             ),
-                            //           ),
-                            //           SizedBox(width: 15,),
-                            //           Text('Grades',
-                            //             style: TextStyle(
-                            //               color: c1.withOpacity(.8),
-                            //               fontSize: 25,
-                            //               fontWeight: FontWeight.w900,
-                            //             ),
-                            //           ),
-                            //           Spacer(),
-                            //           Padding(
-                            //             padding: const EdgeInsets.only(right: 10.0),
-                            //             child: Container(
-                            //               alignment: AlignmentDirectional.centerEnd,
-                            //               child: FaIcon(
-                            //                 FontAwesomeIcons.angleRight,
-                            //                 color: c1.withOpacity(.8),
-                            //                 size: 35,
-                            //               ),
-                            //             ),
-                            //           ),
-                            //
-                            //
-                            //         ],
-                            //       ),
-                            //
-                            //     ),
-                            //   ],
-                            // ),
-              
+
               
               
                           ],),
@@ -397,11 +285,10 @@ class STU_About_course extends StatelessWidget {
                   ),
               
               ),
-            ),
-          ),
 
-        );
-      },
+
+        ))
+        );},
     );
   }
 }

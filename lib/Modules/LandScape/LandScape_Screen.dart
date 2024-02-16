@@ -1,16 +1,13 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-
+import 'package:rive/rive.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:university_hup/Modules/LandScape/LoginScreen.dart';
-
-
+import 'package:university_hup/Shared/constant.dart';
 import 'package:university_hup/Shared/constant.dart';
 
-
-import '../../Layout/Switch_Screen.dart';
 import '../../Shared/Cons_widget.dart';
+import 'LoginScreen.dart';
 
 class LandScape_Screen extends StatelessWidget {
   LandScape_Screen({Key? key}) : super(key: key);
@@ -97,7 +94,7 @@ class LandScape_Screen extends StatelessWidget {
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
-              child: const SizedBox(),
+              child: SizedBox(),
             ),
           ),
           Padding(
@@ -113,7 +110,7 @@ class LandScape_Screen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Spacer(
+                        Spacer(
                           flex: 2,
                         ),
                         Container(
@@ -129,7 +126,7 @@ class LandScape_Screen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 30,
                         ),
                         Padding(
@@ -139,7 +136,7 @@ class LandScape_Screen extends StatelessWidget {
                               '${LandScape_Text1[index]}',
                               style: Theme.of(context).textTheme.bodyText1),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 20,
                         ),
                         Padding(
@@ -148,12 +145,12 @@ class LandScape_Screen extends StatelessWidget {
                               textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.subtitle1),
                         ),
-                        const Spacer(
+                        Spacer(
                           flex: 2,
                         ),
                       ],
                     ),
-                    physics: const BouncingScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     onPageChanged: (index) {
                       if (index == 2) {
                         islast = true;
@@ -181,7 +178,7 @@ class LandScape_Screen extends StatelessWidget {
                             expansionFactor: 4,
                           ),
                           count: 3),
-                      const SizedBox(height: 40),
+                      SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child:
@@ -192,10 +189,10 @@ class LandScape_Screen extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Switch_screen()));
+                                      builder: (context) => loginscreen()));
                             } else {
                               LandScape_controller.nextPage(
-                                duration: const Duration(
+                                duration: Duration(
                                   milliseconds: 750,
                                 ),
                                 curve: Curves.fastLinearToSlowEaseIn,
@@ -207,7 +204,47 @@ class LandScape_Screen extends StatelessWidget {
 
 
 
-
+                        // Container(
+                        //   height: 70,
+                        //
+                        //   decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(25),
+                        //     border: Border.all(color: Colors.blue.withOpacity(1),width: 2.5,style: BorderStyle.solid),
+                        //     color:Colors.blue,
+                        //   ),
+                        //   width: double.infinity,
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.all(8.0),
+                        //     child: TextButton(
+                        //       onPressed: () {
+                        //         if(islast){
+                        //           Navigator.push(
+                        //               context,
+                        //               MaterialPageRoute(
+                        //                   builder: (context) => loginscreen()));
+                        //         }
+                        //         else{
+                        //           LandScape_controller.nextPage(
+                        //             duration: Duration(
+                        //               milliseconds: 750,
+                        //             ),
+                        //             curve: Curves.fastLinearToSlowEaseIn,
+                        //           );
+                        //         }
+                        //
+                        //       },
+                        //       child: Text(
+                        //         'Next',
+                        //         textAlign: TextAlign.center,
+                        //         style: TextStyle(
+                        //           fontSize: 30,
+                        //           fontWeight: FontWeight.bold,
+                        //           color: c5,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                       ),
                     ],
                   ),
