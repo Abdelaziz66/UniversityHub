@@ -12,6 +12,7 @@ import 'package:university_hup/Shared/constant.dart';
 import 'package:university_hup/Shared/remote/DioHelper.dart';
 
 import '../../Shared/Cons_widget.dart';
+import 'ForgetPasswordScreen.dart';
 
 class loginscreen extends StatefulWidget {
   const loginscreen({Key? key}) : super(key: key);
@@ -285,7 +286,7 @@ class _loginscreenState extends State<loginscreen> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => Layout_Screen(),
+                                            builder: (context) => ForgetPasswordScreen(),
                                           ));
                                     },
                                     child: Text(
