@@ -275,7 +275,10 @@ class _loginscreenState extends State<loginscreen> {
                               ),
                             ),
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
+
                                 Expanded(
                                   child: RadioListTile(
                                     selectedTileColor: Colors.blue,
@@ -286,6 +289,7 @@ class _loginscreenState extends State<loginscreen> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     contentPadding: EdgeInsets.all(0),
+
 
                                     value:  'Student',
                                     groupValue: radio,
