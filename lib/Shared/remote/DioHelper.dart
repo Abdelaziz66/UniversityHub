@@ -6,7 +6,7 @@ class Dio_Helper {
      dio=Dio(
        BaseOptions(
            baseUrl:'https://crudapi20240209215103.azurewebsites.net/api/',
-           receiveDataWhenStatusError:false,
+           receiveDataWhenStatusError:true,
        )
      );
    }
@@ -32,13 +32,13 @@ class Dio_Helper {
       Map<String, dynamic>? query,
      required Map<String , dynamic> data,
 })async {
-     dio.options.headers={
+   //  dio.options.headers={
      //   'lang':lang,
      //   'authorizatio':token??'',
-       'Content-Type':'application/json'
+     //  'Content-Type':'application/json'
        //'text/plain',
        //'application/x-www-form-urlencoded',
-     };
+     //};
      return await dio.post(url,queryParameters: query,data: data);
    }
 }

@@ -1,17 +1,18 @@
-
-
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:hexcolor/hexcolor.dart';
+import 'package:rive/rive.dart';
 import 'package:university_hup/Layout/LayoutScreen.dart';
-import 'package:university_hup/Modules/LandScape/ForgetPasswordScreen.dart';
-import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
+import 'package:university_hup/Shared/remote/DioHelper.dart';
 
+import '../../Shared/Cons_widget.dart';
+import 'ForgetPasswordScreen.dart';
 
 class loginscreen extends StatefulWidget {
   const loginscreen({Key? key}) : super(key: key);
@@ -85,7 +86,7 @@ class _loginscreenState extends State<loginscreen> {
                 Positioned.fill(
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
-                    child: const SizedBox(),
+                    child: SizedBox(),
                   ),
                 ),
                 SafeArea(
@@ -97,7 +98,7 @@ class _loginscreenState extends State<loginscreen> {
                           key: formkey,
                           child: Column(
                             children: [
-                              const SizedBox(
+                              SizedBox(
                                 height: 40,
                               ),
                               Container(
@@ -113,16 +114,16 @@ class _loginscreenState extends State<loginscreen> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 height: 25,
                               ),
                               Text(
-                                  'Welcome !',
+                                  'Wellcome !',
                                   style: Theme.of(context).textTheme.bodyText1?.copyWith(
                                       fontSize: 35
                                   )
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 height: 15,
                               ),
                               // Padding(
@@ -171,7 +172,7 @@ class _loginscreenState extends State<loginscreen> {
                                 //   color: Colors.black87,
                                 // ),
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 height: 30,
                               ),
                               Container(
@@ -203,7 +204,7 @@ class _loginscreenState extends State<loginscreen> {
                                     // toolbarOptions:
                                     //     ToolbarOptions(paste: true, copy: true),
                                     cursorColor: c1,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 25,
                                     ),
                                     decoration: InputDecoration(
@@ -218,7 +219,7 @@ class _loginscreenState extends State<loginscreen> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 height: 15,
                               ),
                               Container(
@@ -250,7 +251,7 @@ class _loginscreenState extends State<loginscreen> {
                                         return null;
                                     },
                                     cursorColor: c1,
-                                    style: const TextStyle(fontSize: 25),
+                                    style: TextStyle(fontSize: 25),
                                     decoration: InputDecoration(
                                       prefixIcon: Icon(
                                         Icons.lock_rounded,
@@ -288,7 +289,7 @@ class _loginscreenState extends State<loginscreen> {
                                             builder: (context) => ForgetPasswordScreen(),
                                           ));
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       'Forget Password ?',
                                       style: TextStyle(
                                         fontSize: 18,
