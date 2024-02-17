@@ -24,7 +24,9 @@ import 'constant.dart';
 // );
 
 
-Widget defaultAppbar(context)=>Stack(
+Widget defaultAppbar({
+    String? text,
+    context})=>Stack(
   alignment: FractionalOffset.center,
 
   children: [
@@ -42,8 +44,10 @@ Widget defaultAppbar(context)=>Stack(
       ],
     ),
     Center(
-      child: Text(
-        'Parallel Programming ',textAlign: TextAlign.center,
+      child:Text(
+        text??'Parallel Programming '
+
+        ,textAlign: TextAlign.center,
         style: TextStyle(
             fontWeight: FontWeight.w700, color: c1, fontSize: 20
         ),

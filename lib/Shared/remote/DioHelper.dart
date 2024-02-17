@@ -5,7 +5,7 @@ class Dio_Helper {
    static init(){
      dio=Dio(
        BaseOptions(
-           baseUrl:'https://crudapi20240209215103.azurewebsites.net/api/',
+           baseUrl:'https://nabilramadan.bsite.net/api/',
            receiveDataWhenStatusError:true,
        )
      );

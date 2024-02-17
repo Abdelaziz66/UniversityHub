@@ -1,3 +1,71 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:university_hup/Shared/Cubit/App_cubit.dart';
+import 'package:university_hup/Shared/Cubit/App_state.dart';
+
+import '../../../Shared/Component/component.dart';
+import '../../../Shared/Cons_widget.dart';
+import 'STU_Course_Grades.dart';
+
+class StuAllGradesScreen extends StatelessWidget {
+  const StuAllGradesScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<App_cubit,App_state>(
+        listener: (context,state){},
+        builder: (context,state){
+          App_cubit cubit=App_cubit.get(context);
+          return Scaffold(
+             body: SafeArea(
+               child: Column(
+                 children: [
+                   const SizedBox(height: 30,),
+                   defaultAppbar(context:context,text: 'Total Grades'),
+                   const SizedBox(height: 30,),
+
+                   Expanded(
+                     child: Padding(
+                       padding: const EdgeInsets.all(15.0),
+                       child: ListView.separated(
+                         itemBuilder: (context, index) => InkWell(
+                             onTap: () {
+                               navigateTo(context,  StuCourseGrades());
+                             },
+                             child: Build_STU_All_grades(context,index,cubit.stuAllGrades)),
+                         separatorBuilder: (context, index) => const SizedBox(
+                           height: 20,
+                         ),
+                         itemCount: 5,
+                       ),
+                     ),
+                   ),
+                 ],
+               ),
+             ),
+          );
+        },
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //
 // class STU_Grades_Screen extends StatelessWidget {
 //   const STU_Grades_Screen({Key? key}) : super(key: key);
@@ -316,3 +384,4 @@
 //     super.dispose();
 //   }
 // }
+

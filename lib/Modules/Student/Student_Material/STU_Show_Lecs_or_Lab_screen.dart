@@ -34,7 +34,7 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 30,),
-                defaultAppbar(context),
+                defaultAppbar(context:context),
                 const SizedBox(height: 30,),
 
                 Padding(
