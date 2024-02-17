@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:university_hup/Modules/Student/Student_Notification/Drawer/Edit_Profile_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Notification_Screen.dart';
 
 
@@ -88,7 +89,7 @@ class Layout_Screen extends StatelessWidget {
                               children: [
                                 const SizedBox(width: 10),
                                 FaIcon(
-                                  FontAwesomeIcons.user,
+                                  FontAwesomeIcons.house,
                                   size: 20,
                                   color:cubit.D_value==0? Colors.white:c1,
                                 ),
@@ -102,7 +103,7 @@ class Layout_Screen extends StatelessWidget {
                                     Navigator.pop(context);
                                   },
                                   child: Text(
-                                    'Account',
+                                    'Home',
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w700,
@@ -118,43 +119,46 @@ class Layout_Screen extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color:cubit.D_value==1? Colors.blue.withOpacity(.8):Colors.transparent,
-                          ),
-                          alignment: AlignmentDirectional.topStart,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 10),
-                                FaIcon(
-                                  FontAwesomeIcons.calendar,
-                                  size: 20,
-                                  color:cubit.D_value==1? Colors.white:c1,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    cubit.D_value = 1;
-                                    cubit.SetState_G();
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text(
-                                    'Calendar',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700,
-                                      color:cubit.D_value==1? Colors.white:c1,
+                      GestureDetector(
+                        onTap: (){
+                          cubit.D_value = 1;
+                          cubit.SetState_G();
+                          Navigator.push(context,MaterialPageRoute(builder: (context) => Edit_Profile_screen(),));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0,),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color:cubit.D_value==1? Colors.blue.withOpacity(.8):Colors.transparent,
+                            ),
+                            alignment: AlignmentDirectional.topStart,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 10),
+                                  FaIcon(
+                                    FontAwesomeIcons.solidUser,
+                                    size: 20,
+                                    color:cubit.D_value==1? Colors.white:c1,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Edit Account',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        color:cubit.D_value==1? Colors.white:c1,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -176,7 +180,7 @@ class Layout_Screen extends StatelessWidget {
                               children: [
                                 const SizedBox(width: 10),
                                 FaIcon(
-                                  FontAwesomeIcons.bookBookmark,
+                                  FontAwesomeIcons.chartSimple,
                                   size: 20,
                                   color:cubit.D_value==2? Colors.white:c1,
                                 ),
@@ -190,7 +194,7 @@ class Layout_Screen extends StatelessWidget {
                                     Navigator.pop(context);
                                   },
                                   child: Text(
-                                    'Courses',
+                                    'Grades',
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w700,
@@ -206,94 +210,7 @@ class Layout_Screen extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color:cubit.D_value==3? Colors.blue.withOpacity(.8):Colors.transparent,
-                          ),
-                          alignment: AlignmentDirectional.topStart,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 10),
-                                FaIcon(
-                                  FontAwesomeIcons.penClip,
-                                  size: 20,
-                                  color:cubit.D_value==3? Colors.white:c1,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    cubit.D_value = 3;
-                                    cubit.SetState_G();
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text(
-                                    'Assignments',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700,
-                                      color:cubit.D_value==3? Colors.white:c1,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color:cubit.D_value==4? Colors.blue.withOpacity(.8):Colors.transparent,
-                          ),
-                          alignment: AlignmentDirectional.topStart,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 10),
-                                FaIcon(
-                                  FontAwesomeIcons.featherPointed,
-                                  size: 20,
-                                  color:cubit.D_value==4? Colors.white:c1,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    cubit.D_value = 4;
-                                    cubit.SetState_G();
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text(
-                                    'Quizzes',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700,
-                                      color:cubit.D_value==4? Colors.white:c1,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0,),
                         child: Container(
