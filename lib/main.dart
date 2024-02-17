@@ -20,6 +20,7 @@ import 'Shared/Style/App_Style.dart';
 // git commit -m 'new commit'
 // git push origin zeko-branch
 
+
 // git checkout -b zekoo-branch
 // git pull origin main
 // code………
@@ -28,12 +29,9 @@ import 'Shared/Style/App_Style.dart';
 // git push origin zekoo-branch
 //2
 
-
 // from alfy
-// base url https://crudapi20240209215103.azurewebsites.net/api/
-//********************
-//----------------
-//newwww
+// base url https://nabilramadan.bsite.net/api
+
 void main() {
   // new branch
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

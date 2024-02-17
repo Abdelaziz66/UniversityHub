@@ -389,6 +389,8 @@ class App_cubit extends Cubit<App_state> {
     this.selectedOption=selectedOption;
     emit(Change_Quiz_Answer_State());
   }
+  //----------------------Grades--------------------------
+List <int> stuAllGrades=[10,30,50,45,35];
 //----------------------------------------------------------
 //------------API ------------------------------------
   STU_Login_Model ?stu_login_Model;
@@ -411,6 +413,5 @@ class App_cubit extends Cubit<App_state> {
       emit(STU_LoginErrorState(Error.toString()));
     });
   }
-
 
 }

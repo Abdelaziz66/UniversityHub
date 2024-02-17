@@ -78,7 +78,7 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 30,),
-                defaultAppbar(context),
+                defaultAppbar(context:context),
                 const SizedBox(height: 30,),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.0),

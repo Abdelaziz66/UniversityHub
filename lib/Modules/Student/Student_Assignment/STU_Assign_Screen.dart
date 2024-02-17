@@ -70,7 +70,7 @@ class STU_Assign_Screen extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 30,),
-                  defaultAppbar(context),
+                  defaultAppbar(context:context),
                   const SizedBox(height: 30,),
                   // Padding(
                   //   padding: const EdgeInsets.symmetric(horizontal: 15.0),

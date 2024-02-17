@@ -13,6 +13,7 @@ import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
 
+import 'Student_Grade/STU_Grades_Screen.dart';
 import 'Student_Material/STU_All_Lecture_Screen.dart';
 
 
@@ -32,7 +33,7 @@ class STU_About_course extends StatelessWidget {
                 child: Column(
                     children: [
                       const SizedBox(height: 30,),
-                      defaultAppbar(context),
+                      defaultAppbar(context:context),
                       const SizedBox(height: 30,),
                       Padding(
                         padding: const EdgeInsets.all(15.0),
@@ -217,19 +218,13 @@ class STU_About_course extends StatelessWidget {
                                   Expanded(
                                     child: InkWell(
                                       onTap: (){
-              
+                                        navigateTo(context, StuAllGradesScreen());
                                       },
                                       child: Container(
               
                                         decoration: BoxDecoration(
                                           color: Colors.lightBlueAccent.withOpacity(.25),
                                           borderRadius: BorderRadius.circular(20),
-                                          // border: Border(
-                                          //   left: BorderSide(width: 8, color: Color(0x9934D399)),
-                                          //   top: BorderSide(color: Color(0x9934D399)),
-                                          //   right: BorderSide(color: Color(0x9934D399)),
-                                          //   bottom: BorderSide(color: Color(0x9934D399)),
-                                          // ),
                                         ),
                                         child: Column(
                                           mainAxisAlignment: MainAxisAlignment.center,

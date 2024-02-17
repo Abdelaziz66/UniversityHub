@@ -1809,3 +1809,93 @@ Widget Build_STU_Quiz_Ques(
         ),
       ],
     );
+
+
+//-----------grades-------------------------------
+Widget Build_STU_All_grades(
+    context,
+    int index,
+    List <int> grades
+    ,
+    ) => Container(
+  padding:
+  const EdgeInsets.only(bottom: 10, right: 20.0, top: 10, left: 10),
+
+  decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(15),
+      border: Border.all(
+        color: Colors.blue,
+        width: 1.5,
+      )),
+  child: Row(
+    children: [
+      Container(
+
+        height: 50,
+        width:50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          // image: DecorationImage(
+          //
+          //     image: NetworkImage(
+          //       '',
+          //
+          //     ),
+          //     fit: BoxFit.cover
+          // ),
+          color: Colors.blueGrey.withOpacity(.8),
+        ),
+      ),
+      const SizedBox(
+        width: 15,
+      ),
+      Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Parllel Programming ',
+              style: TextStyle(
+                  fontWeight: FontWeight.w700, color: c1, fontSize: 17
+              ),
+            ),
+            Text(
+              'Dr : Amr massoud ',
+              style: TextStyle(
+                  fontWeight: FontWeight.w400, color: c1, fontSize: 14
+              ),
+            ),
+          ],
+        ),
+      ),
+      const SizedBox(
+        width: 50,
+      ),
+
+      Container(
+        alignment: AlignmentDirectional.center,
+        child: Text('${grades[index]}',
+        style: Theme.of(context).textTheme
+            .subtitle1?.copyWith
+          (
+            color: grades[index]<25?Colors.red
+                :grades[index]>=25&&grades[index]<40?Colors.orange
+                :Colors.green
+         ),
+        ),
+      ),
+      const Spacer(),
+
+      Container(
+    alignment: AlignmentDirectional.centerEnd,
+    child: const FaIcon(
+      FontAwesomeIcons.circleRight,
+      color: Colors.blueGrey,
+      size: 30,
+    ),)
+    ],
+  ),
+);
+
+

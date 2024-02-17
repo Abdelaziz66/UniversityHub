@@ -40,7 +40,7 @@ class STU_About_Assign_Screen extends StatelessWidget {
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 30,),
-                defaultAppbar(context),
+                defaultAppbar(context: context),
                 const SizedBox(height: 30,),
 
                 // Padding(

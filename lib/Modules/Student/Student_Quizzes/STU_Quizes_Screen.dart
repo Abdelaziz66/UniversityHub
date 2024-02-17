@@ -54,7 +54,7 @@ class STU_Quizes_Screen extends StatelessWidget {
 
                 children: [
                   const SizedBox(height: 30,),
-                  defaultAppbar(context),
+                  defaultAppbar(context:context),
                   const SizedBox(height: 40,),
                   const Text('Quizzes',
                   style: TextStyle(
