@@ -23,43 +23,4 @@ Color p4 =HexColor('#6DBBF3');
 
 // Color c1 =Colors.white
 
-Widget constant_Size()=> Column(
-
-  children: [
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // List Item  ___________________________
-        Text(
-          'Parallel Programming',
-          style: TextStyle(
-              fontWeight: FontWeight.w700, color: c1, fontSize: 17),
-        ),
-        SizedBox(height: 1),
-        // padding:
-        // const EdgeInsets.only(bottom: 14, right: 30.0, top: 14, left: 30),
-        Text(
-          'DR : Amr Masoud',
-          style: TextStyle(
-              fontWeight: FontWeight.w400, color: c1, fontSize: 14),
-        ),
-        FaIcon(
-          FontAwesomeIcons.circleRight,
-          color: Colors.teal,
-          size: 30,
-        ),
-        // 3nwaeeeeen ___________________________
-        Text(
-          'Upcoming Course',
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
-
-      ],
-    ),
-  ],
-);
+String? rol= '';
