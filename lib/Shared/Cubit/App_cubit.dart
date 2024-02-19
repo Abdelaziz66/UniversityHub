@@ -10,6 +10,7 @@ import 'package:open_file/open_file.dart';
 import 'package:university_hup/Modules/Instructor/Courses_Screens/All_Ionstructor_Materials.dart';
 import 'package:university_hup/Modules/Instructor/Tasks_Ins_screens/All_Tasks_Ins_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Calendar_Screen.dart';
+import 'package:university_hup/Modules/Navigation_Screens/Dashboard_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Home_Screen.dart';
 
 import 'package:university_hup/Modules/Navigation_Screens/Profile_Screen.dart';
@@ -40,6 +41,7 @@ class App_cubit extends Cubit<App_state> {
   }
 
   List N_HomeScreen=[
+
     const Ongoing_Screen(),
     const Assignments_Screen(),
     const Quizzes_Screen(),
@@ -160,6 +162,7 @@ class App_cubit extends Cubit<App_state> {
 
   List<Widget> Nav_Bar_Items_List(){
     return[
+      const Dashboard_Screen(),
      const Home_screen(),
       switch_Courses_Fun(),
       const Calendar_screen(),
@@ -392,6 +395,9 @@ class App_cubit extends Cubit<App_state> {
   //----------------------Grades--------------------------
 List <int> stuAllGrades=[10,30,50,45,35];
 //----------------------------------------------------------
+
+
+
 //------------API ------------------------------------
   STU_Login_Model ?stu_login_Model;
   void UserLogin({

@@ -475,6 +475,9 @@ class Layout_Screen extends StatelessWidget {
                                   icon: FaIcon(FontAwesomeIcons.house),
                                   label: 'Home'),
                               BottomNavigationBarItem(
+                                  icon: FaIcon(FontAwesomeIcons.newspaper),
+                                  label: 'News'),
+                              BottomNavigationBarItem(
                                   icon: FaIcon(FontAwesomeIcons.book),
                                   label: 'Lecture'),
                               BottomNavigationBarItem(

@@ -10,6 +10,7 @@ import 'package:rive/rive.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
+import 'package:university_hup/Shared/constant.dart';
 
 
 class Home_screen extends StatelessWidget {
@@ -71,7 +72,7 @@ class Home_screen extends StatelessWidget {
                                               MainAxisAlignment.center,
                                           children: [
                                              Text(
-                                              'Hi, Name Here !',
+                                              rol=='Student'?'Hi, Name Here !':'Hi, Dr Name Here !',
                                               style:Theme.of(context).textTheme.bodyText1?.copyWith(
                                                 fontSize: 25
                                               ),

@@ -22,7 +22,6 @@ class _loginscreenState extends State<loginscreen> {
   var passwordcontroller = TextEditingController();
   var formkey = GlobalKey<FormState>();
   bool passwordcheck = false;
-  String? radio= '';
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit, App_state>(
@@ -292,11 +291,10 @@ class _loginscreenState extends State<loginscreen> {
 
 
                                     value:  'Student',
-                                    groupValue: radio,
+                                    groupValue: rol,
                                     onChanged: (value) {
                                       setState(() {
-                                        radio=value;
-
+                                        rol=value;
 
                                       });
 
@@ -320,11 +318,12 @@ class _loginscreenState extends State<loginscreen> {
 
 
                                     value: 'Instructor',
-                                    groupValue: radio,
+                                    groupValue: rol,
                                     onChanged: (value) {
                                       setState(() {
-                                        radio=value;
+                                        rol=value;
                                       });
+
 
 
                                     },
@@ -376,12 +375,26 @@ class _loginscreenState extends State<loginscreen> {
                                   // }).catchError((error){
                                   //   print('error ${error.toString()}');
                                   // });
+                                  if(rol=='Student'){
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Layout_Screen(),
+                                        ));
+                                  }
+                                 else if(rol =='Instructor'){
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Layout_Screen(),
+                                        ));
+                                  }
+                                 else{
 
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Layout_Screen(),
-                                      ));
+                                  }
+
+
+
                                 }
                               },
                               text: 'Sign in',

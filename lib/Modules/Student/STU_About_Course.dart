@@ -1,6 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:university_hup/Modules/Instructor66/Student_Assignment/STU_Assign_Screen.dart';
+import 'package:university_hup/Modules/Instructor66/Student_Grade/STU_Grades_Screen.dart';
+import 'package:university_hup/Modules/Instructor66/Student_Material/STU_All_Lecture_Screen.dart';
+import 'package:university_hup/Modules/Instructor66/Student_Quizzes/STU_Quizes_Screen.dart';
 
 import 'package:university_hup/Modules/Student/Student_Assignment/STU_Assign_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quizes_Screen.dart';
@@ -46,7 +50,7 @@ class STU_About_course extends StatelessWidget {
                                     Expanded(
                                       child: InkWell(
                                         onTap: (){
-                                          navigateTo(context,const STU_Matrial_Screen() );
+                                          navigateTo(context,rol=='Student'? STU_Matrial_Screen():INS_Matrial_Screen() );
                                         },
                                         child: Container(
                                           //height: 240,
@@ -98,7 +102,8 @@ class STU_About_course extends StatelessWidget {
                                     Expanded(
                                       child: InkWell(
                                         onTap: (){
-                                          navigateTo(context,const STU_Assign_Screen() );
+
+                                          navigateTo(context,rol=='Student'? STU_Assign_Screen():INS_Assign_Screen() );
                                         },
                                         child: Container(
               
@@ -162,7 +167,8 @@ class STU_About_course extends StatelessWidget {
                                   Expanded(
                                     child: InkWell(
                                       onTap: (){
-                                        navigateTo(context,const STU_Quizes_Screen() );
+
+                                        navigateTo(context,rol=='Student'? STU_Quizes_Screen():INS_Quizes_Screen() );
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -218,7 +224,7 @@ class STU_About_course extends StatelessWidget {
                                   Expanded(
                                     child: InkWell(
                                       onTap: (){
-                                        navigateTo(context, StuAllGradesScreen());
+                                        navigateTo(context,rol=='Student'? StuAllGradesScreen():INSAllGradesScreen() );
                                       },
                                       child: Container(
               
