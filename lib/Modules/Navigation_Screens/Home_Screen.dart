@@ -2,7 +2,9 @@
 
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -65,68 +67,77 @@ class Home_screen extends StatelessWidget {
                                         horizontal: 10.0, vertical: 15),
                                     child: Row(
                                       children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                             Text(
-                                              rol=='Student'?'Hi, Name Here !':'Hi, Dr Name Here !',
-                                              style:Theme.of(context).textTheme.bodyText1?.copyWith(
-                                                fontSize: 25
-                                              ),
-
-                                              // TextStyle(
-                                              //   fontWeight: FontWeight.w700,
-                                              //   fontSize: 25,
-                                              //   color: Colors.black,
-                                              // ),
-                                            ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              'Time Line Here.',
-                                              style:Theme.of(context).textTheme.subtitle1?.copyWith(
-
-                                               ),
-
-
-        // TextStyle(
-                                              //   // fontWeight: FontWeight.w800,
-                                              //
-                                              //   fontSize: 18,
-                                              //   fontWeight: FontWeight.w500,
-                                              //   color: c1,
-                                              // ),
-                                            ),
-                                          ],
-                                        ),
-                                        const Spacer(),
-                                        Container(
-                                          decoration: const BoxDecoration(
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: const Stack(
-                                            alignment:
-                                                AlignmentDirectional.bottomEnd,
+                                         Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
-                                              CircleAvatar(
-                                                radius: 50,
-                                                backgroundColor: Colors.blue,
-                                                backgroundImage: AssetImage(
-                                                    'assets/images/avatar1.png'),
+                                               Container(
+                                                 width: 250,
+                                                 child: Text(
+                                                  rol=='Student'?'Hi, ${cubit.stu_login_Model?.displayName} !':'Hi, Dr Name Here !',
+                                                  style:Theme.of(context).textTheme.bodyText1?.copyWith(
+
+                                                    overflow: TextOverflow.ellipsis,
+                                                    fontSize: 25
+                                                  ),
+                                          
+                                                  // TextStyle(
+                                                  //   fontWeight: FontWeight.w700,
+                                                  //   fontSize: 25,
+                                                  //   color: Colors.black,
+                                                  // ),
+                                          
+                                                                                             ),
+                                               ),
+                                              const SizedBox(
+                                                height: 5,
                                               ),
-                                              Padding(
-                                                padding:
-                                                    EdgeInsets.all(7.0),
-                                                child: CircleAvatar(
-                                                  radius: 8,
-                                                  backgroundColor: Colors.green,
-                                                ),
+                                              Text(
+                                                'Time Line Here.',
+                                                style:Theme.of(context).textTheme.subtitle1?.copyWith(
+                                          
+                                                 ),
+                                          
+                                          
+                                                  // TextStyle(
+                                                //   // fontWeight: FontWeight.w800,
+                                                //
+                                                //   fontSize: 18,
+                                                //   fontWeight: FontWeight.w500,
+                                                //   color: c1,
+                                                // ),
                                               ),
                                             ],
+                                          ),
+
+                                       // const Spacer(),
+                                        Expanded(
+                                          child: Container(
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: const Stack(
+                                              alignment:
+                                                  AlignmentDirectional.bottomEnd,
+                                              children: [
+                                                CircleAvatar(
+                                                  radius: 50,
+                                                  backgroundColor: Colors.blue,
+                                                  backgroundImage: AssetImage(
+                                                      'assets/images/avatar1.png'),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      EdgeInsets.all(7.0),
+                                                  child: CircleAvatar(
+                                                    radius: 8,
+                                                    backgroundColor: Colors.green,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ],
