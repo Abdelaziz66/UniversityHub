@@ -7,6 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
+import 'package:university_hup/Models/All_News/AllNewsModel.dart';
+import 'package:university_hup/Models/All_News/AllNewsModel.dart';
 import 'package:university_hup/Modules/Instructor/Courses_Screens/All_Ionstructor_Materials.dart';
 import 'package:university_hup/Modules/Instructor/Tasks_Ins_screens/All_Tasks_Ins_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Calendar_Screen.dart';
@@ -20,6 +22,7 @@ import 'package:university_hup/Modules/Student/Student_Notification/Quizzes_Scre
 import 'package:university_hup/Modules/Student/Student_Notification/UpcomingCourse_Screen.dart';
 
 import 'package:university_hup/Shared/constant.dart';
+import '../../Models/All_News/AllNewsModel.dart';
 import '../../Models/STU_Model/User_Model/STU_Login_Model.dart';
 import '../../Modules/Navigation_Screens/Course_Screen.dart';
 
@@ -406,7 +409,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
   }){
     emit(STU_LoginLoadingState());
     Dio_Helper.PostData(
-        url: 'Account/login',
+        url: LOGIN,
         data:{
           'email':email,
           'password':password,
@@ -419,5 +422,36 @@ List <int> stuAllGrades=[10,30,50,45,35];
       emit(STU_LoginErrorState(Error.toString()));
     });
   }
+
+
+
+  //------------------------Get all news ---------------------
+ List<GetAllNewsModel> allNewsModel=[];
+void GetAllNews (){
+  emit(Get_All_NewsLoadingState());
+    Dio_Helper.GetData(url: NEWS).then((value) {
+      // allNewsModel.forEach((element) {
+      //   allNewsModel.add(GetAllNewsModel.fromJson(value.data));
+      // });
+      print(value.data);
+
+      // List Json = value.data;
+      //
+      // for (var element in Json) {
+      //    allNewsModel.add(GetAllNewsModel.fromJson(element.data));
+      // }
+
+
+      allNewsModel.forEach((element) {
+        print('content 1------------: ${element.content}');
+      });
+      emit(Get_All_NewsSuccessState(allNewsModel));
+
+    }).catchError((error){
+      emit(Get_All_NewsErrorState(error.toString()));
+
+      print(error.toString());
+    });
+}
 
 }
