@@ -369,7 +369,7 @@ class Profile_screen extends StatelessWidget {
                                                                           '30204031700212',
                                                                           style: TextStyle(
                                                                             fontWeight: FontWeight.w500,
-                                                                            fontSize: 14,
+                                                                            fontSize: 10,
                                                                             color: c1,
                                                                           ),
                                                                         ),

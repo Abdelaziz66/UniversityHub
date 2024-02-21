@@ -1,5 +1,7 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:university_hup/Modules/Instructor66/Student_Assignment/STU_Assign_Screen.dart';
 import 'package:university_hup/Modules/Instructor66/Student_Grade/STU_Grades_Screen.dart';
@@ -7,6 +9,7 @@ import 'package:university_hup/Modules/Instructor66/Student_Material/STU_All_Lec
 import 'package:university_hup/Modules/Instructor66/Student_Quizzes/STU_Quizes_Screen.dart';
 
 import 'package:university_hup/Modules/Student/Student_Assignment/STU_Assign_Screen.dart';
+import 'package:university_hup/Modules/Student/Student_Grade/STU_Course_Grades.dart';
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quizes_Screen.dart';
 
 
@@ -70,13 +73,15 @@ class STU_About_course extends StatelessWidget {
                                               crossAxisAlignment: CrossAxisAlignment.center,
                                               children: [
               
-                                                     Container(
-                                                      alignment: AlignmentDirectional.center,
-                                                      child: Image.asset('assets/images/a11.png'),
-                                                    ),
+                                                     Expanded(
+                                                       child: Container(
+                                                        alignment: AlignmentDirectional.center,
+                                                        child: Image.asset('assets/images/a11.png'),
+                                                                                                           ),
+                                                     ),
               
               
-                                                const Spacer(),
+
                                                 Padding(
                                                   padding: const EdgeInsets.only(bottom: 25.0),
                                                     child: Container(
@@ -122,12 +127,14 @@ class STU_About_course extends StatelessWidget {
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
-                                             Container(
-                                                  alignment: AlignmentDirectional.center,
-                                                  child:Image.asset('assets/images/a2.png'),
-                                                ),
+                                             Expanded(
+                                               child: Container(
+                                                    alignment: AlignmentDirectional.center,
+                                                    child:Image.asset('assets/images/a2.png'),
+                                                  ),
+                                             ),
               
-                                              const Spacer(),
+
                                               Padding(
                                                 padding: const EdgeInsets.only(bottom: 25.0),
                                                 child: Text('Assignment',textAlign: TextAlign.center,
@@ -186,12 +193,13 @@ class STU_About_course extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
-                                            Container(
-                                                alignment: AlignmentDirectional.center,
-                                                child:Image.asset('assets/images/a3.png'),
-                                              ),
-              
-                                            const Spacer(),
+                                            Expanded(
+                                              child: Container(
+                                                  alignment: AlignmentDirectional.center,
+                                                  child:Image.asset('assets/images/a3.png'),
+                                                ),
+                                            ),
+
                                             Padding(
                                               padding: const EdgeInsets.only(bottom: 25.0),
                                               child: Text('Quizzes',textAlign: TextAlign.center,
@@ -224,7 +232,7 @@ class STU_About_course extends StatelessWidget {
                                   Expanded(
                                     child: InkWell(
                                       onTap: (){
-                                        navigateTo(context,rol=='Student'? StuAllGradesScreen():INSAllGradesScreen() );
+                                        navigateTo(context,rol=='Student'? STUCourseGrades():INSAllGradesScreen() );
                                       },
                                       child: Container(
               
@@ -236,12 +244,13 @@ class STU_About_course extends StatelessWidget {
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
-                                          Container(
-                                                alignment: AlignmentDirectional.center,
-                                                child: Image.asset('assets/images/a44.png'),
-              
-                                            ),
-                                            const Spacer(),
+                                          Expanded(
+                                            child: Container(
+                                                  alignment: AlignmentDirectional.center,
+                                                  child: Image.asset('assets/images/a44.png'),
+
+                                              ),
+                                          ),
                                             Padding(
                                               padding: const EdgeInsets.only(bottom: 25.0),
                                               child: Text('Grades',textAlign: TextAlign.center,

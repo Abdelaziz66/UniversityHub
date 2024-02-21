@@ -89,7 +89,7 @@ class _loginscreenState extends State<loginscreen> {
                 child: SingleChildScrollView(
                   child: Container(
                     child: Padding(
-                      padding: const EdgeInsets.all(30.0),
+                      padding: const EdgeInsets.all(18.0),
                       child: Form(
                         key: formkey,
                         child: Column(
@@ -281,6 +281,9 @@ class _loginscreenState extends State<loginscreen> {
                                 Expanded(
                                   child: RadioListTile(
                                     selectedTileColor: Colors.blue,
+                                    tileColor: Colors.blue,
+                                    hoverColor: Colors.blue,
+                                    activeColor: Colors.blue,
                                     title: Text(
                                       'Student',
                                       style: const TextStyle(
@@ -307,6 +310,9 @@ class _loginscreenState extends State<loginscreen> {
                                 Expanded(
                                   child: RadioListTile(
                                     selectedTileColor: Colors.blue,
+                                    tileColor: Colors.blue,
+                                    hoverColor: Colors.blue,
+                                    activeColor: Colors.blue,
                                     title: Text(
                                       'Instructor',
                                       style: const TextStyle(
@@ -398,6 +404,7 @@ class _loginscreenState extends State<loginscreen> {
                                 }
                               },
                               text: 'Sign in',
+
                             ),
                             // Container(
                             //   width: double.infinity,

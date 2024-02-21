@@ -31,55 +31,52 @@ class STU_Lecture_Screen extends StatelessWidget {
                     height: 30,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 10.0,right: 0),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 0.0,vertical: 15),
-                      child: Row(
-                        children: [
-                          const Text(
-                            'Enrolled',
-                            style: TextStyle(
-                              fontSize: 23,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0,vertical: 20),
+                    child: Row(
+                      children: [
+                        const Text(
+                          'Enrolled',
+                          style: TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
                           ),
-                          const SizedBox(width: 8,),
-                          const Text(
-                            '5',
-                            style: TextStyle(
-                              color: Colors.teal,
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        ),
+                        const SizedBox(width: 8,),
+                        const Text(
+                          '5',
+                          style: TextStyle(
+                            color: Colors.teal,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
                           ),
-                          const SizedBox(width: 8,),
-                          const Text(
-                            'Courses',
-                            style: TextStyle(
-                              fontSize: 23,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
+                        ),
+                        const SizedBox(width: 8,),
+                        const Text(
+                          'Courses',
+                          style: TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
                           ),
-                          const SizedBox(width: 8,),
-                          // Spacer(),
-                          Expanded(
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child:
-                                Image.asset(
-                                    'assets/images/bluebook.png'),
+                        ),
+                        const SizedBox(width: 8,),
+                        // Spacer(),
+                        Expanded(
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child:
+                              Image.asset(
+                                  'assets/images/bluebook.png'),
 
-                            ),
                           ),
+                        ),
 
 
-                        ],
-                      ),
+                      ],
                     ),
                   ),
 
