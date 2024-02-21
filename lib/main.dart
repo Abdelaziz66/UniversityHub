@@ -32,8 +32,6 @@ import 'Shared/Style/App_Style.dart';
 // from alfy
 // base url https://nabilramadan.bsite.net/api
 
-//-----------
-
 void main() {
   // new branch
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

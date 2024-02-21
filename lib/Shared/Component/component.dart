@@ -185,8 +185,6 @@ Widget Post({required bool image,
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 6.0),
     child: GlassBoxWithBorder_Gradiant2(
-        BorderWidth: 0,
-        BorderColor: Colors.black,
         widget: Container(
           width: double.infinity,
           child: Padding(
@@ -199,7 +197,7 @@ Widget Post({required bool image,
                     children: [
                       Container(
                         decoration:
-                            BoxDecoration(shape: BoxShape.circle, boxShadow: [
+                        BoxDecoration(shape: BoxShape.circle, boxShadow: [
                           BoxShadow(
                             color: c5,
                             blurRadius: 2,
@@ -210,7 +208,7 @@ Widget Post({required bool image,
                           radius: 25,
                           backgroundColor: Colors.blue,
                           backgroundImage:
-                              AssetImage('assets/images/avatar1.png'),
+                          AssetImage('assets/images/avatar1.png'),
                         ),
                       ),
                       const SizedBox(
@@ -222,7 +220,7 @@ Widget Post({required bool image,
                         children: [
                           Row(
                             children: [
-                               Text(
+                              Text(
                                 'Name Here',
                                 style: Theme.of(context).textTheme.subtitle1?.copyWith(
                                   color: Colors.black,
@@ -279,83 +277,86 @@ Widget Post({required bool image,
                 ConditionalBuilder(
                     condition: true,
                     builder: (context) => Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 30.0),
-                                  child: Text(
-                                    // 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.',
-                                    'Congratulations, you have completed your registration ! Lets start your learning journey next.',
-                                    maxLines: 4,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 15,
-                                      color: c1,
-                                    ),
-                                  ),
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 30.0),
+                              child: Text(
+                                // 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.',
+                                'Congratulations, you have completed your registration ! Lets start your learning journey next.',
+                                maxLines: 4,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 15,
+                                  color: c1,
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
+                      ),
+                    ),
                     fallback: (context) => const SizedBox(
-                          height: 0,
-                        )),
+                      height: 0,
+                    )),
                 ConditionalBuilder(
                     condition: false,
                     builder: (context) => Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                          child: Row(
-                            children: [
-                              MaterialButton(
-                                onPressed: () {},
-                                minWidth: 1,
-                                padding: EdgeInsets.zero,
-                                child: Text(
-                                  '#Tag',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 16,
-                                    color: c1,
-                                  ),
-                                ),
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Row(
+                        children: [
+                          MaterialButton(
+                            onPressed: () {},
+                            minWidth: 1,
+                            padding: EdgeInsets.zero,
+                            child: Text(
+                              '#Tag',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 16,
+                                color: c1,
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
+                      ),
+                    ),
                     fallback: (context) => const SizedBox(
-                          height: 10,
-                        )),
+                      height: 10,
+                    )),
                 ConditionalBuilder(
                     condition: image,
                     builder: (context) => Padding(
-                          padding: const EdgeInsets.only(
-                              left: 0, right: 0.0, top: 5),
-                          child: Container(
-                            width: double.infinity,
-                            height: 200,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.deepPurple[200],
-                              // image: const DecorationImage(
-                              //   image: NetworkImage(
-                              //     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2PacFBpXBfSh1aCipOEs5Wd0lJqAeBXbx2w&usqp=CAU',
-                              //   ),
-                              //   fit: BoxFit.cover,
-                              // ),
-                            ),
-                          ),
+                      padding: const EdgeInsets.only(
+                          left: 0, right: 0.0, top: 5),
+                      child: Container(
+                        width: double.infinity,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.deepPurple[200],
+                          // image: const DecorationImage(
+                          //   image: NetworkImage(
+                          //     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2PacFBpXBfSh1aCipOEs5Wd0lJqAeBXbx2w&usqp=CAU',
+                          //   ),
+                          //   fit: BoxFit.cover,
+                          // ),
                         ),
+                      ),
+                    ),
                     fallback: (context) => const SizedBox(
-                          height: 0,
-                        )),
+                      height: 0,
+                    )),
               ],
             ),
           ),
         ),
+        BorderWidth: 0,
+        BorderColor: Colors.black,
+
         color: Colors.white.withOpacity(.2),
         borderRadius: 20,
         x: 0,
@@ -1358,6 +1359,10 @@ Widget Build_STU_Lec() => Container(
                 //     fit: BoxFit.cover
                 // ),
               color: Colors.blueGrey.withOpacity(.8),
+              image: DecorationImage(
+                image: AssetImage('assets/images/bc5.png'),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           const SizedBox(

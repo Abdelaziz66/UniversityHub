@@ -24,7 +24,3 @@ Color p4 =HexColor('#6DBBF3');
 // Color c1 =Colors.white
 
 String? rol= '';
-
-//-----------------End  points ---------------
-String LOGIN='Account/login';
-String NEWS ='News';

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:university_hup/Modules/Student/Student_Grade/STU_Grades_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Drawer/Edit_Profile_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Notification_Screen.dart';
 
@@ -99,11 +100,11 @@ class Layout_Screen extends StatelessWidget {
                                 TextButton(
                                   onPressed: () {
                                     cubit.D_value = 0;
-                                    cubit.SetState_G();
+                                    cubit.Nav_Bar_Function(index: 0);
                                     Navigator.pop(context);
                                   },
                                   child: Text(
-                                    'Home',
+                                    'Dashboard',
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w700,
@@ -190,8 +191,9 @@ class Layout_Screen extends StatelessWidget {
                                 TextButton(
                                   onPressed: () {
                                     cubit.D_value = 2;
-                                    cubit.SetState_G();
-                                    Navigator.pop(context);
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => STUAllGradesScreen(),));
+
+
                                   },
                                   child: Text(
                                     'Grades',
@@ -459,16 +461,19 @@ class Layout_Screen extends StatelessWidget {
                           child: BottomNavigationBar(
                             backgroundColor: Colors.transparent,
                             elevation: 0,
+
                             fixedColor: Colors.lightBlueAccent,
                             unselectedIconTheme: const IconThemeData(
                               size: 23,
                             ),
                             selectedIconTheme: const IconThemeData(
+
                               size: 25,
                             ),
                             showSelectedLabels: false,
                             showUnselectedLabels: false,
                             unselectedItemColor: Colors.white,
+
                             type: BottomNavigationBarType.fixed,
                             items: const [
                               BottomNavigationBarItem(

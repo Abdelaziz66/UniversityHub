@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'constant.dart';
@@ -124,26 +123,4 @@ void NavigateAndFinish(context,Widget)=>Navigator.pushAndRemoveUntil(context,
     ),
         (route) => false
 );
-
-
-void flutterToast ({
-  required String msg,
-  Color? backColor,
-})=>Fluttertoast.showToast(
-    msg: msg,
-    toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.BOTTOM,
-    timeInSecForIosWeb: 5,
-    backgroundColor:backColor?? Colors.green,
-    textColor: Colors.white,
-    fontSize: 16.0);
-
-
-
-
-
-
-
-
-
 

@@ -16,6 +16,17 @@ ThemeData Light_Theme = ThemeData(
 
   ),
 
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: Colors.blue,
+    foregroundColor: Colors.white,
+
+
+
+
+
+  ),
+
+
   textTheme: TextTheme(
 
     bodyText1:TextStyle(

@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,11 +9,6 @@ import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
-
-
-//    AbdulMajeedSallam@gmail.com
-
-//    P@ssw0rd
 
 class loginscreen extends StatefulWidget {
   const loginscreen({Key? key}) : super(key: key);
@@ -31,20 +25,7 @@ class _loginscreenState extends State<loginscreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit, App_state>(
-      listener: (context, state) {
-       // if(state is !STU_LoginErrorState) {
-        //   //  if(state.loginmodel.status != 401) {
-        //   navigateTo(context, Layout_Screen());
-        //   flutterToast(msg: 'Login success ');
-        //   //  }
-        // }
-        // else{
-        //   flutterToast(msg: 'Login error ',
-        //     backColor: Colors.red,
-        //   );
-        //
-        // }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
         return Scaffold(
@@ -108,7 +89,7 @@ class _loginscreenState extends State<loginscreen> {
                 child: SingleChildScrollView(
                   child: Container(
                     child: Padding(
-                      padding: const EdgeInsets.all(30.0),
+                      padding: const EdgeInsets.all(18.0),
                       child: Form(
                         key: formkey,
                         child: Column(
@@ -300,6 +281,9 @@ class _loginscreenState extends State<loginscreen> {
                                 Expanded(
                                   child: RadioListTile(
                                     selectedTileColor: Colors.blue,
+                                    tileColor: Colors.blue,
+                                    hoverColor: Colors.blue,
+                                    activeColor: Colors.blue,
                                     title: Text(
                                       'Student',
                                       style: const TextStyle(
@@ -326,6 +310,9 @@ class _loginscreenState extends State<loginscreen> {
                                 Expanded(
                                   child: RadioListTile(
                                     selectedTileColor: Colors.blue,
+                                    tileColor: Colors.blue,
+                                    hoverColor: Colors.blue,
+                                    activeColor: Colors.blue,
                                     title: Text(
                                       'Instructor',
                                       style: const TextStyle(
@@ -353,7 +340,6 @@ class _loginscreenState extends State<loginscreen> {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-
                                 TextButton(
 
                                   onPressed: () {
@@ -375,90 +361,51 @@ class _loginscreenState extends State<loginscreen> {
                                 ),
                               ],
                             ),
+                            Default_Button(
+                              onPressed: () {
+                                cubit.UserLogin(
+                                    email: 'abdulmajeedsallam@gmail.com',
+                                    password: 'P@ssw0rd');
 
-                            ConditionalBuilder(
-                              condition: state is ! STU_LoginLoadingState,
-                              builder:(context)=> Default_Button(
-                                onPressed: () {
-                                  cubit.UserLogin(
-                                      email:'AbdulMajeedSallam@gmail.com',
-                                      //emailcontroller.text,
-                                      password:'P@ssw0rd',
-                                          // passwordcontroller.text
-                                  );
+                                if (formkey.currentState!.validate()) {
+                                  print(emailcontroller.text);
+                                  print(passwordcontroller.text);
+                                } else {
+                                  // Dio_Helper.PostData(
+                                  //     url: 'https://crudapi20240209215103.azurewebsites.net/api/Account/logins',
+                                  //     data: {
+                                  //       'email':'abdulmajeedsallam@gmail.com',
+                                  //       'password' : 'P@ssw0rd',
+                                  //     }).then((value) {
+                                  //       print(value.data);
+                                  // }).catchError((error){
+                                  //   print('error ${error.toString()}');
+                                  // });
+                                  if(rol=='Student'){
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Layout_Screen(),
+                                        ));
+                                  }
+                                 else if(rol =='Instructor'){
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Layout_Screen(),
+                                        ));
+                                  }
+                                 else{
 
-                                  if (formkey.currentState!.validate()) {
-                                    // print(emailcontroller.text);
-                                    // print(passwordcontroller.text);
-
-                                  }else{
-                                    if(rol=='Student'){
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => Layout_Screen(),
-                                          ));
-                                    }
-                                    else if(rol =='Instructor'){
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => Layout_Screen(),
-                                          ));
-                                    }
-                                    else{
-                                    }
                                   }
 
-                                },
-                                text: 'Sign in',
-                              ),
-                              fallback: (context)=>CircularProgressIndicator(),
+
+
+                                }
+                              },
+                              text: 'Sign in',
+
                             ),
-                            // Default_Button(
-                            //   onPressed: () {
-                            //
-                            //
-                            //     if (formkey.currentState!.validate()) {
-                            //       print(emailcontroller.text);
-                            //       print(passwordcontroller.text);
-                            //     } else {
-                            //       // Dio_Helper.PostData(
-                            //       //     url: 'https://crudapi20240209215103.azurewebsites.net/api/Account/logins',
-                            //       //     data: {
-                            //       //       'email':'abdulmajeedsallam@gmail.com',
-                            //       //       'password' : 'P@ssw0rd',
-                            //       //     }).then((value) {
-                            //       //       print(value.data);
-                            //       // }).catchError((error){
-                            //       //   print('error ${error.toString()}');
-                            //       // });
-                            //       if(rol=='Student'){
-                            //         Navigator.push(
-                            //             context,
-                            //             MaterialPageRoute(
-                            //               builder: (context) => Layout_Screen(),
-                            //             ));
-                            //       }
-                            //      else if(rol =='Instructor'){
-                            //         Navigator.push(
-                            //             context,
-                            //             MaterialPageRoute(
-                            //               builder: (context) => Layout_Screen(),
-                            //             ));
-                            //       }
-                            //      else{
-                            //       }
-                            //
-                            //     }
-                            //   },
-                            //   text: 'Sign in',
-                            // ),
-
-
-
-
-
                             // Container(
                             //   width: double.infinity,
                             //   height: 70,
