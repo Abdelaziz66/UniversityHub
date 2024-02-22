@@ -13,12 +13,12 @@ import 'Shared/Style/App_Style.dart';
 
 // from ZEKO
 
-// git checkout -b serious
+// git checkout -b Serious-Branch
 // git pull origin main
 // code………
 // git add .
 // git commit -m 'new commit'
-// git push origin serious
+// git push origin Serious-Branch
 
 //test
 
