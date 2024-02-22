@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,7 +26,20 @@ class _loginscreenState extends State<loginscreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit, App_state>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        // if(state is !STU_LoginErrorState) {
+        //   //  if(state.loginmodel.status != 401) {
+        //   navigateTo(context, Layout_Screen());
+        //   flutterToast(msg: 'Login success ');
+        //   //  }
+        // }
+        // else{
+        //   flutterToast(msg: 'Login error ',
+        //     backColor: Colors.red,
+        //   );
+        //
+        // }
+      },
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
         return Scaffold(
@@ -361,51 +375,89 @@ class _loginscreenState extends State<loginscreen> {
                                 ),
                               ],
                             ),
-                            Default_Button(
-                              onPressed: () {
-                                cubit.UserLogin(
-                                    email: 'abdulmajeedsallam@gmail.com',
-                                    password: 'P@ssw0rd');
+                            ConditionalBuilder(
+                              condition: state is ! STU_LoginLoadingState,
+                              builder:(context)=> Default_Button(
+                                onPressed: () {
+                                  cubit.UserLogin(
+                                    email:'AbdulMajeedSallam@gmail.com',
+                                    //emailcontroller.text,
+                                    password:'P@ssw0rd',
+                                    // passwordcontroller.text
+                                  );
 
-                                if (formkey.currentState!.validate()) {
-                                  print(emailcontroller.text);
-                                  print(passwordcontroller.text);
-                                } else {
-                                  // Dio_Helper.PostData(
-                                  //     url: 'https://crudapi20240209215103.azurewebsites.net/api/Account/logins',
-                                  //     data: {
-                                  //       'email':'abdulmajeedsallam@gmail.com',
-                                  //       'password' : 'P@ssw0rd',
-                                  //     }).then((value) {
-                                  //       print(value.data);
-                                  // }).catchError((error){
-                                  //   print('error ${error.toString()}');
-                                  // });
-                                  if(rol=='Student'){
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Layout_Screen(),
-                                        ));
-                                  }
-                                 else if(rol =='Instructor'){
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Layout_Screen(),
-                                        ));
-                                  }
-                                 else{
+                                  if (formkey.currentState!.validate()) {
+                                    // print(emailcontroller.text);
+                                    // print(passwordcontroller.text);
 
+                                  }else{
+                                    if(rol=='Student'){
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Layout_Screen(),
+                                          ));
+                                    }
+                                    else if(rol =='Instructor'){
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Layout_Screen(),
+                                          ));
+                                    }
+                                    else{
+                                    }
                                   }
 
-
-
-                                }
-                              },
-                              text: 'Sign in',
-
+                                },
+                                text: 'Sign in',
+                              ),
+                              fallback: (context)=>CircularProgressIndicator(),
                             ),
+                            // Default_Button(
+                            //   onPressed: () {
+                            //
+                            //
+                            //     if (formkey.currentState!.validate()) {
+                            //       print(emailcontroller.text);
+                            //       print(passwordcontroller.text);
+                            //     } else {
+                            //       // Dio_Helper.PostData(
+                            //       //     url: 'https://crudapi20240209215103.azurewebsites.net/api/Account/logins',
+                            //       //     data: {
+                            //       //       'email':'abdulmajeedsallam@gmail.com',
+                            //       //       'password' : 'P@ssw0rd',
+                            //       //     }).then((value) {
+                            //       //       print(value.data);
+                            //       // }).catchError((error){
+                            //       //   print('error ${error.toString()}');
+                            //       // });
+                            //       if(rol=='Student'){
+                            //         Navigator.push(
+                            //             context,
+                            //             MaterialPageRoute(
+                            //               builder: (context) => Layout_Screen(),
+                            //             ));
+                            //       }
+                            //      else if(rol =='Instructor'){
+                            //         Navigator.push(
+                            //             context,
+                            //             MaterialPageRoute(
+                            //               builder: (context) => Layout_Screen(),
+                            //             ));
+                            //       }
+                            //      else{
+                            //       }
+                            //
+                            //     }
+                            //   },
+                            //   text: 'Sign in',
+                            // ),
+
+
+
+
+
                             // Container(
                             //   width: double.infinity,
                             //   height: 70,

@@ -88,7 +88,7 @@ class Dashboard_Screen extends StatelessWidget {
                                         MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            rol=='Student'?'Hi, Name Here !':'Hi, Dr Ahmed !',
+                                            rol=='Student'?'Hi, ${cubit.stu_login_Model?.displayName} !':'Hi, Dr Ahmed !',
                                             style:Theme.of(context).textTheme.bodyText1?.copyWith(
                                                 fontSize: 25
                                             ),

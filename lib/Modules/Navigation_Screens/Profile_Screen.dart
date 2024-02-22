@@ -460,25 +460,9 @@ class Profile_screen extends StatelessWidget {
                       Expanded(
                         child: InkWell(
                           onTap: () {
+                            cubit.GetAllNews();
                             print('aaaaa');
-                            Dio_Helper.PostData(
-                                url:
-                                //'Ahttps://crudapi20240209215103.azurewebsites.net/api/'
-                                    'Account/login',
-                                data: {
-                                  'email': 'abdulmajeedsallam@gmail.com',
-                                  'password': 'P@ssw0rd'
-                                });
-                            // cubit.UserLogin(
-                            //     email: 'abdulmajeedsallam@gmail.com',
-                            //     password: 'P@ssw0rd');
 
-                            // cubit.image=null;
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => editscreen(),
-                            //     ));
                           },
                           child: GlassBox(
                               widget: Padding(
