@@ -13,6 +13,13 @@ import 'Shared/Style/App_Style.dart';
 
 // from ZEKO
 
+// git checkout -b serious
+// git pull origin main
+// code………
+// git add .
+// git commit -m 'new commit'
+// git push origin serious
+
 // git checkout -b zeko-branch
 // git pull origin main
 // code………
@@ -27,6 +34,8 @@ import 'Shared/Style/App_Style.dart';
 // git add .
 // git commit -m 'new commit'
 // git push origin zekoo-branch
+
+
 //2
 
 // from alfy
