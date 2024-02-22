@@ -1,3 +1,5 @@
+import 'package:university_hup/Models/All_News/AllNewsModel.dart';
+
 import '../../Models/STU_Model/User_Model/STU_Login_Model.dart';
 
 abstract class App_state {}
@@ -73,5 +75,19 @@ class STU_LoginErrorState extends App_state {
   String? error;
   STU_LoginErrorState(this.error);
 }
+//---------get all news--------------
+
+class Get_All_NewsLoadingState extends App_state {}
+
+class Get_All_NewsSuccessState extends App_state {
+  List<GetAllNewsModel> newsmodel=[];
 
 
+  Get_All_NewsSuccessState(this.newsmodel);
+
+}
+
+class Get_All_NewsErrorState extends App_state {
+  String? error;
+  Get_All_NewsErrorState(this.error);
+}
