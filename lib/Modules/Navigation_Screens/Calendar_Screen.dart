@@ -41,13 +41,23 @@ class Calendar_screen extends StatelessWidget {
           false,
         ];
         List Calender_Color1 = [
-          Colors.greenAccent.withOpacity(.25),
-          Colors.lightBlueAccent.withOpacity(.25),
-          Colors.deepPurpleAccent.withOpacity(.25),
+          Colors.lightBlueAccent.withOpacity(.18),
+
+          Colors.pinkAccent.withOpacity(.12),
+
+          Colors.greenAccent.withOpacity(.18),
+
+
+          Colors.deepPurpleAccent.withOpacity(.18),
         ];
         List Calender_Color2 = [
-          Colors.green,
           Colors.blue,
+
+          Colors.pinkAccent,
+
+
+          Colors.green,
+
           Colors.deepPurple,
         ];
         return SafeArea(
@@ -95,16 +105,16 @@ class Calendar_screen extends StatelessWidget {
 
                       // physics: ,
                       itemBuilder: (context, index) => Calender_Event(
-                          color1: Calender_Color1[(index + 1) % 3 == 0
+                          color1: Calender_Color1[(index + 1) % 4 == 0
+                              ? 3
+                              : (index + 1) % 4 == 1
                               ? 2
-                              : (index + 1) % 3 == 1
-                                  ? 0
-                                  : 1],
-                          color2: Calender_Color2[(index + 1) % 3 == 0
-                              ? 2
-                              : (index + 1) % 3 == 1
-                                  ? 0
-                                  : 1]),
+                              : (index + 1) % 4 == 2?1:0],
+                          color2: Calender_Color2[(index + 1) % 4 == 0
+                              ? 3
+                              : (index + 1) % 4 == 1
+                                  ? 2
+                                  : (index + 1) % 4 == 2?1:0]),
                       separatorBuilder: (context, index) => Container(
                         height: 15,
                         color: Colors.transparent,

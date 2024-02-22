@@ -186,7 +186,11 @@ class App_cubit extends Cubit<App_state> {
     emit(D_E_state());
   }
 
-
+bool switch_quiz=true;
+  void switch_quiz_Function({required bool s}){
+    switch_quiz=s;
+    emit(D_E_state());
+  }
 
 
 
