@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:university_hup/Modules/Instructor/Courses_Screens/Material_content_sec_or_lec.dart';
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
 
+import '../../Models/All_News/AllNewsModel.dart';
 import '../Cons_widget.dart';
 import '../Cubit/App_cubit.dart';
 import '../constant.dart';
@@ -179,8 +180,10 @@ Widget GlassBoxWithBorder_Gradiant2({
       child: widget,
     );
 
-Widget Post({required bool image,
-  context
+Widget Post({
+  required bool image,
+  context,
+  GetAllNewsModel?news,
 }) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 6.0),
@@ -223,7 +226,7 @@ Widget Post({required bool image,
                           Row(
                             children: [
                                Text(
-                                'Name Here',
+                                '${news?.userName}',
                                 style: Theme.of(context).textTheme.subtitle1?.copyWith(
                                   color: Colors.black,
                                 ),
@@ -244,7 +247,7 @@ Widget Post({required bool image,
                             ],
                           ),
                           Text(
-                            'Date & Time',
+                            '${news?.createdAt}',
                             style: TextStyle(
                               // fontWeight: FontWeight.w800,
 
@@ -287,7 +290,8 @@ Widget Post({required bool image,
                                   padding: const EdgeInsets.only(right: 30.0),
                                   child: Text(
                                     // 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.',
-                                    'Congratulations, you have completed your registration ! Lets start your learning journey next.',
+                                 //   'Congratulations, you have completed your registration ! Lets start your learning journey next.',
+                                   '${news?.content}',
                                     maxLines: 4,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(

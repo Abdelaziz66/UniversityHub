@@ -460,7 +460,13 @@ class Profile_screen extends StatelessWidget {
                       Expanded(
                         child: InkWell(
                           onTap: () {
-                            cubit.GetAllNews();
+                            //print('fff ${stuToken}');
+
+                            cubit.StuGetAllCourses(
+                              token:App_cubit.get(context).Tokenn,
+                              //'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9naXZlbm5hbWUiOiJhYmR1bG1hamVlZHNhbGxhbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6IkFiZHVsTWFqZWVkU2FsbGFtQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlN0dWRlbnQiLCJleHAiOjE3MDg3OTI4NTcsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcyODYiLCJhdWQiOiJNeVNlY3VyZWRBcGlVc2VycyJ9.-W0r2xzZjmLSzdPoDAIVNTwoBZ0fdy0UQc09FZces4g'
+                              //'${cubit.stu_login_Model?.token}'
+                            );
                             print('aaaaa');
                           },
                           child: GlassBox(

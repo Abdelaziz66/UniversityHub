@@ -9,6 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:rive/rive.dart';
+import 'package:university_hup/Models/All_News/AllNewsModel.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
@@ -24,7 +25,8 @@ class Home_screen extends StatelessWidget {
       listener: (context, state) => {},
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
-        List<bool> image = [true, false, false, true, true, false, true, false];
+        List<bool> image = [true, false,true];
+        List<GetAllNewsModel>news=cubit.allNewsModel;
         return Scaffold(
           backgroundColor: Colors.transparent,
           body: Stack(
@@ -156,13 +158,13 @@ class Home_screen extends StatelessWidget {
                           // physics: ,
                           itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.all(5.0),
-                            child: Post(image: image[index],context: context),
+                            child: Post(image: image[index],context: context,news: news[index]),
                           ),
                           separatorBuilder: (context, index) => Container(
                             height: 0,
                             color: Colors.transparent,
                           ),
-                          itemCount: 8,
+                          itemCount: news.length,
                         ),
                       ],
                     ),

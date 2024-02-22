@@ -28,3 +28,5 @@ String? rol= '';
 //-----------------End  points ---------------
 String LOGIN='Account/login';
 String NEWS ='News';
+String STU_COURSES='Students/CurrentCourcesInfo';
+String Token='';

@@ -23,6 +23,7 @@ import 'package:university_hup/Modules/Student/Student_Notification/UpcomingCour
 
 import 'package:university_hup/Shared/constant.dart';
 import '../../Models/All_News/AllNewsModel.dart';
+import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
 import '../../Models/STU_Model/User_Model/STU_Login_Model.dart';
 import '../../Modules/Navigation_Screens/Course_Screen.dart';
 
@@ -39,6 +40,9 @@ class App_cubit extends Cubit<App_state> {
 // Abdelaziz  --------------------------------------------------------------------
   int Nav_HomeBar_index=0;
   void nav_home_bar_Function({required int index}){
+    // if (index==2){
+    //
+    // }
     Nav_HomeBar_index=index;
     emit(Nav_HomeBar_state());
   }
@@ -402,6 +406,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
 
 
 //------------API ------------------------------------
+  String ?Tokenn;
   STU_Login_Model ?stu_login_Model;
   void UserLogin({
     required String email,
@@ -415,6 +420,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
           'password':password,
         }).then((value) {
       stu_login_Model= STU_Login_Model.fromJson(value.data);
+      Tokenn=stu_login_Model?.token;
       emit(STU_LoginSuccessState(stu_login_Model!));
       print(value.data);
     }).catchError((Error){
@@ -430,22 +436,18 @@ List <int> stuAllGrades=[10,30,50,45,35];
 void GetAllNews (){
   emit(Get_All_NewsLoadingState());
     Dio_Helper.GetData(url: NEWS).then((value) {
-      // allNewsModel.forEach((element) {
-      //   allNewsModel.add(GetAllNewsModel.fromJson(value.data));
-      // });
-      print(value.data);
+      if(value.statusCode==200){
+         print ('git news success');
+        List Json = value.data;
+        for (var element in Json) {
+           allNewsModel.add(GetAllNewsModel.fromJson(element));
+        }
+        emit(Get_All_NewsSuccessState(allNewsModel));
 
-      // List Json = value.data;
-      //
-      // for (var element in Json) {
-      //    allNewsModel.add(GetAllNewsModel.fromJson(element.data));
-      // }
-
-
+      }
       allNewsModel.forEach((element) {
         print('content 1------------: ${element.content}');
       });
-      emit(Get_All_NewsSuccessState(allNewsModel));
 
     }).catchError((error){
       emit(Get_All_NewsErrorState(error.toString()));
@@ -453,5 +455,34 @@ void GetAllNews (){
       print(error.toString());
     });
 }
+
+//------------Get All Courses--------------
+
+  List<Stu_GetAllCoursesModel> stuAllCoursesModel=[];
+  void StuGetAllCourses ({
+    required token,
+}){
+    emit(Stu_Get_All_Courses_LoadingState());
+    Dio_Helper.GetData(
+        url: STU_COURSES,
+       token: Tokenn,
+    ).then((value) {
+      if(value.statusCode==200){
+        print ('get course true');
+        List Json = value.data;
+        for (var element in Json) {
+          stuAllCoursesModel.add(Stu_GetAllCoursesModel.fromJson(element));
+        }
+        emit(Stu_Get_All_Courses_SuccessState(stuAllCoursesModel));
+      }
+      stuAllCoursesModel.forEach((element) {
+        print('name------- ${element.name}');
+      });
+
+    }).catchError((error){
+      emit(Stu_Get_All_Courses_ErrorState(error.toString()));
+      print(error.toString());
+    });
+  }
 
 }
