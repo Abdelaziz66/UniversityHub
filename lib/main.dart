@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
 
-          create: (context) => App_cubit(),
+          create: (context) => App_cubit()..GetAllNews(),
 
         ),
       ],

@@ -27,6 +27,20 @@ class _loginscreenState extends State<loginscreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit, App_state>(
       listener: (context, state) {
+      //  if(state is STU_LoginSuccessState) {
+      // //   Token=''
+      //      if(state.loginmodel != 401) {
+      //        App_cubit.get(context).Tokenn=state.loginmodel.token;
+      //    navigateTo(context, Layout_Screen());
+      //        flutterToast(msg: 'Login success ');
+      //     //   //  }
+      //      }
+      //     else{
+      //        flutterToast(msg: 'Login error ',
+      //          backColor: Colors.red,);
+      //     //
+      //      }
+      //  }
         // if(state is !STU_LoginErrorState) {
         //   //  if(state.loginmodel.status != 401) {
         //   navigateTo(context, Layout_Screen());
@@ -376,37 +390,42 @@ class _loginscreenState extends State<loginscreen> {
                               ],
                             ),
                             ConditionalBuilder(
-                              condition: state is ! STU_LoginLoadingState,
+                              condition: true,
                               builder:(context)=> Default_Button(
                                 onPressed: () {
+                                //  if (formkey.currentState!.validate()) {
                                   cubit.UserLogin(
-                                    email:'AbdulMajeedSallam@gmail.com',
-                                    //emailcontroller.text,
-                                    password:'P@ssw0rd',
-                                    // passwordcontroller.text
-                                  );
+                                      email:
+                                      'AbdulMajeedSallam@gmail.com',
+                                     // emailcontroller.text,
+                                      password:
+                                      'P@ssw0rd',
+                                         //  passwordcontroller.text
+                                   // email:'AbdulMajeedSallam@gmail.com',
 
-                                  if (formkey.currentState!.validate()) {
+                                  );
+                                  cubit.Tokenn=cubit.stu_login_Model?.token;
+                                  if(rol=='Student'){
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Layout_Screen(),
+                                        ));
+                                  }
+                                  else if(rol =='Instructor'){
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Layout_Screen(),
+                                        ));
+                                  }
+
                                     // print(emailcontroller.text);
                                     // print(passwordcontroller.text);
 
-                                  }else{
-                                    if(rol=='Student'){
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => Layout_Screen(),
-                                          ));
-                                    }
-                                    else if(rol =='Instructor'){
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => Layout_Screen(),
-                                          ));
-                                    }
+                                 // }
                                     else{
-                                    }
+
                                   }
 
                                 },

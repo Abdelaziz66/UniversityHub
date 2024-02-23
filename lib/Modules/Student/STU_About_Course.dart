@@ -32,7 +32,7 @@ class STU_About_course extends StatelessWidget {
     return BlocConsumer<App_cubit, App_state>(
       listener: (context, state) {},
       builder: (context, state) {
-
+      App_cubit cubit=App_cubit.get(context);
         return Scaffold(
           body:SafeArea(
             child: SingleChildScrollView(
@@ -53,6 +53,7 @@ class STU_About_course extends StatelessWidget {
                                     Expanded(
                                       child: InkWell(
                                         onTap: (){
+
                                           navigateTo(context,rol=='Student'? STU_Matrial_Screen():INS_Matrial_Screen() );
                                         },
                                         child: Container(

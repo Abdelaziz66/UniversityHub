@@ -8,6 +8,8 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
+import '../../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+
 
 
 
@@ -24,6 +26,8 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
     return BlocConsumer<App_cubit,App_state>(
       listener: (context,state){},
       builder: (context,state){
+        App_cubit cubit=App_cubit.get(context);
+        List<GetCourseMaterialsModel>courseMaterial=cubit.stuCoursesMatrialModel;
         return Scaffold(
           // appBar: AppBar(
           //   title: Text('Material Name'),
@@ -106,11 +110,15 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
                           crossAxisSpacing: 10,
                           childAspectRatio: 1.1,
                         ),
-                        itemCount: 5,
+                        itemCount: courseMaterial.length,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index)
                         {
-                          return STU_Build_Lec_View_Widget(index,context);
+                          return STU_Build_Lec_View_Widget(
+                              index: index,
+                              context: context,
+                              courseMaterial: courseMaterial[index]
+                          );
                         }
                     ),
                   ),

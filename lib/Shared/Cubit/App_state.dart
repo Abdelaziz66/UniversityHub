@@ -1,5 +1,7 @@
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
 
+import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
+import '../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
 import '../../Models/STU_Model/User_Model/STU_Login_Model.dart';
 
 abstract class App_state {}
@@ -91,3 +93,37 @@ class Get_All_NewsErrorState extends App_state {
   String? error;
   Get_All_NewsErrorState(this.error);
 }
+
+//------------STU get All courses-----------------
+class Stu_Get_All_Courses_LoadingState extends App_state {}
+
+class Stu_Get_All_Courses_SuccessState extends App_state {
+  List<Stu_GetAllCoursesModel> coursesmodel=[];
+
+
+  Stu_Get_All_Courses_SuccessState(this.coursesmodel);
+
+}
+
+class Stu_Get_All_Courses_ErrorState extends App_state {
+  String? error;
+  Stu_Get_All_Courses_ErrorState(this.error);
+}
+//------------STU get All courses-----------------
+
+class Stu_Get_Course_Material_LoadingState extends App_state {}
+
+class Stu_Get_Course_Material_SuccessState extends App_state {
+  List<GetCourseMaterialsModel> coursesmodel=[];
+
+
+  Stu_Get_Course_Material_SuccessState(this.coursesmodel);
+
+}
+
+class Stu_Get_Course_Material_ErrorState extends App_state {
+  String? error;
+  Stu_Get_Course_Material_ErrorState(this.error);
+}
+
+

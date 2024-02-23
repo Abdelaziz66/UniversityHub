@@ -7,6 +7,7 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 
 
+import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
 import '../../Shared/Component/component.dart';
 import '../../Shared/Cons_widget.dart';
 
@@ -20,6 +21,8 @@ class STU_Lecture_Screen extends StatelessWidget {
     return BlocConsumer<App_cubit, App_state>(
       listener: (context, state) {},
       builder: (context, state) {
+        App_cubit cubit=App_cubit.get(context);
+        List<Stu_GetAllCoursesModel>courses=cubit.stuAllCoursesModel;
         return SafeArea(
           child: Scaffold(
             backgroundColor: Colors.transparent,
@@ -93,13 +96,19 @@ class STU_Lecture_Screen extends StatelessWidget {
                     child: ListView.separated(
                       itemBuilder: (context, index) => InkWell(
                           onTap: () {
+                            cubit.StuGetCourseMaterials(
+                              token:App_cubit.get(context).Tokenn,
+                              cycleId: '${courses[index].cycleId}',
+                            );
                             navigateTo(context,  STU_About_course());
                           },
-                          child: Build_STU_Lec()),
+                          child: Build_STU_Lec(
+                            courses: courses[index],
+                          )),
                       separatorBuilder: (context, index) => const SizedBox(
                         height: 20,
                       ),
-                      itemCount: 5,
+                      itemCount: courses.length,
                     ),
                   ),
                 ],

@@ -8,6 +8,7 @@ import 'package:university_hup/Modules/Student/Student_Material/STU_Show_Lecs_or
 import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/constant.dart';
 
+import '../../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
 import '../../../Shared/Component/component.dart';
 import '../../../Shared/Cubit/App_cubit.dart';
 import '../../../Shared/Cubit/App_state.dart';
@@ -21,6 +22,7 @@ class INS_Matrial_Screen extends StatelessWidget {
       listener: (context, state) => {},
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
+        List<GetCourseMaterialsModel>courseMaterial=cubit.stuCoursesMatrialModel;
         bool isvisbile=false;
         return Scaffold(
           key: scafoldkey1,
@@ -292,14 +294,14 @@ class INS_Matrial_Screen extends StatelessWidget {
                               crossAxisCount: 2, childAspectRatio: 2.5),
                       itemBuilder: (context, index) => InkWell(
                           onTap: () {
-
                             navigateTo(context,rol=='Student'? STU_Show_Material_Lec_Or_Sec():INS_Show_Material_Lec_Or_Sec());
                           },
                           child: Matrial_C(
+                          courseMaterial:courseMaterial[index] ,
                             index: index,
                           )),
                       scrollDirection: Axis.vertical,
-                      itemCount: 7,
+                      itemCount: courseMaterial.length,
                     ),
                   ),
                 ),
@@ -314,9 +316,12 @@ class INS_Matrial_Screen extends StatelessWidget {
                           onTap: () {
                             navigateTo(context, STU_Show_Material_Lec_Or_Sec());
                           },
-                          child: Matrial_C(index: index)),
+                          child: Matrial_C(
+                              courseMaterial:courseMaterial[index] ,
+                              index: index
+                          )),
                       scrollDirection: Axis.vertical,
-                      itemCount: 5,
+                      itemCount: courseMaterial.length,
                     ),
                   ),
                 ),

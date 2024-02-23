@@ -7,6 +7,7 @@ import 'package:university_hup/Modules/Student/Student_Material/STU_Show_Lecs_or
 import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/constant.dart';
 
+import '../../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
 import '../../../Shared/Component/component.dart';
 import '../../../Shared/Cubit/App_cubit.dart';
 import '../../../Shared/Cubit/App_state.dart';
@@ -21,6 +22,7 @@ class STU_Matrial_Screen extends StatelessWidget {
       listener: (context, state) => {},
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
+        List<GetCourseMaterialsModel>courseMaterila=cubit.stuCoursesMatrialModel;
         return Scaffold(
             // appBar: AppBar(
             //   title: Padding(
@@ -265,10 +267,11 @@ class STU_Matrial_Screen extends StatelessWidget {
                                 navigateTo(context, STU_Show_Material_Lec_Or_Sec());
                               },
                               child: Matrial_C(
+                                courseMaterial: courseMaterila[index],
                                 index: index,
                               )),
                           scrollDirection: Axis.vertical,
-                          itemCount: 7,
+                          itemCount: courseMaterila.length,
                         ),
                       ),
                     ),
@@ -283,9 +286,11 @@ class STU_Matrial_Screen extends StatelessWidget {
                               onTap: () {
                                 navigateTo(context, STU_Show_Material_Lec_Or_Sec());
                               },
-                              child: Matrial_C(index: index)),
+                              child: Matrial_C(
+                                  courseMaterial: courseMaterila[index],
+                                  index: index)),
                           scrollDirection: Axis.vertical,
-                          itemCount: 5,
+                          itemCount: courseMaterila.length,
                         ),
                       ),
                     ),
