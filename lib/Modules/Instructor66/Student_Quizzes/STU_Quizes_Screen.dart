@@ -1,87 +1,297 @@
-
+import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
+import 'package:day_night_time_picker/lib/state/time.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:university_hup/Modules/Instructor66/Student_Quizzes/STU_Quiz_Ques.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
-
+import 'package:university_hup/Shared/constant.dart';
 
 class INS_Quizes_Screen extends StatelessWidget {
-  const INS_Quizes_Screen({Key? key}) : super(key: key);
+  INS_Quizes_Screen({Key? key}) : super(key: key);
+
+  var scafoldkey4 = GlobalKey<ScaffoldState>();
+  // var controller1 = PageController();
+  // int index1 = 0;
+  // List<Widget>quizlist=[
+  //
+  //
+  // ];
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<App_cubit,App_state>(
-      listener: (context,state){},
-      builder: (context,state){
-        App_cubit cubit =App_cubit.get(context);
-        return  Scaffold(
-          // appBar: AppBar(
-          //   title: Padding(
-          //     padding: const EdgeInsets.all(0.0),
-          //     child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.start,
-          //       children: [
-          //         SizedBox(
-          //           height: 10,
-          //         ),
-          //         Text(
-          //           'Material name',
-          //           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-          //         ),
-          //
-          //       ],
-          //     ),
-          //   ),
-          //   actions: [
-          //     Padding(
-          //       padding: const EdgeInsets.all(12.0),
-          //       child: Image(
-          //         image: NetworkImage(
-          //           'https://s3-alpha-sig.figma.com/img/07b3/a7c9/c2125e7477b092a6b41eee3cbb5627cd?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=LSFzhb5MX20bm5v9pG3n1Lqu5K91VfFaQWA08MV3tZIr-uKjGcByqUBbmljKxlpoEMBhMNd0BPeNgR4EYO~5vCLiHPHXmElMRDj6uXz86SLBMiP~g9p53YydDzfpLmcGZqaN9-ji1169FinyPbjn1Z2h3EBaLuV-Yvxw-eC9KsLuPIloT73yerWbs7kKpOrkjKlLfqZiuZVNgA~7w6QuAYyFEs6T8Ng6LkhhVNUucnBwrquNsuxqNmuQUvvk-6N~7uBKQUw-slravD9XxeGtLp0gJINLfsiC1ZCrGNhl8YZoUdwqPuSPfJdHt~kZhsZpWbdtivJRMcjyF5ZwSQKm-Q__'
-          //             //'https://s3-alpha-sig.figma.com/img/d231/da63/0330da0307bd5fd4566c82a5540e92e7?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=J63YbqUJG4~63Q6d5hwEqu3tJAI~012Z3wt3kH03TzaxbPJV4dw-ICasQIcTcQ0CtXSIODocBY7-mJoDxKOdvk~qxLK9~Ouxq5GxPxHrwv6UkMN2TaYWEsi9JCTnTbVOVHQTpzLamoqryU62-W-0H4Noh5W1DQFu1oIqmeFk7Pjldr~RsrNx4aByu~Kim87HDgzZfUVxf3n1F8ONO6iIVJ~5O8IWTJI7HEvjAs9D3hs0uC20cwBq43JH-Cv0d6HE9eHELQ5Rdu1MEWFb9-Slv5q9NKLQaZ-3WNl6gbHB4~9txFsm8fOMBa7qNkonJyUVEzxWMdAL4uRtRaKHFDIlVQ__'
-          //         ),
-          //         fit: BoxFit.cover,
-          //         height: 50,
-          //         width: 50,
-          //       ),
-          //     ),
-          //   ],
-          // ),
+    return BlocConsumer<App_cubit, App_state>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        App_cubit cubit = App_cubit.get(context);
+        bool isvisbile=false;
+        Time _time = Time(hour: 11, minute: 30, second: 20);
+        return Scaffold(
+          key: scafoldkey4,
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal: 8),
+            child: FloatingActionButton(
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => INS_Quizes_Ques_Screen(),));
+                // if(!isvisbile)
+                // {
+                //   isvisbile=!isvisbile;
+                //
+                //   scafoldkey4.currentState?.showBottomSheet(
+                //         (context) => Padding(
+                //       padding: const EdgeInsets.all(8.0),
+                //       child: GlassBoxWithBorder(
+                //         widget: Container(
+                //           height: 250,
+                //           child: Padding(
+                //             padding: const EdgeInsets.all(25.0),
+                //             child: Column(
+                //               children: [
+                //                 const Spacer(),
+                //                 Container(
+                //                   alignment: Alignment.center,
+                //                   height: 70,
+                //
+                //                   decoration: BoxDecoration(
+                //                     // border: Border.all(color: Colors.white),
+                //                     borderRadius: BorderRadius.circular(18),
+                //                     color: Colors.white.withOpacity(.8),
+                //                   ),
+                //                   child: Padding(
+                //                     padding:
+                //                     const EdgeInsets.symmetric(horizontal: 8.0),
+                //                     child: TextFormField(
+                //                       // controller: emailcontroller,
+                //                       keyboardType: TextInputType.text,
+                //                       onFieldSubmitted: (value) {
+                //                         print(value);
+                //                       },
+                //                       onChanged: (value) {
+                //                         print(value);
+                //                       },
+                //                       validator: (value) {
+                //                         if (value!.isEmpty) {
+                //                           return 'Folder name can\'t be empty';
+                //                         }
+                //                         return null;
+                //                       },
+                //                       // toolbarOptions:
+                //                       //     ToolbarOptions(paste: true, copy: true),
+                //                       cursorColor: c1,
+                //                       style: const TextStyle(
+                //                         fontSize: 25,
+                //                       ),
+                //                       decoration: InputDecoration(
+                //                         prefixIcon: Padding(
+                //                           padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 6),
+                //                           child: FaIcon(
+                //                             FontAwesomeIcons.solidFolder,
+                //                             color: c1,
+                //                             size: 30,
+                //                           ),
+                //                         ),
+                //                         hintText: 'Folder task name',
+                //                         border: InputBorder.none,
+                //                       ),
+                //                     ),
+                //                   ),
+                //                 ),
+                //                 SizedBox(height: 15,),
+                //                 Container(
+                //                   height: 60,
+                //                   child: Row(
+                //                     children: [
+                //                       Expanded(child: Default_Button(textFontSize: 20,onPressed: (){ Navigator.of(context).push(
+                //                         showPicker(
+                //                           context: context,
+                //                           value: _time,
+                //                           sunrise: TimeOfDay(hour: 6, minute: 0), // optional
+                //                           sunset: TimeOfDay(hour: 18, minute: 0), // optional
+                //                           duskSpanInMinutes: 120, // optional
+                //                           onChange: (value){},
+                //
+                //                         ),
+                //                       );},text: 'Deadline',)),
+                //                       SizedBox(width: 15,),
+                //                       // GestureDetector(onTap:(){
+                //                       //
+                //                       //
+                //                       // } ,
+                //                       //     child: FaIcon(FontAwesomeIcons.clock)),
+                //                       Expanded(child: Default_Button(onPressed: (){},text: 'Upload task',textFontSize: 20)),
+                //                     ],
+                //                   ),
+                //                 ),
+                //
+                //                 SizedBox(height: 15,),
+                //
+                //                 const Spacer(),
+                //               ],
+                //             ),
+                //           ),
+                //         ),
+                //         color:
+                //         Colors.blueGrey.withOpacity(.2),
+                //         borderRadius: 30,
+                //         x: 15,
+                //         y: 15,
+                //         BorderWidth: 3,
+                //         BorderColor: Colors.blueGrey,),
+                //     ),
+                //   );
+                //
+                // }
+                // else
+                // {
+                //
+                //   Navigator.pop(context);
+                //   isvisbile=!isvisbile;
+                // }
 
-            body: SafeArea(
-              child: Column(
+              },
+              child:!isvisbile? FaIcon(FontAwesomeIcons.plus): FaIcon(FontAwesomeIcons.angleDown),
 
-                children: [
-                  const SizedBox(height: 30,),
-                  defaultAppbar(context:context),
-                  const SizedBox(height: 40,),
-                  const Text('Quizzes',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue
-                  ),
-                  ),
-                  const SizedBox(height: 15,),
-                  Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 7.5),
-                        child: ListView.separated(
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder:(context,index)=> Build_Quiz_Data_Widget(cubit.stu_Quiz_State,cubit.stu_Quiz_isStart,index),
-                          separatorBuilder: (context,index)=>const SizedBox(height: 25,),
-                          itemCount: 3,
-                        ),
-                      ),
-                    ),
-                ],
-              ),
             ),
+          ),
+          body: SafeArea(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 30,
+                ),
+                defaultAppbar(context: context),
+                const SizedBox(
+                  height: 40,
+                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 15, top: 10, right: 15),
+                //   child: Row(
+                //     children: [
+                //       Expanded(
+                //           child: GestureDetector(
+                //         onTap: () {
+                //           cubit.switch_quiz_Function(s: true);
+                //
+                //           controller1.previousPage(
+                //               duration: Duration(
+                //                 milliseconds: 750,
+                //               ),
+                //               curve: Curves.fastLinearToSlowEaseIn);
+                //         },
+                //         child: Container(
+                //           decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(15),
+                //             color: cubit.switch_quiz
+                //                 ? Colors.blue
+                //                 : c1.withOpacity(.8),
+                //             boxShadow: [
+                //               BoxShadow(
+                //                 color: cubit.switch_quiz
+                //                     ? Colors.grey
+                //                     : Colors.white,
+                //                 spreadRadius: 1,
+                //                 blurRadius: 7,
+                //               )
+                //             ],
+                //           ),
+                //           child: Padding(
+                //             padding: const EdgeInsets.all(15.0),
+                //             child: Center(
+                //               child: Text(
+                //                 'Quizzes',
+                //                 style: TextStyle(
+                //                   fontSize: 20,
+                //                   fontWeight: FontWeight.bold,
+                //                   color: cubit.switch_quiz ? c5 : c5,
+                //                 ),
+                //               ),
+                //             ),
+                //           ),
+                //         ),
+                //       )),
+                //       const SizedBox(
+                //         width: 15,
+                //       ),
+                //       Expanded(
+                //           child: GestureDetector(
+                //         onTap: () {
+                //           cubit.switch_quiz_Function(s: false);
+                //           controller1.nextPage(
+                //               duration: Duration(
+                //                 milliseconds: 750,
+                //               ),
+                //               curve: Curves.fastLinearToSlowEaseIn);
+                //         },
+                //         child: Container(
+                //           decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(15),
+                //             color: cubit.switch_quiz
+                //                 ? c1.withOpacity(.8)
+                //                 : Colors.blue,
+                //             boxShadow: [
+                //               BoxShadow(
+                //                 color: cubit.switch_quiz
+                //                     ? Colors.white
+                //                     : Colors.grey,
+                //                 spreadRadius: 1,
+                //                 blurRadius: 7,
+                //               )
+                //             ],
+                //           ),
+                //           child: Padding(
+                //             padding: const EdgeInsets.all(15.0),
+                //             child: Center(
+                //               child: Text(
+                //                 'Make Quiz',
+                //                 style: TextStyle(
+                //                   fontSize: 20,
+                //                   fontWeight: FontWeight.bold,
+                //                   color: cubit.switch_quiz ? c5 : c5,
+                //                 ),
+                //               ),
+                //             ),
+                //           ),
+                //         ),
+                //       )),
+                //     ],
+                //   ),
+                // ),
+                const Text(
+                  'Quizzes',
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 7.5),
+                    child: ListView.separated(
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) =>
+                          Build_Quiz_Data_Widget(cubit.stu_Quiz_State,
+                              cubit.stu_Quiz_isStart, index),
+                      separatorBuilder: (context, index) =>
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      itemCount: 3,
+                    ),
+                  ),
+                ),
 
-
-          );
-
+              ],
+            ),
+          ),
+        );
       },
     );
   }

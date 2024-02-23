@@ -369,7 +369,7 @@ class Profile_screen extends StatelessWidget {
                                                                           '30204031700212',
                                                                           style: TextStyle(
                                                                             fontWeight: FontWeight.w500,
-                                                                            fontSize: 14,
+                                                                            fontSize: 10,
                                                                             color: c1,
                                                                           ),
                                                                         ),
@@ -468,6 +468,7 @@ class Profile_screen extends StatelessWidget {
                               //'${cubit.stu_login_Model?.token}'
                             );
                             print('aaaaa');
+
                           },
                           child: GlassBox(
                               widget: Padding(

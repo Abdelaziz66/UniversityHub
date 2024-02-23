@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:university_hup/Modules/Student/Student_Grade/STU_Grades_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Drawer/Edit_Profile_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Notification_Screen.dart';
 
@@ -77,41 +78,44 @@ class Layout_Screen extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0,),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color:cubit.D_value==0? Colors.blue.withOpacity(.8):Colors.transparent,
-                          ),
-                          alignment: AlignmentDirectional.topStart,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 10),
-                                FaIcon(
-                                  FontAwesomeIcons.house,
-                                  size: 20,
-                                  color:cubit.D_value==0? Colors.white:c1,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    cubit.D_value = 0;
-                                    cubit.SetState_G();
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text(
-                                    'Home',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700,
-                                      color:cubit.D_value==0? Colors.white:c1,
+                        child: GestureDetector(
+                          onTap: (){
+                            cubit.D_value = 0;
+                            cubit.Nav_Bar_Function(index: 0);
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color:cubit.D_value==0||cubit.Nav_Bar_index==0? Colors.blue.withOpacity(.8):Colors.transparent,
+                            ),
+                            alignment: AlignmentDirectional.topStart,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 10),
+                                  FaIcon(
+                                    FontAwesomeIcons.house,
+                                    size: 20,
+                                    color:cubit.D_value==0||cubit.Nav_Bar_index==0? Colors.white:c1,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Dashboard',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        color:cubit.D_value==0||cubit.Nav_Bar_index==0? Colors.white:c1,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -130,7 +134,8 @@ class Layout_Screen extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color:cubit.D_value==1? Colors.blue.withOpacity(.8):Colors.transparent,
+                              // color:cubit.D_value==1? Colors.blue.withOpacity(.8):Colors.transparent,
+                              color:Colors.transparent,
                             ),
                             alignment: AlignmentDirectional.topStart,
                             child: Padding(
@@ -141,7 +146,8 @@ class Layout_Screen extends StatelessWidget {
                                   FaIcon(
                                     FontAwesomeIcons.solidUser,
                                     size: 20,
-                                    color:cubit.D_value==1? Colors.white:c1,
+                                    // color:cubit.D_value==2? Colors.white:c1,
+                                    color:c1,
                                   ),
                                   const SizedBox(
                                     width: 5,
@@ -153,7 +159,8 @@ class Layout_Screen extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w700,
-                                        color:cubit.D_value==1? Colors.white:c1,
+                                        // color:cubit.D_value==2? Colors.white:c1,
+                                        color:c1,
                                       ),
                                     ),
                                   ),
@@ -168,41 +175,46 @@ class Layout_Screen extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0,),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color:cubit.D_value==2? Colors.blue.withOpacity(.8):Colors.transparent,
-                          ),
-                          alignment: AlignmentDirectional.topStart,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 10),
-                                FaIcon(
-                                  FontAwesomeIcons.chartSimple,
-                                  size: 20,
-                                  color:cubit.D_value==2? Colors.white:c1,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    cubit.D_value = 2;
-                                    cubit.SetState_G();
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text(
-                                    'Grades',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700,
-                                      color:cubit.D_value==2? Colors.white:c1,
+                        child: GestureDetector(
+                          onTap: (){
+                            cubit.D_value = 2;
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => STUAllGradesScreen(),));
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              // color:cubit.D_value==1? Colors.blue.withOpacity(.8):Colors.transparent,
+                              color:Colors.transparent,
+                            ),
+                            alignment: AlignmentDirectional.topStart,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 10),
+                                  FaIcon(
+                                    FontAwesomeIcons.chartSimple,
+                                    size: 20,
+                                    // color:cubit.D_value==2? Colors.white:c1,
+                                    color:c1,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Grades',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        // color:cubit.D_value==2? Colors.white:c1,
+                                        color:c1,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -213,41 +225,46 @@ class Layout_Screen extends StatelessWidget {
 
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0,),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color:cubit.D_value==5? Colors.blue.withOpacity(.8):Colors.transparent,
-                          ),
-                          alignment: AlignmentDirectional.topStart,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 10),
-                                FaIcon(
-                                  FontAwesomeIcons.gear,
-                                  size: 20,
-                                  color:cubit.D_value==5? Colors.white:c1,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    cubit.D_value = 5;
-                                    cubit.SetState_G();
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text(
-                                    'Settings',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700,
-                                      color:cubit.D_value==5? Colors.white:c1,
+                        child: GestureDetector(
+                          onTap: (){
+                            cubit.D_value = 3;
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              // color:cubit.D_value==1? Colors.blue.withOpacity(.8):Colors.transparent,
+                              color:Colors.transparent,
+                            ),
+                            alignment: AlignmentDirectional.topStart,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 10),
+                                  FaIcon(
+                                    FontAwesomeIcons.gear,
+                                    size: 20,
+                                    // color:cubit.D_value==2? Colors.white:c1,
+                                    color:c1,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Settings',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        // color:cubit.D_value==2? Colors.white:c1,
+                                        color:c1,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -257,41 +274,46 @@ class Layout_Screen extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0,),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color:cubit.D_value==6? Colors.blue.withOpacity(.8):Colors.transparent,
-                          ),
-                          alignment: AlignmentDirectional.topStart,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 10),
-                                FaIcon(
-                                  FontAwesomeIcons.rightFromBracket,
-                                  size: 20,
-                                  color:cubit.D_value==6? Colors.white:c1,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    cubit.D_value = 6;
-                                    cubit.SetState_G();
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text(
-                                    'Logout',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700,
-                                      color:cubit.D_value==6? Colors.white:c1,
+                        child: GestureDetector(
+                          onTap: (){
+                            cubit.D_value = 4;
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              // color:cubit.D_value==1? Colors.blue.withOpacity(.8):Colors.transparent,
+                              color:Colors.transparent,
+                            ),
+                            alignment: AlignmentDirectional.topStart,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 10),
+                                  FaIcon(
+                                    FontAwesomeIcons.rightFromBracket,
+                                    size: 20,
+                                    // color:cubit.D_value==2? Colors.white:c1,
+                                    color:c1,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Logout',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        // color:cubit.D_value==2? Colors.white:c1,
+                                        color:c1,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -459,16 +481,19 @@ class Layout_Screen extends StatelessWidget {
                           child: BottomNavigationBar(
                             backgroundColor: Colors.transparent,
                             elevation: 0,
+
                             fixedColor: Colors.lightBlueAccent,
                             unselectedIconTheme: const IconThemeData(
                               size: 23,
                             ),
                             selectedIconTheme: const IconThemeData(
+
                               size: 25,
                             ),
                             showSelectedLabels: false,
                             showUnselectedLabels: false,
                             unselectedItemColor: Colors.white,
+
                             type: BottomNavigationBarType.fixed,
                             items: const [
                               BottomNavigationBarItem(

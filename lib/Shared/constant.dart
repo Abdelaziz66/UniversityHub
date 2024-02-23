@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 
 // Color c1 =Colors.blue;
 // Color? c2 =Colors.black;
@@ -29,4 +30,5 @@ String? rol= '';
 String LOGIN='Account/login';
 String NEWS ='News';
 String STU_COURSES='Students/CurrentCourcesInfo';
+//String STU_COURSE_MATERIAL='Students/CurrentCourseMaterial?CycleId=${App_cubit().cycleId}';
 String Token='';

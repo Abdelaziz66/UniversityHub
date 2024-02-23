@@ -125,7 +125,6 @@ void NavigateAndFinish(context,Widget)=>Navigator.pushAndRemoveUntil(context,
         (route) => false
 );
 
-
 void flutterToast ({
   required String msg,
   Color? backColor,
@@ -137,13 +136,3 @@ void flutterToast ({
     backgroundColor:backColor?? Colors.green,
     textColor: Colors.white,
     fontSize: 16.0);
-
-
-
-
-
-
-
-
-
-

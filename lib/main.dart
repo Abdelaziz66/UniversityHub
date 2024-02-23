@@ -13,26 +13,18 @@ import 'Shared/Style/App_Style.dart';
 
 // from ZEKO
 
-// git checkout -b zeko-branch
+// git checkout -b Serious-Branch
 // git pull origin main
 // code………
 // git add .
 // git commit -m 'new commit'
-// git push origin zeko-branch
+// git push origin Serious-Branch
 
+//test
 
-// git checkout -b zekoo-branch
-// git pull origin main
-// code………
-// git add .
-// git commit -m 'new commit'
-// git push origin zekoo-branch
-//2
 
 // from alfy
 // base url https://nabilramadan.bsite.net/api
-
-//-----------
 
 void main() {
   // new branch

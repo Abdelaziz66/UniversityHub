@@ -11,11 +11,6 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
-
-//    AbdulMajeedSallam@gmail.com
-
-//    P@ssw0rd
-
 class loginscreen extends StatefulWidget {
   const loginscreen({Key? key}) : super(key: key);
 
@@ -46,6 +41,18 @@ class _loginscreenState extends State<loginscreen> {
       //     //
       //      }
       //  }
+        // if(state is !STU_LoginErrorState) {
+        //   //  if(state.loginmodel.status != 401) {
+        //   navigateTo(context, Layout_Screen());
+        //   flutterToast(msg: 'Login success ');
+        //   //  }
+        // }
+        // else{
+        //   flutterToast(msg: 'Login error ',
+        //     backColor: Colors.red,
+        //   );
+        //
+        // }
       },
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
@@ -110,7 +117,7 @@ class _loginscreenState extends State<loginscreen> {
                 child: SingleChildScrollView(
                   child: Container(
                     child: Padding(
-                      padding: const EdgeInsets.all(30.0),
+                      padding: const EdgeInsets.all(18.0),
                       child: Form(
                         key: formkey,
                         child: Column(
@@ -302,6 +309,9 @@ class _loginscreenState extends State<loginscreen> {
                                 Expanded(
                                   child: RadioListTile(
                                     selectedTileColor: Colors.blue,
+                                    tileColor: Colors.blue,
+                                    hoverColor: Colors.blue,
+                                    activeColor: Colors.blue,
                                     title: Text(
                                       'Student',
                                       style: const TextStyle(
@@ -328,6 +338,9 @@ class _loginscreenState extends State<loginscreen> {
                                 Expanded(
                                   child: RadioListTile(
                                     selectedTileColor: Colors.blue,
+                                    tileColor: Colors.blue,
+                                    hoverColor: Colors.blue,
+                                    activeColor: Colors.blue,
                                     title: Text(
                                       'Instructor',
                                       style: const TextStyle(
@@ -355,7 +368,6 @@ class _loginscreenState extends State<loginscreen> {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-
                                 TextButton(
 
                                   onPressed: () {
@@ -377,7 +389,6 @@ class _loginscreenState extends State<loginscreen> {
                                 ),
                               ],
                             ),
-
                             ConditionalBuilder(
                               condition: true,
                               builder:(context)=> Default_Button(
@@ -390,11 +401,10 @@ class _loginscreenState extends State<loginscreen> {
                                       password:
                                       'P@ssw0rd',
                                          //  passwordcontroller.text
-                                  );
-                                  print('token from login ${cubit.stu_login_Model?.token}');
-                                  cubit.Tokenn=cubit.stu_login_Model?.token;
-                                  print('token from login ${ cubit.Tokenn}');
+                                   // email:'AbdulMajeedSallam@gmail.com',
 
+                                  );
+                                  cubit.Tokenn=cubit.stu_login_Model?.token;
                                   if(rol=='Student'){
                                     Navigator.push(
                                         context,

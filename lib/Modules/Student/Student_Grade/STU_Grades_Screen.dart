@@ -1,6 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rive/rive.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 
@@ -8,63 +13,549 @@ import '../../../Shared/Component/component.dart';
 import '../../../Shared/Cons_widget.dart';
 import 'STU_Course_Grades.dart';
 
-class StuAllGradesScreen extends StatelessWidget {
-  const StuAllGradesScreen({Key? key}) : super(key: key);
+class STUAllGradesScreen extends StatelessWidget {
+  const STUAllGradesScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<App_cubit,App_state>(
-        listener: (context,state){},
-        builder: (context,state){
-          App_cubit cubit=App_cubit.get(context);
-          return Scaffold(
-             body: SafeArea(
-               child: Column(
-                 children: [
-                   const SizedBox(height: 30,),
-                   defaultAppbar(context:context,text: 'Total Grades'),
-                   const SizedBox(height: 30,),
+    return BlocConsumer<App_cubit, App_state>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        App_cubit cubit = App_cubit.get(context);
+        return Scaffold(
+          body: Stack(
+            children: [
+              // Column(
+              //   children: [
+              //     Row(
+              //       children: [
+              //         Expanded(
+              //           child: Container(
+              //             width: double.infinity,
+              //             height: 10,
+              //             color: Colors.blue,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //     const Spacer(),
+              //     Row(
+              //       children: [
+              //         Expanded(
+              //           child: Container(
+              //             width: double.infinity,
+              //             height: 0,
+              //             color: Colors.blue,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ],
+              // ),
+              Column(
+                children: [
+                  const Spacer(),
+                  Container(
+                    height: 600,
+                    child: const RiveAnimation.asset(
+                      "assets/riveassets/shapes.riv",
+                    ),
+                  ),
+                ],
+              ),
+              Positioned(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 135, sigmaY: 135),
+                    child: const SizedBox(),
+                  )),
+              SafeArea(
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    defaultAppbar(context: context, text: 'Total Grades'),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    // child: Padding(
+                    //   padding: const EdgeInsets.all(15.0),
+                    //   child: ListView.separated(
+                    //     itemBuilder: (context, index) => InkWell(
+                    //         onTap: () {
+                    //           navigateTo(context,  INSCourseGrades());
+                    //         },
+                    //         child: Build_STU_All_grades(context,index,cubit.stuAllGrades)),
+                    //     separatorBuilder: (context, index) => const SizedBox(
+                    //       height: 20,
+                    //     ),
+                    //     itemCount: 5,
+                    //   ),
+                    // ),
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: DataTable(
 
-                   Expanded(
-                     child: Padding(
-                       padding: const EdgeInsets.all(15.0),
-                       child: ListView.separated(
-                         itemBuilder: (context, index) => InkWell(
-                             onTap: () {
-                               navigateTo(context,  StuCourseGrades());
-                             },
-                             child: Build_STU_All_grades(context,index,cubit.stuAllGrades)),
-                         separatorBuilder: (context, index) => const SizedBox(
-                           height: 20,
-                         ),
-                         itemCount: 5,
-                       ),
-                     ),
-                   ),
-                 ],
-               ),
-             ),
-          );
-        },
+                          decoration: BoxDecoration(
+                            // color: Colors.blueGrey.withOpacity(.3),
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          headingRowHeight: 50,
+
+
+                          horizontalMargin: 0,
+                          columnSpacing: 0,
+                          headingRowColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                          dataRowMaxHeight: 75,
+                          dataRowMinHeight: 60,
+                          dividerThickness: .2,
+                          border: TableBorder(
+                            verticalInside:
+                            BorderSide(color: Colors.teal, width: 2),
+                          ),
+                          columns: [
+                            DataColumn(
+                              label: Container(
+                                width: MediaQuery.of(context).size.width*.33,
+
+                                child: Column(
+                                  children: [
+                                    Container(
+                                        child: Text(
+                                          'Course',
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1
+                                              ?.copyWith(
+                                            color: Colors.teal,
+                                            fontSize: 23,
+                                            fontWeight: FontWeight.w900,
+                                          ),
+                                        )),
+                                    Spacer(),
+                                    Container(
+                                      height: 2,
+                                      color: Colors.teal,
+                                      width: double.infinity,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            DataColumn(
+                              label: Container(
+                                width: MediaQuery.of(context).size.width*.55,
+
+                                child: Column(
+                                  children: [
+                                    Container(
+                                        child: Text(
+                                          'Grade',
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1
+                                              ?.copyWith(
+                                            color: Colors.teal,
+                                            fontSize: 23,
+                                            fontWeight: FontWeight.w900,
+                                          ),
+                                        )),
+                                    Spacer(),
+                                    Container(
+                                      height: 2,
+                                      color: Colors.teal,
+                                      width: double.infinity,
+
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                          rows: [
+                            DataRow(cells: [
+                              DataCell(GestureDetector(
+                                onTap: () {
+                                  navigateTo(context, STUCourseGrades());
+                                },
+                                child: Container(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Parallel',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    )),
+                              )),
+                              DataCell(GestureDetector(
+                                onTap: () {
+                                  navigateTo(context, STUCourseGrades());
+                                },
+                                child: Container(
+                                    width: double.infinity,
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Spacer(flex: 2,),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              '30/',
+                                              style: TextStyle(
+                                                color: Colors.teal,
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            Text(
+                                              '100',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10),
+                                              border: Border.all(color: Colors.teal,width: 2)
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 6),
+                                            child: Text(
+                                              'more',
+                                              style: TextStyle(
+                                                color: Colors.teal,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+                              )),
+                            ],),
+                            DataRow(cells: [
+                              DataCell(GestureDetector(
+                                onTap: () {
+                                  navigateTo(context, STUCourseGrades());
+                                },
+                                child: Container(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Robotics',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    )),
+                              )),
+                              DataCell(GestureDetector(
+                                onTap: () {
+                                  navigateTo(context, STUCourseGrades());
+                                },
+                                child: Container(
+                                    width: double.infinity,
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Spacer(flex: 2,),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              '30/',
+                                              style: TextStyle(
+                                                color: Colors.teal,
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            Text(
+                                              '100',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10),
+                                              border: Border.all(color: Colors.teal,width: 2)
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 6),
+                                            child: Text(
+                                              'more',
+                                              style: TextStyle(
+                                                color: Colors.teal,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+                              )),
+                            ],),
+                            DataRow(cells: [
+                              DataCell(GestureDetector(
+                                onTap: () {
+                                  navigateTo(context, STUCourseGrades());
+                                },
+                                child: Container(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Genetic',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    )),
+                              )),
+                              DataCell(GestureDetector(
+                                onTap: () {
+                                  navigateTo(context, STUCourseGrades());
+                                },
+                                child: Container(
+                                    width: double.infinity,
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Spacer(flex: 2,),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              '30/',
+                                              style: TextStyle(
+                                                color: Colors.teal,
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            Text(
+                                              '100',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10),
+                                              border: Border.all(color: Colors.teal,width: 2)
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 6),
+                                            child: Text(
+                                              'more',
+                                              style: TextStyle(
+                                                color: Colors.teal,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+                              )),
+                            ],),
+                            DataRow(cells: [
+                              DataCell(GestureDetector(
+                                onTap: () {
+                                  navigateTo(context, STUCourseGrades());
+                                },
+                                child: Container(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Security',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    )),
+                              )),
+                              DataCell(GestureDetector(
+                                onTap: () {
+                                  navigateTo(context, STUCourseGrades());
+                                },
+                                child: Container(
+                                    width: double.infinity,
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Spacer(flex: 2,),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              '30/',
+                                              style: TextStyle(
+                                                color: Colors.teal,
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            Text(
+                                              '100',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10),
+                                              border: Border.all(color: Colors.teal,width: 2)
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 6),
+                                            child: Text(
+                                              'more',
+                                              style: TextStyle(
+                                                color: Colors.teal,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+                              )),
+                            ],),
+                            DataRow(cells: [
+                              DataCell(GestureDetector(
+                                onTap: () {
+                                  navigateTo(context, STUCourseGrades());
+                                },
+                                child: Container(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Distributed',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    )),
+                              )),
+                              DataCell(GestureDetector(
+                                onTap: () {
+                                  navigateTo(context, STUCourseGrades());
+                                },
+                                child: Container(
+                                    width: double.infinity,
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Spacer(flex: 2,),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              '30/',
+                                              style: TextStyle(
+                                                color: Colors.teal,
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            Text(
+                                              '100',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10),
+                                              border: Border.all(color: Colors.teal,width: 2)
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 6),
+                                            child: Text(
+                                              'more',
+                                              style: TextStyle(
+                                                color: Colors.teal,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+                              )),
+                            ],),
+
+                          ]),
+                    ),
+
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //
 // class STU_Grades_Screen extends StatelessWidget {
@@ -77,7 +568,6 @@ class StuAllGradesScreen extends StatelessWidget {
 //     );
 //   }
 // }
-
 
 //
 // import 'package:dropdown_button2/dropdown_button2.dart';
@@ -293,8 +783,6 @@ class StuAllGradesScreen extends StatelessWidget {
 //   );
 // }
 
-
-
 //
 // import 'dart:async';
 // import 'package:flutter/material.dart';
@@ -384,4 +872,3 @@ class StuAllGradesScreen extends StatelessWidget {
 //     super.dispose();
 //   }
 // }
-

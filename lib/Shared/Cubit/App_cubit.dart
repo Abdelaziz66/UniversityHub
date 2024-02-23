@@ -8,7 +8,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
-import 'package:university_hup/Models/All_News/AllNewsModel.dart';
 import 'package:university_hup/Modules/Instructor/Courses_Screens/All_Ionstructor_Materials.dart';
 import 'package:university_hup/Modules/Instructor/Tasks_Ins_screens/All_Tasks_Ins_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Calendar_Screen.dart';
@@ -24,6 +23,7 @@ import 'package:university_hup/Modules/Student/Student_Notification/UpcomingCour
 import 'package:university_hup/Shared/constant.dart';
 import '../../Models/All_News/AllNewsModel.dart';
 import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
+import '../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
 import '../../Models/STU_Model/User_Model/STU_Login_Model.dart';
 import '../../Modules/Navigation_Screens/Course_Screen.dart';
 
@@ -40,9 +40,7 @@ class App_cubit extends Cubit<App_state> {
 // Abdelaziz  --------------------------------------------------------------------
   int Nav_HomeBar_index=0;
   void nav_home_bar_Function({required int index}){
-    // if (index==2){
-    //
-    // }
+
     Nav_HomeBar_index=index;
     emit(Nav_HomeBar_state());
   }
@@ -178,6 +176,11 @@ class App_cubit extends Cubit<App_state> {
 
   int Nav_Bar_index = 0;
   void Nav_Bar_Function({required int index}) {
+    if (index==2){
+      StuGetAllCourses(
+        token:Tokenn,
+      );
+    }
     Nav_Bar_index=index;
     emit(Nav_Bar_state());
   }
@@ -192,7 +195,11 @@ class App_cubit extends Cubit<App_state> {
     emit(D_E_state());
   }
 
-
+bool switch_quiz=true;
+  void switch_quiz_Function({required bool s}){
+    switch_quiz=s;
+    emit(D_E_state());
+  }
 
 
 
@@ -404,7 +411,6 @@ List <int> stuAllGrades=[10,30,50,45,35];
 //----------------------------------------------------------
 
 
-
 //------------API ------------------------------------
   String ?Tokenn;
   STU_Login_Model ?stu_login_Model;
@@ -432,9 +438,9 @@ List <int> stuAllGrades=[10,30,50,45,35];
 
 
   //------------------------Get all news ---------------------
- List<GetAllNewsModel> allNewsModel=[];
-void GetAllNews (){
-  emit(Get_All_NewsLoadingState());
+  List<GetAllNewsModel> allNewsModel=[];
+  void GetAllNews (){
+    emit(Get_All_NewsLoadingState());
     Dio_Helper.GetData(url: NEWS).then((value) {
       if(value.statusCode==200){
          print ('git news success');
@@ -454,21 +460,22 @@ void GetAllNews (){
 
       print(error.toString());
     });
-}
+  }
 
-//------------Get All Courses--------------
 
   List<Stu_GetAllCoursesModel> stuAllCoursesModel=[];
   void StuGetAllCourses ({
     required token,
-}){
-    emit(Stu_Get_All_Courses_LoadingState());
+}) {
+    if(stuAllCoursesModel.length==0) {
+      emit(Stu_Get_All_Courses_LoadingState());
+
     Dio_Helper.GetData(
-        url: STU_COURSES,
-       token: Tokenn,
+      url: STU_COURSES,
+      token: Tokenn,
     ).then((value) {
-      if(value.statusCode==200){
-        print ('get course true');
+      if (value.statusCode == 200) {
+        print('get course true');
         List Json = value.data;
         for (var element in Json) {
           stuAllCoursesModel.add(Stu_GetAllCoursesModel.fromJson(element));
@@ -478,11 +485,43 @@ void GetAllNews (){
       stuAllCoursesModel.forEach((element) {
         print('name------- ${element.name}');
       });
+    }).catchError((error) {
+      emit(Stu_Get_All_Courses_ErrorState(error.toString()));
+      print(error.toString());
+    });
+  }
+  }
+
+ // String? cycleId;
+  List<GetCourseMaterialsModel> stuCoursesMatrialModel=[];
+  void StuGetCourseMaterials ({
+    required token,
+    required cycleId,
+  }){
+    stuCoursesMatrialModel=[];
+    emit(Stu_Get_Course_Material_LoadingState());
+    Dio_Helper.GetData(
+      url:'Students/CurrentCourseMaterial?CycleId=${cycleId}',
+      //STU_COURSE_MATERIAL,
+      token: Tokenn,
+    ).then((value) {
+      if(value.statusCode==200){
+        print ('get course material true');
+        List Json = value.data;
+        for (var element in Json) {
+          stuCoursesMatrialModel.add(GetCourseMaterialsModel.fromJson(element));
+        }
+        emit(Stu_Get_Course_Material_SuccessState(stuCoursesMatrialModel));
+      }
+      stuCoursesMatrialModel.forEach((element) {
+        print('name------- ${element.lectureName}');
+      });
 
     }).catchError((error){
-      emit(Stu_Get_All_Courses_ErrorState(error.toString()));
+      emit(Stu_Get_Course_Material_ErrorState(error.toString()));
       print(error.toString());
     });
   }
 
 }
+

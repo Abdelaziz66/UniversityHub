@@ -145,7 +145,9 @@ class INS_Assign_Screen extends StatelessWidget {
                                   height: 60,
                                   child: Row(
                                     children: [
-                                      Expanded(child: Default_Button(textFontSize: 20,onPressed: (){ Navigator.of(context).push(
+                                      Expanded(
+                                          child: Default_Button(textFontSize: 20,onPressed: (){
+                                            Navigator.of(context).push(
                                         showPicker(
                                           context: context,
                                           value: _time,
@@ -155,7 +157,8 @@ class INS_Assign_Screen extends StatelessWidget {
                                           onChange: (value){},
 
                                         ),
-                                      );},text: 'Deadline',)),
+                                      );},
+                                            text: 'Deadline',)),
                                       SizedBox(width: 15,),
                                       // GestureDetector(onTap:(){
                                       //
