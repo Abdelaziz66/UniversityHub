@@ -100,6 +100,17 @@ class STU_Lecture_Screen extends StatelessWidget {
                               token:App_cubit.get(context).Tokenn,
                               cycleId: '${courses[index].cycleId}',
                             );
+                            cubit.StuGetCourseAssign(
+                              token:App_cubit.get(context).Tokenn,
+                              cycleId: '${courses[index].cycleId}',
+                            );
+                            cubit.StuGetCourseQuiz(
+                              token:App_cubit.get(context).Tokenn,
+                              cycleId: '${courses[index].cycleId}',
+                            );
+
+                            cubit.currrentCourseName=courses[index].name;
+
                             navigateTo(context,  STU_About_course());
                           },
                           child: Build_STU_Lec(
