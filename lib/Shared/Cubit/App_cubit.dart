@@ -22,8 +22,10 @@ import 'package:university_hup/Modules/Student/Student_Notification/UpcomingCour
 
 import 'package:university_hup/Shared/constant.dart';
 import '../../Models/All_News/AllNewsModel.dart';
+import '../../Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
 import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
 import '../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+import '../../Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
 import '../../Models/STU_Model/User_Model/STU_Login_Model.dart';
 import '../../Modules/Navigation_Screens/Course_Screen.dart';
 
@@ -390,7 +392,7 @@ bool switch_quiz=true;
 
 
   //-----------------STU Quizzes------------
-  List<bool> stu_Quiz_State = [false,false,true];
+  List<bool> stu_Quiz_IsComplete = [false,false,true];
   List<bool> stu_Quiz_isStart = [true,false,true];
 
   List<String> stu_Quiz_Ques_lis=[
@@ -492,6 +494,8 @@ List <int> stuAllGrades=[10,30,50,45,35];
   }
   }
 
+  String? currrentCourseName;
+
  // String? cycleId;
   List<GetCourseMaterialsModel> stuCoursesMatrialModel=[];
   void StuGetCourseMaterials ({
@@ -499,15 +503,19 @@ List <int> stuAllGrades=[10,30,50,45,35];
     required cycleId,
   }){
     stuCoursesMatrialModel=[];
-    emit(Stu_Get_Course_Material_LoadingState());
+    emit(Stu_Get_Course_Quiz_LoadingState());
     Dio_Helper.GetData(
       url:'Students/CurrentCourseMaterial?CycleId=${cycleId}',
       //STU_COURSE_MATERIAL,
       token: Tokenn,
     ).then((value) {
       if(value.statusCode==200){
+        print(value.data);
+        print(value.data.runtimeType);
+
         print ('get course material true');
         List Json = value.data;
+        print(value.data);
         for (var element in Json) {
           stuCoursesMatrialModel.add(GetCourseMaterialsModel.fromJson(element));
         }
@@ -522,6 +530,77 @@ List <int> stuAllGrades=[10,30,50,45,35];
       print(error.toString());
     });
   }
+
+  //----------------------STU assign -----------------
+
+  List<STU_Course_Assign_Model> stuCoursesAssignModel=[];
+  void StuGetCourseAssign ({
+    required token,
+    required cycleId,
+  }){
+    //stuCoursesAssignModel=[];
+    emit(Stu_Get_Course_Assign_LoadingState());
+    Dio_Helper.GetData(
+      url:'Students/CurrentCourseTasks?cycleId=${cycleId}',
+      //STU_COURSE_MATERIAL,
+      token: Tokenn,
+    ).then((value) {
+      print(value.statusCode);
+      if(value.statusCode==200){
+        print(value.data);
+        print(value.data.runtimeType);
+
+        Map<String,dynamic> Json = value.data;
+      //  for (var element in  Json) {
+        Json.forEach((key, value) {
+          stuCoursesAssignModel.add(STU_Course_Assign_Model.fromJson(value));
+        });
+        print ('get course Assign true');
+        emit(Stu_Get_Course_Assign_SuccessState(stuCoursesAssignModel));
+      }
+      stuCoursesAssignModel.forEach((element) {
+        print('task name------- ${element.taskName}');
+      });
+
+    }).catchError((error){
+      emit(Stu_Get_Course_Assign_ErrorState(error.toString()));
+      print(error.toString());
+    });
+  }
+
+
+
+  // String? cycleId;
+  List<STU_Quiz_Model> stuCoursesQuizlModel=[];
+  void StuGetCourseQuiz ({
+    required token,
+    required cycleId,
+  }){
+    stuCoursesQuizlModel=[];
+    emit(Stu_Get_Course_Quiz_LoadingState());
+    Dio_Helper.GetData(
+      url:'Students/CurrentCourseQuizzes?cycleId=${cycleId}',
+      //STU_COURSE_MATERIAL,
+      token: Tokenn,
+    ).then((value) {
+      if(value.statusCode==200){
+        print ('get course Quiz true');
+        List Json = value.data;
+        for (var element in Json) {
+          stuCoursesQuizlModel.add(STU_Quiz_Model.fromJson(element));
+        }
+        emit(Stu_Get_Course_Quiz_SuccessState(stuCoursesQuizlModel));
+      }
+      stuCoursesQuizlModel.forEach((element) {
+        print('Quiz title------- ${element.title}');
+      });
+
+    }).catchError((error){
+      emit(Stu_Get_Course_Quiz_ErrorState(error.toString()));
+      print(error.toString());
+    });
+  }
+
 
 }
 

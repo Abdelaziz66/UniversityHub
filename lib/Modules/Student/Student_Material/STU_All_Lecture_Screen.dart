@@ -22,7 +22,7 @@ class STU_Matrial_Screen extends StatelessWidget {
       listener: (context, state) => {},
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
-        List<GetCourseMaterialsModel>courseMaterila=cubit.stuCoursesMatrialModel;
+        List<GetCourseMaterialsModel>courseMaterial=cubit.stuCoursesMatrialModel;
         return Scaffold(
             // appBar: AppBar(
             //   title: Padding(
@@ -267,11 +267,11 @@ class STU_Matrial_Screen extends StatelessWidget {
                                 navigateTo(context, STU_Show_Material_Lec_Or_Sec());
                               },
                               child: Matrial_C(
-                                courseMaterial: courseMaterila[index],
+                                courseMaterial: courseMaterial[index],
                                 index: index,
                               )),
                           scrollDirection: Axis.vertical,
-                          itemCount: courseMaterila.length,
+                          itemCount: courseMaterial.length,
                         ),
                       ),
                     ),
@@ -287,10 +287,10 @@ class STU_Matrial_Screen extends StatelessWidget {
                                 navigateTo(context, STU_Show_Material_Lec_Or_Sec());
                               },
                               child: Matrial_C(
-                                  courseMaterial: courseMaterila[index],
+                                  courseMaterial: courseMaterial[index],
                                   index: index)),
                           scrollDirection: Axis.vertical,
-                          itemCount: courseMaterila.length,
+                          itemCount: courseMaterial.length,
                         ),
                       ),
                     ),

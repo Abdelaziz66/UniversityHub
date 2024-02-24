@@ -9,6 +9,7 @@ import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dar
 import '../../Models/All_News/AllNewsModel.dart';
 import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
 import '../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+import '../../Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
 import '../Cons_widget.dart';
 import '../Cubit/App_cubit.dart';
 import '../constant.dart';
@@ -1812,8 +1813,20 @@ Widget BuildAssignFileViewWidget(
       ));
 }
 
+
+
+
+
+
 Widget Build_Quiz_Data_Widget(
-        List<bool> quizState, List<bool> isQuizStart, int index) =>
+{
+  STU_Quiz_Model ?quiz,
+          List<bool>? quizIsComplete,
+          List<bool> ?isQuizStart,
+  int? index
+ }
+    //List<bool> quizState, List<bool> isQuizStart, int index
+    ) =>
     Container(
       padding: const EdgeInsetsDirectional.all(12),
       decoration: BoxDecoration(
@@ -1826,9 +1839,10 @@ Widget Build_Quiz_Data_Widget(
             height: 20,
           ),
           Text(
-            'Parallel programming Quiz 1',
+            quiz?.title!=null?
+             '${quiz?.title}':'Parallel programming Quiz 1',
             style: TextStyle(
-                fontWeight: FontWeight.w700, color: c1, fontSize: 17,
+              fontWeight: FontWeight.w700, color: c1, fontSize: 17,
             ),
           ),
           const SizedBox(
@@ -1839,102 +1853,244 @@ Widget Build_Quiz_Data_Widget(
             height: 20,
           ),
           ConditionalBuilder(
-              condition: quizState[index],
+              condition: quizIsComplete![index!],
               builder: (context) =>  Container(
-            height: 40,
-            width: 180,
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Center(
-                child: isQuizStart[index]
-                    ? const Text(
-                  'Finished',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                )
-                    : const Text(
-                  'Waiting',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                )),
-          ),
+                height: 40,
+                width: 180,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Center(
+                    child:
+                    //isQuizStart[index] ?
+                    const Text(
+                      'Finished',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )
+                      /*  : const Text(
+                      'Waiting',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )*/
+              ),
+              ),
 
               fallback: (context) => Column(
+                children: [
+                  Text('From',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('From',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
 
-                          Container(
-                            height: 25,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Colors.green)),
-                            child: const Center(child: Text('8:00')),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text('To',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            height: 25,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Colors.red)),
-                            child: const Center(child: Text('10:00')),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 25,),
                       Container(
-                        height: 40,
-                        width: 180,
+                        height: 25,
+                        width: 60,
                         decoration: BoxDecoration(
-                          color: isQuizStart[index]
-                              ? Colors.green:Colors.blue,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Center(
-                            child: isQuizStart[index]
-                                ? TextButton(
-                                    onPressed: () {
-                                      navigateTo(
-                                          context, STU_Quizes_Ques_Screen());
-                                    },
-                                    child: const Text(
-                                      'Start',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20),
-                                    ),
-                                  )
-                                : const Text(
-                                    'Waiting',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  )),
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: Colors.green)),
+                        child: const Center(child: Text('8:00')),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text('To',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        height: 25,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: Colors.red)),
+                        child: const Center(child: Text('10:00')),
                       ),
                     ],
-                  )),
+                  ),
+                  const SizedBox(height: 25,),
+                  Container(
+                    height: 40,
+                    width: 180,
+                    decoration: BoxDecoration(
+                      color:
+
+                      quiz?.status=='Available'
+                      //isQuizStart[index]
+                          ? Colors.green:Colors.blue,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                        child: quiz?.status=='Available'
+                       // isQuizStart[index]
+                            ? TextButton(
+                          onPressed: () {
+                            navigateTo(
+                                context, STU_Quizes_Ques_Screen());
+                          },
+                          child: const Text(
+                            'Start',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                        )
+                            : const Text(
+                          'Waiting',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        )),
+                  ),
+                ],
+              )),
         ],
       ),
     );
+
+
+
+
+
+
+
+//
+// Widget Build_Quiz_Data_Widget({
+//   STU_Quiz_Model ?quiz,
+//           List<bool>? quizState,
+//           List<bool> ?isQuizStart,
+//   int? index
+// }) =>
+//     Container(
+//       padding: const EdgeInsetsDirectional.all(12),
+//       decoration: BoxDecoration(
+//           borderRadius: BorderRadius.circular(15),
+//           border: Border.all(color: Colors.blue)),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         children: [
+//           const SizedBox(
+//             height: 20,
+//           ),
+//           Text(
+//             '${quiz?.title}',
+//             style: TextStyle(
+//                 fontWeight: FontWeight.w700, color: c1, fontSize: 17,
+//             ),
+//           ),
+//           const SizedBox(
+//             height: 10,
+//           ),
+//           Text('10 Points',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
+//           const SizedBox(
+//             height: 20,
+//           ),
+//           ConditionalBuilder(
+//               condition: quizState![index!],
+//               builder: (context) =>  Container(
+//             height: 40,
+//             width: 180,
+//             decoration: BoxDecoration(
+//               color: Colors.blue,
+//               borderRadius: BorderRadius.circular(15),
+//             ),
+//             child: Center(
+//                 child:quiz?.status=='not Available'
+//             ? const Text(
+//                   'Waiting',
+//                   style: TextStyle(
+//                       color: Colors.white,
+//                       fontWeight: FontWeight.bold,
+//                       fontSize: 20),
+//                 )
+//                     : const Text(
+//                   'Finished',
+//                   style: TextStyle(
+//                       color: Colors.white,
+//                       fontWeight: FontWeight.bold,
+//                       fontSize: 20),
+//                 )),
+//           ),
+//
+//               fallback: (context) => Column(
+//                     children: [
+//                       Text('From',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
+//                       const SizedBox(height: 10),
+//                       Row(
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         children: [
+//
+//                           Container(
+//                             height: 25,
+//                             width: 60,
+//                             decoration: BoxDecoration(
+//                                 borderRadius: BorderRadius.circular(5),
+//                                 border: Border.all(color: Colors.green)),
+//                             child: const Center(child: Text('8:00')),
+//                           ),
+//                           const SizedBox(
+//                             width: 10,
+//                           ),
+//                           Text('To',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
+//                           const SizedBox(
+//                             width: 10,
+//                           ),
+//                           Container(
+//                             height: 25,
+//                             width: 60,
+//                             decoration: BoxDecoration(
+//                                 borderRadius: BorderRadius.circular(5),
+//                                 border: Border.all(color: Colors.red)),
+//                             child: const Center(child: Text('10:00')),
+//                           ),
+//                         ],
+//                       ),
+//                       const SizedBox(height: 25,),
+//                       Container(
+//                         height: 40,
+//                         width: 180,
+//                         decoration: BoxDecoration(
+//                           color: quiz?.status=='Available'
+//                               ? Colors.green:Colors.blue,
+//                           borderRadius: BorderRadius.circular(15),
+//                         ),
+//                         child: Center(
+//                             child:quiz?.status=='Available'
+//                             //isQuizStart[index]
+//                                 ? TextButton(
+//                                     onPressed: () {
+//                                       navigateTo(
+//                                           context, STU_Quizes_Ques_Screen());
+//                                     },
+//                                     child: const Text(
+//                                       'Start',
+//                                       style: TextStyle(
+//                                           color: Colors.white,
+//                                           fontWeight: FontWeight.bold,
+//                                           fontSize: 20),
+//                                     ),
+//                                   )
+//                                 : const Text(
+//                                     'Waiting',
+//                                     style: TextStyle(
+//                                         color: Colors.white,
+//                                         fontWeight: FontWeight.bold,
+//                                         fontSize: 20),
+//                                   )),
+//                       ),
+//                     ],
+//                   )),
+//         ],
+//       ),
+//     );
 
 Widget Build_STU_Quiz_Ques(
         context, List<String> ques, List<String> answers, index) =>

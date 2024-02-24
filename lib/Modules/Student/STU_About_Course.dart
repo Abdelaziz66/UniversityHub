@@ -40,7 +40,10 @@ class STU_About_course extends StatelessWidget {
                 child: Column(
                     children: [
                       const SizedBox(height: 30,),
-                      defaultAppbar(context:context),
+                      defaultAppbar(
+                          context:context,
+                        text: '${cubit.currrentCourseName}'
+                      ),
                       const SizedBox(height: 30,),
                       Padding(
                         padding: const EdgeInsets.all(15.0),
