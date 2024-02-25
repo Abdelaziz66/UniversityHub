@@ -54,10 +54,10 @@ class STU_Course_Assign_Model {
   int? taskGrade;
   String? startDate;
   String? endDate;
-//  String? status;
- // String? courseName;
+  String? status;
+  String? courseName;
   String? filePath;
-//  String? instructorName;
+  String? instructorName;
   String? createdAt;
 
   STU_Course_Assign_Model(
@@ -66,10 +66,10 @@ class STU_Course_Assign_Model {
         this.taskGrade,
         this.startDate,
         this.endDate,
-     //   this.status,
-     //   this.courseName,
+        this.status,
+        this.courseName,
         this.filePath,
-    //    this.instructorName,
+        this.instructorName,
         this.createdAt});
 
   STU_Course_Assign_Model.fromJson(Map<String, dynamic> json) {
@@ -78,10 +78,10 @@ class STU_Course_Assign_Model {
     taskGrade = json['taskGrade'];
     startDate = json['startDate'];
     endDate = json['endDate'];
- //   status = json['status'];
- //   courseName = json['courseName'];
+    status = json['status'];
+    courseName = json['courseName'];
     filePath = json['filePath'];
- //   instructorName = json['instructorName'];
+    instructorName = json['instructorName'];
     createdAt = json['createdAt'];
   }
 
@@ -92,10 +92,10 @@ class STU_Course_Assign_Model {
     data['taskGrade'] = this.taskGrade;
     data['startDate'] = this.startDate;
     data['endDate'] = this.endDate;
-  //  data['status'] = this.status;
-   /// data['courseName'] = this.courseName;
+    data['status'] = this.status;
+    data['courseName'] = this.courseName;
     data['filePath'] = this.filePath;
-  //  data['instructorName'] = this.instructorName;
+    data['instructorName'] = this.instructorName;
     data['createdAt'] = this.createdAt;
     return data;
   }

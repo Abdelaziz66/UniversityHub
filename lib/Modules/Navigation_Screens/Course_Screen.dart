@@ -1,4 +1,5 @@
 
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:university_hup/Modules/Student/STU_About_Course.dart';
@@ -93,34 +94,27 @@ class STU_Lecture_Screen extends StatelessWidget {
                   // ),
                   const SizedBox(height: 5,),
                   Expanded(
-                    child: ListView.separated(
-                      itemBuilder: (context, index) => InkWell(
-                          onTap: () {
-                            cubit.StuGetCourseMaterials(
-                              token:App_cubit.get(context).Tokenn,
-                              cycleId: '${courses[index].cycleId}',
-                            );
-                            cubit.StuGetCourseAssign(
-                              token:App_cubit.get(context).Tokenn,
-                              cycleId: '${courses[index].cycleId}',
-                            );
-                            cubit.StuGetCourseQuiz(
-                              token:App_cubit.get(context).Tokenn,
-                              cycleId: '${courses[index].cycleId}',
-                            );
-
-                            cubit.currrentCourseName=courses[index].name;
-
-                            navigateTo(context,  STU_About_course());
-                          },
-                          child: Build_STU_Lec(
-                            courses: courses[index],
-                          )),
-                      separatorBuilder: (context, index) => const SizedBox(
-                        height: 20,
+                    child: ConditionalBuilder(
+                      condition: courses.isNotEmpty,
+                      builder:(context)=>    ListView.separated(
+                        itemBuilder: (context, index) => InkWell(
+                            onTap: () {
+                              cubit.currentCourseName=courses[index].name;
+                              cubit.currentCycleId=courses[index].cycleId;
+                              navigateTo(context,  STU_About_course());
+                            },
+                            child: Build_STU_Lec(
+                              courses: courses[index],
+                            )),
+                        separatorBuilder: (context, index) => const SizedBox(
+                          height: 20,
+                        ),
+                        itemCount: courses.length,
                       ),
-                      itemCount: courses.length,
+                      fallback:(context)=> Center(child: CircularProgressIndicator(),),
                     ),
+
+
                   ),
                 ],
               ),

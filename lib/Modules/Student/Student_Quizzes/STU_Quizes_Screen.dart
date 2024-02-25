@@ -58,7 +58,7 @@ class STU_Quizes_Screen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 30,),
                   defaultAppbar(context:context,
-                      text: '${cubit.currrentCourseName}'
+                      text: '${cubit.currentCourseName}'
                   ),
                   const SizedBox(height: 40,),
                   const Text('Quizzes',
@@ -73,7 +73,7 @@ class STU_Quizes_Screen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 7.5),
                         child: ConditionalBuilder(
-                          condition: quiz.isNotEmpty,
+                          condition: quiz.isNotEmpty&&state is ! Stu_Get_Course_Quiz_LoadingState,
                           builder:(context)=> ListView.separated(
                             physics: const BouncingScrollPhysics(),
                             itemBuilder:(context,index)=> Build_Quiz_Data_Widget(

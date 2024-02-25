@@ -42,7 +42,7 @@ class STU_About_course extends StatelessWidget {
                       const SizedBox(height: 30,),
                       defaultAppbar(
                           context:context,
-                        text: '${cubit.currrentCourseName}'
+                        text: '${cubit.currentCourseName}'
                       ),
                       const SizedBox(height: 30,),
                       Padding(
@@ -56,6 +56,10 @@ class STU_About_course extends StatelessWidget {
                                     Expanded(
                                       child: InkWell(
                                         onTap: (){
+                                          cubit.StuGetCourseMaterials(
+                                            token:App_cubit.get(context).Tokenn,
+                                          //  cycleId: '${courses[index].cycleId}',
+                                          );
 
                                           navigateTo(context,rol=='Student'? STU_Matrial_Screen():INS_Matrial_Screen() );
                                         },
@@ -111,6 +115,10 @@ class STU_About_course extends StatelessWidget {
                                     Expanded(
                                       child: InkWell(
                                         onTap: (){
+                                          cubit.StuGetCourseAssign(
+                                            token:App_cubit.get(context).Tokenn,
+                                        //    cycleId: '${courses[index].cycleId}',
+                                          );
 
                                           navigateTo(context,rol=='Student'? STU_Assign_Screen():INS_Assign_Screen() );
                                         },
@@ -178,7 +186,10 @@ class STU_About_course extends StatelessWidget {
                                   Expanded(
                                     child: InkWell(
                                       onTap: (){
-
+                                        cubit.StuGetCourseQuiz(
+                                          token:App_cubit.get(context).Tokenn,
+                                       //   cycleId: '${courses[index].cycleId}',
+                                        );
                                         navigateTo(context,rol=='Student'? STU_Quizes_Screen():INS_Quizes_Screen() );
                                       },
                                       child: Container(

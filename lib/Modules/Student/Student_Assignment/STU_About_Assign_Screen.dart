@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
+import '../../../Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
 import '../../../Shared/Component/component.dart';
 import '../../../Shared/Cons_widget.dart';
 import '../../../Shared/Cubit/App_cubit.dart';
@@ -19,28 +20,17 @@ class STU_About_Assign_Screen extends StatelessWidget {
       listener:(context,stata){},
       builder: (context,state){
         App_cubit cubit=App_cubit.get(context);
+       // STU_Course_Assign_Model? assign;
         List< PlatformFile>all_files=cubit.all_assign_files_List;
         return Scaffold(
-          // appBar: AppBar(
-          //   title: Text("Assignment"),
-          //   actions: [
-          //     TextButton(onPressed: (){
-          //       // cubit.AddPost(
-          //       //   postText:postTextController.text,
-          //       // );
-          //       // cubit.GetPosts();
-          //       Navigator.pop(context);
-          //     }, child: Text('Done',
-          //         style: Theme.of(context).textTheme.subtitle1
-          //     )),
-          //   ],
-          // ),
           body: SafeArea(
             child: Column(
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 30,),
-                defaultAppbar(context: context),
+                defaultAppbar(
+                    text: cubit.currentCourseName,
+                    context: context),
                 const SizedBox(height: 30,),
 
                 // Padding(
@@ -262,7 +252,7 @@ class STU_About_Assign_Screen extends StatelessWidget {
                 //   ),
                 // ),
 
-                const Text('Material name',
+                Text('${ cubit.assignName}',
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
