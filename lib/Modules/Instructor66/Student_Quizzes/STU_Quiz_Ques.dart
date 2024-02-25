@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:university_hup/Modules/Instructor66/Student_Quizzes/INS_Quizes_Ques.dart';
 import 'package:university_hup/Modules/Instructor66/Student_Quizzes/STU_Quiz_Finish_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Finish_Screen.dart';
 import 'package:university_hup/Shared/Component/component.dart';
@@ -626,7 +627,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
                     containerHeight: 50,
                     onPressed: () {
 
-                      navigateTo(context, const INS_Quiz_Finish_Screen());
+                      navigateTo(context,  INS_Quizes_Ques_Sceen());
                       // submit;
 
                     },
