@@ -165,7 +165,8 @@ class INS_Matrial_Screen extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              defaultAppbar(context: context),
+              defaultAppbar(context: context,
+              ),
               const SizedBox(
                 height: 30,
               ),

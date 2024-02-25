@@ -28,6 +28,8 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
       builder: (context,state){
         App_cubit cubit=App_cubit.get(context);
         List<GetCourseMaterialsModel>courseMaterial=cubit.stuCoursesMatrialModel;
+        List<GetCourseMaterialsModel>lectures=cubit.stuLECTUREModel;
+        List<GetCourseMaterialsModel>labs=cubit.stuLABModel;
         return Scaffold(
           // appBar: AppBar(
           //   title: Text('Material Name'),
@@ -38,7 +40,9 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 30,),
-                defaultAppbar(context:context),
+                defaultAppbar(
+                    text: cubit.currentCourseName,
+                    context:context),
                 const SizedBox(height: 30,),
 
                 Padding(
@@ -110,14 +114,14 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
                           crossAxisSpacing: 10,
                           childAspectRatio: 1.1,
                         ),
-                        itemCount: courseMaterial.length,
+                        itemCount: labs.length,
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index)
                         {
                           return STU_Build_Lec_View_Widget(
                               index: index,
                               context: context,
-                              courseMaterial: courseMaterial[index]
+                              courseMaterial:cubit.isLec!?lectures[index]:labs[index]
                           );
                         }
                     ),

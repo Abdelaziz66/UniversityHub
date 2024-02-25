@@ -7,6 +7,7 @@ import 'package:university_hup/Modules/Instructor/Courses_Screens/Material_conte
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
 
 import '../../Models/All_News/AllNewsModel.dart';
+import '../../Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
 import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
 import '../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
 import '../../Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
@@ -430,7 +431,10 @@ Widget Post({
                             ],
                           ),
                           Text(
-                            '${news?.createdAt}',
+                            '${DateTime.parse(news!.createdAt!).year}-${DateTime.parse(news.createdAt!).month}'
+                                '-${DateTime.parse(news.createdAt!).day}  at  '
+                                '${DateTime.parse(news.createdAt!).hour}:${DateTime.parse(news.createdAt!).minute}',
+                           // '${news?.createdAt}',
                             style: TextStyle(
                               // fontWeight: FontWeight.w800,
 
@@ -699,7 +703,8 @@ Widget Lecture_C() => InkWell(
 
 Widget Matrial_C({
   GetCourseMaterialsModel ?courseMaterial,
-  required index}) => Padding(
+  required index
+}) => Padding(
   padding: const EdgeInsets.all(8.0),
   child: GlassBoxWithBorder(
       widget: Padding(
@@ -714,8 +719,16 @@ Widget Matrial_C({
             const SizedBox(
               width: 10,
             ),
-            Text(
+
+            courseMaterial?.type=='Lecture' ? Text(
               'Lecture ${index + 1}',
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.w700,
+                color: c1,
+              ),
+            ):Text(
+              'Lab ${index + 1}',
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.w700,
@@ -1602,7 +1615,9 @@ Widget Build_STU_Lec({
 
 
 //--------------Assignments-----------------------------
-Widget Build_STU_pend_Tasks() => Container(
+Widget Build_STU_pend_Tasks({
+  STU_Course_Assign_Model? assign
+}) => Container(
     width: double.infinity,
     height: 76.95,
     decoration: ShapeDecoration(
@@ -1642,7 +1657,7 @@ Widget Build_STU_pend_Tasks() => Container(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Parallel',
+                '${assign?.taskName}',
                 style: TextStyle( fontWeight: FontWeight.w700, color: c1, fontSize: 17),
               ),
               Row(
@@ -1651,8 +1666,9 @@ Widget Build_STU_pend_Tasks() => Container(
                     fontWeight: FontWeight.w400, color: c1, fontSize: 14,
                   ),),
                   const SizedBox(width: 3,),
-                  const Text(
-                    '1 more day',
+                   Text(
+                    '${DateTime.parse(assign!.startDate!).hour}:${DateTime.parse(assign.startDate!).minute}',
+                    //'1 more day',
                     style: TextStyle(
                         fontWeight: FontWeight.w500, color: Colors.red, fontSize: 14,
                     ),
@@ -1895,7 +1911,11 @@ Widget Build_Quiz_Data_Widget(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             border: Border.all(color: Colors.green)),
-                        child: const Center(child: Text('8:00')),
+                        child: Center(child: Text(
+                          '${DateTime.parse(quiz!.startDate!).hour}:${DateTime.parse(quiz.startDate!).minute}',
+
+
+                        )),
                       ),
                       const SizedBox(
                         width: 10,
@@ -1910,7 +1930,10 @@ Widget Build_Quiz_Data_Widget(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             border: Border.all(color: Colors.red)),
-                        child: const Center(child: Text('10:00')),
+                        child:Center(child: Text(
+                          '${DateTime.parse(quiz.endDate!).hour}:${DateTime.parse(quiz.endDate!).minute}',
+
+                        )),
                       ),
                     ],
                   ),

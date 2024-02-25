@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -446,7 +447,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
     Dio_Helper.GetData(url: NEWS).then((value) {
       if(value.statusCode==200){
          print ('git news success');
-        List Json = value.data;
+        List Json = value.data['newsData'];
         for (var element in Json) {
            allNewsModel.add(GetAllNewsModel.fromJson(element));
         }
@@ -478,7 +479,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
     ).then((value) {
       if (value.statusCode == 200) {
         print('get course true');
-        List Json = value.data;
+        List Json = value.data['coursesData'];
         for (var element in Json) {
           stuAllCoursesModel.add(Stu_GetAllCoursesModel.fromJson(element));
         }
@@ -494,18 +495,25 @@ List <int> stuAllGrades=[10,30,50,45,35];
   }
   }
 
-  String? currrentCourseName;
+  String? currentCourseName;
+  String?currentCycleId;
 
  // String? cycleId;
   List<GetCourseMaterialsModel> stuCoursesMatrialModel=[];
+  List<GetCourseMaterialsModel> stuLECTUREModel=[];
+  List<GetCourseMaterialsModel> stuLABModel=[];
+  bool? isLec;
+
   void StuGetCourseMaterials ({
     required token,
-    required cycleId,
+   // required cycleId,
   }){
     stuCoursesMatrialModel=[];
+    stuLECTUREModel=[];
+    stuLABModel=[];
     emit(Stu_Get_Course_Quiz_LoadingState());
     Dio_Helper.GetData(
-      url:'Students/CurrentCourseMaterial?CycleId=${cycleId}',
+      url:'Students/CurrentCourseMaterial?CycleId=${currentCycleId}',
       //STU_COURSE_MATERIAL,
       token: Tokenn,
     ).then((value) {
@@ -515,14 +523,26 @@ List <int> stuAllGrades=[10,30,50,45,35];
 
         print ('get course material true');
         List Json = value.data;
-        print(value.data);
         for (var element in Json) {
           stuCoursesMatrialModel.add(GetCourseMaterialsModel.fromJson(element));
         }
         emit(Stu_Get_Course_Material_SuccessState(stuCoursesMatrialModel));
       }
       stuCoursesMatrialModel.forEach((element) {
-        print('name------- ${element.lectureName}');
+        if(element.type=='Lecture'){
+          stuLECTUREModel.add(element);
+        }
+        else if(element.type=='Lab'){
+          stuLABModel.add(element);
+        }
+      });
+      print('lectures:');
+      stuLECTUREModel.forEach((element) {
+        print( element.type);
+      });
+      print('Labs:');
+      stuLABModel.forEach((element) {
+        print( element.type);
       });
 
     }).catchError((error){
@@ -530,18 +550,18 @@ List <int> stuAllGrades=[10,30,50,45,35];
       print(error.toString());
     });
   }
-
   //----------------------STU assign -----------------
 
+ String ? assignName;
   List<STU_Course_Assign_Model> stuCoursesAssignModel=[];
   void StuGetCourseAssign ({
     required token,
-    required cycleId,
+   // required cycleId,
   }){
-    //stuCoursesAssignModel=[];
+    stuCoursesAssignModel=[];
     emit(Stu_Get_Course_Assign_LoadingState());
     Dio_Helper.GetData(
-      url:'Students/CurrentCourseTasks?cycleId=${cycleId}',
+      url:'Students/CurrentCourseTasks?cycleId=${currentCycleId}',
       //STU_COURSE_MATERIAL,
       token: Tokenn,
     ).then((value) {
@@ -550,10 +570,10 @@ List <int> stuAllGrades=[10,30,50,45,35];
         print(value.data);
         print(value.data.runtimeType);
 
-        Map<String,dynamic> Json = value.data;
+        List Json = value.data;
       //  for (var element in  Json) {
-        Json.forEach((key, value) {
-          stuCoursesAssignModel.add(STU_Course_Assign_Model.fromJson(value));
+        Json.forEach((element) {
+          stuCoursesAssignModel.add(STU_Course_Assign_Model.fromJson(element));
         });
         print ('get course Assign true');
         emit(Stu_Get_Course_Assign_SuccessState(stuCoursesAssignModel));
@@ -574,12 +594,12 @@ List <int> stuAllGrades=[10,30,50,45,35];
   List<STU_Quiz_Model> stuCoursesQuizlModel=[];
   void StuGetCourseQuiz ({
     required token,
-    required cycleId,
+//    required cycleId,
   }){
     stuCoursesQuizlModel=[];
     emit(Stu_Get_Course_Quiz_LoadingState());
     Dio_Helper.GetData(
-      url:'Students/CurrentCourseQuizzes?cycleId=${cycleId}',
+      url:'Students/CurrentCourseQuizzes?cycleId=${currentCycleId}',
       //STU_COURSE_MATERIAL,
       token: Tokenn,
     ).then((value) {
