@@ -35,6 +35,26 @@ class App_cubit extends Cubit<App_state> {
 
 
 // Abdelaziz  --------------------------------------------------------------------
+
+  int more=2;
+  void addmore(){
+    if(more==4){
+
+    }else{
+      more++;
+    }
+
+    emit(Defulte_state());
+  }
+  void minusmore(){
+    if(more==2){
+
+    }else{
+      more--;
+    }
+
+    emit(Defulte_state());
+  }
   int Nav_HomeBar_index=0;
   void nav_home_bar_Function({required int index}){
     Nav_HomeBar_index=index;

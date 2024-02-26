@@ -22,19 +22,25 @@ import 'Shared/Style/App_Style.dart';
 
 //test
 
-
 // from alfy
 // base url https://nabilramadan.bsite.net/api
 
 void main() {
   // new branch
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.transparent, // navigation bar color
-    statusBarColor: Colors.transparent, // status bar color
-    statusBarIconBrightness: Brightness.dark,
-    systemNavigationBarIconBrightness: Brightness.dark,
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      overlays: [SystemUiOverlay.top,]);
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemStatusBarContrastEnforced: false,
+      statusBarColor: Colors.transparent, // status bar color
+      statusBarIconBrightness: Brightness.dark,
 
-  ));
+      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: Colors.white, // navigation bar color
+      systemNavigationBarContrastEnforced: false,
+      systemNavigationBarDividerColor: Colors.transparent,
+    ),
+  );
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 
@@ -50,9 +56,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-
           create: (context) => App_cubit(),
-
         ),
       ],
       child: BlocConsumer<App_cubit, App_state>(
@@ -66,10 +70,9 @@ class MyApp extends StatelessWidget {
               themeMode: ThemeMode.light,
 
 // home:StartWidget,
-              home:  LandScape_Screen(),
+              home: LandScape_Screen(),
             );
           }),
     );
   }
 }
-
