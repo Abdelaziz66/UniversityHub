@@ -68,7 +68,7 @@ class INS_Quiz_Finish_Screen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 35
                 ),),
-                const Text(' Answers have been sent successfully',
+                const Text(' Quiz have been sent successfully',
                   style: TextStyle(
                       fontSize: 15
                   ),),

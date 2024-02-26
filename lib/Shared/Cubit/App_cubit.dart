@@ -22,7 +22,7 @@ import 'package:university_hup/Modules/Student/Student_Notification/Quizzes_Scre
 import 'package:university_hup/Modules/Student/Student_Notification/UpcomingCourse_Screen.dart';
 
 import 'package:university_hup/Shared/constant.dart';
-import '../../Models/All_News/AllNewsModel.dart';
+
 import '../../Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
 import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
 import '../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
@@ -41,6 +41,26 @@ class App_cubit extends Cubit<App_state> {
 
 
 // Abdelaziz  --------------------------------------------------------------------
+
+  int more=2;
+  void addmore(){
+    if(more==4){
+
+    }else{
+      more++;
+    }
+
+    emit(Defulte_state());
+  }
+  void minusmore(){
+    if(more==2){
+
+    }else{
+      more--;
+    }
+
+    emit(Defulte_state());
+  }
   int Nav_HomeBar_index=0;
   void nav_home_bar_Function({required int index}){
 
@@ -442,6 +462,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
 
   //------------------------Get all news ---------------------
   List<GetAllNewsModel> allNewsModel=[];
+
   void GetAllNews (){
     emit(Get_All_NewsLoadingState());
     Dio_Helper.GetData(url: NEWS).then((value) {

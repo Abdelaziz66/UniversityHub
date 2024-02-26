@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:university_hup/Modules/Instructor66/Student_Quizzes/INS_Quizes_Ques.dart';
 import 'package:university_hup/Modules/Instructor66/Student_Quizzes/STU_Quiz_Ques.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
@@ -36,7 +37,7 @@ class INS_Quizes_Screen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal: 8),
             child: FloatingActionButton(
               onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => INS_Quizes_Ques_Screen(),));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => INS_Quizes_Ques_Sceen(),));
                 // if(!isvisbile)
                 // {
                 //   isvisbile=!isvisbile;

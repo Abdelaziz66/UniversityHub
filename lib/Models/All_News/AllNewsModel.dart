@@ -9,12 +9,12 @@ class GetAllNewsModel {
 
   GetAllNewsModel(
       this.newsId,
-        this.content,
-        this.filePath,
-        this.facultyId,
-        this.createdAt,
-        this.userId,
-        this.userName
+      this.content,
+      this.filePath,
+      this.facultyId,
+      this.createdAt,
+      this.userId,
+      this.userName
       );
 
   GetAllNewsModel.fromJson(Map<String, dynamic> json) {
