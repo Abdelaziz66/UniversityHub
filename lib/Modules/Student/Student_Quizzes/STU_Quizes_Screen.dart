@@ -1,6 +1,8 @@
 
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
@@ -15,6 +17,7 @@ class STU_Quizes_Screen extends StatelessWidget {
       listener: (context,state){},
       builder: (context,state){
         App_cubit cubit =App_cubit.get(context);
+        List<STU_Quiz_Model>quiz=cubit.stuCoursesQuizlModel;
         return  Scaffold(
           // appBar: AppBar(
           //   title: Padding(
@@ -54,7 +57,9 @@ class STU_Quizes_Screen extends StatelessWidget {
 
                 children: [
                   const SizedBox(height: 30,),
-                  defaultAppbar(context:context),
+                  defaultAppbar(context:context,
+                      text: '${cubit.currentCourseName}'
+                  ),
                   const SizedBox(height: 40,),
                   const Text('Quizzes',
                   style: TextStyle(
@@ -67,11 +72,20 @@ class STU_Quizes_Screen extends StatelessWidget {
                   Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 7.5),
-                        child: ListView.separated(
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder:(context,index)=> Build_Quiz_Data_Widget(cubit.stu_Quiz_State,cubit.stu_Quiz_isStart,index),
-                          separatorBuilder: (context,index)=>const SizedBox(height: 25,),
-                          itemCount: 3,
+                        child: ConditionalBuilder(
+                          condition: quiz.isNotEmpty&&state is ! Stu_Get_Course_Quiz_LoadingState,
+                          builder:(context)=> ListView.separated(
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder:(context,index)=> Build_Quiz_Data_Widget(
+                            quiz: quiz[index],
+                                quizIsComplete: cubit.stu_Quiz_IsComplete,
+                              //  cubit.stu_Quiz_isStart,
+                                index:
+                                index),
+                            separatorBuilder: (context,index)=>const SizedBox(height: 25,),
+                            itemCount: quiz.length,
+                          ),
+                          fallback: (context)=>Center(child: CircularProgressIndicator()),
                         ),
                       ),
                     ),

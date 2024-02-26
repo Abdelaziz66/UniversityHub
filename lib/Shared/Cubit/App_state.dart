@@ -1,5 +1,9 @@
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
 
+import '../../Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
+import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
+import '../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+import '../../Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
 import '../../Models/STU_Model/User_Model/STU_Login_Model.dart';
 
 abstract class App_state {}
@@ -93,3 +97,71 @@ class Get_All_NewsErrorState extends App_state {
   String? error;
   Get_All_NewsErrorState(this.error);
 }
+
+//------------STU get All courses-----------------
+class Stu_Get_All_Courses_LoadingState extends App_state {}
+
+class Stu_Get_All_Courses_SuccessState extends App_state {
+  List<Stu_GetAllCoursesModel> coursesmodel=[];
+
+
+  Stu_Get_All_Courses_SuccessState(this.coursesmodel);
+
+}
+
+class Stu_Get_All_Courses_ErrorState extends App_state {
+  String? error;
+  Stu_Get_All_Courses_ErrorState(this.error);
+}
+//------------STU get All materials-----------------
+
+class Stu_Get_Course_Material_LoadingState extends App_state {}
+
+class Stu_Get_Course_Material_SuccessState extends App_state {
+  List<GetCourseMaterialsModel> coursesmodel=[];
+
+
+  Stu_Get_Course_Material_SuccessState(this.coursesmodel);
+
+}
+
+class Stu_Get_Course_Material_ErrorState extends App_state {
+  String? error;
+  Stu_Get_Course_Material_ErrorState(this.error);
+}
+
+//-----------------------stu get course Assign-----
+
+class Stu_Get_Course_Assign_LoadingState extends App_state {}
+
+class Stu_Get_Course_Assign_SuccessState extends App_state {
+  List<STU_Course_Assign_Model> assignmodel=[];
+
+
+  Stu_Get_Course_Assign_SuccessState(this.assignmodel);
+
+}
+
+class Stu_Get_Course_Assign_ErrorState extends App_state {
+  String? error;
+  Stu_Get_Course_Assign_ErrorState(this.error);
+}
+
+//--------------Course Quiz data-------------
+
+class Stu_Get_Course_Quiz_LoadingState extends App_state {}
+
+class Stu_Get_Course_Quiz_SuccessState extends App_state {
+  List<STU_Quiz_Model> quizmodel=[];
+
+
+  Stu_Get_Course_Quiz_SuccessState(this.quizmodel);
+
+}
+
+class Stu_Get_Course_Quiz_ErrorState extends App_state {
+  String? error;
+  Stu_Get_Course_Quiz_ErrorState(this.error);
+}
+
+

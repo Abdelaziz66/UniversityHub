@@ -56,7 +56,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => App_cubit(),
+
+          create: (context) => App_cubit()..GetAllNews(),
+
         ),
       ],
       child: BlocConsumer<App_cubit, App_state>(
@@ -70,7 +72,7 @@ class MyApp extends StatelessWidget {
               themeMode: ThemeMode.light,
 
 // home:StartWidget,
-              home: LandScape_Screen(),
+              home:  LandScape_Screen(),
             );
           }),
     );

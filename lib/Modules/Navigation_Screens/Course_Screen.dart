@@ -1,4 +1,5 @@
 
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:university_hup/Modules/Student/STU_About_Course.dart';
@@ -7,6 +8,7 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 
 
+import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
 import '../../Shared/Component/component.dart';
 import '../../Shared/Cons_widget.dart';
 
@@ -20,6 +22,8 @@ class STU_Lecture_Screen extends StatelessWidget {
     return BlocConsumer<App_cubit, App_state>(
       listener: (context, state) {},
       builder: (context, state) {
+        App_cubit cubit=App_cubit.get(context);
+        List<Stu_GetAllCoursesModel>courses=cubit.stuAllCoursesModel;
         return SafeArea(
           child: Scaffold(
             backgroundColor: Colors.transparent,
@@ -90,17 +94,27 @@ class STU_Lecture_Screen extends StatelessWidget {
                   // ),
                   const SizedBox(height: 5,),
                   Expanded(
-                    child: ListView.separated(
-                      itemBuilder: (context, index) => InkWell(
-                          onTap: () {
-                            navigateTo(context,  STU_About_course());
-                          },
-                          child: Build_STU_Lec()),
-                      separatorBuilder: (context, index) => const SizedBox(
-                        height: 20,
+                    child: ConditionalBuilder(
+                      condition: courses.isNotEmpty,
+                      builder:(context)=>    ListView.separated(
+                        itemBuilder: (context, index) => InkWell(
+                            onTap: () {
+                              cubit.currentCourseName=courses[index].name;
+                              cubit.currentCycleId=courses[index].cycleId;
+                              navigateTo(context,  STU_About_course());
+                            },
+                            child: Build_STU_Lec(
+                              courses: courses[index],
+                            )),
+                        separatorBuilder: (context, index) => const SizedBox(
+                          height: 20,
+                        ),
+                        itemCount: courses.length,
                       ),
-                      itemCount: 5,
+                      fallback:(context)=> Center(child: CircularProgressIndicator(),),
                     ),
+
+
                   ),
                 ],
               ),

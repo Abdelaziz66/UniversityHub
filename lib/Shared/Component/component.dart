@@ -8,6 +8,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:university_hup/Modules/Instructor/Courses_Screens/Material_content_sec_or_lec.dart';
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
 
+import '../../Models/All_News/AllNewsModel.dart';
+import '../../Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
+import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
+import '../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+import '../../Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
 import '../Cons_widget.dart';
 import '../Cubit/App_cubit.dart';
 import '../constant.dart';
@@ -182,8 +187,192 @@ Widget GlassBoxWithBorder_Gradiant2({
       child: widget,
     );
 
-Widget Post({required bool image,
-  context
+// Widget Post({
+//   required bool image,
+//   context,
+//   GetAllNewsModel?news,
+// }) {
+//   return Padding(
+//     padding: const EdgeInsets.symmetric(horizontal: 6.0),
+//     child: GlassBoxWithBorder_Gradiant2(
+//         widget: Container(
+//           width: double.infinity,
+//           child: Padding(
+//             padding: const EdgeInsets.all(10.0),
+//             child: Column(
+//               children: [
+//                 Padding(
+//                   padding: const EdgeInsets.symmetric(horizontal: 5.0),
+//                   child: Row(
+//                     children: [
+//                       Container(
+//                         decoration:
+//                         BoxDecoration(shape: BoxShape.circle, boxShadow: [
+//                           BoxShadow(
+//                             color: c5,
+//                             blurRadius: 2,
+//                             spreadRadius: 2,
+//                           ),
+//                         ]),
+//                         child: const CircleAvatar(
+//                           radius: 25,
+//                           backgroundColor: Colors.blue,
+//                           backgroundImage:
+//                           AssetImage('assets/images/avatar1.png'),
+//                         ),
+//                       ),
+//                       const SizedBox(
+//                         width: 15,
+//                       ),
+//                       Column(
+//                         crossAxisAlignment: CrossAxisAlignment.start,
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         children: [
+//                           Row(
+//                             children: [
+//                                Text(
+//                                 '${news?.userName}',),
+//                               Text(
+//                                 'Name Here',
+//                                 style: Theme.of(context).textTheme.subtitle1?.copyWith(
+//                                   color: Colors.black,
+//                                 ),
+//
+//                               ),
+//                               const SizedBox(
+//                                 width: 4,
+//                               ),
+//                               Icon(
+//                                 Icons.verified,
+//                                 size: 18,
+//                                 color: c1.withOpacity(.5),
+//                               ),
+//                             ],
+//                           ),
+//                           Text(
+//                             '${news?.createdAt}',
+//                             style: TextStyle(
+//                               // fontWeight: FontWeight.w800,
+//
+//                               fontSize: 13,
+//
+//                               color: c1,
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                       const Spacer(),
+//                       IconButton(
+//                           onPressed: () {},
+//                           icon: FaIcon(
+//                             FontAwesomeIcons.ellipsisVertical,
+//                             color: c1,
+//                           )),
+//                     ],
+//                   ),
+//                 ),
+//                 const SizedBox(
+//                   height: 8,
+//                 ),
+//                 Container(
+//                   color: c1,
+//                   width: double.infinity,
+//                   height: .3,
+//                 ),
+//                 const SizedBox(
+//                   height: 15,
+//                 ),
+//                 ConditionalBuilder(
+//                     condition: true,
+//                     builder: (context) => Padding(
+//                           padding: const EdgeInsets.symmetric(horizontal: 5.0),
+//                           child: Row(
+//                             children: [
+//                               Expanded(
+//                                 child: Padding(
+//                                   padding: const EdgeInsets.only(right: 30.0),
+//                                   child: Text(
+//                                     // 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.',
+//                                  //   'Congratulations, you have completed your registration ! Lets start your learning journey next.',
+//                                    '${news?.content}',
+//                                     maxLines: 4,
+//                                     overflow: TextOverflow.ellipsis,
+//                                     style: TextStyle(
+//                                       fontWeight: FontWeight.w700,
+//                                       fontSize: 15,
+//                                       color: c1,
+//                                     ),
+//                                   ),
+//
+//                     ] ) ) ),
+//                     fallback: (context) => const SizedBox(
+//                       height: 0,
+//                     )),
+//                 ConditionalBuilder(
+//                     condition: false,
+//                     builder: (context) => Padding(
+//                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
+//                       child: Row(
+//                         children: [
+//                           MaterialButton(
+//                             onPressed: () {},
+//                             minWidth: 1,
+//                             padding: EdgeInsets.zero,
+//                             child: Text(
+//                               '#Tag',
+//                               style: TextStyle(
+//                                 fontWeight: FontWeight.w900,
+//                                 fontSize: 16,
+//                                 color: c1,
+//                               ),
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                     fallback: (context) => const SizedBox(
+//                       height: 10,
+//                     )),
+//                 ConditionalBuilder(
+//                     condition: image,
+//                     builder: (context) => Padding(
+//                       padding: const EdgeInsets.only(
+//                           left: 0, right: 0.0, top: 5),
+//                       child: Container(
+//                         width: double.infinity,
+//                         height: 200,
+//                         decoration: BoxDecoration(
+//                           borderRadius: BorderRadius.circular(10),
+//                           color: Colors.deepPurple[200],
+//                           // image: const DecorationImage(
+//                           //   image: NetworkImage(
+//                           //     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2PacFBpXBfSh1aCipOEs5Wd0lJqAeBXbx2w&usqp=CAU',
+//                           //   ),
+//                           //   fit: BoxFit.cover,
+//                           // ),
+//                         ),
+//                       ),
+//                     ),
+//                     fallback: (context) => const SizedBox(
+//                       height: 0,
+//                     )),
+//               ],
+//             ),
+//           ),
+//         ),
+//         BorderWidth: 0,
+//         BorderColor: Colors.black,
+//
+//         color: Colors.white.withOpacity(.2),
+//         borderRadius: 20,
+//         x: 0,
+//         y: 0),
+//   );
+// }
+Widget Post({
+  required bool image,
+  context,
+  GetAllNewsModel? news,
 }) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 6.0),
@@ -224,7 +413,7 @@ Widget Post({required bool image,
                           Row(
                             children: [
                               Text(
-                                'Name Here',
+                                '${news?.userName}',
                                 style: Theme.of(context).textTheme.subtitle1?.copyWith(
                                   color: Colors.black,
                                 ),
@@ -245,7 +434,10 @@ Widget Post({required bool image,
                             ],
                           ),
                           Text(
-                            'Date & Time',
+                            '${DateTime.parse(news!.createdAt!).year}-${DateTime.parse(news.createdAt!).month}'
+                                '-${DateTime.parse(news.createdAt!).day}  at  '
+                                '${DateTime.parse(news.createdAt!).hour}:${DateTime.parse(news.createdAt!).minute}',
+                           // '${news?.createdAt}',
                             style: TextStyle(
                               // fontWeight: FontWeight.w800,
 
@@ -287,8 +479,9 @@ Widget Post({required bool image,
                             child: Padding(
                               padding: const EdgeInsets.only(right: 30.0),
                               child: Text(
+                                '${news?.content}',
                                 // 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.',
-                                'Congratulations, you have completed your registration ! Lets start your learning journey next.',
+                                //'Congratulations, you have completed your registration ! Lets start your learning journey next.',
                                 maxLines: 4,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -366,7 +559,6 @@ Widget Post({required bool image,
         y: 0),
   );
 }
-
 Widget Calender_Event({
   required Color color1,
   required Color color2,
@@ -512,7 +704,10 @@ Widget Lecture_C() => InkWell(
       ),
     );
 
-Widget Matrial_C({required index}) => Padding(
+Widget Matrial_C({
+  GetCourseMaterialsModel ?courseMaterial,
+  required index
+}) => Padding(
   padding: const EdgeInsets.all(8.0),
   child: GlassBoxWithBorder(
       widget: Padding(
@@ -527,8 +722,16 @@ Widget Matrial_C({required index}) => Padding(
             const SizedBox(
               width: 10,
             ),
-            Text(
+
+            courseMaterial?.type=='Lecture' ? Text(
               'Lecture ${index + 1}',
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.w700,
+                color: c1,
+              ),
+            ):Text(
+              'Lab ${index + 1}',
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.w700,
@@ -1209,10 +1412,11 @@ Widget Build_Lec_View_Widget(
 
 //------------------------------
 
-Widget STU_Build_Lec_View_Widget(
-    index,
-    context,
-    ) {
+Widget STU_Build_Lec_View_Widget({
+  GetCourseMaterialsModel ? courseMaterial,
+  index,
+  context,
+}) {
   // final kb = file.size / 1024;
   // final mb = kb / 1024;
   // final fileSize =
@@ -1253,14 +1457,19 @@ Widget STU_Build_Lec_View_Widget(
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'lecture name',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
+                 Container(
+                 width: 180,
+                   child: Text(
+                    '${courseMaterial?.lectureName}',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                                   ),
+                 ),
                 Text(
                   '40 MB',
                   style: TextStyle(
@@ -1335,7 +1544,9 @@ Widget Build_Quezes_Ins(context) => Container(
     ));
 
 //------------------------------------------------
-Widget Build_STU_Lec() => Container(
+Widget Build_STU_Lec({
+  Stu_GetAllCoursesModel? courses
+}) => Container(
       padding:
       const EdgeInsets.only(bottom: 10, right: 20.0, top: 10, left: 10),
 
@@ -1377,13 +1588,13 @@ Widget Build_STU_Lec() => Container(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Parllel Programming ',
+                  '${courses?.name}',
                   style: TextStyle(
                       fontWeight: FontWeight.w700, color: c1, fontSize: 17
                   ),
                 ),
                 Text(
-                  'Dr : Amr massoud ',
+                  '${courses?.instructorFullName} ',
                   style: TextStyle(
                       fontWeight: FontWeight.w400, color: c1, fontSize: 14
                   ),
@@ -1407,7 +1618,9 @@ Widget Build_STU_Lec() => Container(
 
 
 //--------------Assignments-----------------------------
-Widget Build_STU_pend_Tasks() => Container(
+Widget Build_STU_pend_Tasks({
+  STU_Course_Assign_Model? assign
+}) => Container(
     width: double.infinity,
     height: 76.95,
     decoration: ShapeDecoration(
@@ -1447,7 +1660,7 @@ Widget Build_STU_pend_Tasks() => Container(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Parallel',
+                '${assign?.taskName}',
                 style: TextStyle( fontWeight: FontWeight.w700, color: c1, fontSize: 17),
               ),
               Row(
@@ -1456,8 +1669,9 @@ Widget Build_STU_pend_Tasks() => Container(
                     fontWeight: FontWeight.w400, color: c1, fontSize: 14,
                   ),),
                   const SizedBox(width: 3,),
-                  const Text(
-                    '1 more day',
+                   Text(
+                    '${DateTime.parse(assign!.startDate!).hour}:${DateTime.parse(assign.startDate!).minute}',
+                    //'1 more day',
                     style: TextStyle(
                         fontWeight: FontWeight.w500, color: Colors.red, fontSize: 14,
                     ),
@@ -1618,8 +1832,20 @@ Widget BuildAssignFileViewWidget(
       ));
 }
 
+
+
+
+
+
 Widget Build_Quiz_Data_Widget(
-        List<bool> quizState, List<bool> isQuizStart, int index) =>
+{
+  STU_Quiz_Model ?quiz,
+          List<bool>? quizIsComplete,
+          List<bool> ?isQuizStart,
+  int? index
+ }
+    //List<bool> quizState, List<bool> isQuizStart, int index
+    ) =>
     Container(
       padding: const EdgeInsetsDirectional.all(12),
       decoration: BoxDecoration(
@@ -1632,9 +1858,10 @@ Widget Build_Quiz_Data_Widget(
             height: 20,
           ),
           Text(
-            'Parallel programming Quiz 1',
+            quiz?.title!=null?
+             '${quiz?.title}':'Parallel programming Quiz 1',
             style: TextStyle(
-                fontWeight: FontWeight.w700, color: c1, fontSize: 17,
+              fontWeight: FontWeight.w700, color: c1, fontSize: 17,
             ),
           ),
           const SizedBox(
@@ -1645,102 +1872,251 @@ Widget Build_Quiz_Data_Widget(
             height: 20,
           ),
           ConditionalBuilder(
-              condition: quizState[index],
+              condition: quizIsComplete![index!],
               builder: (context) =>  Container(
-            height: 40,
-            width: 180,
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Center(
-                child: isQuizStart[index]
-                    ? const Text(
-                  'Finished',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                )
-                    : const Text(
-                  'Waiting',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                )),
-          ),
+                height: 40,
+                width: 180,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Center(
+                    child:
+                    //isQuizStart[index] ?
+                    const Text(
+                      'Finished',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )
+                      /*  : const Text(
+                      'Waiting',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )*/
+              ),
+              ),
 
               fallback: (context) => Column(
+                children: [
+                  Text('From',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('From',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
 
-                          Container(
-                            height: 25,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Colors.green)),
-                            child: const Center(child: Text('8:00')),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text('To',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            height: 25,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: Colors.red)),
-                            child: const Center(child: Text('10:00')),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 25,),
                       Container(
-                        height: 40,
-                        width: 180,
+                        height: 25,
+                        width: 60,
                         decoration: BoxDecoration(
-                          color: isQuizStart[index]
-                              ? Colors.green:Colors.blue,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Center(
-                            child: isQuizStart[index]
-                                ? TextButton(
-                                    onPressed: () {
-                                      navigateTo(
-                                          context, STU_Quizes_Ques_Screen());
-                                    },
-                                    child: const Text(
-                                      'Start',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20),
-                                    ),
-                                  )
-                                : const Text(
-                                    'Waiting',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
-                                  )),
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: Colors.green)),
+                        child: Center(child: Text(
+                          '${DateTime.parse(quiz!.startDate!).hour}:${DateTime.parse(quiz.startDate!).minute}',
+
+
+                        )),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text('To',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        height: 25,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: Colors.red)),
+                        child:Center(child: Text(
+                          '${DateTime.parse(quiz.endDate!).hour}:${DateTime.parse(quiz.endDate!).minute}',
+
+                        )),
                       ),
                     ],
-                  )),
+                  ),
+                  const SizedBox(height: 25,),
+                  Container(
+                    height: 40,
+                    width: 180,
+                    decoration: BoxDecoration(
+                      color:
+
+                      quiz?.status=='Available'
+                      //isQuizStart[index]
+                          ? Colors.green:Colors.blue,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                        child: quiz?.status=='Available'
+                       // isQuizStart[index]
+                            ? TextButton(
+                          onPressed: () {
+                            navigateTo(
+                                context, STU_Quizes_Ques_Screen());
+                          },
+                          child: const Text(
+                            'Start',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                        )
+                            : const Text(
+                          'Waiting',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        )),
+                  ),
+                ],
+              )),
         ],
       ),
     );
+
+
+
+
+
+
+
+//
+// Widget Build_Quiz_Data_Widget({
+//   STU_Quiz_Model ?quiz,
+//           List<bool>? quizState,
+//           List<bool> ?isQuizStart,
+//   int? index
+// }) =>
+//     Container(
+//       padding: const EdgeInsetsDirectional.all(12),
+//       decoration: BoxDecoration(
+//           borderRadius: BorderRadius.circular(15),
+//           border: Border.all(color: Colors.blue)),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         children: [
+//           const SizedBox(
+//             height: 20,
+//           ),
+//           Text(
+//             '${quiz?.title}',
+//             style: TextStyle(
+//                 fontWeight: FontWeight.w700, color: c1, fontSize: 17,
+//             ),
+//           ),
+//           const SizedBox(
+//             height: 10,
+//           ),
+//           Text('10 Points',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
+//           const SizedBox(
+//             height: 20,
+//           ),
+//           ConditionalBuilder(
+//               condition: quizState![index!],
+//               builder: (context) =>  Container(
+//             height: 40,
+//             width: 180,
+//             decoration: BoxDecoration(
+//               color: Colors.blue,
+//               borderRadius: BorderRadius.circular(15),
+//             ),
+//             child: Center(
+//                 child:quiz?.status=='not Available'
+//             ? const Text(
+//                   'Waiting',
+//                   style: TextStyle(
+//                       color: Colors.white,
+//                       fontWeight: FontWeight.bold,
+//                       fontSize: 20),
+//                 )
+//                     : const Text(
+//                   'Finished',
+//                   style: TextStyle(
+//                       color: Colors.white,
+//                       fontWeight: FontWeight.bold,
+//                       fontSize: 20),
+//                 )),
+//           ),
+//
+//               fallback: (context) => Column(
+//                     children: [
+//                       Text('From',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
+//                       const SizedBox(height: 10),
+//                       Row(
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         children: [
+//
+//                           Container(
+//                             height: 25,
+//                             width: 60,
+//                             decoration: BoxDecoration(
+//                                 borderRadius: BorderRadius.circular(5),
+//                                 border: Border.all(color: Colors.green)),
+//                             child: const Center(child: Text('8:00')),
+//                           ),
+//                           const SizedBox(
+//                             width: 10,
+//                           ),
+//                           Text('To',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
+//                           const SizedBox(
+//                             width: 10,
+//                           ),
+//                           Container(
+//                             height: 25,
+//                             width: 60,
+//                             decoration: BoxDecoration(
+//                                 borderRadius: BorderRadius.circular(5),
+//                                 border: Border.all(color: Colors.red)),
+//                             child: const Center(child: Text('10:00')),
+//                           ),
+//                         ],
+//                       ),
+//                       const SizedBox(height: 25,),
+//                       Container(
+//                         height: 40,
+//                         width: 180,
+//                         decoration: BoxDecoration(
+//                           color: quiz?.status=='Available'
+//                               ? Colors.green:Colors.blue,
+//                           borderRadius: BorderRadius.circular(15),
+//                         ),
+//                         child: Center(
+//                             child:quiz?.status=='Available'
+//                             //isQuizStart[index]
+//                                 ? TextButton(
+//                                     onPressed: () {
+//                                       navigateTo(
+//                                           context, STU_Quizes_Ques_Screen());
+//                                     },
+//                                     child: const Text(
+//                                       'Start',
+//                                       style: TextStyle(
+//                                           color: Colors.white,
+//                                           fontWeight: FontWeight.bold,
+//                                           fontSize: 20),
+//                                     ),
+//                                   )
+//                                 : const Text(
+//                                     'Waiting',
+//                                     style: TextStyle(
+//                                         color: Colors.white,
+//                                         fontWeight: FontWeight.bold,
+//                                         fontSize: 20),
+//                                   )),
+//                       ),
+//                     ],
+//                   )),
+//         ],
+//       ),
+//     );
 
 Widget Build_STU_Quiz_Ques(
         context, List<String> ques, List<String> answers, index) =>
