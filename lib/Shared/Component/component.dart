@@ -5,14 +5,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:university_hup/Modules/Instructor/Courses_Screens/Material_content_sec_or_lec.dart';
+import 'package:university_hup/Models/All_News/AllNewsModel.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
+
+
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
 
-import '../../Models/All_News/AllNewsModel.dart';
-import '../../Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
-import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
-import '../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
-import '../../Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
+
+
 import '../Cons_widget.dart';
 import '../Cubit/App_cubit.dart';
 import '../constant.dart';
@@ -1085,160 +1088,160 @@ Widget BuildMatrialsWidget() => Padding(
 
 //---------------------------------------------------------
 
-Widget BuildCoursesWidget(context) => InkWell(
-      onTap: () {
-        navigateTo(context, Show_Material_Lec_Or_Sec());
-      },
-      child: Container(
-          decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(.5),
-              borderRadius: BorderRadius.circular(10)),
-          height: 150,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    const Text('Lec1'),
-                    const Spacer(),
-                    DropdownButton<Widget>(
-                      elevation: 20,
-                      menuMaxHeight: 100,
-                      alignment: AlignmentDirectional.topEnd,
-                      borderRadius: BorderRadius.circular(5),
-                      icon: const Icon(Icons.more_vert),
-                      // Value is the selected item
-                      // value: AppCubit.get(context).Material_More_selectedItem,
-                      // List of items for the dropdown
-                      items: App_cubit.get(context).items.map((Widget item) {
-                        return DropdownMenuItem<Widget>(
-                          value: item,
-                          child: item,
-                        );
-                      }).toList(),
-
-                      // onChanged callback to update the selected item
-
-                      onChanged: (Widget? newValue) {
-                        App_cubit.get(context)
-                            .change_more_list_visible(newValue);
-                      },
-                    ),
-
-                    // IconButton(
-
-                    //   icon: Icon(Icons.more_vert),
-
-                    //   onPressed: () {
-
-                    //     navigateTo(context, MyDropDownMenu());
-
-                    //     // AppCubit.get(context).change_more_list_visible();
-
-                    //   },
-
-                    // ),
-
-                    //         Column(
-
-                    //   children: [
-
-                    //     // Your other widgets here
-
-                    //     //         IconButton(
-
-                    //     //   icon: Icon(Icons.more_vert),
-
-                    //     //   onPressed: () {
-
-                    //     //    //navigateTo(context, MoreIconScreen());
-
-                    //     //     // AppCubit.get(context).change_more_list_visible();
-
-                    //     //   },
-
-                    //     // ),
-
-                    //     // Visibility(
-
-                    //     //   visible: AppCubit.get(context).isListVisible,
-
-                    //     //   child: Expanded(
-
-                    //     //     child: ListView(
-
-                    //     //       children: [
-
-                    //     //         // Your list items go here
-
-                    //     //         ListTile(
-
-                    //     //           leading: Icon(Icons.star),
-
-                    //     //           title: Text('Star Icon'),
-
-                    //     //         ),
-
-                    //     //         ListTile(
-
-                    //     //           leading: Icon(Icons.favorite),
-
-                    //     //           title: Text('Favorite Icon'),
-
-                    //     //         ),
-
-                    //     //         ListTile(
-
-                    //     //           leading: Icon(Icons.book),
-
-                    //     //           title: Text('Book Icon'),
-
-                    //     //         ),
-
-                    //     //         // Add more items as needed
-
-                    //     //       ],
-
-                    //     //     ),
-
-                    //     //   ),
-
-                    //     // ),
-
-                    //   ],
-
-                    // ),
-
-                    // IconButton(
-
-                    //     onPressed: (){},
-
-                    //     icon: Icon(Icons.more_vert))
-                  ],
-                ),
-
-                const Expanded(
-                    child: Text(
-                  'Cyber Security',
-                  style: TextStyle(fontSize: 20),
-                )),
-
-                Expanded(
-                  child: Container(
-                      child: const Text(
-                    'comment',
-                    style: TextStyle(color: Colors.white),
-                  )),
-                ),
-
-                //Spacer(),
-
-                Container(child: const Text('added at 12/11/2023')),
-              ],
-            ),
-          )),
-    );
+// Widget BuildCoursesWidget(context) => InkWell(
+//       onTap: () {
+//         navigateTo(context, Show_Material_Lec_Or_Sec());
+//       },
+//       child: Container(
+//           decoration: BoxDecoration(
+//               color: Colors.grey.withOpacity(.5),
+//               borderRadius: BorderRadius.circular(10)),
+//           height: 150,
+//           child: Padding(
+//             padding: const EdgeInsets.all(8.0),
+//             child: Column(
+//               children: [
+//                 Row(
+//                   children: [
+//                     const Text('Lec1'),
+//                     const Spacer(),
+//                     DropdownButton<Widget>(
+//                       elevation: 20,
+//                       menuMaxHeight: 100,
+//                       alignment: AlignmentDirectional.topEnd,
+//                       borderRadius: BorderRadius.circular(5),
+//                       icon: const Icon(Icons.more_vert),
+//                       // Value is the selected item
+//                       // value: AppCubit.get(context).Material_More_selectedItem,
+//                       // List of items for the dropdown
+//                       items: App_cubit.get(context).items.map((Widget item) {
+//                         return DropdownMenuItem<Widget>(
+//                           value: item,
+//                           child: item,
+//                         );
+//                       }).toList(),
+//
+//                       // onChanged callback to update the selected item
+//
+//                       onChanged: (Widget? newValue) {
+//                         App_cubit.get(context)
+//                             .change_more_list_visible(newValue);
+//                       },
+//                     ),
+//
+//                     // IconButton(
+//
+//                     //   icon: Icon(Icons.more_vert),
+//
+//                     //   onPressed: () {
+//
+//                     //     navigateTo(context, MyDropDownMenu());
+//
+//                     //     // AppCubit.get(context).change_more_list_visible();
+//
+//                     //   },
+//
+//                     // ),
+//
+//                     //         Column(
+//
+//                     //   children: [
+//
+//                     //     // Your other widgets here
+//
+//                     //     //         IconButton(
+//
+//                     //     //   icon: Icon(Icons.more_vert),
+//
+//                     //     //   onPressed: () {
+//
+//                     //     //    //navigateTo(context, MoreIconScreen());
+//
+//                     //     //     // AppCubit.get(context).change_more_list_visible();
+//
+//                     //     //   },
+//
+//                     //     // ),
+//
+//                     //     // Visibility(
+//
+//                     //     //   visible: AppCubit.get(context).isListVisible,
+//
+//                     //     //   child: Expanded(
+//
+//                     //     //     child: ListView(
+//
+//                     //     //       children: [
+//
+//                     //     //         // Your list items go here
+//
+//                     //     //         ListTile(
+//
+//                     //     //           leading: Icon(Icons.star),
+//
+//                     //     //           title: Text('Star Icon'),
+//
+//                     //     //         ),
+//
+//                     //     //         ListTile(
+//
+//                     //     //           leading: Icon(Icons.favorite),
+//
+//                     //     //           title: Text('Favorite Icon'),
+//
+//                     //     //         ),
+//
+//                     //     //         ListTile(
+//
+//                     //     //           leading: Icon(Icons.book),
+//
+//                     //     //           title: Text('Book Icon'),
+//
+//                     //     //         ),
+//
+//                     //     //         // Add more items as needed
+//
+//                     //     //       ],
+//
+//                     //     //     ),
+//
+//                     //     //   ),
+//
+//                     //     // ),
+//
+//                     //   ],
+//
+//                     // ),
+//
+//                     // IconButton(
+//
+//                     //     onPressed: (){},
+//
+//                     //     icon: Icon(Icons.more_vert))
+//                   ],
+//                 ),
+//
+//                 const Expanded(
+//                     child: Text(
+//                   'Cyber Security',
+//                   style: TextStyle(fontSize: 20),
+//                 )),
+//
+//                 Expanded(
+//                   child: Container(
+//                       child: const Text(
+//                     'comment',
+//                     style: TextStyle(color: Colors.white),
+//                   )),
+//                 ),
+//
+//                 //Spacer(),
+//
+//                 Container(child: const Text('added at 12/11/2023')),
+//               ],
+//             ),
+//           )),
+//     );
 
 //---------------------------------------------------------
 

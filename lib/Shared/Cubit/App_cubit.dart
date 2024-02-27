@@ -9,9 +9,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
-import 'package:university_hup/Modules/Instructor/Courses_Screens/All_Ionstructor_Materials.dart';
-import 'package:university_hup/Modules/Instructor/Tasks_Ins_screens/All_Tasks_Ins_Screen.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
+import 'package:university_hup/Models/STU_Model/User_Model/STU_Login_Model.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Calendar_Screen.dart';
+import 'package:university_hup/Modules/Navigation_Screens/Course_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Dashboard_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Home_Screen.dart';
 
@@ -23,12 +27,12 @@ import 'package:university_hup/Modules/Student/Student_Notification/UpcomingCour
 
 import 'package:university_hup/Shared/constant.dart';
 
-import '../../Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
-import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
-import '../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
-import '../../Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
-import '../../Models/STU_Model/User_Model/STU_Login_Model.dart';
-import '../../Modules/Navigation_Screens/Course_Screen.dart';
+// import '../../Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
+// import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
+// import '../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+// import '../../Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
+// import '../../Models/STU_Model/User_Model/STU_Login_Model.dart';
+// import '../../Modules/Navigation_Screens/Course_Screen.dart';
 
 
 import '../remote/DioHelper.dart';
@@ -171,28 +175,12 @@ class App_cubit extends Cubit<App_state> {
     emit(Switch_stud_ins_bool_state());
   }
 
-  Widget switch_Courses_Fun(){
-
-    if(isStudent==true){
-      return const STU_Lecture_Screen();
-    }else {
-      return AllMaterials();
-    }
-  }
-
-  Widget switch_Tasks_Fun(){
-    if(isStudent==true){
-      return const All_Tasks_ins_Screen();
-    }else {
-      return const All_Tasks_ins_Screen();
-    }
-  }
 
   List<Widget> Nav_Bar_Items_List(){
     return[
       const Dashboard_Screen(),
      const Home_screen(),
-      switch_Courses_Fun(),
+      STU_Lecture_Screen(),
       const Calendar_screen(),
        const Profile_screen()
   ];}
