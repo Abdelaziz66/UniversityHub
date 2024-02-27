@@ -479,7 +479,7 @@ Widget Post({
                             child: Padding(
                               padding: const EdgeInsets.only(right: 30.0),
                               child: Text(
-                                '${news?.content}',
+                                '${news.content}',
                                 // 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.',
                                 //'Congratulations, you have completed your registration ! Lets start your learning journey next.',
                                 maxLines: 4,
@@ -530,16 +530,16 @@ Widget Post({
                           left: 0, right: 0.0, top: 5),
                       child: Container(
                         width: double.infinity,
-                        height: 200,
+                        height: 300,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.deepPurple[200],
-                          // image: const DecorationImage(
-                          //   image: NetworkImage(
-                          //     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2PacFBpXBfSh1aCipOEs5Wd0lJqAeBXbx2w&usqp=CAU',
-                          //   ),
-                          //   fit: BoxFit.cover,
-                          // ),
+                          image:  DecorationImage(
+                            image: NetworkImage(
+                              '${news.filePath}'
+                            ),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -1587,10 +1587,14 @@ Widget Build_STU_Lec({
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '${courses?.name}',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700, color: c1, fontSize: 17
+                Container(
+                 width:250,
+                  child: Text(
+                    '${courses?.name}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700, color: c1, fontSize: 17,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
                 Text(
@@ -1842,8 +1846,9 @@ Widget Build_Quiz_Data_Widget(
   STU_Quiz_Model ?quiz,
           List<bool>? quizIsComplete,
           List<bool> ?isQuizStart,
-  int? index
- }
+  int? index,
+  Function? onQuizStart,
+}
     //List<bool> quizState, List<bool> isQuizStart, int index
     ) =>
     Container(
@@ -1953,12 +1958,14 @@ Widget Build_Quiz_Data_Widget(
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Center(
-                        child: quiz?.status=='Available'
+                        child: quiz.status=='Available'
                        // isQuizStart[index]
                             ? TextButton(
                           onPressed: () {
-                            navigateTo(
-                                context, STU_Quizes_Ques_Screen());
+                            onQuizStart;
+                            App_cubit.get(context).currentQuizId=quiz.id;
+                            App_cubit.get(context).StuGetQuizDataById(token: App_cubit.get(context).Tokenn,);
+                            navigateTo(context, STU_Quizes_Ques_Screen());
                           },
                           child: const Text(
                             'Start',
@@ -2118,8 +2125,15 @@ Widget Build_Quiz_Data_Widget(
 //       ),
 //     );
 
-Widget Build_STU_Quiz_Ques(
-        context, List<String> ques, List<String> answers, index) =>
+Widget Build_STU_Quiz_Ques({
+  context,
+ // List<String>? ques,
+ // List<String>? answers,
+  index,
+  Questions? questions,
+  List<Answers>? answer,
+}
+) =>
     Column(
       children: [
         Row(
@@ -2164,7 +2178,7 @@ Widget Build_STU_Quiz_Ques(
                 const SizedBox(width: 10,),
                 Expanded(
                   child: Text(
-                    '${ques[index]}',
+                    '${questions?.text}',
                     maxLines: 5,
 
                     style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),
@@ -2182,7 +2196,8 @@ Widget Build_STU_Quiz_Ques(
             return RadioListTile(
               selectedTileColor: Colors.blue,
               title: Text(
-                App_cubit.get(context).stu_Quiz_Ques_options[index],
+                '${answer?[index].text}',
+                //App_cubit.get(context).stu_Quiz_Ques_options[index],
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               value: App_cubit.get(context).stu_Quiz_Ques_options[index],
