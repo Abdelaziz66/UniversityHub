@@ -1,10 +1,11 @@
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
+import 'package:university_hup/Models/STU_Model/User_Model/STU_Login_Model.dart';
 
-import '../../Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
-import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
-import '../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
-import '../../Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
-import '../../Models/STU_Model/User_Model/STU_Login_Model.dart';
+
 
 abstract class App_state {}
 
