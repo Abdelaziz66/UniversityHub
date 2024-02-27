@@ -164,4 +164,20 @@ class Stu_Get_Course_Quiz_ErrorState extends App_state {
   Stu_Get_Course_Quiz_ErrorState(this.error);
 }
 
+//----------------quiz data----------
+class Stu_Get_Quiz_Data_LoadingState extends App_state {}
+
+class Stu_Get_Quiz_Data_SuccessState extends App_state {
+  List<GetQuizDataModel> quizDatamodel=[];
+
+
+  Stu_Get_Quiz_Data_SuccessState(this.quizDatamodel);
+
+}
+
+class Stu_Get_Quiz_Data_ErrorState extends App_state {
+  String? error;
+  Stu_Get_Quiz_Data_ErrorState(this.error);
+}
+
 

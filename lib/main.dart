@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:university_hup/Modules/LandScape/LandScape_Screen.dart';
-
 import 'package:university_hup/Shared/remote/DioHelper.dart';
-
-import 'Layout/Switch_Screen.dart';
 import 'Shared/Cubit/App_cubit.dart';
 import 'Shared/Cubit/App_state.dart';
 import 'Shared/Cubit/bloc_observed.dart';

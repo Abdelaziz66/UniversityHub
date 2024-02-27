@@ -10,13 +10,13 @@ class Dio_Helper {
 
   static init() {
     dio = Dio(BaseOptions(
-      baseUrl: 'https://nabilramadan.bsite.net/api/',
+      baseUrl: 'https://lms.runasp.net/api/',//'https://nabilramadan.bsite.net/api/',
       receiveDataWhenStatusError: true,
     ));
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
-      client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
-      return client;
-    };
+    // (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
+    //   client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+    //   return client;
+    // };
   }
 
   static Future<Response> GetData({

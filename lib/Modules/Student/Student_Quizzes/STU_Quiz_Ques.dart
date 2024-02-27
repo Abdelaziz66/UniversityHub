@@ -7,15 +7,10 @@ import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 
-
-
-
-
+import '../../../Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
 
 class STU_Quizes_Ques_Screen extends StatefulWidget {
   const STU_Quizes_Ques_Screen({super.key});
-
-
 
   @override
   State<STU_Quizes_Ques_Screen> createState() => _STU_Quizes_Ques_ScreenState();
@@ -23,15 +18,17 @@ class STU_Quizes_Ques_Screen extends StatefulWidget {
 
 class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
   bool islast = false;
-  bool ismiddle =false;
+  bool ismiddle = false;
 
   var boardcontroller = PageController();
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<App_cubit,App_state>(
-      listener: (context,state){},
-      builder: (context,state){
-        App_cubit cubit =App_cubit.get(context);
+    return BlocConsumer<App_cubit, App_state>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        App_cubit cubit = App_cubit.get(context);
+        List<Questions>ques=cubit.questionModel;
+        List<Answers>answers=cubit.answersModel;
         return Scaffold(
           // appBar: AppBar(
           //   title: Padding(
@@ -77,42 +74,52 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
             child: Column(
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 30,),
-                defaultAppbar(context:context),
-                const SizedBox(height: 30,),
+                const SizedBox(
+                  height: 30,
+                ),
+                defaultAppbar(context: context),
+                const SizedBox(
+                  height: 30,
+                ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.0),
                   child: Row(
                     children: [
-                      Text('Quiz ',
+                      Text(
+                        'Quiz ',
                         style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text('1',
+                      Text(
+                        '1',
                         style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
-                            color: Colors.blue
-                        ),
+                            color: Colors.blue),
                       ),
                       Spacer(),
-
-
-                      Text('1:25 ',
+                      Text(
+                        '1:25 ',
                         style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue
-                        ),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue),
                       ),
-                      SizedBox(width: 5,),
-                      Icon(FontAwesomeIcons.clock,size: 20,),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Icon(
+                        FontAwesomeIcons.clock,
+                        size: 20,
+                      ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 25,),
+                const SizedBox(
+                  height: 25,
+                ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -123,13 +130,12 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                           setState(() {
                             islast = true;
                           });
-                        } else if(index == cubit.stu_Quiz_Ques_lis.length - 2)
-                        {
+                        } else if (index ==
+                            cubit.stu_Quiz_Ques_lis.length - 2) {
                           setState(() {
                             ismiddle = true;
                           });
-                        }
-                        else{
+                        } else {
                           setState(() {
                             islast = false;
                             ismiddle = false;
@@ -137,35 +143,37 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                         }
                       },
                       controller: boardcontroller,
-                      itemBuilder: (context, index) =>
-                          Build_STU_Quiz_Ques(context,cubit.stu_Quiz_Ques_lis,cubit.stu_Quiz_Ques_options,index),
-                      itemCount: cubit.stu_Quiz_Ques_lis.length,
+                      itemBuilder: (context, index) => Build_STU_Quiz_Ques(
+                         context:  context,
+                         // ques: cubit.stu_Quiz_Ques_lis,
+                        //  answers: cubit.stu_Quiz_Ques_options,
+                        index:   index,
+                      answer:answers,
+                        questions: ques[index]
+                      ),
+                      itemCount:ques.length //cubit.stu_Quiz_Ques_lis.length,
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child:
-
-
-
-                  Default_Button(
-                    containerWidth:  double.infinity,
-                      containerHeight: 50,
+                  child: Default_Button(
+                    containerWidth: double.infinity,
+                    containerHeight: 50,
                     onPressed: () {
-        if (islast) {
-        navigateTo(context,const STU_Quiz_Finish_Screen());
-        // submit;
-        } else {
-        boardcontroller.nextPage(
-        duration: const Duration(
-        milliseconds: 750,
-        ),
-        curve: Curves.fastLinearToSlowEaseIn,
-        );
-        }
+                      if (islast) {
+                        navigateTo(context, const STU_Quiz_Finish_Screen());
+                        // submit;
+                      } else {
+                        boardcontroller.nextPage(
+                          duration: const Duration(
+                            milliseconds: 750,
+                          ),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                        );
+                      }
                     },
-                    text: islast?'Submit':'Next',
+                    text: islast ? 'Submit' : 'Next',
                   ),
                   // TextButton(onPressed: (){
                   //   if (islast) {
@@ -205,12 +213,8 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
               ],
             ),
           ),
-
-
         );
       },
     );
   }
 }
-
-

@@ -78,25 +78,14 @@ class STU_Lecture_Screen extends StatelessWidget {
 
                           ),
                         ),
-
-
                       ],
                     ),
                   ),
-
-
-                  // Container(
-                  //   height: 1,
-                  //   width: double.infinity,
-                  //   decoration: BoxDecoration(
-                  //     color: Colors.grey[300],
-                  //   ),
-                  // ),
                   const SizedBox(height: 5,),
                   Expanded(
                     child: ConditionalBuilder(
                       condition: courses.isNotEmpty,
-                      builder:(context)=>    ListView.separated(
+                      builder:(context)=>ListView.separated(
                         itemBuilder: (context, index) => InkWell(
                             onTap: () {
                               cubit.currentCourseName=courses[index].name;
