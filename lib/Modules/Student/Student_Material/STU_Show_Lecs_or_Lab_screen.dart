@@ -112,7 +112,7 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
                           crossAxisCount: 2,
                           mainAxisSpacing: 10,
                           crossAxisSpacing: 10,
-                          childAspectRatio: 1.1,
+                          childAspectRatio: .95,
                         ),
                         itemCount: labs.length,
                         physics: const BouncingScrollPhysics(),

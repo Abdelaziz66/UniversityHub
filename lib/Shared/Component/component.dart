@@ -1428,6 +1428,7 @@ Widget STU_Build_Lec_View_Widget({
   final color = Colors.blueGrey.withOpacity(.7);
   return Container(
 
+
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(12),
       color: Colors.blueGrey.withOpacity(.15),
@@ -1436,54 +1437,48 @@ Widget STU_Build_Lec_View_Widget({
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-            child: Container(
-              alignment: Alignment.center,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Text(
-                '.jpg',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                ),
-              ),
-            )),
+        Container(
+          height: 100,
+          alignment: Alignment.center,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: const Text(
+            '.jpg',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 28,
+            ),
+          ),
+        ),
         const SizedBox(
           height: 8,
         ),
-        Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                 Container(
-                 width: 180,
-                   child: Text(
-                    '${courseMaterial?.lectureName}',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                    ),
-
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                                   ),
-                 ),
-                Text(
-                  '40 MB',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[700],
-                  ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+               Text(
+                '${courseMaterial?.lectureName}',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
                 ),
-              ],
-            ),
-
-          ],
+          
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                               ),
+              Text(
+                '40 MB',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey[700],
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     ),
@@ -1585,23 +1580,24 @@ Widget Build_STU_Lec({
           const SizedBox(
             width: 15,
           ),
-          Container(
+          Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                 width:250,
-                  child: Text(
-                    '${courses?.name}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700, color: c1, fontSize: 17,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                Text(
+                  '${courses?.name}',maxLines: 1,
+                  style: TextStyle(
+
+                    fontWeight: FontWeight.w700, color: c1, fontSize: 17,
+                    overflow: TextOverflow.ellipsis,
+
                   ),
                 ),
                 Text(
                   '${courses?.instructorFullName} ',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                   style: TextStyle(
                       fontWeight: FontWeight.w400, color: c1, fontSize: 14
                   ),
@@ -1609,7 +1605,9 @@ Widget Build_STU_Lec({
               ],
             ),
           ),
-          const Spacer(),
+          const SizedBox(
+            width: 15,
+          ),
           Container(
             alignment: AlignmentDirectional.centerEnd,
             child: const FaIcon(

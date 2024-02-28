@@ -81,42 +81,46 @@ class Dashboard_Screen extends StatelessWidget {
                                       horizontal: 10.0, vertical: 15),
                                   child: Row(
                                     children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            rol=='Student'?'Hi, ${cubit.stu_login_Model?.displayName} !':'Hi, Dr Ahmed !',
-                                            style:Theme.of(context).textTheme.bodyText1?.copyWith(
-                                                fontSize: 25
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              rol=='Student'?'Hi, ${cubit.stu_login_Model?.displayName} !':'Hi, Dr Ahmed !',
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style:Theme.of(context).textTheme.bodyText1?.copyWith(
+                                                  fontSize: 25
+                                              ),
+
+                                              // TextStyle(
+                                              //   fontWeight: FontWeight.w700,
+                                              //   fontSize: 25,
+                                              //   color: Colors.black,
+                                              // ),
                                             ),
+                                            Text(
+                                              'Your Dashboard.',
+                                              style:Theme.of(context).textTheme.subtitle1?.copyWith(
 
-                                            // TextStyle(
-                                            //   fontWeight: FontWeight.w700,
-                                            //   fontSize: 25,
-                                            //   color: Colors.black,
-                                            // ),
-                                          ),
-                                          Text(
-                                            'Your Dashboard.',
-                                            style:Theme.of(context).textTheme.subtitle1?.copyWith(
+                                              ),
 
+
+                                              // TextStyle(
+                                              //   // fontWeight: FontWeight.w800,
+                                              //
+                                              //   fontSize: 18,
+                                              //   fontWeight: FontWeight.w500,
+                                              //   color: c1,
+                                              // ),
                                             ),
-
-
-                                            // TextStyle(
-                                            //   // fontWeight: FontWeight.w800,
-                                            //
-                                            //   fontSize: 18,
-                                            //   fontWeight: FontWeight.w500,
-                                            //   color: c1,
-                                            // ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                      const Spacer(),
+                                     SizedBox(width: 15,),
                                       Container(
                                         decoration: const BoxDecoration(
                                           shape: BoxShape.circle,
