@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:university_hup/Modules/Student/Student_Grade/STU_Grades_Screen.dart';
@@ -330,10 +331,12 @@ class Layout_Screen extends StatelessWidget {
                 y: 40),
           ),
           backgroundColor: Colors.white,
+
           body: Stack(
             children: [
               Column(
                 children: [
+
                   Row(
                     children: [
                       Expanded(
@@ -375,6 +378,7 @@ class Layout_Screen extends StatelessWidget {
                 filter: ImageFilter.blur(sigmaX: 80, sigmaY: 80),
                 child: const SizedBox(),
               )),
+
               SafeArea(
                   child: Column(
                 children: [
@@ -526,6 +530,8 @@ class Layout_Screen extends StatelessWidget {
                   ),
                 ],
               ),
+
+
             ],
           ),
         );

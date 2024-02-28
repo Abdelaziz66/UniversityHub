@@ -45,12 +45,15 @@ Widget defaultAppbar({
       ],
     ),
     Center(
-      child:Text(
-        text??'Parallel Programming '
+      child:Padding(
+        padding: const EdgeInsets.only(left: 80.0,right: 40),
+        child: Text(
+          text??'Parallel Programming ',overflow: TextOverflow.ellipsis,maxLines: 1,
 
-        ,textAlign: TextAlign.center,
-        style: TextStyle(
-            fontWeight: FontWeight.w700, color: c1, fontSize: 20
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontWeight: FontWeight.w700, color: c1, fontSize: 20
+          ),
         ),
       ),
     ),
