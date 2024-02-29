@@ -88,19 +88,22 @@ class Dashboard_Screen extends StatelessWidget {
                                           mainAxisAlignment:
                                           MainAxisAlignment.center,
                                           children: [
-                                            Text(
-                                              rol=='Student'?'Hi, ${cubit.stu_login_Model?.displayName} !':'Hi, Dr Ahmed !',
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style:Theme.of(context).textTheme.bodyText1?.copyWith(
-                                                  fontSize: 25
-                                              ),
+                                            Container(
+                                             // width:200,
+                                              child: Text(
+                                                rol=='Student'?'Hi, ${cubit.stu_login_Model?.displayName} !':'Hi, Dr Ahmed !',
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style:Theme.of(context).textTheme.bodyText1?.copyWith(
+                                                    fontSize: 25
+                                                ),
 
-                                              // TextStyle(
-                                              //   fontWeight: FontWeight.w700,
-                                              //   fontSize: 25,
-                                              //   color: Colors.black,
-                                              // ),
+                                                // TextStyle(
+                                                //   fontWeight: FontWeight.w700,
+                                                //   fontSize: 25,
+                                                //   color: Colors.black,
+                                                // ),
+                                              ),
                                             ),
                                             Text(
                                               'Your Dashboard.',

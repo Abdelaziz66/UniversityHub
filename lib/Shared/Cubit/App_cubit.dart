@@ -567,14 +567,16 @@ List <int> stuAllGrades=[10,30,50,45,35];
     required token,
    // required cycleId,
   }){
+   // stuCoursesAssignModel=[];
      if(stuCoursesAssignModel.isEmpty) {
        emit(Stu_Get_Course_Assign_LoadingState());
        Dio_Helper.GetData(
-         url: 'Students/CurrentCourseTasks?cycleId=${currentCycleId}',
+         url: 'Students/CurrentCourseTasks?CycleId=${currentCycleId}',
          //STU_COURSE_MATERIAL,
          token: Tokenn,
        ).then((value) {
          if (value.statusCode == 200) {
+           print(value.data);
            List Json = value.data;
            //  for (var element in  Json) {
            Json.forEach((element) {
@@ -633,6 +635,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
   List<Answers> answersModel=[];
   String?currentQuizId;
   void StuGetQuizDataById ({
+    required qIndex,
     required token,
 //    required cycleId,
   }){
@@ -652,7 +655,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
           questionModel.add(Questions.fromJson(element));
         }
 
-        List answer = value.data['questions'][0]['answers'];
+        List answer = ques[qIndex]['answers'];//value.data['questions'][]['answers'];
         for (var element in answer) {
           answersModel.add(Answers.fromJson(element));
         }

@@ -1965,7 +1965,7 @@ Widget Build_Quiz_Data_Widget(
                           onPressed: () {
                             onQuizStart;
                             App_cubit.get(context).currentQuizId=quiz.id;
-                            App_cubit.get(context).StuGetQuizDataById(token: App_cubit.get(context).Tokenn,);
+                            App_cubit.get(context).StuGetQuizDataById(qIndex:0,token: App_cubit.get(context).Tokenn,);
                             navigateTo(context, STU_Quizes_Ques_Screen());
                           },
                           child: const Text(
