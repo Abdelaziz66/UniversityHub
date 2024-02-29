@@ -149,7 +149,7 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                          context:  context,
                          // ques: cubit.stu_Quiz_Ques_lis,
                         //  answers: cubit.stu_Quiz_Ques_options,
-                        index:   index,
+                        index: index,
                       answer:answers,
                         questions: ques[index]
                       ),
