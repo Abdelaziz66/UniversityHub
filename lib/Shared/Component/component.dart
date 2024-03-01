@@ -1963,6 +1963,7 @@ Widget Build_Quiz_Data_Widget(
                        // isQuizStart[index]
                             ? TextButton(
                           onPressed: () {
+                            App_cubit.get(context).submitQuizAnswers=[];
                             onQuizStart;
                             App_cubit.get(context).currentQuizId=quiz.id;
                             App_cubit.get(context).StuGetQuizDataById(qIndex:0,token: App_cubit.get(context).Tokenn,);
@@ -2132,7 +2133,6 @@ Widget Build_STU_Quiz_Ques({
  // List<String>? answers,
   index,
   Questions? questions,
-  List<Answers>? answer,
 }
 ) =>
     Column(
@@ -2192,18 +2192,19 @@ Widget Build_STU_Quiz_Ques({
         const SizedBox(height: 30.0),
         ListView.builder(
           shrinkWrap: true,
-          itemCount: App_cubit.get(context).stu_Quiz_Ques_options.length,
+          itemCount: questions?.answers?.length,
           itemBuilder: (context, index) {
             return RadioListTile(
               selectedTileColor: Colors.blue,
               title: Text(
-                '${answer?[index].text}',
+                '${questions?.answers![index].text}',
                 //App_cubit.get(context).stu_Quiz_Ques_options[index],
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              value: App_cubit.get(context).stu_Quiz_Ques_options[index],
-              groupValue: App_cubit.get(context).selectedOption,
+              value: questions?.answers![index].id,
+              groupValue: App_cubit.get(context).quizAnswerSelected,
               onChanged: (value) {
+                print((value));
                 App_cubit.get(context).Quiz_Select_answer(value);
               },
             );

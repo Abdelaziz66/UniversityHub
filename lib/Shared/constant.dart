@@ -30,5 +30,7 @@ String? rol= '';
 String LOGIN='Account/login';
 String NEWS ='News';
 String STU_COURSES='Students/CurrentCourcesInfo';
+String STU_INFO='Students/GetStudentInfo';
+String SUBMITQUIZ='Students/quiz/submit';
 //String STU_COURSE_MATERIAL='Students/CurrentCourseMaterial?CycleId=${App_cubit().cycleId}';
 String Token='';

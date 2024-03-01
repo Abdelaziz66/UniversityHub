@@ -79,7 +79,7 @@ class Profile_screen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                '3',
+                                '${cubit.studentInfoModel?.departmentName}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   fontSize: 20,
@@ -90,7 +90,7 @@ class Profile_screen extends StatelessWidget {
                                 height: 7,
                               ),
                               Text(
-                                'GPA',
+                                'Depart',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   fontSize: 16,
@@ -105,7 +105,7 @@ class Profile_screen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                '4',
+                                '${cubit.studentInfoModel?.level}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   fontSize: 20,
@@ -169,13 +169,19 @@ class Profile_screen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        child: Text(
-                          'Name Here',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w900,
-                            fontSize: 16,
-                            color: c1,
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Container(
+                          width: 100,
+                          child: Text(
+                            '${cubit.studentInfoModel?.fullName}',
+                            maxLines: 1,
+                            style: TextStyle(
+
+                              overflow: TextOverflow.ellipsis,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 16,
+                              color: c1,
+                            ),
                           ),
                         ),
                       ),
@@ -246,7 +252,7 @@ class Profile_screen extends StatelessWidget {
                                                           child: Column(
                                                             children: [
                                                               Text(
-                                                                'FCAI - Sadat City University',
+                                                                '${cubit.studentInfoModel?.facultyName} - ${cubit.studentInfoModel?.universityName}',
                                                                 style:
                                                                 TextStyle(
                                                                   fontWeight:
@@ -290,13 +296,41 @@ class Profile_screen extends StatelessWidget {
                                                                     ),
                                                                   ),
                                                                   const SizedBox(
-                                                                    width: 20,
+                                                                    width: 15,
                                                                   ),
                                                                   Column(
                                                                     crossAxisAlignment:
                                                                     CrossAxisAlignment
                                                                         .start,
                                                                     children: [
+                                                                      Row(
+                                                                        children: [
+                                                                          const Text(
+                                                                            'Email : ',
+                                                                            style: TextStyle(
+                                                                              fontWeight: FontWeight.w900,
+                                                                              fontSize: 14,
+                                                                              color: Colors.teal,
+                                                                            ),
+                                                                          ),
+                                                                          Container(
+                                                                           // padding: EdgeInsets.only(right: 5),
+                                                                           // width:double.infinity,
+                                                                           width: 150,
+                                                                            child: Text(
+                                                                              '${cubit.studentInfoModel?.email}',
+                                                                              maxLines: 2,
+                                                                              style: TextStyle(
+                                                                                overflow:TextOverflow.ellipsis,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                fontSize: 14,
+                                                                                color: c1,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                       SizedBox(height: 4,),
                                                                       Row(
                                                                         children: [
                                                                           const Text(
@@ -308,8 +342,9 @@ class Profile_screen extends StatelessWidget {
                                                                             ),
                                                                           ),
                                                                           Text(
-                                                                            'Your Name ',
+                                                                            '${cubit.studentInfoModel?.fullName}',
                                                                             style: TextStyle(
+                                                                              overflow: TextOverflow.ellipsis,
                                                                               fontWeight: FontWeight.w500,
                                                                               fontSize: 14,
                                                                               color: c1,
@@ -332,7 +367,7 @@ class Profile_screen extends StatelessWidget {
                                                                             ),
                                                                           ),
                                                                           Text(
-                                                                            '4 - CS',
+                                                                            '${cubit.studentInfoModel?.level} -${cubit.studentInfoModel?.departmentName}',
                                                                             style: TextStyle(
                                                                               fontWeight: FontWeight.w500,
                                                                               fontSize: 14,
@@ -356,7 +391,7 @@ class Profile_screen extends StatelessWidget {
                                                                             ),
                                                                           ),
                                                                           Text(
-                                                                            '2031035',
+                                                                            '${cubit.studentInfoModel?.academicId}',
                                                                             style: TextStyle(
                                                                               fontWeight: FontWeight.w500,
                                                                               fontSize: 14,
@@ -368,26 +403,6 @@ class Profile_screen extends StatelessWidget {
                                                                       const SizedBox(
                                                                         height:
                                                                         4,
-                                                                      ),
-                                                                      Row(
-                                                                        children: [
-                                                                          const Text(
-                                                                            'National ID : ',
-                                                                            style: TextStyle(
-                                                                              fontWeight: FontWeight.w900,
-                                                                              fontSize: 14,
-                                                                              color: Colors.teal,
-                                                                            ),
-                                                                          ),
-                                                                          Text(
-                                                                            '30204031700212',
-                                                                            style: TextStyle(
-                                                                              fontWeight: FontWeight.w500,
-                                                                              fontSize: 10,
-                                                                              color: c1,
-                                                                            ),
-                                                                          ),
-                                                                        ],
                                                                       ),
                                                                     ],
                                                                   ),
@@ -1073,98 +1088,98 @@ class Profile_screen extends StatelessWidget {
                   fallback: (context) => const SizedBox(
                         height: 0,
                       )),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30.0,
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.transparent,
-                      border: Border.all(color: Colors.white, width: 0)),
-                  alignment: AlignmentDirectional.topStart,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      children: [
-
-                        const FaIcon(
-                          FontAwesomeIcons.solidUser,
-                          size: 25,
-                          color: Colors.black,
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          'Change User Name',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: c1,
-                          ),
-                        ),
-                        const Spacer(),
-                        const FaIcon(
-                          FontAwesomeIcons.circleChevronRight,
-                          size: 25,
-                          color: Colors.black,
-                        ),
-
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30.0,
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.transparent,
-                      border: Border.all(color: Colors.white, width: 0)),
-                  alignment: AlignmentDirectional.topStart,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      children: [
-
-                        const FaIcon(
-                          FontAwesomeIcons.solidEnvelope,
-                          size: 25,
-                          color: Colors.black,
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          'Change Email',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: c1,
-                          ),
-                        ),
-                        const Spacer(),
-                        const FaIcon(
-                          FontAwesomeIcons.circleChevronRight,
-                          size: 25,
-                          color: Colors.black,
-                        ),
-
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(
+              //     horizontal: 30.0,
+              //   ),
+              //   child: Container(
+              //     decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(20),
+              //         color: Colors.transparent,
+              //         border: Border.all(color: Colors.white, width: 0)),
+              //     alignment: AlignmentDirectional.topStart,
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(15.0),
+              //       child: Row(
+              //         children: [
+              //
+              //           const FaIcon(
+              //             FontAwesomeIcons.solidUser,
+              //             size: 25,
+              //             color: Colors.black,
+              //           ),
+              //           const SizedBox(
+              //             width: 20,
+              //           ),
+              //           Text(
+              //             'Change User Name',
+              //             style: TextStyle(
+              //               fontSize: 16,
+              //               fontWeight: FontWeight.w700,
+              //               color: c1,
+              //             ),
+              //           ),
+              //           const Spacer(),
+              //           const FaIcon(
+              //             FontAwesomeIcons.circleChevronRight,
+              //             size: 25,
+              //             color: Colors.black,
+              //           ),
+              //
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(
+              //     horizontal: 30.0,
+              //   ),
+              //   child: Container(
+              //     decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(20),
+              //         color: Colors.transparent,
+              //         border: Border.all(color: Colors.white, width: 0)),
+              //     alignment: AlignmentDirectional.topStart,
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(15.0),
+              //       child: Row(
+              //         children: [
+              //
+              //           const FaIcon(
+              //             FontAwesomeIcons.solidEnvelope,
+              //             size: 25,
+              //             color: Colors.black,
+              //           ),
+              //           const SizedBox(
+              //             width: 20,
+              //           ),
+              //           Text(
+              //             'Change Email',
+              //             style: TextStyle(
+              //               fontSize: 16,
+              //               fontWeight: FontWeight.w700,
+              //               color: c1,
+              //             ),
+              //           ),
+              //           const Spacer(),
+              //           const FaIcon(
+              //             FontAwesomeIcons.circleChevronRight,
+              //             size: 25,
+              //             color: Colors.black,
+              //           ),
+              //
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 30.0,
