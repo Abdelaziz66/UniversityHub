@@ -35,6 +35,7 @@ import 'package:university_hup/Shared/constant.dart';
 // import '../../Modules/Navigation_Screens/Course_Screen.dart';
 
 
+import '../../Models/STU_Model/User_Model/CurrentStudentInfoModel.dart';
 import '../remote/DioHelper.dart';
 import 'App_state.dart';
 
@@ -412,9 +413,9 @@ bool switch_quiz=true;
     'Compare and Contrast Shared Memory and Distributed Memory Models?'];
 
   final List<String> stu_Quiz_Ques_options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
-  String selectedOption = '';
+  String quizAnswerSelected = '';
   void Quiz_Select_answer(selectedOption){
-    this.selectedOption=selectedOption;
+    this.quizAnswerSelected=selectedOption;
     emit(Change_Quiz_Answer_State());
   }
   //----------------------Grades--------------------------
@@ -438,13 +439,37 @@ List <int> stuAllGrades=[10,30,50,45,35];
         }).then((value) {
       stu_login_Model= STU_Login_Model.fromJson(value.data);
       Tokenn=stu_login_Model?.token;
+      print('TOKENN:${Tokenn}');
       emit(STU_LoginSuccessState(stu_login_Model!));
-      print(value.data);
     }).catchError((Error){
       print(Error.toString());
       emit(STU_LoginErrorState(Error.toString()));
     });
   }
+
+  CurrentStudentInfoModel? studentInfoModel;
+  void GetCurrentStudenInfo (
+  //  required token,
+  ) {
+      emit(Get_STU_Info_LoadingState());
+      Dio_Helper.GetData(
+        url: STU_INFO,
+        token: Tokenn,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          print('get Student inf true');
+          studentInfoModel=CurrentStudentInfoModel.fromJson(value.data);
+          print(studentInfoModel?.facultyName);
+          emit(Get_STU_Info_SuccessState());
+        }
+      }).catchError((error) {
+        emit(Get_STU_Info_ErrorState(error.toString()));
+        print(error.toString());
+      });
+
+  }
+
+
 
 
 
@@ -604,76 +629,109 @@ List <int> stuAllGrades=[10,30,50,45,35];
   void StuGetCourseQuiz ({
     required token,
 //    required cycleId,
-  }){
-    stuCoursesQuizlModel=[];
-    emit(Stu_Get_Course_Quiz_LoadingState());
-    Dio_Helper.GetData(
-      url:'Students/CurrentCourseQuizzes?cycleId=${currentCycleId}',
-      //STU_COURSE_MATERIAL,
-      token: Tokenn,
-    ).then((value) {
-      if(value.statusCode==200){
-        print ('get course Quiz true');
-        List Json = value.data;
-        for (var element in Json) {
-          stuCoursesQuizlModel.add(STU_Quiz_Model.fromJson(element));
+  }) {
+    if (stuCoursesQuizlModel.isEmpty) {
+      emit(Stu_Get_Course_Quiz_LoadingState());
+      Dio_Helper.GetData(
+        url: 'Students/CurrentCourseQuizzes?cycleId=${currentCycleId}',
+        //STU_COURSE_MATERIAL,
+        token: Tokenn,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          print('get course Quiz true');
+          List Json = value.data;
+          for (var element in Json) {
+            stuCoursesQuizlModel.add(STU_Quiz_Model.fromJson(element));
+          }
+          emit(Stu_Get_Course_Quiz_SuccessState(stuCoursesQuizlModel));
         }
-        emit(Stu_Get_Course_Quiz_SuccessState(stuCoursesQuizlModel));
-      }
-      stuCoursesQuizlModel.forEach((element) {
-        print('Quiz title------- ${element.title}');
+        stuCoursesQuizlModel.forEach((element) {
+          print('Quiz title------- ${element.title}');
+        });
+      }).catchError((error) {
+        emit(Stu_Get_Course_Quiz_ErrorState(error.toString()));
+        print(error.toString());
       });
-
-    }).catchError((error){
-      emit(Stu_Get_Course_Quiz_ErrorState(error.toString()));
-      print(error.toString());
-    });
+    }
   }
-
-  List<GetQuizDataModel> quizlDataModel=[];
+ // List<GetQuizDataModel> quizlDataModel=[];
   List<Questions> questionModel=[];
-  List<Answers> answersModel=[];
+ // List<Answers> answersModel=[];
   String?currentQuizId;
   void StuGetQuizDataById ({
     required qIndex,
     required token,
 //    required cycleId,
   }){
-    quizlDataModel=[];
-    questionModel=[];
-    answersModel=[];
-    emit(Stu_Get_Quiz_Data_LoadingState());
-    Dio_Helper.GetData(
-      url:'Students/Quiz?quizId=${currentQuizId}',
-      //STU_COURSE_MATERIAL,
+   // quizlDataModel=[];
+   // answersModel=[];
+    if(questionModel.isEmpty) {
+      emit(Stu_Get_Quiz_Data_LoadingState());
+      Dio_Helper.GetData(
+        url: 'Students/Quiz?quizId=${currentQuizId}',
+        //STU_COURSE_MATERIAL,
+        token: Tokenn,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          print('get course Quiz true');
+          List ques = value.data['questions'];
+          for (var element in ques) {
+            questionModel.add(Questions.fromJson(element));
+          }
+
+          // List<Map<String,dynamic>> answer =value.data['questions']['answers'];
+          // for (var element in answer) {
+          //   answersModel.add(Answers.fromJson(element['answers']));
+          // }
+
+          emit(Stu_Get_Quiz_Data_SuccessState());
+        }
+        questionModel.forEach((element) {
+          print('Quiz ques------- ${element.text}');
+        });
+        // answersModel.forEach((element) {
+        //   print('Quiz answers------- ${element.text}');
+        // });
+
+      }).catchError((error) {
+        emit(Stu_Get_Quiz_Data_ErrorState(error.toString()));
+        print(error.toString());
+      });
+    }
+  }
+
+List<Map<String,dynamic>>submitQuizAnswers=[];
+
+  SubmitQuizModel? submitQuizModel;
+  void SumitQuiz(
+  //  required quizId,
+  //  required List<Map<String,dynamic>>answers,
+)
+  {
+    emit(Stu_Submit_Quiz_LoadingState());
+    Dio_Helper.PostData(
       token: Tokenn,
-    ).then((value) {
-      if(value.statusCode==200){
-        print ('get course Quiz true');
-        List ques = value.data['questions'];
-        for (var element in ques) {
-          questionModel.add(Questions.fromJson(element));
-        }
+        url: SUBMITQUIZ,
+        data:{
+          'quizId':currentQuizId,
+          'answers':submitQuizAnswers,
+        }).then((value) {
+      submitQuizModel= SubmitQuizModel.fromJson(value.data);
+      print(submitQuizModel?.Q1);
+      print(submitQuizModel?.Q2);
+      print(submitQuizModel?.Q3);
+      print(submitQuizModel?.Q4);
+      emit(Stu_Submit_Quiz_SuccessState());
 
-        List answer = ques[qIndex]['answers'];//value.data['questions'][]['answers'];
-        for (var element in answer) {
-          answersModel.add(Answers.fromJson(element));
-        }
 
-        emit(Stu_Get_Quiz_Data_SuccessState(quizlDataModel));
-      }
-      questionModel.forEach((element) {
-        print('Quiz ques------- ${element.text}');
-      });
-      answersModel.forEach((element) {
-        print('Quiz answers------- ${element.text}');
-      });
-
-    }).catchError((error){
-      emit(Stu_Get_Quiz_Data_ErrorState(error.toString()));
-      print(error.toString());
+    }).catchError((Error){
+      print(Error.toString());
+      emit(Stu_Submit_Quiz_ErrorState(Error.toString()));
     });
   }
+
+
+
 
 
 }

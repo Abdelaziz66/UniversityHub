@@ -227,7 +227,7 @@ class STU_Matrial_Screen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: ConditionalBuilder(
-                          condition: lectures.isNotEmpty,
+                          condition: lectures.isNotEmpty&&state is !Stu_Get_Course_Material_LoadingState ,
                           builder:(context)=>GridView.builder(
                             gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(

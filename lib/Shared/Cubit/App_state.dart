@@ -82,6 +82,25 @@ class STU_LoginErrorState extends App_state {
   String? error;
   STU_LoginErrorState(this.error);
 }
+//--------------Current student info
+class Get_STU_Info_LoadingState extends App_state {}
+
+class Get_STU_Info_SuccessState extends App_state {
+ // List<GetQuizDataModel> quizDatamodel=[];
+
+
+  Get_STU_Info_SuccessState();
+
+}
+
+class Get_STU_Info_ErrorState extends App_state {
+  String? error;
+  Get_STU_Info_ErrorState(this.error);
+}
+
+
+
+
 //---------get all news--------------
 
 class Get_All_NewsLoadingState extends App_state {}
@@ -169,16 +188,30 @@ class Stu_Get_Course_Quiz_ErrorState extends App_state {
 class Stu_Get_Quiz_Data_LoadingState extends App_state {}
 
 class Stu_Get_Quiz_Data_SuccessState extends App_state {
-  List<GetQuizDataModel> quizDatamodel=[];
 
 
-  Stu_Get_Quiz_Data_SuccessState(this.quizDatamodel);
+  Stu_Get_Quiz_Data_SuccessState();
 
 }
 
 class Stu_Get_Quiz_Data_ErrorState extends App_state {
   String? error;
   Stu_Get_Quiz_Data_ErrorState(this.error);
+}
+//---------submit Quiz-------
+class Stu_Submit_Quiz_LoadingState extends App_state {}
+
+class Stu_Submit_Quiz_SuccessState extends App_state {
+  //List<GetQuizDataModel> quizDatamodel=[];
+
+
+  Stu_Submit_Quiz_SuccessState();
+
+}
+
+class Stu_Submit_Quiz_ErrorState extends App_state {
+  String? error;
+  Stu_Submit_Quiz_ErrorState(this.error);
 }
 
 

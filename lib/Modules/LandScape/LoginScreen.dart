@@ -405,6 +405,8 @@ class _loginscreenState extends State<loginscreen> {
 
                                   );
                                   cubit.Tokenn=cubit.stu_login_Model?.token;
+                                  print('[[[[ ${cubit.Tokenn}');
+                                  cubit.GetCurrentStudenInfo();
                                   if(rol=='Student'){
                                     Navigator.push(
                                         context,

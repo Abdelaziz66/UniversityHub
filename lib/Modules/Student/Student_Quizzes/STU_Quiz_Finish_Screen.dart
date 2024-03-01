@@ -16,7 +16,7 @@ class STU_Quiz_Finish_Screen extends StatelessWidget {
     return BlocConsumer<App_cubit,App_state>(
       listener: (context,state){},
       builder: (context,state){
-        // App_cubit cubit =App_cubit.get(context);
+         App_cubit cubit =App_cubit.get(context);
         return Scaffold(
 
           // appBar: AppBar(
@@ -94,6 +94,8 @@ class STU_Quiz_Finish_Screen extends StatelessWidget {
                       child:
                       TextButton(
                         onPressed: (){
+                         print('from ddd${cubit.submitQuizAnswers}');
+                          cubit.SumitQuiz();
                           NavigateAndFinish(context, Layout_Screen());
                         },
                         child: const Text('Finished',
