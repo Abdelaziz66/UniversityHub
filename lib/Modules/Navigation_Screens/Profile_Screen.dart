@@ -18,7 +18,7 @@ class Profile_screen extends StatelessWidget {
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
         return ConditionalBuilder(
-          condition: true,
+          condition:cubit.studentInfoModel!=null,
           builder: (context) => Column(
             children: [
               const SizedBox(
