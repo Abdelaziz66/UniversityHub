@@ -193,6 +193,9 @@ class App_cubit extends Cubit<App_state> {
         token:Tokenn,
       );
     }
+    else if(index==4){
+      GetCurrentStudenInfo();
+    }
     Nav_Bar_index=index;
     emit(Nav_Bar_state());
   }
@@ -451,6 +454,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
   void GetCurrentStudenInfo (
   //  required token,
   ) {
+    if(studentInfoModel==null) {
       emit(Get_STU_Info_LoadingState());
       Dio_Helper.GetData(
         url: STU_INFO,
@@ -458,7 +462,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
       ).then((value) {
         if (value.statusCode == 200) {
           print('get Student inf true');
-          studentInfoModel=CurrentStudentInfoModel.fromJson(value.data);
+          studentInfoModel = CurrentStudentInfoModel.fromJson(value.data);
           print(studentInfoModel?.facultyName);
           emit(Get_STU_Info_SuccessState());
         }
@@ -466,7 +470,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
         emit(Get_STU_Info_ErrorState(error.toString()));
         print(error.toString());
       });
-
+    }
   }
 
 
@@ -538,10 +542,10 @@ List <int> stuAllGrades=[10,30,50,45,35];
   List<GetCourseMaterialsModel> stuLABModel=[];
   bool? isLec;
 
-  void StuGetCourseMaterials ({
-    required token,
+  void StuGetCourseMaterials (
+    //required token,
    // required cycleId,
-  }) {
+  ) {
     if (stuCoursesMatrialModel.isEmpty){
       emit(Stu_Get_Course_Material_LoadingState());
     Dio_Helper.GetData(
@@ -560,14 +564,10 @@ List <int> stuAllGrades=[10,30,50,45,35];
       }
       stuCoursesMatrialModel.forEach((element) {
         if (element.type == 'Lecture') {
-          if(stuLECTUREModel.length==0) {
             stuLECTUREModel.add(element);
-          }
         }
         else if (element.type == 'Lab') {
-          if(stuLABModel.length==0) {
             stuLABModel.add(element);
-          }
           }
       });
       print('lectures:');
@@ -588,10 +588,10 @@ List <int> stuAllGrades=[10,30,50,45,35];
 
  String ? assignName;
   List<STU_Course_Assign_Model> stuCoursesAssignModel=[];
-  void StuGetCourseAssign ({
-    required token,
+  void StuGetCourseAssign (
+    //required token,
    // required cycleId,
-  }){
+  ){
    // stuCoursesAssignModel=[];
      if(stuCoursesAssignModel.isEmpty) {
        emit(Stu_Get_Course_Assign_LoadingState());
@@ -626,10 +626,10 @@ List <int> stuAllGrades=[10,30,50,45,35];
   // String? cycleId;
 
   List<STU_Quiz_Model> stuCoursesQuizlModel=[];
-  void StuGetCourseQuiz ({
-    required token,
+  void StuGetCourseQuiz (
+ //   required token,
 //    required cycleId,
-  }) {
+  ) {
     if (stuCoursesQuizlModel.isEmpty) {
       emit(Stu_Get_Course_Quiz_LoadingState());
       Dio_Helper.GetData(

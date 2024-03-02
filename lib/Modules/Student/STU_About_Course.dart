@@ -56,9 +56,8 @@ class STU_About_course extends StatelessWidget {
                                     Expanded(
                                       child: InkWell(
                                         onTap: (){
-                                          cubit.GetCurrentStudenInfo();
                                           cubit.StuGetCourseMaterials(
-                                            token:App_cubit.get(context).Tokenn,
+                                          //  token:App_cubit.get(context).Tokenn,
                                           //  cycleId: '${courses[index].cycleId}',
                                           );
 
@@ -117,7 +116,7 @@ class STU_About_course extends StatelessWidget {
                                       child: InkWell(
                                         onTap: (){
                                           cubit.StuGetCourseAssign(
-                                            token:App_cubit.get(context).Tokenn,
+                                        //    token:App_cubit.get(context).Tokenn,
                                         //    cycleId: '${courses[index].cycleId}',
                                           );
 
@@ -188,7 +187,7 @@ class STU_About_course extends StatelessWidget {
                                     child: InkWell(
                                       onTap: (){
                                         cubit.StuGetCourseQuiz(
-                                          token:App_cubit.get(context).Tokenn,
+                                        //  token:App_cubit.get(context).Tokenn,
                                        //   cycleId: '${courses[index].cycleId}',
                                         );
                                         navigateTo(context,rol=='Student'? STU_Quizes_Screen():INS_Quizes_Screen() );

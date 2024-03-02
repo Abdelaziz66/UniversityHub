@@ -404,9 +404,13 @@ class _loginscreenState extends State<loginscreen> {
                                    // email:'AbdulMajeedSallam@gmail.com',
 
                                   );
-                                  cubit.Tokenn=cubit.stu_login_Model?.token;
-                                  print('[[[[ ${cubit.Tokenn}');
-                                  cubit.GetCurrentStudenInfo();
+                                  // cubit.Tokenn=cubit.stu_login_Model?.token;
+                                  // print('[[[[ ${cubit.Tokenn}');
+                                 //if(state is STU_LoginSuccessState)
+                                 // if(cubit.Tokenn!=null)
+                                 // {
+                                 //   cubit.GetCurrentStudenInfo();
+                                 // }
                                   if(rol=='Student'){
                                     Navigator.push(
                                         context,
