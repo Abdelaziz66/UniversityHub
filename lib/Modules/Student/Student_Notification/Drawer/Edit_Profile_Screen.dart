@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rive/rive.dart';
+import 'package:university_hup/Modules/LandScape/ForgetPasswordScreen.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
@@ -119,7 +120,7 @@ class Edit_Profile_screen extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.transparent,
-                              border: Border.all(color: Colors.white, width: 0)),
+                              border: Border.all(color: Colors.black, width: 0)),
                           alignment: AlignmentDirectional.topStart,
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -165,7 +166,7 @@ class Edit_Profile_screen extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.transparent,
-                              border: Border.all(color: Colors.white, width: 0)),
+                              border: Border.all(color: Colors.black, width: 0)),
                           alignment: AlignmentDirectional.topStart,
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -207,41 +208,51 @@ class Edit_Profile_screen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                           horizontal: 30.0,
                         ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.transparent,
-                              border: Border.all(color: Colors.white, width: 0)),
-                          alignment: AlignmentDirectional.topStart,
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Row(
-                              children: [
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ForgetPasswordScreen(),
+                                ));
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.transparent,
+                                border: Border.all(color: Colors.black, width: 0)),
+                            alignment: AlignmentDirectional.topStart,
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Row(
+                                children: [
 
-                                const FaIcon(
-                                  FontAwesomeIcons.key,
-                                  size: 25,
-                                  color: Colors.black,
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  'Change Password',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: c1,
+                                  const FaIcon(
+                                    FontAwesomeIcons.key,
+                                    size: 25,
+                                    color: Colors.black,
                                   ),
-                                ),
-                                const Spacer(),
-                                const FaIcon(
-                                  FontAwesomeIcons.circleChevronRight,
-                                  size: 25,
-                                  color: Colors.black,
-                                ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  Text(
+                                    'Change Password',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                      color: c1,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  const FaIcon(
+                                    FontAwesomeIcons.circleChevronRight,
+                                    size: 25,
+                                    color: Colors.black,
+                                  ),
 
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),

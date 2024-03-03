@@ -90,145 +90,76 @@ class _loginscreenState extends State<SuccessfulResetPasswordScreen> {
                   ),
                 ),
                 SafeArea(
-                  child: SingleChildScrollView(
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: Form(
-                          key: formkey,
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 40,
-                              ),
-                              Container(
-                                alignment: AlignmentDirectional.center,
-                                child: CircleAvatar(
-                                  radius:130,
-                                  backgroundColor: Colors.black.withOpacity(.0),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Image.asset(
-                                      'assets/images/finishresetpassword.png',
-                                    ),
+                  child: Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: Form(
+                        key: formkey,
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            Container(
+                              alignment: AlignmentDirectional.center,
+                              child: CircleAvatar(
+                                radius:130,
+                                backgroundColor: Colors.black.withOpacity(.0),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Image.asset(
+                                    'assets/images/finishresetpassword.png',
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 25,
-                              ),
-                              Text(
-                                  'Password Changed',textAlign: TextAlign.center,
-                                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                                      fontSize: 35
-                                  )
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              // Padding(
-                              //   padding: const EdgeInsets.only(right: 15.0, top: 30),
-                              //   child: Row(
-                              //       mainAxisAlignment: MainAxisAlignment.center,
-                              //       crossAxisAlignment: CrossAxisAlignment.center,
-                              //       children: [
-                              //         Text(
-                              //           'E ',
-                              //           style: TextStyle(
-                              //               color: Colors.blue,
-                              //               fontSize: 22,
-                              //               fontWeight: FontWeight.bold),
-                              //         ),
-                              //         Text(
-                              //           'D U T',
-                              //           style: TextStyle(
-                              //               color: Colors.black,
-                              //               fontSize: 22,
-                              //               fontWeight: FontWeight.bold),
-                              //         ),
-                              //         Text(
-                              //           ' E ',
-                              //           style: TextStyle(
-                              //               color: Colors.blue,
-                              //               fontSize: 22,
-                              //               fontWeight: FontWeight.bold),
-                              //         ),
-                              //         Text(
-                              //           'C H ',
-                              //           style: TextStyle(
-                              //               color: Colors.black,
-                              //               fontSize: 22,
-                              //               fontWeight: FontWeight.bold),
-                              //         ),
-                              //       ]),
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            Text(
+                                'Password Changed',textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                                    fontSize: 35
+                                )
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                                'Your Password has been successfully changed',textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                                    fontSize: 20
+                                )
+                              // TextStyle(
+                              //   fontSize:25,
+                              //   color: Colors.black87,
                               // ),
-                              Text(
-                                  'Your Password has been successfully change and you can now begin your user experience',textAlign: TextAlign.center,
-                                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                                      fontSize: 25
-                                  )
-                                // TextStyle(
-                                //   fontSize:25,
-                                //   color: Colors.black87,
-                                // ),
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
 
+                            Spacer(),
 
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              Default_Button(
+                            Default_Button(
 
-                                onPressed: (){
+                              onPressed: (){
 
 
 
 
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => loginscreen(),
-                                        ));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => loginscreen(),
+                                      ));
 
-                                },
-                                text:'Next',
-                              ),
-                              // Container(
-                              //   width: double.infinity,
-                              //   height: 70,
-                              //   decoration: BoxDecoration(
-                              //     borderRadius: BorderRadius.circular(25),
-                              //     color: Colors.blue,
-                              //   ),
-                              //   child: TextButton(
-                              //     onPressed: () {
-                              //       if (formkey.currentState!.validate()) {
-                              //         print(emailcontroller.text);
-                              //         print(passwordcontroller.text);
-                              //       } else {
-                              //         Navigator.push(
-                              //             context,
-                              //             MaterialPageRoute(
-                              //               builder: (context) => Layout_Screen(),
-                              //             ));
-                              //       }
-                              //     },
-                              //     child: Text(
-                              //       'Sign in',
-                              //       style: TextStyle(
-                              //         color: Colors.white,
-                              //         fontWeight: FontWeight.bold,
-                              //         fontSize: 25,
-                              //       ),
-                              //     ),
-                              //   ),
-                              // ),
+                              },
+                              text:'Next',
+                            ),
 
-                            ],
-                          ),
+
+                          ],
                         ),
                       ),
                     ),

@@ -52,14 +52,16 @@ class Layout_Screen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 15,
                           ),
                           Text(
-                            "Hi , Ahmed !",
+                            rol=='Student'?'${cubit.stu_login_Model?.displayName}':'Hi, Dr Ahmed',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style:  TextStyle(
-                              fontSize : 25,
-                              fontWeight : FontWeight.w900,
-                              color :c1,
+                              fontSize : 20,
+                              fontWeight : FontWeight.w700,
+                              color :c1.withOpacity(.8),
                             ),
                           ),
 
@@ -75,7 +77,7 @@ class Layout_Screen extends StatelessWidget {
                         color: Colors.blue.withOpacity(.2),
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0,),

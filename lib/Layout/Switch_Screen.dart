@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
+import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
-
-import '../Shared/Cubit/App_cubit.dart';
 import 'LayoutScreen.dart';
 
 class Switch_screen extends StatelessWidget {

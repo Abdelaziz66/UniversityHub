@@ -133,7 +133,7 @@ class _loginscreenState extends State<ForgetPasswordCodeScreen> {
                             Text(
                                 'Enter your code to reset your password',textAlign: TextAlign.center,
                                 style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                                    fontSize: 25
+                                    fontSize: 20
                                 )
                               // TextStyle(
                               //   fontSize:25,
@@ -173,15 +173,16 @@ class _loginscreenState extends State<ForgetPasswordCodeScreen> {
                                   //     ToolbarOptions(paste: true, copy: true),
                                   cursorColor: c1,
                                   style: const TextStyle(
-                                    fontSize: 25,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                   decoration: InputDecoration(
                                     prefixIcon: Icon(
                                       Icons.password,
                                       color: c1,
-                                      size: 30,
+                                      size: 25,
                                     ),
-                                    hintText: 'Code',
+                                    hintText: ' Code',
                                     border: InputBorder.none,
                                   ),
                                 ),
