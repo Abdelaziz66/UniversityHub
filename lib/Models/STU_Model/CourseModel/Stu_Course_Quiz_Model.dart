@@ -206,37 +206,53 @@ class Answers {
 
 
 class SubmitQuizModel {
- // late List<Map<String,dynamic>>response;
-  bool? Q1;
-  bool? Q2;
-  bool? Q3;
-  bool? Q4;
 
 
 
-  SubmitQuizModel({
-    this.Q1, this.Q2, this.Q3, this.Q4});
+
+
+  bool? q0011;
+
+  SubmitQuizModel({this.q0011});
 
   SubmitQuizModel.fromJson(Map<String, dynamic> json) {
-
-
-    Q1 = json['Q001_1'];
-    Q2 = json['Q002_1'];
-    Q3 = json['Q003_1'];
-    Q4 = json['Q004_1'];
+  q0011 = json['Q001_1'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Q001_1'] = this.Q1;
-    data['Q002_1'] = this.Q2;
-    data['Q003_1'] = this.Q3;
-    data['Q004_1'] = this.Q4;
-    return data;
+  final Map<String, dynamic> data = new Map<String, dynamic>();
+  data['Q001_1'] = this.q0011;
+  return data;
   }
 
 
-
-
+ // late List<Map<String,dynamic>>response;
+ //  bool? Q1;
+ //  bool? Q2;
+ //  bool? Q3;
+ //  bool? Q4;
+ //
+ //
+ //
+ //  SubmitQuizModel({
+ //    this.Q1, this.Q2, this.Q3, this.Q4});
+ //
+ //  SubmitQuizModel.fromJson(Map<String, dynamic> json) {
+ //
+ //
+ //    Q1 = json['Q001_1'];
+ //    Q2 = json['Q002_1'];
+ //    Q3 = json['Q003_1'];
+ //    Q4 = json['Q004_1'];
+ //  }
+ //
+ //  Map<String, dynamic> toJson() {
+ //    final Map<String, dynamic> data = new Map<String, dynamic>();
+ //    data['Q001_1'] = this.Q1;
+ //    data['Q002_1'] = this.Q2;
+ //    data['Q003_1'] = this.Q3;
+ //    data['Q004_1'] = this.Q4;
+ //    return data;
+ //  }
 
 }

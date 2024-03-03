@@ -21,7 +21,7 @@ class STU_Quizes_Ques_Screen extends StatefulWidget {
 class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
   bool islast = false;
   bool isStart = false;
-
+  bool isBack=false;
   var boardcontroller = PageController();
   @override
   Widget build(BuildContext context) {
@@ -88,14 +88,24 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                     child: PageView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       onPageChanged: (index) {
+                        print(isBack);
                         print(ques[index-1].text,);
-                        print(index);
+                        print('page index ${index}');
                         print(cubit.quizAnswerSelected);
                         print(ques[index].id);
+                        if(isBack==false){
                         cubit.submitQuizAnswers.add({
                           'questionId':ques[index-1].id,
                           'answerId':cubit.quizAnswerSelected
-                        });
+                        });}
+                        else if(isBack==true){
+                          // cubit.submitQuizAnswers[index]={
+                          //   'questionId':ques[index].id,
+                          //   'answerId':cubit.quizAnswerSelected
+                          // };
+                        //  cubit.submitQuizAnswers[index]['questionId']=ques[index].id;
+                          cubit.submitQuizAnswers[index]['answerId']=cubit.quizAnswerSelected;
+                        }
                         if (index == ques.length - 1) {
                           setState(() {
                             islast = true;
@@ -138,6 +148,7 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                       ),
                         child: IconButton(
                           onPressed: (){
+
                            // print(boardcontroller.initialPage);
                             boardcontroller.previousPage (
                               duration: const Duration(
@@ -145,6 +156,9 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                             ),
                             curve: Curves.fastLinearToSlowEaseIn,
                             );
+                            setState(() {
+                              isBack=true;
+                            });
                           },
                           icon:const Icon(FontAwesomeIcons.backward,
                             color: Colors.blue,
@@ -158,7 +172,9 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                               containerWidth: double.infinity,
                               containerHeight: 50,
                               onPressed: () {
-
+                                setState(() {
+                                  isBack=false;
+                                });
                                 if (islast) {
                                   cubit.submitQuizAnswers.add({
                                     'questionId':ques[ques.length-1].id,
@@ -173,7 +189,9 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                                     ),
                                     curve: Curves.fastLinearToSlowEaseIn,
                                   );
+
                                 }
+
                               },
                               text: islast ? 'Submit' : 'Next',
                             ),

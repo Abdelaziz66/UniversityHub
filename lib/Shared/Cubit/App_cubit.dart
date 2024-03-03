@@ -534,7 +534,8 @@ List <int> stuAllGrades=[10,30,50,45,35];
   }
 
   String? currentCourseName;
-  String?currentCycleId;
+  String? currentCycleId;
+  bool isCycleIdChange=false;
 
  // String? cycleId;
   List<GetCourseMaterialsModel> stuCoursesMatrialModel=[];
@@ -546,7 +547,8 @@ List <int> stuAllGrades=[10,30,50,45,35];
     //required token,
    // required cycleId,
   ) {
-    if (stuCoursesMatrialModel.isEmpty){
+    print('sdsds ${isCycleIdChange}');
+    if (stuCoursesMatrialModel.isEmpty || isCycleIdChange==true){
       emit(Stu_Get_Course_Material_LoadingState());
     Dio_Helper.GetData(
       url: 'Students/CurrentCourseMaterial?CycleId=${currentCycleId}',
@@ -583,6 +585,8 @@ List <int> stuAllGrades=[10,30,50,45,35];
       print(error.toString());
     });
   }
+    isCycleIdChange=false;
+
   }
   //----------------------STU assign -----------------
 
@@ -593,7 +597,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
    // required cycleId,
   ){
    // stuCoursesAssignModel=[];
-     if(stuCoursesAssignModel.isEmpty) {
+     if(stuCoursesAssignModel.isEmpty || isCycleIdChange==true) {
        emit(Stu_Get_Course_Assign_LoadingState());
        Dio_Helper.GetData(
          url: 'Students/CurrentCourseTasks?CycleId=${currentCycleId}',
@@ -619,6 +623,8 @@ List <int> stuAllGrades=[10,30,50,45,35];
          print(error.toString());
        });
      }
+     isCycleIdChange=false;
+
   }
 
 
@@ -630,7 +636,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
  //   required token,
 //    required cycleId,
   ) {
-    if (stuCoursesQuizlModel.isEmpty) {
+    if (stuCoursesQuizlModel.isEmpty|| isCycleIdChange==true) {
       emit(Stu_Get_Course_Quiz_LoadingState());
       Dio_Helper.GetData(
         url: 'Students/CurrentCourseQuizzes?cycleId=${currentCycleId}',
@@ -653,6 +659,8 @@ List <int> stuAllGrades=[10,30,50,45,35];
         print(error.toString());
       });
     }
+    isCycleIdChange=false;
+
   }
  // List<GetQuizDataModel> quizlDataModel=[];
   List<Questions> questionModel=[];
@@ -702,12 +710,16 @@ List <int> stuAllGrades=[10,30,50,45,35];
 
 List<Map<String,dynamic>>submitQuizAnswers=[];
 
-  SubmitQuizModel? submitQuizModel;
+
+  List<Map<String,dynamic>>QuizAnswersResponse=[];
+
+  //List<SubmitQuizModel>? submitQuizModel;
   void SumitQuiz(
   //  required quizId,
   //  required List<Map<String,dynamic>>answers,
 )
   {
+    QuizAnswersResponse=[];
     emit(Stu_Submit_Quiz_LoadingState());
     Dio_Helper.PostData(
       token: Tokenn,
@@ -716,15 +728,38 @@ List<Map<String,dynamic>>submitQuizAnswers=[];
           'quizId':currentQuizId,
           'answers':submitQuizAnswers,
         }).then((value) {
-      submitQuizModel= SubmitQuizModel.fromJson(value.data);
-      print(submitQuizModel?.Q1);
-      print(submitQuizModel?.Q2);
-      print(submitQuizModel?.Q3);
-      print(submitQuizModel?.Q4);
-      emit(Stu_Submit_Quiz_SuccessState());
+      if (value.statusCode == 200) {
+        print('get course Quiz true');
+     //   print(value.data);
+        List json = value.data;
 
 
-    }).catchError((Error){
+        for (var element in json) {
+          QuizAnswersResponse.add({
+            '${element.keys}': element.values
+          });
+        };
+
+        QuizAnswersResponse.forEach((element) {
+          print(element.keys);
+          print(element.values);
+        });
+
+
+        // for (var element in json) {
+        //   QuizAnswersResponse.add({
+        //     '${element.keys}':element.values
+        //   });
+        // };
+
+
+        // submitQuizModel= SubmitQuizModel.fromJson(value.data);
+        //  print(submitQuizModel?.Q1);
+        //  print(submitQuizModel?.Q2);
+        //  print(submitQuizModel?.Q3);
+        //  print(submitQuizModel?.Q4);
+        emit(Stu_Submit_Quiz_SuccessState());
+      }}).catchError((Error){
       print(Error.toString());
       emit(Stu_Submit_Quiz_ErrorState(Error.toString()));
     });
