@@ -189,7 +189,7 @@ class _loginscreenState extends State<loginscreen> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .subtitle1
-                                    ?.copyWith(fontSize: 25)
+                                    ?.copyWith(fontSize: 20)
                                 // TextStyle(
                                 //   fontSize:25,
                                 //   color: Colors.black87,
@@ -228,7 +228,7 @@ class _loginscreenState extends State<loginscreen> {
                                   //     ToolbarOptions(paste: true, copy: true),
                                   cursorColor: c1,
                                   style: const TextStyle(
-                                    fontSize: 25,
+                                    fontSize: 20,     fontWeight: FontWeight.w500,
                                   ),
                                   decoration: InputDecoration(
                                     prefixIcon: Icon(
@@ -236,7 +236,7 @@ class _loginscreenState extends State<loginscreen> {
                                       color: c1,
                                       size: 30,
                                     ),
-                                    hintText: 'email',
+                                    hintText: ' Email',
                                     border: InputBorder.none,
                                   ),
                                 ),
@@ -274,7 +274,7 @@ class _loginscreenState extends State<loginscreen> {
                                       return null;
                                   },
                                   cursorColor: c1,
-                                  style: const TextStyle(fontSize: 25),
+                                  style: const TextStyle(fontSize: 20    , fontWeight: FontWeight.w500,),
                                   decoration: InputDecoration(
                                     prefixIcon: Icon(
                                       Icons.lock_rounded,
@@ -295,7 +295,7 @@ class _loginscreenState extends State<loginscreen> {
                                         size: 30,
                                       ),
                                     ),
-                                    hintText: 'password',
+                                    hintText: ' Password',
                                     border: InputBorder.none,
                                   ),
                                 ),

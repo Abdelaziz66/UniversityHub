@@ -5,9 +5,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'package:university_hup/Layout/LayoutScreen.dart';
-import 'package:university_hup/Modules/LandScape/ForgetPasswordScreen.dart';
 import 'package:university_hup/Modules/LandScape/SuccessfulResetPasswordScreen.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
@@ -168,7 +165,7 @@ class _loginscreenState extends State<NewPasswordScreen> {
                               Text(
                                   'Enter New Password',
                                   style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                                      fontSize: 25
+                                      fontSize: 20
                                   )
                                 // TextStyle(
                                 //   fontSize:25,
@@ -208,12 +205,15 @@ class _loginscreenState extends State<NewPasswordScreen> {
                                         return null;
                                     },
                                     cursorColor: c1,
-                                    style: const TextStyle(fontSize: 25),
+                                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500,),
+                                    textAlign: TextAlign.left,
+                                    textAlignVertical: TextAlignVertical.center,
+
                                     decoration: InputDecoration(
                                       prefixIcon: Icon(
-                                        Icons.lock_rounded,
+                                        Icons.password,
                                         color: c1,
-                                        size: 30,
+                                        size: 25,
                                       ),
                                       suffixIcon: IconButton(
                                         onPressed: () {
@@ -226,10 +226,70 @@ class _loginscreenState extends State<NewPasswordScreen> {
                                               ? Icons.remove_red_eye
                                               : Icons.visibility_off,
                                           color: c1,
-                                          size: 30,
+                                          size: 25,
                                         ),
                                       ),
-                                      hintText: 'New Password',
+                                      hintText: ' New Password',
+                                      border: InputBorder.none,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+
+                              Container(
+                                alignment: Alignment.center,
+                                height: 70,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(18),
+                                  color:Colors.blueGrey.withOpacity(0.1),
+                                  //HexColor('D8E1E8FF'),
+                                ),
+                                child: Padding(
+                                  padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: TextFormField(
+                                    controller: passwordcontroller,
+                                    keyboardType: TextInputType.visiblePassword,
+                                    obscureText: passwordcheck ? false : true,
+                                    onFieldSubmitted: (value) {
+                                      print(value);
+                                    },
+                                    onChanged: (value) {
+                                      print(value);
+                                    },
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Password can\'t be empty';
+                                      } else
+                                        return null;
+                                    },
+                                    cursorColor: c1,
+                                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500,),
+                                    decoration: InputDecoration(
+                                      prefixIcon: Icon(
+                                        Icons.password,
+                                        color: c1,
+                                        size: 25,
+                                      ),
+                                      suffixIcon: IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            passwordcheck = !passwordcheck;
+                                          });
+                                        },
+                                        icon: Icon(
+                                          passwordcheck
+                                              ? Icons.remove_red_eye
+                                              : Icons.visibility_off,
+                                          color: c1,
+                                          size: 25,
+                                        ),
+                                      ),
+                                      hintText: ' Confirm Password',
                                       border: InputBorder.none,
                                     ),
                                   ),

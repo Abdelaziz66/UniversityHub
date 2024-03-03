@@ -15,6 +15,10 @@ ThemeData Light_Theme = ThemeData(
     backgroundColor: Colors.transparent,
 
   ),
+  progressIndicatorTheme: ProgressIndicatorThemeData(
+    color: Colors.blue,
+
+  ),
 
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: Colors.blue,

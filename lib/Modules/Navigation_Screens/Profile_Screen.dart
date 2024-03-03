@@ -2,6 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:university_hup/Modules/LandScape/ForgetPasswordScreen.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
@@ -171,7 +172,7 @@ class Profile_screen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Container(
-                          width: 100,
+                          width: 300,
                           child: Text(
                             '${cubit.studentInfoModel?.fullName}',
                             maxLines: 1,
@@ -208,7 +209,7 @@ class Profile_screen extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: GlassBox(
+                      child: GlassBoxWithBorder(
                           widget: Padding(
                             padding: const EdgeInsets.all(6.0),
                             child: InkWell(
@@ -306,35 +307,7 @@ class Profile_screen extends StatelessWidget {
                                                                       Row(
                                                                         children: [
                                                                           const Text(
-                                                                            'Email : ',
-                                                                            style: TextStyle(
-                                                                              fontWeight: FontWeight.w900,
-                                                                              fontSize: 14,
-                                                                              color: Colors.teal,
-                                                                            ),
-                                                                          ),
-                                                                          Container(
-                                                                           // padding: EdgeInsets.only(right: 5),
-                                                                           // width:double.infinity,
-                                                                           width: 150,
-                                                                            child: Text(
-                                                                              '${cubit.studentInfoModel?.email}',
-                                                                              maxLines: 2,
-                                                                              style: TextStyle(
-                                                                                overflow:TextOverflow.ellipsis,
-                                                                                fontWeight: FontWeight.w500,
-                                                                                fontSize: 14,
-                                                                                color: c1,
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                       SizedBox(height: 4,),
-                                                                      Row(
-                                                                        children: [
-                                                                          const Text(
-                                                                            'Your Name : ',
+                                                                            'Name : ',
                                                                             style: TextStyle(
                                                                               fontWeight: FontWeight.w900,
                                                                               fontSize: 14,
@@ -352,34 +325,7 @@ class Profile_screen extends StatelessWidget {
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                      const SizedBox(
-                                                                        height:
-                                                                        4,
-                                                                      ),
-                                                                      Row(
-                                                                        children: [
-                                                                          const Text(
-                                                                            'Your Level : ',
-                                                                            style: TextStyle(
-                                                                              fontWeight: FontWeight.w900,
-                                                                              fontSize: 14,
-                                                                              color: Colors.teal,
-                                                                            ),
-                                                                          ),
-                                                                          Text(
-                                                                            '${cubit.studentInfoModel?.level} -${cubit.studentInfoModel?.departmentName}',
-                                                                            style: TextStyle(
-                                                                              fontWeight: FontWeight.w500,
-                                                                              fontSize: 14,
-                                                                              color: c1,
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                      const SizedBox(
-                                                                        height:
-                                                                        4,
-                                                                      ),
+                                                                       SizedBox(height: 4,),
                                                                       Row(
                                                                         children: [
                                                                           const Text(
@@ -400,6 +346,63 @@ class Profile_screen extends StatelessWidget {
                                                                           ),
                                                                         ],
                                                                       ),
+
+                                                                      const SizedBox(
+                                                                        height:
+                                                                        4,
+                                                                      ),
+                                                                      Row(
+                                                                        children: [
+                                                                          const Text(
+                                                                            'Level : ',
+                                                                            style: TextStyle(
+                                                                              fontWeight: FontWeight.w900,
+                                                                              fontSize: 14,
+                                                                              color: Colors.teal,
+                                                                            ),
+                                                                          ),
+                                                                          Text(
+                                                                            '${cubit.studentInfoModel?.level} - ${cubit.studentInfoModel?.departmentName}',
+                                                                            style: TextStyle(
+                                                                              fontWeight: FontWeight.w500,
+                                                                              fontSize: 14,
+                                                                              color: c1,
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      const SizedBox(
+                                                                        height:
+                                                                        4,
+                                                                      ),
+                                                                      Row(
+                                                                        children: [
+                                                                          const Text(
+                                                                            'Email : ',
+                                                                            style: TextStyle(
+                                                                              fontWeight: FontWeight.w900,
+                                                                              fontSize: 14,
+                                                                              color: Colors.teal,
+                                                                            ),
+                                                                          ),
+                                                                          Container(
+                                                                            // padding: EdgeInsets.only(right: 5),
+                                                                            // width:double.infinity,
+                                                                            width: 150,
+                                                                            child: Text(
+                                                                              '${cubit.studentInfoModel?.email}',
+                                                                              maxLines: 2,
+                                                                              style: TextStyle(
+                                                                                overflow:TextOverflow.ellipsis,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                fontSize: 9,
+                                                                                color: c1,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+
                                                                       const SizedBox(
                                                                         height:
                                                                         4,
@@ -484,238 +487,10 @@ class Profile_screen extends StatelessWidget {
                                   //   ),
                                   // ],
                                 ),
-                                // barrierColor: Colors.blueGrey.withOpacity(.5),
+
 
                               ),
-                              // onTap: () {
-                              //   scafoldkey.currentState?.showBottomSheet(
-                              //     (context) => GestureDetector(
-                              //       onTap: () {
-                              //         Navigator.pop(context);
-                              //       },
-                              //       child: GlassBox(
-                              //           widget: Stack(
-                              //             children: [
-                              //               Column(
-                              //                 children: [
-                              //                   const Spacer(),
-                              //                   Padding(
-                              //                     padding:
-                              //                         const EdgeInsets.all(
-                              //                             15.0),
-                              //                     child:
-                              //                         GlassBoxWithBorder_Gradiant(
-                              //                       widget: Padding(
-                              //                         padding:
-                              //                             const EdgeInsets
-                              //                                 .all(15.0),
-                              //                         child: Column(
-                              //                           children: [
-                              //                             Text(
-                              //                               'FCAI - Sadat City University',
-                              //                               style:
-                              //                                   TextStyle(
-                              //                                 fontWeight:
-                              //                                     FontWeight
-                              //                                         .w900,
-                              //                                 fontSize:
-                              //                                     15,
-                              //                                 color: c1,
-                              //                               ),
-                              //                             ),
-                              //                             const SizedBox(
-                              //                               height: 10,
-                              //                             ),
-                              //                             Row(
-                              //                               crossAxisAlignment:
-                              //                                   CrossAxisAlignment
-                              //                                       .center,
-                              //                               mainAxisAlignment:
-                              //                                   MainAxisAlignment
-                              //                                       .start,
-                              //                               children: [
-                              //                                 Container(
-                              //                                   decoration: const BoxDecoration(
-                              //                                       shape:
-                              //                                           BoxShape.circle,
-                              //                                       boxShadow: [
-                              //                                         BoxShadow(
-                              //                                           color: Colors.black,
-                              //                                           blurRadius: 0,
-                              //                                           spreadRadius: 1,
-                              //                                         ),
-                              //                                       ]),
-                              //                                   child:
-                              //                                       const CircleAvatar(
-                              //                                     radius:
-                              //                                         50,
-                              //                                     backgroundImage:
-                              //                                         AssetImage(
-                              //                                       'assets/images/profile.png',
-                              //                                     ),
-                              //                                   ),
-                              //                                 ),
-                              //                                 const SizedBox(
-                              //                                   width: 20,
-                              //                                 ),
-                              //                                 Column(
-                              //                                   crossAxisAlignment:
-                              //                                       CrossAxisAlignment
-                              //                                           .start,
-                              //                                   children: [
-                              //                                     Row(
-                              //                                       children: [
-                              //                                         const Text(
-                              //                                           'Your Name : ',
-                              //                                           style: TextStyle(
-                              //                                             fontWeight: FontWeight.w900,
-                              //                                             fontSize: 14,
-                              //                                             color: Colors.teal,
-                              //                                           ),
-                              //                                         ),
-                              //                                         Text(
-                              //                                           'Your Name ',
-                              //                                           style: TextStyle(
-                              //                                             fontWeight: FontWeight.w500,
-                              //                                             fontSize: 14,
-                              //                                             color: c1,
-                              //                                           ),
-                              //                                         ),
-                              //                                       ],
-                              //                                     ),
-                              //                                     const SizedBox(
-                              //                                       height:
-                              //                                           4,
-                              //                                     ),
-                              //                                     Row(
-                              //                                       children: [
-                              //                                         const Text(
-                              //                                           'Your Level : ',
-                              //                                           style: TextStyle(
-                              //                                             fontWeight: FontWeight.w900,
-                              //                                             fontSize: 14,
-                              //                                             color: Colors.teal,
-                              //                                           ),
-                              //                                         ),
-                              //                                         Text(
-                              //                                           '4 - CS',
-                              //                                           style: TextStyle(
-                              //                                             fontWeight: FontWeight.w500,
-                              //                                             fontSize: 14,
-                              //                                             color: c1,
-                              //                                           ),
-                              //                                         ),
-                              //                                       ],
-                              //                                     ),
-                              //                                     const SizedBox(
-                              //                                       height:
-                              //                                           4,
-                              //                                     ),
-                              //                                     Row(
-                              //                                       children: [
-                              //                                         const Text(
-                              //                                           'Academic ID : ',
-                              //                                           style: TextStyle(
-                              //                                             fontWeight: FontWeight.w900,
-                              //                                             fontSize: 14,
-                              //                                             color: Colors.teal,
-                              //                                           ),
-                              //                                         ),
-                              //                                         Text(
-                              //                                           '2031035',
-                              //                                           style: TextStyle(
-                              //                                             fontWeight: FontWeight.w500,
-                              //                                             fontSize: 14,
-                              //                                             color: c1,
-                              //                                           ),
-                              //                                         ),
-                              //                                       ],
-                              //                                     ),
-                              //                                     const SizedBox(
-                              //                                       height:
-                              //                                           4,
-                              //                                     ),
-                              //                                     Row(
-                              //                                       children: [
-                              //                                         const Text(
-                              //                                           'National ID : ',
-                              //                                           style: TextStyle(
-                              //                                             fontWeight: FontWeight.w900,
-                              //                                             fontSize: 14,
-                              //                                             color: Colors.teal,
-                              //                                           ),
-                              //                                         ),
-                              //                                         Text(
-                              //                                           '30204031700212',
-                              //                                           style: TextStyle(
-                              //                                             fontWeight: FontWeight.w500,
-                              //                                             fontSize: 10,
-                              //                                             color: c1,
-                              //                                           ),
-                              //                                         ),
-                              //                                       ],
-                              //                                     ),
-                              //                                   ],
-                              //                                 ),
-                              //                               ],
-                              //                             ),
-                              //                           ],
-                              //                         ),
-                              //                       ),
-                              //                       color: Colors.white
-                              //                           .withOpacity(.5),
-                              //                       borderRadius: 20,
-                              //                       x: 18,
-                              //                       y: 18,
-                              //                       BorderWidth: 3,
-                              //                       BorderColor:
-                              //                           Colors.white,
-                              //                     ),
-                              //                   ),
-                              //                   const Spacer(),
-                              //                 ],
-                              //               ),
-                              //               // Row(
-                              //               //   children: [
-                              //               //     Spacer(),
-                              //               //     Padding(
-                              //               //       padding:
-                              //               //       const EdgeInsets.only(
-                              //               //           right: 30.0),
-                              //               //       child: InkWell(
-                              //               //         onTap: () {
-                              //               //           Navigator.pop(context);
-                              //               //         },
-                              //               //         child: CircleAvatar(
-                              //               //             backgroundColor: Colors
-                              //               //                 .blue,
-                              //               //             // radius: 25,
-                              //               //             child: Padding(
-                              //               //               padding:
-                              //               //               const EdgeInsets
-                              //               //                   .all(3.0),
-                              //               //               child: FaIcon(
-                              //               //                 FontAwesomeIcons
-                              //               //                     .chevronDown,
-                              //               //                 color:
-                              //               //                 Colors.white,
-                              //               //                 size: 20,
-                              //               //               ),
-                              //               //             )),
-                              //               //       ),
-                              //               //     ),
-                              //               //   ],
-                              //               // ),
-                              //             ],
-                              //           ),
-                              //           color:
-                              //               Colors.blueGrey.withOpacity(.3),
-                              //           borderRadius: 0,
-                              //           x: 5,
-                              //           y: 5),
-                              //     ),
-                              //   );
-                              // },
+
                               child: Container(
                                 alignment: Alignment.center,
                                 child: Text(
@@ -729,282 +504,20 @@ class Profile_screen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          color: Colors.blueGrey.withOpacity(.2),
+                          color: Colors.blueGrey.withOpacity(.1),
                           borderRadius: 10,
-                          x: 40,
-                          y: 40),
+                          BorderColor: Colors.black,
+                          BorderWidth: .5,
+                          x: 30,
+                          y: 30),
                     ),
                     const SizedBox(
                       width: 7,
                     ),
                     Expanded(
                       child: InkWell(
-                        onTap: () =>showDialog<String>(
-                          context: context,
-                          barrierColor: Colors.blueGrey.withOpacity(.2),
-                          useSafeArea: true,
 
-                          builder: (BuildContext context) => AlertDialog(
-
-                            insetPadding: const EdgeInsets.all(0.0),
-                            scrollable: false,
-                            shadowColor: Colors.transparent,
-
-
-                            // title: const Text('AlertDialog Title'),
-                            content:  Center(
-                              child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  child:    GestureDetector(
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: GlassBox(
-                                        widget: Stack(
-                                          children: [
-                                            Column(
-                                              children: [
-                                                const Spacer(),
-                                                Padding(
-                                                  padding:
-                                                  const EdgeInsets.all(
-                                                      15.0),
-                                                  child:
-                                                  GlassBoxWithBorder_Gradiant(
-                                                    widget: Padding(
-                                                      padding:
-                                                      const EdgeInsets
-                                                          .all(15.0),
-                                                      child: Column(
-                                                        children: [
-                                                          Text(
-                                                            'FCAI - Sadat City University',
-                                                            style:
-                                                            TextStyle(
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w900,
-                                                              fontSize:
-                                                              15,
-                                                              color: c1,
-                                                            ),
-                                                          ),
-                                                          const SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                          Row(
-                                                            crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                            mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                            children: [
-                                                              Container(
-                                                                decoration: const BoxDecoration(
-                                                                    shape:
-                                                                    BoxShape.circle,
-                                                                    boxShadow: [
-                                                                      BoxShadow(
-                                                                        color: Colors.black,
-                                                                        blurRadius: 0,
-                                                                        spreadRadius: 1,
-                                                                      ),
-                                                                    ]),
-                                                                child:
-                                                                const CircleAvatar(
-                                                                  radius:
-                                                                  50,
-                                                                  backgroundImage:
-                                                                  AssetImage(
-                                                                    'assets/images/profile.png',
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                width: 20,
-                                                              ),
-                                                              Column(
-                                                                crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                                children: [
-                                                                  Row(
-                                                                    children: [
-                                                                      const Text(
-                                                                        'Your Name : ',
-                                                                        style: TextStyle(
-                                                                          fontWeight: FontWeight.w900,
-                                                                          fontSize: 14,
-                                                                          color: Colors.teal,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        'Your Name ',
-                                                                        style: TextStyle(
-                                                                          fontWeight: FontWeight.w500,
-                                                                          fontSize: 14,
-                                                                          color: c1,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  const SizedBox(
-                                                                    height:
-                                                                    4,
-                                                                  ),
-                                                                  Row(
-                                                                    children: [
-                                                                      const Text(
-                                                                        'Your Level : ',
-                                                                        style: TextStyle(
-                                                                          fontWeight: FontWeight.w900,
-                                                                          fontSize: 14,
-                                                                          color: Colors.teal,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        '4 - CS',
-                                                                        style: TextStyle(
-                                                                          fontWeight: FontWeight.w500,
-                                                                          fontSize: 14,
-                                                                          color: c1,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  const SizedBox(
-                                                                    height:
-                                                                    4,
-                                                                  ),
-                                                                  Row(
-                                                                    children: [
-                                                                      const Text(
-                                                                        'Academic ID : ',
-                                                                        style: TextStyle(
-                                                                          fontWeight: FontWeight.w900,
-                                                                          fontSize: 14,
-                                                                          color: Colors.teal,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        '2031035',
-                                                                        style: TextStyle(
-                                                                          fontWeight: FontWeight.w500,
-                                                                          fontSize: 14,
-                                                                          color: c1,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  const SizedBox(
-                                                                    height:
-                                                                    4,
-                                                                  ),
-                                                                  Row(
-                                                                    children: [
-                                                                      const Text(
-                                                                        'National ID : ',
-                                                                        style: TextStyle(
-                                                                          fontWeight: FontWeight.w900,
-                                                                          fontSize: 14,
-                                                                          color: Colors.teal,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        '30204031700212',
-                                                                        style: TextStyle(
-                                                                          fontWeight: FontWeight.w500,
-                                                                          fontSize: 10,
-                                                                          color: c1,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    color: Colors.white
-                                                        .withOpacity(.5),
-                                                    borderRadius: 20,
-                                                    x: 18,
-                                                    y: 18,
-                                                    BorderWidth: 3,
-                                                    BorderColor:
-                                                    Colors.white,
-                                                  ),
-                                                ),
-                                                const Spacer(),
-                                              ],
-                                            ),
-                                            // Row(
-                                            //   children: [
-                                            //     Spacer(),
-                                            //     Padding(
-                                            //       padding:
-                                            //       const EdgeInsets.only(
-                                            //           right: 30.0),
-                                            //       child: InkWell(
-                                            //         onTap: () {
-                                            //           Navigator.pop(context);
-                                            //         },
-                                            //         child: CircleAvatar(
-                                            //             backgroundColor: Colors
-                                            //                 .blue,
-                                            //             // radius: 25,
-                                            //             child: Padding(
-                                            //               padding:
-                                            //               const EdgeInsets
-                                            //                   .all(3.0),
-                                            //               child: FaIcon(
-                                            //                 FontAwesomeIcons
-                                            //                     .chevronDown,
-                                            //                 color:
-                                            //                 Colors.white,
-                                            //                 size: 20,
-                                            //               ),
-                                            //             )),
-                                            //       ),
-                                            //     ),
-                                            //   ],
-                                            // ),
-                                          ],
-                                        ),
-                                        color:
-                                        Colors.transparent,
-                                        borderRadius: 0,
-                                        x: 5,
-                                        y: 5),
-                                  ),),
-                            ),
-                            elevation: 0,
-                            clipBehavior: Clip.none,
-                            surfaceTintColor: Colors.transparent,
-                            backgroundColor: Colors.transparent,
-                            contentPadding: EdgeInsets.zero,
-
-
-
-
-                            // actions: <Widget>[
-                            //   TextButton(
-                            //     onPressed: () => Navigator.pop(context, 'Cancel'),
-                            //     child: const Text('Cancel'),
-                            //   ),
-                            //   TextButton(
-                            //     onPressed: () => Navigator.pop(context, 'OK'),
-                            //     child: const Text('OK'),
-                            //   ),
-                            // ],
-                          ),
-                          // barrierColor: Colors.blueGrey.withOpacity(.5),
-
-                        ),
-                        child: GlassBox(
+                        child: GlassBoxWithBorder(
                             widget: Padding(
                               padding: const EdgeInsets.all(6.0),
                               child: Container(
@@ -1019,10 +532,12 @@ class Profile_screen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            color: Colors.blueGrey.withOpacity(.2),
+                            color: Colors.blueGrey.withOpacity(.1),
                             borderRadius: 10,
-                            x: 40,
-                            y: 40),
+                            BorderColor: Colors.black,
+                            BorderWidth: .5,
+                            x: 30,
+                            y: 30),
                       ),
                     ),
                   ],
@@ -1033,7 +548,7 @@ class Profile_screen extends StatelessWidget {
                   builder: (context) => Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(15.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
                             child: GlassBox(
                                 widget: Padding(
                                   padding: const EdgeInsets.all(10.0),
@@ -1078,7 +593,7 @@ class Profile_screen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                color: Colors.blueGrey.withOpacity(.25),
+                                color: Colors.blueGrey.withOpacity(.1),
                                 borderRadius: 12,
                                 x: 40,
                                 y: 40),
@@ -1088,137 +603,57 @@ class Profile_screen extends StatelessWidget {
                   fallback: (context) => const SizedBox(
                         height: 0,
                       )),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(
-              //     horizontal: 30.0,
-              //   ),
-              //   child: Container(
-              //     decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(20),
-              //         color: Colors.transparent,
-              //         border: Border.all(color: Colors.white, width: 0)),
-              //     alignment: AlignmentDirectional.topStart,
-              //     child: Padding(
-              //       padding: const EdgeInsets.all(15.0),
-              //       child: Row(
-              //         children: [
-              //
-              //           const FaIcon(
-              //             FontAwesomeIcons.solidUser,
-              //             size: 25,
-              //             color: Colors.black,
-              //           ),
-              //           const SizedBox(
-              //             width: 20,
-              //           ),
-              //           Text(
-              //             'Change User Name',
-              //             style: TextStyle(
-              //               fontSize: 16,
-              //               fontWeight: FontWeight.w700,
-              //               color: c1,
-              //             ),
-              //           ),
-              //           const Spacer(),
-              //           const FaIcon(
-              //             FontAwesomeIcons.circleChevronRight,
-              //             size: 25,
-              //             color: Colors.black,
-              //           ),
-              //
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 10,
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(
-              //     horizontal: 30.0,
-              //   ),
-              //   child: Container(
-              //     decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(20),
-              //         color: Colors.transparent,
-              //         border: Border.all(color: Colors.white, width: 0)),
-              //     alignment: AlignmentDirectional.topStart,
-              //     child: Padding(
-              //       padding: const EdgeInsets.all(15.0),
-              //       child: Row(
-              //         children: [
-              //
-              //           const FaIcon(
-              //             FontAwesomeIcons.solidEnvelope,
-              //             size: 25,
-              //             color: Colors.black,
-              //           ),
-              //           const SizedBox(
-              //             width: 20,
-              //           ),
-              //           Text(
-              //             'Change Email',
-              //             style: TextStyle(
-              //               fontSize: 16,
-              //               fontWeight: FontWeight.w700,
-              //               color: c1,
-              //             ),
-              //           ),
-              //           const Spacer(),
-              //           const FaIcon(
-              //             FontAwesomeIcons.circleChevronRight,
-              //             size: 25,
-              //             color: Colors.black,
-              //           ),
-              //
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 10,
-              // ),
+              SizedBox(height: 15,),
+
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 30.0,
                 ),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.transparent,
-                      border: Border.all(color: Colors.white, width: 0)),
-                  alignment: AlignmentDirectional.topStart,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      children: [
+                child: GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ForgetPasswordScreen(),
+                        ));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black, width: 0)),
+                    alignment: AlignmentDirectional.topStart,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Row(
+                        children: [
 
-                        const FaIcon(
-                          FontAwesomeIcons.key,
-                          size: 25,
-                          color: Colors.black,
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          'Change Password',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: c1,
+                          const FaIcon(
+                            FontAwesomeIcons.key,
+                            size: 25,
+                            color: Colors.black,
                           ),
-                        ),
-                        const Spacer(),
-                        const FaIcon(
-                          FontAwesomeIcons.circleChevronRight,
-                          size: 25,
-                          color: Colors.black,
-                        ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            'Change Password',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: c1,
+                            ),
+                          ),
+                          const Spacer(),
+                          const FaIcon(
+                            FontAwesomeIcons.circleChevronRight,
+                            size: 25,
+                            color: Colors.black,
+                          ),
 
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

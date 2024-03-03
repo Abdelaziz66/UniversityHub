@@ -24,19 +24,10 @@ import 'package:university_hup/Modules/Student/Student_Notification/Assignments_
 import 'package:university_hup/Modules/Student/Student_Notification/Ongoing_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Quizzes_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/UpcomingCourse_Screen.dart';
-
 import 'package:university_hup/Shared/constant.dart';
-
-// import '../../Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
-// import '../../Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
-// import '../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
-// import '../../Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
-// import '../../Models/STU_Model/User_Model/STU_Login_Model.dart';
-// import '../../Modules/Navigation_Screens/Course_Screen.dart';
-
-
+import 'package:university_hup/Shared/remote/DioHelper.dart';
 import '../../Models/STU_Model/User_Model/CurrentStudentInfoModel.dart';
-import '../remote/DioHelper.dart';
+
 import 'App_state.dart';
 
 class App_cubit extends Cubit<App_state> {

@@ -414,11 +414,14 @@ Widget Post({
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 '${news?.userName}',
                                 style: Theme.of(context).textTheme.subtitle1?.copyWith(
                                   color: Colors.black,
+                                  fontWeight: FontWeight.w800,
                                 ),
                                 // TextStyle(
                                 //   fontWeight: FontWeight.w900,
@@ -438,15 +441,15 @@ Widget Post({
                           ),
                           Text(
                             '${DateTime.parse(news!.createdAt!).year}-${DateTime.parse(news.createdAt!).month}'
-                                '-${DateTime.parse(news.createdAt!).day}  at  '
+                                '-${DateTime.parse(news.createdAt!).day} at '
                                 '${DateTime.parse(news.createdAt!).hour}:${DateTime.parse(news.createdAt!).minute}',
                            // '${news?.createdAt}',
                             style: TextStyle(
-                              // fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w800,
 
-                              fontSize: 13,
+                              fontSize: 12,
 
-                              color: c1,
+                              color: c1.withOpacity(.6),
                             ),
                           ),
                         ],
