@@ -3,13 +3,15 @@ import 'package:file_picker/file_picker.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+
 import '../../../Shared/Component/component.dart';
 import '../../../Shared/Cons_widget.dart';
 import '../../../Shared/Cubit/App_cubit.dart';
 import '../../../Shared/Cubit/App_state.dart';
 
-class STU_About_Assign_Screen extends StatelessWidget {
-  const STU_About_Assign_Screen({super.key});
+class INS_About_Assign_Screen extends StatelessWidget {
+  const INS_About_Assign_Screen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,23 +19,32 @@ class STU_About_Assign_Screen extends StatelessWidget {
       listener:(context,stata){},
       builder: (context,state){
         App_cubit cubit=App_cubit.get(context);
-       // STU_Course_Assign_Model? assign;
         List< PlatformFile>all_files=cubit.all_assign_files_List;
         return Scaffold(
+          // appBar: AppBar(
+          //   title: Text("Assignment"),
+          //   actions: [
+          //     TextButton(onPressed: (){
+          //       // cubit.AddPost(
+          //       //   postText:postTextController.text,
+          //       // );
+          //       // cubit.GetPosts();
+          //       Navigator.pop(context);
+          //     }, child: Text('Done',
+          //         style: Theme.of(context).textTheme.subtitle1
+          //     )),
+          //   ],
+          // ),
           body: SafeArea(
             child: Column(
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 30,),
-                defaultAppbar(
-                    text: cubit.currentCourseName,
-                    context: context),
+                defaultAppbar(context: context),
                 const SizedBox(height: 30,),
 
-
-
-                Text('${ cubit.assignName}',
-                  style: const TextStyle(
+                const Text('Material name',
+                  style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),

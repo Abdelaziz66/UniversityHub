@@ -2,7 +2,8 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:university_hup/Modules/LandScape/ForgetPasswordScreen.dart';
+
+import 'package:university_hup/Modules/LandScape/ResetPasswoed/ForgetPasswordScreen.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';

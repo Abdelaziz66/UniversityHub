@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
 
 import 'package:university_hup/Modules/Student/Student_Assignment/STU_About_Assign_Screen.dart';
 
@@ -14,7 +15,7 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
-import '../../../Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
+
 
 
 
