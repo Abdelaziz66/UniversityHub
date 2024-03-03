@@ -89,8 +89,20 @@ class STU_Lecture_Screen extends StatelessWidget {
                       builder:(context)=>ListView.separated(
                         itemBuilder: (context, index) => InkWell(
                             onTap: () {
+                              print(cubit.currentCycleId);
+                              print(courses[index].cycleId);
                               cubit.currentCourseName=courses[index].name;
-                              cubit.currentCycleId=courses[index].cycleId;
+                              if(cubit.currentCycleId!=courses[index].cycleId) {
+                               cubit.stuCoursesMatrialModel=[];
+                                cubit.stuLECTUREModel=[];
+                                cubit.stuLABModel=[];
+                                cubit.stuCoursesAssignModel=[];
+                                cubit.stuCoursesQuizlModel=[];
+                                cubit.isCycleIdChange=true;
+                              } else {
+                                cubit.isCycleIdChange=false;
+                              }
+                              cubit.currentCycleId=courses[index].cycleId!;
                               navigateTo(context,  STU_About_course());
                             },
                             child: Build_STU_Lec(

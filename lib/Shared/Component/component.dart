@@ -1959,7 +1959,7 @@ Widget Build_Quiz_Data_Widget(
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Center(
-                        child: quiz.status=='Available'
+                        child: quiz.status=='Not Available'
                        // isQuizStart[index]
                             ? TextButton(
                           onPressed: () {
