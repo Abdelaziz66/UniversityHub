@@ -3,10 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:university_hup/Modules/Instructor66/Student_Assignment/STU_Assign_Screen.dart';
-import 'package:university_hup/Modules/Instructor66/Student_Grade/STU_Grades_Screen.dart';
-import 'package:university_hup/Modules/Instructor66/Student_Material/STU_All_Lecture_Screen.dart';
-import 'package:university_hup/Modules/Instructor66/Student_Quizzes/STU_Quizes_Screen.dart';
+import 'package:university_hup/Modules/Instructor/Instructor_Assignment/INS_Assign_Screen.dart';
+import 'package:university_hup/Modules/Instructor/Instructor_Grade/INS_Grades_Screen.dart';
+import 'package:university_hup/Modules/Instructor/Instructor_Material/INS_All_Lecture_Screen.dart';
+import 'package:university_hup/Modules/Instructor/Instructor_Quizzes/INS_Quizes_Screen.dart';
+
 
 import 'package:university_hup/Modules/Student/Student_Assignment/STU_Assign_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Grade/STU_Course_Grades.dart';
