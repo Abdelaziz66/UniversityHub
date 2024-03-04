@@ -150,6 +150,21 @@ class Stu_Get_Course_Material_ErrorState extends App_state {
   Stu_Get_Course_Material_ErrorState(this.error);
 }
 
+//-----------------get course material files----------
+class Stu_Get_Course_Material_File_LoadingState extends App_state {}
+
+class Stu_Get_Course_Material_File_SuccessState extends App_state {
+
+
+  Stu_Get_Course_Material_File_SuccessState();
+
+}
+
+class Stu_Get_Course_Material_File_ErrorState extends App_state {
+  String? error;
+  Stu_Get_Course_Material_File_ErrorState(this.error);
+}
+
 //-----------------------stu get course Assign-----
 
 class Stu_Get_Course_Assign_LoadingState extends App_state {}

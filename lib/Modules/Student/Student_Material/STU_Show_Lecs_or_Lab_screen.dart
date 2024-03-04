@@ -1,4 +1,5 @@
 
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -27,9 +28,9 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
       listener: (context,state){},
       builder: (context,state){
         App_cubit cubit=App_cubit.get(context);
-        List<GetCourseMaterialsModel>courseMaterial=cubit.stuCoursesMatrialModel;
-        List<GetCourseMaterialsModel>lectures=cubit.stuLECTUREModel;
-        List<GetCourseMaterialsModel>labs=cubit.stuLABModel;
+      //  List<GetCourseMaterialsModel>courseMaterial=cubit.stuCoursesMatrialModel;
+        List<GetCourseMaterialFileModel>files=cubit.stuCoursesMatrialFileModel;
+       // List<GetCourseMaterialsModel>labs=cubit.stuLABModel;
         return Scaffold(
           // appBar: AppBar(
           //   title: Text('Material Name'),
@@ -107,23 +108,29 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: .95,
-                        ),
-                        itemCount: labs.length,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index)
-                        {
-                          return STU_Build_Lec_View_Widget(
-                              index: index,
-                              context: context,
-                              courseMaterial:cubit.isLec!?lectures[index]:labs[index]
-                          );
-                        }
+                    child:ConditionalBuilder(
+                      condition: files.isNotEmpty&&state is !Stu_Get_Course_Material_File_LoadingState ,
+                      builder:(context)=>GridView.builder(
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                            childAspectRatio: .95,
+                          ),
+                          itemCount: files.length,
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (context, index)
+                          {
+                            return STU_Build_Lec_View_Widget(
+                                index: index,
+                                context: context,
+                                file:files[index]//cubit.isLec!?lectures[index]:labs[index]
+                            );
+                          }
+                      ),
+
+
+                      fallback:(context)=> Center(child: CircularProgressIndicator(),),
                     ),
                   ),
 

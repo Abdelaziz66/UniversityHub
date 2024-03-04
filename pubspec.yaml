@@ -39,7 +39,7 @@ dependencies:
   font_awesome_flutter: ^10.5.0
   bloc: ^8.1.1
   flutter_bloc: ^8.1.2
-  persistent_bottom_nav_bar: ^5.0.2
+  #persistent_bottom_nav_bar: ^5.0.2
   conditional_builder_null_safety: ^0.0.6
   file_picker: ^6.1.1
   open_file: ^3.3.2

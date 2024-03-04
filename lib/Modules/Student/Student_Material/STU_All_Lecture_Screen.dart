@@ -235,6 +235,7 @@ class STU_Matrial_Screen extends StatelessWidget {
                                 crossAxisCount: 2, childAspectRatio: 2.5),
                             itemBuilder: (context, index) => InkWell(
                                 onTap: () {
+                                  cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);
                                   cubit.isLec=true;
                                   navigateTo(context, STU_Show_Material_Lec_Or_Sec());
                                 },
@@ -260,6 +261,9 @@ class STU_Matrial_Screen extends StatelessWidget {
                                   crossAxisCount: 2, childAspectRatio: 2.5),
                           itemBuilder: (context, index) => InkWell(
                               onTap: () {
+                                print('dddddd');
+                                cubit.StuGetCourseMaterialFiles(lecId: labs[index].lectureId);
+
                                 cubit.isLec=false;
                                 navigateTo(context, STU_Show_Material_Lec_Or_Sec());
                               },

@@ -89,23 +89,12 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                       physics: const NeverScrollableScrollPhysics(),
                       onPageChanged: (index) {
                         print(isBack);
-                        print(ques[index-1].text,);
+                       // print(ques[index-1].text,);
                         print('page index ${index}');
                         print(cubit.quizAnswerSelected);
                         print(ques[index].id);
-                        if(isBack==false){
-                        cubit.submitQuizAnswers.add({
-                          'questionId':ques[index-1].id,
-                          'answerId':cubit.quizAnswerSelected
-                        });}
-                        else if(isBack==true){
-                          // cubit.submitQuizAnswers[index]={
-                          //   'questionId':ques[index].id,
-                          //   'answerId':cubit.quizAnswerSelected
-                          // };
-                        //  cubit.submitQuizAnswers[index]['questionId']=ques[index].id;
-                          cubit.submitQuizAnswers[index]['answerId']=cubit.quizAnswerSelected;
-                        }
+
+
                         if (index == ques.length - 1) {
                           setState(() {
                             islast = true;
@@ -148,7 +137,9 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                       ),
                         child: IconButton(
                           onPressed: (){
-
+                            setState(() {
+                              islast = false;
+                            });
                            // print(boardcontroller.initialPage);
                             boardcontroller.previousPage (
                               duration: const Duration(
@@ -172,17 +163,33 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                               containerWidth: double.infinity,
                               containerHeight: 50,
                               onPressed: () {
-                                setState(() {
-                                  isBack=false;
-                                });
-                                if (islast) {
+                                if(isBack==false){
                                   cubit.submitQuizAnswers.add({
-                                    'questionId':ques[ques.length-1].id,
+                                    'questionId':ques[boardcontroller.page!.toInt()].id,
                                     'answerId':cubit.quizAnswerSelected
-                                  });
+                                  }
+                                  );}
+                                else if(isBack==true){
+                                  // cubit.submitQuizAnswers[index]={
+                                  //   'questionId':ques[index].id,
+                                  //   'answerId':cubit.quizAnswerSelected
+                                  // };
+                                  //  cubit.submitQuizAnswers[index]['questionId']=ques[index].id;
+
+                                  cubit.submitQuizAnswers[boardcontroller.page!.toInt()]['answerId']=cubit.quizAnswerSelected;
+                                }
+                                if (islast) {
+
+                                  print('ddddd${boardcontroller.page?.toInt()}');
+
+                                  // cubit.submitQuizAnswers.add({
+                                  //   'questionId':ques[ques.length-1].id,
+                                  //   'answerId':cubit.quizAnswerSelected
+                                  // });
                                   navigateTo(context, const STU_Quiz_Finish_Screen());
                                   // submit;
                                 } else {
+                                  print('ddddd${boardcontroller.page?.toInt()}');
                                   boardcontroller.nextPage(
                                     duration: const Duration(
                                       milliseconds: 750,
@@ -191,7 +198,9 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                                   );
 
                                 }
-
+                                setState(() {
+                                  isBack=false;
+                                });
                               },
                               text: islast ? 'Submit' : 'Next',
                             ),
