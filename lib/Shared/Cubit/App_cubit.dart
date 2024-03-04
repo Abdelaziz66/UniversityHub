@@ -565,11 +565,11 @@ List <int> stuAllGrades=[10,30,50,45,35];
       });
       print('lectures:');
       stuLECTUREModel.forEach((element) {
-        print(element.type);
+        print(element.lectureId);
       });
       print('Labs:');
       stuLABModel.forEach((element) {
-        print(element.type);
+        print(element.lectureId);
       });
     }).catchError((error) {
       emit(Stu_Get_Course_Material_ErrorState(error.toString()));
@@ -579,6 +579,60 @@ List <int> stuAllGrades=[10,30,50,45,35];
     isCycleIdChange=false;
 
   }
+
+  List<GetCourseMaterialFileModel> stuCoursesMatrialFileModel=[];
+  // List<GetCourseMaterialsModel> stuLECTUREModel=[];
+  // List<GetCourseMaterialsModel> stuLABModel=[];
+
+  void StuGetCourseMaterialFiles ({
+    //required token,
+    required lecId,
+  }
+  ) {
+    stuCoursesMatrialFileModel=[];
+   // print('lecId=${lecId}');
+    //if (stuCoursesMatrialModel.isEmpty || isCycleIdChange==true){
+      emit(Stu_Get_Course_Material_File_LoadingState());
+    Dio_Helper.GetData(
+      url: 'Students/Getfilesoflecture?lectureId=${lecId}',
+      //STU_COURSE_MATERIAL,
+      token: Tokenn,
+    ).then((value) {
+      if (value.statusCode == 200) {
+
+        print('get course material File true');
+        List Json = value.data;
+        for (var element in Json) {
+          stuCoursesMatrialFileModel.add(GetCourseMaterialFileModel.fromJson(element));
+        }
+        emit(Stu_Get_Course_Material_File_SuccessState());
+      }
+      // stuCoursesMatrialModel.forEach((element) {
+      //   if (element.type == 'Lecture') {
+      //       stuLECTUREModel.add(element);
+      //   }
+      //   else if (element.type == 'Lab') {
+      //       stuLABModel.add(element);
+      //     }
+      // });
+      print('Files:');
+      stuCoursesMatrialFileModel.forEach((element) {
+        print(element.fileName);
+      });
+
+    }).catchError((error) {
+      emit(Stu_Get_Course_Material_File_ErrorState(error.toString()));
+      print(error.toString());
+    });
+  //}
+   //isCycleIdChange=false;
+  }
+
+
+
+
+
+
   //----------------------STU assign -----------------
 
  String ? assignName;
@@ -677,12 +731,10 @@ List <int> stuAllGrades=[10,30,50,45,35];
           for (var element in ques) {
             questionModel.add(Questions.fromJson(element));
           }
-
           // List<Map<String,dynamic>> answer =value.data['questions']['answers'];
           // for (var element in answer) {
           //   answersModel.add(Answers.fromJson(element['answers']));
           // }
-
           emit(Stu_Get_Quiz_Data_SuccessState());
         }
         questionModel.forEach((element) {
@@ -691,19 +743,14 @@ List <int> stuAllGrades=[10,30,50,45,35];
         // answersModel.forEach((element) {
         //   print('Quiz answers------- ${element.text}');
         // });
-
       }).catchError((error) {
         emit(Stu_Get_Quiz_Data_ErrorState(error.toString()));
         print(error.toString());
       });
     }
   }
-
 List<Map<String,dynamic>>submitQuizAnswers=[];
-
-
   List<Map<String,dynamic>>QuizAnswersResponse=[];
-
   //List<SubmitQuizModel>? submitQuizModel;
   void SumitQuiz(
   //  required quizId,
@@ -735,8 +782,6 @@ List<Map<String,dynamic>>submitQuizAnswers=[];
           print(element.keys);
           print(element.values);
         });
-
-
         // for (var element in json) {
         //   QuizAnswersResponse.add({
         //     '${element.keys}':element.values

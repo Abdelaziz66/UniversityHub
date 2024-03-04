@@ -47,7 +47,7 @@ class Profile_screen extends StatelessWidget {
                               //   ),
                               // ]
                           ),
-                          child: const Padding(
+                          child:  Padding(
                             padding: EdgeInsets.all(10.0),
                             child: CircleAvatar(
                               radius: 48,
@@ -57,7 +57,9 @@ class Profile_screen extends StatelessWidget {
                                 radius: 45,
                                 backgroundColor: Colors.white,
                                 backgroundImage:
-                                    AssetImage('assets/images/profile.png'),
+                                    NetworkImage('${cubit.studentInfoModel?.imagePath}'
+                                        //'assets/images/profile.png'
+                                      ),
                               ),
                             ),
                           ),

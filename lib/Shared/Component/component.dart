@@ -1420,6 +1420,7 @@ Widget Build_Lec_View_Widget(
 
 Widget STU_Build_Lec_View_Widget({
   GetCourseMaterialsModel ? courseMaterial,
+  GetCourseMaterialFileModel ? file,
   index,
   context,
 }) {
@@ -1464,6 +1465,7 @@ Widget STU_Build_Lec_View_Widget({
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
                Text(
+                 '${file?.fileName}'??
                 '${courseMaterial?.lectureName}',
                 style: TextStyle(
                   color: Colors.black,

@@ -93,9 +93,10 @@ class STU_Lecture_Screen extends StatelessWidget {
                               print(courses[index].cycleId);
                               cubit.currentCourseName=courses[index].name;
                               if(cubit.currentCycleId!=courses[index].cycleId) {
-                               cubit.stuCoursesMatrialModel=[];
+                                cubit.stuCoursesMatrialModel=[];
                                 cubit.stuLECTUREModel=[];
                                 cubit.stuLABModel=[];
+                                //cubit.stuCoursesMatrialFileModel=[];
                                 cubit.stuCoursesAssignModel=[];
                                 cubit.stuCoursesQuizlModel=[];
                                 cubit.isCycleIdChange=true;
