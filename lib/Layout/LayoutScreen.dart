@@ -1,13 +1,14 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:university_hup/Modules/Student/Student_Grade/STU_Grades_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Drawer/Edit_Profile_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Notification_Screen.dart';
-
 
 import 'package:university_hup/Shared/Component/component.dart';
 import '../Shared/Cubit/App_cubit.dart';
@@ -24,14 +25,16 @@ class Layout_Screen extends StatelessWidget {
       listener: (context, state) => {},
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
+        List<IconData>recent=[
+          FontAwesomeIcons.penClip,FontAwesomeIcons.bookBookmark,FontAwesomeIcons.featherPointed,FontAwesomeIcons.book,
+          FontAwesomeIcons.bookBookmark,FontAwesomeIcons.penClip,FontAwesomeIcons.featherPointed,FontAwesomeIcons.book,
+        ];
         return Scaffold(
           key: scafoldkey,
-
           drawer: Drawer(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.black,
             elevation: 0,
-
             child: GlassBox(
                 widget: Padding(
                   padding: const EdgeInsets.all(15.0),
@@ -39,7 +42,9 @@ class Layout_Screen extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          const SizedBox(height: 50,),
+                          const SizedBox(
+                            height: 50,
+                          ),
                           const CircleAvatar(
                             backgroundColor: Colors.white,
                             radius: 80,
@@ -55,17 +60,17 @@ class Layout_Screen extends StatelessWidget {
                             height: 15,
                           ),
                           Text(
-                            rol=='Student'?'${cubit.stu_login_Model?.displayName}':'Hi, Dr Ahmed',
+                            rol == 'Student'
+                                ? '${cubit.stu_login_Model?.displayName}'
+                                : 'Hi, Dr Ahmed',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style:  TextStyle(
-                              fontSize : 20,
-                              fontWeight : FontWeight.w700,
-                              color :c1.withOpacity(.8),
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              color: c1.withOpacity(.8),
                             ),
                           ),
-
-
                         ],
                       ),
                       const SizedBox(
@@ -80,9 +85,11 @@ class Layout_Screen extends StatelessWidget {
                         height: 20,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                        ),
                         child: GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             cubit.D_value = 0;
                             cubit.Nav_Bar_Function(index: 0);
                             Navigator.pop(context);
@@ -90,7 +97,10 @@ class Layout_Screen extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color:cubit.D_value==0||cubit.Nav_Bar_index==0? Colors.blue.withOpacity(.8):Colors.transparent,
+                              color:
+                                  cubit.D_value == 0 || cubit.Nav_Bar_index == 0
+                                      ? Colors.blue.withOpacity(.8)
+                                      : Colors.transparent,
                             ),
                             alignment: AlignmentDirectional.topStart,
                             child: Padding(
@@ -101,7 +111,10 @@ class Layout_Screen extends StatelessWidget {
                                   FaIcon(
                                     FontAwesomeIcons.house,
                                     size: 20,
-                                    color:cubit.D_value==0||cubit.Nav_Bar_index==0? Colors.white:c1,
+                                    color: cubit.D_value == 0 ||
+                                            cubit.Nav_Bar_index == 0
+                                        ? Colors.white
+                                        : c1,
                                   ),
                                   const SizedBox(
                                     width: 5,
@@ -113,7 +126,10 @@ class Layout_Screen extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w700,
-                                        color:cubit.D_value==0||cubit.Nav_Bar_index==0? Colors.white:c1,
+                                        color: cubit.D_value == 0 ||
+                                                cubit.Nav_Bar_index == 0
+                                            ? Colors.white
+                                            : c1,
                                       ),
                                     ),
                                   ),
@@ -127,18 +143,24 @@ class Layout_Screen extends StatelessWidget {
                         height: 10,
                       ),
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           cubit.D_value = 1;
                           cubit.SetState_G();
-                          Navigator.push(context,MaterialPageRoute(builder: (context) => Edit_Profile_screen(),));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Edit_Profile_screen(),
+                              ));
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0,),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0,
+                          ),
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               // color:cubit.D_value==1? Colors.blue.withOpacity(.8):Colors.transparent,
-                              color:Colors.transparent,
+                              color: Colors.transparent,
                             ),
                             alignment: AlignmentDirectional.topStart,
                             child: Padding(
@@ -150,7 +172,7 @@ class Layout_Screen extends StatelessWidget {
                                     FontAwesomeIcons.solidUser,
                                     size: 20,
                                     // color:cubit.D_value==2? Colors.white:c1,
-                                    color:c1,
+                                    color: c1,
                                   ),
                                   const SizedBox(
                                     width: 5,
@@ -163,7 +185,7 @@ class Layout_Screen extends StatelessWidget {
                                         fontSize: 20,
                                         fontWeight: FontWeight.w700,
                                         // color:cubit.D_value==2? Colors.white:c1,
-                                        color:c1,
+                                        color: c1,
                                       ),
                                     ),
                                   ),
@@ -177,17 +199,23 @@ class Layout_Screen extends StatelessWidget {
                         height: 10,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                        ),
                         child: GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             cubit.D_value = 2;
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => STUAllGradesScreen(),));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => STUAllGradesScreen(),
+                                ));
                           },
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               // color:cubit.D_value==1? Colors.blue.withOpacity(.8):Colors.transparent,
-                              color:Colors.transparent,
+                              color: Colors.transparent,
                             ),
                             alignment: AlignmentDirectional.topStart,
                             child: Padding(
@@ -199,7 +227,7 @@ class Layout_Screen extends StatelessWidget {
                                     FontAwesomeIcons.chartSimple,
                                     size: 20,
                                     // color:cubit.D_value==2? Colors.white:c1,
-                                    color:c1,
+                                    color: c1,
                                   ),
                                   const SizedBox(
                                     width: 5,
@@ -212,7 +240,7 @@ class Layout_Screen extends StatelessWidget {
                                         fontSize: 20,
                                         fontWeight: FontWeight.w700,
                                         // color:cubit.D_value==2? Colors.white:c1,
-                                        color:c1,
+                                        color: c1,
                                       ),
                                     ),
                                   ),
@@ -225,11 +253,12 @@ class Layout_Screen extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                        ),
                         child: GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             cubit.D_value = 3;
                             Navigator.pop(context);
                           },
@@ -237,7 +266,7 @@ class Layout_Screen extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               // color:cubit.D_value==1? Colors.blue.withOpacity(.8):Colors.transparent,
-                              color:Colors.transparent,
+                              color: Colors.transparent,
                             ),
                             alignment: AlignmentDirectional.topStart,
                             child: Padding(
@@ -249,7 +278,7 @@ class Layout_Screen extends StatelessWidget {
                                     FontAwesomeIcons.gear,
                                     size: 20,
                                     // color:cubit.D_value==2? Colors.white:c1,
-                                    color:c1,
+                                    color: c1,
                                   ),
                                   const SizedBox(
                                     width: 5,
@@ -262,7 +291,7 @@ class Layout_Screen extends StatelessWidget {
                                         fontSize: 20,
                                         fontWeight: FontWeight.w700,
                                         // color:cubit.D_value==2? Colors.white:c1,
-                                        color:c1,
+                                        color: c1,
                                       ),
                                     ),
                                   ),
@@ -276,9 +305,11 @@ class Layout_Screen extends StatelessWidget {
                         height: 10,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0,),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                        ),
                         child: GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             cubit.D_value = 4;
                             Navigator.pop(context);
                           },
@@ -286,7 +317,7 @@ class Layout_Screen extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               // color:cubit.D_value==1? Colors.blue.withOpacity(.8):Colors.transparent,
-                              color:Colors.transparent,
+                              color: Colors.transparent,
                             ),
                             alignment: AlignmentDirectional.topStart,
                             child: Padding(
@@ -298,7 +329,7 @@ class Layout_Screen extends StatelessWidget {
                                     FontAwesomeIcons.rightFromBracket,
                                     size: 20,
                                     // color:cubit.D_value==2? Colors.white:c1,
-                                    color:c1,
+                                    color: c1,
                                   ),
                                   const SizedBox(
                                     width: 5,
@@ -311,7 +342,7 @@ class Layout_Screen extends StatelessWidget {
                                         fontSize: 20,
                                         fontWeight: FontWeight.w700,
                                         // color:cubit.D_value==2? Colors.white:c1,
-                                        color:c1,
+                                        color: c1,
                                       ),
                                     ),
                                   ),
@@ -321,9 +352,7 @@ class Layout_Screen extends StatelessWidget {
                           ),
                         ),
                       ),
-
                       const Spacer(),
-
                     ],
                   ),
                 ),
@@ -333,12 +362,10 @@ class Layout_Screen extends StatelessWidget {
                 y: 40),
           ),
           backgroundColor: Colors.white,
-
           body: Stack(
             children: [
               Column(
                 children: [
-
                   Row(
                     children: [
                       Expanded(
@@ -394,7 +421,6 @@ class Layout_Screen extends StatelessWidget {
               )),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-
                 children: [
                   Row(
                     children: [
@@ -414,13 +440,17 @@ class Layout_Screen extends StatelessWidget {
                               children: [
                                 Padding(
                                   padding: EdgeInsets.only(top: 25.0),
-                                  child: FaIcon(FontAwesomeIcons.solidWindowMinimize,size: 25),
+                                  child: FaIcon(
+                                      FontAwesomeIcons.solidWindowMinimize,
+                                      size: 25),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(top: 0.0),
-                                  child: FaIcon(FontAwesomeIcons.windowMinimize,size: 40,),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.windowMinimize,
+                                    size: 40,
+                                  ),
                                 ),
-
                               ],
                             ),
                           ),
@@ -439,16 +469,98 @@ class Layout_Screen extends StatelessWidget {
                       // ),
 
                       const Spacer(),
-                      // Padding(
-                      //   padding: const EdgeInsets.only(right: 15.0, top: 30),
-                      //   child: IconButton(
-                      //       onPressed: () {},
-                      //       icon: FaIcon(
-                      //         FontAwesomeIcons.qrcode,
-                      //         color: c1,
-                      //         size: 30,
-                      //       )),
-                      // ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15.0, top: 30),
+                        child: IconButton(
+                            onPressed: () => showDialog<String>(
+                                  context: context,
+                                  barrierColor: Colors.black.withOpacity(.02),
+                                  useSafeArea: true,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    insetPadding: const EdgeInsets.all(0.0),
+                                    scrollable: false,
+                                    shadowColor: Colors.transparent,
+
+                                    // title: const Text('AlertDialog Title'),
+                                    content: Center(
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: GlassBox(
+                                              widget: Stack(
+                                                children: [
+                                                  Column(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 60,
+                                                      ),
+                                                      Text(
+                                                        'Recent Activity',
+                                                        style: TextStyle(
+                                                            fontSize: 25,
+                                                            fontWeight:
+                                                                FontWeight.w900,
+                                                            color: Colors.black
+                                                                .withOpacity(
+                                                                    .7)),
+                                                      ),
+                                                      Expanded(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  top: 40,
+                                                                  left: 15,
+                                                                  bottom: 0,
+                                                                  right: 15),
+                                                          child: ListView
+                                                              .separated(
+                                                            physics:
+                                                                const BouncingScrollPhysics(),
+                                                            itemBuilder: (context,
+                                                                    index) =>
+                                                                Notification_Card(icon: recent[index]),
+                                                            separatorBuilder:
+                                                                (context,
+                                                                        index) =>
+                                                                    Container(
+                                                              height: 15,
+                                                              color: Colors
+                                                                  .transparent,
+                                                            ),
+                                                            itemCount: 8,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              color: Colors.transparent,
+                                              borderRadius: 0,
+                                              x: 50,
+                                              y: 50),
+                                        ),
+                                      ),
+                                    ),
+                                    elevation: 0,
+                                    clipBehavior: Clip.none,
+                                    surfaceTintColor: Colors.transparent,
+                                    backgroundColor: Colors.transparent,
+                                    contentPadding: EdgeInsets.zero,
+                                  ),
+                                ),
+                            icon: FaIcon(
+                              FontAwesomeIcons.clockRotateLeft,
+                              color: c1,
+                              size: 25,
+                            )),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(right: 15.0, top: 30),
                         child: Stack(
@@ -456,7 +568,12 @@ class Layout_Screen extends StatelessWidget {
                           children: [
                             IconButton(
                                 onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Notification_Screen(),));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const Notification_Screen(),
+                                      ));
                                 },
                                 icon: FaIcon(
                                   FontAwesomeIcons.bell,
@@ -464,11 +581,18 @@ class Layout_Screen extends StatelessWidget {
                                   size: 30,
                                 )),
                             const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 10.0,horizontal: 8),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 8),
                               child: CircleAvatar(
                                 radius: 8,
                                 backgroundColor: Colors.red,
-                                child: Text('3',style: TextStyle(color: Colors.white,fontSize: 13,fontWeight: FontWeight.w700),),
+                                child: Text(
+                                  '3',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ),
                             ),
                           ],
@@ -480,60 +604,76 @@ class Layout_Screen extends StatelessWidget {
                   // Choose the nav bar style with this property.,
 
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0,horizontal: 5),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 4.0, horizontal: 5),
                     child: GlassBox(
-                        widget: Padding(
-                          padding: const EdgeInsets.all(1.0),
-                          child: BottomNavigationBar(
-                            backgroundColor: Colors.transparent,
-                            elevation: 0,
-
-                            fixedColor: Colors.lightBlueAccent,
-                            unselectedIconTheme: const IconThemeData(
-                              size: 23,
-                            ),
-                            selectedIconTheme: const IconThemeData(
-
-                              size: 25,
-                            ),
-                            showSelectedLabels: false,
-                            showUnselectedLabels: false,
-                            unselectedItemColor: Colors.white,
-
-                            type: BottomNavigationBarType.fixed,
-                            items: const [
-                              BottomNavigationBarItem(
-                                  icon: FaIcon(FontAwesomeIcons.house),
-                                  label: 'Home'),
-                              BottomNavigationBarItem(
-                                  icon: FaIcon(FontAwesomeIcons.newspaper),
-                                  label: 'News'),
-                              BottomNavigationBarItem(
-                                  icon: FaIcon(FontAwesomeIcons.book),
-                                  label: 'Lecture'),
-                              BottomNavigationBarItem(
-                                  icon: FaIcon(FontAwesomeIcons.calendarCheck,),
-                                  label: 'Calendar'),
-                              BottomNavigationBarItem(
-                                  icon: FaIcon(FontAwesomeIcons.user),
-                                  label: 'Profile'),
-                            ],
-                            currentIndex: cubit.Nav_Bar_index,
-                            onTap: (index) {
-                              cubit.Nav_Bar_Function(index: index);
-                            },
+                      widget: Padding(
+                        padding: const EdgeInsets.all(0.0),
+                        child: BottomNavigationBar(
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          fixedColor: Colors.lightBlueAccent,
+                          unselectedIconTheme: const IconThemeData(
+                            size: 23,
                           ),
+                          selectedIconTheme: const IconThemeData(
+                            size: 25,
+                          ),
+                          showSelectedLabels: false,
+                          showUnselectedLabels: false,
+                          landscapeLayout:
+                              BottomNavigationBarLandscapeLayout.spread,
+                          unselectedItemColor: Colors.white,
+                          type: BottomNavigationBarType.fixed,
+                          items: [
+                            BottomNavigationBarItem(
+                                icon: FaIcon(FontAwesomeIcons.house),
+                                label: 'Home'),
+                            BottomNavigationBarItem(
+                                icon: FaIcon(FontAwesomeIcons.newspaper),
+                                label: 'News'),
+                            BottomNavigationBarItem(
+                                icon: Icon(FontAwesomeIcons.book),
+                                label: 'Lecture'),
+                            BottomNavigationBarItem(
+                                icon: FaIcon(
+                                  FontAwesomeIcons.calendar,
+                                ),
+                                label: 'Calendar'),
+                            BottomNavigationBarItem(
+                                icon: FaIcon(FontAwesomeIcons.user),
+                                label: 'Profile'),
+                            // BottomNavigationBarItem(
+                            //
+                            //     icon: Container(height: 25,child: Image.asset('assets/icons/home.png',color: Colors.white,)),
+                            //     label: 'Home'),
+                            // BottomNavigationBarItem(
+                            //     icon: Container(height: 25,child: Image.asset('assets/icons/news.png',color: Colors.white,)),
+                            //     label: 'News'),
+                            // BottomNavigationBarItem(
+                            //     icon: Container(height: 25,child: Image.asset('assets/icons/bo.png',color: Colors.white,)),
+                            //     label: 'Lecture'),
+                            // BottomNavigationBarItem(
+                            //     icon: Container(height: 25,child: Image.asset('assets/icons/calender.png',color: Colors.white,)),
+                            //     label: 'Calendar'),
+                            // BottomNavigationBarItem(
+                            //     icon: Container(height: 25,child: Image.asset('assets/icons/user.png',color: Colors.white,)),
+                            //     label: 'Profile'),
+                          ],
+                          currentIndex: cubit.Nav_Bar_index,
+                          onTap: (index) {
+                            cubit.Nav_Bar_Function(index: index);
+                          },
                         ),
-                        color: Colors.black,
-                        borderRadius: 25,
-                        x: 10,
-                        y: 10
+                      ),
+                      color: Colors.black,
+                      borderRadius: 25,
+                      x: 10,
+                      y: 10,
                     ),
                   ),
                 ],
               ),
-
-
             ],
           ),
         );

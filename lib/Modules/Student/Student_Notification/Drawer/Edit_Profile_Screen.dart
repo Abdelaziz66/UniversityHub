@@ -113,6 +113,7 @@ class Edit_Profile_screen extends StatelessWidget {
                         height: 30,
                       ),
 
+
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 30.0,
@@ -129,7 +130,7 @@ class Edit_Profile_screen extends StatelessWidget {
                               children: [
 
                                 const FaIcon(
-                                  FontAwesomeIcons.solidUser,
+                                  FontAwesomeIcons.camera,
                                   size: 25,
                                   color: Colors.black,
                                 ),
@@ -137,53 +138,7 @@ class Edit_Profile_screen extends StatelessWidget {
                                   width: 20,
                                 ),
                                 Text(
-                                  'Change User Name',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: c1,
-                                  ),
-                                ),
-                                const Spacer(),
-                                const FaIcon(
-                                  FontAwesomeIcons.circleChevronRight,
-                                  size: 25,
-                                  color: Colors.black,
-                                ),
-
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 30.0,
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.transparent,
-                              border: Border.all(color: Colors.black, width: 0)),
-                          alignment: AlignmentDirectional.topStart,
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Row(
-                              children: [
-
-                                const FaIcon(
-                                  FontAwesomeIcons.solidEnvelope,
-                                  size: 25,
-                                  color: Colors.black,
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  'Change Email',
+                                  'Change Image',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w700,

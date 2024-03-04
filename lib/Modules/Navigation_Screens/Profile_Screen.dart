@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:university_hup/Modules/LandScape/ResetPasswoed/ForgetPasswordScreen.dart';
+import 'package:university_hup/Modules/Student/Student_Notification/Drawer/Edit_Profile_Screen.dart';
 import 'package:university_hup/Shared/Component/component.dart';
+import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
@@ -212,11 +214,43 @@ class Profile_screen extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: GlassBoxWithBorder(
+                      child: InkWell(
+                        onTap: (){
+                          navigateTo(context, Edit_Profile_screen());
+                        },
+
+                        child: GlassBox(
+                            widget: Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: Container(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Edit account',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                    color: c1,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            color: Colors.blueGrey.withOpacity(.15),
+                            borderRadius: 10,
+
+                            x: 30,
+                            y: 30),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 7,
+                    ),
+                    Expanded(
+                      child: GlassBox(
                           widget: Padding(
                             padding: const EdgeInsets.all(6.0),
                             child: InkWell(
-                              onTap: () =>showDialog<String>(
+                              onTap: () =>
+                                  showDialog<String>(
                                 context: context,
                                 barrierColor: Colors.black.withOpacity(.3),
                                 useSafeArea: true,
@@ -430,37 +464,7 @@ class Profile_screen extends StatelessWidget {
                                                     const Spacer(flex: 1,),
                                                   ],
                                                 ),
-                                                // Row(
-                                                //   children: [
-                                                //     Spacer(),
-                                                //     Padding(
-                                                //       padding:
-                                                //       const EdgeInsets.only(
-                                                //           right: 30.0),
-                                                //       child: InkWell(
-                                                //         onTap: () {
-                                                //           Navigator.pop(context);
-                                                //         },
-                                                //         child: CircleAvatar(
-                                                //             backgroundColor: Colors
-                                                //                 .blue,
-                                                //             // radius: 25,
-                                                //             child: Padding(
-                                                //               padding:
-                                                //               const EdgeInsets
-                                                //                   .all(3.0),
-                                                //               child: FaIcon(
-                                                //                 FontAwesomeIcons
-                                                //                     .chevronDown,
-                                                //                 color:
-                                                //                 Colors.white,
-                                                //                 size: 20,
-                                                //               ),
-                                                //             )),
-                                                //       ),
-                                                //     ),
-                                                //   ],
-                                                // ),
+
                                               ],
                                             ),
                                             color:
@@ -479,16 +483,7 @@ class Profile_screen extends StatelessWidget {
 
 
 
-                                  // actions: <Widget>[
-                                  //   TextButton(
-                                  //     onPressed: () => Navigator.pop(context, 'Cancel'),
-                                  //     child: const Text('Cancel'),
-                                  //   ),
-                                  //   TextButton(
-                                  //     onPressed: () => Navigator.pop(context, 'OK'),
-                                  //     child: const Text('OK'),
-                                  //   ),
-                                  // ],
+
                                 ),
 
 
@@ -507,42 +502,14 @@ class Profile_screen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          color: Colors.blueGrey.withOpacity(.1),
+                          color: Colors.blueGrey.withOpacity(.15),
                           borderRadius: 10,
-                          BorderColor: Colors.black,
-                          BorderWidth: .5,
+
                           x: 30,
                           y: 30),
                     ),
-                    const SizedBox(
-                      width: 7,
-                    ),
-                    Expanded(
-                      child: InkWell(
 
-                        child: GlassBoxWithBorder(
-                            widget: Padding(
-                              padding: const EdgeInsets.all(6.0),
-                              child: Container(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'Logout',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                    color: c1,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            color: Colors.blueGrey.withOpacity(.1),
-                            borderRadius: 10,
-                            BorderColor: Colors.black,
-                            BorderWidth: .5,
-                            x: 30,
-                            y: 30),
-                      ),
-                    ),
+
                   ],
                 ),
               ),
@@ -608,59 +575,59 @@ class Profile_screen extends StatelessWidget {
                       )),
               SizedBox(height: 15,),
 
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30.0,
-                ),
-                child: GestureDetector(
-                  onTap: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              ForgetPasswordScreen(),
-                        ));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.transparent,
-                        border: Border.all(color: Colors.black, width: 0)),
-                    alignment: AlignmentDirectional.topStart,
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Row(
-                        children: [
-
-                          const FaIcon(
-                            FontAwesomeIcons.key,
-                            size: 25,
-                            color: Colors.black,
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            'Change Password',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              color: c1,
-                            ),
-                          ),
-                          const Spacer(),
-                          const FaIcon(
-                            FontAwesomeIcons.circleChevronRight,
-                            size: 25,
-                            color: Colors.black,
-                          ),
-
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(
+              //     horizontal: 30.0,
+              //   ),
+              //   child: GestureDetector(
+              //     onTap: (){
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //             builder: (context) =>
+              //                 ForgetPasswordScreen(),
+              //           ));
+              //     },
+              //     child: Container(
+              //       decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(20),
+              //           color: Colors.transparent,
+              //           border: Border.all(color: Colors.black, width: 0)),
+              //       alignment: AlignmentDirectional.topStart,
+              //       child: Padding(
+              //         padding: const EdgeInsets.all(15.0),
+              //         child: Row(
+              //           children: [
+              //
+              //             const FaIcon(
+              //               FontAwesomeIcons.key,
+              //               size: 25,
+              //               color: Colors.black,
+              //             ),
+              //             const SizedBox(
+              //               width: 20,
+              //             ),
+              //             Text(
+              //               'Change Password',
+              //               style: TextStyle(
+              //                 fontSize: 16,
+              //                 fontWeight: FontWeight.w700,
+              //                 color: c1,
+              //               ),
+              //             ),
+              //             const Spacer(),
+              //             const FaIcon(
+              //               FontAwesomeIcons.circleChevronRight,
+              //               size: 25,
+              //               color: Colors.black,
+              //             ),
+              //
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
           fallback: (context) => const Center(child: CircularProgressIndicator()),

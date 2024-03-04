@@ -2,7 +2,9 @@
 
 import 'dart:ui';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 
@@ -28,10 +30,11 @@ class Dashboard_Screen extends StatelessWidget {
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
        List<_PieData> pieData=[
-         _PieData('0',2),
-         _PieData('0',2),
-         _PieData('0',2),
-         _PieData('0',2),
+         _PieData('A',75),
+         _PieData('B',80),
+         _PieData('C',85),
+         _PieData('D',90),
+
 
        ];
         List<_SalesData> data = [
@@ -40,6 +43,151 @@ class Dashboard_Screen extends StatelessWidget {
           _SalesData('Mar', 34),
           _SalesData('Apr', 32),
           _SalesData('May', 40)
+        ];
+        List<Widget> listwidget = [
+          Expanded(
+            child: GlassBoxWithBorder_Gradiant2(
+                widget: Container(
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10.0,right: 10,bottom: 3,left: 10),
+                    child: Container(
+                      child:Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text('Check Quiz'),
+                          SizedBox(height: 7,),
+                          Container(color: Colors.black.withOpacity(.3),height: 1.5,),
+                          Spacer(),
+
+                          Row(
+                            children: [
+                              FaIcon(FontAwesomeIcons.bookmark,size: 12,),
+                              SizedBox(width: 7,),
+                              Text('Computer Security',textAlign: TextAlign.start,
+                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                            ],
+                          ),
+                          SizedBox(height: 2,),
+                          Row(
+                            children: [
+                              FaIcon(FontAwesomeIcons.user,size: 12,),
+                              SizedBox(width: 7,),
+                              Text('Sara shehab',textAlign: TextAlign.start,
+                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                            ],
+                          ),
+                          SizedBox(height: 2,),
+                          Row(
+                            children: [
+                              FaIcon(FontAwesomeIcons.chartLine,size: 12,),
+                              SizedBox(width: 7,),
+                              Text('5 points',textAlign: TextAlign.start,
+                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                            ],
+                          ),
+                          SizedBox(height: 2,),
+                          Row(
+                            children: [
+                              FaIcon(FontAwesomeIcons.clock,size: 12,),
+                              SizedBox(width: 7,),
+                              Text('Deadline 1/3',textAlign: TextAlign.start,
+                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                            ],
+                          ),
+                          SizedBox(height: 2,),
+                          Row(
+                            children: [
+                              FaIcon(FontAwesomeIcons.clock,size: 12,),
+                              SizedBox(width: 7,),
+                              Text('From 8 PM to 9 PM',textAlign: TextAlign.start,
+                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                            ],
+                          ),
+                          Spacer(),
+
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                BorderWidth: 0,
+                BorderColor: Colors.black,
+
+                color: Colors.white.withOpacity(.2),
+                borderRadius: 20,
+                x: 0,
+                y: 0),
+          ),
+          Expanded(
+            child: GlassBoxWithBorder_Gradiant2(
+                widget: Container(
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10.0,right: 10,bottom: 3,left: 10),
+                    child: Container(
+                      child:Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text('Check Assignment'),
+                          SizedBox(height: 7,),
+                          Container(color: Colors.black.withOpacity(.3),height: 1.5,),
+                          Spacer(),
+
+                          Row(
+                            children: [
+                              FaIcon(FontAwesomeIcons.bookmark,size: 12,),
+                              SizedBox(width: 7,),
+                              Text('Computer Security',textAlign: TextAlign.start,
+                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                            ],
+                          ),
+                          SizedBox(height: 7,),
+                          Row(
+                            children: [
+                              FaIcon(FontAwesomeIcons.user,size: 12,),
+                              SizedBox(width: 7,),
+                              Text('Sara shehab',textAlign: TextAlign.start,
+                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                            ],
+                          ),
+                          SizedBox(height: 7,),
+                          Row(
+                            children: [
+                              FaIcon(FontAwesomeIcons.chartLine,size: 12,),
+                              SizedBox(width: 7,),
+                              Text('5 points',textAlign: TextAlign.start,
+                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                            ],
+                          ),
+                          SizedBox(height: 7,),
+                          Row(
+                            children: [
+                              FaIcon(FontAwesomeIcons.clock,size: 12,),
+                              SizedBox(width: 7,),
+                              Text('Deadline 1/3, 10 PM',textAlign: TextAlign.start,
+                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                            ],
+                          ),
+                          Spacer(),
+
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                BorderWidth: 0,
+                BorderColor: Colors.black,
+
+                color: Colors.white.withOpacity(.2),
+                borderRadius: 20,
+                x: 0,
+                y: 0),
+          ),
+
+
         ];
         return ConditionalBuilder(
           condition:cubit.stu_login_Model!=null,
@@ -278,6 +426,26 @@ class Dashboard_Screen extends StatelessWidget {
                           Expanded(
                             child: Row(
                               children: [
+
+                                Expanded(
+                                  child: CarouselSlider(
+                                    items:listwidget,
+                                    options: CarouselOptions(
+                                      height: double.infinity,
+                                      viewportFraction: 1,
+                                      initialPage: 0,
+                                      enableInfiniteScroll: true,
+                                      reverse: false,
+                                      autoPlay: true,
+                                      autoPlayInterval: const Duration(seconds: 2),
+                                      autoPlayAnimationDuration: const Duration(seconds: 1),
+                                      autoPlayCurve: Curves.fastOutSlowIn,
+                                      scrollDirection: Axis.horizontal,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 15,),
+
                                 Expanded(
                                   child: GlassBoxWithBorder_Gradiant2(
                                       widget: Container(
@@ -289,57 +457,47 @@ class Dashboard_Screen extends StatelessWidget {
 
 
                                                 title: ChartTitle(text: 'Great !'),
-                                                legend: Legend(isVisible: true),
-                                                series: <PieSeries<_PieData, String>>[
-                                                  PieSeries<_PieData, String>(
+                                                legend: Legend(isVisible: true,padding: 5,itemPadding: 3,height: '120' ),
+                                                backgroundColor: Colors.transparent,
+                                                borderColor: Colors.transparent,
+                                                palette: [Colors.green[300]!,Colors.deepPurple[300]!,Colors.red[300]!,Colors.cyan[300]!,],
+                                                tooltipBehavior: TooltipBehavior(color: Colors.blue,),
 
-                                                      explode: true,
-                                                      explodeIndex: 0,
+                                                margin: EdgeInsets.zero,
+
+                                                series: <RadialBarSeries<_PieData, String>>[
+                                                  RadialBarSeries<_PieData, String>(
+
+
+                                                      // explode: true,
+                                                      // explodeIndex: 0,
+                                                    gap: '2',
+                                                    radius: '50',
+                                                    name: '5',
+                                                    innerRadius: '15',
+                                                    cornerStyle: CornerStyle.bothCurve,
+                                                      opacity:1 ,
+                                                      useSeriesColor: false,
+                                                      trackColor: Colors.blueGrey,
+                                                      trackBorderColor: Colors.transparent,
+                                                       trackOpacity: .1,
+                                                      strokeColor: Colors.transparent,
+                                                      maximumValue: 100,
+                                                      trackBorderWidth: 3,
+                                                      strokeWidth: 3,
+
+                                                      enableTooltip: true,
+
+                                                      sortingOrder: SortingOrder.ascending,
+
+
                                                       dataSource: pieData,
                                                       xValueMapper: (_PieData data, _) => data.xData,
                                                       yValueMapper: (_PieData data, _) => data.yData,
                                                       dataLabelMapper: (_PieData data, _) => data.text,
-                                                      dataLabelSettings: DataLabelSettings(isVisible: true)),
+                                                      dataLabelSettings: DataLabelSettings(isVisible: false,color: Colors.teal,opacity: .3)),
                                                 ]
                                             ),
-                                          ),
-                                        ),
-                                      ),
-                                      BorderWidth: 0,
-                                      BorderColor: Colors.black,
-
-                                      color: Colors.white.withOpacity(.2),
-                                      borderRadius: 20,
-                                      x: 0,
-                                      y: 0),
-                                ),
-                                SizedBox(width: 15,),
-                                Expanded(
-                                  child: GlassBoxWithBorder_Gradiant2(
-                                      widget: Container(
-                                        width: double.infinity,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Container(
-                                            child: SfCartesianChart(
-                                                primaryXAxis: CategoryAxis(),
-                                                // Chart title
-                                                title: ChartTitle(text: 'Your Activity'),
-                                                // Enable legend
-                                                legend: Legend(isVisible: false),
-                                                // Enable tooltip
-                                                tooltipBehavior: TooltipBehavior(enable: true),
-                                                series: <CartesianSeries<_SalesData, String>>[
-                                                  LineSeries<_SalesData, String>(
-                                                      color: Colors.teal,
-                                                      markerSettings:MarkerSettings(color: Colors.cyan,width: 0,height: 0,isVisible: true) ,
-                                                      dataSource: data,
-                                                      xValueMapper: (_SalesData sales, _) => sales.year,
-                                                      yValueMapper: (_SalesData sales, _) => sales.sales,
-                                                      name: 'Active',
-                                                      // Enable data label
-                                                      dataLabelSettings: DataLabelSettings(isVisible: true))
-                                                ]),
                                           ),
                                         ),
                                       ),
@@ -354,86 +512,6 @@ class Dashboard_Screen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          // SizedBox(height: 15,),
-                          // Expanded(
-                          //   child: Row(
-                          //     children: [
-                          //       Expanded(
-                          //         child: GlassBoxWithBorder_Gradiant2(
-                          //             widget: Container(
-                          //               width: double.infinity,
-                          //               child: Padding(
-                          //                 padding: const EdgeInsets.all(10.0),
-                          //                 child: Container(
-                          //                   child: SfCartesianChart(
-                          //                       primaryXAxis: CategoryAxis(),
-                          //                       // Chart title
-                          //                       title: ChartTitle(text: 'Your Activity'),
-                          //                       // Enable legend
-                          //                       legend: Legend(isVisible: false),
-                          //                       // Enable tooltip
-                          //                       tooltipBehavior: TooltipBehavior(enable: true),
-                          //                       series: <CartesianSeries<_SalesData, String>>[
-                          //                         LineSeries<_SalesData, String>(
-                          //                             color: Colors.teal,
-                          //                             markerSettings:MarkerSettings(color: Colors.cyan,width: 0,height: 0,isVisible: true) ,
-                          //                             dataSource: data,
-                          //                             xValueMapper: (_SalesData sales, _) => sales.year,
-                          //                             yValueMapper: (_SalesData sales, _) => sales.sales,
-                          //                             name: 'Active',
-                          //                             // Enable data label
-                          //                             dataLabelSettings: DataLabelSettings(isVisible: true))
-                          //                       ]),
-                          //                 ),
-                          //               ),
-                          //             ),
-                          //             BorderWidth: 0,
-                          //             BorderColor: Colors.black,
-                          //
-                          //             color: Colors.white.withOpacity(.2),
-                          //             borderRadius: 20,
-                          //             x: 0,
-                          //             y: 0),
-                          //       ),
-                          //       SizedBox(width: 15,),
-                          //       Expanded(
-                          //         child: GlassBoxWithBorder_Gradiant2(
-                          //             widget: Container(
-                          //               width: double.infinity,
-                          //               child: Padding(
-                          //                 padding: const EdgeInsets.all(10.0),
-                          //                 child: Container(
-                          //                   child:SfCircularChart(
-                          //
-                          //
-                          //                       title: ChartTitle(text: 'Great !'),
-                          //                       legend: Legend(isVisible: true),
-                          //                       series: <PieSeries<_PieData, String>>[
-                          //                         PieSeries<_PieData, String>(
-                          //
-                          //                             explode: true,
-                          //                             explodeIndex: 0,
-                          //                             dataSource: pieData,
-                          //                             xValueMapper: (_PieData data, _) => data.xData,
-                          //                             yValueMapper: (_PieData data, _) => data.yData,
-                          //                             dataLabelMapper: (_PieData data, _) => data.text,
-                          //                             dataLabelSettings: DataLabelSettings(isVisible: true)),
-                          //                       ]
-                          //                   ),
-                          //                 ),
-                          //               ),
-                          //             ),
-                          //             BorderWidth: 0,
-                          //             BorderColor: Colors.black,
-                          //
-                          //             color: Colors.white.withOpacity(.2),
-                          //             borderRadius: 20,
-                          //             x: 0,
-                          //             y: 0),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
                           SizedBox(height: 55,),
 
                         ],
