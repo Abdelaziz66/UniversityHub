@@ -1,9 +1,6 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:university_hup/Modules/Student/Student_Grade/STU_Grades_Screen.dart';
@@ -98,7 +95,7 @@ class Layout_Screen extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color:
-                                  cubit.D_value == 0 || cubit.Nav_Bar_index == 0
+                                 cubit.Nav_Bar_index == 0
                                       ? Colors.blue.withOpacity(.8)
                                       : Colors.transparent,
                             ),
@@ -111,7 +108,7 @@ class Layout_Screen extends StatelessWidget {
                                   FaIcon(
                                     FontAwesomeIcons.house,
                                     size: 20,
-                                    color: cubit.D_value == 0 ||
+                                    color:
                                             cubit.Nav_Bar_index == 0
                                         ? Colors.white
                                         : c1,
@@ -126,7 +123,7 @@ class Layout_Screen extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w700,
-                                        color: cubit.D_value == 0 ||
+                                        color:
                                                 cubit.Nav_Bar_index == 0
                                             ? Colors.white
                                             : c1,
@@ -149,7 +146,7 @@ class Layout_Screen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Edit_Profile_screen(),
+                                builder: (context) => const Edit_Profile_screen(),
                               ));
                         },
                         child: Padding(
@@ -208,7 +205,7 @@ class Layout_Screen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => STUAllGradesScreen(),
+                                  builder: (context) => const STUAllGradesScreen(),
                                 ));
                           },
                           child: Container(
@@ -476,8 +473,9 @@ class Layout_Screen extends StatelessWidget {
                                   context: context,
                                   barrierColor: Colors.black.withOpacity(.02),
                                   useSafeArea: true,
-                                  builder: (BuildContext context) =>
-                                      AlertDialog(
+
+                                  builder: (BuildContext context) =>  AlertDialog(
+
                                     insetPadding: const EdgeInsets.all(0.0),
                                     scrollable: false,
                                     shadowColor: Colors.transparent,
@@ -486,7 +484,7 @@ class Layout_Screen extends StatelessWidget {
                                     content: Center(
                                       child: Container(
                                         width:
-                                            MediaQuery.of(context).size.width,
+                                        MediaQuery.of(context).size.width,
                                         child: GestureDetector(
                                           onTap: () {
                                             Navigator.pop(context);
@@ -496,7 +494,7 @@ class Layout_Screen extends StatelessWidget {
                                                 children: [
                                                   Column(
                                                     children: [
-                                                      SizedBox(
+                                                      const SizedBox(
                                                         height: 60,
                                                       ),
                                                       Text(
@@ -504,35 +502,35 @@ class Layout_Screen extends StatelessWidget {
                                                         style: TextStyle(
                                                             fontSize: 25,
                                                             fontWeight:
-                                                                FontWeight.w900,
+                                                            FontWeight.w900,
                                                             color: Colors.black
                                                                 .withOpacity(
-                                                                    .7)),
+                                                                .7)),
                                                       ),
                                                       Expanded(
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  top: 40,
-                                                                  left: 15,
-                                                                  bottom: 0,
-                                                                  right: 15),
+                                                          const EdgeInsets
+                                                              .only(
+                                                              top: 40,
+                                                              left: 15,
+                                                              bottom: 0,
+                                                              right: 15),
                                                           child: ListView
                                                               .separated(
                                                             physics:
-                                                                const BouncingScrollPhysics(),
+                                                            const BouncingScrollPhysics(),
                                                             itemBuilder: (context,
-                                                                    index) =>
+                                                                index) =>
                                                                 Notification_Card(icon: recent[index]),
                                                             separatorBuilder:
                                                                 (context,
-                                                                        index) =>
-                                                                    Container(
-                                                              height: 15,
-                                                              color: Colors
-                                                                  .transparent,
-                                                            ),
+                                                                index) =>
+                                                                Container(
+                                                                  height: 15,
+                                                                  color: Colors
+                                                                      .transparent,
+                                                                ),
                                                             itemCount: 8,
                                                           ),
                                                         ),
@@ -554,6 +552,7 @@ class Layout_Screen extends StatelessWidget {
                                     backgroundColor: Colors.transparent,
                                     contentPadding: EdgeInsets.zero,
                                   ),
+
                                 ),
                             icon: FaIcon(
                               FontAwesomeIcons.clockRotateLeft,
@@ -626,21 +625,21 @@ class Layout_Screen extends StatelessWidget {
                           unselectedItemColor: Colors.white,
                           type: BottomNavigationBarType.fixed,
                           items: [
-                            BottomNavigationBarItem(
+                            const BottomNavigationBarItem(
                                 icon: FaIcon(FontAwesomeIcons.house),
                                 label: 'Home'),
-                            BottomNavigationBarItem(
+                            const BottomNavigationBarItem(
                                 icon: FaIcon(FontAwesomeIcons.newspaper),
                                 label: 'News'),
-                            BottomNavigationBarItem(
+                            const BottomNavigationBarItem(
                                 icon: Icon(FontAwesomeIcons.book),
                                 label: 'Lecture'),
-                            BottomNavigationBarItem(
+                            const BottomNavigationBarItem(
                                 icon: FaIcon(
                                   FontAwesomeIcons.calendar,
                                 ),
                                 label: 'Calendar'),
-                            BottomNavigationBarItem(
+                            const BottomNavigationBarItem(
                                 icon: FaIcon(FontAwesomeIcons.user),
                                 label: 'Profile'),
                             // BottomNavigationBarItem(
