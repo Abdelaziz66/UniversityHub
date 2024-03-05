@@ -45,7 +45,7 @@ class Dashboard_Screen extends StatelessWidget {
           _SalesData('May', 40)
         ];
         List<Widget> listwidget = [
-          Expanded(
+          Container(
             child: GlassBoxWithBorder_Gradiant2(
                 widget: Container(
                   width: double.infinity,
@@ -120,7 +120,7 @@ class Dashboard_Screen extends StatelessWidget {
                 x: 0,
                 y: 0),
           ),
-          Expanded(
+          Container(
             child: GlassBoxWithBorder_Gradiant2(
                 widget: Container(
                   width: double.infinity,

@@ -1,10 +1,13 @@
 import 'dart:async';
+//import 'dart:html';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
@@ -28,6 +31,7 @@ import 'package:university_hup/Shared/constant.dart';
 import 'package:university_hup/Shared/remote/DioHelper.dart';
 import '../../Models/STU_Model/User_Model/CurrentStudentInfoModel.dart';
 
+import '../Cons_widget.dart';
 import 'App_state.dart';
 
 class App_cubit extends Cubit<App_state> {
@@ -275,6 +279,7 @@ bool switch_quiz=true;
     }
   }
 
+
   void add_NewFile_To_FIles_List()async{
     emit(AddNewFile_Loading_State());
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -293,7 +298,7 @@ bool switch_quiz=true;
     }
   }
 
-  void openFile_Fun(PlatformFile file){
+  void openFile_Fun(File file){
     emit(ShowFile_Loading_State());
     OpenFile.open(file.path).then((value) {
       emit(ShowFile_Success_State());
@@ -358,7 +363,8 @@ bool switch_quiz=true;
 
 
 //--------STU  Upload assignment -------------------
-  List<PlatformFile>all_assign_files_List=[];
+  List<File>all_assign_files_List=[];
+  File? assignFile ;
   void pick_assign_File() async{
     emit(AddFile_Assign_Loading_State());
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -367,7 +373,8 @@ bool switch_quiz=true;
       allowedExtensions: ['png', 'cdr', 'psd','jpeg', 'png','pdf'],
     );
     if(result != null) {
-      all_assign_files_List=result.files;    //Adding all files to all_files list
+      assignFile=File(result.files.single.path!);
+      //all_assign_files_List=result.files.single!.path;    //Adding all files to all_files list
       emit(AddFile_Assign_Success_State());
     } else {
       // User canceled the picker
@@ -375,24 +382,24 @@ bool switch_quiz=true;
     }
   }
 
-  void add_Assign_NewFile_To_FIles_List()async{
-    emit(AddNewFile_Assign_Loading_State());
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowMultiple: true,
-      allowedExtensions: ['png', 'cdr', 'psd','jpeg', 'png','pdf'],
-    );
-    if(result != null) {
-      result.files.forEach((element) {
-        all_assign_files_List.add(element);
-      });
-      emit(AddNewFile_Assign_Success_State());
-    } else {
-      // User canceled the picker
-      emit(AddNewFile_Assign_Error_State());
-    }
-  }
-
+  // void add_Assign_NewFile_To_FIles_List()async{
+  //   emit(AddNewFile_Assign_Loading_State());
+  //   FilePickerResult? result = await FilePicker.platform.pickFiles(
+  //     type: FileType.custom,
+  //     allowMultiple: true,
+  //     allowedExtensions: ['png', 'cdr', 'psd','jpeg', 'png','pdf'],
+  //   );
+  //   if(result != null) {
+  //     result.files.forEach((element) {
+  //       all_assign_files_List.add(element.);
+  //     });
+  //     emit(AddNewFile_Assign_Success_State());
+  //   } else {
+  //     // User canceled the picker
+  //     emit(AddNewFile_Assign_Error_State());
+  //   }
+  // }
+  //
 
 
   //-----------------STU Quizzes------------
@@ -635,7 +642,8 @@ List <int> stuAllGrades=[10,30,50,45,35];
 
   //----------------------STU assign -----------------
 
- String ? assignName;
+  String ? assignName;
+  String ? taskId;
   List<STU_Course_Assign_Model> stuCoursesAssignModel=[];
   void StuGetCourseAssign (
     //required token,
@@ -671,9 +679,35 @@ List <int> stuAllGrades=[10,30,50,45,35];
      isCycleIdChange=false;
 
   }
+  //-------------------------submit Task-----------------
+  File ?file;
+  void SumitTask(
+  )
+  {
+   // print('All files-------------- ${all_assign_files_List[0]}');
+    print('task id : ${taskId}');
+    print('All files-------------- ${assignFile}');
+    emit(Stu_Submit_Task_LoadingState());
+    Dio_Helper.PostFileData(
+        token: Tokenn,
+        url: 'Students/File/Upload?taskid=${taskId}',
+      file:File(assignFile!.path)
+    ).then((value) {
+      if (value.statusCode == 200) {
+        print('post assign true');
+        //   print(value.data);
+        String json = value.data;
+        print(json);
+        flutterToast(msg: '$json');
+        emit(Stu_Submit_Task_SuccessState());
+      }}).catchError((Error){
+      print(Error.toString());
+      emit(Stu_Submit_Task_ErrorState(Error.toString()));
+    });
+  }
 
 
-
+//-------------Quiz------------------------------
   // String? cycleId;
 
   List<STU_Quiz_Model> stuCoursesQuizlModel=[];
@@ -782,18 +816,7 @@ List<Map<String,dynamic>>submitQuizAnswers=[];
           print(element.keys);
           print(element.values);
         });
-        // for (var element in json) {
-        //   QuizAnswersResponse.add({
-        //     '${element.keys}':element.values
-        //   });
-        // };
 
-
-        // submitQuizModel= SubmitQuizModel.fromJson(value.data);
-        //  print(submitQuizModel?.Q1);
-        //  print(submitQuizModel?.Q2);
-        //  print(submitQuizModel?.Q3);
-        //  print(submitQuizModel?.Q4);
         emit(Stu_Submit_Quiz_SuccessState());
       }}).catchError((Error){
       print(Error.toString());

@@ -1,5 +1,6 @@
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,6 @@ class STU_Assign_Screen extends StatelessWidget {
         List<STU_Course_Assign_Model>assign=cubit.stuCoursesAssignModel;
         return Scaffold(
           body: SafeArea(
-            child: SingleChildScrollView(
               child: Column(
                 children: [
                   const SizedBox(height: 30,),
@@ -155,8 +155,11 @@ class STU_Assign_Screen extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            //Spacer(),
                             const Expanded(
                               child: Image(
+                                height: 120,
+                                width: 120,
                                 image: AssetImage('assets/images/R.png'),
                               ),
                             ),
@@ -240,49 +243,53 @@ class STU_Assign_Screen extends StatelessWidget {
                   ),
 
                   const SizedBox(height: 20,),
-                  ConditionalBuilder(condition: cubit.pend,
-                    builder: (context) =>Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: Container(
-                        height: 500,
-                        child: ConditionalBuilder(
-                          condition: assign.isNotEmpty&&state is !Stu_Get_Course_Assign_LoadingState,
-                          builder:(context)=> ListView.separated(
+                  Expanded(
+                    child: ConditionalBuilder(condition: cubit.pend,
+                      builder: (context) =>Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Container(
+                          height: 500,
+                          child: ConditionalBuilder(
+                            condition: assign.isNotEmpty&&state is !Stu_Get_Course_Assign_LoadingState,
+                            builder:(context)=> ListView.separated(
+                              physics: const BouncingScrollPhysics(),
+                              itemBuilder:(context,index)=>InkWell(
+                                  onTap: (){
+                                    cubit.assignName=assign[index].taskName;
+                                    cubit.assignFile=null;
+                                    cubit.taskId=assign[index].taskId;
+                                    cubit.all_assign_files_List=[];
+                                    navigateTo(context,STU_About_Assign_Screen() );
+                                  },
+                                  child: Build_STU_pend_Tasks(assign:assign[index] )),
+                              separatorBuilder: (context,index)=>const SizedBox(height: 10,),
+                              itemCount: assign.length,
+                            ),
+                            fallback:(context)=> Center(child: CircularProgressIndicator(),),
+                          ),
+                        ),
+                      ) ,
+                      fallback: (context) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Container(
+                          height:500,
+                          child: ListView.separated(
                             physics: const BouncingScrollPhysics(),
                             itemBuilder:(context,index)=>InkWell(
                                 onTap: (){
-                                  cubit.assignName=assign[index].taskName;
-                                  cubit.all_assign_files_List=[];
-                                  navigateTo(context,STU_About_Assign_Screen() );
+                                  // navigateTo(context,STU_Assign_Screen() );
                                 },
-                                child: Build_STU_pend_Tasks(assign:assign[index] )),
+                                child: Build_STU_complete_Tasks()),
                             separatorBuilder: (context,index)=>const SizedBox(height: 10,),
-                            itemCount: assign.length,
+                            itemCount: 2,
                           ),
-                          fallback:(context)=> Center(child: CircularProgressIndicator(),),
-                        ),
-                      ),
-                    ) ,
-                    fallback: (context) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: Container(
-                        height:500,
-                        child: ListView.separated(
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder:(context,index)=>InkWell(
-                              onTap: (){
-                                // navigateTo(context,STU_Assign_Screen() );
-                              },
-                              child: Build_STU_complete_Tasks()),
-                          separatorBuilder: (context,index)=>const SizedBox(height: 10,),
-                          itemCount: 2,
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-            ),
+            
           ),
         );
       },

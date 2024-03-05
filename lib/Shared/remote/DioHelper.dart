@@ -33,14 +33,20 @@ class Dio_Helper {
      };
      return await dio.get(url, queryParameters: query);
   }
+
   static Future<Response> PostData({
     required String url,
     Map<String, dynamic>? query,
     String? token,
 
-    required Map<String, dynamic> data,
+     Map<String, dynamic>? data,
+    //String? filePath,
+    //String? fileName,
+   // File ? file,
+
   }) async {
-      dio.options.headers={
+  //  FormData formData=FormData();
+        dio.options.headers={
     //   'lang':lang,
     //   'authorizatio':token??'',
     //  'Content-Type':'application/json'
@@ -50,6 +56,83 @@ class Dio_Helper {
         'Accept':'application/json',
         'Authorization':'Bearer $token',
     };
-    return await dio.post(url, queryParameters: query, data: data);
+      // formData.files.add(MapEntry(
+      //   'file',
+      // //  file.path
+      //    await MultipartFile.fromFile(
+      //      file!.path, // Replace 'path_to_your_file' with the actual file path
+      //      filename: file.path.split('/').last, // Replace 'file_name' with the desired file name
+      //    ),
+      // )
+      // );
+    return await dio.post(
+        url, queryParameters: query, data: data);
+  }
+
+  static Future<Response> PostFileData({
+    required String url,
+    Map<String, dynamic>? query,
+    String? token,
+    Map<String, dynamic>? data,
+    File ? file,
+  }) async {
+    FormData formData=FormData();
+    dio.options.headers={
+      'Content-Type':'application/json',
+      'Accept':'application/json',
+      'Authorization':'Bearer $token',
+    };
+    formData.files.add(MapEntry(
+      'file',
+      await MultipartFile.fromFile(
+        file!.path,
+       filename: file.path.split('/').last,
+      ),
+    )
+    );
+    return await dio.post(
+        url, queryParameters: query, data: formData,
+    );
+  }
+
+
+  static Future<Response> PostListFileData({
+    required String url,
+    Map<String, dynamic>? query,
+    String? token,
+    Map<String, dynamic>? data,
+    List<File>?files,
+  }) async {
+    FormData formData = FormData();
+    dio.options.headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+    for (int i = 0; i < files!.length; i++) {
+      File file = files[i];
+      String fileName = file.path
+          .split('/')
+          .last; // Get the file name
+      formData.files.add(MapEntry(
+        'file$i', // 'file' is the key name expected by the API for each file
+        await MultipartFile.fromFile(
+          file.path,
+          filename: fileName,
+        ),
+      ));
+      // formData.files.add(MapEntry(
+      //   'file',
+      //   await MultipartFile.fromFile(
+      //     file!.path,
+      //     filename: file.path.split('/').last,
+      //   ),
+      // )
+      // );
+
+    }
+    return await dio.post(
+      url, queryParameters: query, data: formData,
+    );
   }
 }
