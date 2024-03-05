@@ -1,3 +1,5 @@
+//import 'dart:html';
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -1343,7 +1345,7 @@ Widget BuildFileViewWidget(
   final extension = file.extension ?? 'none';
   final color = Colors.red;
   return InkWell(
-      onTap: () => App_cubit.get(context).openFile_Fun(file),
+      onTap: () => print('fff'),//App_cubit.get(context).openFile_Fun(file),
       child: Container(
         padding: const EdgeInsets.all(8),
         child: Column(
@@ -1873,14 +1875,13 @@ Widget Build_STU_complete_Tasks() => Container(
 Widget BuildAssignFileViewWidget(
   index,
   context,
-  PlatformFile file,
+  File file,
 ) {
-  final kb = file.size / 1024;
-  final mb = kb / 1024;
-  final fileSize =
-      mb >= 1 ? '${mb.toStringAsFixed(2)} MB ' : '${kb.toStringAsFixed(2)} KB';
-  final extension = file.extension ?? 'none';
-  final color = Colors.red;
+   final kb = file.lengthSync() / 1024;
+   final mb = kb / 1024;
+  final fileSize = mb >= 1 ? '${mb.toStringAsFixed(2)} MB ' : '${kb.toStringAsFixed(2)} KB';
+  final extension = file.path.split('.').last?? '';
+  final color = Colors.grey[500];
   return InkWell(
       onTap: () => App_cubit.get(context).openFile_Fun(file),
       child: Container(
@@ -1908,15 +1909,15 @@ Widget BuildAssignFileViewWidget(
               height: 8,
             ),
             Text(
-              file.name,
+              file.path.split('/').last,
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 14,
               ),
               overflow: TextOverflow.ellipsis,
             ),
-            Text(
-              fileSize,
+            Text('${fileSize}',
+              //fileSize,
               style: TextStyle(
                 fontSize: 12,
                 color: Colors.grey[700],

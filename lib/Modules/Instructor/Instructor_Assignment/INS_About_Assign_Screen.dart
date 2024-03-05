@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 
 import 'package:flutter/material.dart';
@@ -19,7 +21,7 @@ class INS_About_Assign_Screen extends StatelessWidget {
       listener:(context,stata){},
       builder: (context,state){
         App_cubit cubit=App_cubit.get(context);
-        List< PlatformFile>all_files=cubit.all_assign_files_List;
+        List<File>all_files=cubit.all_assign_files_List;
         return Scaffold(
           // appBar: AppBar(
           //   title: Text("Assignment"),
@@ -99,7 +101,7 @@ class INS_About_Assign_Screen extends StatelessWidget {
                                   if(all_files==[]) {
                                     cubit.pick_assign_File();
                                   } else {
-                                    cubit.add_Assign_NewFile_To_FIles_List();
+               //                     cubit.add_Assign_NewFile_To_FIles_List();
                                   }
                                 },
                                 child:const Row(

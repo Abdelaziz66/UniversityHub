@@ -479,7 +479,7 @@ class INS_Assign_Screen extends StatelessWidget {
                           itemBuilder:(context,index)=>InkWell(
                               onTap: (){
                                 cubit.all_assign_files_List=[];
-
+                                cubit.assignFile=null;
                                 navigateTo(context,STU_About_Assign_Screen() );
                               },
                               child: Build_STU_pend_Tasks()),

@@ -1,4 +1,7 @@
 
+//import 'dart:html';
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 
 import 'package:flutter/material.dart';
@@ -18,7 +21,7 @@ class STU_About_Assign_Screen extends StatelessWidget {
       builder: (context,state){
         App_cubit cubit=App_cubit.get(context);
        // STU_Course_Assign_Model? assign;
-        List< PlatformFile>all_files=cubit.all_assign_files_List;
+       //  var all_files=cubit.assignFile;
         return Scaffold(
           body: SafeArea(
             child: Column(
@@ -50,7 +53,7 @@ class STU_About_Assign_Screen extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                all_files.isNotEmpty?
+                cubit.assignFile!=null?
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -60,11 +63,11 @@ class STU_About_Assign_Screen extends StatelessWidget {
                           mainAxisSpacing: 6,
                           crossAxisSpacing: 6,
                         ),
-                        itemCount: all_files.length,
+                        itemCount: 1,//all_files.length,
                         itemBuilder: (context, index)
                         {
-                          final file = all_files[index];
-                          return BuildAssignFileViewWidget(index,context,file);
+                          final file = cubit.assignFile;
+                          return BuildAssignFileViewWidget(index,context,file!);
                         }
                     ),
                   ),
@@ -85,25 +88,32 @@ class STU_About_Assign_Screen extends StatelessWidget {
                             //cubit.pickPostImage==null?
                             TextButton(
                                 onPressed: (){
-                                  if(all_files==[]) {
+                                  print('ssssss${cubit.assignFile}');
+                                  if(cubit.assignFile==null) {
                                     cubit.pick_assign_File();
-                                  } else {
-                                    cubit.add_Assign_NewFile_To_FIles_List();
                                   }
+                                  else {
+                                   // print('files:${cubit.all_assign_files_List}');
+                                    print(cubit.assignFile);
+                                    // cubit.add_Assign_NewFile_To_FIles_List();
+                                    cubit.SumitTask();
+                                   }
                                 },
-                                child:const Row(
+                                child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(Icons.file_present_rounded,color: Colors.white,),
                                     SizedBox(
                                       width: 5,),
-                                    Text('Upload',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 25,
+                                      Text(
+                                       // all_file=null?
+                                            'Attach File' ,//: 'Done',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
                                       ),
-                                    ),
                                   ],
                                 )
 
