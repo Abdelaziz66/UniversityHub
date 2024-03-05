@@ -7,6 +7,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -45,147 +46,439 @@ class Dashboard_Screen extends StatelessWidget {
           _SalesData('May', 40)
         ];
         List<Widget> listwidget = [
-          Container(
-            child: GlassBoxWithBorder_Gradiant2(
-                widget: Container(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10.0,right: 10,bottom: 3,left: 10),
-                    child: Container(
-                      child:Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text('Check Quiz'),
-                          SizedBox(height: 7,),
-                          Container(color: Colors.black.withOpacity(.3),height: 1.5,),
-                          Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0,right: 10,bottom: 3,left: 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text('Check Quiz'),
+                SizedBox(height: 7,),
+                Container(color: Colors.black.withOpacity(.3),height: 1.5,),
+                Spacer(),
 
-                          Row(
-                            children: [
-                              FaIcon(FontAwesomeIcons.bookmark,size: 12,),
-                              SizedBox(width: 7,),
-                              Text('Computer Security',textAlign: TextAlign.start,
-                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
-                            ],
-                          ),
-                          SizedBox(height: 2,),
-                          Row(
-                            children: [
-                              FaIcon(FontAwesomeIcons.user,size: 12,),
-                              SizedBox(width: 7,),
-                              Text('Sara shehab',textAlign: TextAlign.start,
-                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
-                            ],
-                          ),
-                          SizedBox(height: 2,),
-                          Row(
-                            children: [
-                              FaIcon(FontAwesomeIcons.chartLine,size: 12,),
-                              SizedBox(width: 7,),
-                              Text('5 points',textAlign: TextAlign.start,
-                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
-                            ],
-                          ),
-                          SizedBox(height: 2,),
-                          Row(
-                            children: [
-                              FaIcon(FontAwesomeIcons.clock,size: 12,),
-                              SizedBox(width: 7,),
-                              Text('Deadline 1/3',textAlign: TextAlign.start,
-                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
-                            ],
-                          ),
-                          SizedBox(height: 2,),
-                          Row(
-                            children: [
-                              FaIcon(FontAwesomeIcons.clock,size: 12,),
-                              SizedBox(width: 7,),
-                              Text('From 8 PM to 9 PM',textAlign: TextAlign.start,
-                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
-                            ],
-                          ),
-                          Spacer(),
+                Row(
+                  children: [
+                    FaIcon(FontAwesomeIcons.bookmark,size: 12,),
+                    SizedBox(width: 7,),
+                    Text('Computer Security',textAlign: TextAlign.start,
+                      style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                  ],
+                ),
+                SizedBox(height: 2,),
+                Row(
+                  children: [
+                    FaIcon(FontAwesomeIcons.user,size: 12,),
+                    SizedBox(width: 7,),
+                    Text('Sara shehab',textAlign: TextAlign.start,
+                      style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                  ],
+                ),
+                SizedBox(height: 2,),
+                Row(
+                  children: [
+                    FaIcon(FontAwesomeIcons.chartLine,size: 12,),
+                    SizedBox(width: 7,),
+                    Text('5 points',textAlign: TextAlign.start,
+                      style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                  ],
+                ),
+                SizedBox(height: 2,),
+                Row(
+                  children: [
+                    FaIcon(FontAwesomeIcons.clock,size: 12,),
+                    SizedBox(width: 7,),
+                    Text('Deadline 1/3',textAlign: TextAlign.start,
+                      style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                  ],
+                ),
+                SizedBox(height: 2,),
+                Row(
+                  children: [
+                    FaIcon(FontAwesomeIcons.clock,size: 12,),
+                    SizedBox(width: 7,),
+                    Text('From 8 PM to 9 PM',textAlign: TextAlign.start,
+                      style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                  ],
+                ),
+                Spacer(),
 
-                        ],
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0,right: 10,bottom: 3,left: 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text('Check Assignment'),
+                SizedBox(height: 7,),
+                Container(color: Colors.black.withOpacity(.3),height: 1.5,),
+                Spacer(),
+
+                Row(
+                  children: [
+                    FaIcon(FontAwesomeIcons.bookmark,size: 12,),
+                    SizedBox(width: 7,),
+                    Text('Computer Security',textAlign: TextAlign.start,
+                      style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                  ],
+                ),
+                SizedBox(height: 7,),
+                Row(
+                  children: [
+                    FaIcon(FontAwesomeIcons.user,size: 12,),
+                    SizedBox(width: 7,),
+                    Text('Sara shehab',textAlign: TextAlign.start,
+                      style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                  ],
+                ),
+                SizedBox(height: 7,),
+                Row(
+                  children: [
+                    FaIcon(FontAwesomeIcons.chartLine,size: 12,),
+                    SizedBox(width: 7,),
+                    Text('5 points',textAlign: TextAlign.start,
+                      style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                  ],
+                ),
+                SizedBox(height: 7,),
+                Row(
+                  children: [
+                    FaIcon(FontAwesomeIcons.clock,size: 12,),
+                    SizedBox(width: 7,),
+                    Text('Deadline 1/3, 10 PM',textAlign: TextAlign.start,
+                      style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
+                  ],
+                ),
+                Spacer(),
+
+              ],
+            ),
+          ),
+
+
+
+        ];
+        List<Widget> listwidget2 = [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+
+                Expanded(
+                  child: ConditionalBuilder(
+                      condition: true,
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10.0,top: 15,bottom: 15,left: 10),
+                                child: Text(
+                                  // 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.',
+                                  'Congratulations, you have completed your registration ! Lets start your learning journey next.',
+
+                                  maxLines: 6,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: c1.withOpacity(1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      fallback: (context) => const SizedBox(
+                        height: 0,
+                      )),
+                ),
+
+                Expanded(
+                  child: ConditionalBuilder(
+                      condition: true,
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.only(
+                            left: 0, right: 0.0, top: 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.deepPurple[200],
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                'assets/images/g7.png',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                      fallback: (context) => const SizedBox(
+                        height: 0,
+                      )),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+
+                Expanded(
+                  child: ConditionalBuilder(
+                      condition: true,
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10.0,top: 15,bottom: 15,left: 10),
+                                child: Text(
+                                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.'
+                                      'Congratulations, you have completed your registration ! Lets start your learning journey next.',
+
+                                  maxLines: 6,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: c1.withOpacity(1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      fallback: (context) => const SizedBox(
+                        height: 0,
+                      )),
+                ),
+
+                ConditionalBuilder(
+                    condition: false,
+                    builder: (context) => Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 0, right: 0.0, top: 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.blue[100],
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                'assets/images/a44.png',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                BorderWidth: 0,
-                BorderColor: Colors.black,
-
-                color: Colors.white.withOpacity(.2),
-                borderRadius: 20,
-                x: 0,
-                y: 0),
+                    fallback: (context) => const SizedBox(
+                      height: 0,
+                    )),
+              ],
+            ),
           ),
-          Container(
-            child: GlassBoxWithBorder_Gradiant2(
-                widget: Container(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10.0,right: 10,bottom: 3,left: 10),
-                    child: Container(
-                      child:Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text('Check Assignment'),
-                          SizedBox(height: 7,),
-                          Container(color: Colors.black.withOpacity(.3),height: 1.5,),
-                          Spacer(),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
 
-                          Row(
-                            children: [
-                              FaIcon(FontAwesomeIcons.bookmark,size: 12,),
-                              SizedBox(width: 7,),
-                              Text('Computer Security',textAlign: TextAlign.start,
-                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
-                            ],
-                          ),
-                          SizedBox(height: 7,),
-                          Row(
-                            children: [
-                              FaIcon(FontAwesomeIcons.user,size: 12,),
-                              SizedBox(width: 7,),
-                              Text('Sara shehab',textAlign: TextAlign.start,
-                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
-                            ],
-                          ),
-                          SizedBox(height: 7,),
-                          Row(
-                            children: [
-                              FaIcon(FontAwesomeIcons.chartLine,size: 12,),
-                              SizedBox(width: 7,),
-                              Text('5 points',textAlign: TextAlign.start,
-                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
-                            ],
-                          ),
-                          SizedBox(height: 7,),
-                          Row(
-                            children: [
-                              FaIcon(FontAwesomeIcons.clock,size: 12,),
-                              SizedBox(width: 7,),
-                              Text('Deadline 1/3, 10 PM',textAlign: TextAlign.start,
-                                style: TextStyle(fontWeight: FontWeight.w700,fontSize: 13),),
-                            ],
-                          ),
-                          Spacer(),
+                Expanded(
+                  child: ConditionalBuilder(
+                      condition: true,
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10.0,top: 15,bottom: 15,left: 10),
+                                child: Text(
+                                  // 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.',
+                                  'Congratulations, you have completed your registration ! Lets start your learning journey next.',
 
-                        ],
+                                  maxLines: 6,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: c1.withOpacity(1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      fallback: (context) => const SizedBox(
+                        height: 0,
+                      )),
+                ),
+
+                Expanded(
+                  child: ConditionalBuilder(
+                      condition: true,
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.only(
+                            left: 0, right: 0.0, top: 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.deepPurple[100],
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                'assets/images/a2.png',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                      fallback: (context) => const SizedBox(
+                        height: 0,
+                      )),
+                ),
+              ],
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+
+                Expanded(
+                  child: ConditionalBuilder(
+                      condition: true,
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10.0,top: 15,bottom: 15,left: 10),
+                                child: Text(
+                                  // 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.',
+                                  'Congratulations, you have completed your registration ! Lets start your learning journey next.',
+
+                                  maxLines: 6,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: c1.withOpacity(1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      fallback: (context) => const SizedBox(
+                        height: 0,
+                      )),
+                ),
+
+                Expanded(
+                  child: ConditionalBuilder(
+                      condition: true,
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.only(
+                            left: 0, right: 0.0, top: 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.blue[100],
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                'assets/images/a44.png',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                      fallback: (context) => const SizedBox(
+                        height: 0,
+                      )),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+
+                Expanded(
+                  child: ConditionalBuilder(
+                      condition: true,
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10.0,top: 15,bottom: 15,left: 10),
+                                child: Text(
+                                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.'
+                                  'Congratulations, you have completed your registration ! Lets start your learning journey next.',
+
+                                  maxLines: 6,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: c1.withOpacity(1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      fallback: (context) => const SizedBox(
+                        height: 0,
+                      )),
+                ),
+
+                ConditionalBuilder(
+                    condition: false,
+                    builder: (context) => Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 0, right: 0.0, top: 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.blue[100],
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                'assets/images/a44.png',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                BorderWidth: 0,
-                BorderColor: Colors.black,
-
-                color: Colors.white.withOpacity(.2),
-                borderRadius: 20,
-                x: 0,
-                y: 0),
+                    fallback: (context) => const SizedBox(
+                      height: 0,
+                    )),
+              ],
+            ),
           ),
+
 
 
         ];
@@ -311,79 +604,34 @@ class Dashboard_Screen extends StatelessWidget {
                             child: GlassBoxWithBorder_Gradiant2(
                                 widget: Container(
                                   width: double.infinity,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Row(
-                                      children: [
-
-                                        Expanded(
-                                          child: ConditionalBuilder(
-                                              condition: true,
-                                              builder: (context) => Padding(
-                                                padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding: const EdgeInsets.only(right: 10.0,top: 15,bottom: 15,left: 10),
-                                                        child: Text(
-                                                          // 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.',
-                                                          'Congratulations, you have completed your registration ! Lets start your learning journey next.',
-
-                                                          maxLines: 6,
-                                                          overflow: TextOverflow.ellipsis,
-                                                          style: TextStyle(
-                                                            fontWeight: FontWeight.w500,
-                                                            fontSize: 13,
-                                                            color: c1.withOpacity(1),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              fallback: (context) => const SizedBox(
-                                                height: 0,
-                                              )),
-                                        ),
-
-                                        Expanded(
-                                          child: ConditionalBuilder(
-                                              condition: true,
-                                              builder: (context) => Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 0, right: 0.0, top: 0),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(20),
-                                                    color: Colors.deepPurple[200],
-                                                    image: const DecorationImage(
-                                                      image: AssetImage(
-                                                        'assets/images/g7.png',
-                                                      ),
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              fallback: (context) => const SizedBox(
-                                                height: 0,
-                                              )),
-                                        ),
-                                      ],
+                                  child:Container(
+                                    width: double.infinity,
+                                    child: CarouselSlider(
+                                      items:listwidget2,
+                                      options: CarouselOptions(
+                                        height: double.infinity,
+                                        viewportFraction: 1,
+                                        initialPage: 0,
+                                        enableInfiniteScroll: true,
+                                        reverse: false,
+                                        autoPlay: true,
+                                        autoPlayInterval: const Duration(seconds: 3),
+                                        autoPlayAnimationDuration: const Duration(seconds: 1),
+                                        autoPlayCurve: Curves.fastOutSlowIn,
+                                        scrollDirection: Axis.horizontal,
+                                      ),
                                     ),
-                                  ),
+                                  ) ,
                                 ),
-                                BorderWidth: 0,
-                                BorderColor: Colors.black,
+                                BorderWidth: .5,
+                                BorderColor: Colors.black.withOpacity(.7),
 
                                 color: Colors.white.withOpacity(.2),
                                 borderRadius: 20,
                                 x: 0,
                                 y: 0),
                           ),
-                          SizedBox(height: 15,),
+                          SizedBox(height: 10,),
                           Expanded(
                             child: GlassBoxWithBorder_Gradiant2(
                                 widget: Container(
@@ -413,8 +661,8 @@ class Dashboard_Screen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                BorderWidth: 0,
-                                BorderColor: Colors.black,
+                                BorderWidth: .5,
+                                BorderColor: Colors.black.withOpacity(.7),
 
                                 color: Colors.white.withOpacity(.2),
                                 borderRadius: 20,
@@ -422,29 +670,58 @@ class Dashboard_Screen extends StatelessWidget {
                                 y: 0),
                           ),
 
-                          SizedBox(height: 15,),
+                          SizedBox(height: 10,),
                           Expanded(
                             child: Row(
                               children: [
-
                                 Expanded(
-                                  child: CarouselSlider(
-                                    items:listwidget,
-                                    options: CarouselOptions(
-                                      height: double.infinity,
-                                      viewportFraction: 1,
-                                      initialPage: 0,
-                                      enableInfiniteScroll: true,
-                                      reverse: false,
-                                      autoPlay: true,
-                                      autoPlayInterval: const Duration(seconds: 2),
-                                      autoPlayAnimationDuration: const Duration(seconds: 1),
-                                      autoPlayCurve: Curves.fastOutSlowIn,
-                                      scrollDirection: Axis.horizontal,
-                                    ),
+                                  child: Container(
+                                    child: GlassBoxWithBorder_Gradiant2(
+                                        widget: Container(
+                                          width: double.infinity,
+                                          child: CarouselSlider(
+                                            items:listwidget,
+                                            options: CarouselOptions(
+                                              height: double.infinity,
+                                              viewportFraction: 1,
+                                              initialPage: 0,
+                                              enableInfiniteScroll: true,
+                                              reverse: false,
+                                              autoPlay: true,
+                                              autoPlayInterval: const Duration(seconds: 3),
+                                              autoPlayAnimationDuration: const Duration(seconds: 1),
+                                              autoPlayCurve: Curves.fastOutSlowIn,
+                                              scrollDirection: Axis.horizontal,
+                                            ),
+                                          ),
+                                        ),
+                                        BorderWidth: .5,
+                                        BorderColor: Colors.black.withOpacity(.7),
+
+                                        color: Colors.white.withOpacity(.2),
+                                        borderRadius: 20,
+                                        x: 0,
+                                        y: 0),
                                   ),
                                 ),
-                                SizedBox(width: 15,),
+                                // Expanded(
+                                //   child: CarouselSlider(
+                                //     items:listwidget,
+                                //     options: CarouselOptions(
+                                //       height: double.infinity,
+                                //       viewportFraction: 1,
+                                //       initialPage: 0,
+                                //       enableInfiniteScroll: true,
+                                //       reverse: false,
+                                //       autoPlay: true,
+                                //       autoPlayInterval: const Duration(seconds: 2),
+                                //       autoPlayAnimationDuration: const Duration(seconds: 1),
+                                //       autoPlayCurve: Curves.fastOutSlowIn,
+                                //       scrollDirection: Axis.horizontal,
+                                //     ),
+                                //   ),
+                                // ),
+                                SizedBox(width: 10,),
 
                                 Expanded(
                                   child: GlassBoxWithBorder_Gradiant2(
@@ -501,8 +778,8 @@ class Dashboard_Screen extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      BorderWidth: 0,
-                                      BorderColor: Colors.black,
+                                      BorderWidth: .5,
+                                      BorderColor: Colors.black.withOpacity(.7),
 
                                       color: Colors.white.withOpacity(.2),
                                       borderRadius: 20,
