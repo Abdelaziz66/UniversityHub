@@ -1,9 +1,5 @@
-
-//import 'dart:html';
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../Shared/Component/component.dart';
@@ -13,7 +9,6 @@ import '../../../Shared/Cubit/App_state.dart';
 
 class STU_About_Assign_Screen extends StatelessWidget {
   const STU_About_Assign_Screen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit,App_state>(
@@ -21,7 +16,7 @@ class STU_About_Assign_Screen extends StatelessWidget {
       builder: (context,state){
         App_cubit cubit=App_cubit.get(context);
        // STU_Course_Assign_Model? assign;
-       //  var all_files=cubit.assignFile;
+        List<File> all_files=cubit.all_assign_files_List;
         return Scaffold(
           body: SafeArea(
             child: Column(
@@ -35,7 +30,7 @@ class STU_About_Assign_Screen extends StatelessWidget {
 
 
 
-                Text('${ cubit.assignName}',
+                Text('${ cubit.stuAssignDataModel?.taskName}',
                   style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -44,6 +39,7 @@ class STU_About_Assign_Screen extends StatelessWidget {
                 const SizedBox(height: 20,),
                 Container(
                   height: 40,
+                  width: double.infinity,
                   child: const Text(
                     'Assignment info',
                     style: TextStyle(
@@ -53,7 +49,7 @@ class STU_About_Assign_Screen extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                cubit.assignFile!=null?
+                all_files.isNotEmpty?
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -63,11 +59,10 @@ class STU_About_Assign_Screen extends StatelessWidget {
                           mainAxisSpacing: 6,
                           crossAxisSpacing: 6,
                         ),
-                        itemCount: 1,//all_files.length,
+                        itemCount: all_files.length,
                         itemBuilder: (context, index)
                         {
-                          final file = cubit.assignFile;
-                          return BuildAssignFileViewWidget(index,context,file!);
+                          return BuildAssignFileViewWidget(index,context,all_files[index]);
                         }
                     ),
                   ),
@@ -77,6 +72,7 @@ class STU_About_Assign_Screen extends StatelessWidget {
                   padding: const EdgeInsets.all(15.0),
                   child: Row(
                     children: [
+
                       Expanded(
                         child: Container(
                             height: 55,
@@ -85,42 +81,68 @@ class STU_About_Assign_Screen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(22),
                             ),
                             child:
-                            //cubit.pickPostImage==null?
                             TextButton(
                                 onPressed: (){
-                                  print('ssssss${cubit.assignFile}');
-                                  if(cubit.assignFile==null) {
+                                  if(all_files.isEmpty) {
                                     cubit.pick_assign_File();
                                   }
                                   else {
-                                   // print('files:${cubit.all_assign_files_List}');
-                                    print(cubit.assignFile);
-                                    // cubit.add_Assign_NewFile_To_FIles_List();
                                     cubit.SumitTask();
+                                    Navigator.pop(context);
                                    }
+
                                 },
-                                child: Row(
+                                child:all_files.isEmpty?
+                                const Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(Icons.file_present_rounded,color: Colors.white,),
                                     SizedBox(
                                       width: 5,),
                                       Text(
-                                       // all_file=null?
                                             'Attach File' ,//: 'Done',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20,
                                         ),
-                                      ),
+                                      )
                                   ],
-                                )
+                                ): const Text(
+                              'Done' ,//: 'Done',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
 
                             )
                         ),
                       ),
-                      const SizedBox(width:7 ,),
+                      SizedBox(width:5 ,),
+                      all_files.isNotEmpty? Container(
+                          height: 55,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.withOpacity(.9),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child:
+                          TextButton(
+                              onPressed: (){
+                                print('ass new file ');
+                                cubit.pick_assign_File();
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.add,color: Colors.white,),
+                                ],
+                              )
+
+                          )
+                      ):SizedBox(),
 
                     ],
                   ),

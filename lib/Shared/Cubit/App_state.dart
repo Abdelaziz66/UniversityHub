@@ -183,6 +183,26 @@ class Stu_Get_Course_Assign_ErrorState extends App_state {
 }
 
 
+//-----------get task data ------------
+
+
+
+class Stu_Get_Course_Assign_Data_LoadingState extends App_state {}
+
+class Stu_Get_Course_Assign_Data_SuccessState extends App_state {
+//  List<STU_Course_Assign_Model> assignmodel=[];
+
+
+  Stu_Get_Course_Assign_Data_SuccessState();
+
+}
+
+class Stu_Get_Course_Assign_Data_ErrorState extends App_state {
+  String? error;
+  Stu_Get_Course_Assign_Data_ErrorState(this.error);
+}
+
+
 //-------------------------subit task--------------
 
 

@@ -373,33 +373,33 @@ bool switch_quiz=true;
       allowedExtensions: ['png', 'cdr', 'psd','jpeg', 'png','pdf'],
     );
     if(result != null) {
-      assignFile=File(result.files.single.path!);
-      //all_assign_files_List=result.files.single!.path;    //Adding all files to all_files list
+      result.files.forEach((element) {
+        all_assign_files_List.add(File(element.path!));
+      });
       emit(AddFile_Assign_Success_State());
     } else {
-      // User canceled the picker
       emit(AddFile_Assign_Error_State());
     }
   }
 
-  // void add_Assign_NewFile_To_FIles_List()async{
-  //   emit(AddNewFile_Assign_Loading_State());
-  //   FilePickerResult? result = await FilePicker.platform.pickFiles(
-  //     type: FileType.custom,
-  //     allowMultiple: true,
-  //     allowedExtensions: ['png', 'cdr', 'psd','jpeg', 'png','pdf'],
-  //   );
-  //   if(result != null) {
-  //     result.files.forEach((element) {
-  //       all_assign_files_List.add(element.);
-  //     });
-  //     emit(AddNewFile_Assign_Success_State());
-  //   } else {
-  //     // User canceled the picker
-  //     emit(AddNewFile_Assign_Error_State());
-  //   }
-  // }
-  //
+  void Add_NewFile_To_Assign_List()async{
+    emit(AddNewFile_Assign_Loading_State());
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowMultiple: true,
+      allowedExtensions: ['png', 'cdr', 'psd','jpeg', 'png','pdf'],
+    );
+    if(result != null) {
+      result.files.forEach((element) {
+        all_assign_files_List.add(File(element.path!));
+      });
+      emit(AddNewFile_Assign_Success_State());
+    } else {
+      // User canceled the picker
+      emit(AddNewFile_Assign_Error_State());
+    }
+  }
+
 
 
   //-----------------STU Quizzes------------
@@ -679,19 +679,49 @@ List <int> stuAllGrades=[10,30,50,45,35];
      isCycleIdChange=false;
 
   }
+
+  //-----------get task ddta---------------
+  GetTaskDataModel? stuAssignDataModel;
+  void StuGetAssignData (
+      ){
+    print('task id:::${taskId}');
+//    if(stuCoursesAssignModel.isEmpty || isCycleIdChange==true) {
+      emit(Stu_Get_Course_Assign_Data_LoadingState());
+      Dio_Helper.GetData(
+        url: 'Students/GetAssignment?taskId=${taskId}',
+        token: Tokenn,
+      ).then((value) {
+        if (value.statusCode == 200) {
+
+            stuAssignDataModel=
+                GetTaskDataModel.fromJson(value.data);
+          print('get course Assign true');
+          emit(Stu_Get_Course_Assign_Data_SuccessState());
+        }
+          print('task name------- ${stuAssignDataModel?.filePath}');
+      }).catchError((error) {
+        emit(Stu_Get_Course_Assign_Data_ErrorState(error.toString()));
+        print(error.toString());
+      });
+  //}
+   // isCycleIdChange=false;
+
+  }
+
+
   //-------------------------submit Task-----------------
   File ?file;
   void SumitTask(
   )
   {
-   // print('All files-------------- ${all_assign_files_List[0]}');
+    // print('All files-------------- ${all_assign_files_List}');
     print('task id : ${taskId}');
-    print('All files-------------- ${assignFile}');
+    print('All files-------------- ${all_assign_files_List}');
     emit(Stu_Submit_Task_LoadingState());
-    Dio_Helper.PostFileData(
+    Dio_Helper.PostListFileData(
         token: Tokenn,
         url: 'Students/File/Upload?taskid=${taskId}',
-      file:File(assignFile!.path)
+      files:all_assign_files_List
     ).then((value) {
       if (value.statusCode == 200) {
         print('post assign true');
@@ -702,7 +732,10 @@ List <int> stuAllGrades=[10,30,50,45,35];
         emit(Stu_Submit_Task_SuccessState());
       }}).catchError((Error){
       print(Error.toString());
+      flutterToast(msg: 'Error to upload you task , please try again');
+
       emit(Stu_Submit_Task_ErrorState(Error.toString()));
+
     });
   }
 
