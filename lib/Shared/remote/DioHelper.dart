@@ -111,11 +111,9 @@ class Dio_Helper {
     };
     for (int i = 0; i < files!.length; i++) {
       File file = files[i];
-      String fileName = file.path
-          .split('/')
-          .last; // Get the file name
+      String fileName = file.path.split('/').last; // Get the file name
       formData.files.add(MapEntry(
-        'file$i', // 'file' is the key name expected by the API for each file
+        'file', // 'file' is the key name expected by the API for each file
         await MultipartFile.fromFile(
           file.path,
           filename: fileName,
