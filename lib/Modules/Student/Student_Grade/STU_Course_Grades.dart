@@ -136,7 +136,8 @@ class STUCourseGrades extends StatelessWidget {
                             ),
                           ],
                           rows: [
-                            DataRow(cells: [
+                            DataRow(
+                              cells: [
                               DataCell(Container(
                                   width: double.infinity,
                                   child: Text(

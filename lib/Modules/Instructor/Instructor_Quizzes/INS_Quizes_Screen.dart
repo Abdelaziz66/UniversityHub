@@ -191,7 +191,9 @@ class INS_Quizes_Screen extends StatelessWidget {
                               isQuizStart:
                               cubit.stu_Quiz_isStart,
                               index:
-                              index),
+                              index
+
+                          ),
                       separatorBuilder: (context, index) =>
                       const SizedBox(
                         height: 25,

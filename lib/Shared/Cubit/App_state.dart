@@ -256,6 +256,9 @@ class Stu_Get_Quiz_Data_ErrorState extends App_state {
 //---------submit Quiz-------
 class Stu_Submit_Quiz_LoadingState extends App_state {}
 
+class Stu_Assign_Quiz_Answer_SuccessState extends App_state {}
+
+
 class Stu_Submit_Quiz_SuccessState extends App_state {
   //List<GetQuizDataModel> quizDatamodel=[];
 

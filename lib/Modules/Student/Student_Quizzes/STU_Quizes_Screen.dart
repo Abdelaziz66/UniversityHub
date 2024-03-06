@@ -79,7 +79,6 @@ class STU_Quizes_Screen extends StatelessWidget {
                             itemBuilder:(context,index)=> Build_Quiz_Data_Widget(
                             quiz: quiz[index],
                                 quizIsComplete: cubit.stu_Quiz_IsComplete,
-                              //  cubit.stu_Quiz_isStart,
                                 index:
                                 index),
                             separatorBuilder: (context,index)=>const SizedBox(height: 25,),
