@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 //import 'dart:html';
 import 'dart:io';
 
@@ -29,8 +30,10 @@ import 'package:university_hup/Modules/Student/Student_Notification/Quizzes_Scre
 import 'package:university_hup/Modules/Student/Student_Notification/UpcomingCourse_Screen.dart';
 import 'package:university_hup/Shared/constant.dart';
 import 'package:university_hup/Shared/remote/DioHelper.dart';
+import '../../Models/STU_Model/CourseModel/Stu_Course_Grades_model.dart';
 import '../../Models/STU_Model/User_Model/CurrentStudentInfoModel.dart';
 
+import '../../Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
 import '../Cons_widget.dart';
 import 'App_state.dart';
 
@@ -78,10 +81,10 @@ class App_cubit extends Cubit<App_state> {
   ];
   List N_HomeScreen_Text=[
 
-      // 'Ongoing Courses',
-      // 'Assignments',
-      // 'Quizzes',
-      // 'UpcomingCourse',
+    // 'Ongoing Courses',
+    // 'Assignments',
+    // 'Quizzes',
+    // 'UpcomingCourse',
     const Text(
       'Ongoing Courses',
       style: TextStyle(
@@ -175,11 +178,11 @@ class App_cubit extends Cubit<App_state> {
   List<Widget> Nav_Bar_Items_List(){
     return[
       const Dashboard_Screen(),
-     const Home_screen(),
+      const Home_screen(),
       STU_Lecture_Screen(),
       const Calendar_screen(),
-       const Profile_screen()
-  ];}
+      const Profile_screen()
+    ];}
 
   int Nav_Bar_index = 0;
   void Nav_Bar_Function({required int index}) {
@@ -205,7 +208,7 @@ class App_cubit extends Cubit<App_state> {
     emit(D_E_state());
   }
 
-bool switch_quiz=true;
+  bool switch_quiz=true;
   void switch_quiz_Function({required bool s}){
     switch_quiz=s;
     emit(D_E_state());
@@ -373,33 +376,33 @@ bool switch_quiz=true;
       allowedExtensions: ['png', 'cdr', 'psd','jpeg', 'png','pdf'],
     );
     if(result != null) {
-      assignFile=File(result.files.single.path!);
-      //all_assign_files_List=result.files.single!.path;    //Adding all files to all_files list
+      result.files.forEach((element) {
+        all_assign_files_List.add(File(element.path!));
+      });
       emit(AddFile_Assign_Success_State());
     } else {
-      // User canceled the picker
       emit(AddFile_Assign_Error_State());
     }
   }
 
-  // void add_Assign_NewFile_To_FIles_List()async{
-  //   emit(AddNewFile_Assign_Loading_State());
-  //   FilePickerResult? result = await FilePicker.platform.pickFiles(
-  //     type: FileType.custom,
-  //     allowMultiple: true,
-  //     allowedExtensions: ['png', 'cdr', 'psd','jpeg', 'png','pdf'],
-  //   );
-  //   if(result != null) {
-  //     result.files.forEach((element) {
-  //       all_assign_files_List.add(element.);
-  //     });
-  //     emit(AddNewFile_Assign_Success_State());
-  //   } else {
-  //     // User canceled the picker
-  //     emit(AddNewFile_Assign_Error_State());
-  //   }
-  // }
-  //
+  void Add_NewFile_To_Assign_List()async{
+    emit(AddNewFile_Assign_Loading_State());
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowMultiple: true,
+      allowedExtensions: ['png', 'cdr', 'psd','jpeg', 'png','pdf'],
+    );
+    if(result != null) {
+      result.files.forEach((element) {
+        all_assign_files_List.add(File(element.path!));
+      });
+      emit(AddNewFile_Assign_Success_State());
+    } else {
+      // User canceled the picker
+      emit(AddNewFile_Assign_Error_State());
+    }
+  }
+
 
 
   //-----------------STU Quizzes------------
@@ -414,13 +417,18 @@ bool switch_quiz=true;
     'Compare and Contrast Shared Memory and Distributed Memory Models?'];
 
   final List<String> stu_Quiz_Ques_options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
-  String quizAnswerSelected = '';
-  void Quiz_Select_answer(selectedOption){
-    this.quizAnswerSelected=selectedOption;
+  //String quizAnswerSelected = '';
+  void Quiz_Select_answer(index,value){
+    allquizAnswers![index]=value;
+    //quizAnswerSelected=value;
     emit(Change_Quiz_Answer_State());
   }
+
+
+
+
   //----------------------Grades--------------------------
-List <int> stuAllGrades=[10,30,50,45,35];
+  List <int> stuAllGrades=[10,30,50,45,35];
 //----------------------------------------------------------
 
 
@@ -450,8 +458,8 @@ List <int> stuAllGrades=[10,30,50,45,35];
 
   CurrentStudentInfoModel? studentInfoModel;
   void GetCurrentStudenInfo (
-  //  required token,
-  ) {
+      //  required token,
+      ) {
     if(studentInfoModel==null) {
       emit(Get_STU_Info_LoadingState());
       Dio_Helper.GetData(
@@ -506,83 +514,83 @@ List <int> stuAllGrades=[10,30,50,45,35];
 
   void StuGetAllCourses ({
     required token,
-}) {
+  }) {
     if(stuAllCoursesModel.length==0) {
       emit(Stu_Get_All_Courses_LoadingState());
-    Dio_Helper.GetData(
-      url: STU_COURSES,
-      token: Tokenn,
-    ).then((value) {
-      if (value.statusCode == 200) {
-        print('get course true');
-        List Json = value.data;
-        for (var element in Json) {
-          stuAllCoursesModel.add(Stu_GetAllCoursesModel.fromJson(element));
+      Dio_Helper.GetData(
+        url: STU_COURSES,
+        token: Tokenn,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          print('get course true');
+          List Json = value.data;
+          for (var element in Json) {
+            stuAllCoursesModel.add(Stu_GetAllCoursesModel.fromJson(element));
+          }
+          emit(Stu_Get_All_Courses_SuccessState(stuAllCoursesModel));
         }
-        emit(Stu_Get_All_Courses_SuccessState(stuAllCoursesModel));
-      }
-      stuAllCoursesModel.forEach((element) {
-        print('name------- ${element.name}');
+        stuAllCoursesModel.forEach((element) {
+          print('name------- ${element.name}');
+        });
+      }).catchError((error) {
+        emit(Stu_Get_All_Courses_ErrorState(error.toString()));
+        print(error.toString());
       });
-    }).catchError((error) {
-      emit(Stu_Get_All_Courses_ErrorState(error.toString()));
-      print(error.toString());
-    });
-  }
+    }
   }
 
   String? currentCourseName;
   String? currentCycleId;
   bool isCycleIdChange=false;
 
- // String? cycleId;
+  // String? cycleId;
   List<GetCourseMaterialsModel> stuCoursesMatrialModel=[];
   List<GetCourseMaterialsModel> stuLECTUREModel=[];
   List<GetCourseMaterialsModel> stuLABModel=[];
   bool? isLec;
 
   void StuGetCourseMaterials (
-    //required token,
-   // required cycleId,
-  ) {
+      //required token,
+      // required cycleId,
+      ) {
     print('sdsds ${isCycleIdChange}');
     if (stuCoursesMatrialModel.isEmpty || isCycleIdChange==true){
       emit(Stu_Get_Course_Material_LoadingState());
-    Dio_Helper.GetData(
-      url: 'Students/CurrentCourseMaterial?CycleId=${currentCycleId}',
-      //STU_COURSE_MATERIAL,
-      token: Tokenn,
-    ).then((value) {
-      if (value.statusCode == 200) {
+      Dio_Helper.GetData(
+        url: 'Students/CurrentCourseMaterial?CycleId=${currentCycleId}',
+        //STU_COURSE_MATERIAL,
+        token: Tokenn,
+      ).then((value) {
+        if (value.statusCode == 200) {
 
-        print('get course material true');
-        List Json = value.data;
-        for (var element in Json) {
-          stuCoursesMatrialModel.add(GetCourseMaterialsModel.fromJson(element));
+          print('get course material true');
+          List Json = value.data;
+          for (var element in Json) {
+            stuCoursesMatrialModel.add(GetCourseMaterialsModel.fromJson(element));
+          }
+          emit(Stu_Get_Course_Material_SuccessState(stuCoursesMatrialModel));
         }
-        emit(Stu_Get_Course_Material_SuccessState(stuCoursesMatrialModel));
-      }
-      stuCoursesMatrialModel.forEach((element) {
-        if (element.type == 'Lecture') {
+        stuCoursesMatrialModel.forEach((element) {
+          if (element.type == 'Lecture') {
             stuLECTUREModel.add(element);
-        }
-        else if (element.type == 'Lab') {
+          }
+          else if (element.type == 'Lab') {
             stuLABModel.add(element);
           }
+        });
+        print('lectures:');
+        stuLECTUREModel.forEach((element) {
+          print(element.lectureId);
+        });
+        print('Labs:');
+        stuLABModel.forEach((element) {
+          print(element.lectureId);
+        });
+      }).catchError((error) {
+        emit(Stu_Get_Course_Material_ErrorState(error.toString()));
+        print(error.toString());
       });
-      print('lectures:');
-      stuLECTUREModel.forEach((element) {
-        print(element.lectureId);
-      });
-      print('Labs:');
-      stuLABModel.forEach((element) {
-        print(element.lectureId);
-      });
-    }).catchError((error) {
-      emit(Stu_Get_Course_Material_ErrorState(error.toString()));
-      print(error.toString());
-    });
-  }
+    }
     isCycleIdChange=false;
 
   }
@@ -595,11 +603,11 @@ List <int> stuAllGrades=[10,30,50,45,35];
     //required token,
     required lecId,
   }
-  ) {
+      ) {
     stuCoursesMatrialFileModel=[];
-   // print('lecId=${lecId}');
+    // print('lecId=${lecId}');
     //if (stuCoursesMatrialModel.isEmpty || isCycleIdChange==true){
-      emit(Stu_Get_Course_Material_File_LoadingState());
+    emit(Stu_Get_Course_Material_File_LoadingState());
     Dio_Helper.GetData(
       url: 'Students/Getfilesoflecture?lectureId=${lecId}',
       //STU_COURSE_MATERIAL,
@@ -614,14 +622,6 @@ List <int> stuAllGrades=[10,30,50,45,35];
         }
         emit(Stu_Get_Course_Material_File_SuccessState());
       }
-      // stuCoursesMatrialModel.forEach((element) {
-      //   if (element.type == 'Lecture') {
-      //       stuLECTUREModel.add(element);
-      //   }
-      //   else if (element.type == 'Lab') {
-      //       stuLABModel.add(element);
-      //     }
-      // });
       print('Files:');
       stuCoursesMatrialFileModel.forEach((element) {
         print(element.fileName);
@@ -631,8 +631,8 @@ List <int> stuAllGrades=[10,30,50,45,35];
       emit(Stu_Get_Course_Material_File_ErrorState(error.toString()));
       print(error.toString());
     });
-  //}
-   //isCycleIdChange=false;
+    //}
+    //isCycleIdChange=false;
   }
 
 
@@ -646,52 +646,82 @@ List <int> stuAllGrades=[10,30,50,45,35];
   String ? taskId;
   List<STU_Course_Assign_Model> stuCoursesAssignModel=[];
   void StuGetCourseAssign (
-    //required token,
-   // required cycleId,
-  ){
-   // stuCoursesAssignModel=[];
-     if(stuCoursesAssignModel.isEmpty || isCycleIdChange==true) {
-       emit(Stu_Get_Course_Assign_LoadingState());
-       Dio_Helper.GetData(
-         url: 'Students/CurrentCourseTasks?CycleId=${currentCycleId}',
-         //STU_COURSE_MATERIAL,
-         token: Tokenn,
-       ).then((value) {
-         if (value.statusCode == 200) {
-           print(value.data);
-           List Json = value.data;
-           //  for (var element in  Json) {
-           Json.forEach((element) {
-             stuCoursesAssignModel.add(
-                 STU_Course_Assign_Model.fromJson(element));
-           });
-           print('get course Assign true');
-           emit(Stu_Get_Course_Assign_SuccessState(stuCoursesAssignModel));
-         }
-         stuCoursesAssignModel.forEach((element) {
-           print('task name------- ${element.taskName}');
-         });
-       }).catchError((error) {
-         emit(Stu_Get_Course_Assign_ErrorState(error.toString()));
-         print(error.toString());
-       });
-     }
-     isCycleIdChange=false;
+      //required token,
+      // required cycleId,
+      ){
+    // stuCoursesAssignModel=[];
+    if(stuCoursesAssignModel.isEmpty || isCycleIdChange==true) {
+      emit(Stu_Get_Course_Assign_LoadingState());
+      Dio_Helper.GetData(
+
+        url: 'Students/CurrentCourseTasks?CycleId=${currentCycleId}',
+        //STU_COURSE_MATERIAL,
+        token: Tokenn,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          print(value.data);
+          List Json = value.data;
+          //  for (var element in  Json) {
+          Json.forEach((element) {
+            stuCoursesAssignModel.add(
+                STU_Course_Assign_Model.fromJson(element));
+          });
+          print('get course Assign true');
+          emit(Stu_Get_Course_Assign_SuccessState(stuCoursesAssignModel));
+        }
+        stuCoursesAssignModel.forEach((element) {
+          print('task name------- ${element.taskName}');
+        });
+      }).catchError((error) {
+        emit(Stu_Get_Course_Assign_ErrorState(error.toString()));
+        print(error.toString());
+      });
+    }
+    isCycleIdChange=false;
 
   }
+
+  //-----------get task ddta---------------
+  GetTaskDataModel? stuAssignDataModel;
+  void StuGetAssignData (
+      ){
+    print('task id:::${taskId}');
+//    if(stuCoursesAssignModel.isEmpty || isCycleIdChange==true) {
+    emit(Stu_Get_Course_Assign_Data_LoadingState());
+    Dio_Helper.GetData(
+      url: 'Students/GetAssignment?taskId=${taskId}',
+      token: Tokenn,
+    ).then((value) {
+      if (value.statusCode == 200) {
+        stuAssignDataModel=
+            GetTaskDataModel.fromJson(value.data);
+        print('get course Assign true');
+        emit(Stu_Get_Course_Assign_Data_SuccessState());
+      }
+      print('task name------- ${stuAssignDataModel?.filePath}');
+    }).catchError((error) {
+      emit(Stu_Get_Course_Assign_Data_ErrorState(error.toString()));
+      print(error.toString());
+    });
+    //}
+    // isCycleIdChange=false;
+
+  }
+
+
   //-------------------------submit Task-----------------
   File ?file;
   void SumitTask(
-  )
+      )
   {
-   // print('All files-------------- ${all_assign_files_List[0]}');
+    // print('All files-------------- ${all_assign_files_List}');
     print('task id : ${taskId}');
-    print('All files-------------- ${assignFile}');
+    print('All files-------------- ${all_assign_files_List}');
     emit(Stu_Submit_Task_LoadingState());
-    Dio_Helper.PostFileData(
+    Dio_Helper.PostListFileData(
         token: Tokenn,
         url: 'Students/File/Upload?taskid=${taskId}',
-      file:File(assignFile!.path)
+        files:all_assign_files_List
     ).then((value) {
       if (value.statusCode == 200) {
         print('post assign true');
@@ -702,19 +732,19 @@ List <int> stuAllGrades=[10,30,50,45,35];
         emit(Stu_Submit_Task_SuccessState());
       }}).catchError((Error){
       print(Error.toString());
+      flutterToast(msg: 'Error to upload you task , please try again');
+
       emit(Stu_Submit_Task_ErrorState(Error.toString()));
+
     });
   }
 
-
 //-------------Quiz------------------------------
-  // String? cycleId;
 
   List<STU_Quiz_Model> stuCoursesQuizlModel=[];
   void StuGetCourseQuiz (
- //   required token,
-//    required cycleId,
-  ) {
+
+      ) {
     if (stuCoursesQuizlModel.isEmpty|| isCycleIdChange==true) {
       emit(Stu_Get_Course_Quiz_LoadingState());
       Dio_Helper.GetData(
@@ -741,94 +771,122 @@ List <int> stuAllGrades=[10,30,50,45,35];
     isCycleIdChange=false;
 
   }
- // List<GetQuizDataModel> quizlDataModel=[];
   List<Questions> questionModel=[];
- // List<Answers> answersModel=[];
+
+  List<String>? allquizAnswers ;
+
   String?currentQuizId;
-  void StuGetQuizDataById ({
-    required qIndex,
-    required token,
-//    required cycleId,
-  }){
-   // quizlDataModel=[];
-   // answersModel=[];
-    if(questionModel.isEmpty) {
-      emit(Stu_Get_Quiz_Data_LoadingState());
-      Dio_Helper.GetData(
-        url: 'Students/Quiz?quizId=${currentQuizId}',
-        //STU_COURSE_MATERIAL,
-        token: Tokenn,
-      ).then((value) {
-        if (value.statusCode == 200) {
-          print('get course Quiz true');
-          List ques = value.data['questions'];
-          for (var element in ques) {
-            questionModel.add(Questions.fromJson(element));
-          }
-          // List<Map<String,dynamic>> answer =value.data['questions']['answers'];
-          // for (var element in answer) {
-          //   answersModel.add(Answers.fromJson(element['answers']));
-          // }
-          emit(Stu_Get_Quiz_Data_SuccessState());
+  void StuGetQuizDataById (
+      ){
+    emit(Stu_Get_Quiz_Data_LoadingState());
+    Dio_Helper.GetData(
+      url: 'Students/Quiz?quizId=${currentQuizId}',
+      //STU_COURSE_MATERIAL,
+      token: Tokenn,
+    ).then((value) {
+      if (value.statusCode == 200) {
+        print('get course Quiz true');
+        List ques = value.data['questions'];
+        for (var element in ques) {
+          questionModel.add(Questions.fromJson(element));
         }
-        questionModel.forEach((element) {
-          print('Quiz ques------- ${element.text}');
-        });
-        // answersModel.forEach((element) {
-        //   print('Quiz answers------- ${element.text}');
-        // });
-      }).catchError((error) {
-        emit(Stu_Get_Quiz_Data_ErrorState(error.toString()));
-        print(error.toString());
+
+        allquizAnswers = List<String>.generate(
+          questionModel.length,
+              (index) =>'',
+        );
+        emit(Stu_Get_Quiz_Data_SuccessState());
+      }
+      questionModel.forEach((element) {
+        print('Quiz ques------- ${element.text}');
       });
-    }
+
+    }).catchError((error) {
+      emit(Stu_Get_Quiz_Data_ErrorState(error.toString()));
+      print(error.toString());
+    });
+    questionModel=[];
   }
 
-
-List<Map<String,dynamic>>submitQuizAnswers=[];
+  List<Map<String,dynamic>>submitQuizAnswers=[];
+  int? quizResult=0;
   List<Map<String,dynamic>>QuizAnswersResponse=[];
-  //List<SubmitQuizModel>? submitQuizModel;
   void SumitQuiz(
-  //  required quizId,
-  //  required List<Map<String,dynamic>>answers,
-)
+      )
   {
     QuizAnswersResponse=[];
     emit(Stu_Submit_Quiz_LoadingState());
+
+    for(int i=0;i<questionModel.length;i++){
+      submitQuizAnswers.add({
+        'questionId':questionModel[i].id,
+        'answerId':allquizAnswers![i]
+      });
+    }
+    emit(Stu_Assign_Quiz_Answer_SuccessState());
     Dio_Helper.PostData(
-      token: Tokenn,
+        token: Tokenn,
         url: SUBMITQUIZ,
         data:{
           'quizId':currentQuizId,
           'answers':submitQuizAnswers,
         }).then((value) {
       if (value.statusCode == 200) {
-        print('get course Quiz true');
-     //   print(value.data);
+        print('submit Quiz true');
         List json = value.data;
 
-
         for (var element in json) {
+          print(element.values);
           QuizAnswersResponse.add({
             '${element.keys}': element.values
           });
-        };
-
-        QuizAnswersResponse.forEach((element) {
-          print(element.keys);
-          print(element.values);
-        });
-
+        }
+        for (var item in QuizAnswersResponse) {
+          if (item.values.toString()=='((true))') {
+            quizResult=quizResult!+1;
+          }
+        }
+        print('quiz result :${quizResult}');
         emit(Stu_Submit_Quiz_SuccessState());
-      }}).catchError((Error){
+      }
+    }).catchError((Error){
       print(Error.toString());
       emit(Stu_Submit_Quiz_ErrorState(Error.toString()));
     });
   }
 
+  //-------------STU get all grades for current course------------
 
+  List<GetCourseGradesModel>courseGradesModel=[];
 
+  void GetStuCourseGrade(){
+    // courseGradesModel=[];
+    if(courseGradesModel.isEmpty || isCycleIdChange==true) {
+      emit(Stu_Get_Course_Grades_LoadingState());
+      Dio_Helper.GetData
+        (url: 'Students/GetAllGradesForCurrentCourse?courseId=${currentCycleId}',
+        token: Tokenn,
 
-
+      )
+          .then((value) {
+        if (value.statusCode == 200) {
+          List Json = value.data;
+          for (var element in Json) {
+            courseGradesModel.add(GetCourseGradesModel.fromJson(element));
+          }
+          print('Get course grades successfull');
+          print((courseGradesModel.length));
+          courseGradesModel.forEach((element) {
+            print(element.title);
+          });
+          emit(Stu_Get_Course_Grades_SuccessState());
+        }
+      }).catchError((error) {
+        print(error);
+        emit(Stu_Get_Course_Grades_ErrorState(error));
+      });
+      // courseGradesModel=[];
+    }
+    isCycleIdChange=false;
+  }
 }
-

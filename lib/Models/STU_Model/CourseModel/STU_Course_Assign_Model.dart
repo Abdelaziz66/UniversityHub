@@ -100,3 +100,46 @@ class STU_Course_Assign_Model {
     return data;
   }
 }
+
+
+
+class GetTaskDataModel {
+  String? taskName;
+  int? taskGrade;
+  String? startDate;
+  String? endDate;
+  String? status;
+  String? filePath;
+  String? createdAt;
+
+  GetTaskDataModel(
+      {this.taskName,
+        this.taskGrade,
+        this.startDate,
+        this.endDate,
+        this.status,
+        this.filePath,
+        this.createdAt});
+
+  GetTaskDataModel.fromJson(Map<String, dynamic> json) {
+    taskName = json['TaskName'];
+    taskGrade = json['TaskGrade'];
+    startDate = json['StartDate'];
+    endDate = json['EndDate'];
+    status = json['Status'];
+    filePath = json['FilePath'];
+    createdAt = json['CreatedAt'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['TaskName'] = this.taskName;
+    data['TaskGrade'] = this.taskGrade;
+    data['StartDate'] = this.startDate;
+    data['EndDate'] = this.endDate;
+    data['Status'] = this.status;
+    data['FilePath'] = this.filePath;
+    data['CreatedAt'] = this.createdAt;
+    return data;
+  }
+}

@@ -14,6 +14,7 @@ import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialM
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
 
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
+import 'package:university_hup/Shared/Cubit/App_state.dart';
 
 import '../Cons_widget.dart';
 import '../Cubit/App_cubit.dart';
@@ -2065,18 +2066,28 @@ Widget Build_Quiz_Data_Widget({
                                 // isQuizStart[index]
                                 ? TextButton(
                                     onPressed: () {
-                                      App_cubit.get(context).submitQuizAnswers =
-                                          [];
+                                    //  print(App_cubit.get(context).allquizAnswers![0]);
+
+                                      //print(App_cubit.get(context).allquizAnswers![0]);
+
+                                      //  App_cubit.get(context).quizAnswerSelected='';
+
+                                      App_cubit.get(context).submitQuizAnswers = [];
+
                                       onQuizStart;
-                                      App_cubit.get(context).currentQuizId =
-                                          quiz.id;
-                                      App_cubit.get(context).StuGetQuizDataById(
-                                        qIndex: 0,
-                                        token: App_cubit.get(context).Tokenn,
-                                      );
+
+                                      App_cubit.get(context).currentQuizId = quiz.id;
+
+                                      App_cubit.get(context).StuGetQuizDataById();
+
+                                    //  App_cubit.get(context).allquizAnswers[0]=App_cubit.get(context).quizAnswerSelected;
+                                    //  App_cubit.get(context).allquizAnswers =  List<String>.filled(App_cubit.get(context).questionModel.length,'');
+
+
                                       navigateTo(
                                           context, STU_Quizes_Ques_Screen());
                                     },
+
                                     child: const Text(
                                       'Start',
                                       style: TextStyle(
@@ -2233,7 +2244,7 @@ Widget Build_STU_Quiz_Ques({
   context,
   // List<String>? ques,
   // List<String>? answers,
-  index,
+  qIndex,
   Questions? questions,
 }) =>
     Column(
@@ -2252,7 +2263,7 @@ Widget Build_STU_Quiz_Ques({
               width: 5,
             ),
             Text(
-              '${index + 1}',
+              '${qIndex + 1}',
               style: const TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
@@ -2310,11 +2321,19 @@ Widget Build_STU_Quiz_Ques({
                 style:
                     const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              value: questions?.answers![index].id,
-              groupValue: App_cubit.get(context).quizAnswerSelected,
+              value:questions?.answers![index].id,
+              //App_cubit.get(context).allquizAnswers[qIndex],
+              groupValue://'',//App_cubit.get(context).quizAnswerSelected,
+                App_cubit.get(context).allquizAnswers![qIndex],
               onChanged: (value) {
-                print((value));
-                App_cubit.get(context).Quiz_Select_answer(value);
+                print(App_cubit.get(context).allquizAnswers![qIndex]);
+                print(('------${value}'));
+                App_cubit.get(context).Quiz_Select_answer(qIndex,value);
+//                App_cubit.get(context).allquizAnswers[qIndex]=App_cubit.get(context).quizAnswerSelected;
+                print( App_cubit.get(context).allquizAnswers);
+                 print(App_cubit.get(context).allquizAnswers![qIndex]);
+                 print(questions?.answers![index].id,);
+
               },
             );
           },

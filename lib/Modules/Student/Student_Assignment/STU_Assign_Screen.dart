@@ -259,6 +259,7 @@ class STU_Assign_Screen extends StatelessWidget {
                                     cubit.assignFile=null;
                                     cubit.taskId=assign[index].taskId;
                                     cubit.all_assign_files_List=[];
+                                    cubit.StuGetAssignData();
                                     navigateTo(context,STU_About_Assign_Screen() );
                                   },
                                   child: Build_STU_pend_Tasks(assign:assign[index] )),

@@ -183,6 +183,26 @@ class Stu_Get_Course_Assign_ErrorState extends App_state {
 }
 
 
+//-----------get task data ------------
+
+
+
+class Stu_Get_Course_Assign_Data_LoadingState extends App_state {}
+
+class Stu_Get_Course_Assign_Data_SuccessState extends App_state {
+//  List<STU_Course_Assign_Model> assignmodel=[];
+
+
+  Stu_Get_Course_Assign_Data_SuccessState();
+
+}
+
+class Stu_Get_Course_Assign_Data_ErrorState extends App_state {
+  String? error;
+  Stu_Get_Course_Assign_Data_ErrorState(this.error);
+}
+
+
 //-------------------------subit task--------------
 
 
@@ -236,6 +256,9 @@ class Stu_Get_Quiz_Data_ErrorState extends App_state {
 //---------submit Quiz-------
 class Stu_Submit_Quiz_LoadingState extends App_state {}
 
+class Stu_Assign_Quiz_Answer_SuccessState extends App_state {}
+
+
 class Stu_Submit_Quiz_SuccessState extends App_state {
   //List<GetQuizDataModel> quizDatamodel=[];
 
@@ -248,5 +271,20 @@ class Stu_Submit_Quiz_ErrorState extends App_state {
   String? error;
   Stu_Submit_Quiz_ErrorState(this.error);
 }
+
+//--------------get stu course grades -----------
+
+class Stu_Get_Course_Grades_LoadingState extends App_state {}
+
+class Stu_Get_Course_Grades_SuccessState extends App_state {
+  Stu_Get_Course_Grades_SuccessState();
+
+}
+
+class Stu_Get_Course_Grades_ErrorState extends App_state {
+  String? error;
+  Stu_Get_Course_Grades_ErrorState(this.error);
+}
+
 
 

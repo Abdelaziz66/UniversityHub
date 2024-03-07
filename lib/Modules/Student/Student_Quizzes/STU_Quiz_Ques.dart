@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -85,41 +86,40 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
-                    child: PageView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      onPageChanged: (index) {
-                        print(isBack);
-                       // print(ques[index-1].text,);
-                        print('page index ${index}');
-                        print(cubit.quizAnswerSelected);
-                        print(ques[index].id);
-
-
-                        if (index == ques.length - 1) {
-                          setState(() {
-                            islast = true;
-                          });
-                        }
-                        else if (index >=1) {
-                          setState(() {
-                            isStart = true;
-                          });
-                        } else {
-                          setState(() {
-                            islast = false;
-                            isStart = false;
-                          });
-                        }
-                      },
-                      controller: boardcontroller,
-                      itemBuilder: (context, index) => Build_STU_Quiz_Ques(
-                         context:  context,
-                         // ques: cubit.stu_Quiz_Ques_lis,
-                        //  answers: cubit.stu_Quiz_Ques_options,
-                        index: index,
-                        questions: ques[index]
+                    child: ConditionalBuilder(
+                      condition: cubit.questionModel.isNotEmpty,
+                      builder:(context)=> PageView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        onPageChanged: (index) {
+                          print(isBack);
+                          print('page index ${index}');
+                          if (index == ques.length - 1) {
+                            setState(() {
+                              islast = true;
+                            });
+                          }
+                          else if (index >=1) {
+                            setState(() {
+                              isStart = true;
+                            });
+                          } else {
+                            setState(() {
+                              islast = false;
+                              isStart = false;
+                            });
+                          }
+                        },
+                        controller: boardcontroller,
+                        itemBuilder: (context, index) => Build_STU_Quiz_Ques(
+                           context:  context,
+                           // ques: cubit.stu_Quiz_Ques_lis,
+                          //  answers: cubit.stu_Quiz_Ques_options,
+                          qIndex: index,
+                          questions: ques[index]
+                        ),
+                        itemCount:ques.length
                       ),
-                      itemCount:ques.length
+                      fallback: (context)=>Center(child: CircularProgressIndicator(),),
                     ),
                   ),
                 ),
@@ -133,14 +133,12 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                       decoration: BoxDecoration(
                         color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(25),
-
                       ),
                         child: IconButton(
                           onPressed: (){
                             setState(() {
                               islast = false;
                             });
-                           // print(boardcontroller.initialPage);
                             boardcontroller.previousPage (
                               duration: const Duration(
                               milliseconds: 750,
@@ -163,33 +161,34 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                               containerWidth: double.infinity,
                               containerHeight: 50,
                               onPressed: () {
-                                if(isBack==false){
-                                  cubit.submitQuizAnswers.add({
-                                    'questionId':ques[boardcontroller.page!.toInt()].id,
-                                    'answerId':cubit.quizAnswerSelected
-                                  }
-                                  );}
-                                else if(isBack==true){
-                                  // cubit.submitQuizAnswers[index]={
-                                  //   'questionId':ques[index].id,
-                                  //   'answerId':cubit.quizAnswerSelected
-                                  // };
-                                  //  cubit.submitQuizAnswers[index]['questionId']=ques[index].id;
-
-                                  cubit.submitQuizAnswers[boardcontroller.page!.toInt()]['answerId']=cubit.quizAnswerSelected;
-                                }
+                                // if(isBack==false){
+                                //
+                                //   cubit.submitQuizAnswers.add({
+                                //     'questionId':ques[boardcontroller.page!.toInt()].id,
+                                //     'answerId':cubit.quizAnswerSelected
+                                //   }
+                                //   );}
+                                // else if(isBack==true){
+                                //   // cubit.submitQuizAnswers[index]={
+                                //   //   'questionId':ques[index].id,
+                                //   //   'answerId':cubit.quizAnswerSelected
+                                //   // };
+                                //   //  cubit.submitQuizAnswers[index]['questionId']=ques[index].id;
+                                //
+                                //   cubit.submitQuizAnswers[boardcontroller.page!.toInt()]['answerId']=cubit.quizAnswerSelected;
+                                // }
                                 if (islast) {
-
-                                  print('ddddd${boardcontroller.page?.toInt()}');
+                                  //cubit.allquizAnswers.add(cubit.quizAnswerSelected);
+                                  //print('ddddd${boardcontroller.page?.toInt()}');
 
                                   // cubit.submitQuizAnswers.add({
                                   //   'questionId':ques[ques.length-1].id,
                                   //   'answerId':cubit.quizAnswerSelected
                                   // });
-                                  navigateTo(context, const STU_Quiz_Finish_Screen());
-                                  // submit;
+                                  cubit.SumitQuiz();
+                                    NavigateAndFinish(context,
+                                        const STU_Quiz_Finish_Screen());
                                 } else {
-                                  print('ddddd${boardcontroller.page?.toInt()}');
                                   boardcontroller.nextPage(
                                     duration: const Duration(
                                       milliseconds: 750,
@@ -204,41 +203,6 @@ class _STU_Quizes_Ques_ScreenState extends State<STU_Quizes_Ques_Screen> {
                               },
                               text: islast ? 'Submit' : 'Next',
                             ),
-
-                          // TextButton(onPressed: (){
-                          //   if (islast) {
-                          //     navigateTo(context,STU_Quiz_Finish_Screen());
-                          //     // submit;
-                          //   } else {
-                          //     boardcontroller.nextPage(
-                          //       duration: Duration(
-                          //         milliseconds: 750,
-                          //       ),
-                          //       curve: Curves.fastLinearToSlowEaseIn,
-                          //     );
-                          //   }
-                          // },
-                          //   child:
-                          //
-                          // Container(
-                          //   width: double.infinity,
-                          //   height: 50,
-                          //   decoration: BoxDecoration(
-                          //     color: Colors.blue,
-                          //     borderRadius: BorderRadius.circular(20),
-                          //   ),
-                          //   child: Center(
-                          //     child:
-                          //     Text(islast?'Submit':'Next',
-                          //       style: TextStyle(
-                          //           color: Colors.white,
-                          //           fontWeight: FontWeight.bold,
-                          //           fontSize: 25
-                          //       ),
-                          //
-                          //     ),
-                          //   ),
-                          // ) ,                    ),
                         ),
                       ),
                     ],
