@@ -81,10 +81,10 @@ class App_cubit extends Cubit<App_state> {
   ];
   List N_HomeScreen_Text=[
 
-      // 'Ongoing Courses',
-      // 'Assignments',
-      // 'Quizzes',
-      // 'UpcomingCourse',
+    // 'Ongoing Courses',
+    // 'Assignments',
+    // 'Quizzes',
+    // 'UpcomingCourse',
     const Text(
       'Ongoing Courses',
       style: TextStyle(
@@ -178,11 +178,11 @@ class App_cubit extends Cubit<App_state> {
   List<Widget> Nav_Bar_Items_List(){
     return[
       const Dashboard_Screen(),
-     const Home_screen(),
+      const Home_screen(),
       STU_Lecture_Screen(),
       const Calendar_screen(),
-       const Profile_screen()
-  ];}
+      const Profile_screen()
+    ];}
 
   int Nav_Bar_index = 0;
   void Nav_Bar_Function({required int index}) {
@@ -208,7 +208,7 @@ class App_cubit extends Cubit<App_state> {
     emit(D_E_state());
   }
 
-bool switch_quiz=true;
+  bool switch_quiz=true;
   void switch_quiz_Function({required bool s}){
     switch_quiz=s;
     emit(D_E_state());
@@ -428,7 +428,7 @@ bool switch_quiz=true;
 
 
   //----------------------Grades--------------------------
-List <int> stuAllGrades=[10,30,50,45,35];
+  List <int> stuAllGrades=[10,30,50,45,35];
 //----------------------------------------------------------
 
 
@@ -458,8 +458,8 @@ List <int> stuAllGrades=[10,30,50,45,35];
 
   CurrentStudentInfoModel? studentInfoModel;
   void GetCurrentStudenInfo (
-  //  required token,
-  ) {
+      //  required token,
+      ) {
     if(studentInfoModel==null) {
       emit(Get_STU_Info_LoadingState());
       Dio_Helper.GetData(
@@ -514,83 +514,83 @@ List <int> stuAllGrades=[10,30,50,45,35];
 
   void StuGetAllCourses ({
     required token,
-}) {
+  }) {
     if(stuAllCoursesModel.length==0) {
       emit(Stu_Get_All_Courses_LoadingState());
-    Dio_Helper.GetData(
-      url: STU_COURSES,
-      token: Tokenn,
-    ).then((value) {
-      if (value.statusCode == 200) {
-        print('get course true');
-        List Json = value.data;
-        for (var element in Json) {
-          stuAllCoursesModel.add(Stu_GetAllCoursesModel.fromJson(element));
+      Dio_Helper.GetData(
+        url: STU_COURSES,
+        token: Tokenn,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          print('get course true');
+          List Json = value.data;
+          for (var element in Json) {
+            stuAllCoursesModel.add(Stu_GetAllCoursesModel.fromJson(element));
+          }
+          emit(Stu_Get_All_Courses_SuccessState(stuAllCoursesModel));
         }
-        emit(Stu_Get_All_Courses_SuccessState(stuAllCoursesModel));
-      }
-      stuAllCoursesModel.forEach((element) {
-        print('name------- ${element.name}');
+        stuAllCoursesModel.forEach((element) {
+          print('name------- ${element.name}');
+        });
+      }).catchError((error) {
+        emit(Stu_Get_All_Courses_ErrorState(error.toString()));
+        print(error.toString());
       });
-    }).catchError((error) {
-      emit(Stu_Get_All_Courses_ErrorState(error.toString()));
-      print(error.toString());
-    });
-  }
+    }
   }
 
   String? currentCourseName;
   String? currentCycleId;
   bool isCycleIdChange=false;
 
- // String? cycleId;
+  // String? cycleId;
   List<GetCourseMaterialsModel> stuCoursesMatrialModel=[];
   List<GetCourseMaterialsModel> stuLECTUREModel=[];
   List<GetCourseMaterialsModel> stuLABModel=[];
   bool? isLec;
 
   void StuGetCourseMaterials (
-    //required token,
-   // required cycleId,
-  ) {
+      //required token,
+      // required cycleId,
+      ) {
     print('sdsds ${isCycleIdChange}');
     if (stuCoursesMatrialModel.isEmpty || isCycleIdChange==true){
       emit(Stu_Get_Course_Material_LoadingState());
-    Dio_Helper.GetData(
-      url: 'Students/CurrentCourseMaterial?CycleId=${currentCycleId}',
-      //STU_COURSE_MATERIAL,
-      token: Tokenn,
-    ).then((value) {
-      if (value.statusCode == 200) {
+      Dio_Helper.GetData(
+        url: 'Students/CurrentCourseMaterial?CycleId=${currentCycleId}',
+        //STU_COURSE_MATERIAL,
+        token: Tokenn,
+      ).then((value) {
+        if (value.statusCode == 200) {
 
-        print('get course material true');
-        List Json = value.data;
-        for (var element in Json) {
-          stuCoursesMatrialModel.add(GetCourseMaterialsModel.fromJson(element));
+          print('get course material true');
+          List Json = value.data;
+          for (var element in Json) {
+            stuCoursesMatrialModel.add(GetCourseMaterialsModel.fromJson(element));
+          }
+          emit(Stu_Get_Course_Material_SuccessState(stuCoursesMatrialModel));
         }
-        emit(Stu_Get_Course_Material_SuccessState(stuCoursesMatrialModel));
-      }
-      stuCoursesMatrialModel.forEach((element) {
-        if (element.type == 'Lecture') {
+        stuCoursesMatrialModel.forEach((element) {
+          if (element.type == 'Lecture') {
             stuLECTUREModel.add(element);
-        }
-        else if (element.type == 'Lab') {
+          }
+          else if (element.type == 'Lab') {
             stuLABModel.add(element);
           }
+        });
+        print('lectures:');
+        stuLECTUREModel.forEach((element) {
+          print(element.lectureId);
+        });
+        print('Labs:');
+        stuLABModel.forEach((element) {
+          print(element.lectureId);
+        });
+      }).catchError((error) {
+        emit(Stu_Get_Course_Material_ErrorState(error.toString()));
+        print(error.toString());
       });
-      print('lectures:');
-      stuLECTUREModel.forEach((element) {
-        print(element.lectureId);
-      });
-      print('Labs:');
-      stuLABModel.forEach((element) {
-        print(element.lectureId);
-      });
-    }).catchError((error) {
-      emit(Stu_Get_Course_Material_ErrorState(error.toString()));
-      print(error.toString());
-    });
-  }
+    }
     isCycleIdChange=false;
 
   }
@@ -603,11 +603,11 @@ List <int> stuAllGrades=[10,30,50,45,35];
     //required token,
     required lecId,
   }
-  ) {
+      ) {
     stuCoursesMatrialFileModel=[];
-   // print('lecId=${lecId}');
+    // print('lecId=${lecId}');
     //if (stuCoursesMatrialModel.isEmpty || isCycleIdChange==true){
-      emit(Stu_Get_Course_Material_File_LoadingState());
+    emit(Stu_Get_Course_Material_File_LoadingState());
     Dio_Helper.GetData(
       url: 'Students/Getfilesoflecture?lectureId=${lecId}',
       //STU_COURSE_MATERIAL,
@@ -631,8 +631,8 @@ List <int> stuAllGrades=[10,30,50,45,35];
       emit(Stu_Get_Course_Material_File_ErrorState(error.toString()));
       print(error.toString());
     });
-  //}
-   //isCycleIdChange=false;
+    //}
+    //isCycleIdChange=false;
   }
 
 
@@ -646,38 +646,38 @@ List <int> stuAllGrades=[10,30,50,45,35];
   String ? taskId;
   List<STU_Course_Assign_Model> stuCoursesAssignModel=[];
   void StuGetCourseAssign (
-    //required token,
-   // required cycleId,
-  ){
-   // stuCoursesAssignModel=[];
-     if(stuCoursesAssignModel.isEmpty || isCycleIdChange==true) {
-       emit(Stu_Get_Course_Assign_LoadingState());
-       Dio_Helper.GetData(
+      //required token,
+      // required cycleId,
+      ){
+    // stuCoursesAssignModel=[];
+    if(stuCoursesAssignModel.isEmpty || isCycleIdChange==true) {
+      emit(Stu_Get_Course_Assign_LoadingState());
+      Dio_Helper.GetData(
 
-         url: 'Students/CurrentCourseTasks?CycleId=${currentCycleId}',
-         //STU_COURSE_MATERIAL,
-         token: Tokenn,
-       ).then((value) {
-         if (value.statusCode == 200) {
-           print(value.data);
-           List Json = value.data;
-           //  for (var element in  Json) {
-           Json.forEach((element) {
-             stuCoursesAssignModel.add(
-                 STU_Course_Assign_Model.fromJson(element));
-           });
-           print('get course Assign true');
-           emit(Stu_Get_Course_Assign_SuccessState(stuCoursesAssignModel));
-         }
-         stuCoursesAssignModel.forEach((element) {
-           print('task name------- ${element.taskName}');
-         });
-       }).catchError((error) {
-         emit(Stu_Get_Course_Assign_ErrorState(error.toString()));
-         print(error.toString());
-       });
-     }
-     isCycleIdChange=false;
+        url: 'Students/CurrentCourseTasks?CycleId=${currentCycleId}',
+        //STU_COURSE_MATERIAL,
+        token: Tokenn,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          print(value.data);
+          List Json = value.data;
+          //  for (var element in  Json) {
+          Json.forEach((element) {
+            stuCoursesAssignModel.add(
+                STU_Course_Assign_Model.fromJson(element));
+          });
+          print('get course Assign true');
+          emit(Stu_Get_Course_Assign_SuccessState(stuCoursesAssignModel));
+        }
+        stuCoursesAssignModel.forEach((element) {
+          print('task name------- ${element.taskName}');
+        });
+      }).catchError((error) {
+        emit(Stu_Get_Course_Assign_ErrorState(error.toString()));
+        print(error.toString());
+      });
+    }
+    isCycleIdChange=false;
 
   }
 
@@ -687,24 +687,24 @@ List <int> stuAllGrades=[10,30,50,45,35];
       ){
     print('task id:::${taskId}');
 //    if(stuCoursesAssignModel.isEmpty || isCycleIdChange==true) {
-      emit(Stu_Get_Course_Assign_Data_LoadingState());
-      Dio_Helper.GetData(
-        url: 'Students/GetAssignment?taskId=${taskId}',
-        token: Tokenn,
-      ).then((value) {
-        if (value.statusCode == 200) {
-            stuAssignDataModel=
-                GetTaskDataModel.fromJson(value.data);
-          print('get course Assign true');
-          emit(Stu_Get_Course_Assign_Data_SuccessState());
-        }
-          print('task name------- ${stuAssignDataModel?.filePath}');
-      }).catchError((error) {
-        emit(Stu_Get_Course_Assign_Data_ErrorState(error.toString()));
-        print(error.toString());
-      });
-  //}
-   // isCycleIdChange=false;
+    emit(Stu_Get_Course_Assign_Data_LoadingState());
+    Dio_Helper.GetData(
+      url: 'Students/GetAssignment?taskId=${taskId}',
+      token: Tokenn,
+    ).then((value) {
+      if (value.statusCode == 200) {
+        stuAssignDataModel=
+            GetTaskDataModel.fromJson(value.data);
+        print('get course Assign true');
+        emit(Stu_Get_Course_Assign_Data_SuccessState());
+      }
+      print('task name------- ${stuAssignDataModel?.filePath}');
+    }).catchError((error) {
+      emit(Stu_Get_Course_Assign_Data_ErrorState(error.toString()));
+      print(error.toString());
+    });
+    //}
+    // isCycleIdChange=false;
 
   }
 
@@ -712,7 +712,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
   //-------------------------submit Task-----------------
   File ?file;
   void SumitTask(
-  )
+      )
   {
     // print('All files-------------- ${all_assign_files_List}');
     print('task id : ${taskId}');
@@ -721,7 +721,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
     Dio_Helper.PostListFileData(
         token: Tokenn,
         url: 'Students/File/Upload?taskid=${taskId}',
-      files:all_assign_files_List
+        files:all_assign_files_List
     ).then((value) {
       if (value.statusCode == 200) {
         print('post assign true');
@@ -738,13 +738,13 @@ List <int> stuAllGrades=[10,30,50,45,35];
 
     });
   }
-  
+
 //-------------Quiz------------------------------
 
   List<STU_Quiz_Model> stuCoursesQuizlModel=[];
   void StuGetCourseQuiz (
 
-  ) {
+      ) {
     if (stuCoursesQuizlModel.isEmpty|| isCycleIdChange==true) {
       emit(Stu_Get_Course_Quiz_LoadingState());
       Dio_Helper.GetData(
@@ -777,42 +777,42 @@ List <int> stuAllGrades=[10,30,50,45,35];
 
   String?currentQuizId;
   void StuGetQuizDataById (
-  ){
-      emit(Stu_Get_Quiz_Data_LoadingState());
-      Dio_Helper.GetData(
-        url: 'Students/Quiz?quizId=${currentQuizId}',
-        //STU_COURSE_MATERIAL,
-        token: Tokenn,
-      ).then((value) {
-        if (value.statusCode == 200) {
-          print('get course Quiz true');
-          List ques = value.data['questions'];
-          for (var element in ques) {
-            questionModel.add(Questions.fromJson(element));
-          }
-
-          allquizAnswers = List<String>.generate(
-            questionModel.length,
-                (index) =>'',
-          );
-          emit(Stu_Get_Quiz_Data_SuccessState());
+      ){
+    emit(Stu_Get_Quiz_Data_LoadingState());
+    Dio_Helper.GetData(
+      url: 'Students/Quiz?quizId=${currentQuizId}',
+      //STU_COURSE_MATERIAL,
+      token: Tokenn,
+    ).then((value) {
+      if (value.statusCode == 200) {
+        print('get course Quiz true');
+        List ques = value.data['questions'];
+        for (var element in ques) {
+          questionModel.add(Questions.fromJson(element));
         }
-        questionModel.forEach((element) {
-          print('Quiz ques------- ${element.text}');
-        });
 
-      }).catchError((error) {
-        emit(Stu_Get_Quiz_Data_ErrorState(error.toString()));
-        print(error.toString());
+        allquizAnswers = List<String>.generate(
+          questionModel.length,
+              (index) =>'',
+        );
+        emit(Stu_Get_Quiz_Data_SuccessState());
+      }
+      questionModel.forEach((element) {
+        print('Quiz ques------- ${element.text}');
       });
-      questionModel=[];
+
+    }).catchError((error) {
+      emit(Stu_Get_Quiz_Data_ErrorState(error.toString()));
+      print(error.toString());
+    });
+    questionModel=[];
   }
 
   List<Map<String,dynamic>>submitQuizAnswers=[];
   int? quizResult=0;
   List<Map<String,dynamic>>QuizAnswersResponse=[];
   void SumitQuiz(
-)
+      )
   {
     QuizAnswersResponse=[];
     emit(Stu_Submit_Quiz_LoadingState());
@@ -825,7 +825,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
     }
     emit(Stu_Assign_Quiz_Answer_SuccessState());
     Dio_Helper.PostData(
-      token: Tokenn,
+        token: Tokenn,
         url: SUBMITQUIZ,
         data:{
           'quizId':currentQuizId,
@@ -834,7 +834,7 @@ List <int> stuAllGrades=[10,30,50,45,35];
       if (value.statusCode == 200) {
         print('submit Quiz true');
         List json = value.data;
-        
+
         for (var element in json) {
           print(element.values);
           QuizAnswersResponse.add({
@@ -842,14 +842,14 @@ List <int> stuAllGrades=[10,30,50,45,35];
           });
         }
         for (var item in QuizAnswersResponse) {
-            if (item.values.toString()=='((true))') {
-              quizResult=quizResult!+1;
-            }
+          if (item.values.toString()=='((true))') {
+            quizResult=quizResult!+1;
+          }
         }
-       print('quiz result :${quizResult}');
+        print('quiz result :${quizResult}');
         emit(Stu_Submit_Quiz_SuccessState());
       }
-        }).catchError((Error){
+    }).catchError((Error){
       print(Error.toString());
       emit(Stu_Submit_Quiz_ErrorState(Error.toString()));
     });
@@ -857,37 +857,36 @@ List <int> stuAllGrades=[10,30,50,45,35];
 
   //-------------STU get all grades for current course------------
 
-List<GetCourseGradesModel>courseGradesModel=[];
+  List<GetCourseGradesModel>courseGradesModel=[];
 
-void GetStuCourseGrade(){
-  // courseGradesModel=[];
-  if(courseGradesModel.isEmpty || isCycleIdChange==true) {
-    emit(Stu_Get_Course_Grades_LoadingState());
-    Dio_Helper.GetData
-      (url: 'Students/GetAllGradesForCurrentCourse?courseId=${currentCycleId}',
-      token: Tokenn,
+  void GetStuCourseGrade(){
+    // courseGradesModel=[];
+    if(courseGradesModel.isEmpty || isCycleIdChange==true) {
+      emit(Stu_Get_Course_Grades_LoadingState());
+      Dio_Helper.GetData
+        (url: 'Students/GetAllGradesForCurrentCourse?courseId=${currentCycleId}',
+        token: Tokenn,
 
-    )
-        .then((value) {
-      if (value.statusCode == 200) {
-        List Json = value.data;
-        for (var element in Json) {
-          courseGradesModel.add(GetCourseGradesModel.fromJson(element));
+      )
+          .then((value) {
+        if (value.statusCode == 200) {
+          List Json = value.data;
+          for (var element in Json) {
+            courseGradesModel.add(GetCourseGradesModel.fromJson(element));
+          }
+          print('Get course grades successfull');
+          print((courseGradesModel.length));
+          courseGradesModel.forEach((element) {
+            print(element.title);
+          });
+          emit(Stu_Get_Course_Grades_SuccessState());
         }
-        print('Get course grades successfull');
-        print((courseGradesModel.length));
-        courseGradesModel.forEach((element) {
-          print(element.title);
-        });
-        emit(Stu_Get_Course_Grades_SuccessState());
-      }
-    }).catchError((error) {
-      print(error);
-      emit(Stu_Get_Course_Grades_ErrorState(error));
-    });
-   // courseGradesModel=[];
+      }).catchError((error) {
+        print(error);
+        emit(Stu_Get_Course_Grades_ErrorState(error));
+      });
+      // courseGradesModel=[];
+    }
+    isCycleIdChange=false;
   }
-  isCycleIdChange=false;
 }
-}
-

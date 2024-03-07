@@ -14,7 +14,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:rive/rive.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
@@ -162,6 +162,7 @@ class Dashboard_Screen extends StatelessWidget {
 
         ];
         List<Widget> listwidget2 = [
+
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
@@ -208,10 +209,11 @@ class Dashboard_Screen extends StatelessWidget {
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.deepPurple[200],
+                            color: Colors.blue[100],
                             image: const DecorationImage(
                               image: AssetImage(
-                                'assets/images/g7.png',
+                                'assets/images/post/6.png',
+
                               ),
                               fit: BoxFit.cover,
                             ),
@@ -288,6 +290,133 @@ class Dashboard_Screen extends StatelessWidget {
               ],
             ),
           ),
+
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+
+                Expanded(
+                  child: ConditionalBuilder(
+                      condition: true,
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10.0,top: 15,bottom: 15,left: 10),
+                                child: Text(
+                                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.'
+                                      'Congratulations, you have completed your registration ! Lets start your learning journey next.',
+
+                                  maxLines: 6,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: c1.withOpacity(1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      fallback: (context) => const SizedBox(
+                        height: 0,
+                      )),
+                ),
+
+                ConditionalBuilder(
+                    condition: true,
+                    builder: (context) => Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 0, right: 0.0, top: 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.blue[100],
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                'assets/images/post/7.png',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    fallback: (context) => const SizedBox(
+                      height: 0,
+                    )),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+
+                Expanded(
+                  child: ConditionalBuilder(
+                      condition: true,
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 10.0,top: 15,bottom: 15,left: 10),
+                                child: Text(
+                                  // 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.',
+                                  'Congratulations, you have completed your registration ! Lets start your learning journey next.',
+
+                                  maxLines: 6,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13,
+                                    color: c1.withOpacity(1),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      fallback: (context) => const SizedBox(
+                        height: 0,
+                      )),
+                ),
+
+                Expanded(
+                  child: ConditionalBuilder(
+                      condition: true,
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.only(
+                            left: 0, right: 0.0, top: 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.blueGrey.withOpacity(.15),
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                'assets/images/g7.png',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                      fallback: (context) => const SizedBox(
+                        height: 0,
+                      )),
+                ),
+              ],
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
@@ -337,7 +466,7 @@ class Dashboard_Screen extends StatelessWidget {
                             color: Colors.deepPurple[100],
                             image: const DecorationImage(
                               image: AssetImage(
-                                'assets/images/a2.png',
+                                'assets/images/post/1.png',
                               ),
                               fit: BoxFit.cover,
                             ),
@@ -351,7 +480,6 @@ class Dashboard_Screen extends StatelessWidget {
               ],
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
@@ -398,10 +526,10 @@ class Dashboard_Screen extends StatelessWidget {
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.blue[100],
+                            color: Colors.deepPurple[100],
                             image: const DecorationImage(
                               image: AssetImage(
-                                'assets/images/a44.png',
+                                'assets/images/post/11.png',
                               ),
                               fit: BoxFit.cover,
                             ),
@@ -415,69 +543,11 @@ class Dashboard_Screen extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
 
-                Expanded(
-                  child: ConditionalBuilder(
-                      condition: true,
-                      builder: (context) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 10.0,top: 15,bottom: 15,left: 10),
-                                child: Text(
-                                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.'
-                                  'Congratulations, you have completed your registration ! Lets start your learning journey next.',
 
-                                  maxLines: 6,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 13,
-                                    color: c1.withOpacity(1),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      fallback: (context) => const SizedBox(
-                        height: 0,
-                      )),
-                ),
 
-                ConditionalBuilder(
-                    condition: false,
-                    builder: (context) => Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 0, right: 0.0, top: 0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.blue[100],
-                            image: const DecorationImage(
-                              image: AssetImage(
-                                'assets/images/a44.png',
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    fallback: (context) => const SizedBox(
-                      height: 0,
-                    )),
-              ],
-            ),
-          ),
+
+
 
 
 

@@ -15,6 +15,7 @@ import '../Shared/constant.dart';
 
 class Layout_Screen extends StatelessWidget {
   Layout_Screen({super.key});
+  var scafoldkey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
