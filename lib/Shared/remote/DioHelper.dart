@@ -69,31 +69,31 @@ class Dio_Helper {
         url, queryParameters: query, data: data);
   }
 
-  static Future<Response> PostFileData({
-    required String url,
-    Map<String, dynamic>? query,
-    String? token,
-    Map<String, dynamic>? data,
-    File ? file,
-  }) async {
-    FormData formData=FormData();
-    dio.options.headers={
-      'Content-Type':'application/json',
-      'Accept':'application/json',
-      'Authorization':'Bearer $token',
-    };
-    formData.files.add(MapEntry(
-      'file',
-      await MultipartFile.fromFile(
-        file!.path,
-       filename: file.path.split('/').last,
-      ),
-    )
-    );
-    return await dio.post(
-        url, queryParameters: query, data: formData,
-    );
-  }
+  // static Future<Response> PostFileData({
+  //   required String url,
+  //   Map<String, dynamic>? query,
+  //   String? token,
+  //   Map<String, dynamic>? data,
+  //   File ? file,
+  // }) async {
+  //   FormData formData=FormData();
+  //   dio.options.headers={
+  //     'Content-Type':'application/json',
+  //     'Accept':'application/json',
+  //     'Authorization':'Bearer $token',
+  //   };
+  //   formData.files.add(MapEntry(
+  //     'file',
+  //     await MultipartFile.fromFile(
+  //       file!.path,
+  //      filename: file.path.split('/').last,
+  //     ),
+  //   )
+  //   );
+  //   return await dio.post(
+  //       url, queryParameters: query, data: formData,
+  //   );
+  // }
 
 
   static Future<Response> PostListFileData({

@@ -86,10 +86,11 @@ Widget defaultAppbar({
 
 Widget Default_Button({
   required Function onPressed,
-  required String text,
+  String? text,
   double ?containerHeight,
   double ?containerWidth,
   double ?textFontSize,
+  Widget? child,
 })=>Container(
   //padding: EdgeInsets.only(bottom: 4),
 width: containerWidth??double.infinity,
@@ -100,8 +101,9 @@ color: Colors.blue,
 ),
   child: TextButton(
     onPressed: (){onPressed();},
-    child: Text(
-        text,
+    child:child ??
+    Text(
+        text!,
         style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
