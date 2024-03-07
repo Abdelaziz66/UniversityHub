@@ -1,4 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -38,38 +39,114 @@ class Profile_screen extends StatelessWidget {
                     Stack(
                       alignment: AlignmentDirectional.bottomCenter,
                       children: [
-                        Container(
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              // boxShadow: [
-                              //   BoxShadow(
-                              //     color: Colors.white,
-                              //     blurRadius: 0,
-                              //     spreadRadius: 1,
-                              //   ),
-                              // ]
-                          ),
-                          child:  Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: CircleAvatar(
-                              radius: 48,
-                              backgroundColor: Colors.white,
-                              child: CircleAvatar(
+                        GestureDetector(
+                          onTap: ()=>
+                              showDialog<String>(
+                                context: context,
+                                barrierColor: Colors.black.withOpacity(.3),
+                                useSafeArea: true,
 
-                                radius: 45,
+
+                                builder: (BuildContext context) => AlertDialog(
+
+                                  insetPadding: const EdgeInsets.all(0.0),
+                                  scrollable: false,
+                                  shadowColor: Colors.transparent,
+
+
+                                  // title: const Text('AlertDialog Title'),
+                                  content:  Center(
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      child:    GestureDetector(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: GlassBox(
+                                            widget: Stack(
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    const Spacer(),
+                                                    Container(
+                                                      alignment: Alignment.center,
+                                                      decoration: const BoxDecoration(
+                                                        shape: BoxShape.circle,
+
+                                                      ),
+                                                      child:  Padding(
+                                                        padding: EdgeInsets.all(10.0),
+                                                        child: CircleAvatar(
+                                                        
+                                                          radius: 120,
+                                                          backgroundColor: Colors.white,
+                                                          backgroundImage:
+                                                          NetworkImage('${cubit.studentInfoModel?.imagePath}'
+                                                            //'assets/images/profile.png'
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const Spacer(flex: 1,),
+                                                  ],
+                                                ),
+
+                                              ],
+                                            ),
+                                            color:
+                                            Colors.transparent,
+                                            borderRadius: 0,
+                                            x: 5,
+                                            y: 5),
+                                      ),),
+                                  ),
+                                  elevation: 0,
+                                  clipBehavior: Clip.none,
+                                  surfaceTintColor: Colors.transparent,
+                                  backgroundColor: Colors.transparent,
+                                  contentPadding: EdgeInsets.zero,
+
+
+
+
+
+                                ),
+
+
+                              ),
+                          child: Container(
+                            decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                // boxShadow: [
+                                //   BoxShadow(
+                                //     color: Colors.white,
+                                //     blurRadius: 0,
+                                //     spreadRadius: 1,
+                                //   ),
+                                // ]
+                            ),
+                            child:  Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: CircleAvatar(
+                                radius: 48,
                                 backgroundColor: Colors.white,
-                                backgroundImage:
-                                    NetworkImage('${cubit.studentInfoModel?.imagePath}'
-                                        //'assets/images/profile.png'
-                                      ),
+                                child: CircleAvatar(
+
+                                  radius: 45,
+                                  backgroundColor: Colors.white,
+                                  backgroundImage:
+                                      NetworkImage('${cubit.studentInfoModel?.imagePath}'
+                                          //'assets/images/profile.png'
+                                        ),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                        FaIcon(
-                          Icons.camera_alt_outlined,
-                          color: Colors.blueGrey.withOpacity(.6),size: 28,
-                        ),
+                        // FaIcon(
+                        //   Icons.camera_alt_outlined,
+                        //   color: Colors.blueGrey.withOpacity(.6),size: 28,
+                        // ),
                       ],
                     ),
                     const SizedBox(

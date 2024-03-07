@@ -1631,8 +1631,8 @@ Widget Build_STU_Lec({Stu_GetAllCoursesModel? courses}) => Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           border: Border.all(
-            color: Colors.blue,
-            width: 1.5,
+            color: Colors.black,
+            width: .5,
           )),
       child: Row(
         children: [
@@ -1651,7 +1651,7 @@ Widget Build_STU_Lec({Stu_GetAllCoursesModel? courses}) => Container(
               // ),
               color: Colors.blueGrey.withOpacity(.8),
               image: DecorationImage(
-                image: AssetImage('assets/images/bc5.png'),
+                image: AssetImage('assets/images/post/7.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -1689,9 +1689,9 @@ Widget Build_STU_Lec({Stu_GetAllCoursesModel? courses}) => Container(
           ),
           Container(
             alignment: AlignmentDirectional.centerEnd,
-            child: const FaIcon(
+            child:  FaIcon(
               FontAwesomeIcons.circleRight,
-              color: Colors.teal,
+              color: Colors.teal.withOpacity(.8),
               size: 35,
             ),
           ),

@@ -783,6 +783,8 @@ List <int> stuAllGrades=[10,30,50,45,35];
       });
     }
   }
+
+
 List<Map<String,dynamic>>submitQuizAnswers=[];
   List<Map<String,dynamic>>QuizAnswersResponse=[];
   //List<SubmitQuizModel>? submitQuizModel;
