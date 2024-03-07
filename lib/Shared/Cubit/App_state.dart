@@ -272,4 +272,19 @@ class Stu_Submit_Quiz_ErrorState extends App_state {
   Stu_Submit_Quiz_ErrorState(this.error);
 }
 
+//--------------get stu course grades -----------
+
+class Stu_Get_Course_Grades_LoadingState extends App_state {}
+
+class Stu_Get_Course_Grades_SuccessState extends App_state {
+  Stu_Get_Course_Grades_SuccessState();
+
+}
+
+class Stu_Get_Course_Grades_ErrorState extends App_state {
+  String? error;
+  Stu_Get_Course_Grades_ErrorState(this.error);
+}
+
+
 

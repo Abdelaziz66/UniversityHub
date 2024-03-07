@@ -248,6 +248,7 @@ class STU_About_course extends StatelessWidget {
                                   Expanded(
                                     child: InkWell(
                                       onTap: (){
+                                        cubit.GetStuCourseGrade();
                                         navigateTo(context,rol=='Student'? STUCourseGrades():INSAllGradesScreen() );
                                       },
                                       child: Container(
