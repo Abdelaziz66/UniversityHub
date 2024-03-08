@@ -286,5 +286,23 @@ class Stu_Get_Course_Grades_ErrorState extends App_state {
   Stu_Get_Course_Grades_ErrorState(this.error);
 }
 
+class Connection_success_State extends App_state {
 
+
+}
+
+class Connection_failed_State extends App_state {
+
+
+}
+
+
+class CreateDateBase_state extends App_state{}
+class CreateTable_state extends App_state{}
+class InsertToDataBase_state extends App_state{}
+class UpdateDataBase_state extends App_state{}
+class GetFromDataBase_state extends App_state{}
+class DeleteFromDataBase_state extends App_state{}
+class UpdataDataBase2_state extends App_state{}
+class UpdataDataBase3_state extends App_state{}
 

@@ -56,6 +56,8 @@ dependencies:
   fluttertoast: ^8.2.4
   carousel_slider: ^4.2.1
   pin_code_fields: ^8.0.1
+  internet_connection_checker: ^1.0.0+1
+  sqflite: ^2.3.2
 
 
 
