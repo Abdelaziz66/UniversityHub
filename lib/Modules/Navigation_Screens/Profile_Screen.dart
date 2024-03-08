@@ -1,6 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -428,13 +429,17 @@ class Profile_screen extends StatelessWidget {
                                                                               color: Colors.teal,
                                                                             ),
                                                                           ),
-                                                                          Text(
-                                                                            '${cubit.studentInfoModel?.fullName}',
-                                                                            style: TextStyle(
-                                                                              overflow: TextOverflow.ellipsis,
-                                                                              fontWeight: FontWeight.w500,
-                                                                              fontSize: 14,
-                                                                              color: c1,
+                                                                          Container(
+                                                                            width: 130,
+                                                                            child: Text(
+                                                                              '${cubit.studentInfoModel?.fullName}',
+                                                                              maxLines: 1,
+                                                                              style: TextStyle(
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                fontSize: 14,
+                                                                                color: c1,
+                                                                              ),
                                                                             ),
                                                                           ),
                                                                         ],
@@ -492,26 +497,21 @@ class Profile_screen extends StatelessWidget {
                                                                       Row(
                                                                         children: [
                                                                           const Text(
-                                                                            'Email : ',
+                                                                            'Number : ',
                                                                             style: TextStyle(
                                                                               fontWeight: FontWeight.w900,
                                                                               fontSize: 14,
                                                                               color: Colors.teal,
                                                                             ),
                                                                           ),
-                                                                          Container(
-                                                                            // padding: EdgeInsets.only(right: 5),
-                                                                            // width:double.infinity,
-                                                                            width: 150,
-                                                                            child: Text(
-                                                                              '${cubit.studentInfoModel?.email}',
-                                                                              maxLines: 2,
-                                                                              style: TextStyle(
-                                                                                overflow:TextOverflow.ellipsis,
-                                                                                fontWeight: FontWeight.w500,
-                                                                                fontSize: 9,
-                                                                                color: c1,
-                                                                              ),
+                                                                          Text(
+                                                                            '${cubit.studentInfoModel?.phone}',
+                                                                            maxLines: 1,
+                                                                            style: TextStyle(
+                                                                              overflow:TextOverflow.ellipsis,
+                                                                              fontWeight: FontWeight.w500,
+                                                                              fontSize: 14,
+                                                                              color: c1,
                                                                             ),
                                                                           ),
                                                                         ],

@@ -10,8 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
@@ -41,46 +43,40 @@ class App_cubit extends Cubit<App_state> {
   App_cubit() : super(App_ini_state());
   static App_cubit get(context) => BlocProvider.of(context);
 
-
-
 // Abdelaziz  --------------------------------------------------------------------
 
-  int more=2;
-  void addmore(){
-    if(more==4){
-
-    }else{
+  int more = 2;
+  void addmore() {
+    if (more == 4) {
+    } else {
       more++;
     }
 
     emit(Defulte_state());
   }
-  void minusmore(){
-    if(more==2){
 
-    }else{
+  void minusmore() {
+    if (more == 2) {
+    } else {
       more--;
     }
 
     emit(Defulte_state());
   }
-  int Nav_HomeBar_index=0;
-  void nav_home_bar_Function({required int index}){
 
-    Nav_HomeBar_index=index;
+  int Nav_HomeBar_index = 0;
+  void nav_home_bar_Function({required int index}) {
+    Nav_HomeBar_index = index;
     emit(Nav_HomeBar_state());
   }
 
-  List N_HomeScreen=[
-
+  List N_HomeScreen = [
     const Ongoing_Screen(),
     const Assignments_Screen(),
     const Quizzes_Screen(),
     const UpcomingCourse_Screen(),
-
   ];
-  List N_HomeScreen_Text=[
-
+  List N_HomeScreen_Text = [
     // 'Ongoing Courses',
     // 'Assignments',
     // 'Quizzes',
@@ -117,16 +113,14 @@ class App_cubit extends Cubit<App_state> {
         color: Colors.black,
       ),
     ),
-
-
   ];
-  List N_HomeScreen_Icon=[
+  List N_HomeScreen_Icon = [
     CircleAvatar(
       radius: 22,
       backgroundColor: Colors.white.withOpacity(.5),
       child: FaIcon(
         FontAwesomeIcons.bookBookmark,
-        color:c1,
+        color: c1,
         size: 25,
       ),
     ),
@@ -135,7 +129,7 @@ class App_cubit extends Cubit<App_state> {
       backgroundColor: Colors.white.withOpacity(.5),
       child: FaIcon(
         FontAwesomeIcons.penClip,
-        color:c1,
+        color: c1,
         size: 25,
       ),
     ),
@@ -144,7 +138,7 @@ class App_cubit extends Cubit<App_state> {
       backgroundColor: Colors.white.withOpacity(.5),
       child: FaIcon(
         FontAwesomeIcons.featherPointed,
-        color:c1,
+        color: c1,
         size: 25,
       ),
     ),
@@ -153,128 +147,124 @@ class App_cubit extends Cubit<App_state> {
       backgroundColor: Colors.white.withOpacity(.5),
       child: FaIcon(
         FontAwesomeIcons.book,
-        color:c1,
+        color: c1,
         size: 25,
       ),
     ),
   ];
 
-  int? D_value=0;
-  void SetState_G(){
+  int? D_value = 0;
+  void SetState_G() {
     emit(stateforDrawer());
   }
 
-
 // Navigation Bar Start Here >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-
-  bool? isStudent=true;
-  void switch_isStudent_Fun({required bool is_studentvalue}){
-    isStudent=is_studentvalue;
+  bool? isStudent = true;
+  void switch_isStudent_Fun({required bool is_studentvalue}) {
+    isStudent = is_studentvalue;
     emit(Switch_stud_ins_bool_state());
   }
 
-
-  List<Widget> Nav_Bar_Items_List(){
-    return[
+  List<Widget> Nav_Bar_Items_List() {
+    return [
       const Dashboard_Screen(),
       const Home_screen(),
       STU_Lecture_Screen(),
       const Calendar_screen(),
       const Profile_screen()
-    ];}
+    ];
+  }
 
   int Nav_Bar_index = 0;
   void Nav_Bar_Function({required int index}) {
-    if (index==2){
+    if (index == 2) {
       StuGetAllCourses(
-        token:Tokenn,
+        token: Tokenn,
       );
-    }
-    else if(index==4){
+    } else if (index == 4) {
       GetCurrentStudenInfo();
     }
-    Nav_Bar_index=index;
+    Nav_Bar_index = index;
     emit(Nav_Bar_state());
   }
 
 // Navigation Bar End Here >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // Doctor And Engineer Start Here >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-  bool DE=true;
-  void D_E_Function({required bool de}){
-    DE=de;
+  bool DE = true;
+  void D_E_Function({required bool de}) {
+    DE = de;
     print(DE);
     emit(D_E_state());
   }
 
-  bool switch_quiz=true;
-  void switch_quiz_Function({required bool s}){
-    switch_quiz=s;
+  bool switch_quiz = true;
+  void switch_quiz_Function({required bool s}) {
+    switch_quiz = s;
     emit(D_E_state());
   }
 
-
-
 // ALFY  --------------------------------------------------------------------
 //instructor by alfy:
-  bool isBottomSheetShown=false;
+  bool isBottomSheetShown = false;
   IconData fabIcon = Icons.add;
-
-
-
 
   /*------------------------------------------------------------*/
   List<Widget> items = [
     Row(
       children: [
-        TextButton(onPressed: (){}, child: const Text('Edit' ,style: TextStyle(fontSize: 12),)),
-        const Icon(Icons.edit,size: 16),
+        TextButton(
+            onPressed: () {},
+            child: const Text(
+              'Edit',
+              style: TextStyle(fontSize: 12),
+            )),
+        const Icon(Icons.edit, size: 16),
       ],
     ),
     Row(
       children: [
-        TextButton(onPressed: (){}, child: const Text('material name 1',
-          style: TextStyle(fontSize: 12),
-        )),
-        const Icon(CupertinoIcons.delete,size: 16,),
+        TextButton(
+            onPressed: () {},
+            child: const Text(
+              'material name 1',
+              style: TextStyle(fontSize: 12),
+            )),
+        const Icon(
+          CupertinoIcons.delete,
+          size: 16,
+        ),
       ],
     ),
   ];
   Widget? Material_More_selectedItem;
 
-
-
-
-  void ChangeBottomSheetState(
-      {
-        required bool isShow,
-        required IconData icon,
-      }
-      ){
-    isBottomSheetShown=isShow;
+  void ChangeBottomSheetState({
+    required bool isShow,
+    required IconData icon,
+  }) {
+    isBottomSheetShown = isShow;
     fabIcon = icon;
     emit(ChangeBottomSheet_State());
   }
 
-
-
-  void change_more_list_visible(Widget? newValue){
+  void change_more_list_visible(Widget? newValue) {
     Material_More_selectedItem = newValue!;
     emit(ChangeListVisible_State());
   }
 
   /*-------------------add lecture screen-------------------*/
-  List<PlatformFile>all_files_List=[];
-  void pickFile() async{
+  List<PlatformFile> all_files_List = [];
+  void pickFile() async {
     emit(AddFile_Loading_State());
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowMultiple: true,
-      allowedExtensions: ['png', 'cdr', 'psd','jpeg', 'png','pdf'],
+      allowedExtensions: ['png', 'cdr', 'psd', 'jpeg', 'png', 'pdf'],
     );
-    if(result != null) {
-      all_files_List=result.files;    //Adding all files to all_files list
+    if (result != null) {
+      all_files_List = result.files; //Adding all files to all_files list
       emit(AddFile_Success_State());
     } else {
       // User canceled the picker
@@ -282,15 +272,14 @@ class App_cubit extends Cubit<App_state> {
     }
   }
 
-
-  void add_NewFile_To_FIles_List()async{
+  void add_NewFile_To_FIles_List() async {
     emit(AddNewFile_Loading_State());
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowMultiple: true,
-      allowedExtensions: ['png', 'cdr', 'psd','jpeg', 'png','pdf'],
+      allowedExtensions: ['png', 'cdr', 'psd', 'jpeg', 'png', 'pdf'],
     );
-    if(result != null) {
+    if (result != null) {
       result.files.forEach((element) {
         all_files_List.add(element);
       });
@@ -301,21 +290,17 @@ class App_cubit extends Cubit<App_state> {
     }
   }
 
-  void openFile_Fun(File file){
+  void openFile_Fun(File file) {
     emit(ShowFile_Loading_State());
     OpenFile.open(file.path).then((value) {
       emit(ShowFile_Success_State());
-    }).catchError((error){
+    }).catchError((error) {
       print('opening file error${error}');
       emit(ShowFile_Error_State());
     });
   }
 
-
-
   /*-------------add quiz --------------*/
-
-
 
   final List<String> materil_for_quiz = [
     'Material name 1',
@@ -326,11 +311,10 @@ class App_cubit extends Cubit<App_state> {
   ];
 
   String? selectedValue;
-  void selected_item_quiz (String value) {
+  void selected_item_quiz(String value) {
     selectedValue = value;
     emit(select_item_add_quiz_State());
   }
-
 
   int hours = 0;
   int minutes = 0;
@@ -339,12 +323,13 @@ class App_cubit extends Cubit<App_state> {
 
   String _formatTime() {
     String formattedHours = DateFormat('HH').format(DateTime(0, 0, 0, hours));
-    String formattedMinutes = DateFormat('mm').format(DateTime(0, 0, 0, 0, minutes));
-    String formattedSeconds = DateFormat('ss').format(DateTime(0, 0, 0, 0, 0, seconds));
+    String formattedMinutes =
+        DateFormat('mm').format(DateTime(0, 0, 0, 0, minutes));
+    String formattedSeconds =
+        DateFormat('ss').format(DateTime(0, 0, 0, 0, 0, seconds));
 
     return '$formattedHours:$formattedMinutes:$formattedSeconds';
   }
-
 
   // Future<File> saveFile_Fun(PlatformFile file)async{
   //   final appStorage= await getApplicationDocumentsDirectory();
@@ -352,30 +337,26 @@ class App_cubit extends Cubit<App_state> {
   //   return File(file.path!).copy(newFIle.path);
   // }
 
-
-
 /*switch betwean assignment pending or completed*/
 
-  bool pend=true;
-  void pend_Complete_Function({required bool pe}){
-    pend=pe;
+  bool pend = true;
+  void pend_Complete_Function({required bool pe}) {
+    pend = pe;
     print(pend);
     emit(pend_complete_state());
   }
 
-
-
 //--------STU  Upload assignment -------------------
-  List<File>all_assign_files_List=[];
-  File? assignFile ;
-  void pick_assign_File() async{
+  List<File> all_assign_files_List = [];
+  File? assignFile;
+  void pick_assign_File() async {
     emit(AddFile_Assign_Loading_State());
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowMultiple: true,
-      allowedExtensions: ['png', 'cdr', 'psd','jpeg', 'png','pdf'],
+      allowedExtensions: ['png', 'cdr', 'psd', 'jpeg', 'png', 'pdf'],
     );
-    if(result != null) {
+    if (result != null) {
       result.files.forEach((element) {
         all_assign_files_List.add(File(element.path!));
       });
@@ -385,14 +366,14 @@ class App_cubit extends Cubit<App_state> {
     }
   }
 
-  void Add_NewFile_To_Assign_List()async{
+  void Add_NewFile_To_Assign_List() async {
     emit(AddNewFile_Assign_Loading_State());
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowMultiple: true,
-      allowedExtensions: ['png', 'cdr', 'psd','jpeg', 'png','pdf'],
+      allowedExtensions: ['png', 'cdr', 'psd', 'jpeg', 'png', 'pdf'],
     );
-    if(result != null) {
+    if (result != null) {
       result.files.forEach((element) {
         all_assign_files_List.add(File(element.path!));
       });
@@ -403,64 +384,62 @@ class App_cubit extends Cubit<App_state> {
     }
   }
 
-
-
   //-----------------STU Quizzes------------
-  List<bool> stu_Quiz_IsComplete = [false,false,true];
-  List<bool> stu_Quiz_isStart = [true,false,true];
+  List<bool> stu_Quiz_IsComplete = [false, false, true];
+  List<bool> stu_Quiz_isStart = [true, false, true];
 
-  List<String> stu_Quiz_Ques_lis=[
+  List<String> stu_Quiz_Ques_lis = [
     'What is Parallel Computing?',
     'What are the main challenges in Parallel Programming?',
     'Compare and Contrast Shared Memory and Distributed Memory Models?',
     'Explain the concept of Race Conditions and how they can be mitigated?',
-    'Compare and Contrast Shared Memory and Distributed Memory Models?'];
+    'Compare and Contrast Shared Memory and Distributed Memory Models?'
+  ];
 
-  final List<String> stu_Quiz_Ques_options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+  final List<String> stu_Quiz_Ques_options = [
+    'Option 1',
+    'Option 2',
+    'Option 3',
+    'Option 4'
+  ];
   //String quizAnswerSelected = '';
-  void Quiz_Select_answer(index,value){
-    allquizAnswers![index]=value;
+  void Quiz_Select_answer(index, value) {
+    allquizAnswers![index] = value;
     //quizAnswerSelected=value;
     emit(Change_Quiz_Answer_State());
   }
 
-
-
-
   //----------------------Grades--------------------------
-  List <int> stuAllGrades=[10,30,50,45,35];
+  List<int> stuAllGrades = [10, 30, 50, 45, 35];
 //----------------------------------------------------------
 
-
 //------------API ------------------------------------
-  String ?Tokenn;
-  STU_Login_Model ?stu_login_Model;
+  String? Tokenn;
+  STU_Login_Model? stu_login_Model;
   void UserLogin({
     required String email,
     required String password,
-  }){
+  }) {
     emit(STU_LoginLoadingState());
-    Dio_Helper.PostData(
-        url: LOGIN,
-        data:{
-          'email':email,
-          'password':password,
-        }).then((value) {
-      stu_login_Model= STU_Login_Model.fromJson(value.data);
-      Tokenn=stu_login_Model?.token;
+    Dio_Helper.PostData(url: LOGIN, data: {
+      'email': email,
+      'password': password,
+    }).then((value) {
+      stu_login_Model = STU_Login_Model.fromJson(value.data);
+      Tokenn = stu_login_Model?.token;
       print('TOKENN:${Tokenn}');
       emit(STU_LoginSuccessState(stu_login_Model!));
-    }).catchError((Error){
+    }).catchError((Error) {
       print(Error.toString());
       emit(STU_LoginErrorState(Error.toString()));
     });
   }
 
   CurrentStudentInfoModel? studentInfoModel;
-  void GetCurrentStudenInfo (
+  void GetCurrentStudenInfo(
       //  required token,
       ) {
-    if(studentInfoModel==null) {
+    if (studentInfoModel == null) {
       emit(Get_STU_Info_LoadingState());
       Dio_Helper.GetData(
         url: STU_INFO,
@@ -472,6 +451,8 @@ class App_cubit extends Cubit<App_state> {
           print(studentInfoModel?.facultyName);
           emit(Get_STU_Info_SuccessState());
         }
+      }).then((value){
+        // InsertToDataBase_User_Table(User_Table!);
       }).catchError((error) {
         emit(Get_STU_Info_ErrorState(error.toString()));
         print(error.toString());
@@ -479,15 +460,11 @@ class App_cubit extends Cubit<App_state> {
     }
   }
 
-
-
-
-
   //------------------------Get all news ---------------------
-  List<GetAllNewsModel> allNewsModel=[];
+  List<GetAllNewsModel> allNewsModel = [];
 
-  void GetAllNews (){
-    if(allNewsModel.isEmpty) {
+  void GetAllNews() {
+    if (allNewsModel.isEmpty) {
       emit(Get_All_NewsLoadingState());
       Dio_Helper.GetData(url: NEWS).then((value) {
         if (value.statusCode == 200) {
@@ -501,6 +478,9 @@ class App_cubit extends Cubit<App_state> {
         allNewsModel.forEach((element) {
           print('content 1------------: ${element.content}');
         });
+
+      }).then((value){
+        // InsertToDataBase_News_Table(News_Table!);
       }).catchError((error) {
         emit(Get_All_NewsErrorState(error.toString()));
 
@@ -509,13 +489,12 @@ class App_cubit extends Cubit<App_state> {
     }
   }
 
+  List<Stu_GetAllCoursesModel> stuAllCoursesModel = [];
 
-  List<Stu_GetAllCoursesModel> stuAllCoursesModel=[];
-
-  void StuGetAllCourses ({
+  void StuGetAllCourses({
     required token,
   }) {
-    if(stuAllCoursesModel.length==0) {
+    if (stuAllCoursesModel.length == 0) {
       emit(Stu_Get_All_Courses_LoadingState());
       Dio_Helper.GetData(
         url: STU_COURSES,
@@ -541,20 +520,20 @@ class App_cubit extends Cubit<App_state> {
 
   String? currentCourseName;
   String? currentCycleId;
-  bool isCycleIdChange=false;
+  bool isCycleIdChange = false;
 
   // String? cycleId;
-  List<GetCourseMaterialsModel> stuCoursesMatrialModel=[];
-  List<GetCourseMaterialsModel> stuLECTUREModel=[];
-  List<GetCourseMaterialsModel> stuLABModel=[];
+  List<GetCourseMaterialsModel> stuCoursesMatrialModel = [];
+  List<GetCourseMaterialsModel> stuLECTUREModel = [];
+  List<GetCourseMaterialsModel> stuLABModel = [];
   bool? isLec;
 
-  void StuGetCourseMaterials (
+  void StuGetCourseMaterials(
       //required token,
       // required cycleId,
       ) {
     print('sdsds ${isCycleIdChange}');
-    if (stuCoursesMatrialModel.isEmpty || isCycleIdChange==true){
+    if (stuCoursesMatrialModel.isEmpty || isCycleIdChange == true) {
       emit(Stu_Get_Course_Material_LoadingState());
       Dio_Helper.GetData(
         url: 'Students/CurrentCourseMaterial?CycleId=${currentCycleId}',
@@ -562,19 +541,18 @@ class App_cubit extends Cubit<App_state> {
         token: Tokenn,
       ).then((value) {
         if (value.statusCode == 200) {
-
           print('get course material true');
           List Json = value.data;
           for (var element in Json) {
-            stuCoursesMatrialModel.add(GetCourseMaterialsModel.fromJson(element));
+            stuCoursesMatrialModel
+                .add(GetCourseMaterialsModel.fromJson(element));
           }
           emit(Stu_Get_Course_Material_SuccessState(stuCoursesMatrialModel));
         }
         stuCoursesMatrialModel.forEach((element) {
           if (element.type == 'Lecture') {
             stuLECTUREModel.add(element);
-          }
-          else if (element.type == 'Lab') {
+          } else if (element.type == 'Lab') {
             stuLABModel.add(element);
           }
         });
@@ -591,20 +569,18 @@ class App_cubit extends Cubit<App_state> {
         print(error.toString());
       });
     }
-    isCycleIdChange=false;
-
+    isCycleIdChange = false;
   }
 
-  List<GetCourseMaterialFileModel> stuCoursesMatrialFileModel=[];
+  List<GetCourseMaterialFileModel> stuCoursesMatrialFileModel = [];
   // List<GetCourseMaterialsModel> stuLECTUREModel=[];
   // List<GetCourseMaterialsModel> stuLABModel=[];
 
-  void StuGetCourseMaterialFiles ({
+  void StuGetCourseMaterialFiles({
     //required token,
     required lecId,
-  }
-      ) {
-    stuCoursesMatrialFileModel=[];
+  }) {
+    stuCoursesMatrialFileModel = [];
     // print('lecId=${lecId}');
     //if (stuCoursesMatrialModel.isEmpty || isCycleIdChange==true){
     emit(Stu_Get_Course_Material_File_LoadingState());
@@ -614,11 +590,11 @@ class App_cubit extends Cubit<App_state> {
       token: Tokenn,
     ).then((value) {
       if (value.statusCode == 200) {
-
         print('get course material File true');
         List Json = value.data;
         for (var element in Json) {
-          stuCoursesMatrialFileModel.add(GetCourseMaterialFileModel.fromJson(element));
+          stuCoursesMatrialFileModel
+              .add(GetCourseMaterialFileModel.fromJson(element));
         }
         emit(Stu_Get_Course_Material_File_SuccessState());
       }
@@ -626,7 +602,6 @@ class App_cubit extends Cubit<App_state> {
       stuCoursesMatrialFileModel.forEach((element) {
         print(element.fileName);
       });
-
     }).catchError((error) {
       emit(Stu_Get_Course_Material_File_ErrorState(error.toString()));
       print(error.toString());
@@ -635,25 +610,19 @@ class App_cubit extends Cubit<App_state> {
     //isCycleIdChange=false;
   }
 
-
-
-
-
-
   //----------------------STU assign -----------------
 
-  String ? assignName;
-  String ? taskId;
-  List<STU_Course_Assign_Model> stuCoursesAssignModel=[];
-  void StuGetCourseAssign (
+  String? assignName;
+  String? taskId;
+  List<STU_Course_Assign_Model> stuCoursesAssignModel = [];
+  void StuGetCourseAssign(
       //required token,
       // required cycleId,
-      ){
+      ) {
     // stuCoursesAssignModel=[];
-    if(stuCoursesAssignModel.isEmpty || isCycleIdChange==true) {
+    if (stuCoursesAssignModel.isEmpty || isCycleIdChange == true) {
       emit(Stu_Get_Course_Assign_LoadingState());
       Dio_Helper.GetData(
-
         url: 'Students/CurrentCourseTasks?CycleId=${currentCycleId}',
         //STU_COURSE_MATERIAL,
         token: Tokenn,
@@ -663,8 +632,8 @@ class App_cubit extends Cubit<App_state> {
           List Json = value.data;
           //  for (var element in  Json) {
           Json.forEach((element) {
-            stuCoursesAssignModel.add(
-                STU_Course_Assign_Model.fromJson(element));
+            stuCoursesAssignModel
+                .add(STU_Course_Assign_Model.fromJson(element));
           });
           print('get course Assign true');
           emit(Stu_Get_Course_Assign_SuccessState(stuCoursesAssignModel));
@@ -677,14 +646,12 @@ class App_cubit extends Cubit<App_state> {
         print(error.toString());
       });
     }
-    isCycleIdChange=false;
-
+    isCycleIdChange = false;
   }
 
   //-----------get task ddta---------------
   GetTaskDataModel? stuAssignDataModel;
-  void StuGetAssignData (
-      ){
+  void StuGetAssignData() {
     print('task id:::${taskId}');
 //    if(stuCoursesAssignModel.isEmpty || isCycleIdChange==true) {
     emit(Stu_Get_Course_Assign_Data_LoadingState());
@@ -693,8 +660,7 @@ class App_cubit extends Cubit<App_state> {
       token: Tokenn,
     ).then((value) {
       if (value.statusCode == 200) {
-        stuAssignDataModel=
-            GetTaskDataModel.fromJson(value.data);
+        stuAssignDataModel = GetTaskDataModel.fromJson(value.data);
         print('get course Assign true');
         emit(Stu_Get_Course_Assign_Data_SuccessState());
       }
@@ -705,47 +671,43 @@ class App_cubit extends Cubit<App_state> {
     });
     //}
     // isCycleIdChange=false;
-
   }
 
-
   //-------------------------submit Task-----------------
-  File ?file;
-  void SumitTask(
-      )
-  {
+  File? file;
+  void SumitTask() {
     // print('All files-------------- ${all_assign_files_List}');
     print('task id : ${taskId}');
     print('All files-------------- ${all_assign_files_List}');
     emit(Stu_Submit_Task_LoadingState());
     Dio_Helper.PostListFileData(
-        token: Tokenn,
-        url: 'Students/File/Upload?taskid=${taskId}',
-        files:all_assign_files_List
-    ).then((value) {
+            token: Tokenn,
+            url: 'Students/File/Upload?taskid=${taskId}',
+            files: all_assign_files_List)
+        .then((value) {
       if (value.statusCode == 200) {
         print('post assign true');
         //   print(value.data);
         String json = value.data;
         print(json);
-        flutterToast(msg: '$json');
+        flutterToast(msg: '$json', backColor: Colors.blue);
         emit(Stu_Submit_Task_SuccessState());
-      }}).catchError((Error){
+      }
+    }).catchError((Error) {
       print(Error.toString());
-      flutterToast(msg: 'Error to upload you task , please try again');
+      flutterToast(
+          msg: 'Error to upload you task , please try again',
+          backColor: Colors.blue);
 
       emit(Stu_Submit_Task_ErrorState(Error.toString()));
-
     });
   }
 
 //-------------Quiz------------------------------
 
-  List<STU_Quiz_Model> stuCoursesQuizlModel=[];
-  void StuGetCourseQuiz (
-
-      ) {
-    if (stuCoursesQuizlModel.isEmpty|| isCycleIdChange==true) {
+  List<STU_Quiz_Model> stuCoursesQuizlModel = [];
+  void StuGetCourseQuiz() {
+    if (stuCoursesQuizlModel.isEmpty || isCycleIdChange == true) {
       emit(Stu_Get_Course_Quiz_LoadingState());
       Dio_Helper.GetData(
         url: 'Students/CurrentCourseQuizzes?cycleId=${currentCycleId}',
@@ -768,16 +730,15 @@ class App_cubit extends Cubit<App_state> {
         print(error.toString());
       });
     }
-    isCycleIdChange=false;
-
+    isCycleIdChange = false;
   }
-  List<Questions> questionModel=[];
 
-  List<String>? allquizAnswers ;
+  List<Questions> questionModel = [];
 
-  String?currentQuizId;
-  void StuGetQuizDataById (
-      ){
+  List<String>? allquizAnswers;
+
+  String? currentQuizId;
+  void StuGetQuizDataById() {
     emit(Stu_Get_Quiz_Data_LoadingState());
     Dio_Helper.GetData(
       url: 'Students/Quiz?quizId=${currentQuizId}',
@@ -793,63 +754,53 @@ class App_cubit extends Cubit<App_state> {
 
         allquizAnswers = List<String>.generate(
           questionModel.length,
-              (index) =>'',
+          (index) => '',
         );
         emit(Stu_Get_Quiz_Data_SuccessState());
       }
       questionModel.forEach((element) {
         print('Quiz ques------- ${element.text}');
       });
-
     }).catchError((error) {
       emit(Stu_Get_Quiz_Data_ErrorState(error.toString()));
       print(error.toString());
     });
-    questionModel=[];
+    questionModel = [];
   }
 
-  List<Map<String,dynamic>>submitQuizAnswers=[];
-  int? quizResult=0;
-  List<Map<String,dynamic>>QuizAnswersResponse=[];
-  void SumitQuiz(
-      )
-  {
-    QuizAnswersResponse=[];
+  List<Map<String, dynamic>> submitQuizAnswers = [];
+  int? quizResult = 0;
+  List<Map<String, dynamic>> QuizAnswersResponse = [];
+  void SumitQuiz() {
+    QuizAnswersResponse = [];
     emit(Stu_Submit_Quiz_LoadingState());
 
-    for(int i=0;i<questionModel.length;i++){
-      submitQuizAnswers.add({
-        'questionId':questionModel[i].id,
-        'answerId':allquizAnswers![i]
-      });
+    for (int i = 0; i < questionModel.length; i++) {
+      submitQuizAnswers.add(
+          {'questionId': questionModel[i].id, 'answerId': allquizAnswers![i]});
     }
     emit(Stu_Assign_Quiz_Answer_SuccessState());
-    Dio_Helper.PostData(
-        token: Tokenn,
-        url: SUBMITQUIZ,
-        data:{
-          'quizId':currentQuizId,
-          'answers':submitQuizAnswers,
-        }).then((value) {
+    Dio_Helper.PostData(token: Tokenn, url: SUBMITQUIZ, data: {
+      'quizId': currentQuizId,
+      'answers': submitQuizAnswers,
+    }).then((value) {
       if (value.statusCode == 200) {
         print('submit Quiz true');
         List json = value.data;
 
         for (var element in json) {
           print(element.values);
-          QuizAnswersResponse.add({
-            '${element.keys}': element.values
-          });
+          QuizAnswersResponse.add({'${element.keys}': element.values});
         }
         for (var item in QuizAnswersResponse) {
-          if (item.values.toString()=='((true))') {
-            quizResult=quizResult!+1;
+          if (item.values.toString() == '((true))') {
+            quizResult = quizResult! + 1;
           }
         }
         print('quiz result :${quizResult}');
         emit(Stu_Submit_Quiz_SuccessState());
       }
-    }).catchError((Error){
+    }).catchError((Error) {
       print(Error.toString());
       emit(Stu_Submit_Quiz_ErrorState(Error.toString()));
     });
@@ -857,18 +808,16 @@ class App_cubit extends Cubit<App_state> {
 
   //-------------STU get all grades for current course------------
 
-  List<GetCourseGradesModel>courseGradesModel=[];
+  List<GetCourseGradesModel> courseGradesModel = [];
 
-  void GetStuCourseGrade(){
+  void GetStuCourseGrade() {
     // courseGradesModel=[];
-    if(courseGradesModel.isEmpty || isCycleIdChange==true) {
+    if (courseGradesModel.isEmpty || isCycleIdChange == true) {
       emit(Stu_Get_Course_Grades_LoadingState());
-      Dio_Helper.GetData
-        (url: 'Students/GetAllGradesForCurrentCourse?courseId=${currentCycleId}',
+      Dio_Helper.GetData(
+        url: 'Students/GetAllGradesForCurrentCourse?courseId=${currentCycleId}',
         token: Tokenn,
-
-      )
-          .then((value) {
+      ).then((value) {
         if (value.statusCode == 200) {
           List Json = value.data;
           for (var element in Json) {
@@ -887,6 +836,144 @@ class App_cubit extends Cubit<App_state> {
       });
       // courseGradesModel=[];
     }
-    isCycleIdChange=false;
+    isCycleIdChange = false;
   }
+
+// connection here ------------------------------------------------------------
+
+  // Future<bool> connenction =  InternetConnectionChecker().hasConnection;
+  Future<void> connection_Function() async {
+    InternetConnectionChecker().onStatusChange.listen((state) {
+      switch (state) {
+        case InternetConnectionStatus.connected:
+          print('********************************************');
+          print('internet connected! :)');
+          print('********************************************');
+          emit(Connection_success_State());
+          break;
+
+        case InternetConnectionStatus.disconnected:
+          print('********************************************');
+          print('No internet :( ');
+          print('********************************************');
+          emit(Connection_failed_State());
+          break;
+      }
+    });
+  }
+
+  Database? database;
+  String? User_Table = 'User';
+  String? News_Table = 'News';
+  void CreateDateBase() async {
+    database = await openDatabase(
+      'Local_DB.db',
+      version: 1,
+      onCreate: (database, version) async {
+        print('_____________________________________________________________________________');
+        print('database created');
+        await database
+            .execute('CREATE TABLE User(userId TEXT,fullName TEXT,email TEXT,'
+                'phone TEXT,imagePath TEXT,academicId TEXT,'
+                'departmentName TEXT,facultyName TEXT,universityName TEXT,level INTEGER)')
+            .catchError((error) {
+          print('error when created user table ${error.toString()}');
+        });
+        print('_____________________________________________________________________________');
+        emit(CreateTable_state());
+        await database
+            .execute('CREATE TABLE News(newsId TEXT,content TEXT,filePath TEXT,'
+                'facultyId TEXT,createdAt TEXT,userId TEXT,'
+                'userName TEXT)')
+            .catchError((error) {
+          print('error when created News table ${error.toString()}');
+        });
+        print('_____________________________________________________________________________');
+        emit(CreateTable_state());
+      },
+      onOpen: (database) async {
+        print('________________Start Get Data ________________ ');
+
+        GetFromDataBase(database, User_Table!);
+        GetFromDataBase(database, News_Table!);
+
+      },
+    );
+
+    emit(CreateDateBase_state());
+  }
+
+  Future InsertToDataBase_User_Table(
+    String tablename,
+  ) async {
+    print('Start Insert into User table _________________________________');
+    database?.transaction((txn) async {
+      await txn.rawInsert(
+          'INSERT INTO $tablename(userId,fullName,email,phone,imagePath,academicId,departmentName,facultyName,universityName,level)'
+              'VALUES("${studentInfoModel!.userId}","${studentInfoModel!.fullName}",'
+              '"${studentInfoModel!.email}","${studentInfoModel!.phone}",'
+              '"${studentInfoModel!.imagePath}","${studentInfoModel!.academicId}",'
+              '"${studentInfoModel!.departmentName}","${studentInfoModel!.facultyName}",'
+              '"${studentInfoModel!.universityName}","${studentInfoModel!.level}")');
+    });
+
+    emit(InsertToDataBase_state());
+    GetFromDataBase(database, tablename);
+  }
+
+  Future InsertToDataBase_News_Table(
+      String tablename,
+      ) async {
+    print('Start Insert into News table _________________________________');
+    allNewsModel.forEach((element) {
+      database?.transaction((txn) async {
+        await txn.rawInsert(
+            'INSERT INTO $tablename(newsId,content,filePath,facultyId,createdAt,userId,userName)'
+                'VALUES(${element.newsId},"${element.content}","${element.filePath}","${element.facultyId}","${element.createdAt}","${element.userId}","${element.userName}")');
+
+      });
+    });
+    emit(InsertToDataBase_state());
+    GetFromDataBase(database, tablename);
+
+  }
+
+  CurrentStudentInfoModel usermodel=new CurrentStudentInfoModel();
+  List<GetAllNewsModel> newsmodel=[];
+  void GetFromDataBase(database, String tablename) {
+    database?.rawQuery('SELECT * FROM $tablename').then((value) {
+      if (tablename == User_Table) {
+        usermodel=new CurrentStudentInfoModel();
+        usermodel = CurrentStudentInfoModel.fromJson(value[0]);
+        print('User_Table_________________________________________');
+        print(value);
+        print('-----------------------------------------------------');
+        print(usermodel);
+        print('__________________________________________________________________________________');
+
+
+      }
+      else if(tablename == News_Table){
+        newsmodel=[];
+        value.forEach((element) {
+          newsmodel.add(GetAllNewsModel.fromJson(element));
+        });
+
+        print('News_Table_________________________________________');
+        print(value);
+        print('-----------------------------------------------------');
+        newsmodel.forEach((element) {
+          print(element.userName);
+        });
+        print('__________________________________________________________________________________');
+
+      }
+    });
+    emit(GetFromDataBase_state());
+  }
+
+
+
+
+
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:university_hup/Modules/LandScape/LandScape/LandScape_Screen.dart';
+import 'package:university_hup/Shared/Cons_widget.dart';
 
 import 'package:university_hup/Shared/remote/DioHelper.dart';
 import 'Shared/Cubit/App_cubit.dart';
@@ -25,8 +27,9 @@ import 'Shared/Style/App_Style.dart';
 
 void main() {
   // new branch
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      overlays: [SystemUiOverlay.top,]);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+    SystemUiOverlay.top,
+  ]);
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       systemStatusBarContrastEnforced: false,
@@ -39,7 +42,9 @@ void main() {
       systemNavigationBarDividerColor: Colors.transparent,
     ),
   );
+
   Bloc.observer = MyBlocObserver();
+
   runApp(const MyApp());
 
   Dio_Helper.init();
@@ -54,15 +59,81 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-
-          create: (context) => App_cubit()..GetAllNews(),
-
+          create: (context) => App_cubit()..CreateDateBase()
+            ..connection_Function()
+            ..GetAllNews(),
         ),
       ],
       child: BlocConsumer<App_cubit, App_state>(
-          listener: (context, state) => () {},
+          listener: (context, state) => () {
+                // InternetConnectionChecker().onStatusChange.listen((state) {
+                //   switch (state) {
+                //     case InternetConnectionStatus.connected:
+                //       print('********************************************');
+                //       print('internet connected! :)');
+                //       print('********************************************');
+                //
+                //       break;
+                //
+                //     case InternetConnectionStatus.disconnected:
+                //       print('********************************************');
+                //       print('No internet :( ');
+                //       print('********************************************');
+                //
+                //       break;
+                //   }
+                // });
+
+
+                // if (state is Connection_success_State)
+                //   {
+                //     print(
+                //         '******************* from main *************************'),
+                //     print('internet connected! :)'),
+                //     print(
+                //         '******************* from main *************************'),
+                //     flutterToast(
+                //       msg: 'Connected',
+                //       backColor: Colors.teal,
+                //     ),
+                //   },
+                // if (state is Connection_failed_State)
+                //   {
+                //     print(
+                //         '******************* from main *************************'),
+                //     print('internet disconnected! :)'),
+                //     print(
+                //         '******************* from main *************************'),
+                //     flutterToast(
+                //       msg: 'Disconnected',
+                //       backColor: Colors.red,
+                //     ),
+                //   }
+              },
           builder: (context, state) {
             App_cubit cubit = App_cubit.get(context);
+            if (state is Connection_success_State) {
+              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              //   content: Text('Connected'),backgroundColor:Colors.teal ,width: 50,
+              //   action: SnackBarAction(label: 'Connected',onPressed: (){},backgroundColor: Colors.teal,
+              //     textColor: Colors.black,
+              //   ),
+              //   onVisible: (){},
+              //
+              // ));
+
+              flutterToast(
+                msg: 'Connected',
+                backColor: Colors.teal,
+              );
+            }
+            if (state is Connection_failed_State) {
+              SnackBar(content: Text('Disconnected'),backgroundColor: Colors.red,);
+              flutterToast(
+                msg: 'Disconnected',
+                backColor: Colors.red,
+              );
+            }
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: Light_Theme,
@@ -70,7 +141,7 @@ class MyApp extends StatelessWidget {
               themeMode: ThemeMode.light,
 
 // home:StartWidget,
-              home:  LandScape_Screen(),
+              home: LandScape_Screen(),
             );
           }),
     );

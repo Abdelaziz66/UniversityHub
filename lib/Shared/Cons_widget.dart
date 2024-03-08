@@ -132,12 +132,12 @@ void NavigateAndFinish(context,Widget)=>Navigator.pushAndRemoveUntil(context,
 
 void flutterToast ({
   required String msg,
-  Color? backColor,
+ required Color? backColor,
 })=>Fluttertoast.showToast(
     msg: msg,
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.BOTTOM,
     timeInSecForIosWeb: 5,
-    backgroundColor:backColor?? Colors.green,
+    backgroundColor:backColor,
     textColor: Colors.white,
     fontSize: 16.0);

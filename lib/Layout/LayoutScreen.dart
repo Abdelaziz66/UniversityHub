@@ -8,6 +8,7 @@ import 'package:university_hup/Modules/Student/Student_Notification/Drawer/Edit_
 import 'package:university_hup/Modules/Student/Student_Notification/Notification_Screen.dart';
 
 import 'package:university_hup/Shared/Component/component.dart';
+import 'package:university_hup/Shared/Cons_widget.dart';
 import '../Shared/Cubit/App_cubit.dart';
 import '../Shared/Cubit/App_state.dart';
 
@@ -20,12 +21,20 @@ class Layout_Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit, App_state>(
-      listener: (context, state) => {},
+      listener: (context, state) => {
+
+      },
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
-        List<IconData>recent=[
-          FontAwesomeIcons.penClip,FontAwesomeIcons.bookBookmark,FontAwesomeIcons.featherPointed,FontAwesomeIcons.book,
-          FontAwesomeIcons.bookBookmark,FontAwesomeIcons.penClip,FontAwesomeIcons.featherPointed,FontAwesomeIcons.book,
+        List<IconData> recent = [
+          FontAwesomeIcons.penClip,
+          FontAwesomeIcons.bookBookmark,
+          FontAwesomeIcons.featherPointed,
+          FontAwesomeIcons.book,
+          FontAwesomeIcons.bookBookmark,
+          FontAwesomeIcons.penClip,
+          FontAwesomeIcons.featherPointed,
+          FontAwesomeIcons.book,
         ];
         return Scaffold(
           key: scafoldkey,
@@ -95,10 +104,9 @@ class Layout_Screen extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color:
-                                 cubit.Nav_Bar_index == 0
-                                      ? Colors.blue.withOpacity(.8)
-                                      : Colors.transparent,
+                              color: cubit.Nav_Bar_index == 0
+                                  ? Colors.blue.withOpacity(.8)
+                                  : Colors.transparent,
                             ),
                             alignment: AlignmentDirectional.topStart,
                             child: Padding(
@@ -109,8 +117,7 @@ class Layout_Screen extends StatelessWidget {
                                   FaIcon(
                                     FontAwesomeIcons.house,
                                     size: 20,
-                                    color:
-                                            cubit.Nav_Bar_index == 0
+                                    color: cubit.Nav_Bar_index == 0
                                         ? Colors.white
                                         : c1,
                                   ),
@@ -124,8 +131,7 @@ class Layout_Screen extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w700,
-                                        color:
-                                                cubit.Nav_Bar_index == 0
+                                        color: cubit.Nav_Bar_index == 0
                                             ? Colors.white
                                             : c1,
                                       ),
@@ -147,7 +153,8 @@ class Layout_Screen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Edit_Profile_screen(),
+                                builder: (context) =>
+                                    const Edit_Profile_screen(),
                               ));
                         },
                         child: Padding(
@@ -206,7 +213,8 @@ class Layout_Screen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const STUAllGradesScreen(),
+                                  builder: (context) =>
+                                      const STUAllGradesScreen(),
                                 ));
                           },
                           child: Container(
@@ -258,6 +266,8 @@ class Layout_Screen extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             cubit.D_value = 3;
+                            cubit.InsertToDataBase_User_Table(cubit.User_Table!);
+                            cubit.InsertToDataBase_News_Table(cubit.News_Table!);
                             Navigator.pop(context);
                           },
                           child: Container(
@@ -474,9 +484,8 @@ class Layout_Screen extends StatelessWidget {
                                   context: context,
                                   barrierColor: Colors.black.withOpacity(.02),
                                   useSafeArea: true,
-
-                                  builder: (BuildContext context) =>  AlertDialog(
-
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
                                     insetPadding: const EdgeInsets.all(0.0),
                                     scrollable: false,
                                     shadowColor: Colors.transparent,
@@ -485,7 +494,7 @@ class Layout_Screen extends StatelessWidget {
                                     content: Center(
                                       child: Container(
                                         width:
-                                        MediaQuery.of(context).size.width,
+                                            MediaQuery.of(context).size.width,
                                         child: GestureDetector(
                                           onTap: () {
                                             Navigator.pop(context);
@@ -503,35 +512,37 @@ class Layout_Screen extends StatelessWidget {
                                                         style: TextStyle(
                                                             fontSize: 25,
                                                             fontWeight:
-                                                            FontWeight.w900,
+                                                                FontWeight.w900,
                                                             color: Colors.black
                                                                 .withOpacity(
-                                                                .7)),
+                                                                    .7)),
                                                       ),
                                                       Expanded(
                                                         child: Padding(
                                                           padding:
-                                                          const EdgeInsets
-                                                              .only(
-                                                              top: 40,
-                                                              left: 15,
-                                                              bottom: 0,
-                                                              right: 15),
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  top: 40,
+                                                                  left: 15,
+                                                                  bottom: 0,
+                                                                  right: 15),
                                                           child: ListView
                                                               .separated(
                                                             physics:
-                                                            const BouncingScrollPhysics(),
+                                                                const BouncingScrollPhysics(),
                                                             itemBuilder: (context,
-                                                                index) =>
-                                                                Notification_Card(icon: recent[index]),
+                                                                    index) =>
+                                                                Notification_Card(
+                                                                    icon: recent[
+                                                                        index]),
                                                             separatorBuilder:
                                                                 (context,
-                                                                index) =>
-                                                                Container(
-                                                                  height: 15,
-                                                                  color: Colors
-                                                                      .transparent,
-                                                                ),
+                                                                        index) =>
+                                                                    Container(
+                                                              height: 15,
+                                                              color: Colors
+                                                                  .transparent,
+                                                            ),
                                                             itemCount: 8,
                                                           ),
                                                         ),
@@ -553,7 +564,6 @@ class Layout_Screen extends StatelessWidget {
                                     backgroundColor: Colors.transparent,
                                     contentPadding: EdgeInsets.zero,
                                   ),
-
                                 ),
                             icon: FaIcon(
                               FontAwesomeIcons.clockRotateLeft,
