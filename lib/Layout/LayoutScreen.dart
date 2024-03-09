@@ -266,8 +266,8 @@ class Layout_Screen extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             cubit.D_value = 3;
-                            cubit.InsertToDataBase_User_Table(cubit.User_Table!);
-                            cubit.InsertToDataBase_News_Table(cubit.News_Table!);
+                            cubit.InsertToDataBase_User_Table();
+                            cubit.InsertToDataBase_News_Table();
                             Navigator.pop(context);
                           },
                           child: Container(

@@ -128,7 +128,7 @@ class MyApp extends StatelessWidget {
               );
             }
             if (state is Connection_failed_State) {
-              SnackBar(content: Text('Disconnected'),backgroundColor: Colors.red,);
+              // SnackBar(content: Text('Disconnected'),backgroundColor: Colors.red,);
               flutterToast(
                 msg: 'Disconnected',
                 backColor: Colors.red,
