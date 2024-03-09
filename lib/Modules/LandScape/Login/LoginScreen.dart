@@ -10,6 +10,8 @@ import 'package:university_hup/Modules/LandScape/ResetPasswoed/ForgetPasswordScr
 import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
+import 'package:university_hup/Shared/Local/Cache_helper.dart';
+
 import 'package:university_hup/Shared/constant.dart';
 
 class loginscreen extends StatefulWidget {
@@ -28,24 +30,31 @@ class _loginscreenState extends State<loginscreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit, App_state>(
       listener: (context, state) {
-      //  if(state is STU_LoginSuccessState) {
-      // //   Token=''
-      //      if(state.loginmodel != 401) {
-      //        App_cubit.get(context).Tokenn=state.loginmodel.token;
-      //    navigateTo(context, Layout_Screen());
-      //        flutterToast(msg: 'Login success ');
-      //     //   //  }
-      //      }
-      //     else{
-      //        flutterToast(msg: 'Login error ',
-      //          backColor: Colors.red,);
-      //     //
-      //      }
-      //  }
+       if(state is STU_LoginSuccessState) {
+           if(state.loginmodel != 401) {
+             CachHelper.saveData(key:'token', value:'token_hereeeeeee').then((value){
+               print(CachHelper.getData(key: 'token'));
+               print('MMM++++++++++++++++++++++++++++++++++');
+               print('++++++++++++++++++++++++++++++++++');
+               print(token);
+               print('++++++++++++++++++++++++++++++++++');
+               print('++++++++++++++++++++++++++++++++++');
+               NavigateAndFinish(context, Layout_Screen());
+             flutterToast(msg: 'Login success ', backColor: Colors.green
+             );
+             });
+
+           }
+          else{
+             flutterToast(msg: 'Login error ',
+               backColor: Colors.red,);
+          //
+           }
+       }
         // if(state is !STU_LoginErrorState) {
         //   //  if(state.loginmodel.status != 401) {
         //   navigateTo(context, Layout_Screen());
-        //   flutterToast(msg: 'Login success ');
+        //   flutterToast(msg: 'Login success ', backColor: Colors.red);
         //   //  }
         // }
         // else{
@@ -391,53 +400,29 @@ class _loginscreenState extends State<loginscreen> {
                               ],
                             ),
                             ConditionalBuilder(
-                              condition: true,
+                              condition: state is! STU_LoginLoadingState,
                               builder:(context)=> Default_Button(
                                 onPressed: () {
-                                //  if (formkey.currentState!.validate()) {
+                                 if (formkey.currentState!.validate()) {
                                   cubit.UserLogin(
                                       email:
-                                      'AbdulMajeedSallam@gmail.com',
-                                     // emailcontroller.text,
+                                      // 'AbdulMajeedSallam@gmail.com',
+                                     emailcontroller.text,
                                       password:
-                                      'P@ssw0rd',
-                                         //  passwordcontroller.text
-                                   // email:'AbdulMajeedSallam@gmail.com',
-
+                                      // 'P@ssw0rd',
+                                      passwordcontroller.text
                                   );
-                                  // cubit.Tokenn=cubit.stu_login_Model?.token;
-                                  // print('[[[[ ${cubit.Tokenn}');
-                                 //if(state is STU_LoginSuccessState)
-                                 // if(cubit.Tokenn!=null)
-                                 // {
-                                 //   cubit.GetCurrentStudenInfo();
-                                 // }
-                                  if(rol=='Student'){
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Layout_Screen(),
-                                        ));
-                                  }
-                                  else if(rol =='Instructor'){
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Layout_Screen(),
-                                        ));
-                                  }
-
-                                    // print(emailcontroller.text);
-                                    // print(passwordcontroller.text);
-
-                                 // }
-                                    else{
-
-                                  }
+                                   // cubit.Tokenn=cubit.stu_login_Model?.token;
+                                   // print('[[[[ ${cubit.Tokenn}');
+                                   // if(cubit.Tokenn!=null)
+                                   // {
+                                   //   cubit.GetCurrentStudenInfo();
+                                   // }
 
 
-
+                                 }
                                 },
+
                                 text: 'Sign in',
                               ),
                               fallback: (context)=>CircularProgressIndicator(),

@@ -34,3 +34,7 @@ String STU_INFO='Students/GetStudentInfo';
 String SUBMITQUIZ='Students/quiz/submit';
 //String STU_COURSE_MATERIAL='Students/CurrentCourseMaterial?CycleId=${App_cubit().cycleId}';
 String Token='';
+
+String? token;
+Widget? StartWidget;
+
