@@ -23,7 +23,7 @@ import 'package:university_hup/Models/STU_Model/User_Model/STU_Login_Model.dart'
 import 'package:university_hup/Modules/Navigation_Screens/Calendar_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Course_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Dashboard_Screen.dart';
-import 'package:university_hup/Modules/Navigation_Screens/Home_Screen.dart';
+import 'package:university_hup/Modules/Navigation_Screens/News_Screen.dart';
 
 import 'package:university_hup/Modules/Navigation_Screens/Profile_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Assignments_Screen.dart';
@@ -184,6 +184,15 @@ class App_cubit extends Cubit<App_state> {
       );
     } else if (index == 4) {
       GetCurrentStudenInfo();
+    }
+    else if(index == 1){
+      // print('News_Table_________________________________________');
+      // print(newsmodel.length);
+      // print('-----------------------------------------------------');
+      // newsmodel.forEach((element) {
+      //   print(element.userName);
+      // });
+      // print('__________________________________________________________________________________');
     }
     Nav_Bar_index = index;
     emit(Nav_Bar_state());
@@ -452,7 +461,7 @@ class App_cubit extends Cubit<App_state> {
           emit(Get_STU_Info_SuccessState());
         }
       }).then((value){
-        // InsertToDataBase_User_Table(User_Table!);
+        InsertToDataBase_User_Table();
       }).catchError((error) {
         emit(Get_STU_Info_ErrorState(error.toString()));
         print(error.toString());
@@ -468,7 +477,7 @@ class App_cubit extends Cubit<App_state> {
       emit(Get_All_NewsLoadingState());
       Dio_Helper.GetData(url: NEWS).then((value) {
         if (value.statusCode == 200) {
-          print('git news success');
+          // print('git news success');
           List Json = value.data;
           for (var element in Json) {
             allNewsModel.add(GetAllNewsModel.fromJson(element));
@@ -476,11 +485,11 @@ class App_cubit extends Cubit<App_state> {
           emit(Get_All_NewsSuccessState(allNewsModel));
         }
         allNewsModel.forEach((element) {
-          print('content 1------------: ${element.content}');
+          // print('content 1------------: ${element.content}');
         });
 
       }).then((value){
-        // InsertToDataBase_News_Table(News_Table!);
+        InsertToDataBase_News_Table();
       }).catchError((error) {
         emit(Get_All_NewsErrorState(error.toString()));
 
@@ -842,6 +851,7 @@ class App_cubit extends Cubit<App_state> {
 // connection here ------------------------------------------------------------
 
   // Future<bool> connenction =  InternetConnectionChecker().hasConnection;
+  bool connnection=true;
   Future<void> connection_Function() async {
     InternetConnectionChecker().onStatusChange.listen((state) {
       switch (state) {
@@ -849,6 +859,8 @@ class App_cubit extends Cubit<App_state> {
           print('********************************************');
           print('internet connected! :)');
           print('********************************************');
+          connnection=true;
+          print(connnection);
           emit(Connection_success_State());
           break;
 
@@ -856,6 +868,11 @@ class App_cubit extends Cubit<App_state> {
           print('********************************************');
           print('No internet :( ');
           print('********************************************');
+
+          // InsertToDataBase_User_Table();
+          // InsertToDataBase_News_Table();
+          connnection=false;
+          print(connnection);
           emit(Connection_failed_State());
           break;
       }
@@ -903,47 +920,55 @@ class App_cubit extends Cubit<App_state> {
     emit(CreateDateBase_state());
   }
 
-  Future InsertToDataBase_User_Table(
-    String tablename,
-  ) async {
-    print('Start Insert into User table _________________________________');
-    database?.transaction((txn) async {
-      await txn.rawInsert(
-          'INSERT INTO $tablename(userId,fullName,email,phone,imagePath,academicId,departmentName,facultyName,universityName,level)'
-              'VALUES("${studentInfoModel!.userId}","${studentInfoModel!.fullName}",'
-              '"${studentInfoModel!.email}","${studentInfoModel!.phone}",'
-              '"${studentInfoModel!.imagePath}","${studentInfoModel!.academicId}",'
-              '"${studentInfoModel!.departmentName}","${studentInfoModel!.facultyName}",'
-              '"${studentInfoModel!.universityName}","${studentInfoModel!.level}")');
-    });
+  Future InsertToDataBase_User_Table() async {
 
-    emit(InsertToDataBase_state());
-    GetFromDataBase(database, tablename);
-  }
-
-  Future InsertToDataBase_News_Table(
-      String tablename,
-      ) async {
-    print('Start Insert into News table _________________________________');
-    allNewsModel.forEach((element) {
-      database?.transaction((txn) async {
-        await txn.rawInsert(
-            'INSERT INTO $tablename(newsId,content,filePath,facultyId,createdAt,userId,userName)'
-                'VALUES(${element.newsId},"${element.content}","${element.filePath}","${element.facultyId}","${element.createdAt}","${element.userId}","${element.userName}")');
-
+    if(studentInfoModel!=null){
+      print('Start Insert into User table _________________________________');
+      await database?.rawDelete('DELETE FROM User').then((value) {
+        database?.transaction((txn) async {
+          await txn.rawInsert(
+              'INSERT INTO User(userId,fullName,email,phone,imagePath,academicId,departmentName,facultyName,universityName,level)'
+                  'VALUES("${studentInfoModel!.userId}","${studentInfoModel!.fullName}",'
+                  '"${studentInfoModel!.email}","${studentInfoModel!.phone}",'
+                  '"${studentInfoModel!.imagePath}","${studentInfoModel!.academicId}",'
+                  '"${studentInfoModel!.departmentName}","${studentInfoModel!.facultyName}",'
+                  '"${studentInfoModel!.universityName}","${studentInfoModel!.level}")');
+        });
+        emit(InsertToDataBase_state());
+        GetFromDataBase(database,'User');
       });
-    });
-    emit(InsertToDataBase_state());
-    GetFromDataBase(database, tablename);
+
+    }
 
   }
 
-  CurrentStudentInfoModel usermodel=new CurrentStudentInfoModel();
+  Future InsertToDataBase_News_Table() async {
+    if(true){
+      print('Start Insert into News table _________________________________');
+      await database?.rawDelete('DELETE FROM News').then((value) {
+        allNewsModel.forEach((element) {
+          database?.transaction((txn) async {
+            await txn.rawInsert(
+                'INSERT INTO News(newsId,content,filePath,facultyId,createdAt,userId,userName)'
+                    'VALUES(${element.newsId},"${element.content}","${element.filePath}","${element.facultyId}","${element.createdAt}","${element.userId}","${element.userName}")');
+
+          });
+        });
+        emit(InsertToDataBase_state());
+        GetFromDataBase(database,'News');
+      });
+
+    }
+
+
+  }
+
+  CurrentStudentInfoModel usermodel= CurrentStudentInfoModel();
   List<GetAllNewsModel> newsmodel=[];
   void GetFromDataBase(database, String tablename) {
     database?.rawQuery('SELECT * FROM $tablename').then((value) {
       if (tablename == User_Table) {
-        usermodel=new CurrentStudentInfoModel();
+        usermodel= CurrentStudentInfoModel();
         usermodel = CurrentStudentInfoModel.fromJson(value[0]);
         print('User_Table_________________________________________');
         print(value);
@@ -959,9 +984,10 @@ class App_cubit extends Cubit<App_state> {
           newsmodel.add(GetAllNewsModel.fromJson(element));
         });
 
-        print('News_Table_________________________________________');
-        print(value);
+        print('News_Table_from get_________________________________________');
+        // print(value);
         print('-----------------------------------------------------');
+        print(newsmodel.length);
         newsmodel.forEach((element) {
           print(element.userName);
         });
@@ -971,9 +997,6 @@ class App_cubit extends Cubit<App_state> {
     });
     emit(GetFromDataBase_state());
   }
-
-
-
 
 
 }

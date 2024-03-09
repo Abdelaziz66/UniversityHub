@@ -40,10 +40,11 @@ class Dashboard_Screen extends StatelessWidget {
        ];
         List<_SalesData> data = [
           _SalesData('Jan', 35),
-          _SalesData('Feb', 28),
+          _SalesData('Feb', 25),
           _SalesData('Mar', 34),
-          _SalesData('Apr', 32),
-          _SalesData('May', 40)
+          _SalesData('Apr', 25),
+          _SalesData('May', 40),
+
         ];
         List<Widget> listwidget = [
           Padding(
@@ -641,7 +642,7 @@ class Dashboard_Screen extends StatelessWidget {
                                           decoration: const BoxDecoration(
                                             shape: BoxShape.circle,
                                           ),
-                                          child: const Stack(
+                                          child:  Stack(
                                             alignment:
                                             AlignmentDirectional.bottomEnd,
                                             children: [
@@ -656,7 +657,7 @@ class Dashboard_Screen extends StatelessWidget {
                                                 EdgeInsets.all(7.0),
                                                 child: CircleAvatar(
                                                   radius: 8,
-                                                  backgroundColor: Colors.green,
+                                                  backgroundColor: cubit.connnection == true? Colors.green:Colors.red,
                                                 ),
                                               ),
                                             ],
@@ -714,11 +715,13 @@ class Dashboard_Screen extends StatelessWidget {
                                           // Chart title
                                           title: ChartTitle(text: 'Your Activity'),
                                           // Enable legend
-                                          legend: Legend(isVisible: true),
+                                          legend: Legend(isVisible: true,),
                                           // Enable tooltip
                                           tooltipBehavior: TooltipBehavior(enable: true),
+
                                           series: <CartesianSeries<_SalesData, String>>[
                                             LineSeries<_SalesData, String>(
+
                                                 color: Colors.teal,
                                                 markerSettings:MarkerSettings(color: Colors.cyan,width: 0,height: 0,isVisible: true) ,
                                                 dataSource: data,

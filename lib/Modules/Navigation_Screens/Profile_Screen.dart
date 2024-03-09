@@ -1,9 +1,11 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'package:university_hup/Modules/LandScape/ResetPasswoed/ForgetPasswordScreen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Drawer/Edit_Profile_Screen.dart';
@@ -22,9 +24,17 @@ class Profile_screen extends StatelessWidget {
     return BlocConsumer<App_cubit, App_state>(
       listener: (context, state) => {},
       builder: (context, state) {
+        List<_SalesData> data = [
+          _SalesData('Jan', 35),
+          _SalesData('Feb', 25),
+          _SalesData('Mar', 34),
+          _SalesData('Apr', 25),
+          _SalesData('May', 40),
+
+        ];
         App_cubit cubit = App_cubit.get(context);
         return ConditionalBuilder(
-          condition:cubit.studentInfoModel!=null,
+          condition:cubit.studentInfoModel!=null||cubit.usermodel!=null,
           builder: (context) => Column(
             children: [
               const SizedBox(
@@ -82,7 +92,7 @@ class Profile_screen extends StatelessWidget {
                                                           radius: 120,
                                                           backgroundColor: Colors.white,
                                                           backgroundImage:
-                                                          NetworkImage('${cubit.studentInfoModel?.imagePath}'
+                                                          NetworkImage('${cubit.connnection==true?cubit.studentInfoModel!.imagePath:cubit.usermodel!.imagePath}'
                                                             //'assets/images/profile.png'
                                                           ),
                                                         ),
@@ -136,7 +146,7 @@ class Profile_screen extends StatelessWidget {
                                   radius: 45,
                                   backgroundColor: Colors.white,
                                   backgroundImage:
-                                      NetworkImage('${cubit.studentInfoModel?.imagePath}'
+                                      NetworkImage('${cubit.connnection==true?cubit.studentInfoModel!.imagePath:cubit.usermodel!.imagePath}'
                                           //'assets/images/profile.png'
                                         ),
                                 ),
@@ -163,7 +173,7 @@ class Profile_screen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                '${cubit.studentInfoModel?.departmentName}',
+                                '${cubit.connnection==true?cubit.studentInfoModel!.departmentName:cubit.usermodel!.departmentName}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   fontSize: 20,
@@ -189,7 +199,7 @@ class Profile_screen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                '${cubit.studentInfoModel?.level}',
+                                '${cubit.connnection==true?cubit.studentInfoModel!.level:cubit.usermodel!.level}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   fontSize: 20,
@@ -257,7 +267,7 @@ class Profile_screen extends StatelessWidget {
                         child: Container(
                           width: 300,
                           child: Text(
-                            '${cubit.studentInfoModel?.fullName}',
+                            '${cubit.connnection==true?cubit.studentInfoModel!.fullName:cubit.usermodel!.fullName}',
                             maxLines: 1,
                             style: TextStyle(
 
@@ -368,7 +378,7 @@ class Profile_screen extends StatelessWidget {
                                                           child: Column(
                                                             children: [
                                                               Text(
-                                                                '${cubit.studentInfoModel?.facultyName} - ${cubit.studentInfoModel?.universityName}',
+                                                                '${cubit.connnection==true?cubit.studentInfoModel!.facultyName:cubit.usermodel!.facultyName} - ${cubit.connnection==true?cubit.studentInfoModel!.universityName:cubit.usermodel!.universityName}',
                                                                 style:
                                                                 TextStyle(
                                                                   fontWeight:
@@ -432,7 +442,7 @@ class Profile_screen extends StatelessWidget {
                                                                           Container(
                                                                             width: 130,
                                                                             child: Text(
-                                                                              '${cubit.studentInfoModel?.fullName}',
+                                                                              '${cubit.connnection==true?cubit.studentInfoModel!.fullName:cubit.usermodel!.fullName}',
                                                                               maxLines: 1,
                                                                               style: TextStyle(
                                                                                 overflow: TextOverflow.ellipsis,
@@ -456,7 +466,7 @@ class Profile_screen extends StatelessWidget {
                                                                             ),
                                                                           ),
                                                                           Text(
-                                                                            '${cubit.studentInfoModel?.academicId}',
+                                                                            '${cubit.connnection==true?cubit.studentInfoModel!.academicId:cubit.usermodel!.academicId}',
                                                                             style: TextStyle(
                                                                               fontWeight: FontWeight.w500,
                                                                               fontSize: 14,
@@ -481,7 +491,7 @@ class Profile_screen extends StatelessWidget {
                                                                             ),
                                                                           ),
                                                                           Text(
-                                                                            '${cubit.studentInfoModel?.level} - ${cubit.studentInfoModel?.departmentName}',
+                                                                            '${cubit.connnection==true?cubit.studentInfoModel!.level:cubit.usermodel!.level} - ${cubit.connnection==true?cubit.studentInfoModel!.departmentName:cubit.usermodel!.departmentName}',
                                                                             style: TextStyle(
                                                                               fontWeight: FontWeight.w500,
                                                                               fontSize: 14,
@@ -505,7 +515,7 @@ class Profile_screen extends StatelessWidget {
                                                                             ),
                                                                           ),
                                                                           Text(
-                                                                            '${cubit.studentInfoModel?.phone}',
+                                                                            '${cubit.connnection==true?cubit.studentInfoModel!.phone:cubit.usermodel!.phone}',
                                                                             maxLines: 1,
                                                                             style: TextStyle(
                                                                               overflow:TextOverflow.ellipsis,
@@ -650,7 +660,49 @@ class Profile_screen extends StatelessWidget {
                   fallback: (context) => const SizedBox(
                         height: 0,
                       )),
-              SizedBox(height: 15,),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Container(
+                  height: 180,
+                  child: GlassBoxWithBorder_Gradiant2(
+                      widget: Container(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            child: SfCartesianChart(
+                                primaryXAxis: CategoryAxis(),
+                                // Chart title
+                                title: ChartTitle(text: 'Your Activity'),
+                                // Enable legend
+                                legend: Legend(isVisible: true,),
+                                // Enable tooltip
+                                tooltipBehavior: TooltipBehavior(enable: true),
+
+                                series: <CartesianSeries<_SalesData, String>>[
+                                  LineSeries<_SalesData, String>(
+
+                                      color: Colors.teal,
+                                      markerSettings:MarkerSettings(color: Colors.cyan,width: 0,height: 0,isVisible: true) ,
+                                      dataSource: data,
+                                      xValueMapper: (_SalesData sales, _) => sales.year,
+                                      yValueMapper: (_SalesData sales, _) => sales.sales,
+                                      name: 'Active',
+                                      // Enable data label
+                                      dataLabelSettings: DataLabelSettings(isVisible: true))
+                                ]),
+                          ),
+                        ),
+                      ),
+                      BorderWidth: .5,
+                      BorderColor: Colors.black.withOpacity(.7),
+
+                      color: Colors.white.withOpacity(.2),
+                      borderRadius: 20,
+                      x: 0,
+                      y: 0),
+                ),
+              ),
 
               // Padding(
               //   padding: const EdgeInsets.symmetric(
@@ -712,4 +764,10 @@ class Profile_screen extends StatelessWidget {
       },
     );
   }
+}
+class _SalesData {
+  _SalesData(this.year, this.sales);
+
+  final String year;
+  final double sales;
 }
