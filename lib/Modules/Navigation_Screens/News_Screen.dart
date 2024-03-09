@@ -1,5 +1,3 @@
-
-
 import 'dart:ui';
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -14,19 +12,20 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
-
 class Home_screen extends StatelessWidget {
-  const Home_screen({Key? key}) : super(key: key);
+  Home_screen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit, App_state>(
-      listener: (context, state) => {},
+      listener: (context, state) {
+
+      },
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
-        List<bool> image = [true, false,true];
-        List<GetAllNewsModel>news=cubit.allNewsModel;
-        return  Scaffold(
+        List<bool> image = [true, false, true];
+        List<GetAllNewsModel> news = cubit.allNewsModel;
+        return Scaffold(
           backgroundColor: Colors.transparent,
           body: Stack(
             children: [
@@ -43,9 +42,9 @@ class Home_screen extends StatelessWidget {
               ),
               Positioned(
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 120, sigmaY: 120),
-                    child: const SizedBox(),
-                  )),
+                filter: ImageFilter.blur(sigmaX: 120, sigmaY: 120),
+                child: const SizedBox(),
+              )),
               SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 50.0),
@@ -56,7 +55,8 @@ class Home_screen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 25.0, vertical: 6),
                           child: Container(
                             width: double.infinity,
                             child: Column(
@@ -65,15 +65,18 @@ class Home_screen extends StatelessWidget {
                                   children: [
                                     Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          rol=='Student'?'News & events !':'News & events !',
-                                          style:Theme.of(context).textTheme.bodyText1?.copyWith(
-                                              fontSize: 23
-                                          ),
+                                          rol == 'Student'
+                                              ? 'News & events !'
+                                              : 'News & events !',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              ?.copyWith(fontSize: 23),
 
                                           // TextStyle(
                                           //   fontWeight: FontWeight.w700,
@@ -86,11 +89,10 @@ class Home_screen extends StatelessWidget {
                                         // ),
                                         Text(
                                           'Time Line Here.',
-                                          style:Theme.of(context).textTheme.subtitle1?.copyWith(
-                                              fontSize: 18
-
-                                          ),
-
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1
+                                              ?.copyWith(fontSize: 18),
 
                                           // TextStyle(
                                           //   // fontWeight: FontWeight.w800,
@@ -103,18 +105,17 @@ class Home_screen extends StatelessWidget {
                                       ],
                                     ),
                                     // const Spacer(),
-                                    SizedBox(width: 40,),
+                                    SizedBox(
+                                      width: 40,
+                                    ),
 
                                     Expanded(
                                       child: Container(
                                         height: 100,
                                         width: 100,
-                                        child:
-                                        Image.asset(
+                                        child: Image.asset(
                                           'assets/images/n7.png',
-
                                         ),
-
                                       ),
                                     ),
                                     // Container(
@@ -148,22 +149,53 @@ class Home_screen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        ListView.separated(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
+                        ConditionalBuilder(
+                          condition: cubit.connnection,
+                          builder: (context) {
+                            print('Display online list');
+                            return  ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
 
-                          // physics: ,
-                          itemBuilder: (context, index) => Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Post(image: image[index],context: context,news:cubit.connnection==true? news[index]:cubit.newsmodel[index]),
-                          ),
-                          separatorBuilder: (context, index) => Container(
-                            height: 0,
-                            color: Colors.transparent,
-                          ),
-                          itemCount:news.length,
-                          // itemCount:cubit.connnection==true? news.length:cubit.newsmodel.length,
+                              // physics: ,
+                              itemBuilder: (context, index) => Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Post(
+                                    image: image[index],
+                                    context: context,
+                                    news: news[index]),
+                              ),
+                              separatorBuilder: (context, index) => Container(
+                                height: 0,
+                                color: Colors.transparent,
+                              ),
+                              itemCount: news.length,
+                              // itemCount:connection==true? news.length:cubit.newsmodel.length,
+                            );
+        },
+                          fallback: (context) {
+                            print('Display offline list');
+                            return ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+
+                              // physics: ,
+                              itemBuilder: (context, index) => Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Post(
+                                    image: image[index],
+                                    context: context,
+                                    news: cubit.newsmodel[index]),
+                              ),
+                              separatorBuilder: (context, index) => Container(
+                                height: 0,
+                                color: Colors.transparent,
+                              ),
+                              itemCount: cubit.newsmodel.length,
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -177,4 +209,3 @@ class Home_screen extends StatelessWidget {
     );
   }
 }
-

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:university_hup/Modules/LandScape/LandScape/LandScape_Screen.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
 
@@ -31,7 +30,7 @@ void main() {
     SystemUiOverlay.top,
   ]);
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
+    const SystemUiOverlayStyle(
       systemStatusBarContrastEnforced: false,
       statusBarColor: Colors.transparent, // status bar color
       statusBarIconBrightness: Brightness.dark,
@@ -60,8 +59,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => App_cubit()..CreateDateBase()
-            ..connection_Function()
-            ..GetAllNews(),
+            ..connection_Function(),
+
         ),
       ],
       child: BlocConsumer<App_cubit, App_state>(
@@ -111,7 +110,7 @@ class MyApp extends StatelessWidget {
                 //   }
               },
           builder: (context, state) {
-            App_cubit cubit = App_cubit.get(context);
+            // App_cubit cubit = App_cubit.get(context);
             if (state is Connection_success_State) {
               // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               //   content: Text('Connected'),backgroundColor:Colors.teal ,width: 50,

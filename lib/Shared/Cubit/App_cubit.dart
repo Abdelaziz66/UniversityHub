@@ -169,7 +169,7 @@ class App_cubit extends Cubit<App_state> {
   List<Widget> Nav_Bar_Items_List() {
     return [
       const Dashboard_Screen(),
-      const Home_screen(),
+       Home_screen(),
       STU_Lecture_Screen(),
       const Calendar_screen(),
       const Profile_screen()
@@ -445,37 +445,38 @@ class App_cubit extends Cubit<App_state> {
   }
 
   CurrentStudentInfoModel? studentInfoModel;
-  void GetCurrentStudenInfo(
+  Future<void> GetCurrentStudenInfo(
       //  required token,
-      ) {
-    if (studentInfoModel == null) {
-      emit(Get_STU_Info_LoadingState());
-      Dio_Helper.GetData(
-        url: STU_INFO,
-        token: Tokenn,
-      ).then((value) {
-        if (value.statusCode == 200) {
-          print('get Student inf true');
-          studentInfoModel = CurrentStudentInfoModel.fromJson(value.data);
-          print(studentInfoModel?.facultyName);
-          emit(Get_STU_Info_SuccessState());
-        }
-      }).then((value){
-        InsertToDataBase_User_Table();
-      }).catchError((error) {
-        emit(Get_STU_Info_ErrorState(error.toString()));
-        print(error.toString());
-      });
-    }
+      ) async {
+    emit(Get_STU_Info_LoadingState());
+   await Dio_Helper.GetData(
+      url: STU_INFO,
+      token: Tokenn,
+    ).then((value) {
+      if (value.statusCode == 200) {
+        print('get Student inf true');
+        studentInfoModel = CurrentStudentInfoModel.fromJson(value.data);
+        print(studentInfoModel?.facultyName);
+        emit(Get_STU_Info_SuccessState());
+      }
+    }).catchError((error) {
+      emit(Get_STU_Info_ErrorState(error.toString()));
+      print(error.toString());
+    });
+    InsertToDataBase_User_Table();
   }
 
   //------------------------Get all news ---------------------
   List<GetAllNewsModel> allNewsModel = [];
 
-  void GetAllNews() {
+  Future<void> GetAllNews() async {
+    // print('start get news from api ');
+    print(allNewsModel.length );
+    allNewsModel=[];
     if (allNewsModel.isEmpty) {
+      // print('start get news from api -->');
       emit(Get_All_NewsLoadingState());
-      Dio_Helper.GetData(url: NEWS).then((value) {
+     await Dio_Helper.GetData(url: NEWS).then((value) {
         if (value.statusCode == 200) {
           // print('git news success');
           List Json = value.data;
@@ -488,14 +489,16 @@ class App_cubit extends Cubit<App_state> {
           // print('content 1------------: ${element.content}');
         });
 
-      }).then((value){
-        InsertToDataBase_News_Table();
+
       }).catchError((error) {
         emit(Get_All_NewsErrorState(error.toString()));
 
         print(error.toString());
       });
+      InsertToDataBase_News_Table();
+
     }
+
   }
 
   List<Stu_GetAllCoursesModel> stuAllCoursesModel = [];
@@ -832,7 +835,7 @@ class App_cubit extends Cubit<App_state> {
           for (var element in Json) {
             courseGradesModel.add(GetCourseGradesModel.fromJson(element));
           }
-          print('Get course grades successfull');
+          print('Get course grades successful');
           print((courseGradesModel.length));
           courseGradesModel.forEach((element) {
             print(element.title);
@@ -859,8 +862,10 @@ class App_cubit extends Cubit<App_state> {
           print('********************************************');
           print('internet connected! :)');
           print('********************************************');
+
+          GetCurrentStudenInfo();
+          GetAllNews();
           connnection=true;
-          print(connnection);
           emit(Connection_success_State());
           break;
 
@@ -868,11 +873,7 @@ class App_cubit extends Cubit<App_state> {
           print('********************************************');
           print('No internet :( ');
           print('********************************************');
-
-          // InsertToDataBase_User_Table();
-          // InsertToDataBase_News_Table();
           connnection=false;
-          print(connnection);
           emit(Connection_failed_State());
           break;
       }
@@ -944,7 +945,7 @@ class App_cubit extends Cubit<App_state> {
 
   Future InsertToDataBase_News_Table() async {
     if(true){
-      print('Start Insert into News table _________________________________');
+      // print('Start Insert into News table _________________________________');
       await database?.rawDelete('DELETE FROM News').then((value) {
         allNewsModel.forEach((element) {
           database?.transaction((txn) async {
@@ -970,12 +971,13 @@ class App_cubit extends Cubit<App_state> {
       if (tablename == User_Table) {
         usermodel= CurrentStudentInfoModel();
         usermodel = CurrentStudentInfoModel.fromJson(value[0]);
-        print('User_Table_________________________________________');
-        print(value);
-        print('-----------------------------------------------------');
-        print(usermodel);
         print('__________________________________________________________________________________');
-
+        print('User_Table_from get_________________________________________');
+        // print(value);
+        print('-----------------------------------------------------');
+        print(studentInfoModel!.universityName);
+        print(usermodel.universityName);
+        print('__________________________________________________________________________________');
 
       }
       else if(tablename == News_Table){
@@ -984,14 +986,15 @@ class App_cubit extends Cubit<App_state> {
           newsmodel.add(GetAllNewsModel.fromJson(element));
         });
 
-        print('News_Table_from get_________________________________________');
-        // print(value);
-        print('-----------------------------------------------------');
-        print(newsmodel.length);
-        newsmodel.forEach((element) {
-          print(element.userName);
-        });
-        print('__________________________________________________________________________________');
+        // print('News_Table_from get_________________________________________');
+        // // print(value);
+        // print('-----------------------------------------------------');
+        // print(allNewsModel.length);
+        // print(newsmodel.length);
+        // newsmodel.forEach((element) {
+        //   print(element.userName);
+        // });
+        // print('__________________________________________________________________________________');
 
       }
     });
