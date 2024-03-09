@@ -34,7 +34,8 @@ class Profile_screen extends StatelessWidget {
         ];
         App_cubit cubit = App_cubit.get(context);
         return ConditionalBuilder(
-          condition:cubit.studentInfoModel!=null||cubit.usermodel!=null,
+          // condition:true,
+          condition:cubit.studentInfoModel!=null&&cubit.connnection==true||cubit.usermodel.fullName!=null&&cubit.connnection==false,
           builder: (context) => Column(
             children: [
               const SizedBox(
@@ -199,7 +200,7 @@ class Profile_screen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                '${cubit.connnection==true?cubit.studentInfoModel!.level:cubit.usermodel!.level}',
+                                '${cubit.connnection==true?cubit.studentInfoModel!.level:cubit.usermodel.level}',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   fontSize: 20,

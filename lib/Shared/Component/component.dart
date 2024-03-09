@@ -540,11 +540,12 @@ Widget Post({
                             width: double.infinity,
                             height: 300,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.deepPurple[200],
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.blueGrey.withOpacity(.2),
                               image: DecorationImage(
                                 image: NetworkImage('${news.filePath}'),
                                 fit: BoxFit.cover,
+
                               ),
                             ),
                           ),
