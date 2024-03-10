@@ -27,6 +27,7 @@ class Calendar_screen extends StatelessWidget {
     return BlocConsumer<App_cubit, App_state>(
       listener: (context, state) => {},
       builder: (context, state) {
+        int selectedIndex=0;
        bool isvisbile=false;
        var startDate;
        var endDate;
@@ -368,15 +369,19 @@ class Calendar_screen extends StatelessWidget {
                           // physics: ,
                           itemBuilder: (context, index) => InkWell(
                             onTap: (){
-                              cubit.GetStuCalenderDayEvent(
-                                start: '2024-03-07',
-                                end: '2024-03-08'
-                              );
+                              cubit.changeSelectedIndex_Calender(index);
+                              //cubit.GetStuCalenderDayEvent(
+                              //   start: '2024-03-07',
+                              //   end: '2024-03-08'
+                              // );
+                              print(cubit.selectedIndex);
                             },
                             child: Calender_Item(
+                              index: index,
                               Calender_Number: Calender_Number[index],
                               Calender_Day: Calender_Day[index],
-                              iselected: Calender_Selected[index],
+                              selectedIndex: cubit.selectedIndex,
+                             // iselected: Calender_Selected[index],
                             ),
                           ),
                           separatorBuilder: (context, index) => Container(

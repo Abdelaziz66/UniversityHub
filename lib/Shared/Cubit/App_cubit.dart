@@ -960,7 +960,12 @@ class App_cubit extends Cubit<App_state> {
     // courseGradesModel=[];
 
   }
-
+//-----------change selected index--------
+  int selectedIndex=0;
+  void changeSelectedIndex_Calender(int index){
+    selectedIndex=index;
+    emit(ChangeCalenderIndexState());
+  }
 
 
 
