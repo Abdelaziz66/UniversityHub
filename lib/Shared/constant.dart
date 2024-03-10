@@ -38,3 +38,7 @@ String GETCALENDER='Calendar/GetAllCalendar';
 
 
 String Token='';
+
+String? token;
+Widget? StartWidget;
+

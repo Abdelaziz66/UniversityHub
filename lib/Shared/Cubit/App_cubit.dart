@@ -46,6 +46,29 @@ class App_cubit extends Cubit<App_state> {
 
 // Abdelaziz  --------------------------------------------------------------------
 
+  int Nav_Bar_index = 0;
+  void Nav_Bar_Function({required int index}) {
+    if (index == 2) {
+      StuGetAllCourses(
+        token: Tokenn,
+      );
+    } else if (index == 4) {
+      // GetCurrentStudenInfo();
+    }
+    else if(index == 1){
+      // print('News_Table_________________________________________');
+      // print(newsmodel.length);
+      // print('-----------------------------------------------------');
+      // newsmodel.forEach((element) {
+      //   print(element.userName);
+      // });
+      // print('__________________________________________________________________________________');
+    }
+    Nav_Bar_index = index;
+    emit(Nav_Bar_state());
+  }
+
+
   int more = 2;
   void addmore() {
     if (more == 4) {
@@ -177,27 +200,6 @@ class App_cubit extends Cubit<App_state> {
     ];
   }
 
-  int Nav_Bar_index = 0;
-  void Nav_Bar_Function({required int index}) {
-    if (index == 2) {
-      StuGetAllCourses(
-        token: Tokenn,
-      );
-    } else if (index == 4) {
-      GetCurrentStudenInfo();
-    }
-    else if(index == 1){
-      // print('News_Table_________________________________________');
-      // print(newsmodel.length);
-      // print('-----------------------------------------------------');
-      // newsmodel.forEach((element) {
-      //   print(element.userName);
-      // });
-      // print('__________________________________________________________________________________');
-    }
-    Nav_Bar_index = index;
-    emit(Nav_Bar_state());
-  }
 
 
 
@@ -450,6 +452,8 @@ class App_cubit extends Cubit<App_state> {
       Tokenn = stu_login_Model?.token;
       print('TOKENN:${Tokenn}');
       emit(STU_LoginSuccessState(stu_login_Model!));
+      GetCurrentStudenInfo();
+      GetAllNews();
     }).catchError((Error) {
       print(Error.toString());
       emit(STU_LoginErrorState(Error.toString()));
@@ -988,9 +992,11 @@ class App_cubit extends Cubit<App_state> {
           print('********************************************');
           print('internet connected! :)');
           print('********************************************');
+          if(Tokenn!=null){
+            GetCurrentStudenInfo();
+            GetAllNews();
+          }
 
-          GetCurrentStudenInfo();
-          GetAllNews();
           connnection=true;
           emit(Connection_success_State());
           break;

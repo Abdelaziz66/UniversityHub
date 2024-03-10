@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:university_hup/Layout/LayoutScreen.dart';
 import 'package:university_hup/Modules/LandScape/LandScape/LandScape_Screen.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
+import 'package:university_hup/Shared/Local/Cache_helper.dart';
+import 'package:university_hup/Shared/constant.dart';
 
 import 'package:university_hup/Shared/remote/DioHelper.dart';
 import 'Shared/Cubit/App_cubit.dart';
@@ -24,7 +27,7 @@ import 'Shared/Style/App_Style.dart';
 // from alfy
 // base url https://nabilramadan.bsite.net/api
 
-void main() {
+void main()  {
   // new branch
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
     SystemUiOverlay.top,
@@ -43,7 +46,19 @@ void main() {
   );
 
   Bloc.observer = MyBlocObserver();
-
+  CachHelper.init();
+  token = CachHelper.getData(key: 'token');
+  print('++++++++++++++++++++++++++++++++++');
+  print('++++++++++++++++++++++++++++++++++');
+  print(token);
+  print('++++++++++++++++++++++++++++++++++');
+  print('++++++++++++++++++++++++++++++++++');
+  if (token == null) {
+    StartWidget = LandScape_Screen();
+  }
+  else{
+    StartWidget=Layout_Screen();
+  }
   runApp(const MyApp());
 
   Dio_Helper.init();
@@ -140,7 +155,7 @@ class MyApp extends StatelessWidget {
               themeMode: ThemeMode.light,
 
 // home:StartWidget,
-              home: LandScape_Screen(),
+              home: StartWidget,
             );
           }),
     );
