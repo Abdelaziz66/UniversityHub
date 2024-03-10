@@ -32,6 +32,7 @@ import 'package:university_hup/Modules/Student/Student_Notification/Quizzes_Scre
 import 'package:university_hup/Modules/Student/Student_Notification/UpcomingCourse_Screen.dart';
 import 'package:university_hup/Shared/constant.dart';
 import 'package:university_hup/Shared/remote/DioHelper.dart';
+import '../../Models/STU_Model/Calender_Model/CalenderMode.dart';
 import '../../Models/STU_Model/CourseModel/Stu_Course_Grades_model.dart';
 import '../../Models/STU_Model/User_Model/CurrentStudentInfoModel.dart';
 
@@ -171,7 +172,7 @@ class App_cubit extends Cubit<App_state> {
       const Dashboard_Screen(),
        Home_screen(),
       STU_Lecture_Screen(),
-      const Calendar_screen(),
+       Calendar_screen(),
       const Profile_screen()
     ];
   }
@@ -197,6 +198,17 @@ class App_cubit extends Cubit<App_state> {
     Nav_Bar_index = index;
     emit(Nav_Bar_state());
   }
+
+
+
+  //-------floating action visibility -----------------
+  bool visiblity=false;
+  void ChangeVisibility(){
+    visiblity=!visiblity;
+    emit(ChangeFloatingVisibility_State());
+  }
+
+
 
 // Navigation Bar End Here >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 // Doctor And Engineer Start Here >>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -850,6 +862,120 @@ class App_cubit extends Cubit<App_state> {
     }
     isCycleIdChange = false;
   }
+  //---------------Calender here ----------------
+
+
+  void AddEventToCalender({
+    required startDate,
+    required endDate,
+    required eventBody,
+}) {
+    print(' start ${startDate.toString()}');
+    print('end $endDate');
+    emit(Stu_Add_Event_LoadingState());
+    Dio_Helper.PostData(token: Tokenn, url: ADDEVENT, data: {
+      'startDate': startDate.toString(),//'2024-03-28T04:12:00.000'
+      'endDate': endDate.toString(),
+      'body': 'ffff',
+    }).then((value) {
+      if (value.statusCode == 200) {
+        print('Add Event true');
+        String json = value.data;
+
+        print(json);
+        flutterToast(msg: '${json}', backColor: Colors.green);
+        emit(Stu_Add_Event_SuccessState());
+      }
+    }).catchError((Error) {
+      print(Error.toString());
+      emit(Stu_Add_Event_ErrorState(Error.toString()));
+    });
+  }
+
+
+
+//---------Get All Events ------------------
+  List<GetAllCalenderEvents>getAllCalenderEvents=[];
+  void GetStuCalenderEvents() {
+    // courseGradesModel=[];
+      emit(Stu_Get_Calener_Events_LoadingState());
+      Dio_Helper.GetData(
+        url: GETCALENDER,
+        token: Tokenn,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          List Json = value.data;
+          for (var element in Json) {
+            getAllCalenderEvents.add(GetAllCalenderEvents.fromJson(element));
+          }
+          print('Get Calender event successful');
+          print((courseGradesModel.length));
+          getAllCalenderEvents.forEach((element) {
+            print(element.body);
+          });
+          emit(Stu_Get_Calener_Events_SuccessState());
+        }
+      }).catchError((error) {
+        print(error);
+        emit(Stu_Get_Calener_Events_ErrorState(error));
+      });
+      // courseGradesModel=[];
+
+  }
+
+
+  List<GetCalenderDayEventModel>getAllCalenderDayEvent=[];
+  void GetStuCalenderDayEvent(
+  {
+    required start,
+    required end,
+}
+      ) {
+    // courseGradesModel=[];
+    emit(Stu_Get_Calener_Day_Events_LoadingState());
+    Dio_Helper.GetData(
+      url: 'Calendar/GetByStartAndEnd?start=${start}&end=${end}',
+      token: Tokenn,
+    ).then((value) {
+      if (value.statusCode == 200) {
+        List Json = value.data;
+        for (var element in Json) {
+          getAllCalenderDayEvent.add(GetCalenderDayEventModel.fromJson(element));
+        }
+        print('Get Calender Day even successful');
+        print((courseGradesModel.length));
+        getAllCalenderDayEvent.forEach((element) {
+          print(element.body);
+        });
+        emit(Stu_Get_Calener_Day_Events_SuccessState());
+      }
+    }).catchError((error) {
+      print(error);
+      emit(Stu_Get_Calener_Day_Events_ErrorState(error));
+    });
+    // courseGradesModel=[];
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // connection here ------------------------------------------------------------
 

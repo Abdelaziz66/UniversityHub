@@ -34,6 +34,11 @@ class stateforDrawer extends App_state{}
 //instructor cources state :
 class ChangeBottomSheet_State extends App_state{}
 class ChangeListVisible_State extends App_state{}
+class ChangeFloatingVisibility_State extends App_state{}
+
+
+
+
 
 class AddFile_Loading_State extends App_state{}
 class AddFile_Success_State extends App_state{}
@@ -285,16 +290,63 @@ class Stu_Get_Course_Grades_ErrorState extends App_state {
   String? error;
   Stu_Get_Course_Grades_ErrorState(this.error);
 }
+//------------------Calender----------------
+class Stu_Add_Event_LoadingState extends App_state {}
 
+class Stu_Add_Event_Answer_SuccessState extends App_state {}
+
+class Stu_Add_Event_SuccessState extends App_state {
+  //List<GetQuizDataModel> quizDatamodel=[];
+  Stu_Add_Event_SuccessState();
+}
+
+class Stu_Add_Event_ErrorState extends App_state {
+  String? error;
+  Stu_Add_Event_ErrorState(this.error);
+}
+
+//------------Get calender event--------
+class Stu_Get_Calener_Events_LoadingState extends App_state {}
+
+class Stu_Get_Calener_Events_SuccessState extends App_state {
+  Stu_Get_Calener_Events_SuccessState();
+
+}
+
+class Stu_Get_Calener_Events_ErrorState extends App_state {
+  String? error;
+  Stu_Get_Calener_Events_ErrorState(this.error);
+}
+// -----get event by start  date ------------
+class Stu_Get_Calener_Day_Events_LoadingState extends App_state {}
+
+class Stu_Get_Calener_Day_Events_SuccessState extends App_state {
+  Stu_Get_Calener_Day_Events_SuccessState();
+
+}
+
+class Stu_Get_Calener_Day_Events_ErrorState extends App_state {
+  String? error;
+  Stu_Get_Calener_Day_Events_ErrorState(this.error);
+}
+
+
+
+
+
+
+//-----------------Connection---------
 class Connection_success_State extends App_state {
 
 
 }
 
 class Connection_failed_State extends App_state {
-
-
 }
+
+
+
+
 
 
 class CreateDateBase_state extends App_state{}
