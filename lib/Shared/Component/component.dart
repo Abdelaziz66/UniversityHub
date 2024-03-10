@@ -646,14 +646,17 @@ Widget Calender_Event({
 Widget Calender_Item(
         {required Calender_Number,
         required Calender_Day,
-        required bool iselected}) =>
+          required int selectedIndex,
+          int? index,
+        //required bool iselected
+        }) =>
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
       child: Container(
         alignment: AlignmentDirectional.center,
         width: 70,
         decoration: BoxDecoration(
-          color: iselected ? Colors.black.withOpacity(.2) : Colors.transparent,
+          color: selectedIndex==index ? Colors.black.withOpacity(.2) : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(
@@ -664,7 +667,7 @@ Widget Calender_Item(
             children: [
               Text('${Calender_Number}',
                   style: TextStyle(
-                      color: iselected
+                      color: selectedIndex==index
                           ? Colors.black.withOpacity(.9)
                           : Colors.black.withOpacity(.5),
                       fontWeight: FontWeight.w600,
@@ -674,7 +677,7 @@ Widget Calender_Item(
               ),
               Text('${Calender_Day}',
                   style: TextStyle(
-                      color: iselected
+                      color: selectedIndex==index
                           ? Colors.black.withOpacity(.9)
                           : Colors.black.withOpacity(.5),
                       fontWeight: FontWeight.w800,

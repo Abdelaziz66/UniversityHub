@@ -58,6 +58,8 @@ dependencies:
   pin_code_fields: ^8.0.1
   internet_connection_checker: ^1.0.0+1
   sqflite: ^2.3.2
+  flutter_datetime_picker_plus: ^2.1.0
+
 
 
 
