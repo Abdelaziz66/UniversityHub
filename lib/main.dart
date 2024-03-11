@@ -27,8 +27,10 @@ import 'Shared/Style/App_Style.dart';
 // from alfy
 // base url https://nabilramadan.bsite.net/api
 
-void main()  {
+Future<void> main()  async {
   // new branch
+  WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
     SystemUiOverlay.top,
   ]);
@@ -46,7 +48,7 @@ void main()  {
   );
 
   Bloc.observer = MyBlocObserver();
-  CachHelper.init();
+  await CachHelper.init();
   token = CachHelper.getData(key: 'token');
   print('++++++++++++++++++++++++++++++++++');
   print('++++++++++++++++++++++++++++++++++');
