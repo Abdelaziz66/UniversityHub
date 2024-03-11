@@ -2323,7 +2323,7 @@ Widget Build_STU_Quiz_Ques({
                 '${questions?.answers![index].text}',
                 //App_cubit.get(context).stu_Quiz_Ques_options[index],
                 style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
               value:questions?.answers![index].id,
               //App_cubit.get(context).allquizAnswers[qIndex],

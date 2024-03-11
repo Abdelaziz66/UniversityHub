@@ -146,10 +146,12 @@ class Profile_screen extends StatelessWidget {
 
                                   radius: 45,
                                   backgroundColor: Colors.white,
-                                  backgroundImage:
-                                      NetworkImage('${cubit.connnection==true?cubit.studentInfoModel!.imagePath:cubit.usermodel!.imagePath}'
-                                          //'assets/images/profile.png'
-                                        ),
+                                  backgroundImage:AssetImage('assets/images/profile.png'),
+                                      // NetworkImage('${cubit.connnection==true?cubit.studentInfoModel!
+                                      //     .imagePath:cubit.usermodel!.imagePath}'
+                                      //     // 'assets/images/profile.png'
+                                      //   ),
+
                                 ),
                               ),
                             ),
