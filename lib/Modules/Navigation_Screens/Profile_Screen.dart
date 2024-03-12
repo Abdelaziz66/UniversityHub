@@ -270,7 +270,7 @@ class Profile_screen extends StatelessWidget {
                         child: Container(
                           width: 300,
                           child: Text(
-                            '${cubit.connnection==true?cubit.studentInfoModel!.fullName:cubit.usermodel!.fullName}',
+                            '${cubit.connnection==true?cubit.studentInfoModel!.fullName:cubit.usermodel.fullName}',
                             maxLines: 1,
                             style: TextStyle(
 

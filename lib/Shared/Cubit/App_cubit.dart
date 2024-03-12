@@ -192,11 +192,12 @@ class App_cubit extends Cubit<App_state> {
 
   List<Widget> Nav_Bar_Items_List() {
     return [
+
       const Dashboard_Screen(),
        Home_screen(),
       STU_Lecture_Screen(),
        Calendar_screen(),
-      const Profile_screen()
+      const Profile_screen(),
     ];
   }
 
@@ -449,6 +450,7 @@ class App_cubit extends Cubit<App_state> {
       'password': password,
     }).then((value) {
       stu_login_Model = STU_Login_Model.fromJson(value.data);
+      token= stu_login_Model?.token;
       Tokenn = stu_login_Model?.token;
       print('TOKENN:${Tokenn}');
       emit(STU_LoginSuccessState(stu_login_Model!));
@@ -467,7 +469,7 @@ class App_cubit extends Cubit<App_state> {
     emit(Get_STU_Info_LoadingState());
    await Dio_Helper.GetData(
       url: STU_INFO,
-      token: Tokenn,
+      token: token,
     ).then((value) {
       if (value.statusCode == 200) {
         print('get Student inf true');
@@ -997,7 +999,10 @@ class App_cubit extends Cubit<App_state> {
           print('********************************************');
           print('internet connected! :)');
           print('********************************************');
-          if(Tokenn!=null){
+          if(token != null){
+            print('********************************************');
+            print('GetUserInfo & News After Connected :)');
+            print('********************************************');
             GetCurrentStudenInfo();
             GetAllNews();
           }
