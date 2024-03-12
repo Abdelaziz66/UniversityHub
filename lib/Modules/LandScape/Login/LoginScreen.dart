@@ -30,26 +30,26 @@ class _loginscreenState extends State<loginscreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit, App_state>(
       listener: (context, state) {
-       if(state is STU_LoginSuccessState) {
-           if(state.loginmodel != 401) {
-             CachHelper.saveData(key:'token', value:'${token}').then((value){
-               CachHelper.saveData(key:'rol', value:'${App_cubit.get(context).stu_login_Model!.userRole}').then((value){
-                 print(CachHelper.getData(key: 'token'));
-                 print(CachHelper.getData(key: 'rol'));
-                 NavigateAndFinish(context, Layout_Screen());
-                 flutterToast(msg: 'Login success ', backColor: Colors.green
-                 );
-               });
+        if(state is STU_LoginSuccessState) {
+          if(state.loginmodel != 401) {
+            CachHelper.saveData(key:'token', value:'${token}').then((value){
+              CachHelper.saveData(key:'rol', value:'${App_cubit.get(context).stu_login_Model!.userRole}').then((value){
+                print(CachHelper.getData(key: 'token'));
+                print(CachHelper.getData(key: 'rol'));
+                NavigateAndFinish(context, Layout_Screen());
+                flutterToast(msg: 'Login success ', backColor: Colors.green
+                );
+              });
 
-             });
+            });
 
-           }
+          }
           else{
-             flutterToast(msg: 'Login error ',
-               backColor: Colors.red,);
-          //
-           }
-       }
+            flutterToast(msg: 'Login error ',
+              backColor: Colors.red,);
+            //
+          }
+        }
 
       },
       builder: (context, state) {
@@ -188,11 +188,11 @@ class _loginscreenState extends State<loginscreen> {
                                     .textTheme
                                     .subtitle1
                                     ?.copyWith(fontSize: 20)
-                                // TextStyle(
-                                //   fontSize:25,
-                                //   color: Colors.black87,
-                                // ),
-                                ),
+                              // TextStyle(
+                              //   fontSize:25,
+                              //   color: Colors.black87,
+                              // ),
+                            ),
                             const SizedBox(
                               height: 30,
                             ),
@@ -206,7 +206,7 @@ class _loginscreenState extends State<loginscreen> {
                               ),
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: TextFormField(
                                   controller: emailcontroller,
                                   keyboardType: TextInputType.emailAddress,
@@ -254,7 +254,7 @@ class _loginscreenState extends State<loginscreen> {
                               ),
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: TextFormField(
                                   controller: passwordcontroller,
                                   keyboardType: TextInputType.visiblePassword,
@@ -391,16 +391,16 @@ class _loginscreenState extends State<loginscreen> {
                               condition: state is! STU_LoginLoadingState,
                               builder:(context)=> Default_Button(
                                 onPressed: () {
-                                 if (formkey.currentState!.validate()) {
-                                  cubit.UserLogin(
+                                  if (formkey.currentState!.validate()) {
+                                    cubit.UserLogin(
                                       email:
                                       'AbdulMajeedSallam@gmail.com',
-                                     // emailcontroller.text,
+                                      // emailcontroller.text,
                                       password:
                                       'P@ssw0rd',
                                       // passwordcontroller.text
-                                  );
-                                 }
+                                    );
+                                  }
                                 },
 
                                 text: 'Sign in',
