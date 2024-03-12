@@ -19,26 +19,30 @@ class CachHelper {
   //   return sharedPreferences?.getBool(key);
   // }
 
-  static Future<void> saveData(
+  static Future<bool?> saveData(
       {required String key, required var value}) async {
     if (value is String) {
-      print('aaaa');
-      await sharedPreferences?.setString(key, value);
+      return await sharedPreferences?.setString(key, value);
     }
     if (value is double) {
-       await sharedPreferences?.setDouble(key, value);
+      return await sharedPreferences?.setDouble(key, value);
     }
     if (value is int) {
-       await sharedPreferences?.setInt(key, value);
+      return await sharedPreferences?.setInt(key, value);
     }
-     await sharedPreferences?.setBool(key, value);
+    return await sharedPreferences?.setBool(key, value);
   }
+
+
 
   static dynamic getData({
     required String key,
   }) {
-    return sharedPreferences?.getString(key);
+    return sharedPreferences?.get(key);
   }
+
+
+
 
   static Future<bool?> removedata ( {required String key,})async{
     return await sharedPreferences?.remove(key);

@@ -28,9 +28,9 @@ import 'Shared/Style/App_Style.dart';
 // base url https://nabilramadan.bsite.net/api
 
 Future<void> main()  async {
+  // new branch
   WidgetsFlutterBinding.ensureInitialized();
 
-  // new branch
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
     SystemUiOverlay.top,
   ]);
@@ -48,13 +48,9 @@ Future<void> main()  async {
   );
 
   Bloc.observer = MyBlocObserver();
- await CachHelper.init();
+  await CachHelper.init();
   token = CachHelper.getData(key: 'token');
-  print('++++++++++++++++++++++++++++++++++');
-  print('++++++++++++++++++++++++++++++++++');
-  print(token);
-  print('++++++++++++++++++++++++++++++++++');
-  print('++++++++++++++++++++++++++++++++++');
+  rol= CachHelper.getData(key: 'rol');
   if (token == null) {
     StartWidget = LandScape_Screen();
   }
@@ -82,50 +78,50 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocConsumer<App_cubit, App_state>(
           listener: (context, state) => () {
-                // InternetConnectionChecker().onStatusChange.listen((state) {
-                //   switch (state) {
-                //     case InternetConnectionStatus.connected:
-                //       print('********************************************');
-                //       print('internet connected! :)');
-                //       print('********************************************');
-                //
-                //       break;
-                //
-                //     case InternetConnectionStatus.disconnected:
-                //       print('********************************************');
-                //       print('No internet :( ');
-                //       print('********************************************');
-                //
-                //       break;
-                //   }
-                // });
+            // InternetConnectionChecker().onStatusChange.listen((state) {
+            //   switch (state) {
+            //     case InternetConnectionStatus.connected:
+            //       print('********************************************');
+            //       print('internet connected! :)');
+            //       print('********************************************');
+            //
+            //       break;
+            //
+            //     case InternetConnectionStatus.disconnected:
+            //       print('********************************************');
+            //       print('No internet :( ');
+            //       print('********************************************');
+            //
+            //       break;
+            //   }
+            // });
 
 
-                // if (state is Connection_success_State)
-                //   {
-                //     print(
-                //         '******************* from main *************************'),
-                //     print('internet connected! :)'),
-                //     print(
-                //         '******************* from main *************************'),
-                //     flutterToast(
-                //       msg: 'Connected',
-                //       backColor: Colors.teal,
-                //     ),
-                //   },
-                // if (state is Connection_failed_State)
-                //   {
-                //     print(
-                //         '******************* from main *************************'),
-                //     print('internet disconnected! :)'),
-                //     print(
-                //         '******************* from main *************************'),
-                //     flutterToast(
-                //       msg: 'Disconnected',
-                //       backColor: Colors.red,
-                //     ),
-                //   }
-              },
+            // if (state is Connection_success_State)
+            //   {
+            //     print(
+            //         '******************* from main *************************'),
+            //     print('internet connected! :)'),
+            //     print(
+            //         '******************* from main *************************'),
+            //     flutterToast(
+            //       msg: 'Connected',
+            //       backColor: Colors.teal,
+            //     ),
+            //   },
+            // if (state is Connection_failed_State)
+            //   {
+            //     print(
+            //         '******************* from main *************************'),
+            //     print('internet disconnected! :)'),
+            //     print(
+            //         '******************* from main *************************'),
+            //     flutterToast(
+            //       msg: 'Disconnected',
+            //       backColor: Colors.red,
+            //     ),
+            //   }
+          },
           builder: (context, state) {
             // App_cubit cubit = App_cubit.get(context);
             if (state is Connection_success_State) {

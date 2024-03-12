@@ -146,10 +146,12 @@ class Profile_screen extends StatelessWidget {
 
                                   radius: 45,
                                   backgroundColor: Colors.white,
-                                  backgroundImage:
-                                      NetworkImage('${cubit.connnection==true?cubit.studentInfoModel!.imagePath:cubit.usermodel!.imagePath}'
-                                          //'assets/images/profile.png'
-                                        ),
+                                  backgroundImage:AssetImage('assets/images/profile.png'),
+                                      // NetworkImage('${cubit.connnection==true?cubit.studentInfoModel!
+                                      //     .imagePath:cubit.usermodel!.imagePath}'
+                                      //     // 'assets/images/profile.png'
+                                      //   ),
+
                                 ),
                               ),
                             ),
@@ -268,7 +270,7 @@ class Profile_screen extends StatelessWidget {
                         child: Container(
                           width: 300,
                           child: Text(
-                            '${cubit.connnection==true?cubit.studentInfoModel!.fullName:cubit.usermodel!.fullName}',
+                            '${cubit.connnection==true?cubit.studentInfoModel!.fullName:cubit.usermodel.fullName}',
                             maxLines: 1,
                             style: TextStyle(
 

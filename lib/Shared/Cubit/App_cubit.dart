@@ -50,7 +50,7 @@ class App_cubit extends Cubit<App_state> {
   void Nav_Bar_Function({required int index}) {
     if (index == 2) {
       StuGetAllCourses(
-        token: Tokenn,
+        token: token,
       );
     } else if (index == 4) {
       // GetCurrentStudenInfo();
@@ -192,11 +192,12 @@ class App_cubit extends Cubit<App_state> {
 
   List<Widget> Nav_Bar_Items_List() {
     return [
+
       const Dashboard_Screen(),
        Home_screen(),
       STU_Lecture_Screen(),
        Calendar_screen(),
-      const Profile_screen()
+      const Profile_screen(),
     ];
   }
 
@@ -437,7 +438,7 @@ class App_cubit extends Cubit<App_state> {
 //----------------------------------------------------------
 
 //------------API ------------------------------------
-  String? Tokenn;
+//   String? Tokenn;
   STU_Login_Model? stu_login_Model;
   void UserLogin({
     required String email,
@@ -449,8 +450,9 @@ class App_cubit extends Cubit<App_state> {
       'password': password,
     }).then((value) {
       stu_login_Model = STU_Login_Model.fromJson(value.data);
-      Tokenn = stu_login_Model?.token;
-      print('TOKENN:${Tokenn}');
+      token= stu_login_Model?.token;
+      token = stu_login_Model?.token;
+      print('token:${token}');
       emit(STU_LoginSuccessState(stu_login_Model!));
       GetCurrentStudenInfo();
       GetAllNews();
@@ -467,7 +469,7 @@ class App_cubit extends Cubit<App_state> {
     emit(Get_STU_Info_LoadingState());
    await Dio_Helper.GetData(
       url: STU_INFO,
-      token: Tokenn,
+      token: token,
     ).then((value) {
       if (value.statusCode == 200) {
         print('get Student inf true');
@@ -526,7 +528,7 @@ class App_cubit extends Cubit<App_state> {
       emit(Stu_Get_All_Courses_LoadingState());
       Dio_Helper.GetData(
         url: STU_COURSES,
-        token: Tokenn,
+        token: token,
       ).then((value) {
         if (value.statusCode == 200) {
           print('get course true');
@@ -566,7 +568,7 @@ class App_cubit extends Cubit<App_state> {
       Dio_Helper.GetData(
         url: 'Students/CurrentCourseMaterial?CycleId=${currentCycleId}',
         //STU_COURSE_MATERIAL,
-        token: Tokenn,
+        token: token,
       ).then((value) {
         if (value.statusCode == 200) {
           print('get course material true');
@@ -615,7 +617,7 @@ class App_cubit extends Cubit<App_state> {
     Dio_Helper.GetData(
       url: 'Students/Getfilesoflecture?lectureId=${lecId}',
       //STU_COURSE_MATERIAL,
-      token: Tokenn,
+      token: token,
     ).then((value) {
       if (value.statusCode == 200) {
         print('get course material File true');
@@ -653,7 +655,7 @@ class App_cubit extends Cubit<App_state> {
       Dio_Helper.GetData(
         url: 'Students/CurrentCourseTasks?CycleId=${currentCycleId}',
         //STU_COURSE_MATERIAL,
-        token: Tokenn,
+        token: token,
       ).then((value) {
         if (value.statusCode == 200) {
           print(value.data);
@@ -685,7 +687,7 @@ class App_cubit extends Cubit<App_state> {
     emit(Stu_Get_Course_Assign_Data_LoadingState());
     Dio_Helper.GetData(
       url: 'Students/GetAssignment?taskId=${taskId}',
-      token: Tokenn,
+      token: token,
     ).then((value) {
       if (value.statusCode == 200) {
         stuAssignDataModel = GetTaskDataModel.fromJson(value.data);
@@ -709,7 +711,7 @@ class App_cubit extends Cubit<App_state> {
     print('All files-------------- ${all_assign_files_List}');
     emit(Stu_Submit_Task_LoadingState());
     Dio_Helper.PostListFileData(
-            token: Tokenn,
+            token: token,
             url: 'Students/File/Upload?taskid=${taskId}',
             files: all_assign_files_List)
         .then((value) {
@@ -740,7 +742,7 @@ class App_cubit extends Cubit<App_state> {
       Dio_Helper.GetData(
         url: 'Students/CurrentCourseQuizzes?cycleId=${currentCycleId}',
         //STU_COURSE_MATERIAL,
-        token: Tokenn,
+        token: token,
       ).then((value) {
         if (value.statusCode == 200) {
           print('get course Quiz true');
@@ -771,7 +773,7 @@ class App_cubit extends Cubit<App_state> {
     Dio_Helper.GetData(
       url: 'Students/Quiz?quizId=${currentQuizId}',
       //STU_COURSE_MATERIAL,
-      token: Tokenn,
+      token: token,
     ).then((value) {
       if (value.statusCode == 200) {
         print('get course Quiz true');
@@ -808,7 +810,7 @@ class App_cubit extends Cubit<App_state> {
           {'questionId': questionModel[i].id, 'answerId': allquizAnswers![i]});
     }
     emit(Stu_Assign_Quiz_Answer_SuccessState());
-    Dio_Helper.PostData(token: Tokenn, url: SUBMITQUIZ, data: {
+    Dio_Helper.PostData(token: token, url: SUBMITQUIZ, data: {
       'quizId': currentQuizId,
       'answers': submitQuizAnswers,
     }).then((value) {
@@ -844,7 +846,7 @@ class App_cubit extends Cubit<App_state> {
       emit(Stu_Get_Course_Grades_LoadingState());
       Dio_Helper.GetData(
         url: 'Students/GetAllGradesForCurrentCourse?courseId=${currentCycleId}',
-        token: Tokenn,
+        token: token,
       ).then((value) {
         if (value.statusCode == 200) {
           List Json = value.data;
@@ -877,7 +879,7 @@ class App_cubit extends Cubit<App_state> {
     print(' start ${startDate.toString()}');
     print('end $endDate');
     emit(Stu_Add_Event_LoadingState());
-    Dio_Helper.PostData(token: Tokenn, url: ADDEVENT, data: {
+    Dio_Helper.PostData(token: token, url: ADDEVENT, data: {
       'startDate': startDate.toString(),//'2024-03-28T04:12:00.000'
       'endDate': endDate.toString(),
       'body': 'ffff',
@@ -905,7 +907,7 @@ class App_cubit extends Cubit<App_state> {
       emit(Stu_Get_Calener_Events_LoadingState());
       Dio_Helper.GetData(
         url: GETCALENDER,
-        token: Tokenn,
+        token: token,
       ).then((value) {
         if (value.statusCode == 200) {
           List Json = value.data;
@@ -939,7 +941,7 @@ class App_cubit extends Cubit<App_state> {
     emit(Stu_Get_Calener_Day_Events_LoadingState());
     Dio_Helper.GetData(
       url: 'Calendar/GetByStartAndEnd?start=${start}&end=${end}',
-      token: Tokenn,
+      token: token,
     ).then((value) {
       if (value.statusCode == 200) {
         List Json = value.data;
@@ -997,7 +999,10 @@ class App_cubit extends Cubit<App_state> {
           print('********************************************');
           print('internet connected! :)');
           print('********************************************');
-          if(Tokenn!=null){
+          if(token != null){
+            print('********************************************');
+            print('GetUserInfo & News After Connected :)');
+            print('********************************************');
             GetCurrentStudenInfo();
             GetAllNews();
           }
