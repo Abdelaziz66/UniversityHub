@@ -50,11 +50,7 @@ Future<void> main()  async {
   Bloc.observer = MyBlocObserver();
   await CachHelper.init();
   token = CachHelper.getData(key: 'token');
-  print('++++++++++++++++++++++++++++++++++');
-  print('++++++++++++++++++++++++++++++++++');
-  print(token);
-  print('++++++++++++++++++++++++++++++++++');
-  print('++++++++++++++++++++++++++++++++++');
+  rol= CachHelper.getData(key: 'rol');
   if (token == null) {
     StartWidget = LandScape_Screen();
   }

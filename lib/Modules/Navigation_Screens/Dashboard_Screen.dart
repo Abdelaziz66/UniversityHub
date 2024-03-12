@@ -30,7 +30,7 @@ class Dashboard_Screen extends StatelessWidget {
       listener: (context, state) => {},
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
-       List<_PieData> pieData=[
+        List<_PieData> pieData=[
          _PieData('A',75),
          _PieData('B',80),
          _PieData('C',85),
@@ -554,7 +554,7 @@ class Dashboard_Screen extends StatelessWidget {
 
         ];
         return ConditionalBuilder(
-          condition:cubit.stu_login_Model!=null,
+          condition:cubit.studentInfoModel!=null&&cubit.connnection==true||cubit.usermodel.fullName!=null&&cubit.connnection==false,
           builder: (context) => Scaffold(
             backgroundColor: Colors.transparent,
             body: Stack(
@@ -605,7 +605,7 @@ class Dashboard_Screen extends StatelessWidget {
                                               Container(
                                                 // width:200,
                                                 child: Text(
-                                                  rol=='Student'?'Hi, ${cubit.stu_login_Model?.displayName} !':'Hi, Dr Ahmed !',
+                                                  rol=='Student'?'Hi, ${cubit.connnection==true?cubit.studentInfoModel!.fullName:cubit.usermodel.fullName} !':'Hi, Dr Ahmed !',
                                                   maxLines: 1,
                                                   overflow: TextOverflow.ellipsis,
                                                   style:Theme.of(context).textTheme.bodyText1?.copyWith(

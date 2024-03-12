@@ -32,16 +32,15 @@ class _loginscreenState extends State<loginscreen> {
       listener: (context, state) {
        if(state is STU_LoginSuccessState) {
            if(state.loginmodel != 401) {
-             CachHelper.saveData(key:'token', value:'token_hereeeeeee').then((value){
-               print(CachHelper.getData(key: 'token'));
-               print('MMM++++++++++++++++++++++++++++++++++');
-               print('++++++++++++++++++++++++++++++++++');
-               print(token);
-               print('++++++++++++++++++++++++++++++++++');
-               print('++++++++++++++++++++++++++++++++++');
-               NavigateAndFinish(context, Layout_Screen());
-             flutterToast(msg: 'Login success ', backColor: Colors.green
-             );
+             CachHelper.saveData(key:'token', value:'${token}').then((value){
+               CachHelper.saveData(key:'rol', value:'${App_cubit.get(context).stu_login_Model!.userRole}').then((value){
+                 print(CachHelper.getData(key: 'token'));
+                 print(CachHelper.getData(key: 'rol'));
+                 NavigateAndFinish(context, Layout_Screen());
+                 flutterToast(msg: 'Login success ', backColor: Colors.green
+                 );
+               });
+
              });
 
            }
@@ -51,18 +50,7 @@ class _loginscreenState extends State<loginscreen> {
           //
            }
        }
-        // if(state is !STU_LoginErrorState) {
-        //   //  if(state.loginmodel.status != 401) {
-        //   navigateTo(context, Layout_Screen());
-        //   flutterToast(msg: 'Login success ', backColor: Colors.red);
-        //   //  }
-        // }
-        // else{
-        //   flutterToast(msg: 'Login error ',
-        //     backColor: Colors.red,
-        //   );
-        //
-        // }
+
       },
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
@@ -406,20 +394,12 @@ class _loginscreenState extends State<loginscreen> {
                                  if (formkey.currentState!.validate()) {
                                   cubit.UserLogin(
                                       email:
-                                      // 'AbdulMajeedSallam@gmail.com',
-                                     emailcontroller.text,
+                                      'AbdulMajeedSallam@gmail.com',
+                                     // emailcontroller.text,
                                       password:
-                                      // 'P@ssw0rd',
-                                      passwordcontroller.text
+                                      'P@ssw0rd',
+                                      // passwordcontroller.text
                                   );
-                                   // cubit.Tokenn=cubit.stu_login_Model?.token;
-                                   // print('[[[[ ${cubit.Tokenn}');
-                                   // if(cubit.Tokenn!=null)
-                                   // {
-                                   //   cubit.GetCurrentStudenInfo();
-                                   // }
-
-
                                  }
                                 },
 
