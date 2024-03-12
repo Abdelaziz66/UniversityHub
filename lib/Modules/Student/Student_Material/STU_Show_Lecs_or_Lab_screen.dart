@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -121,10 +123,15 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index)
                           {
-                            return STU_Build_Lec_View_Widget(
-                                index: index,
-                                context: context,
-                                file:files[index]//cubit.isLec!?lectures[index]:labs[index]
+                            return InkWell(
+                              onTap: (){
+                               // cubit.openFile_Fun(files[index].filePath);
+                              },
+                              child: STU_Build_Lec_View_Widget(
+                                  index: index,
+                                  context: context,
+                                  file:files[index]//cubit.isLec!?lectures[index]:labs[index]
+                              ),
                             );
                           }
                       ),

@@ -32,7 +32,7 @@ class _loginscreenState extends State<loginscreen> {
       listener: (context, state) {
        if(state is STU_LoginSuccessState) {
            if(state.loginmodel != 401) {
-             CachHelper.saveData(key:'token', value:'token_hereeeeeee').then((value){
+             CachHelper.saveData(key:'token', value:'${state.loginmodel.token}').then((value){
                print(CachHelper.getData(key: 'token'));
                print('MMM++++++++++++++++++++++++++++++++++');
                print('++++++++++++++++++++++++++++++++++');
