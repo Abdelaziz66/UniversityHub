@@ -85,7 +85,7 @@ class STU_Lecture_Screen extends StatelessWidget {
                   const SizedBox(height: 5,),
                   Expanded(
                     child: ConditionalBuilder(
-                      condition: courses.isNotEmpty,
+                      condition: cubit.connnection,
                       builder:(context)=>ListView.separated(
                         itemBuilder: (context, index) => InkWell(
                             onTap: () {
@@ -115,7 +115,35 @@ class STU_Lecture_Screen extends StatelessWidget {
                         ),
                         itemCount: courses.length,
                       ),
-                      fallback:(context)=> Center(child: CircularProgressIndicator(),),
+                      fallback:(context)=> ListView.separated(
+                        itemBuilder: (context, index) => InkWell(
+                            onTap: () {
+                              print(cubit.currentCycleId);
+                              print(courses[index].cycleId);
+                              cubit.currentCourseName=courses[index].name;
+                              if(cubit.currentCycleId!=courses[index].cycleId) {
+                                cubit.stuCoursesMatrialModel=[];
+                                cubit.stuLECTUREModel=[];
+                                cubit.stuLABModel=[];
+                                //cubit.stuCoursesMatrialFileModel=[];
+                                cubit.stuCoursesAssignModel=[];
+                                cubit.stuCoursesQuizlModel=[];
+                                cubit.courseGradesModel=[];
+                                cubit.isCycleIdChange=true;
+                              } else {
+                                cubit.isCycleIdChange=false;
+                              }
+                              cubit.currentCycleId=courses[index].cycleId!;
+                              navigateTo(context,  STU_About_course());
+                            },
+                            child: Build_STU_Lec(
+                              courses: cubit.coursemodel[index],
+                            )),
+                        separatorBuilder: (context, index) => const SizedBox(
+                          height: 20,
+                        ),
+                        itemCount: cubit.coursemodel.length,
+                      ),
                     ),
 
 
