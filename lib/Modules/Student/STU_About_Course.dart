@@ -116,17 +116,21 @@ class STU_About_course extends StatelessWidget {
                                     Expanded(
                                       child: InkWell(
                                         onTap: (){
-                                          cubit.StuGetCourseAssign(
-                                        //    token:App_cubit.get(context).Tokenn,
-                                        //    cycleId: '${courses[index].cycleId}',
-                                          );
+                                          if(cubit.connnection)
+                                            {
+                                              cubit.StuGetCourseAssign(
+                                                //    token:App_cubit.get(context).Tokenn,
+                                                //    cycleId: '${courses[index].cycleId}',
+                                              );
 
-                                          navigateTo(context,rol=='Student'? STU_Assign_Screen():INS_Assign_Screen() );
+                                              navigateTo(context,rol=='Student'? STU_Assign_Screen():INS_Assign_Screen() );
+                                            }
+
                                         },
                                         child: Container(
               
                                           decoration: BoxDecoration(
-                                            color: Colors.deepPurpleAccent.withOpacity(.25),
+                                            color:cubit.connnection? Colors.deepPurpleAccent.withOpacity(.25):Colors.grey.withOpacity(.25),
                                             // color: Colors.lightBlueAccent.withOpacity(.25),
                                             borderRadius: BorderRadius.circular(20),
                                             // border: Border(
@@ -187,15 +191,19 @@ class STU_About_course extends StatelessWidget {
                                   Expanded(
                                     child: InkWell(
                                       onTap: (){
-                                        cubit.StuGetCourseQuiz(
-                                        //  token:App_cubit.get(context).Tokenn,
-                                       //   cycleId: '${courses[index].cycleId}',
-                                        );
-                                        navigateTo(context,rol=='Student'? STU_Quizes_Screen():INS_Quizes_Screen() );
+                                        if(cubit.connnection){
+                                          cubit.StuGetCourseQuiz(
+                                            //  token:App_cubit.get(context).Tokenn,
+                                            //   cycleId: '${courses[index].cycleId}',
+                                          );
+                                          navigateTo(context,rol=='Student'? STU_Quizes_Screen():INS_Quizes_Screen() );
+                                        }
+
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          color:Colors.pinkAccent.withOpacity(.18),
+
+                                          color:cubit.connnection?Colors.pinkAccent.withOpacity(.18):Colors.grey.withOpacity(.25),
                                           // color: Colors.lightBlueAccent.withOpacity(.25),
                                           borderRadius: BorderRadius.circular(20),
                                           // border: Border(
@@ -248,13 +256,17 @@ class STU_About_course extends StatelessWidget {
                                   Expanded(
                                     child: InkWell(
                                       onTap: (){
-                                        cubit.GetStuCourseGrade();
-                                        navigateTo(context,rol=='Student'? STUCourseGrades():INSAllGradesScreen() );
+                                        
+                                        if(cubit.connnection){
+                                          cubit.GetStuCourseGrade();
+                                          navigateTo(context,rol=='Student'? STUCourseGrades():INSAllGradesScreen() );
+                                        }
+                                       
                                       },
                                       child: Container(
               
                                         decoration: BoxDecoration(
-                                          color: Colors.lightBlueAccent.withOpacity(.25),
+                                          color:cubit.connnection? Colors.lightBlueAccent.withOpacity(.25):Colors.grey.withOpacity(.25),
                                           borderRadius: BorderRadius.circular(20),
                                         ),
                                         child: Column(
