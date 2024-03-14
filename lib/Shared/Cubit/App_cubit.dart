@@ -49,9 +49,13 @@ class App_cubit extends Cubit<App_state> {
   int Nav_Bar_index = 0;
   void Nav_Bar_Function({required int index}) {
     if (index == 2) {
-      StuGetAllCourses(
-        token: token,
-      );
+      if(stuAllCoursesModel.length == 0){
+        StuGetAllCourses(
+          token: token,
+        );
+
+      }
+
     } else if (index == 4) {
       // GetCurrentStudenInfo();
     }
@@ -524,23 +528,27 @@ class App_cubit extends Cubit<App_state> {
   void StuGetAllCourses({
     required token,
   }) {
-    if (stuAllCoursesModel.length == 0) {
+    if (true) {
       emit(Stu_Get_All_Courses_LoadingState());
       Dio_Helper.GetData(
         url: STU_COURSES,
         token: token,
       ).then((value) {
         if (value.statusCode == 200) {
-          print('get course true');
+          stuAllCoursesModel = [];
+          // print('get course true');
           List Json = value.data;
           for (var element in Json) {
             stuAllCoursesModel.add(Stu_GetAllCoursesModel.fromJson(element));
           }
           emit(Stu_Get_All_Courses_SuccessState(stuAllCoursesModel));
+
         }
-        stuAllCoursesModel.forEach((element) {
-          print('name------- ${element.name}');
-        });
+        InsertToDataBase_Course_Table();
+        // stuAllCoursesModel.forEach((element) {
+        //   print('name------- ${element.name}');
+        // });
+
       }).catchError((error) {
         emit(Stu_Get_All_Courses_ErrorState(error.toString()));
         print(error.toString());
@@ -562,7 +570,7 @@ class App_cubit extends Cubit<App_state> {
       //required token,
       // required cycleId,
       ) {
-    print('sdsds ${isCycleIdChange}');
+    // print('sdsds ${isCycleIdChange}');
     if (stuCoursesMatrialModel.isEmpty || isCycleIdChange == true) {
       emit(Stu_Get_Course_Material_LoadingState());
       Dio_Helper.GetData(
@@ -1008,10 +1016,12 @@ class App_cubit extends Cubit<App_state> {
           print('********************************************');
           if(token != null){
             print('********************************************');
-            print('GetUserInfo & News After Connected :)');
+            print('GetUserInfo & News & Course After Connected :)');
             print('********************************************');
             GetCurrentStudenInfo();
             GetAllNews();
+            StuGetAllCourses(token: token);
+
           }
 
           connnection=true;
@@ -1032,6 +1042,9 @@ class App_cubit extends Cubit<App_state> {
   Database? database;
   String? User_Table = 'User';
   String? News_Table = 'News';
+  String? Course_Table = 'Course';
+
+
   void CreateDateBase() async {
     database = await openDatabase(
       'Local_DB.db',
@@ -1056,6 +1069,14 @@ class App_cubit extends Cubit<App_state> {
           print('error when created News table ${error.toString()}');
         });
         print('_____________________________________________________________________________');
+        await database
+            .execute('CREATE TABLE Course(cycleId TEXT,name TEXT,hours INTEGER,'
+            'imagePath TEXT,instructorFullName TEXT)')
+            .catchError((error) {
+          print('error when created Course table ${error.toString()}');
+        });
+
+        print('_____________________________________________________________________________');
         emit(CreateTable_state());
       },
       onOpen: (database) async {
@@ -1063,6 +1084,7 @@ class App_cubit extends Cubit<App_state> {
 
         GetFromDataBase(database, User_Table!);
         GetFromDataBase(database, News_Table!);
+        GetFromDataBase(database, Course_Table!);
 
       },
     );
@@ -1113,21 +1135,39 @@ class App_cubit extends Cubit<App_state> {
 
   }
 
+  Future InsertToDataBase_Course_Table() async {
+    if(true){
+      // print('Start Insert into News table _________________________________');
+      await database?.rawDelete('DELETE FROM Course').then((value) {
+        stuAllCoursesModel.forEach((element) {
+          database?.transaction((txn) async {
+            await txn.rawInsert(
+                'INSERT INTO Course(cycleId,name,hours,imagePath,instructorFullName)'
+                    'VALUES("${element.cycleId}","${element.name}","${element.hours}","${element.imagePath}","${element.instructorFullName}")');
+
+
+          }).catchError((onError){print(onError.toString());});
+          print('${element.cycleId}');
+          print('///////////////////////////////////////////////////');
+        });
+
+        emit(InsertToDataBase_state());
+        GetFromDataBase(database,'Course');
+      });
+
+    }
+
+
+  }
+
   CurrentStudentInfoModel usermodel= CurrentStudentInfoModel();
   List<GetAllNewsModel> newsmodel=[];
+  List<Stu_GetAllCoursesModel>coursemodel=[];
   void GetFromDataBase(database, String tablename) {
     database?.rawQuery('SELECT * FROM $tablename').then((value) {
       if (tablename == User_Table) {
         usermodel= CurrentStudentInfoModel();
         usermodel = CurrentStudentInfoModel.fromJson(value[0]);
-        print('__________________________________________________________________________________');
-        print('User_Table_from get_________________________________________');
-        // print(value);
-        print('-----------------------------------------------------');
-        print(studentInfoModel!.universityName);
-        print(usermodel.universityName);
-        print('__________________________________________________________________________________');
-
       }
       else if(tablename == News_Table){
         newsmodel=[];
@@ -1135,18 +1175,23 @@ class App_cubit extends Cubit<App_state> {
           newsmodel.add(GetAllNewsModel.fromJson(element));
         });
 
-        // print('News_Table_from get_________________________________________');
+      }
+      else if(tablename == Course_Table){
+        coursemodel=[];
+        value.forEach((element) {
+          coursemodel.add(Stu_GetAllCoursesModel.fromJson(element));
+        });
+        // print('Course_from get_________________________________________');
         // // print(value);
         // print('-----------------------------------------------------');
-        // print(allNewsModel.length);
-        // print(newsmodel.length);
-        // newsmodel.forEach((element) {
-        //   print(element.userName);
+        // print(stuAllCoursesModel.length);
+        // print(coursemodel.length);
+        // coursemodel.forEach((element) {
+        //   print(element.name);
         // });
         // print('__________________________________________________________________________________');
-
       }
-    });
+    }).catchError((onError){print(onError.toString());});
     emit(GetFromDataBase_state());
   }
 
