@@ -21,6 +21,7 @@ class Calendar_screen extends StatelessWidget {
   var startDateControler=TextEditingController();
   var endDateControler=TextEditingController();
 
+  DateTime selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -351,6 +352,48 @@ class Calendar_screen extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 50.0),
                 child: Column(
                   children: [
+                    // Padding(
+                    //   padding: const EdgeInsets.all(15.0),
+                    //   child: Container(
+                    //     height: 50,
+                    //     decoration: BoxDecoration(
+                    //       border: Border(
+                    //           bottom: BorderSide(
+                    //               color: Colors.blueGrey.withOpacity(.6),
+                    //               width: 3)),
+                    //     ),
+                    //     child:
+                    //     // ListView.separated(
+                    //     //   physics: const BouncingScrollPhysics(),
+                    //     //   // shrinkWrap: true,
+                    //     //   scrollDirection: Axis.horizontal,
+                    //     //
+                    //     //   // physics: ,
+                    //     //   itemBuilder: (context, index) => InkWell(
+                    //     //     onTap: (){
+                    //     //       cubit.changeSelectedIndex_Calender(index);
+                    //     //       //cubit.GetStuCalenderDayEvent(
+                    //     //       //   start: '2024-03-07',
+                    //     //       //   end: '2024-03-08'
+                    //     //       // );
+                    //     //       print(cubit.selectedIndex);
+                    //     //     },
+                    //     //     child: Calender_Item(
+                    //     //       index: index,
+                    //     //       Calender_Number: Calender_Number[index],
+                    //     //       Calender_Day: Calender_Day[index],
+                    //     //       selectedIndex: cubit.selectedIndex,
+                    //     //       // iselected: Calender_Selected[index],
+                    //     //     ),
+                    //     //   ),
+                    //     //   separatorBuilder: (context, index) => Container(
+                    //     //     height: 0,
+                    //     //     color: Colors.transparent,
+                    //     //   ),
+                    //     //   itemCount: Calender_Number.length,
+                    //     // ),
+                    //   ),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Container(

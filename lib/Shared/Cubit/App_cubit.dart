@@ -969,8 +969,15 @@ class App_cubit extends Cubit<App_state> {
     emit(ChangeCalenderIndexState());
   }
 
+//-----------create list of months-----------
 
-
+  // List<DateTime>months=[];
+  // DateTime calendermonths() {
+  //   for (int i = 0; i < 12; i++) {
+  //     months[i]=DateTime.now();
+  //   }
+  // }
+  //
 
 
 

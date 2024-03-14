@@ -46,7 +46,7 @@ dependencies:
   path_provider: ^2.1.1
   dropdown_button2: ^2.3.9
   shared_preferences: ^2.2.2
-  intl: ^0.17.0
+  intl: ^0.18.1
   rive: ^0.9.1
   flutter_svg: ^2.0.5
   smooth_page_indicator: ^1.1.0
@@ -59,6 +59,10 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   sqflite: ^2.3.2
   flutter_datetime_picker_plus: ^2.1.0
+  month_picker_dialog: ^2.0.0
+  table_calendar: ^3.0.9
+
+
 
 
 
