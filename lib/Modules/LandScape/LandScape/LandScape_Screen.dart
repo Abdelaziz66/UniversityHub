@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:university_hup/Modules/LandScape/Login/LoginScreen.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
+import 'package:university_hup/Shared/Local/Cache_helper.dart';
 import 'package:university_hup/Shared/constant.dart';
 
 class LandScape_Screen extends StatelessWidget {
@@ -187,10 +188,8 @@ class LandScape_Screen extends StatelessWidget {
                           textFontSize: 30,
                           onPressed: () {
                             if (islast) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const loginscreen()));
+                              CachHelper.saveData(key:'landscape', value:'false');
+                              NavigateAndFinish(context,loginscreen());
                             } else {
                               LandScape_controller.nextPage(
                                 duration: Duration(
