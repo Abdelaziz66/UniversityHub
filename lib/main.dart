@@ -61,7 +61,7 @@ Future<void> main()  async {
   rol= CachHelper.getData(key: 'rol');
   landscape= CachHelper.getData(key: 'landscape');
   if (token == null) {
-    if(landscape=='true')
+    if(landscape != null)
       {
         StartWidget = loginscreen();
       }else

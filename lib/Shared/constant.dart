@@ -40,6 +40,6 @@ String GETCALENDER='Calendar/GetAllCalendar';
 // String Token='';
 
 String? token;
-String landscape='false';
+bool? landscape;
 Widget? StartWidget;
 
