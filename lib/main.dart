@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:university_hup/Layout/LayoutScreen.dart';
 import 'package:university_hup/Modules/LandScape/LandScape/LandScape_Screen.dart';
+import 'package:university_hup/Modules/LandScape/Login/LoginScreen.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/Local/Cache_helper.dart';
 import 'package:university_hup/Shared/constant.dart';
@@ -58,8 +59,17 @@ Future<void> main()  async {
   await CachHelper.init();
   token = CachHelper.getData(key: 'token');
   rol= CachHelper.getData(key: 'rol');
+  landscape= CachHelper.getData(key: 'landscape');
   if (token == null) {
-    StartWidget = LandScape_Screen();
+    if(landscape=='true')
+      {
+        StartWidget = loginscreen();
+      }else
+        {
+          StartWidget = LandScape_Screen();
+        }
+
+
   }
   else{
     StartWidget=Layout_Screen();
