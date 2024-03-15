@@ -16,6 +16,7 @@ import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Mode
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 
+import '../../Models/STU_Model/Calender_Model/CalenderMode.dart';
 import '../Cons_widget.dart';
 import '../Cubit/App_cubit.dart';
 import '../constant.dart';
@@ -567,6 +568,7 @@ Widget Post({
 }
 
 Widget Calender_Event({
+  GetCalenderDayEventModel? event,
   required Color color1,
   required Color color2,
 }) =>
@@ -612,7 +614,7 @@ Widget Calender_Event({
                 const SizedBox(
                   width: 8,
                 ),
-                Text('Second Quiz',
+                Text('${event?.body}',
                     style: TextStyle(
                         color: Colors.black.withOpacity(.8),
                         fontWeight: FontWeight.w600,
@@ -631,7 +633,9 @@ Widget Calender_Event({
                 const SizedBox(
                   width: 8,
                 ),
-                Text('9:00 AM - 10:00 AM',
+
+                Text('From ${DateTime.parse(event!.startDate!).hour} : ${DateTime.parse(event.startDate!).minute}'
+                    ' to ${DateTime.parse(event.endDate!).hour} : ${DateTime.parse(event.endDate!).minute}',
                     style: TextStyle(
                         color: Colors.black.withOpacity(.8),
                         fontWeight: FontWeight.w600,

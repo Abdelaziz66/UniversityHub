@@ -3,12 +3,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:university_hup/Modules/LandScape/Login/LoginScreen.dart';
 import 'package:university_hup/Modules/Student/Student_Grade/STU_Grades_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Drawer/Edit_Profile_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Notification_Screen.dart';
 
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
+import 'package:university_hup/Shared/Local/Cache_helper.dart';
 import '../Shared/Cubit/App_cubit.dart';
 import '../Shared/Cubit/App_state.dart';
 
@@ -319,7 +321,9 @@ class Layout_Screen extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             cubit.D_value = 4;
-                            Navigator.pop(context);
+                            //Navigator.pop(context);
+                            CachHelper.removedata(key: 'token');
+                             NavigateAndFinish(context, loginscreen());
                           },
                           child: Container(
                             decoration: BoxDecoration(

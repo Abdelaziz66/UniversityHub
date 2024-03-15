@@ -14,6 +14,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
@@ -940,26 +941,30 @@ class App_cubit extends Cubit<App_state> {
 
   List<GetCalenderDayEventModel>getAllCalenderDayEvent=[];
   void GetStuCalenderDayEvent(
-  {
-    required start,
-    required end,
-}
+
+   // required start,
+   // required end,
+
       ) {
+    getAllCalenderDayEvent=[];
+    print('start date :::::::$selctedDay');
+    print('eeeeeeee:::::${endDate}');
     // courseGradesModel=[];
     emit(Stu_Get_Calener_Day_Events_LoadingState());
     Dio_Helper.GetData(
-      url: 'Calendar/GetByStartAndEnd?start=${start}&end=${end}',
+      url: 'Calendar/GetByStartAndEnd?start=$selctedDay&end=$endDate',
       token: token,
     ).then((value) {
       if (value.statusCode == 200) {
         List Json = value.data;
+        print(Json);
         for (var element in Json) {
           getAllCalenderDayEvent.add(GetCalenderDayEventModel.fromJson(element));
         }
-        print('Get Calender Day even successful');
-        print((courseGradesModel.length));
+        print('Get Calender Day events successful');
+        print((getAllCalenderDayEvent.length));
         getAllCalenderDayEvent.forEach((element) {
-          print(element.body);
+          print('event ${element.body}');
         });
         emit(Stu_Get_Calener_Day_Events_SuccessState());
       }
@@ -978,9 +983,33 @@ class App_cubit extends Cubit<App_state> {
   }
 
 
+  DateTime focusDay=DateTime.now();
+  DateTime selctedDay=DateTime.now();
+  String? endDate;
+  void SelectCalnderDay({
+    required DateTime focusday ,
+    required DateTime selectedday ,
+}){
+    focusDay=focusday;
+    selctedDay=selectedday;
+    endDate=DateFormat('yyyy-MM-${selctedDay.day+1}THH:mm:ss.SSS').format(selectedday);
+    print('end date::::::#$endDate');
+    emit(ChangeCalenderDayState());
+  }
+
+  //CalendarFormat? calenderFormat;
+  bool isMonthFormat=false;
+  void changeCalenderFormat()async{
+     isMonthFormat =!isMonthFormat;
+    emit(ChangeCalenderFormatState());
+  }
 
 
-
+  String ?startTime;
+  String ?endTime;
+  // void ChangeStartAndEndDate(){
+  //   startTime='${DateFormat("yyyy-MM-dd").format(selctedDay)}'
+  // }
 
 
 

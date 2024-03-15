@@ -331,6 +331,8 @@ class Stu_Get_Calener_Day_Events_ErrorState extends App_state {
 
 }
 class ChangeCalenderIndexState extends App_state {}
+class ChangeCalenderDayState extends App_state {}
+class ChangeCalenderFormatState extends App_state {}
 
 
 

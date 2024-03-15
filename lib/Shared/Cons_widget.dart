@@ -91,13 +91,14 @@ Widget Default_Button({
   double ?containerWidth,
   double ?textFontSize,
   Widget? child,
+  Color?color,
 })=>Container(
   //padding: EdgeInsets.only(bottom: 4),
 width: containerWidth??double.infinity,
 height:containerHeight?? 70,
 decoration: BoxDecoration(
 borderRadius: BorderRadius.circular(25),
-color: Colors.blue,
+color: color??Colors.blue,
 ),
   child: TextButton(
     onPressed: (){onPressed();},
