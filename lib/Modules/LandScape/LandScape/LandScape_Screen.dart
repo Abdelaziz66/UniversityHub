@@ -188,7 +188,7 @@ class LandScape_Screen extends StatelessWidget {
                           textFontSize: 30,
                           onPressed: () {
                             if (islast) {
-                              CachHelper.saveData(key:'landscape', value:'false');
+                              CachHelper.saveData(key:'landscape', value:true);
                               NavigateAndFinish(context,loginscreen());
                             } else {
                               LandScape_controller.nextPage(
