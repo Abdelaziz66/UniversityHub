@@ -61,6 +61,9 @@ dependencies:
   flutter_datetime_picker_plus: ^2.1.0
   month_picker_dialog: ^2.0.0
   table_calendar: ^3.0.9
+  flutter_pdfview: ^1.2.7
+  url_launcher: ^6.2.5
+
 
 
 
