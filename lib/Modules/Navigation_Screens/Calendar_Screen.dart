@@ -111,19 +111,32 @@ class Calendar_screen extends StatelessWidget {
                                                 height: 320,
                                                 child: Padding(
                                                   padding: const EdgeInsets
-                                                      .symmetric(
-                                                      vertical: 30.0,
-                                                      horizontal: 25),
+                                                      .only(
+                                                      bottom: 25.0,
+                                                      left: 25,
+                                                    right: 25,
+                                                    top: 20
+                                                  ),
                                                   child: Form(
                                                     key: formkey,
                                                     child: Column(
                                                       children: [
                                                         const Spacer(),
-                                                        Text(
-                                                          'Add event for this date ${DateFormat("yyyy-MM-dd").format(cubit.selctedDay)}',
-                                                          style: Theme.of(context)
-                                                              .textTheme
-                                                              .subtitle1,
+                                                        Row(
+                                                          children: [
+                                                            FaIcon(FontAwesomeIcons.calendar,size: 30,),
+                                                            SizedBox(width: 15,),
+                                                            Text(
+                                                              'Add event for this date\n${DateFormat("yyyy-MM-dd").format(cubit.selctedDay)}',
+                                                              maxLines: 2,
+                                                              overflow: TextOverflow.ellipsis,
+                                                              style:
+                                                                  Theme.of(context)
+                                                                      .textTheme
+                                                                      .subtitle2?.copyWith(fontSize: 18,color: Colors.black),
+
+                                                            ),
+                                                          ],
                                                         ),
                                                         SizedBox(
                                                           height: 15,
@@ -132,15 +145,21 @@ class Calendar_screen extends StatelessWidget {
                                                           padding: EdgeInsets
                                                               .symmetric(
                                                                   vertical: 5,
-                                                                  horizontal: 10),
-                                                          alignment: Alignment.center,
+                                                                  horizontal:
+                                                                      10),
+                                                          alignment:
+                                                              Alignment.center,
                                                           height: 60,
-                                                          decoration: BoxDecoration(
+                                                          decoration:
+                                                              BoxDecoration(
                                                             // border: Border.all(color: Colors.white),
-                                                            borderRadius: BorderRadius
-                                                                    .circular(18),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        18),
                                                             color: Colors.white
-                                                                .withOpacity(.8),
+                                                                .withOpacity(
+                                                                    .8),
                                                           ),
                                                           child: Padding(
                                                             padding:
@@ -148,7 +167,8 @@ class Calendar_screen extends StatelessWidget {
                                                                     .symmetric(
                                                                     horizontal:
                                                                         0.0),
-                                                            child: TextFormField(
+                                                            child:
+                                                                TextFormField(
                                                               controller:
                                                                   eventBodycontroller,
                                                               keyboardType:
@@ -158,8 +178,10 @@ class Calendar_screen extends StatelessWidget {
                                                                   (value) {
                                                                 print(value);
                                                               },
-                                                              validator: (value) {
-                                                                if (value!.isEmpty) {
+                                                              validator:
+                                                                  (value) {
+                                                                if (value!
+                                                                    .isEmpty) {
                                                                   return 'Event title can\'t be empty';
                                                                 }
                                                                 return null;
@@ -169,7 +191,7 @@ class Calendar_screen extends StatelessWidget {
                                                               cursorColor: c1,
                                                               style:
                                                                   const TextStyle(
-                                                                fontSize: 20,
+                                                                fontSize: 18,
                                                               ),
                                                               decoration:
                                                                   InputDecoration(
@@ -197,7 +219,6 @@ class Calendar_screen extends StatelessWidget {
                                                             ),
                                                           ),
                                                         ),
-
                                                         SizedBox(
                                                           height: 15,
                                                         ),
@@ -208,17 +229,25 @@ class Calendar_screen extends StatelessWidget {
                                                               Expanded(
                                                                   child:
                                                                       Default_Button(
-                                                                color: Colors
-                                                                    .grey[400],
-                                                                textFontSize: 20,
+                                                                color:  Colors.teal.withOpacity(.7),
+                                                                textFontSize:
+                                                                    20,
                                                                 onPressed: () {
-                                                                  Navigator.of(context).push(showPicker(
-                                                                     key:formkey,
-                                                                      context: context,
-                                                                      value: _time,
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .push(
+                                                                    showPicker(
+                                                                      key:
+                                                                          formkey,
+                                                                      context:
+                                                                          context,
+                                                                      value:
+                                                                          _time,
                                                                       sunrise: TimeOfDay(
-                                                                          hour: 6,
-                                                                          minute: 0), // optional
+                                                                          hour:
+                                                                              6,
+                                                                          minute:
+                                                                              0), // optional
                                                                       sunset: TimeOfDay(
                                                                           hour:
                                                                               18,
@@ -272,38 +301,42 @@ class Calendar_screen extends StatelessWidget {
                                                                   //   }
                                                                   // });
                                                                 },
-                                                                text: 'Start at',
+                                                                text:
+                                                                    'Start',
                                                               )),
                                                               SizedBox(
                                                                 width: 15,
                                                               ),
                                                               Expanded(
-                                                                  child:
-                                                                      Default_Button(
-                                                                          color: Colors.grey[
-                                                                              400],
-                                                                          onPressed:
-                                                                              () {
-                                                                            Navigator.of(context)
-                                                                                .push(
-                                                                              showPicker(
-                                                                                key: formkey,
-                                                                                context: context,
-                                                                                value: _time,
-                                                                                sunrise: TimeOfDay(hour: 6, minute: 0), // optional
-                                                                                sunset: TimeOfDay(hour: 18, minute: 0), // optional
-                                                                                duskSpanInMinutes: 120, // optional
-                                                                                onChange: (value) {
-                                                                                  cubit.endTime = '${DateFormat("yyyy-MM-ddT${value.hour}:${value.minute}:${value.second}").format(cubit.selctedDay)}';
-                                                                                  print(cubit.endTime);
-                                                                                },
-                                                                              ),
-                                                                            );
-                                                                          },
-                                                                          text:
-                                                                              'End at',
-                                                                          textFontSize:
-                                                                              20)),
+                                                                  child: Default_Button(
+
+                                                                      color: Colors.red.withOpacity(.7),
+                                                                      onPressed: () {
+                                                                        Navigator.of(context)
+                                                                            .push(
+                                                                          showPicker(
+                                                                            key:
+                                                                                formkey,
+                                                                            context:
+                                                                                context,
+                                                                            value:
+                                                                                _time,
+                                                                            sunrise:
+                                                                                TimeOfDay(hour: 6, minute: 0), // optional
+                                                                            sunset:
+                                                                                TimeOfDay(hour: 18, minute: 0), // optional
+                                                                            duskSpanInMinutes:
+                                                                                120, // optional
+                                                                            onChange:
+                                                                                (value) {
+                                                                              cubit.endTime = '${DateFormat("yyyy-MM-ddT${value.hour}:${value.minute}:${value.second}").format(cubit.selctedDay)}';
+                                                                              print(cubit.endTime);
+                                                                            },
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                      text: 'End',
+                                                                      textFontSize: 20)),
                                                             ],
                                                           ),
                                                         ),
@@ -312,35 +345,46 @@ class Calendar_screen extends StatelessWidget {
                                                         ),
                                                         Default_Button(
                                                             onPressed: () {
-                                                              if (formkey.currentState!.validate()) {
+                                                              if (formkey
+                                                                  .currentState!
+                                                                  .validate()) {
                                                                 cubit.AddEventToCalender(
-                                                                    startDate:cubit.startTime,
-                                                                    endDate:cubit.endTime,
-                                                                    eventBody:eventBodycontroller.text);
-                                                                Navigator.pop(context);
+                                                                    startDate: cubit
+                                                                        .startTime,
+                                                                    endDate: cubit
+                                                                        .endTime,
+                                                                    eventBody:
+                                                                        eventBodycontroller
+                                                                            .text);
+                                                                Navigator.pop(
+                                                                    context);
                                                               } else {
                                                                 flutterToast(
-                                                                    msg: 'please enter the event title',
+                                                                    msg:
+                                                                        'please enter the event title',
                                                                     backColor:
-                                                                        Colors.red);
+                                                                        Colors
+                                                                            .red);
                                                               }
                                                             },
                                                             containerHeight: 50,
                                                             textFontSize: 20,
                                                             text: 'Add'),
-                                                        const Spacer(),
+                                                        // SizedBox(
+                                                        //   height: 15,
+                                                        // ),
                                                       ],
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                              color: Colors.blueGrey
-                                                  .withOpacity(.2),
+                                              color: Colors.white
+                                                  .withOpacity(.5),
                                               borderRadius: 30,
                                               x: 15,
                                               y: 15,
-                                              BorderWidth: 3,
-                                              BorderColor: Colors.blueGrey,
+                                              BorderWidth: 1,
+                                              BorderColor: Colors.white,
                                             ),
                                             // GlassBoxWithBorder_Gradiant(
                                             //   widget: Padding(
@@ -373,8 +417,8 @@ class Calendar_screen extends StatelessWidget {
                                   ),
                                   color: Colors.transparent,
                                   borderRadius: 0,
-                                  x: 5,
-                                  y: 5),
+                                  x: 3,
+                                  y: 3),
                             ),
                           ),
                         ),
@@ -670,15 +714,32 @@ class Calendar_screen extends StatelessWidget {
                           formatAnimationCurve: Curves.easeIn,
                           pageJumpingEnabled: true,
                           headerStyle: HeaderStyle(
-                              formatButtonVisible: true, titleCentered: true),
+                              decoration: BoxDecoration(),
+                              formatButtonVisible: true,
+                              titleCentered: true),
                           calendarStyle: CalendarStyle(
                               defaultTextStyle: TextStyle(
-                                  )),
+                                color: Colors.black,
+                              ),
+                              todayDecoration: BoxDecoration(
+                                
+                                
+                                  color: Colors.blueGrey.withOpacity(.4),
+                                  border:
+                                      Border.all(color: Colors.blueGrey, width: 1),
+                                  // borderRadius: BorderRadius.circular(30),
+                                  shape: BoxShape.circle), ),
 
                           focusedDay: cubit.focusDay,
                           currentDay: cubit.selctedDay,
                           firstDay: DateTime.utc(2020, 1, 1),
                           lastDay: DateTime.utc(2030, 1, 1),
+                              rowHeight: 50,
+                              daysOfWeekHeight: 40,
+                              pageAnimationEnabled: true,
+                              pageAnimationCurve: Curves.easeIn,
+
+
                           onDaySelected: (selectedDay, focusedDay) {
                             cubit.SelectCalnderDay(
                                 selectedday: selectedDay, focusday: focusedDay);
@@ -707,7 +768,6 @@ class Calendar_screen extends StatelessWidget {
                           //   print(day);
                           // },
                         ),
-
                       ),
                     ),
                     // Padding(
@@ -756,34 +816,34 @@ class Calendar_screen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child:
-                        //ConditionalBuilder(
-                        //  condition:cubit.getAllCalenderDayEvent.isNotEmpty ,
-                          //builder:(context)=>
-                              ListView.separated(
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) => Calender_Event(
-                                event: cubit.getAllCalenderDayEvent[index],
-                                color1: Calender_Color1[(index + 1) % 4 == 0
-                                    ? 3
-                                    : (index + 1) % 4 == 1
-                                        ? 2
-                                        : (index + 1) % 4 == 2
-                                            ? 1
-                                            : 0],
-                                color2: Calender_Color2[(index + 1) % 4 == 0
-                                    ? 3
-                                    : (index + 1) % 4 == 1
-                                        ? 2
-                                        : (index + 1) % 4 == 2
-                                            ? 1
-                                            : 0]),
-                            separatorBuilder: (context, index) => Container(
-                              height: 15,
-                              color: Colors.transparent,
-                            ),
-                            itemCount: cubit.getAllCalenderDayEvent.length,
+                            //ConditionalBuilder(
+                            //  condition:cubit.getAllCalenderDayEvent.isNotEmpty ,
+                            //builder:(context)=>
+                            ListView.separated(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: (context, index) => Calender_Event(
+                              event: cubit.getAllCalenderDayEvent[index],
+                              color1: Calender_Color1[(index + 1) % 4 == 0
+                                  ? 3
+                                  : (index + 1) % 4 == 1
+                                      ? 2
+                                      : (index + 1) % 4 == 2
+                                          ? 1
+                                          : 0],
+                              color2: Calender_Color2[(index + 1) % 4 == 0
+                                  ? 3
+                                  : (index + 1) % 4 == 1
+                                      ? 2
+                                      : (index + 1) % 4 == 2
+                                          ? 1
+                                          : 0]),
+                          separatorBuilder: (context, index) => Container(
+                            height: 15,
+                            color: Colors.transparent,
                           ),
+                          itemCount: cubit.getAllCalenderDayEvent.length,
+                        ),
                         //  fallback:(context)=>Center(child: Text('No event in this date'),),
                         //),
                       ),
