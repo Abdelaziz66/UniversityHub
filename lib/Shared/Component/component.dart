@@ -1892,7 +1892,7 @@ Widget BuildAssignFileViewWidget(
   final extension = file.path.split('.').last?? '';
   final color = Colors.grey[500];
   return InkWell(
-      onTap: () => App_cubit.get(context).openFile_Fun(file),
+      onTap: () => App_cubit.get(context).openFile_Fun(file: file),
       child: Container(
         padding: const EdgeInsets.all(8),
         child: Column(

@@ -33,6 +33,7 @@ import 'package:university_hup/Modules/Student/Student_Notification/Quizzes_Scre
 import 'package:university_hup/Modules/Student/Student_Notification/UpcomingCourse_Screen.dart';
 import 'package:university_hup/Shared/constant.dart';
 import 'package:university_hup/Shared/remote/DioHelper.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../Models/STU_Model/Calender_Model/CalenderMode.dart';
 import '../../Models/STU_Model/CourseModel/Stu_Course_Grades_model.dart';
 import '../../Models/STU_Model/User_Model/CurrentStudentInfoModel.dart';
@@ -319,14 +320,37 @@ class App_cubit extends Cubit<App_state> {
     }
   }
 
-  void openFile_Fun(File file) {
+  void openFile_Fun({File? file,String? filePath}) {
     emit(ShowFile_Loading_State());
-    OpenFile.open(file.path).then((value) {
+    print('file path : $filePath');
+    OpenFile.open(file?.path??filePath).then((value) {
       emit(ShowFile_Success_State());
     }).catchError((error) {
       print('opening file error${error}');
       emit(ShowFile_Error_State());
     });
+  }
+
+
+  static Future<void> openURL(String url) async {
+    final Uri _url = Uri.parse(url);
+
+    print('ss $_url');
+print(url);
+   // bool iscanLaunchUrl = await canLaunchUrl(_url);
+
+    //if (iscanLaunchUrl) {
+      print('ssdd $_url');
+      await launchUrl(_url).then((value) {
+        print('success');
+      }).catchError((error){
+        print('ddddddddddddddddddddd');
+        print(error);
+        print('Could not launch $url');
+      });
+  //  } else {
+
+ //   }
   }
 
   /*-------------add quiz --------------*/
