@@ -52,6 +52,11 @@ class ShowFile_Loading_State extends App_state{}
 class ShowFile_Success_State extends App_state{}
 class ShowFile_Error_State extends App_state{}
 
+
+class DownloadFile_Loading_State extends App_state{}
+class DownloadFile_Success_State extends App_state{}
+class DownloadFile_Error_State extends App_state{}
+
 class select_item_add_quiz_State extends App_state{}
 
 

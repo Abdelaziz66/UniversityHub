@@ -77,6 +77,7 @@ Future<void> main()  async {
   runApp(const MyApp());
 
   Dio_Helper.init();
+  Dio_Helper2.init();
 }
 
 class MyApp extends StatelessWidget {
