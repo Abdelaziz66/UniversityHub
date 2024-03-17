@@ -126,7 +126,10 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
-                                App_cubit.openURL('${files[index].filePath}');
+                                print(files[index].filePath?.split('net/').last);
+                                print(files[index].filePath);
+                                cubit.loadPDF(networkfile:files[index].filePath);
+                               // App_cubit.openURL('${files[index].filePath}');
                                 //navigateTo(context, fileVierwer(pdfUrl:files[index].filePath! ,));
                                 //cubit.openFile_Fun(filePath:files[index].filePath);
                               },

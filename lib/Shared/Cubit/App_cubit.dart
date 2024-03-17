@@ -13,6 +13,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
@@ -353,6 +354,56 @@ print(url);
  //   }
   }
 
+  String pathPDF = "";
+
+
+   Future<void> loadPDF({
+    required networkfile,
+}) async {
+     emit(DownloadFile_Loading_State());
+      var dir = await getApplicationDocumentsDirectory();
+      print(dir);
+      String filePath = "${dir.path}/data.pdf";
+      print('from cubit:$networkfile');
+      // Download file using Dio
+       Dio_Helper2.DownloadFile(
+           networkfilePath:networkfile , localfilePath:filePath,token: token ).then((value) {
+        print('dddd$value');
+        emit(DownloadFile_Success_State());
+        //pathPDF = filePath;
+      }).catchError((error){
+        print(error);
+        emit(DownloadFile_Error_State());
+      });
+
+
+  }
+
+
+
+
+
+  // Future<File> createFileOfPdfUrl() async {
+  //
+  //   createFileOfPdfUrl().then((f) {
+  //     pathPDF = f.path;
+  //     print(pathPDF);
+  //   });
+  //   final url = "http://africau.edu/images/default/sample.pdf";
+  //   final filename = url.substring(url.lastIndexOf("/") + 1);
+  //   var request = await Dio().get(url);
+  //   var response = await request.close();
+  //   String dir = (await getApplicationDocumentsDirectory()).path;
+  //
+  //   File file = new File('$dir/$filename');
+  //   file.writeAsBytes(request.)
+  //   var bytes = await consolidateHttpClientResponseBytes(response);
+  //
+  //   await file.writeAsBytes(bytes);
+  //
+  //   return file;
+  // }
+
   /*-------------add quiz --------------*/
 
   final List<String> materil_for_quiz = [
@@ -599,7 +650,7 @@ print(url);
     if (stuCoursesMatrialModel.isEmpty || isCycleIdChange == true) {
       emit(Stu_Get_Course_Material_LoadingState());
       Dio_Helper.GetData(
-        url: 'Students/CurrentCourseMaterial?CycleId=${currentCycleId}',
+        url: 'api/Students/CurrentCourseMaterial?CycleId=${currentCycleId}',
         //STU_COURSE_MATERIAL,
         token: token,
       ).then((value) {
@@ -648,7 +699,7 @@ print(url);
     //if (stuCoursesMatrialModel.isEmpty || isCycleIdChange==true){
     emit(Stu_Get_Course_Material_File_LoadingState());
     Dio_Helper.GetData(
-      url: 'Students/Getfilesoflecture?lectureId=${lecId}',
+      url: 'api/Students/Getfilesoflecture?lectureId=${lecId}',
       //STU_COURSE_MATERIAL,
       token: token,
     ).then((value) {
@@ -686,7 +737,7 @@ print(url);
     if (stuCoursesAssignModel.isEmpty || isCycleIdChange == true) {
       emit(Stu_Get_Course_Assign_LoadingState());
       Dio_Helper.GetData(
-        url: 'Students/CurrentCourseTasks?CycleId=${currentCycleId}',
+        url: 'api/Students/CurrentCourseTasks?CycleId=${currentCycleId}',
         //STU_COURSE_MATERIAL,
         token: token,
       ).then((value) {
@@ -719,7 +770,7 @@ print(url);
 //    if(stuCoursesAssignModel.isEmpty || isCycleIdChange==true) {
     emit(Stu_Get_Course_Assign_Data_LoadingState());
     Dio_Helper.GetData(
-      url: 'Students/GetAssignment?taskId=${taskId}',
+      url: 'api/Students/GetAssignment?taskId=${taskId}',
       token: token,
     ).then((value) {
       if (value.statusCode == 200) {
@@ -745,7 +796,7 @@ print(url);
     emit(Stu_Submit_Task_LoadingState());
     Dio_Helper.PostListFileData(
             token: token,
-            url: 'Students/File/Upload?taskid=${taskId}',
+            url: 'api/Students/File/Upload?taskid=${taskId}',
             files: all_assign_files_List)
         .then((value) {
       if (value.statusCode == 200) {
@@ -773,7 +824,7 @@ print(url);
     if (stuCoursesQuizlModel.isEmpty || isCycleIdChange == true) {
       emit(Stu_Get_Course_Quiz_LoadingState());
       Dio_Helper.GetData(
-        url: 'Students/CurrentCourseQuizzes?cycleId=${currentCycleId}',
+        url: 'api/Students/CurrentCourseQuizzes?cycleId=${currentCycleId}',
         //STU_COURSE_MATERIAL,
         token: token,
       ).then((value) {
@@ -804,7 +855,7 @@ print(url);
   void StuGetQuizDataById() {
     emit(Stu_Get_Quiz_Data_LoadingState());
     Dio_Helper.GetData(
-      url: 'Students/Quiz?quizId=${currentQuizId}',
+      url: 'api/Students/Quiz?quizId=${currentQuizId}',
       //STU_COURSE_MATERIAL,
       token: token,
     ).then((value) {
@@ -878,7 +929,7 @@ print(url);
     if (courseGradesModel.isEmpty || isCycleIdChange == true) {
       emit(Stu_Get_Course_Grades_LoadingState());
       Dio_Helper.GetData(
-        url: 'Students/GetAllGradesForCurrentCourse?courseId=${currentCycleId}',
+        url: 'api/Students/GetAllGradesForCurrentCourse?courseId=${currentCycleId}',
         token: token,
       ).then((value) {
         if (value.statusCode == 200) {
@@ -976,7 +1027,7 @@ print(url);
     // courseGradesModel=[];
     emit(Stu_Get_Calener_Day_Events_LoadingState());
     Dio_Helper.GetData(
-      url: 'Calendar/GetByStartAndEnd?start=$selctedDay&end=$endDate',
+      url: 'api/Calendar/GetByStartAndEnd?start=$selctedDay&end=$endDate',
       token: token,
     ).then((value) {
       if (value.statusCode == 200) {

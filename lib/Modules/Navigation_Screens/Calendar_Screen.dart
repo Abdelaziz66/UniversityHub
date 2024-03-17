@@ -108,7 +108,7 @@ class Calendar_screen extends StatelessWidget {
                                             padding: const EdgeInsets.all(15.0),
                                             child: GlassBoxWithBorder(
                                               widget: Container(
-                                                height: 320,
+                                                height: 350,
                                                 child: Padding(
                                                   padding: const EdgeInsets
                                                       .only(
