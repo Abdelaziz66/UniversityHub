@@ -10,7 +10,7 @@ class Dio_Helper {
 
   static init() {
     dio = Dio(BaseOptions(
-      baseUrl: 'https://lms.runasp.net/',//'https://nabilramadan.bsite.net/api/',
+      baseUrl: 'https://lms.runasp.net/api/',//'https://nabilramadan.bsite.net/api/',
       receiveDataWhenStatusError: true,
     ));
     // (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
@@ -164,9 +164,9 @@ class Dio_Helper2 {
     dio2.options.headers={
       //   'lang':lang,
       //   'authorizatio':token??'',
-      'Content-Type':'application/json',
-      'Accept':'application/json',
-      'Authorization':'Bearer $token',
+     // 'Content-Type':'application/json',
+     // 'Accept':'application/json',
+    //  'Authorization':'Bearer $token',
       'responseType': ResponseType.bytes,
     };
     return await dio2.download(networkfilePath, localfilePath);

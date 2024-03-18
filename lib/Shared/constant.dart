@@ -27,14 +27,14 @@ Color p4 =HexColor('#6DBBF3');
 String? rol= '';
 
 //-----------------End  points ---------------
-String LOGIN='api/Account/login';
-String NEWS ='api/News';
-String STU_COURSES='api/Students/CurrentCourcesInfo';
-String STU_INFO='api/Students/GetStudentInfo';
-String SUBMITQUIZ='api/Students/quiz/submit';
+String LOGIN='Account/login';
+String NEWS ='News';
+String STU_COURSES='Students/CurrentCourcesInfo';
+String STU_INFO='Students/GetStudentInfo';
+String SUBMITQUIZ='Students/quiz/submit';
 //String STU_COURSE_MATERIAL='Students/CurrentCourseMaterial?CycleId=${App_cubit().cycleId}';
-String ADDEVENT='api/Calendar';
-String GETCALENDER='api/Calendar/GetAllCalendar';
+String ADDEVENT='Calendar';
+String GETCALENDER='Calendar/GetAllCalendar';
 
 
 // String Token='';

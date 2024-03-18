@@ -129,8 +129,9 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
                                 print(files[index].filePath?.split('net/').last);
                                 print(files[index].filePath);
                                 cubit.loadPDF(networkfile:files[index].filePath);
+                                print('from material ${cubit.pathPDF}');
                                // App_cubit.openURL('${files[index].filePath}');
-                                //navigateTo(context, fileVierwer(pdfUrl:files[index].filePath! ,));
+                                navigateTo(context, fileVierwer(pdfUrl:cubit.pathPDF ,));
                                 //cubit.openFile_Fun(filePath:files[index].filePath);
                               },
                               child: STU_Build_Lec_View_Widget(
