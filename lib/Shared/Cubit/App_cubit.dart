@@ -456,7 +456,7 @@ class App_cubit extends Cubit<App_state> {
     }).then((value) {
       stu_login_Model = STU_Login_Model.fromJson(value.data);
       token= stu_login_Model?.token;
-      token = stu_login_Model?.token;
+      // rol=stu_login_Model?.userRole;
       print('token:${token}');
       emit(STU_LoginSuccessState(stu_login_Model!));
       GetCurrentStudenInfo();
