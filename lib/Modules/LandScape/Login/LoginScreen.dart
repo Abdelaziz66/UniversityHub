@@ -33,13 +33,15 @@ class _loginscreenState extends State<loginscreen> {
         if(state is STU_LoginSuccessState) {
           if(state.loginmodel != 401) {
             CachHelper.saveData(key:'token', value:'${token}').then((value){
-              CachHelper.saveData(key:'rol', value:'${App_cubit.get(context).stu_login_Model!.userRole}').then((value){
-                print(CachHelper.getData(key: 'token'));
-                print(CachHelper.getData(key: 'rol'));
-                NavigateAndFinish(context, Layout_Screen());
-                flutterToast(msg: 'Login success ', backColor: Colors.green
-                );
-              });
+
+              // CachHelper.saveData(key:'rol', value:'${App_cubit.get(context).stu_login_Model!.userRole}').then((value){
+              //   print(CachHelper.getData(key: 'token'));
+              //   print(CachHelper.getData(key: 'rol'));
+              //
+              // });
+              NavigateAndFinish(context, Layout_Screen());
+              flutterToast(msg: 'Login success ', backColor: Colors.green
+              );
 
             });
 
@@ -353,7 +355,9 @@ class _loginscreenState extends State<loginscreen> {
                                     groupValue: rol,
                                     onChanged: (value) {
                                       setState(() {
+
                                         rol=value;
+
                                       });
 
 
