@@ -18,11 +18,10 @@ class Calendar_screen extends StatelessWidget {
   Calendar_screen({super.key});
   var scafoldkey4 = GlobalKey<ScaffoldState>();
   var eventBodycontroller = TextEditingController();
-  var formkey = GlobalKey<FormState>();
-  var startDateControler = TextEditingController();
-  var endDateControler = TextEditingController();
-
-  DateTime selectedDate = DateTime.now();
+  var formkey1 = GlobalKey<FormState>();
+ // var startDateControler = TextEditingController();
+ // var endDateControler = TextEditingController();
+ // DateTime selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class Calendar_screen extends StatelessWidget {
         bool isvisbile = false;
         var startDate;
         var endDate;
-        Time _time = Time(hour: 11, minute: 30, second: 00);
+        Time _time = Time(hour: 11, minute: 30, second: 00000,);
         App_cubit cubit = App_cubit.get(context);
         List Calender_Number = [
           1,
@@ -118,7 +117,7 @@ class Calendar_screen extends StatelessWidget {
                                                     top: 20
                                                   ),
                                                   child: Form(
-                                                    key: formkey,
+                                                    key: formkey1,
                                                     child: Column(
                                                       children: [
                                                         const Spacer(),
@@ -237,8 +236,6 @@ class Calendar_screen extends StatelessWidget {
                                                                           context)
                                                                       .push(
                                                                     showPicker(
-                                                                      key:
-                                                                          formkey,
                                                                       context:
                                                                           context,
                                                                       value:
@@ -258,7 +255,7 @@ class Calendar_screen extends StatelessWidget {
                                                                       onChange:
                                                                           (value) {
                                                                         cubit.startTime =
-                                                                            '${DateFormat("yyyy-MM-ddT${value.hour}:${value.minute}:${value.second}").format(cubit.selctedDay)}';
+                                                                            '${DateFormat("yyyy-MM-ddT${value.hour}:${value.minute}:${value.second}0.000").format(cubit.selctedDay)}';
                                                                         print(cubit
                                                                             .startTime);
                                                                       },
@@ -315,21 +312,13 @@ class Calendar_screen extends StatelessWidget {
                                                                         Navigator.of(context)
                                                                             .push(
                                                                           showPicker(
-                                                                            key:
-                                                                                formkey,
-                                                                            context:
-                                                                                context,
-                                                                            value:
-                                                                                _time,
-                                                                            sunrise:
-                                                                                TimeOfDay(hour: 6, minute: 0), // optional
-                                                                            sunset:
-                                                                                TimeOfDay(hour: 18, minute: 0), // optional
-                                                                            duskSpanInMinutes:
-                                                                                120, // optional
-                                                                            onChange:
-                                                                                (value) {
-                                                                              cubit.endTime = '${DateFormat("yyyy-MM-ddT${value.hour}:${value.minute}:${value.second}").format(cubit.selctedDay)}';
+                                                                            context: context,
+                                                                            value:_time,
+                                                                            sunrise: TimeOfDay(hour: 6, minute: 0), // optional
+                                                                            sunset: TimeOfDay(hour: 18, minute: 0), // optional
+                                                                            duskSpanInMinutes: 120, // optional
+                                                                            onChange:(value) {
+                                                                              cubit.endTime = '${DateFormat("yyyy-MM-ddT${value.hour}:${value.minute}:${value.second}0.000").format(cubit.selctedDay)}';
                                                                               print(cubit.endTime);
                                                                             },
                                                                           ),
@@ -344,27 +333,17 @@ class Calendar_screen extends StatelessWidget {
                                                           height: 15,
                                                         ),
                                                         Default_Button(
-                                                            onPressed: () {
-                                                              if (formkey
-                                                                  .currentState!
-                                                                  .validate()) {
+                                                            onPressed: () {if (formkey1.currentState!.validate()) {
                                                                 cubit.AddEventToCalender(
-                                                                    startDate: cubit
-                                                                        .startTime,
-                                                                    endDate: cubit
-                                                                        .endTime,
-                                                                    eventBody:
-                                                                        eventBodycontroller
-                                                                            .text);
+                                                                    startDate: cubit.startTime,
+                                                                    endDate: cubit.endTime,
+                                                                    eventBody: eventBodycontroller.text);
                                                                 Navigator.pop(
                                                                     context);
                                                               } else {
                                                                 flutterToast(
-                                                                    msg:
-                                                                        'please enter the event title',
-                                                                    backColor:
-                                                                        Colors
-                                                                            .red);
+                                                                    msg: 'please enter the event title',
+                                                                    backColor: Colors.red);
                                                               }
                                                             },
                                                             containerHeight: 50,
@@ -386,27 +365,6 @@ class Calendar_screen extends StatelessWidget {
                                               BorderWidth: 1,
                                               BorderColor: Colors.white,
                                             ),
-                                            // GlassBoxWithBorder_Gradiant(
-                                            //   widget: Padding(
-                                            //     padding:
-                                            //     const EdgeInsets
-                                            //         .all(15.0),
-                                            //     child:  Form(
-                                            //       key: formkey,
-                                            //       child: Padding(
-                                            //         padding: const EdgeInsets.all(8.0),
-                                            //       ),
-                                            //     ),
-                                            //   ),
-                                            //   color: Colors.white
-                                            //       .withOpacity(.5),
-                                            //   borderRadius: 20,
-                                            //   x: 18,
-                                            //   y: 18,
-                                            //   BorderWidth: 3,
-                                            //   BorderColor:
-                                            //   Colors.white,
-                                            // ),
                                           ),
                                           const Spacer(
                                             flex: 1,
