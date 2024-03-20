@@ -43,4 +43,5 @@ String? rol;
 String? token;
 bool? landscape;
 Widget? StartWidget;
+String? skip;
 
