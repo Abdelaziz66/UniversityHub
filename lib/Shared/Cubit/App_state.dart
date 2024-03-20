@@ -1,4 +1,5 @@
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
+import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
@@ -345,6 +346,39 @@ class ChangeCalenderFormatState extends App_state {}
 
 
 
+
+
+//------------Instructor State-----------------
+class Get_INS_Info_LoadingState extends App_state {}
+
+class Get_INS_Info_SuccessState extends App_state {
+  // List<GetQuizDataModel> quizDatamodel=[];
+
+
+  Get_INS_Info_SuccessState();
+
+}
+
+class Get_INS_Info_ErrorState extends App_state {
+  String? error;
+  Get_INS_Info_ErrorState(this.error);
+}
+//------------STU get All courses-----------------
+class INS_Get_All_Courses_LoadingState extends App_state {}
+
+class INS_Get_All_Courses_SuccessState extends App_state {
+  List<INS_Course_Model> ins_Courses_Model=[];
+
+
+  INS_Get_All_Courses_SuccessState(this.ins_Courses_Model);
+
+}
+
+class INS_Get_All_Courses_ErrorState extends App_state {
+  String? error;
+  INS_Get_All_Courses_ErrorState(this.error);
+}
+
 //-----------------Connection---------
 class Connection_success_State extends App_state {
 
@@ -353,10 +387,7 @@ class Connection_success_State extends App_state {
 
 class Connection_failed_State extends App_state {
 }
-
-
-
-
+//------------Offline State-----------------
 
 
 class CreateDateBase_state extends App_state{}

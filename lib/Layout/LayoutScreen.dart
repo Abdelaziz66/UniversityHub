@@ -323,6 +323,7 @@ class Layout_Screen extends StatelessWidget {
                             cubit.D_value = 4;
                             //Navigator.pop(context);
                             CachHelper.removedata(key: 'token');
+                            CachHelper.removedata(key: 'rol');
                              NavigateAndFinish(context, loginscreen());
                           },
                           child: Container(

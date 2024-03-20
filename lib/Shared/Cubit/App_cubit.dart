@@ -17,6 +17,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
+import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
+import 'package:university_hup/Models/INS_Model/currentinfo_ins_model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
@@ -52,12 +54,20 @@ class App_cubit extends Cubit<App_state> {
   int Nav_Bar_index = 0;
   void Nav_Bar_Function({required int index}) {
     if (index == 2) {
-      if(stuAllCoursesModel.length == 0){
-        StuGetAllCourses(
-          token: token,
-        );
+      if(rol=='Student'){
+        if(stuAllCoursesModel.length == 0){
+          StuGetAllCourses(
+            token: token,
+          );
+
+        }
+      }else{
+        if(ins_Courses_Model.length == 0){
+          INS_GetAllCourses_Function( token: token,);
+        }
 
       }
+
 
     } else if (index == 4) {
       // GetCurrentStudenInfo();
@@ -535,10 +545,21 @@ print(url);
       stu_login_Model = STU_Login_Model.fromJson(value.data);
       token= stu_login_Model?.token;
       rol=stu_login_Model?.userRole;
-      print('token:${token}');
+      // print('token:${token}');
       emit(STU_LoginSuccessState(stu_login_Model!));
-      GetCurrentStudenInfo();
-      GetAllNews();
+      if(rol=='Student'){
+
+        GetCurrentStudenInfo();
+        GetAllNews();
+      }
+      else{
+        GetCurrentInfo_ins_Function();
+        GetAllNews();
+
+      }
+
+
+
     }).catchError((Error) {
       print(Error.toString());
       emit(STU_LoginErrorState(Error.toString()));
@@ -567,6 +588,27 @@ print(url);
     InsertToDataBase_User_Table();
   }
 
+  currentinfo_ins_model? instructorInfoModel;
+  Future<void> GetCurrentInfo_ins_Function(
+      //  required token,
+      ) async {
+    emit(Get_INS_Info_LoadingState());
+    await Dio_Helper.GetData(
+      url: INS_INFO,
+      token: token,
+    ).then((value) {
+      if (value.statusCode == 200) {
+        print('get Instructor info true');
+        instructorInfoModel = currentinfo_ins_model.fromJson(value.data);
+        print(instructorInfoModel?.fullName);
+        emit(Get_INS_Info_SuccessState());
+      }
+    }).catchError((error) {
+      emit(Get_INS_Info_ErrorState(error.toString()));
+      print(error.toString());
+    });
+    // InsertToDataBase_User_Table();
+  }
   //------------------------Get all news ---------------------
   List<GetAllNewsModel> allNewsModel = [];
 
@@ -630,6 +672,39 @@ print(url);
 
       }).catchError((error) {
         emit(Stu_Get_All_Courses_ErrorState(error.toString()));
+        print(error.toString());
+      });
+    }
+  }
+
+  List<INS_Course_Model> ins_Courses_Model = [];
+
+  void INS_GetAllCourses_Function({
+    required token,
+  }) {
+    if (true) {
+      emit(INS_Get_All_Courses_LoadingState());
+      Dio_Helper.GetData(
+        url: INS_COURSES,
+        token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          ins_Courses_Model = [];
+          // print('get course true');
+          List Json = value.data;
+          for (var element in Json) {
+            ins_Courses_Model.add(INS_Course_Model.fromJson(element));
+          }
+          emit(INS_Get_All_Courses_SuccessState(ins_Courses_Model));
+
+        }
+        InsertToDataBase_Course_Table();
+        // stuAllCoursesModel.forEach((element) {
+        //   print('name------- ${element.name}');
+        // });
+
+      }).catchError((error) {
+        emit(INS_Get_All_Courses_ErrorState(error.toString()));
         print(error.toString());
       });
     }
@@ -1104,38 +1179,7 @@ print(url);
 // connection here ------------------------------------------------------------
 
   // Future<bool> connenction =  InternetConnectionChecker().hasConnection;
-  bool connnection=true;
-  Future<void> connection_Function() async {
-    InternetConnectionChecker().onStatusChange.listen((state) {
-      switch (state) {
-        case InternetConnectionStatus.connected:
-          print('********************************************');
-          print('internet connected! :)');
-          print('********************************************');
-          if(token != null){
-            print('********************************************');
-            print('GetUserInfo & News & Course After Connected :)');
-            print('********************************************');
-            GetCurrentStudenInfo();
-            GetAllNews();
-            StuGetAllCourses(token: token);
 
-          }
-
-          connnection=true;
-          emit(Connection_success_State());
-          break;
-
-        case InternetConnectionStatus.disconnected:
-          print('********************************************');
-          print('No internet :( ');
-          print('********************************************');
-          connnection=false;
-          emit(Connection_failed_State());
-          break;
-      }
-    });
-  }
 
   Database? database;
   String? User_Table = 'User';
@@ -1292,6 +1336,48 @@ print(url);
     }).catchError((onError){print(onError.toString());});
     emit(GetFromDataBase_state());
   }
+
+  bool connnection=true;
+  Future<void> connection_Function() async {
+    InternetConnectionChecker().onStatusChange.listen((state) {
+      switch (state) {
+        case InternetConnectionStatus.connected:
+          print('********************************************');
+          print('internet connected! :)');
+          print('********************************************');
+          if(token != null){
+            print('********************************************');
+            print('GetUserInfo & News & Course After Connected :)');
+            print('********************************************');
+            if(rol=='Student'){
+              GetCurrentStudenInfo();
+              StuGetAllCourses(token: token);
+              GetAllNews();
+            }else{
+              GetCurrentInfo_ins_Function();
+              INS_GetAllCourses_Function(token: token);
+              GetAllNews();
+            }
+
+
+
+          }
+
+          connnection=true;
+          emit(Connection_success_State());
+          break;
+
+        case InternetConnectionStatus.disconnected:
+          print('********************************************');
+          print('No internet :( ');
+          print('********************************************');
+          connnection=false;
+          emit(Connection_failed_State());
+          break;
+      }
+    });
+  }
+
 
 
 }

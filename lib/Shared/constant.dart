@@ -25,7 +25,7 @@ Color p4 =HexColor('#6DBBF3');
 // Color c1 =Colors.white
 
 
-//-----------------End  points ---------------
+//-----------------End  points for Student ---------------
 String LOGIN='Account/login';
 String NEWS ='News';
 String STU_COURSES='Students/CurrentCourcesInfo';
@@ -34,7 +34,9 @@ String SUBMITQUIZ='Students/quiz/submit';
 //String STU_COURSE_MATERIAL='Students/CurrentCourseMaterial?CycleId=${App_cubit().cycleId}';
 String ADDEVENT='Calendar';
 String GETCALENDER='Calendar/GetAllCalendar';
-
+//-----------------End  points for Instructor  ---------------
+String INS_INFO='Instructor/GetInstructorInfo';
+String INS_COURSES='Instructor/CurrentCoursesInfo';
 
 // String Token='';
 

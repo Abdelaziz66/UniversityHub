@@ -342,7 +342,7 @@ class _loginscreenState extends State<loginscreen> {
                                     hoverColor: Colors.blue,
                                     activeColor: Colors.blue,
                                     title: Text(
-                                      'Instructor',
+                                      'Doctor',
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
