@@ -35,6 +35,7 @@ import 'package:university_hup/Modules/Student/Student_Notification/UpcomingCour
 import 'package:university_hup/Shared/constant.dart';
 import 'package:university_hup/Shared/remote/DioHelper.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../Models/INS_Model/CourseModel.dart';
 import '../../Models/STU_Model/Calender_Model/CalenderMode.dart';
 import '../../Models/STU_Model/CourseModel/Stu_Course_Grades_model.dart';
 import '../../Models/STU_Model/User_Model/CurrentStudentInfoModel.dart';
@@ -213,8 +214,14 @@ class App_cubit extends Cubit<App_state> {
 
   //-------floating action visibility -----------------
   bool visiblity=false;
-  void ChangeVisibility(){
-    visiblity=!visiblity;
+  FaIcon? floatIcon= FaIcon(FontAwesomeIcons.plus);
+  void ChangeVisibility({
+    bool? isShow,
+    FaIcon? icon,
+}){
+    visiblity=isShow!;
+    floatIcon=icon;
+
     emit(ChangeFloatingVisibility_State());
   }
 
@@ -364,11 +371,12 @@ print(url);
      emit(DownloadFile_Loading_State());
       var dir = await getApplicationDocumentsDirectory();
       print(dir);
-      String filePath = "${dir.path}/data.pdf";
+      String filePath = "${dir.path}/${networkfile.split('/').last}";
       print('from cubit:$networkfile');
       // Download file using Dio
-       Dio_Helper2.DownloadFile(
-           networkfilePath:'https://cse.unl.edu/~cbourke/ComputerScienceOne.pdf' , localfilePath:filePath,token: token ).then((value) {
+       Dio_Helper.DownloadFile(
+           networkfilePath:networkfile,
+           localfilePath:filePath,token: token ).then((value) {
         print('dddd${value.data}');
         pathPDF = filePath;
         emit(DownloadFile_Success_State());
@@ -645,48 +653,89 @@ print(url);
   List<GetCourseMaterialsModel> stuLABModel = [];
   bool? isLec;
 
+  List<InsAllLecFoldersModel> insAllLecFoldersModel = [];
+  List<InsAllLecFoldersModel> insLECTUREModel = [];
+  List<InsAllLecFoldersModel> insLABModel = [];
+
   void StuGetCourseMaterials(
       //required token,
       // required cycleId,
       ) {
     // print('sdsds ${isCycleIdChange}');
-    if (stuCoursesMatrialModel.isEmpty || isCycleIdChange == true) {
-      emit(Stu_Get_Course_Material_LoadingState());
-      Dio_Helper.GetData(
-        url: 'Students/CurrentCourseMaterial?CycleId=${currentCycleId}',
-        //STU_COURSE_MATERIAL,
-        token: token,
-      ).then((value) {
-        if (value.statusCode == 200) {
-          print('get course material true');
-          List Json = value.data;
-          for (var element in Json) {
-            stuCoursesMatrialModel
-                .add(GetCourseMaterialsModel.fromJson(element));
+        if(rol=='Student') {
+          if (stuCoursesMatrialModel.isEmpty || isCycleIdChange == true) {
+            emit(Stu_Get_Course_Material_LoadingState());
+            Dio_Helper.GetData(
+              url: 'Students/CurrentCourseMaterial?CycleId=CS101FALL2024',
+              //STU_COURSE_MATERIAL,
+              token: token,
+            ).then((value) {
+              if (value.statusCode == 200) {
+                print('get course material true');
+                List Json = value.data;
+                for (var element in Json) {
+                  stuCoursesMatrialModel
+                      .add(GetCourseMaterialsModel.fromJson(element));
+                }
+                emit(Stu_Get_Course_Material_SuccessState(
+                    stuCoursesMatrialModel));
+              }
+              stuCoursesMatrialModel.forEach((element) {
+                if (element.type == 'Lecture') {
+                  stuLECTUREModel.add(element);
+                } else if (element.type == 'Lab') {
+                  stuLABModel.add(element);
+                }
+              }
+              );
+              print('lectures:');
+              stuLECTUREModel.forEach((element) {
+                print(element.lectureId);
+              });
+              print('Labs:');
+              stuLABModel.forEach((element) {
+                print(element.lectureId);
+              });
+            }).catchError((error) {
+              emit(Stu_Get_Course_Material_ErrorState(error.toString()));
+              print(error.toString());
+            });
           }
-          emit(Stu_Get_Course_Material_SuccessState(stuCoursesMatrialModel));
+          isCycleIdChange = false;
+        }else{
+          insAllLecFoldersModel = [];
+          emit(Ins_Get_All_Lec_Folders_LoadingState());
+          Dio_Helper.GetData(
+            url: 'Instructor/CurrentCourseMaterial?CycleId=$currentCycleId',
+            token: token,//'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9naXZlbm5hbWUiOiJzYXJhIHNoZWhhYiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6IlNhcmFAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiRG9jdG9yIiwiZXhwIjoxNzEwOTc3Njc4LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg2IiwiYXVkIjoiTXlTZWN1cmVkQXBpVXNlcnMifQ.7A0lYXtifSOCqyvjMhYfB3yjivRSyW57Ri_M8dlqN0w',
+          ).then((value) {
+            if (value.statusCode == 200) {
+              insAllLecFoldersModel = [];
+              // print('get course true');
+              List Json = value.data;
+              for (var element in Json) {
+                insAllLecFoldersModel.add(InsAllLecFoldersModel.fromJson(element));
+              }
+              emit(Ins_Get_All_Lec_Folders_SuccessState());
+            }
+            //  InsertToDataBase_Course_Table();
+            insAllLecFoldersModel.forEach((element) {
+              if (element.type == 'Lecture') {
+                insLECTUREModel.add(element);
+              } else if (element.type == 'Lab') {
+                insLABModel.add(element);
+              }
+            }
+            );
+            insAllLecFoldersModel.forEach((element) {
+              print('name------- ${element.lectureName}');
+            });
+
+          }).catchError((error) {
+            emit(Ins_Get_All_Lec_Folders_ErrorState());
+            print(error.toString());
+          });
         }
-        stuCoursesMatrialModel.forEach((element) {
-          if (element.type == 'Lecture') {
-            stuLECTUREModel.add(element);
-          } else if (element.type == 'Lab') {
-            stuLABModel.add(element);
-          }
-        });
-        print('lectures:');
-        stuLECTUREModel.forEach((element) {
-          print(element.lectureId);
-        });
-        print('Labs:');
-        stuLABModel.forEach((element) {
-          print(element.lectureId);
-        });
-      }).catchError((error) {
-        emit(Stu_Get_Course_Material_ErrorState(error.toString()));
-        print(error.toString());
-      });
-    }
-    isCycleIdChange = false;
   }
 
   List<GetCourseMaterialFileModel> stuCoursesMatrialFileModel = [];
@@ -715,6 +764,7 @@ print(url);
         }
         emit(Stu_Get_Course_Material_File_SuccessState());
       }
+      print(stuCoursesMatrialFileModel.length);
       print('Files:');
       stuCoursesMatrialFileModel.forEach((element) {
         print(element.fileName);
@@ -1089,6 +1139,42 @@ print(url);
 
 
 
+  //------------------------INSTRUCTOR----------------
+  //--------------------------------------------------
+  //--------------------------------------------------
+
+
+  // void insGetAllLecFolders({
+  //   required token,
+  // }) {
+  //   if (true) {
+  //     emit(Ins_Get_All_Lec_Folders_LoadingState());
+  //     Dio_Helper.GetData(
+  //       url: STU_COURSES,
+  //       token: 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9naXZlbm5hbWUiOiJzYXJhIHNoZWhhYiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6IlNhcmFAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiRG9jdG9yIiwiZXhwIjoxNzEwOTc3Njc4LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg2IiwiYXVkIjoiTXlTZWN1cmVkQXBpVXNlcnMifQ.7A0lYXtifSOCqyvjMhYfB3yjivRSyW57Ri_M8dlqN0w',
+  //     ).then((value) {
+  //       if (value.statusCode == 200) {
+  //         insAllLecFoldersModel = [];
+  //         // print('get course true');
+  //         List Json = value.data;
+  //         for (var element in Json) {
+  //           insAllLecFoldersModel.add(InsAllLecFoldersModel.fromJson(element));
+  //         }
+  //
+  //
+  //         emit(Ins_Get_All_Lec_Folders_SuccessState());
+  //       }
+  //     //  InsertToDataBase_Course_Table();
+  //       insAllLecFoldersModel.forEach((element) {
+  //         print('name------- ${element.lectureName}');
+  //       });
+  //
+  //     }).catchError((error) {
+  //       emit(Ins_Get_All_Lec_Folders_ErrorState());
+  //       print(error.toString());
+  //     });
+  //   }
+  // }
 
 
 

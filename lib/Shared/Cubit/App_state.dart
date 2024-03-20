@@ -339,7 +339,15 @@ class ChangeCalenderIndexState extends App_state {}
 class ChangeCalenderDayState extends App_state {}
 class ChangeCalenderFormatState extends App_state {}
 
+//---------------INSTRUCTOR------------
+//------------------------------------
+//--------------------------------
+class Ins_Get_All_Lec_Folders_LoadingState extends App_state {}
 
+class Ins_Get_All_Lec_Folders_SuccessState extends App_state {
+  Ins_Get_All_Lec_Folders_SuccessState();
+}
+class Ins_Get_All_Lec_Folders_ErrorState extends App_state {}
 
 
 

@@ -16,6 +16,7 @@ import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Mode
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 
+import '../../Models/INS_Model/CourseModel.dart';
 import '../../Models/STU_Model/Calender_Model/CalenderMode.dart';
 import '../Cons_widget.dart';
 import '../Cubit/App_cubit.dart';
@@ -721,40 +722,52 @@ Widget Lecture_C() => InkWell(
       ),
     );
 
-Widget Matrial_C({GetCourseMaterialsModel? courseMaterial, required index}) =>
+Widget Matrial_C({
+  context,
+  GetCourseMaterialsModel? courseMaterial,
+  InsAllLecFoldersModel?insFolder,
+  required index
+}) =>
     Padding(
       padding: const EdgeInsets.all(8.0),
       child: GlassBoxWithBorder(
         widget: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FaIcon(
-                FontAwesomeIcons.solidFolder,
-                color: c1.withOpacity(.9),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              courseMaterial?.type == 'Lecture'
-                  ? Text(
-                      'Lecture ${index + 1}',
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w700,
-                        color: c1,
-                      ),
-                    )
-                  : Text(
-                      'Lab ${index + 1}',
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w700,
-                        color: c1,
-                      ),
-                    ),
-            ],
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.solidFolder,
+                  color: c1.withOpacity(.9),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+             //   courseMaterial?.type == 'Lecture'
+                     Text(
+                  maxLines: 1,
+
+                        '${App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty?courseMaterial?.lectureName:insFolder?.lectureName}',
+                        style: TextStyle(
+                          overflow: TextOverflow.ellipsis,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w700,
+                          color: c1,
+                        ),
+                      )
+                    // : Text(
+                    //     'Lab ${index + 1}',
+                    //     style: TextStyle(
+                    //       fontSize: 17,
+                    //       fontWeight: FontWeight.w700,
+                    //       color: c1,
+                    //     ),
+                    //   ),
+
+
+              ],
+            ),
           ),
         ),
         color: Colors.blueGrey.withOpacity(.01),
