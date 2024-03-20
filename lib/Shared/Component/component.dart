@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
+import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
@@ -1720,7 +1721,79 @@ Widget Build_STU_Lec({Stu_GetAllCoursesModel? courses}) => Container(
         ],
       ),
     );
-
+Widget INS_Course({INS_Course_Model? courses}) => Container(
+  padding:
+  const EdgeInsets.only(bottom: 10, right: 20.0, top: 10, left: 10),
+  decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(15),
+      border: Border.all(
+        color: Colors.black,
+        width: .5,
+      )),
+  child: Row(
+    children: [
+      Container(
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          // image: DecorationImage(
+          //
+          //     image: NetworkImage(
+          //       '',
+          //
+          //     ),
+          //     fit: BoxFit.cover
+          // ),
+          color: Colors.blueGrey.withOpacity(.8),
+          image: DecorationImage(
+            image: AssetImage('assets/images/post/7.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      const SizedBox(
+        width: 15,
+      ),
+      Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${courses?.name}',
+              maxLines: 1,
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                color: c1,
+                fontSize: 17,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Text(
+              '${courses?.hours} hours',
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: TextStyle(
+                  fontWeight: FontWeight.w700, color: c1, fontSize: 14),
+            ),
+          ],
+        ),
+      ),
+      const SizedBox(
+        width: 15,
+      ),
+      Container(
+        alignment: AlignmentDirectional.centerEnd,
+        child:  FaIcon(
+          FontAwesomeIcons.circleRight,
+          color: Colors.teal.withOpacity(.8),
+          size: 35,
+        ),
+      ),
+    ],
+  ),
+);
 //--------------Assignments-----------------------------
 Widget Build_STU_pend_Tasks({STU_Course_Assign_Model? assign}) => Container(
     width: double.infinity,

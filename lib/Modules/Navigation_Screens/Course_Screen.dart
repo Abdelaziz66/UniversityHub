@@ -9,6 +9,7 @@ import 'package:university_hup/Shared/Cons_widget.dart';
 
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
+import 'package:university_hup/Shared/constant.dart';
 
 
 
@@ -107,13 +108,12 @@ class STU_Lecture_Screen extends StatelessWidget {
                               cubit.currentCycleId=courses[index].cycleId!;
                               navigateTo(context,  STU_About_course());
                             },
-                            child: Build_STU_Lec(
-                              courses: courses[index],
-                            )),
+                            child:rol=='Student'? Build_STU_Lec(
+                              courses:courses[index],):INS_Course( courses:cubit.ins_Courses_Model[index],)),
                         separatorBuilder: (context, index) => const SizedBox(
                           height: 20,
                         ),
-                        itemCount: courses.length,
+                        itemCount:rol=='Student'? courses.length:cubit.ins_Courses_Model.length,
                       ),
                       fallback:(context)=> ListView.separated(
                         itemBuilder: (context, index) => InkWell(
@@ -136,13 +136,12 @@ class STU_Lecture_Screen extends StatelessWidget {
                               cubit.currentCycleId=courses[index].cycleId!;
                               navigateTo(context,  STU_About_course());
                             },
-                            child: Build_STU_Lec(
-                              courses: cubit.coursemodel[index],
-                            )),
+                            child:rol=='Student'? Build_STU_Lec(
+                              courses:cubit.coursemodel[index],):INS_Course( courses:cubit.ins_Courses_Model[index],)),
                         separatorBuilder: (context, index) => const SizedBox(
                           height: 20,
                         ),
-                        itemCount: cubit.coursemodel.length,
+                        itemCount:rol=='Student'? cubit.coursemodel.length:cubit.ins_Courses_Model.length,
                       ),
                     ),
 
