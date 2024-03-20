@@ -58,7 +58,7 @@ Future<void> main()  async {
   Bloc.observer = MyBlocObserver();
   await CachHelper.init();
   token = CachHelper.getData(key: 'token');
-  // rol= CachHelper.getData(key: 'rol');
+  rol= CachHelper.getData(key: 'rol');
   landscape= CachHelper.getData(key: 'landscape');
   if (token == null) {
     if(landscape != null)
