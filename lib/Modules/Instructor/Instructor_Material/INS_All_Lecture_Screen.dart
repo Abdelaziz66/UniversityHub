@@ -13,6 +13,8 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
+import '../../../Models/INS_Model/CourseModel.dart';
+
 
 
 
@@ -22,24 +24,24 @@ import 'package:university_hup/Shared/constant.dart';
 class INS_Matrial_Screen extends StatelessWidget {
    INS_Matrial_Screen({super.key});
   var scafoldkey1 = GlobalKey<ScaffoldState>();
+  var formKey=GlobalKey<FormState>();
+  var folderController =TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit, App_state>(
       listener: (context, state) => {},
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
-        List<GetCourseMaterialsModel>courseMaterial=cubit.stuCoursesMatrialModel;
-        bool isvisbile=false;
+        List<InsAllLecFoldersModel>courseMaterial=cubit.insAllLecFoldersModel;
+        List<InsAllLecFoldersModel>lectures=cubit.insLECTUREModel;
         return Scaffold(
           key: scafoldkey1,
           floatingActionButton: Padding(
             padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal: 8),
             child: FloatingActionButton(
               onPressed: (){
-                if(!isvisbile)
+                if(cubit.visiblity==false)
                   {
-                    isvisbile=!isvisbile;
-
                     scafoldkey1.currentState?.showBottomSheet(
                           (context) => Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -48,60 +50,62 @@ class INS_Matrial_Screen extends StatelessWidget {
                               height: 250,
                               child: Padding(
                                 padding: const EdgeInsets.all(25.0),
-                                child: Column(
-                                  children: [
-                                    const Spacer(),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: 70,
-                                      decoration: BoxDecoration(
-                                        // border: Border.all(color: Colors.white),
-                                        borderRadius: BorderRadius.circular(18),
-                                        color: Colors.white.withOpacity(.8),
-                                      ),
-                                      child: Padding(
-                                        padding:
-                                        const EdgeInsets.symmetric(horizontal: 8.0),
-                                        child: TextFormField(
-                                          // controller: emailcontroller,
-                                          keyboardType: TextInputType.text,
-                                          onFieldSubmitted: (value) {
-                                            print(value);
-                                          },
-                                          onChanged: (value) {
-                                            print(value);
-                                          },
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'Folder name can\'t be empty';
-                                            }
-                                            return null;
-                                          },
-                                          // toolbarOptions:
-                                          //     ToolbarOptions(paste: true, copy: true),
-                                          cursorColor: c1,
-                                          style: const TextStyle(
-                                            fontSize: 25,
-                                          ),
-                                          decoration: InputDecoration(
-                                            prefixIcon: Padding(
-                                              padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 6),
-                                              child: FaIcon(
-                                                FontAwesomeIcons.solidFolder,
-                                                color: c1,
-                                                size: 30,
-                                              ),
+                                child: Form(
+                                  key: formKey,
+                                  child: Column(
+                                    children: [
+                                      const Spacer(),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        height: 70,
+                                        decoration: BoxDecoration(
+                                          // border: Border.all(color: Colors.white),
+                                          borderRadius: BorderRadius.circular(18),
+                                          color: Colors.white.withOpacity(.8),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                          const EdgeInsets.symmetric(horizontal: 8.0),
+                                          child: TextFormField(
+                                            controller: folderController,
+                                            keyboardType: TextInputType.text,
+                                            onFieldSubmitted: (value) {
+                                              print(value);
+                                            },
+                                            validator: (value) {
+                                              if (value!.isEmpty) {
+                                                return 'Folder name can\'t be empty';
+                                              }
+                                              return null;
+                                            },
+                                            cursorColor: c1,
+                                            style: const TextStyle(
+                                              fontSize: 25,
                                             ),
-                                            hintText: 'Folder name',
-                                            border: InputBorder.none,
+                                            decoration: InputDecoration(
+                                              prefixIcon: Padding(
+                                                padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 6),
+                                                child: FaIcon(
+                                                  FontAwesomeIcons.solidFolder,
+                                                  color: c1,
+                                                  size: 30,
+                                                ),
+                                              ),
+                                              hintText: 'Folder name',
+                                              border: InputBorder.none,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(height: 15,),
-                                    Default_Button(onPressed: (){},text: 'Add Folder',),
-                                    const Spacer(),
-                                  ],
+                                      SizedBox(height: 15,),
+                                      Default_Button(onPressed: (){
+                                         if(formKey.currentState!.validate()){
+
+                                         }
+                                      },text: 'Add Folder',),
+                                      const Spacer(),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -113,18 +117,20 @@ class INS_Matrial_Screen extends StatelessWidget {
                           BorderWidth: 3,
                           BorderColor: Colors.blueGrey,),
                       ),
-                    );
+                    ).closed.then((value) {
+                      cubit.ChangeVisibility(isShow: false, icon: FaIcon(FontAwesomeIcons.plus),);
+                    });
+                    cubit.ChangeVisibility(isShow:true,icon:  FaIcon(FontAwesomeIcons.angleDown));
 
                   }
                 else
                   {
-
                     Navigator.pop(context);
-                    isvisbile=!isvisbile;
+                    cubit.ChangeVisibility(isShow: false,icon: FaIcon(FontAwesomeIcons.plus));
                   }
 
               },
-              child:!isvisbile? FaIcon(FontAwesomeIcons.plus): FaIcon(FontAwesomeIcons.angleDown),
+              child:cubit.visiblity==false? FaIcon(FontAwesomeIcons.plus): FaIcon(FontAwesomeIcons.angleDown),
 
             ),
           ),
@@ -172,6 +178,7 @@ class INS_Matrial_Screen extends StatelessWidget {
                 height: 30,
               ),
               defaultAppbar(context: context,
+                text: cubit.currentCourseName
               ),
               const SizedBox(
                 height: 30,
@@ -290,49 +297,57 @@ class INS_Matrial_Screen extends StatelessWidget {
               //   ),
               // ),
 
-              ConditionalBuilder(
-                condition: cubit.DE,
-                builder: (context) => Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2, childAspectRatio: 2.5),
-                      itemBuilder: (context, index) => InkWell(
-                          onTap: () {
-                            navigateTo(context,rol=='Student'? STU_Show_Material_Lec_Or_Sec():INS_Show_Material_Lec_Or_Sec());
-                          },
-                          child: Matrial_C(
-                          courseMaterial:courseMaterial[index] ,
-                            index: index,
-                          )),
-                      scrollDirection: Axis.vertical,
-                      itemCount: courseMaterial.length,
-                    ),
-                  ),
-                ),
-                fallback: (context) => Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2, childAspectRatio: 2.5),
-                      itemBuilder: (context, index) => InkWell(
-                          onTap: () {
-                            navigateTo(context, STU_Show_Material_Lec_Or_Sec());
-                          },
-                          child: Matrial_C(
-                              courseMaterial:courseMaterial[index] ,
-                              index: index
-                          )),
-                      scrollDirection: Axis.vertical,
-                      itemCount: courseMaterial.length,
-                    ),
+
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: GridView.builder(
+                    gridDelegate:
+                    const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, childAspectRatio: 2.5,),
+                    itemBuilder: (context, index) => InkWell(
+                        onTap: () {
+                          cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);
+                          cubit.folderId=lectures[index].lectureId;
+                          navigateTo(context,rol=='Student'? STU_Show_Material_Lec_Or_Sec():INS_Show_Material_Lec_Or_Sec());
+                        },
+                        child: Matrial_C(
+                          context: context,
+                          insFolder:lectures[index] ,
+                        //  index: index,
+                        )),
+                    scrollDirection: Axis.vertical,
+                    itemCount: lectures.length,
                   ),
                 ),
               ),
+
+              // ConditionalBuilder(
+              //   condition: cubit.DE,
+              //   builder: (context) =>
+              //   fallback: (context) => Expanded(
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(15.0),
+              //       child: GridView.builder(
+              //         gridDelegate:
+              //             const SliverGridDelegateWithFixedCrossAxisCount(
+              //                 crossAxisCount: 2, childAspectRatio: 2.5),
+              //         itemBuilder: (context, index) => InkWell(
+              //             onTap: () {
+              //               navigateTo(context, STU_Show_Material_Lec_Or_Sec());
+              //             },
+              //             child: Matrial_C(
+              //                 context: context,
+              //
+              //                 insFolder:lectures[index] ,
+              //                 index: index
+              //             )),
+              //         scrollDirection: Axis.vertical,
+              //         itemCount: lectures.length,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ));

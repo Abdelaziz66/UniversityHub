@@ -17,6 +17,7 @@ import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Mode
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 
+import '../../Models/INS_Model/CourseModel.dart';
 import '../../Models/STU_Model/Calender_Model/CalenderMode.dart';
 import '../Cons_widget.dart';
 import '../Cubit/App_cubit.dart';
@@ -722,40 +723,55 @@ Widget Lecture_C() => InkWell(
       ),
     );
 
-Widget Matrial_C({GetCourseMaterialsModel? courseMaterial, required index}) =>
+Widget Matrial_C({
+  context,
+  GetCourseMaterialsModel? courseMaterial,
+  InsAllLecFoldersModel?insFolder,
+   index
+}) =>
     Padding(
       padding: const EdgeInsets.all(8.0),
       child: GlassBoxWithBorder(
         widget: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FaIcon(
-                FontAwesomeIcons.solidFolder,
-                color: c1.withOpacity(.9),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              courseMaterial?.type == 'Lecture'
-                  ? Text(
-                      'Lecture ${index + 1}',
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w700,
-                        color: c1,
-                      ),
-                    )
-                  : Text(
-                      'Lab ${index + 1}',
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w700,
-                        color: c1,
-                      ),
-                    ),
-            ],
+          child: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.solidFolder,
+                  color: c1.withOpacity(.9),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+             //   courseMaterial?.type == 'Lecture'
+                     Container(
+                       width: 100,
+                       child: Text(
+                          maxLines: 1,
+
+                          '${App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty?courseMaterial?.lectureName:insFolder?.lectureName}',
+                            style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            color: c1,
+                          ),
+                        ),
+                     )
+                    // : Text(
+                    //     'Lab ${index + 1}',
+                    //     style: TextStyle(
+                    //       fontSize: 17,
+                    //       fontWeight: FontWeight.w700,
+                    //       color: c1,
+                    //     ),
+                    //   ),
+
+
+              ],
+            ),
           ),
         ),
         color: Colors.blueGrey.withOpacity(.01),
@@ -1513,6 +1529,8 @@ Widget Build_Lec_View_Widget(
 Widget STU_Build_Lec_View_Widget({
   GetCourseMaterialsModel? courseMaterial,
   GetCourseMaterialFileModel? file,
+  InsLecFilesModel? insFile,
+
   index,
   context,
 }) {
@@ -1539,9 +1557,9 @@ Widget STU_Build_Lec_View_Widget({
             color: color,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: const Text(
-            '.jpg',
-            style: TextStyle(
+          child:  Text(
+            App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty?
+            '${file?.fileName}':'${insFile?.filePath?.split('.').last}',              style: TextStyle(
               color: Colors.white,
               fontSize: 28,
             ),
@@ -1555,7 +1573,8 @@ Widget STU_Build_Lec_View_Widget({
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${file?.fileName}' ?? '${courseMaterial?.lectureName}',
+                App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty?
+                '${file?.fileName}':'${insFile?.fileName}',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 14,
@@ -1564,7 +1583,8 @@ Widget STU_Build_Lec_View_Widget({
                 maxLines: 2,
               ),
               Text(
-                '40 MB',
+                App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty?
+                '${file?.createdAt?.split('T').first} at ${file?.createdAt?.split('T').last}':'${insFile?.createdAt?.split('T').first} at ${insFile?.createdAt?.split('T').last}',
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey[700],
