@@ -11,6 +11,9 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
+import '../../Models/INS_Model/INS_course_model.dart';
+import '../../Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+
 
 
 
@@ -26,6 +29,7 @@ class STU_Lecture_Screen extends StatelessWidget {
       builder: (context, state) {
         App_cubit cubit=App_cubit.get(context);
         List<Stu_GetAllCoursesModel>courses=cubit.stuAllCoursesModel;
+        List<INS_Course_Model>insCourses=cubit.ins_Courses_Model;
         return SafeArea(
           child: Scaffold(
             backgroundColor: Colors.transparent,
@@ -90,22 +94,44 @@ class STU_Lecture_Screen extends StatelessWidget {
                       builder:(context)=>ListView.separated(
                         itemBuilder: (context, index) => InkWell(
                             onTap: () {
-                              print(cubit.currentCycleId);
-                              print(courses[index].cycleId);
-                              cubit.currentCourseName=courses[index].name;
-                              if(cubit.currentCycleId!=courses[index].cycleId) {
-                                cubit.stuCoursesMatrialModel=[];
-                                cubit.stuLECTUREModel=[];
-                                cubit.stuLABModel=[];
-                                //cubit.stuCoursesMatrialFileModel=[];
-                                cubit.stuCoursesAssignModel=[];
-                                cubit.stuCoursesQuizlModel=[];
-                                cubit.courseGradesModel=[];
-                                cubit.isCycleIdChange=true;
-                              } else {
-                                cubit.isCycleIdChange=false;
+                             // print(cubit.currentCycleId);
+                            //  print(courses[index].cycleId);
+                              if(rol=='Student') {
+                                cubit.currentCourseName = courses[index].name;
+                                if (cubit.currentCycleId !=
+                                    courses[index].cycleId) {
+                                  cubit.stuCoursesMatrialModel = [];
+                                  cubit.stuLECTUREModel = [];
+                                  cubit.stuLABModel = [];
+                                  //cubit.stuCoursesMatrialFileModel=[];
+                                  cubit.stuCoursesAssignModel = [];
+                                  cubit.stuCoursesQuizlModel = [];
+                                  cubit.courseGradesModel = [];
+                                  cubit.isCycleIdChange = true;
+                                } else {
+                                  cubit.isCycleIdChange = false;
+                                }
+                                cubit.currentCycleId = courses[index].cycleId!;
                               }
-                              cubit.currentCycleId=courses[index].cycleId!;
+                              else{
+                                cubit.currentCourseName = insCourses[index].name;
+                                if (cubit.currentCycleId !=
+                                    insCourses[index].cycleId) {
+                                  cubit.ins_Courses_Model= [];
+                                  cubit.insLECTUREModel = [];
+                                  cubit.insLABModel = [];
+                                  //cubit.stuCoursesMatrialFileModel=[];
+                               //   cubit.stuCoursesAssignModel = [];
+                               //   cubit.stuCoursesQuizlModel = [];
+                              //    cubit.courseGradesModel = [];
+                               //   cubit.isCycleIdChange = true;
+                                } else {
+                                  cubit.isCycleIdChange = false;
+                                }
+                                cubit.currentCycleId = insCourses[index].cycleId!;
+                              }
+
+
                               navigateTo(context,  STU_About_course());
                             },
                             child:rol=='Student'? Build_STU_Lec(

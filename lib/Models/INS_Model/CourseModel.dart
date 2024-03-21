@@ -23,3 +23,71 @@ class InsAllLecFoldersModel {
     return data;
   }
 }
+
+
+class InsLecFilesModel {
+  int? lectureFileId;
+  String? fileName;
+  String? filePath;
+  String? createdAt;
+
+  InsLecFilesModel(
+      {this.lectureFileId, this.fileName, this.filePath, this.createdAt});
+
+  InsLecFilesModel.fromJson(Map<String, dynamic> json) {
+    lectureFileId = json['lectureFileId'];
+    fileName = json['fileName'];
+    filePath = json['filePath'];
+    createdAt = json['createdAt'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['lectureFileId'] = this.lectureFileId;
+    data['fileName'] = this.fileName;
+    data['filePath'] = this.filePath;
+    data['createdAt'] = this.createdAt;
+    return data;
+  }
+}
+
+
+
+
+
+class InsUploadFilesModel {
+  int? lectureFileId;
+  String? lectureId;
+  String? filePath;
+  String? createdAt;
+  String? name;
+  Null? lecture;
+
+  InsUploadFilesModel(
+      {this.lectureFileId,
+        this.lectureId,
+        this.filePath,
+        this.createdAt,
+        this.name,
+        this.lecture});
+
+  InsUploadFilesModel.fromJson(Map<String, dynamic> json) {
+    lectureFileId = json['lectureFileId'];
+    lectureId = json['lectureId'];
+    filePath = json['filePath'];
+    createdAt = json['createdAt'];
+    name = json['name'];
+    lecture = json['lecture'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['lectureFileId'] = this.lectureFileId;
+    data['lectureId'] = this.lectureId;
+    data['filePath'] = this.filePath;
+    data['createdAt'] = this.createdAt;
+    data['name'] = this.name;
+    data['lecture'] = this.lecture;
+    return data;
+  }
+}

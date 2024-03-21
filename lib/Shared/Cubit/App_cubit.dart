@@ -308,35 +308,34 @@ class App_cubit extends Cubit<App_state> {
     emit(AddFile_Loading_State());
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowMultiple: true,
+      allowMultiple: false,
       allowedExtensions: ['png', 'cdr', 'psd', 'jpeg', 'png', 'pdf'],
     );
     if (result != null) {
       all_files_List = result.files; //Adding all files to all_files list
-      emit(AddFile_Success_State());
+          emit(AddFile_Success_State());
     } else {
-      // User canceled the picker
       emit(AddFile_Error_State());
     }
   }
-
-  void add_NewFile_To_FIles_List() async {
-    emit(AddNewFile_Loading_State());
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowMultiple: true,
-      allowedExtensions: ['png', 'cdr', 'psd', 'jpeg', 'png', 'pdf'],
-    );
-    if (result != null) {
-      result.files.forEach((element) {
-        all_files_List.add(element);
-      });
-      emit(AddNewFile_Success_State());
-    } else {
-      // User canceled the picker
-      emit(AddNewFile_Error_State());
-    }
-  }
+  //
+  // void add_NewFile_To_FIles_List() async {
+  //   emit(AddNewFile_Loading_State());
+  //   FilePickerResult? result = await FilePicker.platform.pickFiles(
+  //     type: FileType.custom,
+  //     allowMultiple: true,
+  //     allowedExtensions: ['png', 'cdr', 'psd', 'jpeg', 'png', 'pdf'],
+  //   );
+  //   if (result != null) {
+  //     result.files.forEach((element) {
+  //       all_files_List.add(element);
+  //     });
+  //     emit(AddNewFile_Success_State());
+  //   } else {
+  //     // User canceled the picker
+  //     emit(AddNewFile_Error_State());
+  //   }
+  // }
 
   void openFile_Fun({File? file,String? filePath}) {
     emit(ShowFile_Loading_State());
@@ -350,26 +349,27 @@ class App_cubit extends Cubit<App_state> {
   }
 
 
-  static Future<void> openURL(String url) async {
-    final Uri _url = Uri.parse(url);
+//   static Future<void> openURL(String url) async {
+//     final Uri _url = Uri.parse(url);
+//
+//     print('ss $_url');
+// print(url);
+//    // bool iscanLaunchUrl = await canLaunchUrl(_url);
+//
+//     //if (iscanLaunchUrl) {
+//       print('ssdd $_url');
+//       await launchUrl(_url).then((value) {
+//         print('success');
+//       }).catchError((error){
+//         print('ddddddddddddddddddddd');
+//         print(error);
+//         print('Could not launch $url');
+//       });
+//   //  } else {
+//
+//  //   }
+//   }
 
-    print('ss $_url');
-print(url);
-   // bool iscanLaunchUrl = await canLaunchUrl(_url);
-
-    //if (iscanLaunchUrl) {
-      print('ssdd $_url');
-      await launchUrl(_url).then((value) {
-        print('success');
-      }).catchError((error){
-        print('ddddddddddddddddddddd');
-        print(error);
-        print('Could not launch $url');
-      });
-  //  } else {
-
- //   }
-  }
 
   String pathPDF = "";
 
@@ -425,6 +425,7 @@ print(url);
   //   return file;
   // }
 
+
   /*-------------add quiz --------------*/
 
   final List<String> materil_for_quiz = [
@@ -476,9 +477,10 @@ print(url);
   File? assignFile;
   void pick_assign_File() async {
     emit(AddFile_Assign_Loading_State());
+
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowMultiple: true,
+      allowMultiple: false,
       allowedExtensions: ['png', 'cdr', 'psd', 'jpeg', 'png', 'pdf'],
     );
     if (result != null) {
@@ -556,23 +558,19 @@ print(url);
       // print('token:${token}');
       emit(STU_LoginSuccessState(stu_login_Model!));
       if(rol=='Student'){
-
         GetCurrentStudenInfo();
         GetAllNews();
       }
       else{
         GetCurrentInfo_ins_Function();
         GetAllNews();
-
       }
-
-
-
     }).catchError((Error) {
       print(Error.toString());
       emit(STU_LoginErrorState(Error.toString()));
     });
   }
+
 
   CurrentStudentInfoModel? studentInfoModel;
   Future<void> GetCurrentStudenInfo(
@@ -710,7 +708,6 @@ print(url);
         // stuAllCoursesModel.forEach((element) {
         //   print('name------- ${element.name}');
         // });
-
       }).catchError((error) {
         emit(INS_Get_All_Courses_ErrorState(error.toString()));
         print(error.toString());
@@ -732,11 +729,7 @@ print(url);
   List<InsAllLecFoldersModel> insLECTUREModel = [];
   List<InsAllLecFoldersModel> insLABModel = [];
 
-  void StuGetCourseMaterials(
-      //required token,
-      // required cycleId,
-      ) {
-    // print('sdsds ${isCycleIdChange}');
+  void GetCourseMaterials() {
         if(rol=='Student') {
           if (stuCoursesMatrialModel.isEmpty || isCycleIdChange == true) {
             emit(Stu_Get_Course_Material_LoadingState());
@@ -777,43 +770,46 @@ print(url);
             });
           }
           isCycleIdChange = false;
-        }else{
-          insAllLecFoldersModel = [];
-          emit(Ins_Get_All_Lec_Folders_LoadingState());
-          Dio_Helper.GetData(
-            url: 'Instructor/CurrentCourseMaterial?CycleId=$currentCycleId',
-            token: token,//'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9naXZlbm5hbWUiOiJzYXJhIHNoZWhhYiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6IlNhcmFAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiRG9jdG9yIiwiZXhwIjoxNzEwOTc3Njc4LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg2IiwiYXVkIjoiTXlTZWN1cmVkQXBpVXNlcnMifQ.7A0lYXtifSOCqyvjMhYfB3yjivRSyW57Ri_M8dlqN0w',
-          ).then((value) {
-            if (value.statusCode == 200) {
-              insAllLecFoldersModel = [];
-              // print('get course true');
-              List Json = value.data;
-              for (var element in Json) {
-                insAllLecFoldersModel.add(InsAllLecFoldersModel.fromJson(element));
+        }else {
+          if (insAllLecFoldersModel.isEmpty || isCycleIdChange == true) {
+            emit(Ins_Get_All_Lec_Folders_LoadingState());
+            Dio_Helper.GetData(
+              url: 'Instructor/CurrentCourseMaterial?CycleId=$currentCycleId',
+              token: token, //'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9naXZlbm5hbWUiOiJzYXJhIHNoZWhhYiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6IlNhcmFAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiRG9jdG9yIiwiZXhwIjoxNzEwOTc3Njc4LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg2IiwiYXVkIjoiTXlTZWN1cmVkQXBpVXNlcnMifQ.7A0lYXtifSOCqyvjMhYfB3yjivRSyW57Ri_M8dlqN0w',
+            ).then((value) {
+              if (value.statusCode == 200) {
+                insAllLecFoldersModel = [];
+                // print('get course true');
+                List Json = value.data;
+                for (var element in Json) {
+                  insAllLecFoldersModel.add(
+                      InsAllLecFoldersModel.fromJson(element));
+                }
+                emit(Ins_Get_All_Lec_Folders_SuccessState());
               }
-              emit(Ins_Get_All_Lec_Folders_SuccessState());
-            }
-            //  InsertToDataBase_Course_Table();
-            insAllLecFoldersModel.forEach((element) {
-              if (element.type == 'Lecture') {
-                insLECTUREModel.add(element);
-              } else if (element.type == 'Lab') {
-                insLABModel.add(element);
+              //  InsertToDataBase_Course_Table();
+              insAllLecFoldersModel.forEach((element) {
+                if (element.type == 'Lecture') {
+                  insLECTUREModel.add(element);
+                } else if (element.type == 'Lab') {
+                  insLABModel.add(element);
+                }
               }
-            }
-            );
-            insAllLecFoldersModel.forEach((element) {
-              print('name------- ${element.lectureName}');
+              );
+              insAllLecFoldersModel.forEach((element) {
+                print('name------- ${element.lectureName}');
+              });
+            }).catchError((error) {
+              emit(Ins_Get_All_Lec_Folders_ErrorState());
+              print(error.toString());
             });
-
-          }).catchError((error) {
-            emit(Ins_Get_All_Lec_Folders_ErrorState());
-            print(error.toString());
-          });
+          }
+          isCycleIdChange = false;
         }
   }
 
   List<GetCourseMaterialFileModel> stuCoursesMatrialFileModel = [];
+  List<InsLecFilesModel> insCoursesMatrialFileModel = [];
   // List<GetCourseMaterialsModel> stuLECTUREModel=[];
   // List<GetCourseMaterialsModel> stuLABModel=[];
 
@@ -821,6 +817,7 @@ print(url);
     //required token,
     required lecId,
   }) {
+    if(rol=='Studen'){
     stuCoursesMatrialFileModel = [];
     // print('lecId=${lecId}');
     //if (stuCoursesMatrialModel.isEmpty || isCycleIdChange==true){
@@ -850,6 +847,72 @@ print(url);
     });
     //}
     //isCycleIdChange=false;
+  }else{
+      insCoursesMatrialFileModel = [];
+      // print('lecId=${lecId}');
+      //if (stuCoursesMatrialModel.isEmpty || isCycleIdChange==true){
+      emit(Stu_Get_Course_Material_File_LoadingState());
+      Dio_Helper.GetData(
+        url: 'Instructor/Getfilesoflecture?lectureId=${lecId}',
+        //STU_COURSE_MATERIAL,
+        token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          print('get course material File true');
+          List Json = value.data;
+          for (var element in Json) {
+            insCoursesMatrialFileModel
+                .add(InsLecFilesModel.fromJson(element));
+          }
+          emit(Stu_Get_Course_Material_File_SuccessState());
+        }
+        print(insCoursesMatrialFileModel.length);
+        print('Files:');
+        insCoursesMatrialFileModel.forEach((element) {
+          print(element.filePath);
+        });
+      }).catchError((error) {
+        emit(Stu_Get_Course_Material_File_ErrorState(error.toString()));
+        print(error.toString());
+      });
+    }
+
+  }
+
+
+  //------------ins upload file ---------------
+ // File? insfile;
+  String? folderId;
+  void insuploadLecFile({
+    required String fileName,
+}) {
+    // print('All files-------------- ${all_assign_files_List}');
+    print('task id : ${taskId}');
+    print('All files-------------- ${all_assign_files_List}');
+    all_assign_files_List=[];
+    emit(Stu_Submit_Task_LoadingState());
+    Dio_Helper.PostListFileData(
+        token: token,
+        url: 'Instructor/UploadLectureFile?lectureId=$folderId&file_Name=$fileName',
+        files: all_assign_files_List
+    )
+        .then((value) {
+      if (value.statusCode == 200) {
+        print('post assign true');
+        //   print(value.data);
+        String json = value.data;
+        print(json);
+        flutterToast(msg: json, backColor: Colors.blue);
+        emit(Stu_Submit_Task_SuccessState());
+      }
+    }).catchError((Error) {
+      print(Error.toString());
+      flutterToast(
+          msg: 'Error to upload your file , please try again',
+          backColor: Colors.blue);
+
+      emit(Stu_Submit_Task_ErrorState(Error.toString()));
+    });
   }
 
   //----------------------STU assign -----------------
@@ -916,7 +979,7 @@ print(url);
   }
 
   //-------------------------submit Task-----------------
-  File? file;
+ // File? file;
   void SumitTask() {
     // print('All files-------------- ${all_assign_files_List}');
     print('task id : ${taskId}');

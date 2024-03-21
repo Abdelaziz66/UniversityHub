@@ -239,10 +239,7 @@ class Stu_Get_Course_Quiz_LoadingState extends App_state {}
 
 class Stu_Get_Course_Quiz_SuccessState extends App_state {
   List<STU_Quiz_Model> quizmodel=[];
-
-
   Stu_Get_Course_Quiz_SuccessState(this.quizmodel);
-
 }
 
 class Stu_Get_Course_Quiz_ErrorState extends App_state {

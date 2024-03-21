@@ -178,6 +178,7 @@ class INS_Matrial_Screen extends StatelessWidget {
                 height: 30,
               ),
               defaultAppbar(context: context,
+                text: cubit.currentCourseName
               ),
               const SizedBox(
                 height: 30,
@@ -296,52 +297,57 @@ class INS_Matrial_Screen extends StatelessWidget {
               //   ),
               // ),
 
-              ConditionalBuilder(
-                condition: cubit.DE,
-                builder: (context) => Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2, childAspectRatio: 2.5),
-                      itemBuilder: (context, index) => InkWell(
-                          onTap: () {
-                            navigateTo(context,rol=='Student'? STU_Show_Material_Lec_Or_Sec():INS_Show_Material_Lec_Or_Sec());
-                          },
-                          child: Matrial_C(
-                            context: context,
-                            insFolder:lectures[index] ,
-                            index: index,
-                          )),
-                      scrollDirection: Axis.vertical,
-                      itemCount: lectures.length,
-                    ),
-                  ),
-                ),
-                fallback: (context) => Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2, childAspectRatio: 2.5),
-                      itemBuilder: (context, index) => InkWell(
-                          onTap: () {
-                            navigateTo(context, STU_Show_Material_Lec_Or_Sec());
-                          },
-                          child: Matrial_C(
-                              context: context,
 
-                              insFolder:lectures[index] ,
-                              index: index
-                          )),
-                      scrollDirection: Axis.vertical,
-                      itemCount: lectures.length,
-                    ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: GridView.builder(
+                    gridDelegate:
+                    const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, childAspectRatio: 2.5,),
+                    itemBuilder: (context, index) => InkWell(
+                        onTap: () {
+                          cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);
+                          cubit.folderId=lectures[index].lectureId;
+                          navigateTo(context,rol=='Student'? STU_Show_Material_Lec_Or_Sec():INS_Show_Material_Lec_Or_Sec());
+                        },
+                        child: Matrial_C(
+                          context: context,
+                          insFolder:lectures[index] ,
+                        //  index: index,
+                        )),
+                    scrollDirection: Axis.vertical,
+                    itemCount: lectures.length,
                   ),
                 ),
               ),
+
+              // ConditionalBuilder(
+              //   condition: cubit.DE,
+              //   builder: (context) =>
+              //   fallback: (context) => Expanded(
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(15.0),
+              //       child: GridView.builder(
+              //         gridDelegate:
+              //             const SliverGridDelegateWithFixedCrossAxisCount(
+              //                 crossAxisCount: 2, childAspectRatio: 2.5),
+              //         itemBuilder: (context, index) => InkWell(
+              //             onTap: () {
+              //               navigateTo(context, STU_Show_Material_Lec_Or_Sec());
+              //             },
+              //             child: Matrial_C(
+              //                 context: context,
+              //
+              //                 insFolder:lectures[index] ,
+              //                 index: index
+              //             )),
+              //         scrollDirection: Axis.vertical,
+              //         itemCount: lectures.length,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ));

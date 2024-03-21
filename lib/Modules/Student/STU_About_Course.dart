@@ -57,7 +57,7 @@ class STU_About_course extends StatelessWidget {
                                     Expanded(
                                       child: InkWell(
                                         onTap: (){
-                                          cubit.StuGetCourseMaterials(
+                                          cubit.GetCourseMaterials(
                                           //  token:App_cubit.get(context).Tokenn,
                                           //  cycleId: '${courses[index].cycleId}',
                                           );
