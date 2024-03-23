@@ -1,9 +1,10 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+import 'package:university_hup/Models/INS_Model/CourseModel.dart';
+
 import 'package:university_hup/Modules/Instructor/Instructor_Material/INS_Show_Lecs_or_Lab_screen.dart';
 
 import 'package:university_hup/Modules/Student/Student_Material/STU_Show_Lecs_or_Lab_screen.dart';
@@ -13,7 +14,7 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
-import '../../../Models/INS_Model/CourseModel.dart';
+
 
 
 
@@ -134,43 +135,7 @@ class INS_Matrial_Screen extends StatelessWidget {
 
             ),
           ),
-            // appBar: AppBar(
-            //   title: Padding(
-            //     padding: const EdgeInsets.all(8.0),
-            //     child: Column(
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //       children: [
-            //         SizedBox(
-            //           height: 10,
-            //         ),
-            //         Text(
-            //           'Material name',
-            //           style:
-            //               TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-            //         ),
-            //         // Text('instructor name',
-            //         //   style: TextStyle(
-            //         //     color: Colors.grey[600],
-            //         //       fontWeight: FontWeight.w400,
-            //         //       fontSize: 15
-            //         //   ),
-            //         // ),
-            //       ],
-            //     ),
-            //   ),
-            //   actions: [
-            //     Padding(
-            //       padding: const EdgeInsets.all(12.0),
-            //       child: Image(
-            //         image: NetworkImage(
-            //             'https://s3-alpha-sig.figma.com/img/07b3/a7c9/c2125e7477b092a6b41eee3cbb5627cd?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=LSFzhb5MX20bm5v9pG3n1Lqu5K91VfFaQWA08MV3tZIr-uKjGcByqUBbmljKxlpoEMBhMNd0BPeNgR4EYO~5vCLiHPHXmElMRDj6uXz86SLBMiP~g9p53YydDzfpLmcGZqaN9-ji1169FinyPbjn1Z2h3EBaLuV-Yvxw-eC9KsLuPIloT73yerWbs7kKpOrkjKlLfqZiuZVNgA~7w6QuAYyFEs6T8Ng6LkhhVNUucnBwrquNsuxqNmuQUvvk-6N~7uBKQUw-slravD9XxeGtLp0gJINLfsiC1ZCrGNhl8YZoUdwqPuSPfJdHt~kZhsZpWbdtivJRMcjyF5ZwSQKm-Q__'),
-            //         fit: BoxFit.cover,
-            //         height: 50,
-            //         width: 50,
-            //       ),
-            //     ),
-            //   ],
-            // ),
+
             body: SafeArea(
           child: Column(
             children: [

@@ -185,20 +185,15 @@ class INS_Quizes_Screen extends StatelessWidget {
                     child: ListView.separated(
                       physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index) =>
-                          Build_Quiz_Data_Widget(
-                              quizIsComplete:
-                              cubit.stu_Quiz_IsComplete,
-                              isQuizStart:
-                              cubit.stu_Quiz_isStart,
-                              index:
-                              index
+                          INS_Quiz_Card(
+
 
                           ),
                       separatorBuilder: (context, index) =>
                       const SizedBox(
                         height: 25,
                       ),
-                      itemCount: 3,
+                      itemCount: 2,
                     ),
                   ),
                 ),
