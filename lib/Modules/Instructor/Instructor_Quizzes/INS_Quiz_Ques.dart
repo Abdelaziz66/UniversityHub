@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:university_hup/Modules/Instructor/Instructor_Quizzes/INS_Quiz_Finish_Screen.dart';
 
 import 'package:university_hup/Shared/Component/component.dart';
@@ -13,8 +14,7 @@ import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
 class INS_Quizes_Ques_Screen extends StatefulWidget {
-   INS_Quizes_Ques_Screen({super.key});
-
+  INS_Quizes_Ques_Screen({super.key});
 
   @override
   State<INS_Quizes_Ques_Screen> createState() => _STU_Quizes_Ques_ScreenState();
@@ -23,7 +23,7 @@ class INS_Quizes_Ques_Screen extends StatefulWidget {
 class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
   bool islast = false;
   bool ismiddle = false;
-  String? quiz_ask= '';
+  String? quiz_ask = '';
 
   var boardcontroller = PageController();
   @override
@@ -86,23 +86,25 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
                 const SizedBox(
                   height: 10,
                 ),
+
+
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.only(left: 15.0,right: 15,top: 15),
                     child: PageView.builder(
                       physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
                       onPageChanged: (index) {
                         if (index == cubit.stu_Quiz_Ques_lis.length - 1) {
                           setState(() {
                             islast = true;
                           });
-                        } else if(index == cubit.stu_Quiz_Ques_lis.length - 2)
-                        {
+                        } else if (index ==
+                            cubit.stu_Quiz_Ques_lis.length - 2) {
                           setState(() {
                             ismiddle = true;
                           });
-                        }
-                        else{
+                        } else {
                           setState(() {
                             islast = false;
                             ismiddle = false;
@@ -110,25 +112,237 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
                         }
                       },
                       controller: boardcontroller,
-                      itemBuilder: (context, index) =>
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Build_INS_Quiz_Ques(context,cubit.stu_Quiz_Ques_lis,cubit.stu_Quiz_Ques_options,index),
-                          ),
+                      itemBuilder: (context, index) => SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Build_INS_Quiz_Ques(
+                              context,
+                              cubit.stu_Quiz_Ques_lis,
+                              cubit.stu_Quiz_Ques_options,
+                              index),
+                        ),
+                      ),
                       itemCount: cubit.stu_Quiz_Ques_lis.length,
                     ),
                   ),
                 ),
+                // Padding(
+                //   padding:
+                //       const EdgeInsets.only(left: 10.0, right: 10, bottom: 15),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //     children: [
+                //       Default_Button(
+                //           text: 'Add more',
+                //           containerHeight: 50,
+                //           containerWidth: 150,
+                //           onPressed: () {
+                //             boardcontroller.nextPage(
+                //               duration: Duration(
+                //                 milliseconds: 1500,
+                //               ),
+                //               curve: Curves.fastLinearToSlowEaseIn,
+                //             );
+                //           }),
+                //       Default_Button(
+                //           text: 'Finished',
+                //           containerHeight: 50,
+                //           containerWidth: 150,
+                //           onPressed: () {
+                //             Navigator.push(
+                //                 context,
+                //                 MaterialPageRoute(
+                //                   builder: (context) =>
+                //                       INS_Quiz_Finish_Screen(),
+                //                 ));
+                //           }),
+                //     ],
+                //   ),
+                // ),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Default_Button(text: 'Finish',
-                  containerHeight: 50,
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => INS_Quiz_Finish_Screen(),));
-                  }),
-                ),
+                  padding: const EdgeInsets.only(left: 10.0,right: 10,bottom: 10),
+                  child: GlassBox(
+                      widget:BottomNavigationBar(
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          // currentIndex: 2,
+                          type:BottomNavigationBarType.fixed ,
+                          selectedLabelStyle: TextStyle(color: Colors.black.withOpacity(.6)),
+                          unselectedLabelStyle: TextStyle(color: Colors.black.withOpacity(.6)),
+                          mouseCursor: MouseCursor.defer,
+                         showSelectedLabels: true,
+                          useLegacyColorScheme: false,
+                          showUnselectedLabels: true,
 
+
+                          onTap: (index){
+                            print('------------------------------------');
+                            print(index);
+                            switch(index){
+                              case 0:
+                                boardcontroller.previousPage(
+                                  duration: Duration(
+                                    milliseconds: 1500,
+                                  ),
+                                  curve: Curves.fastLinearToSlowEaseIn,
+                                );
+                                break;
+
+                              case 1:
+                                boardcontroller.nextPage(
+                                  duration: Duration(
+                                    milliseconds: 1500,
+                                  ),
+                                  curve: Curves.fastLinearToSlowEaseIn,
+                                );
+                                break;
+                              case 2:
+                                break;
+                              case 3:
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          INS_Quiz_Finish_Screen(),
+                                    ));
+                                break;
+                            }
+
+                          },
+                          // selectedIndex: 3,
+
+
+                          // destinations: [
+                          //
+                          //   Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.center,
+                          //     mainAxisAlignment: MainAxisAlignment.center,
+                          //     children: [
+                          //       FaIcon(
+                          //         FontAwesomeIcons.minus,
+                          //         size: 20,
+                          //         color: Colors.red,
+                          //       ),
+                          //       SizedBox(
+                          //         height: 7,
+                          //       ),
+                          //       Text(
+                          //         'remove Q',
+                          //         textAlign: TextAlign.start,
+                          //         style: TextStyle(
+                          //             fontWeight: FontWeight.w700, fontSize: 12),
+                          //       ),
+                          //     ],
+                          //   ),
+                          //   Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.center,
+                          //     mainAxisAlignment: MainAxisAlignment.center,
+                          //     children: [
+                          //       FaIcon(
+                          //         FontAwesomeIcons.plus,
+                          //         size: 20,
+                          //         color: Colors.teal,
+                          //       ),
+                          //       SizedBox(
+                          //         height: 7,
+                          //       ),
+                          //       Text(
+                          //         'Add Q',
+                          //         textAlign: TextAlign.start,
+                          //         style: TextStyle(
+                          //             fontWeight: FontWeight.w700, fontSize: 12),
+                          //       ),
+                          //     ],
+                          //   ),
+                          //   Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.center,
+                          //     mainAxisAlignment: MainAxisAlignment.center,
+                          //     children: [
+                          //       FaIcon(
+                          //         FontAwesomeIcons.save,
+                          //         size: 20,
+                          //         color: Colors.indigoAccent,
+                          //       ),
+                          //       SizedBox(
+                          //         height: 7,
+                          //       ),
+                          //       Text(
+                          //         'Save',
+                          //         textAlign: TextAlign.start,
+                          //         style: TextStyle(
+                          //             fontWeight: FontWeight.w700, fontSize: 12),
+                          //       ),
+                          //     ],
+                          //   ),
+                          //   Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.center,
+                          //     mainAxisAlignment: MainAxisAlignment.center,
+                          //     children: [
+                          //       FaIcon(
+                          //         FontAwesomeIcons.check,
+                          //         size: 20,
+                          //         color: Colors.blue,
+                          //       ),
+                          //       SizedBox(
+                          //         height: 7,
+                          //       ),
+                          //       Text(
+                          //         'Publish',
+                          //         textAlign: TextAlign.start,
+                          //         style: TextStyle(
+                          //             fontWeight: FontWeight.w700, fontSize: 12),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ],
+                        items: [
+                            BottomNavigationBarItem(
+                              icon: FaIcon(
+                                FontAwesomeIcons.minus,
+                                size: 20,
+                                color: Colors.red,
+                              ),
+                              label: 'remove Q',
+
+
+                            ),
+                        BottomNavigationBarItem(
+                          icon: FaIcon(
+                            FontAwesomeIcons.plus,
+                            size: 20,
+                            color: Colors.teal,
+                          ),
+                          label: 'Add Q',
+
+
+                        ),
+                        BottomNavigationBarItem(
+                          icon: FaIcon(
+                            FontAwesomeIcons.save,
+                            size: 20,
+                            color: Colors.indigoAccent,
+                          ),
+                          label: 'Save',
+
+
+                        ),
+                        BottomNavigationBarItem(
+                          icon: FaIcon(
+                            FontAwesomeIcons.check,
+                            size: 20,
+                            color: Colors.blue,
+                          ),
+                          label: 'Publish',
+
+
+                        ),
+                      ],
+                      ),
+                      color: Colors.blueGrey.withOpacity(.15),
+                      borderRadius: 20,
+                      x: 0,
+                      y: 0),
+                ),
 
               ],
             ),
