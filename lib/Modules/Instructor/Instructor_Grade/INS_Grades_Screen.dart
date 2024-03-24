@@ -26,7 +26,7 @@ class INSAllGradesScreen extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                defaultAppbar(context: context, text: 'Total Grades'),
+                defaultAppbar(context: context, text: 'Student'),
                 const SizedBox(
                   height: 30,
                 ),
@@ -45,7 +45,7 @@ class INSAllGradesScreen extends StatelessWidget {
                 //   ),
                 // ),
                 Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(25.0),
                   child: DataTable(
 
                       decoration: BoxDecoration(
@@ -60,62 +60,57 @@ class INSAllGradesScreen extends StatelessWidget {
                       columnSpacing: 0,
                       headingRowColor:
                       MaterialStateProperty.all(Colors.transparent),
-                      dataRowMaxHeight: 75,
-                      dataRowMinHeight: 60,
-                      dividerThickness: .2,
-                      border: TableBorder(
-                        verticalInside:
-                        BorderSide(color: Colors.teal, width: 2),
-                      ),
+                      dataRowMaxHeight: 60,
+                      dataRowMinHeight: 50,
+                      dividerThickness: .4,
+                      // border: TableBorder(
+                      //
+                      //   horizontalInside:
+                      //   BorderSide(color: Colors.teal, width: 2),
+                      // ),
                       columns: [
+
                         DataColumn(
                           label: Container(
-                            width: MediaQuery.of(context).size.width*.33,
+                            width: MediaQuery.of(context).size.width*.85,
 
                             child: Column(
                               children: [
-                                Container(
-                                    child: Text(
-                                      'Course',
-                                      textAlign: TextAlign.center,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1
-                                          ?.copyWith(
-                                        color: Colors.teal,
-                                        fontSize: 23,
-                                        fontWeight: FontWeight.w900,
-                                      ),
-                                    )),
-                                Spacer(),
-                                Container(
-                                  height: 2,
-                                  color: Colors.teal,
-                                  width: double.infinity,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    FaIcon(FontAwesomeIcons.solidUser,color: Colors.teal,),
+                                    SizedBox(width: 15,),
+                                    Container(
+                                        child: Text(
+                                          'Student name',
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1
+                                              ?.copyWith(
+                                            color: Colors.teal,
+                                            fontSize: 23,
+                                            fontWeight: FontWeight.w900,
+                                          ),
+                                        )),
+                                    Spacer(),
+                                    Container(
+                                        child: Text(
+                                          '125',
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1
+                                              ?.copyWith(
+                                            color: Colors.teal,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w900,
+                                          ),
+                                        )),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        DataColumn(
-                          label: Container(
-                            width: MediaQuery.of(context).size.width*.55,
-
-                            child: Column(
-                              children: [
-                                Container(
-                                    child: Text(
-                                      'Grade',
-                                      textAlign: TextAlign.center,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1
-                                          ?.copyWith(
-                                        color: Colors.teal,
-                                        fontSize: 23,
-                                        fontWeight: FontWeight.w900,
-                                      ),
-                                    )),
                                 Spacer(),
                                 Container(
                                   height: 2,
@@ -136,43 +131,26 @@ class INSAllGradesScreen extends StatelessWidget {
                             },
                             child: Container(
                                 width: double.infinity,
-                                child: Text(
-                                  'Parallel',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                )),
-                          )),
-                          DataCell(GestureDetector(
-                            onTap: () {
-                              navigateTo(context, INSCourseGrades());
-                            },
-                            child: Container(
-                                width: double.infinity,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Spacer(flex: 2,),
                                     Row(
                                       children: [
                                         Text(
-                                          '30/',
+                                          '1. ',
                                           style: TextStyle(
-                                            color: Colors.teal,
-                                            fontSize: 22,
+                                            color: Colors.black,
+                                            fontSize: 17,
                                             fontWeight: FontWeight.w700,
                                           ),
                                           textAlign: TextAlign.center,
                                         ),
                                         Text(
-                                          '100',
+                                          'Abdelaziz elsayed abdelaziz',
                                           style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 15,
+                                            fontSize: 17,
                                             fontWeight: FontWeight.w700,
                                           ),
                                           textAlign: TextAlign.center,
@@ -209,43 +187,26 @@ class INSAllGradesScreen extends StatelessWidget {
                             },
                             child: Container(
                                 width: double.infinity,
-                                child: Text(
-                                  'Robotics',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                )),
-                          )),
-                          DataCell(GestureDetector(
-                            onTap: () {
-                              navigateTo(context, INSCourseGrades());
-                            },
-                            child: Container(
-                                width: double.infinity,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Spacer(flex: 2,),
                                     Row(
                                       children: [
                                         Text(
-                                          '30/',
+                                          '1. ',
                                           style: TextStyle(
-                                            color: Colors.teal,
-                                            fontSize: 22,
+                                            color: Colors.black,
+                                            fontSize: 17,
                                             fontWeight: FontWeight.w700,
                                           ),
                                           textAlign: TextAlign.center,
                                         ),
                                         Text(
-                                          '100',
+                                          'Abdelaziz elsayed abdelaziz',
                                           style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 15,
+                                            fontSize: 17,
                                             fontWeight: FontWeight.w700,
                                           ),
                                           textAlign: TextAlign.center,
@@ -282,43 +243,26 @@ class INSAllGradesScreen extends StatelessWidget {
                             },
                             child: Container(
                                 width: double.infinity,
-                                child: Text(
-                                  'Genetic',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                )),
-                          )),
-                          DataCell(GestureDetector(
-                            onTap: () {
-                              navigateTo(context, INSCourseGrades());
-                            },
-                            child: Container(
-                                width: double.infinity,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Spacer(flex: 2,),
                                     Row(
                                       children: [
                                         Text(
-                                          '30/',
+                                          '1. ',
                                           style: TextStyle(
-                                            color: Colors.teal,
-                                            fontSize: 22,
+                                            color: Colors.black,
+                                            fontSize: 17,
                                             fontWeight: FontWeight.w700,
                                           ),
                                           textAlign: TextAlign.center,
                                         ),
                                         Text(
-                                          '100',
+                                          'Abdelaziz elsayed abdelaziz',
                                           style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 15,
+                                            fontSize: 17,
                                             fontWeight: FontWeight.w700,
                                           ),
                                           textAlign: TextAlign.center,
@@ -355,43 +299,26 @@ class INSAllGradesScreen extends StatelessWidget {
                             },
                             child: Container(
                                 width: double.infinity,
-                                child: Text(
-                                  'Security',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                )),
-                          )),
-                          DataCell(GestureDetector(
-                            onTap: () {
-                              navigateTo(context, INSCourseGrades());
-                            },
-                            child: Container(
-                                width: double.infinity,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Spacer(flex: 2,),
                                     Row(
                                       children: [
                                         Text(
-                                          '30/',
+                                          '1. ',
                                           style: TextStyle(
-                                            color: Colors.teal,
-                                            fontSize: 22,
+                                            color: Colors.black,
+                                            fontSize: 17,
                                             fontWeight: FontWeight.w700,
                                           ),
                                           textAlign: TextAlign.center,
                                         ),
                                         Text(
-                                          '100',
+                                          'Abdelaziz elsayed abdelaziz',
                                           style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 15,
+                                            fontSize: 17,
                                             fontWeight: FontWeight.w700,
                                           ),
                                           textAlign: TextAlign.center,
@@ -428,43 +355,26 @@ class INSAllGradesScreen extends StatelessWidget {
                             },
                             child: Container(
                                 width: double.infinity,
-                                child: Text(
-                                  'Distributed',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                )),
-                          )),
-                          DataCell(GestureDetector(
-                            onTap: () {
-                              navigateTo(context, INSCourseGrades());
-                            },
-                            child: Container(
-                                width: double.infinity,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Spacer(flex: 2,),
                                     Row(
                                       children: [
                                         Text(
-                                          '30/',
+                                          '1. ',
                                           style: TextStyle(
-                                            color: Colors.teal,
-                                            fontSize: 22,
+                                            color: Colors.black,
+                                            fontSize: 17,
                                             fontWeight: FontWeight.w700,
                                           ),
                                           textAlign: TextAlign.center,
                                         ),
                                         Text(
-                                          '100',
+                                          'Abdelaziz elsayed abdelaziz',
                                           style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 15,
+                                            fontSize: 17,
                                             fontWeight: FontWeight.w700,
                                           ),
                                           textAlign: TextAlign.center,
@@ -494,6 +404,176 @@ class INSAllGradesScreen extends StatelessWidget {
                                 )),
                           )),
                         ],),
+                        DataRow(cells: [
+                          DataCell(GestureDetector(
+                            onTap: () {
+                              navigateTo(context, INSCourseGrades());
+                            },
+                            child: Container(
+                                width: double.infinity,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          '1. ',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        Text(
+                                          'Abdelaziz elsayed abdelaziz',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          border: Border.all(color: Colors.teal,width: 2)
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 6),
+                                        child: Text(
+                                          'more',
+                                          style: TextStyle(
+                                            color: Colors.teal,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                          )),
+                        ],),
+                        DataRow(cells: [
+                          DataCell(GestureDetector(
+                            onTap: () {
+                              navigateTo(context, INSCourseGrades());
+                            },
+                            child: Container(
+                                width: double.infinity,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          '1. ',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        Text(
+                                          'Abdelaziz elsayed abdelaziz',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          border: Border.all(color: Colors.teal,width: 2)
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 6),
+                                        child: Text(
+                                          'more',
+                                          style: TextStyle(
+                                            color: Colors.teal,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                          )),
+                        ],),
+                        DataRow(cells: [
+                          DataCell(GestureDetector(
+                            onTap: () {
+                              navigateTo(context, INSCourseGrades());
+                            },
+                            child: Container(
+                                width: double.infinity,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          '1. ',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        Text(
+                                          'Abdelaziz elsayed abdelaziz',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          border: Border.all(color: Colors.teal,width: 2)
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 6),
+                                        child: Text(
+                                          'more',
+                                          style: TextStyle(
+                                            color: Colors.teal,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                          )),
+                        ],),
+
+
 
                       ]),
                 ),

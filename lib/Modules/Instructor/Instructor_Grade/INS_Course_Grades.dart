@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:university_hup/Shared/Component/component.dart';
 
 import '../../../Shared/Cons_widget.dart';
 import '../../../Shared/Cubit/App_cubit.dart';
@@ -29,7 +32,101 @@ class INSCourseGrades extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: GlassBox(
+                      widget:Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 15),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                FaIcon(FontAwesomeIcons.solidUser,color: Colors.black,),
+                                SizedBox(width: 15,),
+                                Container(
+                                    child: Text(
+                                      'Student name',
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1
+                                          ?.copyWith(
+                                        color: Colors.black,
+                                        fontSize: 23,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    )),
+                                Spacer(),
+                                Row(
 
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '25/',
+                                      style: TextStyle(
+                                        color: Colors.teal,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Text(
+                                      '100',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Container(
+                              height: 40,
+                              child: LinearPercentIndicator(
+
+
+                                percent: .25,
+                                backgroundColor: Colors.blueGrey.withOpacity(.2),
+                                progressColor: Colors.teal.withOpacity(.6),
+                                barRadius: Radius.circular(20),
+                                lineHeight: 12,
+                                trailing: Text('100'),
+                                leading: Text('25') ,
+
+                                animation: true,
+                                animationDuration: 1500,
+                                curve: Curves.easeOutBack,
+
+
+
+
+                                // footer: Padding(
+                                //   padding: const EdgeInsets.only(top:0.0),
+                                //   child: Text('Submited',
+                                //     style: TextStyle(
+                                //       fontWeight: FontWeight.w600,
+                                //       fontSize: 15,
+                                //       color: Colors.teal,
+                                //     ),
+                                //   ),
+                                // ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      color: Colors.blueGrey.withOpacity(.15),
+                      borderRadius: 20,
+                      x: 0,
+                      y: 0),
+                ),
+
+                SizedBox(height: 20,),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: DataTable(
