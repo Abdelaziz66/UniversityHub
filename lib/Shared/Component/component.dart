@@ -1808,7 +1808,9 @@ Widget INS_Course({INS_Course_Model? courses}) => Container(
       ),
     );
 //--------------Assignments-----------------------------
-Widget Build_STU_pend_Tasks({STU_Course_Assign_Model? assign}) => Container(
+Widget Build_STU_pend_Tasks({
+  STU_Course_Assign_Model? assign
+}) => Container(
     width: double.infinity,
     height: 76.95,
     decoration: ShapeDecoration(
@@ -1881,16 +1883,16 @@ Widget Build_STU_pend_Tasks({STU_Course_Assign_Model? assign}) => Container(
             height: double.infinity,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.grey.withOpacity(.5),
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Center(
               child: Text(
                 'more',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 18,
-                  fontWeight: FontWeight.w500,
+                //  fontWeight: FontWeight.w500,
                 ),
               ),
             ),

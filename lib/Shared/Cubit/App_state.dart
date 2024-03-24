@@ -181,10 +181,9 @@ class Stu_Get_Course_Material_File_ErrorState extends App_state {
 class Stu_Get_Course_Assign_LoadingState extends App_state {}
 
 class Stu_Get_Course_Assign_SuccessState extends App_state {
-  List<STU_Course_Assign_Model> assignmodel=[];
 
 
-  Stu_Get_Course_Assign_SuccessState(this.assignmodel);
+  Stu_Get_Course_Assign_SuccessState();
 
 }
 
