@@ -2,11 +2,13 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:day_night_time_picker/lib/state/time.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:university_hup/Modules/Instructor/Instructor_Assignment/INS_Add_Assign_Screen.dart';
 
 import 'package:university_hup/Modules/Student/Student_Assignment/STU_About_Assign_Screen.dart';
 
@@ -15,6 +17,10 @@ import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
+
+import '../../../Models/INS_Model/INS_Assign_Model.dart';
+import '../../../Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
+import 'INS_About_Assign_Screen.dart';
 
 
 
@@ -32,6 +38,7 @@ class INS_Assign_Screen extends StatelessWidget {
         App_cubit cubit=App_cubit.get(context);
         bool isvisbile=false;
         Time _time = Time(hour: 11, minute: 30, second: 20);
+        List<STU_Course_Assign_Model> insAssign=cubit.insCoursesAssignModel;
         return Scaffold(
           key: scafoldkey3,
 
@@ -39,131 +46,128 @@ class INS_Assign_Screen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal: 8),
             child: FloatingActionButton(
               onPressed: (){
-                if(!isvisbile)
-                {
-                  isvisbile=!isvisbile;
-
-                  scafoldkey3.currentState?.showBottomSheet(
-                        (context) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GlassBoxWithBorder(
-                        widget: Container(
-                          height: 250,
-                          child: Padding(
-                            padding: const EdgeInsets.all(25.0),
-                            child: Column(
-                              children: [
-                                const Spacer(),
-                                Container(
-                                  alignment: Alignment.center,
-                                  height: 70,
-
-                                  decoration: BoxDecoration(
-                                    // border: Border.all(color: Colors.white),
-                                    borderRadius: BorderRadius.circular(18),
-                                    color: Colors.white.withOpacity(.8),
-                                  ),
-                                  child: Padding(
-                                    padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                    child: TextFormField(
-                                      // controller: emailcontroller,
-                                      keyboardType: TextInputType.text,
-                                      onFieldSubmitted: (value) {
-                                        print(value);
-                                      },
-                                      onChanged: (value) {
-                                        print(value);
-                                      },
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Folder name can\'t be empty';
-                                        }
-                                        return null;
-                                      },
-                                      // toolbarOptions:
-                                      //     ToolbarOptions(paste: true, copy: true),
-                                      cursorColor: c1,
-                                      style: const TextStyle(
-                                        fontSize: 25,
-                                      ),
-                                      decoration: InputDecoration(
-                                        prefixIcon: Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 6),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.solidFolder,
-                                            color: c1,
-                                            size: 30,
-                                          ),
-                                        ),
-                                        hintText: 'Folder task name',
-                                        border: InputBorder.none,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 15,),
-                                Container(
-                                  height: 60,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                          child: Default_Button(textFontSize: 20,onPressed: (){
-                                            Navigator.of(context).push(
-                                        showPicker(
-                                          context: context,
-                                          value: _time,
-                                          sunrise: TimeOfDay(hour: 6, minute: 0), // optional
-                                          sunset: TimeOfDay(hour: 18, minute: 0), // optional
-                                          duskSpanInMinutes: 120, // optional
-                                          onChange: (value){},
-
-                                        ),
-                                      );},
-                                            text: 'Deadline',)),
-                                      SizedBox(width: 15,),
-                                      // GestureDetector(onTap:(){
-                                      //
-                                      //
-                                      // } ,
-                                      //     child: FaIcon(FontAwesomeIcons.clock)),
-                                      Expanded(child: Default_Button(onPressed: (){},text: 'Upload task',textFontSize: 20)),
-                                    ],
-                                  ),
-                                ),
-
-                                SizedBox(height: 15,),
-
-                                const Spacer(),
-                              ],
-                            ),
-                          ),
-                        ),
-                        color:
-                        Colors.blueGrey.withOpacity(.2),
-                        borderRadius: 30,
-                        x: 15,
-                        y: 15,
-                        BorderWidth: 3,
-                        BorderColor: Colors.blueGrey,),
-                    ),
-                  );
-
-                }
-                else
-                {
-
-                  Navigator.pop(context);
-                  isvisbile=!isvisbile;
-                }
-
+                navigateTo(context, INS_Add_Assign_Screen());
+                // if(!isvisbile)
+                // {
+                //   isvisbile=!isvisbile;
+                //   scafoldkey3.currentState?.showBottomSheet(
+                //         (context) => Padding(
+                //       padding: const EdgeInsets.all(8.0),
+                //       child: GlassBoxWithBorder(
+                //         widget: Container(
+                //           height: 250,
+                //           child: Padding(
+                //             padding: const EdgeInsets.all(25.0),
+                //             child: Column(
+                //               children: [
+                //                 const Spacer(),
+                //                 Container(
+                //                   alignment: Alignment.center,
+                //                   height: 70,
+                //
+                //                   decoration: BoxDecoration(
+                //                     // border: Border.all(color: Colors.white),
+                //                     borderRadius: BorderRadius.circular(18),
+                //                     color: Colors.white.withOpacity(.8),
+                //                   ),
+                //                   child: Padding(
+                //                     padding:
+                //                     const EdgeInsets.symmetric(horizontal: 8.0),
+                //                     child: TextFormField(
+                //                       // controller: emailcontroller,
+                //                       keyboardType: TextInputType.text,
+                //                       onFieldSubmitted: (value) {
+                //                         print(value);
+                //                       },
+                //                       onChanged: (value) {
+                //                         print(value);
+                //                       },
+                //                       validator: (value) {
+                //                         if (value!.isEmpty) {
+                //                           return 'Folder name can\'t be empty';
+                //                         }
+                //                         return null;
+                //                       },
+                //                       // toolbarOptions:
+                //                       //     ToolbarOptions(paste: true, copy: true),
+                //                       cursorColor: c1,
+                //                       style: const TextStyle(
+                //                         fontSize: 25,
+                //                       ),
+                //                       decoration: InputDecoration(
+                //                         prefixIcon: Padding(
+                //                           padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 6),
+                //                           child: FaIcon(
+                //                             FontAwesomeIcons.solidFolder,
+                //                             color: c1,
+                //                             size: 30,
+                //                           ),
+                //                         ),
+                //                         hintText: 'Folder task name',
+                //                         border: InputBorder.none,
+                //                       ),
+                //                     ),
+                //                   ),
+                //                 ),
+                //                 SizedBox(height: 15,),
+                //                 Container(
+                //                   height: 60,
+                //                   child: Row(
+                //                     children: [
+                //                       Expanded(
+                //                           child: Default_Button(textFontSize: 20,onPressed: (){
+                //                             Navigator.of(context).push(
+                //                         showPicker(
+                //                           context: context,
+                //                           value: _time,
+                //                           sunrise: TimeOfDay(hour: 6, minute: 0), // optional
+                //                           sunset: TimeOfDay(hour: 18, minute: 0), // optional
+                //                           duskSpanInMinutes: 120, // optional
+                //                           onChange: (value){},
+                //
+                //                         ),
+                //                       );},
+                //                             text: 'Deadline',)),
+                //                       SizedBox(width: 15,),
+                //                       // GestureDetector(onTap:(){
+                //                       //
+                //                       //
+                //                       // } ,
+                //                       //     child: FaIcon(FontAwesomeIcons.clock)),
+                //                       Expanded(child: Default_Button(onPressed: (){},text: 'Upload task',textFontSize: 20)),
+                //                     ],
+                //                   ),
+                //                 ),
+                //
+                //                 SizedBox(height: 15,),
+                //
+                //                 const Spacer(),
+                //               ],
+                //             ),
+                //           ),
+                //         ),
+                //         color:
+                //         Colors.blueGrey.withOpacity(.2),
+                //         borderRadius: 30,
+                //         x: 15,
+                //         y: 15,
+                //         BorderWidth: 3,
+                //         BorderColor: Colors.blueGrey,),
+                //     ),
+                //   );
+                // }
+                // else
+                // {
+                //
+                //   Navigator.pop(context);
+                //   isvisbile=!isvisbile;
+                // }
               },
-              child:!isvisbile? FaIcon(FontAwesomeIcons.plus): FaIcon(FontAwesomeIcons.angleDown),
+              child: FaIcon(FontAwesomeIcons.plus),
 
             ),
           ),
           body: SafeArea(
-            child: SingleChildScrollView(
               child: Column(
                 children: [
                   const SizedBox(height: 30,),
@@ -270,7 +274,7 @@ class INS_Assign_Screen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
-                      // height: 200,
+                       height: 200,
                       // width: double.infinity,
                       decoration: BoxDecoration(
                         gradient: const RadialGradient(
@@ -397,118 +401,121 @@ class INS_Assign_Screen extends StatelessWidget {
 
                   Padding(
                     padding: const EdgeInsets.only(left: 15, top: 10, right: 15),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                cubit.pend_Complete_Function(pe: true);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: cubit.pend ? Colors.blue :  c1.withOpacity(.8),
+                    child: Container(
+                      height: 70,
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  cubit.pend_Complete_Function(pe: true);
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: cubit.pend ? Colors.blue :  c1.withOpacity(.8),
 
-                                  boxShadow: [BoxShadow(color:cubit.pend ? Colors.grey: Colors.white,
-                                    spreadRadius: 1,
-                                    blurRadius: 7,
+                                    boxShadow: [BoxShadow(color:cubit.pend ? Colors.grey: Colors.white,
+                                      spreadRadius: 1,
+                                      blurRadius: 7,
 
-                                  )],
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Center(
-                                    child: Text(
-                                      'Pending',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: cubit.pend ? c5 : c5,
+                                    )],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Center(
+                                      child: Text(
+                                        'Pending',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: cubit.pend ? c5 : c5,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            )),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                cubit.pend_Complete_Function(pe: false);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: cubit.pend ? c1.withOpacity(.8):Colors.blue ,
+                              )),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  cubit.pend_Complete_Function(pe: false);
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: cubit.pend ? c1.withOpacity(.8):Colors.blue ,
 
-                                  boxShadow: [BoxShadow(color:cubit.pend ? Colors.white: Colors.grey,
-                                    spreadRadius: 1,
-                                    blurRadius: 7,
+                                    boxShadow: [BoxShadow(color:cubit.pend ? Colors.white: Colors.grey,
+                                      spreadRadius: 1,
+                                      blurRadius: 7,
 
-                                  )],
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15.0),
-                                  child: Center(
-                                    child: Text(
-                                      'Completed',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: cubit.pend ? c5 : c5,
+                                    )],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Center(
+                                      child: Text(
+                                        'Completed',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: cubit.pend ? c5 : c5,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            )),
-                      ],
+                              )),
+                        ],
+                      ),
                     ),
                   ),
 
                   const SizedBox(height: 20,),
-                  ConditionalBuilder(condition: cubit.pend,
-                    builder: (context) =>Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: Container(
-                        height: 500,
-                        child: ListView.separated(
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder:(context,index)=>InkWell(
-                              onTap: (){
-                                cubit.all_assign_files_List=[];
-                                cubit.assignFile=null;
-                                navigateTo(context,STU_About_Assign_Screen() );
-                              },
-                              child: Build_STU_pend_Tasks()),
-                          separatorBuilder: (context,index)=>const SizedBox(height: 10,),
-                          itemCount: 3,
-                        ),
-                      ),
-                    ) ,
-                    fallback: (context) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: Container(
-                        height:500,
-                        child: ListView.separated(
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder:(context,index)=>InkWell(
-                              onTap: (){
-                                // navigateTo(context,STU_Assign_Screen() );
-                              },
-                              child: Build_STU_complete_Tasks()),
-                          separatorBuilder: (context,index)=>const SizedBox(height: 10,),
-                          itemCount: 2,
-                        ),
+                  Expanded(
+                    child: ConditionalBuilder(condition: cubit.pend,
+                      builder: (context) =>Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: ListView.separated(
+                              physics:  BouncingScrollPhysics(),
+                              itemBuilder:(context,index)=>InkWell(
+                                  onTap: (){
+                                    cubit.all_assign_files_List=[];
+                                    cubit.assignFile=null;
+                                    navigateTo(context,INS_About_Assign_Screen() );
+                                  },
+                                  child: Build_STU_pend_Tasks(assign: insAssign[index],)),
+                              separatorBuilder: (context,index)=>const SizedBox(height: 10,),
+                              itemCount: insAssign.length,
+                            ),
+                    
+                      ) ,
+                      fallback: (context) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: ListView.separated(
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder:(context,index)=>InkWell(
+                                onTap: (){
+                                  // navigateTo(context,STU_Assign_Screen() );
+                                },
+                                child: Build_STU_complete_Tasks()),
+                            separatorBuilder: (context,index)=>const SizedBox(height: 10,),
+                            itemCount: 2,
+                          ),
+                        
                       ),
                     ),
                   ),
+                  const SizedBox(height: 20,),
+
                 ],
               ),
             ),
-          ),
+
         );
       },
     );

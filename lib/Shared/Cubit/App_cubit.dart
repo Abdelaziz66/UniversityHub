@@ -38,6 +38,7 @@ import 'package:university_hup/Shared/constant.dart';
 import 'package:university_hup/Shared/remote/DioHelper.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../Models/INS_Model/CourseModel.dart';
+import '../../Models/INS_Model/INS_Assign_Model.dart';
 import '../../Models/STU_Model/Calender_Model/CalenderMode.dart';
 import '../../Models/STU_Model/CourseModel/Stu_Course_Grades_model.dart';
 import '../../Models/STU_Model/User_Model/CurrentStudentInfoModel.dart';
@@ -615,6 +616,7 @@ class App_cubit extends Cubit<App_state> {
     });
     // InsertToDataBase_User_Table();
   }
+
   //------------------------Get all news ---------------------
   List<GetAllNewsModel> allNewsModel = [];
 
@@ -920,38 +922,68 @@ class App_cubit extends Cubit<App_state> {
   String? assignName;
   String? taskId;
   List<STU_Course_Assign_Model> stuCoursesAssignModel = [];
+  List<STU_Course_Assign_Model> insCoursesAssignModel = [];
   void StuGetCourseAssign(
       //required token,
       // required cycleId,
       ) {
     // stuCoursesAssignModel=[];
-    if (stuCoursesAssignModel.isEmpty || isCycleIdChange == true) {
-      emit(Stu_Get_Course_Assign_LoadingState());
-      Dio_Helper.GetData(
-        url: 'Students/CurrentCourseTasks?CycleId=${currentCycleId}',
-        //STU_COURSE_MATERIAL,
-        token: token,
-      ).then((value) {
-        if (value.statusCode == 200) {
-          print(value.data);
-          List Json = value.data;
-          //  for (var element in  Json) {
-          Json.forEach((element) {
-            stuCoursesAssignModel
-                .add(STU_Course_Assign_Model.fromJson(element));
+    if(rol=='Student') {
+      if (stuCoursesAssignModel.isEmpty || isCycleIdChange == true) {
+        emit(Stu_Get_Course_Assign_LoadingState());
+        Dio_Helper.GetData(
+          url: 'Students/CurrentCourseTasks?CycleId=${currentCycleId}',
+          //STU_COURSE_MATERIAL,
+          token: token,
+        ).then((value) {
+          if (value.statusCode == 200) {
+            print(value.data);
+            List Json = value.data;
+            //  for (var element in  Json) {
+            Json.forEach((element) {
+              stuCoursesAssignModel
+                  .add(STU_Course_Assign_Model.fromJson(element));
+            });
+            print('get course Assign true');
+            emit(Stu_Get_Course_Assign_SuccessState());
+          }
+          stuCoursesAssignModel.forEach((element) {
+            print('task name------- ${element.taskName}');
           });
-          print('get course Assign true');
-          emit(Stu_Get_Course_Assign_SuccessState(stuCoursesAssignModel));
-        }
-        stuCoursesAssignModel.forEach((element) {
-          print('task name------- ${element.taskName}');
+        }).catchError((error) {
+          emit(Stu_Get_Course_Assign_ErrorState(error.toString()));
+          print(error.toString());
         });
-      }).catchError((error) {
-        emit(Stu_Get_Course_Assign_ErrorState(error.toString()));
-        print(error.toString());
-      });
-    }
+      }
+    }else
+      {
+        emit(Stu_Get_Course_Assign_LoadingState());
+        Dio_Helper.GetData(
+          url: 'Instructor/GetCurrentCourseTasks?cycleId=${currentCycleId}',
+          //STU_COURSE_MATERIAL,
+          token: token,
+        ).then((value) {
+          if (value.statusCode == 200) {
+            print(value.data);
+            List Json = value.data;
+            //  for (var element in  Json) {
+            Json.forEach((element) {
+              insCoursesAssignModel
+                  .add(STU_Course_Assign_Model.fromJson(element));
+            });
+            print('get course Assign true');
+            emit(Stu_Get_Course_Assign_SuccessState());
+          }
+          insCoursesAssignModel.forEach((element) {
+            print('task name------- ${element.taskName}');
+          });
+        }).catchError((error) {
+          emit(Stu_Get_Course_Assign_ErrorState(error.toString()));
+          print(error.toString());
+        });
+      }
     isCycleIdChange = false;
+
   }
 
   //-----------get task ddta---------------
