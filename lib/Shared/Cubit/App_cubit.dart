@@ -18,7 +18,9 @@ import 'package:sqflite/sqflite.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
 import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
+import 'package:university_hup/Models/INS_Model/INS_grade_for_student_Model.dart';
 import 'package:university_hup/Models/INS_Model/currentinfo_ins_model.dart';
+import 'package:university_hup/Models/INS_Model/student_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
@@ -1366,6 +1368,70 @@ class App_cubit extends Cubit<App_state> {
   String? User_Table = 'User';
   String? News_Table = 'News';
   String? Course_Table = 'Course';
+
+
+  List<student_Model> student_list = [];
+  void INS_Get_AllStudent(
+
+  ) {
+    if (true) {
+      emit(INS_AllStudent_LoadingState());
+      Dio_Helper.GetData(
+        url: INS_AllStudent+currentCycleId!,
+        token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          student_list = [];
+          // print('get course true');
+          List Json = value.data;
+          for (var element in Json) {
+            student_list.add(student_Model.fromJson(element));
+
+          }
+          emit(INS_AllStudent_SuccessState());
+          print('------------------------------------------');
+          print(student_list.length);
+
+        }
+
+      }).catchError((error) {
+        emit(INS_AllStudent_ErrorState());
+        print(error.toString());
+      });
+    }
+  }
+
+  List<GradeforStudent_model> GradeforStudent_list = [];
+  void INS_Get_grade_for_Student({required String id}
+
+      ) {
+    if (true) {
+      emit(INS_GradeforStudent_LoadingState());
+      Dio_Helper.GetData(
+        // url: INS_Gradeforstudent+'CycleId=${currentCycleId}&studentId='+id,
+        url:'Instructor/GetGradesForCurrentCourseForAstudent?CycleId=${currentCycleId}&studentId=$id',
+        token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          GradeforStudent_list = [];
+          // print('get course true');
+          List Json = value.data;
+          for (var element in Json) {
+            GradeforStudent_list.add(GradeforStudent_model.fromJson(element));
+
+          }
+          emit(INS_GradeforStudent_SuccessState());
+          print('------------------------------------------');
+          print(GradeforStudent_list.length);
+
+        }
+
+      }).catchError((error) {
+        emit(INS_GradeforStudent_ErrorState());
+        print(error.toString());
+      });
+    }
+  }
 
 
   void CreateDateBase() async {

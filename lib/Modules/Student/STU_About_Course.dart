@@ -258,8 +258,15 @@ class STU_About_course extends StatelessWidget {
                                       onTap: (){
                                         
                                         if(cubit.connnection){
-                                          cubit.GetStuCourseGrade();
-                                          navigateTo(context,rol=='Student'? STUCourseGrades():INSAllGradesScreen() );
+                                          if(rol=='Student'){
+                                            cubit.GetStuCourseGrade( );
+                                            navigateTo(context,STUCourseGrades() );
+                                          }else{
+                                            cubit.INS_Get_AllStudent();
+                                            navigateTo(context,INSAllGradesScreen() );
+                                          }
+
+
                                         }
                                        
                                       },

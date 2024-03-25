@@ -383,6 +383,26 @@ class INS_Get_All_Courses_ErrorState extends App_state {
   INS_Get_All_Courses_ErrorState(this.error);
 }
 
+
+class INS_AllStudent_LoadingState extends App_state {
+}
+class INS_AllStudent_SuccessState extends App_state {
+}
+
+class INS_AllStudent_ErrorState extends App_state {
+}
+
+
+class INS_GradeforStudent_LoadingState extends App_state {
+}
+class INS_GradeforStudent_SuccessState extends App_state {
+}
+
+class INS_GradeforStudent_ErrorState extends App_state {
+}
+
+
+
 //-----------------Connection---------
 class Connection_success_State extends App_state {
 
