@@ -2589,6 +2589,226 @@ Widget INS_Quiz_Card(
       ),
     );
 
+Widget INS_Quiz_Complete_Card(
+
+
+    //List<bool> quizState, List<bool> isQuizStart, int index
+    ) =>
+    Container(
+      height: 200,
+      decoration: BoxDecoration(
+        // color: Colors.blueGrey.withOpacity(.05),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(width: .5),
+      ),
+      child: Padding(
+        padding:
+        const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
+        child: Column(
+          children: [
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 10,
+                ),
+                Text('Quize 1'),
+                Spacer(),
+                Container(
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    // color: Colors.yellow.withOpacity(.9),
+
+
+                  ),
+                  child: Center(
+                    child: FaIcon(
+                      FontAwesomeIcons.circleCheck,
+                      size: 25,
+                      color: Colors.teal.withOpacity(.8),
+                    ),
+                  ),
+                ),
+
+              ],
+            ),
+
+            SizedBox(
+              height: 7,
+            ),
+            Container(
+              color: Colors.black.withOpacity(.3),
+              height: .5,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.bookmark,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                'Computer Security',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.user,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                'Sara shehab',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.chartLine,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                '5 points',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.clock,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                'From 8 PM to 9 PM',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+
+
+
+                        Container(
+                          height: 45,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.teal.withOpacity(.6),
+                            borderRadius: BorderRadius.circular(12),
+                            // border: Border.all(width: .5),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Result',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,fontSize: 20,
+                                  color: Colors.white),
+                            ),
+                          ),
+                        ),
+
+
+                      ],
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+            Container(
+              height: 40,
+              child: LinearPercentIndicator(
+
+
+                percent: .85,
+                backgroundColor: Colors.blueGrey.withOpacity(.2),
+                progressColor: Colors.teal.withOpacity(.6),
+                barRadius: Radius.circular(20),
+                lineHeight: 12,
+                trailing: Text('125'),
+                leading: Text('120') ,
+
+                animation: true,
+                animationDuration: 1500,
+                curve: Curves.easeOutBack,
+
+
+
+
+                // footer: Padding(
+                //   padding: const EdgeInsets.only(top:0.0),
+                //   child: Text('Submited',
+                //     style: TextStyle(
+                //       fontWeight: FontWeight.w600,
+                //       fontSize: 15,
+                //       color: Colors.teal,
+                //     ),
+                //   ),
+                // ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
 //
 // Widget Build_Quiz_Data_Widget({
 //   STU_Quiz_Model ?quiz,
