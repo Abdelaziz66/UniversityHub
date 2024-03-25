@@ -37,6 +37,8 @@ String GETCALENDER='Calendar/GetAllCalendar';
 //-----------------End  points for Instructor  ---------------
 String INS_INFO='Instructor/GetInstructorInfo';
 String INS_COURSES='Instructor/CurrentCoursesInfo';
+String INS_AllStudent='Instructor/GetAllStudentsEnrolledInAcourse?CycleId=';
+String INS_Gradeforstudent='Instructor/GetGradesForCurrentCourseForAstudent?';
 
 // String Token='';
 
