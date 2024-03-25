@@ -42,131 +42,17 @@ class INS_Assign_Screen extends StatelessWidget {
         return Scaffold(
           key: scafoldkey3,
 
-          floatingActionButton: Padding(
+          floatingActionButton:
+          cubit.pend?Padding(
             padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal: 8),
             child: FloatingActionButton(
               onPressed: (){
                 navigateTo(context, INS_Add_Assign_Screen());
-                // if(!isvisbile)
-                // {
-                //   isvisbile=!isvisbile;
-                //   scafoldkey3.currentState?.showBottomSheet(
-                //         (context) => Padding(
-                //       padding: const EdgeInsets.all(8.0),
-                //       child: GlassBoxWithBorder(
-                //         widget: Container(
-                //           height: 250,
-                //           child: Padding(
-                //             padding: const EdgeInsets.all(25.0),
-                //             child: Column(
-                //               children: [
-                //                 const Spacer(),
-                //                 Container(
-                //                   alignment: Alignment.center,
-                //                   height: 70,
-                //
-                //                   decoration: BoxDecoration(
-                //                     // border: Border.all(color: Colors.white),
-                //                     borderRadius: BorderRadius.circular(18),
-                //                     color: Colors.white.withOpacity(.8),
-                //                   ),
-                //                   child: Padding(
-                //                     padding:
-                //                     const EdgeInsets.symmetric(horizontal: 8.0),
-                //                     child: TextFormField(
-                //                       // controller: emailcontroller,
-                //                       keyboardType: TextInputType.text,
-                //                       onFieldSubmitted: (value) {
-                //                         print(value);
-                //                       },
-                //                       onChanged: (value) {
-                //                         print(value);
-                //                       },
-                //                       validator: (value) {
-                //                         if (value!.isEmpty) {
-                //                           return 'Folder name can\'t be empty';
-                //                         }
-                //                         return null;
-                //                       },
-                //                       // toolbarOptions:
-                //                       //     ToolbarOptions(paste: true, copy: true),
-                //                       cursorColor: c1,
-                //                       style: const TextStyle(
-                //                         fontSize: 25,
-                //                       ),
-                //                       decoration: InputDecoration(
-                //                         prefixIcon: Padding(
-                //                           padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 6),
-                //                           child: FaIcon(
-                //                             FontAwesomeIcons.solidFolder,
-                //                             color: c1,
-                //                             size: 30,
-                //                           ),
-                //                         ),
-                //                         hintText: 'Folder task name',
-                //                         border: InputBorder.none,
-                //                       ),
-                //                     ),
-                //                   ),
-                //                 ),
-                //                 SizedBox(height: 15,),
-                //                 Container(
-                //                   height: 60,
-                //                   child: Row(
-                //                     children: [
-                //                       Expanded(
-                //                           child: Default_Button(textFontSize: 20,onPressed: (){
-                //                             Navigator.of(context).push(
-                //                         showPicker(
-                //                           context: context,
-                //                           value: _time,
-                //                           sunrise: TimeOfDay(hour: 6, minute: 0), // optional
-                //                           sunset: TimeOfDay(hour: 18, minute: 0), // optional
-                //                           duskSpanInMinutes: 120, // optional
-                //                           onChange: (value){},
-                //
-                //                         ),
-                //                       );},
-                //                             text: 'Deadline',)),
-                //                       SizedBox(width: 15,),
-                //                       // GestureDetector(onTap:(){
-                //                       //
-                //                       //
-                //                       // } ,
-                //                       //     child: FaIcon(FontAwesomeIcons.clock)),
-                //                       Expanded(child: Default_Button(onPressed: (){},text: 'Upload task',textFontSize: 20)),
-                //                     ],
-                //                   ),
-                //                 ),
-                //
-                //                 SizedBox(height: 15,),
-                //
-                //                 const Spacer(),
-                //               ],
-                //             ),
-                //           ),
-                //         ),
-                //         color:
-                //         Colors.blueGrey.withOpacity(.2),
-                //         borderRadius: 30,
-                //         x: 15,
-                //         y: 15,
-                //         BorderWidth: 3,
-                //         BorderColor: Colors.blueGrey,),
-                //     ),
-                //   );
-                // }
-                // else
-                // {
-                //
-                //   Navigator.pop(context);
-                //   isvisbile=!isvisbile;
-                // }
               },
               child: FaIcon(FontAwesomeIcons.plus),
 
             ),
-          ),
+          ):SizedBox(),
           body: SafeArea(
               child: Column(
                 children: [
@@ -502,7 +388,7 @@ class INS_Assign_Screen extends StatelessWidget {
                                 onTap: (){
                                   // navigateTo(context,STU_Assign_Screen() );
                                 },
-                                child: Build_STU_complete_Tasks()),
+                                child: Build_INS_complete_Tasks()),
                             separatorBuilder: (context,index)=>const SizedBox(height: 10,),
                             itemCount: 2,
                           ),

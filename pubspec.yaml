@@ -64,6 +64,8 @@ dependencies:
   flutter_pdfview: ^1.2.7
   url_launcher: ^6.2.5
   percent_indicator: ^4.2.3
+  flutter_image_stack: ^0.0.7
+
 
 
 
