@@ -1982,6 +1982,107 @@ Widget Build_STU_complete_Tasks() => Container(
       ),
     ));
 
+//-------------------INS Completed tasks---------------
+Widget Build_INS_complete_Tasks() => Container(
+    width: double.infinity,
+    height: 120,
+    decoration: ShapeDecoration(
+      shape: RoundedRectangleBorder(
+        side: const BorderSide(color: Colors.blue, width: 2),
+        borderRadius: BorderRadius.circular(15),
+      ),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Row(
+        children: [
+          Container(
+            height: 50,
+            width: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              // image: DecorationImage(
+              //
+              //     image: NetworkImage(
+              //       '',
+              //
+              //     ),
+              //     fit: BoxFit.cover
+              // ),
+              color: Colors.blueGrey.withOpacity(.8),
+            ),
+          ),
+          const SizedBox(
+            width: 15,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Task name',
+                style: TextStyle(
+                    fontWeight: FontWeight.w700, color: c1, fontSize: 17),
+              ),
+
+
+
+              SizedBox(height: 10,),
+              Container(
+                height: 30,
+                width: 200,
+                decoration: BoxDecoration(
+                  color: Colors.teal,
+                 border: Border.all(color: Colors.grey,width: .5,),
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                child: Center(child: Text('chack solution',
+                style: TextStyle(
+                  color: Colors.white
+                ),
+                )),
+              ),
+              SizedBox(height: 10,),
+              Row(
+                children: [
+                  Text(
+                    'Completed',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: c1,
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 3,
+                  ),
+                  Text(
+                    '3/4/2024',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: c1,
+                      fontSize: 14,
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+          const Spacer(),
+          const Padding(
+            padding: EdgeInsets.only(right: 10.0),
+            child: FaIcon(
+              FontAwesomeIcons.circleCheck,
+              size: 35,
+              color: Colors.green,
+            ),
+          ),
+        ],
+      ),
+    ));
+
+
+
 Widget BuildAssignFileViewWidget(
   index,
   context,
