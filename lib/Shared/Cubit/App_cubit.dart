@@ -94,6 +94,11 @@ class App_cubit extends Cubit<App_state> {
     Tab_Bar_index = index;
     emit(Tab_Bar_state());
   }
+  int Tab_Bar_1_index = 0;
+  void Tab_Bar_1_Function({required int index}) {
+    Tab_Bar_1_index = index;
+    emit(Tab_Bar_state());
+  }
 
   int more = 2;
   void addmore() {
