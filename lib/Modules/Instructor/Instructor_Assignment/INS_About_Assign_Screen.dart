@@ -1,5 +1,6 @@
 
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:day_night_time_picker/lib/state/time.dart';
@@ -7,6 +8,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_stack/flutter_image_stack.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -48,28 +50,22 @@ class INS_About_Assign_Screen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Container(
                 child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 30,),
                     defaultAppbar(
                         text: cubit.currentCourseName,
                         context: context),
-
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Container(
                         width: double.infinity,
                         height: 60,
-                        padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          border: Border.all(color: Colors.blueGrey!,
-                               width: 2,
-                          ),
+                          color: Colors.grey.withOpacity(.3),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child:Center(
-                          child: Text('Assign name',
+                          child: Text(cubit.assignData['assignName'],
                           style: Theme.of(context).textTheme.subtitle1?.copyWith(
                             fontSize: 25,
                             fontWeight: FontWeight.bold
@@ -83,316 +79,197 @@ class INS_About_Assign_Screen extends StatelessWidget {
                       padding: const EdgeInsets.only(left:0,top: 60,bottom: 15,right: 15),
                       child: SizedBox(
                         height:80,
-                        child: Column(children: [
-                          Row(
+                        child: Row(
                             children: [
                               Expanded(
-                                child: InkWell(
+                                child:
+                                InkWell(
                                   onTap: (){
+                                    showDialog<String>(
+                                      context: context,
+                                      barrierColor: Colors.black.withOpacity(.3),
+                                      useSafeArea: true,
+                                      builder: (BuildContext context) => AlertDialog(
+                                        insetPadding: const EdgeInsets.all(0.0),
+                                        scrollable: false,
+                                        shadowColor: Colors.transparent,
+                                        content: Center(
+                                          child: Container(
+                                            width: MediaQuery.of(context).size.width,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: GlassBox(
+                                                  widget: Stack(
+                                                    children: [
+                                                      Column(
+                                                        children: [
+                                                          const Spacer(),
+                                                          Padding(
+                                                            padding: const EdgeInsets.all(15.0),
+                                                            child: GlassBoxWithBorder(
+                                                              widget: Container(
+                                                                height: 350,
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets
+                                                                      .only(
+                                                                      bottom: 25.0,
+                                                                      left: 25,
+                                                                      right: 25,
+                                                                      top: 20
+                                                                  ),
+                                                                  child: Column(
+                                                                    children: [
+                                                                      Row(
+                                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                                        children: [
+                                                                          FaIcon(FontAwesomeIcons.solidUser,color: Colors.teal,size: 18,),
+                                                                          SizedBox(width: 15,),
+                                                                          Container(
+                                                                              child: Text(
+                                                                                'Student name',
+                                                                                textAlign: TextAlign.center,
+                                                                                style: Theme.of(context)
+                                                                                    .textTheme
+                                                                                    .subtitle1
+                                                                                    ?.copyWith(
+                                                                                  color: Colors.teal,
+                                                                                  fontSize: 18,
+                                                                                  fontWeight: FontWeight.w900,
+                                                                                ),
+                                                                              )),
+                                                                          Spacer(),
+                                                                          // Container(
+                                                                          //     child: Text(
+                                                                          //       'Upload at',
+                                                                          //       textAlign: TextAlign.center,
+                                                                          //       style: Theme.of(context)
+                                                                          //           .textTheme
+                                                                          //           .subtitle1
+                                                                          //           ?.copyWith(
+                                                                          //         color: Colors.teal,
+                                                                          //         fontSize: 15,
+                                                                          //         fontWeight: FontWeight.w900,
+                                                                          //       ),
+                                                                          //     )),
+                                                                        ],
+                                                                      ),
+                                                                      SizedBox(height: 20,),
+                                                                      Container(
+                                                                        height: 2,
+                                                                        color: Colors.teal,
+                                                                        width: double.infinity,
 
-                                  },
-                                  child:
-                                  // GlassBoxWithBorder_notification(
-                                  //   widget: Padding(
-                                  //     padding:
-                                  //     const EdgeInsets.only(bottom: 14, right: 30.0, top: 14, left: 30),
-                                  //     child: Row(
-                                  //       mainAxisAlignment: MainAxisAlignment.start,
-                                  //       crossAxisAlignment: CrossAxisAlignment.center,
-                                  //       children: [
-                                  //             Text(
-                                  //               'Parallel Programming',
-                                  //               style: TextStyle(
-                                  //                   fontWeight: FontWeight.w700, color: c1, fontSize: 17),
-                                  //             ),
-                                  //         const Spacer(),
-                                  //         Container(
-                                  //           alignment: AlignmentDirectional.centerEnd,
-                                  //           child: const FaIcon(
-                                  //             FontAwesomeIcons.circleRight,
-                                  //             color: Colors.teal,
-                                  //             size: 30,
-                                  //           ),
-                                  //         ),
-                                  //       ],
-                                  //     ),
-                                  //   ),
-                                  //   color: Colors.blueGrey.withOpacity(.02),
-                                  //   borderRadius: 30,
-                                  //   x: 0,
-                                  //   y: 0,
-                                  //   BorderColor: Colors.blue,
-                                  //   BorderWidth: 1.5,
-                                  // ),
+                                                                      ),
+                                                                      SizedBox(height: 20,),
 
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color:cubit.connnection? Colors.deepPurpleAccent.withOpacity(.25):Colors.grey.withOpacity(.25),
-                                      borderRadius: BorderRadius.only(bottomLeft: Radius.zero,topLeft: Radius.zero,
-                                      bottomRight:  Radius.circular(50),
-                                      topRight:  Radius.circular(50),
-                                      ),
-                                    ),
+                                                                      Container(
+                                                                        height: 150,
+                                                                        child: ListView.separated(
+                                                                            itemBuilder:(context,index)=> showSTU_UploadeTask(
+                                                                              index: index+1,
+                                                                              stuAssign: cubit.studentUplodeTaskModel[index]
+                                                                            ),
+                                                                          separatorBuilder: (context,index)=>  Container(
+                                                                            height: 1,
+                                                                            color: Colors.teal,
+                                                                            width: double.infinity,
 
-                                    child:Padding(
-                                          padding: const EdgeInsets.all( 20.0),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: [
-
-                                              // Container(
-                                              //   width: 60,
-                                              //   child: Stack(
-                                              //     clipBehavior:Clip.antiAlias,
-                                              //     alignment: AlignmentDirectional.centerEnd,
-                                              //     children: [
-                                              //       CircleAvatar(
-                                              //         radius: 15,
-                                              //         backgroundColor: Colors.red,
-                                              //       ),
-                                              //       CircleAvatar(
-                                              //         radius: 15,
-                                              //         backgroundColor: Colors.white,
-                                              //       ),
-                                              //       Padding(
-                                              //         padding: const EdgeInsets.all(8.0),
-                                              //         child: CircleAvatar(
-                                              //             radius: 10,
-                                              //             backgroundColor: Colors.blue,
-                                              //           ),
-                                              //       ),
-                                              //
-                                              //     ],
-                                              //   ),
-                                              // ),
-
-                                              Container(
-                                                child: Text('Send by ',textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    color: c1.withOpacity(.8),
-                                                    fontSize: 23,
-                                                    fontWeight: FontWeight.w900,
+                                                                          ),
+                                                                          itemCount: cubit.studentUplodeTaskModel.length,
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              color: Colors.white
+                                                                  .withOpacity(.5),
+                                                              borderRadius: 30,
+                                                              x: 15,
+                                                              y: 15,
+                                                              BorderWidth: 1,
+                                                              BorderColor: Colors.white,
+                                                            ),
+                                                          ),
+                                                          const Spacer(
+                                                            flex: 1,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
                                                   ),
-                                                ),
-                                              ),
-                                              SizedBox(width: 120),
-                                              // FlutterImageStack(
-                                              //
-                                              //   showTotalCount: true,
-                                              //   totalCount: 10,
-                                              //   itemRadius: 30, // Radius of each images
-                                              //   itemCount: 3, // Maximum number of images to be shown in stack
-                                              //   itemBorderWidth: 3,
-                                              //   imageList: images,
-                                              // ),
-                                            ],
+                                                  color: Colors.transparent,
+                                                  borderRadius: 0,
+                                                  x: 3,
+                                                  y: 3),
+                                            ),
+                                          ),
+                                        ),
+                                        elevation: 0,
+                                        clipBehavior: Clip.none,
+                                        surfaceTintColor: Colors.transparent,
+                                        backgroundColor: Colors.transparent,
+                                        contentPadding: EdgeInsets.zero,
+                                      ),
+                                    );
+                                  },
+                                  child: ClipRRect(
+                                    child: BackdropFilter(
+                                      filter:ImageFilter.blur(
+                                          sigmaX: 10, sigmaY: 10, tileMode: TileMode.mirror),
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey.withOpacity(.2),
+                                            borderRadius: BorderRadius.only(bottomLeft: Radius.zero,topLeft: Radius.zero,
+                                              bottomRight:  Radius.circular(50),
+                                              topRight:  Radius.circular(50),
+                                            ),
                                           ),
 
-                                        ),
+                                          child:Padding(
+                                            padding: const EdgeInsets.all( 20.0),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  child: Text('Send by ',textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      color: c1.withOpacity(.8),
+                                                      fontSize: 23,
+                                                      fontWeight: FontWeight.w900,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(width: 120),
+                                                FlutterImageStack(
+                                                  showTotalCount: true,
+                                                  totalCount: 10,
+                                                  itemRadius: 30, // Radius of each images
+                                                  itemCount: 3, // Maximum number of images to be shown in stack
+                                                  itemBorderWidth: 3,
+                                                  imageList: images,
+                                                ),
+                                              ],
+                                            ),
 
+                                          ),
+
+
+
+                                      ),
+                                    ),
                                   ),
+
 
                                 ),
 
                               ),
                             ],
                           ),
-
-                          // Row(
-                          //   children: [
-                          //     Expanded(
-                          //       child: InkWell(
-                          //         onTap: (){
-                          //
-                          //         },
-                          //         child: Container(
-                          //           decoration: BoxDecoration(
-                          //             color:cubit.connnection?Colors.pinkAccent.withOpacity(.18):Colors.grey.withOpacity(.25),
-                          //             borderRadius: BorderRadius.only(bottomLeft: Radius.zero,topLeft: Radius.zero,
-                          //               bottomRight:  Radius.circular(50),
-                          //               topRight:  Radius.circular(50),
-                          //             ),
-                          //           ),
-                          //           child: Row(
-                          //             mainAxisAlignment: MainAxisAlignment.start,
-                          //             crossAxisAlignment: CrossAxisAlignment.center,
-                          //             children: [
-                          //               Padding(
-                          //                 padding: const EdgeInsets.all( 20.0),
-                          //                 child: Row(
-                          //                   children: [
-                          //                     Container(
-                          //                       child: Text('Edit task name',textAlign: TextAlign.center,
-                          //                         style: TextStyle(
-                          //                           color: c1.withOpacity(.8),
-                          //                           fontSize: 23,
-                          //                           fontWeight: FontWeight.w900,
-                          //                         ),
-                          //                       ),
-                          //                     ),
-                          //                     Text('',textAlign: TextAlign.center,
-                          //                       style: TextStyle(
-                          //                         color: c1.withOpacity(.8),
-                          //                         fontSize: 23,
-                          //                         fontWeight: FontWeight.w900,
-                          //                       ),
-                          //                     ),
-                          //                   ],
-                          //                 ),
-                          //
-                          //               ),
-                          //             ],
-                          //           ),
-                          //         ),
-                          //
-                          //       ),
-                          //
-                          //     ),
-                          //    // SizedBox(width: 10,),
-                          //
-                          //   ],
-                          // ),
-                          // const SizedBox(height: 15,),
-                          // Row(
-                          //   children: [
-                          //     Expanded(
-                          //       child: InkWell(
-                          //         onTap: (){
-                          //
-                          //         },
-                          //         child:
-                          //
-                          //         Container(
-                          //           width: double.infinity,
-                          //           decoration: BoxDecoration(
-                          //             color:  Colors.greenAccent.withOpacity(.25),
-                          //             borderRadius: BorderRadius.only(bottomLeft: Radius.zero,topLeft: Radius.zero,
-                          //               bottomRight:  Radius.circular(50),
-                          //               topRight:  Radius.circular(50),
-                          //             ),
-                          //           ),
-                          //           child: Row(
-                          //             mainAxisAlignment: MainAxisAlignment.start,
-                          //             crossAxisAlignment: CrossAxisAlignment.center,
-                          //             children: [
-                          //               Padding(
-                          //                 padding: const EdgeInsets.all( 20.0),
-                          //                 child: Row(
-                          //                   children: [
-                          //                     Container(
-                          //                         child: Text('Change task grade',textAlign: TextAlign.center,
-                          //                           style: TextStyle(
-                          //                             color: c1.withOpacity(.8),
-                          //                             fontSize: 23,
-                          //                             fontWeight: FontWeight.w900,
-                          //                           ),
-                          //                         ),
-                          //                       ),
-                          //
-                          //                     // SizedBox(width: 30,),
-                          //                     //Spacer(),
-                          //                     Text('15',textAlign: TextAlign.center,
-                          //                       style: TextStyle(
-                          //                         color: c1.withOpacity(.8),
-                          //                         fontSize: 23,
-                          //                         fontWeight: FontWeight.w900,
-                          //                       ),
-                          //                     ),
-                          //                   ],
-                          //                 ),
-                          //
-                          //               ),
-                          //             ],
-                          //           ),
-                          //         ),
-                          //
-                          //       ),
-                          //
-                          //     ),
-                          //
-                          //   ],
-                          // ),
-                          // const SizedBox(height: 15,),
-                          // Row(
-                          //   children: [
-                          //     Expanded(
-                          //       child: InkWell(
-                          //         onTap: (){
-                          //
-                          //         },
-                          //         child:
-                          //         // GlassBoxWithBorder_notification(
-                          //         //   widget: Padding(
-                          //         //     padding:
-                          //         //     const EdgeInsets.only(bottom: 14, right: 30.0, top: 14, left: 30),
-                          //         //     child: Row(
-                          //         //       mainAxisAlignment: MainAxisAlignment.start,
-                          //         //       crossAxisAlignment: CrossAxisAlignment.center,
-                          //         //       children: [
-                          //         //             Text(
-                          //         //               'Parallel Programming',
-                          //         //               style: TextStyle(
-                          //         //                   fontWeight: FontWeight.w700, color: c1, fontSize: 17),
-                          //         //             ),
-                          //         //         const Spacer(),
-                          //         //         Container(
-                          //         //           alignment: AlignmentDirectional.centerEnd,
-                          //         //           child: const FaIcon(
-                          //         //             FontAwesomeIcons.circleRight,
-                          //         //             color: Colors.teal,
-                          //         //             size: 30,
-                          //         //           ),
-                          //         //         ),
-                          //         //       ],
-                          //         //     ),
-                          //         //   ),
-                          //         //   color: Colors.blueGrey.withOpacity(.02),
-                          //         //   borderRadius: 30,
-                          //         //   x: 0,
-                          //         //   y: 0,
-                          //         //   BorderColor: Colors.blue,
-                          //         //   BorderWidth: 1.5,
-                          //         // ),
-                          //
-                          //         Container(
-                          //           decoration: BoxDecoration(
-                          //             color:cubit.connnection? Colors.lightBlueAccent.withOpacity(.25):Colors.grey.withOpacity(.25),
-                          //             borderRadius: BorderRadius.only(bottomLeft: Radius.zero,topLeft: Radius.zero,
-                          //               bottomRight:  Radius.circular(50),
-                          //               topRight:  Radius.circular(50),
-                          //             ),
-                          //           ),
-                          //           child: Row(
-                          //             mainAxisAlignment: MainAxisAlignment.start,
-                          //             crossAxisAlignment: CrossAxisAlignment.center,
-                          //             children: [
-                          //               Padding(
-                          //                 padding: const EdgeInsets.all( 20.0),
-                          //                 child: Container(
-                          //                   child: Text('Deadline',textAlign: TextAlign.center,
-                          //                     style: TextStyle(
-                          //                       color: c1.withOpacity(.8),
-                          //                       fontSize: 23,
-                          //                       fontWeight: FontWeight.w900,
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //
-                          //               ),
-                          //             ],
-                          //           ),
-                          //         ),
-                          //
-                          //       ),
-                          //
-                          //     ),
-                          //
-                          //   ],
-                          // ),
-
-
-                        ],),
                       ),
                     ),
                     const SizedBox(height: 50,),
@@ -401,7 +278,6 @@ class INS_About_Assign_Screen extends StatelessWidget {
                       child: Container(
                         height: 350,
                         decoration: BoxDecoration(
-                          // color: Colors.blueGrey.withOpacity(.05),
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(width: .5),
                         ),
@@ -411,93 +287,30 @@ class INS_About_Assign_Screen extends StatelessWidget {
                           child: Column(
                             children: [
                               Row(
-                                // mainAxisAlignment: MainAxisAlignment.start,
-                                // crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
                                     width: 10,
                                   ),
-                                  Text('Task data'),
+                                  Text('Task data',
+                                  style:TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold
+                                  )
+                                  ),
                                   Spacer(),
-                                  // Container(
-                                  //   height: 30,
-                                  //   width: 30,
-                                  //   decoration: BoxDecoration(
-                                  //     // color: Colors.yellow.withOpacity(.9),
-                                  //     border: Border.all(
-                                  //       width: .8,
-                                  //       color: Colors.blue.withOpacity(1),
-                                  //     ),
-                                  //     shape: BoxShape.circle,
-                                  //   ),
-                                  //   child: Center(
-                                  //     child: FaIcon(
-                                  //       FontAwesomeIcons.pen,
-                                  //       size: 15,
-                                  //       color: Colors.blue.withOpacity(1),
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  // SizedBox(
-                                  //   width: 7,
-                                  // ),
-                                  // Container(
-                                  //   height: 30,
-                                  //   width: 30,
-                                  //   decoration: BoxDecoration(
-                                  //     // color: Colors.red.withOpacity(.6),
-                                  //     border: Border.all(
-                                  //       width: .8,
-                                  //       color: Colors.red.withOpacity(1),
-                                  //     ),
-                                  //     shape: BoxShape.circle,
-                                  //   ),
-                                  //   child: Center(
-                                  //     child: FaIcon(
-                                  //       FontAwesomeIcons.trashCan,
-                                  //       size: 15,
-                                  //       color: Colors.red.withOpacity(1),
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  // SizedBox(
-                                  //   width: 7,
-                                  // ),
-                                  // Container(
-                                  //   height: 30,
-                                  //   width: 30,
-                                  //   decoration: BoxDecoration(
-                                  //     // color: Colors.teal.withOpacity(.6),
-                                  //     border: Border.all(
-                                  //       width: .8,
-                                  //       color: Colors.teal.withOpacity(1),
-                                  //     ),
-                                  //     shape: BoxShape.circle,
-                                  //   ),
-                                  //   child: Center(
-                                  //     child: FaIcon(
-                                  //       FontAwesomeIcons.eye,
-                                  //       size: 15,
-                                  //       color: Colors.teal.withOpacity(1),
-                                  //     ),
-                                  //   ),
-                                  // ),
                                 ],
                               ),
-
                               SizedBox(
                                 height: 7,
                               ),
                               Container(
                                 color: Colors.black.withOpacity(.3),
-                                height: .5,
+                                height: 1,
                               ),
                               SizedBox(
                                 height: 40,
                               ),
-                               Expanded(
-                                child:
-                                Expanded(
+                             Expanded(
                                   flex: 2,
                                   child: Padding(
                                     padding: EdgeInsets.only(left: 5.0),
@@ -505,7 +318,6 @@ class INS_About_Assign_Screen extends StatelessWidget {
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-
                                         Container(
                                           padding: EdgeInsets.all(8),
                                           height: 50,
@@ -514,7 +326,7 @@ class INS_About_Assign_Screen extends StatelessWidget {
                                             borderRadius: BorderRadius.circular(20),
                                             border: Border.all(width: .5),
                                           ),
-                                          child: const Row(
+                                          child: Row(
                                             children: [
                                               FaIcon(
                                                 FontAwesomeIcons.bookmark,
@@ -532,7 +344,7 @@ class INS_About_Assign_Screen extends StatelessWidget {
 
                                               Spacer(),
                                               Text(
-                                                'Task name ',
+                                                cubit.assignData['assignName'],
                                                 textAlign: TextAlign.start,
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w700, fontSize: 15),
@@ -606,7 +418,7 @@ class INS_About_Assign_Screen extends StatelessWidget {
                                               ),
                                               Spacer(),
                                               Text(
-                                                '15-4-2024 at 02:30 ',
+                                                cubit.assignData['endDate'],
                                                 textAlign: TextAlign.start,
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.w700, fontSize: 15),
@@ -619,9 +431,10 @@ class INS_About_Assign_Screen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                              ),
+
                               InkWell(
                                 onTap: (){
+                                  print(cubit.assignId);
                                   showDialog<String>(
                                     context: context,
                                     barrierColor: Colors.black.withOpacity(.3),
@@ -657,7 +470,7 @@ class INS_About_Assign_Screen extends StatelessWidget {
                                                                     top: 20
                                                                 ),
                                                                 child: Form(
-                                                                  //key: formkey1,
+                                                                  key: formkey1,
                                                                   child: Column(
                                                                     children: [
                                                                       const Spacer(),
@@ -692,8 +505,8 @@ class INS_About_Assign_Screen extends StatelessWidget {
                                                                               0.0),
                                                                           child:
                                                                           TextFormField(
-                                                                           // controller:
-                                                                            //taskNamecontroller,
+                                                                           controller:
+                                                                            taskNamecontroller,
                                                                             keyboardType:
                                                                             TextInputType
                                                                                 .text,
@@ -728,13 +541,13 @@ class INS_About_Assign_Screen extends StatelessWidget {
                                                                                     10),
                                                                                 child: FaIcon(
                                                                                   FontAwesomeIcons
-                                                                                      .calendar,
+                                                                                      .edit,
                                                                                   color: c1,
                                                                                   size: 25,
                                                                                 ),
                                                                               ),
                                                                               hintText:
-                                                                              'Enter task name',
+                                                                              'Task name',
                                                                               border:
                                                                               InputBorder
                                                                                   .none,
@@ -809,13 +622,13 @@ class INS_About_Assign_Screen extends StatelessWidget {
                                                                                     10),
                                                                                 child: FaIcon(
                                                                                   FontAwesomeIcons
-                                                                                      .calendar,
+                                                                                      .solidEdit,
                                                                                   color: c1,
                                                                                   size: 25,
                                                                                 ),
                                                                               ),
                                                                               hintText:
-                                                                              'Enter event title',
+                                                                              'Task grade',
                                                                               border:
                                                                               InputBorder
                                                                                   .none,
@@ -865,8 +678,7 @@ class INS_About_Assign_Screen extends StatelessWidget {
                                                                                                   selectedTime.minute,
                                                                                                 );
                                                                                                 print('Selected date and time: $selectedDateTime');
-                                                                                              //  startDate= DateFormat("yyyy-MM-ddTHH:mm:ss.SSS").format(selectedDateTime);
-                                                                                                // Handle the selected date and time as needed
+
                                                                                               }
                                                                                             });
                                                                                           }
@@ -883,6 +695,11 @@ class INS_About_Assign_Screen extends StatelessWidget {
                                                                       ),
                                                                       Default_Button(
                                                                           onPressed: () {
+                                                                            cubit.updateINSAssign(
+                                                                              taskName: taskNamecontroller.text,
+                                                                             // taskGrade: taskGradecontroller.text,
+                                                                            );
+                                                                            Navigator.pop(context);
                                                                           //   if (formkey1.currentState!.validate()) {
                                                                           //   cubit.AddEventToCalender(
                                                                           //       startDate: cubit.startTime,
@@ -942,7 +759,7 @@ class INS_About_Assign_Screen extends StatelessWidget {
                                   height: 45,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                    color: Colors.teal.withOpacity(.6),
+                                    color: Colors.blue.withOpacity(.6),
                                     borderRadius: BorderRadius.circular(12),
                                     // border: Border.all(width: .5),
                                   ),

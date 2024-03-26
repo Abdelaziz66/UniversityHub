@@ -964,6 +964,7 @@ class App_cubit extends Cubit<App_state> {
       }
     }else
       {
+        insCoursesAssignModel = [];
         emit(Stu_Get_Course_Assign_LoadingState());
         Dio_Helper.GetData(
           url: 'Instructor/GetCurrentCourseTasks?cycleId=${currentCycleId}',
@@ -1320,39 +1321,113 @@ class App_cubit extends Cubit<App_state> {
   //--------------------------------------------------
   //--------------------------------------------------
 
+  //------------------Add New Task---------------------------
+  void AddInsNewTask({
+    required startDate,
+    required endDate,
+    required taskName,
+    required taskGrade,
+  }) {
+    print(' start ${startDate.toString()}');
+    print('end $endDate');
+    emit(Ins_Add_Assign_LoadingState());
+    Dio_Helper.PostListFileData(
+        token: token,
+        url: 'Instructor/UploadAssignment?TaskName=$taskName&TaskGrade=$taskGrade&StartDate=$startDate&EndDate=$startDate&CourseCycleId=$currentCycleId',
+        files: all_assign_files_List,
+    ).then((value) {
+      if (value.statusCode == 200) {
+        print('Add task true');
+        String json = value.data;
 
-  // void insGetAllLecFolders({
-  //   required token,
-  // }) {
-  //   if (true) {
-  //     emit(Ins_Get_All_Lec_Folders_LoadingState());
-  //     Dio_Helper.GetData(
-  //       url: STU_COURSES,
-  //       token: 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9naXZlbm5hbWUiOiJzYXJhIHNoZWhhYiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6IlNhcmFAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiRG9jdG9yIiwiZXhwIjoxNzEwOTc3Njc4LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3Mjg2IiwiYXVkIjoiTXlTZWN1cmVkQXBpVXNlcnMifQ.7A0lYXtifSOCqyvjMhYfB3yjivRSyW57Ri_M8dlqN0w',
-  //     ).then((value) {
-  //       if (value.statusCode == 200) {
-  //         insAllLecFoldersModel = [];
-  //         // print('get course true');
-  //         List Json = value.data;
-  //         for (var element in Json) {
-  //           insAllLecFoldersModel.add(InsAllLecFoldersModel.fromJson(element));
-  //         }
-  //
-  //
-  //         emit(Ins_Get_All_Lec_Folders_SuccessState());
-  //       }
-  //     //  InsertToDataBase_Course_Table();
-  //       insAllLecFoldersModel.forEach((element) {
-  //         print('name------- ${element.lectureName}');
-  //       });
-  //
-  //     }).catchError((error) {
-  //       emit(Ins_Get_All_Lec_Folders_ErrorState());
-  //       print(error.toString());
-  //     });
-  //   }
-  // }
+        print(json);
+        flutterToast(msg: '${json}', backColor: Colors.green);
+        emit(Ins_Add_Assign_SuccessState());
+      }
+    }).catchError((Error) {
+      print(Error.toString());
+      emit(Ins_Add_Assign_ErrorState());
+    });
+  }
 
+
+//----------------get student upload the task------------------
+
+  List<InsStudentUplodeTaskModel>studentUplodeTaskModel=[];
+  void insGetStuUploadTasks({
+    required assignId,
+    // required token,
+  }) {
+    studentUplodeTaskModel=[];
+    if (true) {
+      emit(Ins_Get_STU_upload_Assign_LoadingState());
+      Dio_Helper.GetData(
+        url:'Instructor/GetStudentsWhoUploadThetask?taskId=$assignId' ,
+        token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          studentUplodeTaskModel = [];
+          List Json = value.data;
+          for (var element in Json) {
+            studentUplodeTaskModel.add(InsStudentUplodeTaskModel.fromJson(element));
+          }
+
+
+          emit(Ins_Get_STU_upload_Assign_SuccessState());
+        }
+      //  InsertToDataBase_Course_Table();
+        studentUplodeTaskModel.forEach((element) {
+          print('Student name------- ${element.studentName}');
+        });
+
+      }).catchError((error) {
+        emit(Ins_Get_STU_upload_Assign_ErrorState());
+        print(error.toString());
+      });
+    }
+  }
+
+
+
+
+
+
+//--------------updata INS Assign----------------------------
+
+  Map<String,dynamic>assignData={};
+
+  String? assignId;
+  void updateINSAssign({
+    String? taskName,
+    String? taskGrade,
+    String? startDate,
+    String? endDate,
+
+}){
+    if (true) {
+      emit(Ins_update_Assign_LoadingState());
+      Dio_Helper.updateData(
+        url:'Instructor/UpdateAnAssignment?taskId=T001' ,
+        token: token,
+        data: {
+          "taskName": assignName,
+          "taskGrade": taskGrade,
+          "startDate":taskGrade,
+          "endDate": endDate
+        }
+      ).then((value) {
+        if (value.statusCode == 200) {
+          var Json = value.data;
+          flutterToast(msg:'Updated successfully', backColor: Colors.green);
+          print(Json.toString());
+          emit(Ins_update_Assign_SuccessState());
+        }
+      }).catchError((error) {
+        emit(Ins_update_Assign_ErrorState());
+        print(error.toString());
+      });
+    }
+  }
 
 
 
