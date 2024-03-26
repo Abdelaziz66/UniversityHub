@@ -153,4 +153,23 @@ class Dio_Helper {
     return await dio.download(networkfilePath, localfilePath);
   }
 
+
+  static Future<Response> updateData({
+    required String url,
+    Map<String, dynamic>? query,
+    String? token,
+    Map<String, dynamic>? data,
+
+  }) async {
+    //  FormData formData=FormData();
+    dio.options.headers={
+      'Content-Type':'application/json',
+      'Accept':'application/json',
+      'Authorization':'Bearer $token',
+    };
+
+    return await dio.put(
+        url, queryParameters: query, data: data);
+  }
+
 }

@@ -47,6 +47,7 @@ class INS_Assign_Screen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal: 8),
             child: FloatingActionButton(
               onPressed: (){
+                cubit.all_assign_files_List=[];
                 navigateTo(context, INS_Add_Assign_Screen());
               },
               child: FaIcon(FontAwesomeIcons.plus),
@@ -370,8 +371,16 @@ class INS_Assign_Screen extends StatelessWidget {
                               physics:  BouncingScrollPhysics(),
                               itemBuilder:(context,index)=>InkWell(
                                   onTap: (){
-                                    cubit.all_assign_files_List=[];
-                                    cubit.assignFile=null;
+                                   // cubit.all_assign_files_List=[];
+                                    //cubit.assignFile=null;
+                                    cubit.assignId=insAssign[index].taskId;
+                                    cubit.assignData.addAll({
+                                      'assignName':insAssign[index].taskName,
+                                      'startDate':insAssign[index].startDate,
+                                      'endDate':insAssign[index].endDate,
+                                      'filePath':insAssign[index].filePath,
+                                    });
+                                    cubit.insGetStuUploadTasks(assignId:insAssign[index].taskId );
                                     navigateTo(context,INS_About_Assign_Screen() );
                                   },
                                   child: Build_STU_pend_Tasks(assign: insAssign[index],)),

@@ -21,6 +21,7 @@ import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dar
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 
 import '../../Models/INS_Model/CourseModel.dart';
+import '../../Models/INS_Model/INS_Assign_Model.dart';
 import '../../Models/STU_Model/Calender_Model/CalenderMode.dart';
 import '../Cons_widget.dart';
 import '../Cubit/App_cubit.dart';
@@ -3369,3 +3370,39 @@ Widget Build_STU_All_grades(
         ],
       ),
     );
+
+
+
+//---------------------------INSTRUCTOR----------------
+//------------------------------------------------------
+//--------------------------------------------------------
+
+Widget showSTU_UploadeTask({
+   int? index,
+  InsStudentUplodeTaskModel? stuAssign,
+}   )=>Container(
+  child:Row(
+    children: [
+      Text(
+        '$index.  ',
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 17,
+          fontWeight: FontWeight.w700,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      Text(
+        '${stuAssign?.studentName}',
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 17,
+          fontWeight: FontWeight.w700,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      Spacer(),
+      CircleAvatar(radius: 17,backgroundColor: Colors.teal,),
+    ],
+  ),
+);

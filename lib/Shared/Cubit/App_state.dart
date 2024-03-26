@@ -347,6 +347,31 @@ class Ins_Get_All_Lec_Folders_SuccessState extends App_state {
 class Ins_Get_All_Lec_Folders_ErrorState extends App_state {}
 
 
+class Ins_Get_STU_upload_Assign_LoadingState extends App_state {}
+
+class Ins_Get_STU_upload_Assign_SuccessState extends App_state {
+  Ins_Get_STU_upload_Assign_SuccessState();
+}
+class Ins_Get_STU_upload_Assign_ErrorState extends App_state {}
+
+
+//----------update assign---------------
+class Ins_update_Assign_LoadingState extends App_state {}
+
+class Ins_update_Assign_SuccessState extends App_state {
+  Ins_update_Assign_SuccessState();
+}
+class Ins_update_Assign_ErrorState extends App_state {}
+
+//----------add new task--------------------
+class Ins_Add_Assign_LoadingState extends App_state {}
+
+class Ins_Add_Assign_SuccessState extends App_state {
+  Ins_Add_Assign_SuccessState();
+}
+class Ins_Add_Assign_ErrorState extends App_state {}
+
+
 
 
 
