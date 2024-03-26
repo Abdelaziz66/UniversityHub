@@ -197,14 +197,28 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
                                 );
                                 break;
                               case 2:
+                                Alrat(
+                                    context: context,
+                                    no: () {
+                                      Navigator.pop(context);
+                                    },
+                                    text: 'Do you want to save quiz ?',
+                                    yes: () {});
                                 break;
                               case 3:
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          INS_Quiz_Finish_Screen(),
-                                    ));
+                                Alrat(
+                                    context: context,
+                                    no: () {
+                                      Navigator.pop(context);
+                                    },
+                                    text: 'Do you want to Publish quiz ?',
+                                    yes: () {  Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              INS_Quiz_Finish_Screen(),
+                                        ));});
+
                                 break;
                             }
 

@@ -257,7 +257,7 @@ class INS_Quizes_Screen extends StatelessWidget {
                             horizontal: 15.0, vertical: 7.5),
                         child: ListView.separated(
                           physics: const BouncingScrollPhysics(),
-                          itemBuilder: (context, index) => INS_Quiz_Card(),
+                          itemBuilder: (context, index) => INS_Quiz_Card(context: context),
                           separatorBuilder: (context, index) => const SizedBox(
                             height: 25,
                           ),
