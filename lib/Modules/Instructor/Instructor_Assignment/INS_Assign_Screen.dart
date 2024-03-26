@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
 import 'package:university_hup/Modules/Instructor/Instructor_Assignment/INS_Add_Assign_Screen.dart';
+import 'package:university_hup/Modules/Instructor/Instructor_Assignment/INS_Add_assignment_Screen.dart';
 
 import 'package:university_hup/Modules/Student/Student_Assignment/STU_About_Assign_Screen.dart';
 
@@ -19,7 +21,7 @@ import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
 import '../../../Models/INS_Model/INS_Assign_Model.dart';
-import '../../../Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
+
 import 'INS_About_Assign_Screen.dart';
 
 
@@ -48,7 +50,7 @@ class INS_Assign_Screen extends StatelessWidget {
             child: FloatingActionButton(
               onPressed: (){
                 cubit.all_assign_files_List=[];
-                navigateTo(context, INS_Add_Assign_Screen());
+                navigateTo(context, INS_add_assignment());
               },
               child: FaIcon(FontAwesomeIcons.plus),
 

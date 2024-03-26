@@ -2118,30 +2118,32 @@ Widget BuildAssignFileViewWidget(
   final fileSize =
       mb >= 1 ? '${mb.toStringAsFixed(2)} MB ' : '${kb.toStringAsFixed(2)} KB';
   final extension = file.path.split('.').last ?? '';
-  final color = Colors.grey[500];
+  final color = Colors.blueGrey.withOpacity(.5);
   return InkWell(
       onTap: () => App_cubit.get(context).openFile_Fun(file: file),
-      child: Container(
+      child:GlassBoxWithBorder_Gradiant2(widget:  Container(
+        width: 140,
+        height: 140,
         padding: const EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
                 child: Container(
-              alignment: Alignment.center,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                '.${extension}',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                ),
-              ),
-            )),
+                  alignment: Alignment.center,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: color,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    '.${extension}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                    ),
+                  ),
+                )),
             const SizedBox(
               height: 8,
             ),
@@ -2163,7 +2165,15 @@ Widget BuildAssignFileViewWidget(
             ),
           ],
         ),
-      ));
+      ),
+          BorderWidth: 0,
+          BorderColor: Colors.black,
+
+          color: Colors.white.withOpacity(.2),
+          borderRadius: 20,
+          x: 0,
+          y: 0),
+  );
 }
 
 Widget Build_Quiz_Data_Widget({
