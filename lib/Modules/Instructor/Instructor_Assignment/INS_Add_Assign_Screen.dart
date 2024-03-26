@@ -7,7 +7,10 @@ import 'package:file_picker/file_picker.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:university_hup/Modules/Instructor/Instructor_Assignment/INS_Add_assignment_Screen.dart';
+import 'package:university_hup/Modules/Instructor/Instructor_Quizzes/INS_Quizes_Ques.dart';
 
 
 import '../../../Shared/Component/component.dart';
@@ -33,6 +36,21 @@ class INS_Add_Assign_Screen extends StatelessWidget {
         Time _time = Time(hour: 11, minute: 30, second: 00000,);
 
         return Scaffold(
+          floatingActionButton: Padding(
+            padding:
+            const EdgeInsets.symmetric(vertical: 30.0, horizontal: 8),
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => INS_add_assignment(),
+                    ));
+
+              },
+              child:  FaIcon(FontAwesomeIcons.plus),
+            ),
+          ),
           body: SafeArea(
             child: Column(
               // crossAxisAlignment: CrossAxisAlignment.start,
