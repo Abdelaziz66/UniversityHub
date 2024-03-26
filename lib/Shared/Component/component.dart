@@ -2845,6 +2845,10 @@ Widget INS_Quiz_Card({required context}
       ),
     );
 
+
+var taskNamecontroller = TextEditingController();
+var taskGradecontroller = TextEditingController();
+var formkey1 = GlobalKey<FormState>();
 Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
 
     //List<bool> quizState, List<bool> isQuizStart, int index
@@ -2878,7 +2882,329 @@ Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
                           Navigator.pop(context);
                         },
                         text: 'Do you want to edit Task ?',
-                        yes: () {});
+                        yes: () {
+                          Navigator.pop(context);
+                          print(assign!.taskId);
+                          showDialog<String>(
+                            context: context,
+                            barrierColor: Colors.black.withOpacity(.3),
+                            useSafeArea: true,
+                            builder: (BuildContext context) => AlertDialog(
+                              insetPadding: const EdgeInsets.all(0.0),
+                              scrollable: false,
+                              shadowColor: Colors.transparent,
+                              content: Center(
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: GlassBox(
+                                        widget: Stack(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                const Spacer(),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(15.0),
+                                                  child: GlassBoxWithBorder(
+                                                    widget: Container(
+                                                      height: 350,
+                                                      child: Padding(
+                                                        padding: const EdgeInsets
+                                                            .only(
+                                                            bottom: 25.0,
+                                                            left: 25,
+                                                            right: 25,
+                                                            top: 20
+                                                        ),
+                                                        child: Form(
+                                                          key: formkey1,
+                                                          child: Column(
+                                                            children: [
+                                                              const Spacer(),
+                                                              SizedBox(
+                                                                height: 15,
+                                                              ),
+                                                              Container(
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                    vertical: 5,
+                                                                    horizontal:
+                                                                    10),
+                                                                alignment:
+                                                                Alignment.center,
+                                                                height: 60,
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                  // border: Border.all(color: Colors.white),
+                                                                  borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                      18),
+                                                                  color: Colors.white
+                                                                      .withOpacity(
+                                                                      .8),
+                                                                ),
+                                                                child: Padding(
+                                                                  padding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                      0.0),
+                                                                  child:
+                                                                  TextFormField(
+                                                                    controller:
+                                                                    taskNamecontroller,
+                                                                    keyboardType:
+                                                                    TextInputType
+                                                                        .text,
+                                                                    onFieldSubmitted:
+                                                                        (value) {
+                                                                      print(value);
+                                                                    },
+                                                                    // validator:
+                                                                    //     (value) {
+                                                                    //   if (value!
+                                                                    //       .isEmpty) {
+                                                                    //     return 'Event title can\'t be empty';
+                                                                    //   }
+                                                                    //   return null;
+                                                                    // },
+                                                                    // toolbarOptions:
+                                                                    //     ToolbarOptions(paste: true, copy: true),
+                                                                    cursorColor: c1,
+                                                                    style:
+                                                                    const TextStyle(
+                                                                      fontSize: 18,
+                                                                    ),
+                                                                    decoration:
+                                                                    InputDecoration(
+                                                                      prefixIcon:
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .symmetric(
+                                                                            horizontal:
+                                                                            10.0,
+                                                                            vertical:
+                                                                            10),
+                                                                        child: FaIcon(
+                                                                          FontAwesomeIcons
+                                                                              .edit,
+                                                                          color: c1,
+                                                                          size: 25,
+                                                                        ),
+                                                                      ),
+                                                                      hintText:
+                                                                      'Task name',
+                                                                      border:
+                                                                      InputBorder
+                                                                          .none,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 15,
+                                                              ),
+                                                              Container(
+                                                                padding: EdgeInsets
+                                                                    .symmetric(
+                                                                    vertical: 5,
+                                                                    horizontal:
+                                                                    10),
+                                                                alignment:
+                                                                Alignment.center,
+                                                                height: 60,
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                  // border: Border.all(color: Colors.white),
+                                                                  borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                      18),
+                                                                  color: Colors.white
+                                                                      .withOpacity(
+                                                                      .8),
+                                                                ),
+                                                                child: Padding(
+                                                                  padding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                      0.0),
+                                                                  child:
+                                                                  TextFormField(
+                                                                    controller:
+                                                                    taskGradecontroller,
+                                                                    keyboardType:
+                                                                    TextInputType
+                                                                        .text,
+                                                                    onFieldSubmitted:
+                                                                        (value) {
+                                                                      print(value);
+                                                                    },
+                                                                    //validator:
+                                                                    //     (value) {
+                                                                    //   if (value!
+                                                                    //       .isEmpty) {
+                                                                    //     return 'Event title can\'t be empty';
+                                                                    //   }
+                                                                    //   return null;
+                                                                    // },
+                                                                    // toolbarOptions:
+                                                                    //     ToolbarOptions(paste: true, copy: true),
+                                                                    cursorColor: c1,
+                                                                    style:
+                                                                    const TextStyle(
+                                                                      fontSize: 18,
+                                                                    ),
+                                                                    decoration:
+                                                                    InputDecoration(
+                                                                      prefixIcon:
+                                                                      Padding(
+                                                                        padding: const EdgeInsets
+                                                                            .symmetric(
+                                                                            horizontal:
+                                                                            10.0,
+                                                                            vertical:
+                                                                            10),
+                                                                        child: FaIcon(
+                                                                          FontAwesomeIcons
+                                                                              .solidEdit,
+                                                                          color: c1,
+                                                                          size: 25,
+                                                                        ),
+                                                                      ),
+                                                                      hintText:
+                                                                      'Task grade',
+                                                                      border:
+                                                                      InputBorder
+                                                                          .none,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 15,
+                                                              ),
+                                                              Container(
+                                                                height: 50,
+                                                                child: Row(
+                                                                  children: [
+                                                                    Expanded(
+                                                                        child: Default_Button(
+
+                                                                            color: Colors.red.withOpacity(.7),
+                                                                            onPressed: () {
+                                                                              showDatePicker(
+                                                                                context: context,
+                                                                                initialDate: DateTime.now(),
+                                                                                firstDate: DateTime(2022),
+                                                                                lastDate: DateTime(2025),
+                                                                                builder: (BuildContext context, Widget? child) {
+                                                                                  return Theme(
+                                                                                    data: ThemeData.light().copyWith(
+                                                                                      colorScheme: ColorScheme.light().copyWith(
+                                                                                        primary: Colors.blue, // Change the primary color as needed
+                                                                                      ),
+                                                                                    ),
+                                                                                    child: child!,
+                                                                                  );
+                                                                                },
+                                                                              ).then((selectedDate) {
+                                                                                if (selectedDate != null) {
+                                                                                  showTimePicker(
+                                                                                    context: context,
+                                                                                    initialTime: TimeOfDay.now(),
+                                                                                  ).then((selectedTime) {
+                                                                                    if (selectedTime != null) {
+                                                                                      DateTime selectedDateTime = DateTime(
+                                                                                        selectedDate.year,
+                                                                                        selectedDate.month,
+                                                                                        selectedDate.day,
+                                                                                        selectedTime.hour,
+                                                                                        selectedTime.minute,
+                                                                                      );
+                                                                                      print('Selected date and time: $selectedDateTime');
+
+                                                                                    }
+                                                                                  });
+                                                                                }
+                                                                              });
+                                                                              // );
+                                                                            },
+                                                                            text: 'Change deadline',
+                                                                            textFontSize: 20)),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 15,
+                                                              ),
+                                                              Default_Button(
+                                                                  onPressed: () {
+                                                                    App_cubit.get(context).updateINSAssign(
+                                                                      taskName: taskNamecontroller.text,
+                                                                      // taskGrade: taskGradecontroller.text,
+                                                                    );
+                                                                    Navigator.pop(context);
+                                                                    //   if (formkey1.currentState!.validate()) {
+                                                                    //   cubit.AddEventToCalender(
+                                                                    //       startDate: cubit.startTime,
+                                                                    //       endDate: cubit.endTime,
+                                                                    //       eventBody: taskGradecontroller.text);
+                                                                    //   Navigator.pop(
+                                                                    //       context);
+                                                                    // } else {
+                                                                    //   flutterToast(
+                                                                    //       msg: 'please enter the event title',
+                                                                    //       backColor: Colors.red);
+                                                                    // }
+                                                                  },
+                                                                  containerHeight: 50,
+                                                                  textFontSize: 20,
+                                                                  text: 'Confirm changes'),
+                                                              // SizedBox(
+                                                              //   height: 15,
+                                                              // ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    color: Colors.white
+                                                        .withOpacity(.5),
+                                                    borderRadius: 30,
+                                                    x: 15,
+                                                    y: 15,
+                                                    BorderWidth: 1,
+                                                    BorderColor: Colors.white,
+                                                  ),
+                                                ),
+                                                const Spacer(
+                                                  flex: 1,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        color: Colors.transparent,
+                                        borderRadius: 0,
+                                        x: 3,
+                                        y: 3),
+                                  ),
+                                ),
+                              ),
+                              elevation: 0,
+                              clipBehavior: Clip.none,
+                              surfaceTintColor: Colors.transparent,
+                              backgroundColor: Colors.transparent,
+                              contentPadding: EdgeInsets.zero,
+                            ),
+                          );
+                        });
                   },
                   child: Container(
                     height: 30,
