@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
@@ -5,6 +6,7 @@ import 'package:day_night_time_picker/lib/state/time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:university_hup/Modules/Instructor/Instructor_Assignment/INS_Assign_Screen.dart';
 import 'package:university_hup/Modules/Instructor/Instructor_Quizzes/INS_Quiz_Ques.dart';
 import 'package:university_hup/Shared/Component/component.dart';
@@ -21,11 +23,23 @@ class INS_add_assignment extends StatefulWidget {
 }
 
 class _INS_add_assignmentState extends State<INS_add_assignment> {
-  bool islast = false;
-  bool ismiddle = false;
+  // bool islast = false;
+  // bool ismiddle = false;
   int _index = 0;
-  String? quiz_ask = '';
-  var boardcontroller = PageController();
+  var taskNamecontroller = TextEditingController();
+  var taskGradecontroller = TextEditingController();
+  String? startDate;
+  String? endDate;
+  int? starthours;
+  int? startminutes;
+  int? endhours;
+  int? endminutes;
+  int? startd;
+  int? endd;
+  int? startm;
+  int? endm;
+  // String? quiz_ask = '';
+  // var boardcontroller = PageController();
   var stepcontroller = ScrollController();
   var formkey = GlobalKey<FormState>();
   @override
@@ -35,7 +49,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
         List<File> all_files = cubit.all_assign_files_List;
-        Time _time = Time(hour: 11, minute: 30, second: 20);
+        Time _time = Time(hour: 11, minute: 30, second: 0);
         return Scaffold(
           body: SafeArea(
             child: Column(
@@ -125,11 +139,29 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                       },
                       onStepContinue: () {
                         if (_index == 2) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => INS_Assign_Screen(),
-                              ));
+
+                          if (formkey.currentState!
+                              .validate() &&
+                              startDate != null &&
+                              endDate != null && all_files.isNotEmpty) {
+                            cubit.AddInsNewTask(
+                              startDate: startDate,
+                              endDate: endDate,
+                              taskName:
+                              taskNamecontroller.text,
+                              taskGrade:
+                              taskGradecontroller.text,
+                            );
+                            cubit.StuGetCourseAssign();
+                            NavigateAndFinish(context,INS_Assign_Screen(),);
+                          } else {
+                            flutterToast(
+                                msg:
+                                'please add all data about task',
+                                backColor: Colors.red);
+                          }
+
+
                         } else if (_index <= 0 || _index < 2) {
                           setState(() {
                             _index += 1;
@@ -162,18 +194,18 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                       padding: const EdgeInsets.all(10.0),
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                        CrossAxisAlignment.center,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        MainAxisAlignment.center,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: 3.0, horizontal: 8),
                                             child: Row(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              CrossAxisAlignment.center,
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              MainAxisAlignment.center,
                                               children: [
                                                 Expanded(
                                                   child: Text(
@@ -183,7 +215,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                       fontSize: 17,
                                                       color: Colors.black,
                                                       fontWeight:
-                                                          FontWeight.w500,
+                                                      FontWeight.w500,
                                                     ),
                                                   ),
                                                 ),
@@ -198,17 +230,18 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                             decoration: BoxDecoration(
                                               // border: Border.all(color: Colors.white),
                                               borderRadius:
-                                                  BorderRadius.circular(18),
+                                              BorderRadius.circular(18),
                                               color: Colors.blueGrey
                                                   .withOpacity(.1),
                                             ),
                                             child: Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 8.0),
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 8.0),
                                               child: TextFormField(
+                                                controller: taskNamecontroller,
                                                 keyboardType:
-                                                    TextInputType.text,
+                                                TextInputType.text,
                                                 onFieldSubmitted: (value) {
                                                   print(value);
                                                 },
@@ -334,108 +367,6 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                 //     x: 0,
                                 //     y: 0),
                                 // SizedBox(height: 15,),
-                                GlassBoxWithBorder_Gradiant2(
-                                    widget: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Container(
-                                        height: 150,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 8.0,
-                                                      vertical: 3),
-                                              child: Text(
-                                                'You can add notic ?',
-                                                maxLines: 2,
-                                                style: TextStyle(
-                                                  fontSize: 17,
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: GestureDetector(
-                                                onTap: () {},
-                                                child: Container(
-                                                  alignment: Alignment.center,
-                                                  decoration: BoxDecoration(
-                                                    // border: Border.all(color: Colors.white),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            18),
-                                                    color: Colors.blueGrey
-                                                        .withOpacity(.1),
-                                                  ),
-                                                  child: Padding(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 8.0),
-                                                    child: TextFormField(
-                                                      keyboardType:
-                                                          TextInputType.text,
-                                                      onFieldSubmitted:
-                                                          (value) {
-                                                        print(value);
-                                                      },
-                                                      onChanged: (value) {
-                                                        print(value);
-                                                      },
-                                                      // validator: (value) {
-                                                      //   if (value!.isEmpty) {
-                                                      //     return 'Folder name can\'t be empty';
-                                                      //   }
-                                                      //   return null;
-                                                      // },
-                                                      // toolbarOptions:
-                                                      //     ToolbarOptions(paste: true, copy: true),
-                                                      cursorColor: c1,
-                                                      style: const TextStyle(
-                                                        fontSize: 20,
-                                                      ),
-                                                      decoration:
-                                                          InputDecoration(
-                                                        prefixIcon: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            SizedBox(
-                                                              height: 15,
-                                                            ),
-                                                            FaIcon(
-                                                              FontAwesomeIcons
-                                                                  .circleExclamation,
-                                                              color: c1,
-                                                              size: 25,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        hintText: 'Description',
-                                                        border:
-                                                            InputBorder.none,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    BorderWidth: 0,
-                                    BorderColor: Colors.black,
-                                    color: Colors.white.withOpacity(.2),
-                                    borderRadius: 20,
-                                    x: 0,
-                                    y: 0),
                               ],
                             ),
                           ),
@@ -455,482 +386,125 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                               child: Column(
                                 children: [
                                   Container(
-                                    height: 95,
+                                    height: 100,
+
                                     child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Expanded(
-                                          flex: 1,
-                                          child: GlassBoxWithBorder_Gradiant2(
-                                              widget: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                left: 8.0),
-                                                        child: Text(
-                                                          'What about points ?',
-                                                          maxLines: 2,
-                                                          style: TextStyle(
-                                                            fontSize: 17,
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 15,
-                                                    ),
-                                                    Expanded(
-                                                      child: GestureDetector(
-                                                        onTap: () {},
-                                                        child: Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        20),
-                                                            color: Colors
-                                                                .blueGrey
-                                                                .withOpacity(
-                                                                    .1),
-                                                          ),
-                                                          child: Container(
-                                                            alignment: Alignment
-                                                                .center,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              // border: Border.all(color: Colors.white),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          18),
-                                                              color: Colors
-                                                                  .blueGrey
-                                                                  .withOpacity(
-                                                                      .1),
-                                                            ),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .symmetric(
-                                                                      horizontal:
-                                                                          8.0),
-                                                              child:
-                                                                  TextFormField(
-                                                                keyboardType:
-                                                                    TextInputType
-                                                                        .number,
-                                                                onFieldSubmitted:
-                                                                    (value) {
-                                                                  print(value);
-                                                                },
-                                                                onChanged:
-                                                                    (value) {
-                                                                  print(value);
-                                                                },
-                                                                validator:
-                                                                    (value) {
-                                                                  if (value!
-                                                                      .isEmpty) {
-                                                                    return 'Points name can\'t be empty';
-                                                                  }
-                                                                  return null;
-                                                                },
-                                                                // toolbarOptions:
-                                                                //     ToolbarOptions(paste: true, copy: true),
-                                                                cursorColor: c1,
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize: 20,
-                                                                ),
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  prefixIcon:
-                                                                      Icon(
-                                                                    Icons
-                                                                        .add_chart,
-                                                                    color: c1,
-                                                                    size: 30,
-                                                                  ),
-                                                                  hintText:
-                                                                      'Points',
-                                                                  border:
-                                                                      InputBorder
-                                                                          .none,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              BorderWidth: 0,
-                                              BorderColor: Colors.black,
-                                              color:
-                                                  Colors.white.withOpacity(.2),
-                                              borderRadius: 20,
-                                              x: 0,
-                                              y: 0),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Container(
-                                    height: 200,
-                                    child: Expanded(
-                                      flex: 2,
-                                      child: GlassBoxWithBorder_Gradiant2(
-                                          widget: Container(
-                                            child: Padding(
+                                        GlassBoxWithBorder_Gradiant2(
+                                            widget: Padding(
                                               padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Column(
+                                              const EdgeInsets.all(10.0),
+                                              child: Row(
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
+                                                CrossAxisAlignment.center,
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                                MainAxisAlignment.center,
                                                 children: [
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        'Determine Time',
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                      const EdgeInsets
+                                                          .only(
+                                                          left: 8.0),
+                                                      child: Text(
+                                                        'What about points ?',
                                                         maxLines: 2,
                                                         style: TextStyle(
                                                           fontSize: 17,
                                                           color: Colors.black,
                                                           fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Expanded(
-                                                    child: GestureDetector(
-                                                      onTap: () {
-                                                        Navigator.of(context)
-                                                            .push(
-                                                          showPicker(
-                                                            context: context,
-                                                            value: _time,
-                                                            sunrise: TimeOfDay(
-                                                                hour: 6,
-                                                                minute:
-                                                                    0), // optional
-                                                            sunset: TimeOfDay(
-                                                                hour: 18,
-                                                                minute:
-                                                                    0), // optional
-                                                            duskSpanInMinutes:
-                                                                120, // optional
-                                                            onChange:
-                                                                (value) {},
-                                                          ),
-                                                        );
-                                                      },
-                                                      child: Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(20),
-                                                          color: Colors.teal
-                                                              .withOpacity(.5),
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .symmetric(
-                                                                  horizontal:
-                                                                      15.0),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              FaIcon(
-                                                                  FontAwesomeIcons
-                                                                      .clock),
-                                                              SizedBox(
-                                                                width: 12,
-                                                              ),
-                                                              Text(
-                                                                'Start',
-                                                                style:
-                                                                    TextStyle(
-                                                                  fontSize: 22,
-                                                                  color: Colors
-                                                                      .black
-                                                                      .withOpacity(
-                                                                          .7),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
-                                                                ),
-                                                              ),
-                                                              Spacer(),
-                                                              Container(
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15),
-                                                                  color: Colors
-                                                                      .white
-                                                                      .withOpacity(
-                                                                          .3),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding: const EdgeInsets
-                                                                      .symmetric(
-                                                                      vertical:
-                                                                          8.0,
-                                                                      horizontal:
-                                                                          15),
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                        '8',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.black,
-                                                                          fontWeight:
-                                                                              FontWeight.w600,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        ' PM',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              15,
-                                                                          color:
-                                                                              Colors.black,
-                                                                          fontWeight:
-                                                                              FontWeight.w600,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                width: 10,
-                                                              ),
-                                                              Container(
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15),
-                                                                  color: Colors
-                                                                      .white
-                                                                      .withOpacity(
-                                                                          .3),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding: const EdgeInsets
-                                                                      .symmetric(
-                                                                      vertical:
-                                                                          8.0,
-                                                                      horizontal:
-                                                                          15),
-                                                                  child: FaIcon(
-                                                                    FontAwesomeIcons
-                                                                        .pencil,
-                                                                    color: Colors
-                                                                        .black
-                                                                        .withOpacity(
-                                                                            .5),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
+                                                          FontWeight.w500,
                                                         ),
                                                       ),
                                                     ),
                                                   ),
                                                   SizedBox(
-                                                    height: 10,
+                                                    width: 15,
                                                   ),
                                                   Expanded(
                                                     child: GestureDetector(
-                                                      onTap: () {
-                                                        Navigator.of(context)
-                                                            .push(
-                                                          showPicker(
-                                                            context: context,
-                                                            value: _time,
-                                                            sunrise: TimeOfDay(
-                                                                hour: 6,
-                                                                minute:
-                                                                    0), // optional
-                                                            sunset: TimeOfDay(
-                                                                hour: 18,
-                                                                minute:
-                                                                    0), // optional
-                                                            duskSpanInMinutes:
-                                                                120, // optional
-                                                            onChange:
-                                                                (value) {},
-                                                          ),
-                                                        );
-                                                      },
+                                                      onTap: () {},
                                                       child: Container(
                                                         decoration:
-                                                            BoxDecoration(
+                                                        BoxDecoration(
                                                           borderRadius:
-                                                              BorderRadius
-                                                                  .circular(20),
-                                                          color: Colors.red
-                                                              .withOpacity(.5),
+                                                          BorderRadius
+                                                              .circular(
+                                                              20),
+                                                          color: Colors
+                                                              .blueGrey
+                                                              .withOpacity(
+                                                              .1),
                                                         ),
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .symmetric(
-                                                                  horizontal:
-                                                                      15.0),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              FaIcon(
-                                                                  FontAwesomeIcons
-                                                                      .clock),
-                                                              SizedBox(
-                                                                width: 12,
+                                                        child: Container(
+                                                          alignment: Alignment
+                                                              .center,
+                                                          decoration:
+                                                          BoxDecoration(
+                                                            // border: Border.all(color: Colors.white),
+                                                            borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                18),
+                                                            color: Colors
+                                                                .blueGrey
+                                                                .withOpacity(
+                                                                .1),
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal:
+                                                                8.0),
+                                                            child:
+                                                            TextFormField(
+                                                              controller:
+                                                              taskGradecontroller,
+                                                              keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                              onFieldSubmitted:
+                                                                  (value) {
+                                                                print(value);
+                                                              },
+                                                              onChanged:
+                                                                  (value) {
+                                                                print(value);
+                                                              },
+                                                              validator:
+                                                                  (value) {
+                                                                if (value!
+                                                                    .isEmpty) {
+                                                                  return 'Points name can\'t be empty';
+                                                                }
+                                                                return null;
+                                                              },
+                                                              // toolbarOptions:
+                                                              //     ToolbarOptions(paste: true, copy: true),
+                                                              cursorColor: c1,
+                                                              style:
+                                                              const TextStyle(
+                                                                fontSize: 20,
                                                               ),
-                                                              Text(
-                                                                'End',
-                                                                style:
-                                                                    TextStyle(
-                                                                  fontSize: 22,
-                                                                  color: Colors
-                                                                      .black
-                                                                      .withOpacity(
-                                                                          .7),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
+                                                              decoration:
+                                                              InputDecoration(
+                                                                prefixIcon:
+                                                                Icon(
+                                                                  Icons
+                                                                      .add_chart,
+                                                                  color: c1,
+                                                                  size: 30,
                                                                 ),
+                                                                hintText:
+                                                                'Points',
+                                                                border:
+                                                                InputBorder
+                                                                    .none,
                                                               ),
-                                                              Spacer(),
-                                                              Container(
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15),
-                                                                  color: Colors
-                                                                      .white
-                                                                      .withOpacity(
-                                                                          .3),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding: const EdgeInsets
-                                                                      .symmetric(
-                                                                      vertical:
-                                                                          8.0,
-                                                                      horizontal:
-                                                                          15),
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                        '10',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              20,
-                                                                          color:
-                                                                              Colors.black,
-                                                                          fontWeight:
-                                                                              FontWeight.w600,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        ' PM',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              15,
-                                                                          color:
-                                                                              Colors.black,
-                                                                          fontWeight:
-                                                                              FontWeight.w600,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                width: 10,
-                                                              ),
-                                                              Container(
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15),
-                                                                  color: Colors
-                                                                      .white
-                                                                      .withOpacity(
-                                                                          .3),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding: const EdgeInsets
-                                                                      .symmetric(
-                                                                      vertical:
-                                                                          8.0,
-                                                                      horizontal:
-                                                                          15),
-                                                                  child: FaIcon(
-                                                                    FontAwesomeIcons
-                                                                        .pencil,
-                                                                    color: Colors
-                                                                        .black
-                                                                        .withOpacity(
-                                                                            .5),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
@@ -939,18 +513,537 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                 ],
                                               ),
                                             ),
-                                          ),
-                                          BorderWidth: 0,
-                                          BorderColor: Colors.black,
-                                          color: Colors.white.withOpacity(.2),
-                                          borderRadius: 20,
-                                          x: 0,
-                                          y: 0),
+                                            BorderWidth: 0,
+                                            BorderColor: Colors.black,
+                                            color:
+                                            Colors.white.withOpacity(.2),
+                                            borderRadius: 20,
+                                            x: 0,
+                                            y: 0),
+                                      ],
                                     ),
+                                  ),
+                                  SizedBox(
+                                    height: 0,
+                                  ),
+                                  Container(
+
+                                    height: 200,
+                                    child: GlassBoxWithBorder_Gradiant2(
+                                        widget: Container(
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsets.all(10.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .center,
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .center,
+                                                  children: [
+                                                    Text(
+                                                      'Determine Time',
+                                                      maxLines: 2,
+                                                      style: TextStyle(
+                                                        fontSize: 17,
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                        FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Expanded(
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.of(context)
+                                                          .push(
+                                                        showPicker(
+                                                          context: context,
+                                                          value: _time,
+                                                          sunrise: TimeOfDay(
+                                                              hour: 6,
+                                                              minute:
+                                                              0), // optional
+                                                          sunset: TimeOfDay(
+                                                              hour: 18,
+                                                              minute:
+                                                              0), // optional
+                                                          duskSpanInMinutes:
+                                                          120, // optional
+
+                                                          borderRadius: 25,
+                                                          accentColor:
+                                                          Colors.blue,
+                                                          blurredBackground:
+                                                          true,
+                                                          elevation: 0,
+
+                                                          is24HrFormat: false,
+                                                          onCancel: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          onChange: (value) {
+                                                            startminutes =
+                                                                value.minute;
+                                                            starthours =
+                                                                value.hour;
+                                                          },
+                                                          // onChangeDateTime: (){},
+                                                        ),
+                                                      )
+                                                          .then((value) {
+                                                        showDatePicker(
+                                                          context: context,
+                                                          initialDate:
+                                                          DateTime.now(),
+                                                          firstDate:
+                                                          DateTime(2022),
+                                                          lastDate:
+                                                          DateTime(2025),
+                                                          builder:
+                                                              (BuildContext
+                                                          context,
+                                                              Widget?
+                                                              child) {
+                                                            return Theme(
+                                                              data: ThemeData
+                                                                  .light()
+                                                                  .copyWith(
+                                                                colorScheme:
+                                                                ColorScheme
+                                                                    .light()
+                                                                    .copyWith(
+                                                                  primary: Colors
+                                                                      .blue, // Change the primary color as needed
+                                                                ),
+                                                              ),
+                                                              child: child!,
+                                                            );
+                                                          },
+                                                        ).then(
+                                                                (selectedDate) {
+                                                              if (selectedDate !=
+                                                                  null) {
+                                                               startm= selectedDate
+                                                                    .month;
+                                                               startd= selectedDate
+                                                                      .day;
+                                                                DateTime
+                                                                selectedDateTime =
+                                                                DateTime(
+                                                                  selectedDate
+                                                                      .year,
+                                                                  selectedDate
+                                                                      .month,
+                                                                  selectedDate
+                                                                      .day,
+                                                                  starthours!,
+                                                                  startminutes!,
+                                                                );
+                                                                print(
+                                                                    'Selected date and time: $selectedDateTime');
+                                                                startDate = DateFormat(
+                                                                    "yyyy-MM-ddTHH:mm:ss.SSS")
+                                                                    .format(
+                                                                    selectedDateTime);
+                                                                print(
+                                                                    '2024-03-23T22:31:30.911Z');
+                                                                // Handle the selected date and time as needed
+                                                              }
+                                                            });
+                                                      });
+                                                    },
+                                                    child: Container(
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(20),
+                                                        color: Colors.teal
+                                                            .withOpacity(.5),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                        const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal:
+                                                            15.0),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                          children: [
+                                                            FaIcon(
+                                                                FontAwesomeIcons
+                                                                    .clock),
+                                                            SizedBox(
+                                                              width: 12,
+                                                            ),
+                                                            Text(
+                                                              'Start',
+                                                              style:
+                                                              TextStyle(
+                                                                fontSize: 22,
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                    .7),
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w700,
+                                                              ),
+                                                            ),
+                                                            Spacer(),
+                                                            Container(
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    15),
+                                                                color: Colors
+                                                                    .white
+                                                                    .withOpacity(
+                                                                    .3),
+                                                              ),
+                                                              child: Padding(
+                                                                padding: const EdgeInsets
+                                                                    .symmetric(
+                                                                    vertical:
+                                                                    8.0,
+                                                                    horizontal:
+                                                                    15),
+                                                                child: Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      '8',
+                                                                      style:
+                                                                      TextStyle(
+                                                                        fontSize:
+                                                                        20,
+                                                                        color:
+                                                                        Colors.black,
+                                                                        fontWeight:
+                                                                        FontWeight.w600,
+                                                                      ),
+                                                                    ),
+                                                                    Text(
+                                                                      ' PM',
+                                                                      style:
+                                                                      TextStyle(
+                                                                        fontSize:
+                                                                        15,
+                                                                        color:
+                                                                        Colors.black,
+                                                                        fontWeight:
+                                                                        FontWeight.w600,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            Container(
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    15),
+                                                                color: Colors
+                                                                    .white
+                                                                    .withOpacity(
+                                                                    .3),
+                                                              ),
+                                                              child: Padding(
+                                                                padding: const EdgeInsets
+                                                                    .symmetric(
+                                                                    vertical:
+                                                                    8.0,
+                                                                    horizontal:
+                                                                    15),
+                                                                child: FaIcon(
+                                                                  FontAwesomeIcons
+                                                                      .pencil,
+                                                                  color: Colors
+                                                                      .black
+                                                                      .withOpacity(
+                                                                      .5),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Expanded(
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.of(context)
+                                                          .push(
+                                                        showPicker(
+                                                          context: context,
+                                                          value: _time,
+                                                          sunrise: TimeOfDay(
+                                                              hour: 6,
+                                                              minute:
+                                                              0), // optional
+                                                          sunset: TimeOfDay(
+                                                              hour: 18,
+                                                              minute:
+                                                              0), // optional
+                                                          duskSpanInMinutes:
+                                                          120, // optional
+
+                                                          borderRadius: 25,
+                                                          accentColor:
+                                                          Colors.blue,
+                                                          blurredBackground:
+                                                          true,
+                                                          elevation: 0,
+
+                                                          is24HrFormat: false,
+                                                          onCancel: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          onChange: (value) {
+                                                            endminutes =
+                                                                value.minute;
+                                                            endhours =
+                                                                value.hour;
+                                                          },
+                                                          // onChangeDateTime: (){},
+                                                        ),
+                                                      )
+                                                          .then((value) {
+                                                        showDatePicker(
+                                                          context: context,
+                                                          initialDate:
+                                                          DateTime.now(),
+                                                          firstDate:
+                                                          DateTime(2022),
+                                                          lastDate:
+                                                          DateTime(2025),
+                                                          builder:
+                                                              (BuildContext
+                                                          context,
+                                                              Widget?
+                                                              child) {
+                                                            return Theme(
+                                                              data: ThemeData
+                                                                  .light()
+                                                                  .copyWith(
+                                                                colorScheme:
+                                                                ColorScheme
+                                                                    .light()
+                                                                    .copyWith(
+                                                                  primary: Colors
+                                                                      .blue, // Change the primary color as needed
+                                                                ),
+                                                              ),
+                                                              child: child!,
+                                                            );
+                                                          },
+                                                        ).then(
+                                                                (selectedDate) {
+                                                              if (selectedDate !=
+                                                                  null) {
+                                                                endm= selectedDate
+                                                                    .month;
+                                                                endd= selectedDate
+                                                                    .day;
+                                                                DateTime
+                                                                selectedDateTime =
+                                                                DateTime(
+                                                                  selectedDate
+                                                                      .year,
+                                                                  selectedDate
+                                                                      .month,
+                                                                  selectedDate
+                                                                      .day,
+                                                                  endhours!,
+                                                                  endminutes!,
+                                                                );
+                                                                print(
+                                                                    'Selected date and time: $selectedDateTime');
+                                                                endDate = DateFormat(
+                                                                    "yyyy-MM-ddTHH:mm:ss.SSS")
+                                                                    .format(
+                                                                    selectedDateTime);
+                                                                print(
+                                                                    '2024-03-23T22:31:30.911Z');
+                                                                print(endDate);
+                                                                // Handle the selected date and time as needed
+                                                              }
+                                                            });
+                                                      });
+                                                    },
+                                                    child: Container(
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(20),
+                                                        color: Colors.red
+                                                            .withOpacity(.5),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                        const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal:
+                                                            15.0),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                          children: [
+                                                            FaIcon(
+                                                                FontAwesomeIcons
+                                                                    .clock),
+                                                            SizedBox(
+                                                              width: 12,
+                                                            ),
+                                                            Text(
+                                                              'End',
+                                                              style:
+                                                              TextStyle(
+                                                                fontSize: 22,
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                    .7),
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w700,
+                                                              ),
+                                                            ),
+                                                            Spacer(),
+                                                            Container(
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    15),
+                                                                color: Colors
+                                                                    .white
+                                                                    .withOpacity(
+                                                                    .3),
+                                                              ),
+                                                              child: Padding(
+                                                                padding: const EdgeInsets
+                                                                    .symmetric(
+                                                                    vertical:
+                                                                    8.0,
+                                                                    horizontal:
+                                                                    15),
+                                                                child: Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      '10',
+                                                                      style:
+                                                                      TextStyle(
+                                                                        fontSize:
+                                                                        20,
+                                                                        color:
+                                                                        Colors.black,
+                                                                        fontWeight:
+                                                                        FontWeight.w600,
+                                                                      ),
+                                                                    ),
+                                                                    Text(
+                                                                      ' PM',
+                                                                      style:
+                                                                      TextStyle(
+                                                                        fontSize:
+                                                                        15,
+                                                                        color:
+                                                                        Colors.black,
+                                                                        fontWeight:
+                                                                        FontWeight.w600,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            Container(
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    15),
+                                                                color: Colors
+                                                                    .white
+                                                                    .withOpacity(
+                                                                    .3),
+                                                              ),
+                                                              child: Padding(
+                                                                padding: const EdgeInsets
+                                                                    .symmetric(
+                                                                    vertical:
+                                                                    8.0,
+                                                                    horizontal:
+                                                                    15),
+                                                                child: FaIcon(
+                                                                  FontAwesomeIcons
+                                                                      .pencil,
+                                                                  color: Colors
+                                                                      .black
+                                                                      .withOpacity(
+                                                                      .5),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        BorderWidth: 0,
+                                        BorderColor: Colors.black,
+                                        color: Colors.white.withOpacity(.2),
+                                        borderRadius: 20,
+                                        x: 0,
+                                        y: 0),
                                   ),
                                 ],
                               ),
                             )),
+
+
+
                         Step(
                           isActive: _index == 2,
                           state: _index == 2
@@ -963,7 +1056,9 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                           ),
                           content: Container(
                             height: 350,
+
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(1.0),
@@ -973,7 +1068,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                         decoration: BoxDecoration(
                                           // color: Colors.blueGrey.withOpacity(.05),
                                           borderRadius:
-                                              BorderRadius.circular(20),
+                                          BorderRadius.circular(20),
                                           border: Border.all(width: .5),
                                         ),
                                         child: Padding(
@@ -991,7 +1086,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                   SizedBox(
                                                     width: 10,
                                                   ),
-                                                  Text('Assignment 1'),
+                                                  Text('${taskNamecontroller.text}'),
                                                   Spacer(),
                                                   Container(
                                                     height: 30,
@@ -1083,16 +1178,16 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                       flex: 2,
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                left: 5.0),
+                                                        const EdgeInsets
+                                                            .only(
+                                                            left: 5.0),
                                                         child: Column(
                                                           mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
+                                                          MainAxisAlignment
+                                                              .start,
                                                           crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .center,
+                                                          CrossAxisAlignment
+                                                              .center,
                                                           children: [
                                                             Row(
                                                               children: [
@@ -1107,41 +1202,14 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                 Text(
                                                                   'Computer Security',
                                                                   textAlign:
-                                                                      TextAlign
-                                                                          .start,
+                                                                  TextAlign
+                                                                      .start,
                                                                   style: TextStyle(
                                                                       fontWeight:
-                                                                          FontWeight
-                                                                              .w700,
+                                                                      FontWeight
+                                                                          .w700,
                                                                       fontSize:
-                                                                          13),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            SizedBox(
-                                                              height: 2,
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                FaIcon(
-                                                                  FontAwesomeIcons
-                                                                      .user,
-                                                                  size: 12,
-                                                                ),
-                                                                SizedBox(
-                                                                  width: 7,
-                                                                ),
-                                                                Text(
-                                                                  'Sara shehab',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .start,
-                                                                  style: TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w700,
-                                                                      fontSize:
-                                                                          13),
+                                                                      13),
                                                                 ),
                                                               ],
                                                             ),
@@ -1159,16 +1227,16 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                   width: 7,
                                                                 ),
                                                                 Text(
-                                                                  '5 points',
+                                                                  '${taskGradecontroller.text} points',
                                                                   textAlign:
-                                                                      TextAlign
-                                                                          .start,
+                                                                  TextAlign
+                                                                      .start,
                                                                   style: TextStyle(
                                                                       fontWeight:
-                                                                          FontWeight
-                                                                              .w700,
+                                                                      FontWeight
+                                                                          .w700,
                                                                       fontSize:
-                                                                          13),
+                                                                      13),
                                                                 ),
                                                               ],
                                                             ),
@@ -1186,16 +1254,43 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                   width: 7,
                                                                 ),
                                                                 Text(
-                                                                  'From 8 PM to 9 PM',
+                                                                  'Start ${startd}/${startm} at ${starthours}.${startminutes}',
                                                                   textAlign:
-                                                                      TextAlign
-                                                                          .start,
+                                                                  TextAlign
+                                                                      .start,
                                                                   style: TextStyle(
                                                                       fontWeight:
-                                                                          FontWeight
-                                                                              .w700,
+                                                                      FontWeight
+                                                                          .w700,
                                                                       fontSize:
-                                                                          13),
+                                                                      13),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            SizedBox(
+                                                              height: 2,
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                FaIcon(
+                                                                  FontAwesomeIcons
+                                                                      .clock,
+                                                                  size: 12,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: 7,
+                                                                ),
+                                                                Text(
+                                                                  'End ${endd}/${endm} at ${endhours}.${endminutes}',
+                                                                  textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                                  style: TextStyle(
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                      fontSize:
+                                                                      13),
                                                                 ),
                                                               ],
                                                             ),
@@ -1206,25 +1301,25 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                     Expanded(
                                                       child: Column(
                                                         mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
+                                                        MainAxisAlignment
+                                                            .center,
                                                         crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
+                                                        CrossAxisAlignment
+                                                            .center,
                                                         children: [
                                                           Container(
                                                             height: 45,
                                                             width:
-                                                                double.infinity,
+                                                            double.infinity,
                                                             decoration:
-                                                                BoxDecoration(
+                                                            BoxDecoration(
                                                               color: Colors.teal
                                                                   .withOpacity(
-                                                                      .6),
+                                                                  .6),
                                                               borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          12),
+                                                              BorderRadius
+                                                                  .circular(
+                                                                  12),
                                                               // border: Border.all(width: .5),
                                                             ),
                                                             child: Center(
@@ -1232,10 +1327,10 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                 'Edit',
                                                                 style: TextStyle(
                                                                     fontWeight:
-                                                                        FontWeight
-                                                                            .w700,
+                                                                    FontWeight
+                                                                        .w700,
                                                                     fontSize:
-                                                                        20,
+                                                                    20,
                                                                     color: Colors
                                                                         .white),
                                                               ),
@@ -1261,135 +1356,99 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                 SizedBox(
                                   height: 15,
                                 ),
-                                Expanded(
-                                    child: Row(
-                                  children: [
-                                    all_files.isNotEmpty
-                                        ? Expanded(
-                                          child: GridView.builder(
-                                              gridDelegate:
-                                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 1,
-                                                mainAxisSpacing: 1,
-                                                crossAxisSpacing: 1,
-                                              ),
-                                              itemCount: all_files.length,
-                                              itemBuilder: (context, index) {
-                                                return BuildAssignFileViewWidget(
-                                                    index,
-                                                    context,
-                                                    all_files[index]);
-                                              }),
-                                        )
-                                        : SizedBox(),
-                                    SizedBox(width: 15,),
-                                    Column(
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            if (all_files.isEmpty) {
-                                              cubit.pick_assign_File();
-                                            } else {
-                                              if (formkey.currentState!
-                                                  .validate() &&
-                                                  _time != null &&
-                                                  _time != null) {
-                                                cubit.AddInsNewTask(
-                                                  startDate: _time,
-                                                  endDate: _time,
-                                                  taskName:
-                                                  'taskNamecontroller.text',
-                                                  taskGrade:
-                                                  'taskGradecontroller.text',
-                                                );
-                                                cubit.StuGetCourseAssign();
-                                                Navigator.pop(context);
-                                              } else {
-                                                flutterToast(
-                                                    msg:
-                                                    'please add all data about task',
-                                                    backColor: Colors.red);
-                                              }
-                                            }
-                                          },
-                                          child: GlassBoxWithBorder_Gradiant2(
-                                              widget: Container(
-                                                width: 140,
-                                                height: 140,
-                                                padding: const EdgeInsets.all(8),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Expanded(
-                                                        child: Container(
-                                                      alignment: Alignment.center,
-                                                      width: double.infinity,
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.blueGrey
-                                                            .withOpacity(.3),
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                12),
-                                                      ),
-                                                      child: FaIcon(
-                                                        FontAwesomeIcons.plus,
-                                                        size: 35,
-                                                        color: Colors.black,
-                                                      ),
-                                                    )),
-                                                    const SizedBox(
-                                                      height: 8,
+                                all_files.isNotEmpty
+
+
+                                    ? BuildAssignFileViewWidget(
+                                    0, context, all_files[0])
+                                    : InkWell(
+                                  onTap: () {
+                                    if (all_files.isEmpty) {
+                                      cubit.pick_assign_File();
+                                    }
+
+                                  },
+                                  child: GlassBoxWithBorder_Gradiant2(
+                                      widget: Container(
+
+
+                                        height: 150,
+                                        width: 150,
+                                        padding:
+                                        const EdgeInsets.all(8),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment
+                                              .center,
+                                          children: [
+                                            Expanded(
+
+                                                child: Container(
+
+                                                  alignment:
+                                                  Alignment.center,
+                                                  width: double.infinity,
+                                                  decoration:
+                                                  BoxDecoration(
+                                                    color: Colors.blueGrey
+                                                        .withOpacity(.3),
+                                                    borderRadius:
+                                                    BorderRadius
+                                                        .circular(12),
+                                                  ),
+                                                  child: FaIcon(
+                                                    FontAwesomeIcons.plus,
+                                                    size: 35,
+                                                    color: Colors.black,
+                                                  ),
+                                                )),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Container(
+                                              height: 40,
+                                              child: const Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  Icon(
+                                                    Icons
+                                                        .file_present_rounded,
+                                                    color: Colors
+                                                        .black,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    'Attach File', //: 'Done',
+                                                    style:
+                                                    TextStyle(
+                                                      color: Colors
+                                                          .black,
+                                                      fontWeight:
+                                                      FontWeight
+                                                          .bold,
+                                                      fontSize:
+                                                      18,
                                                     ),
-                                                     all_files.isEmpty
-                                                        ? const Row(
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .center,
-                                                      children: [
-                                                        Icon(
-                                                          Icons
-                                                              .file_present_rounded,
-                                                          color: Colors.black,
-                                                        ),
-                                                        SizedBox(
-                                                          width: 5,
-                                                        ),
-                                                        Text(
-                                                          'Attach File', //: 'Done',
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                            FontWeight.bold,
-                                                            fontSize: 15,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    )
-                                                        : const Text(
-                                                      'Done', //: 'Done',
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontWeight:
-                                                        FontWeight.bold,
-                                                        fontSize: 20,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                  )
+                                                ],
                                               ),
-                                              BorderWidth: 0,
-                                              BorderColor: Colors.black,
-                                              color: Colors.white.withOpacity(.2),
-                                              borderRadius: 20,
-                                              x: 0,
-                                              y: 0),
+                                            )
+
+                                          ],
                                         ),
-                                        Spacer(),
-                                      ],
-                                    ),
-                                  ],
-                                )),
+                                      ),
+                                      BorderWidth: 0,
+                                      BorderColor: Colors.black,
+                                      color: Colors.white
+                                          .withOpacity(.2),
+                                      borderRadius: 20,
+                                      x: 0,
+                                      y: 0),
+                                ),
                               ],
                             ),
                           ),
