@@ -3237,7 +3237,11 @@ Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
                           Navigator.pop(context);
                         },
                         text: 'Do you want to delete Task ?',
-                        yes: () {});
+                        yes: () {
+                          App_cubit.get(context).INS_Delete_Assign(taskid: assign!.taskId);
+                          Navigator.pop(context);
+
+                        });
                   },
                   child: Container(
                     height: 30,
