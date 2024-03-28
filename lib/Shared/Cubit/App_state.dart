@@ -364,6 +364,14 @@ class Ins_update_Assign_SuccessState extends App_state {
 }
 class Ins_update_Assign_ErrorState extends App_state {}
 
+//----------delete assign---------------
+class Ins_delete_Assign_LoadingState extends App_state {}
+
+class Ins_delete_Assign_SuccessState extends App_state {
+
+}
+class Ins_delete_Assign_ErrorState extends App_state {}
+
 //----------add new task--------------------
 class Ins_Add_Assign_LoadingState extends App_state {}
 

@@ -1434,6 +1434,29 @@ class App_cubit extends Cubit<App_state> {
     }
   }
 
+  void INS_Delete_Assign({
+   required String? taskid,
+  }){
+    if (true) {
+      emit(Ins_delete_Assign_LoadingState());
+      Dio_Helper.updateData(
+          url:'Instructor/DeleteAnAssignment?taskId=2130e4c4-75d6-4556-8437-7c8aec71bcf1' ,
+          token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          var Json = value.data;
+          flutterToast(msg:'Delete successfully', backColor: Colors.green);
+          print(Json.toString());
+          emit(Ins_delete_Assign_SuccessState());
+        }
+      }).catchError((error) {
+        emit(Ins_delete_Assign_ErrorState());
+        print(error.toString());
+      });
+    }
+  }
+
+
 
 
 
