@@ -172,4 +172,24 @@ class Dio_Helper {
         url, queryParameters: query, data: data);
   }
 
+
+
+  static Future<Response> deleteData({
+    required String url,
+    Map<String, dynamic>? query,
+    String? token,
+    Map<String, dynamic>? data,
+
+  }) async {
+    //  FormData formData=FormData();
+    dio.options.headers={
+      'Content-Type':'application/json',
+      'Accept':'application/json',
+      'Authorization':'Bearer $token',
+    };
+
+    return await dio.delete(
+        url, queryParameters: query, data: data);
+  }
+
 }

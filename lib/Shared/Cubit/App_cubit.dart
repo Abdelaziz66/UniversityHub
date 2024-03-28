@@ -785,7 +785,9 @@ class App_cubit extends Cubit<App_state> {
           }
           isCycleIdChange = false;
         }else {
-          if (insAllLecFoldersModel.isEmpty || isCycleIdChange == true) {
+          insAllLecFoldersModel=[];
+          insLECTUREModel = [];
+          //if (insAllLecFoldersModel.isEmpty || isCycleIdChange == true) {
             emit(Ins_Get_All_Lec_Folders_LoadingState());
             Dio_Helper.GetData(
               url: 'Instructor/CurrentCourseMaterial?CycleId=$currentCycleId',
@@ -818,8 +820,8 @@ class App_cubit extends Cubit<App_state> {
               print(error.toString());
             });
           }
-          isCycleIdChange = false;
-        }
+        //   isCycleIdChange = false;
+        // }
   }
 
   List<GetCourseMaterialFileModel> stuCoursesMatrialFileModel = [];
@@ -1326,7 +1328,104 @@ class App_cubit extends Cubit<App_state> {
   //--------------------------------------------------
   //--------------------------------------------------
 
+
+  void INS_AddNewMaterialFolder({
+    required folderName
+  }){
+    if (true) {
+      emit(Ins_Add_Folder_LoadingState());
+      Dio_Helper.PostData(
+        url:'Instructor/UploadLectureFolder?title=$folderName&CycleId=$currentCycleId' ,
+        token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          var Json = value.data;
+          // for (var element in Json) {
+          //   insAllLecFoldersModel.add(InsStudentUplodeTaskModel.fromJson(element));
+          // }
+          flutterToast(msg: 'add new folder successfully', backColor: Colors.green);
+          print(Json);
+          emit(Ins_Add_Folder_SuccessState());
+        }
+        //  InsertToDataBase_Course_Table();
+        // studentUplodeTaskModel.forEach((element) {
+        //   print('Student name------- ${element.studentName}');
+        // });
+
+      }).catchError((error) {
+        emit(Ins_Add_Folder_ErrorState());
+        print(error.toString());
+      });
+    }
+  }
+
+
+  void INS_DeleteMaterialFolder({
+    required folderId
+  }){
+    if (true) {
+      emit(Ins_Delete_Folder_LoadingState());
+      Dio_Helper.deleteData(
+        url:'Instructor/DeleteLectureFolder?lectureId=$folderId' ,
+        token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          var Json = value.data;
+          // for (var element in Json) {
+          //   insAllLecFoldersModel.add(InsStudentUplodeTaskModel.fromJson(element));
+          // }
+          print(Json);
+          emit(Ins_Delete_Folder_SuccessState());
+        }
+        //  InsertToDataBase_Course_Table();
+        // studentUplodeTaskModel.forEach((element) {
+        //   print('Student name------- ${element.studentName}');
+        // });
+
+      }).catchError((error) {
+        emit(Ins_Delete_Folder_ErrorState());
+        print(error.toString());
+      });
+    }
+  }
+
+
+  //-------------update folder name------------
+  void INS_UpdateMaterialFolder({
+    required folderId,
+    required newFolderName,
+
+  }){
+    if (true) {
+      emit(Ins_Update_Folder_LoadingState());
+      Dio_Helper.updateData(
+        url:'Instructor/UpdateLectureFolderName?name=$newFolderName&lectureId=$folderId' ,
+        token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          var Json = value.data;
+          // for (var element in Json) {
+          //   insAllLecFoldersModel.add(InsStudentUplodeTaskModel.fromJson(element));
+          // }
+          print(Json);
+          emit(Ins_Update_Folder_SuccessState());
+        }
+        //  InsertToDataBase_Course_Table();
+        // studentUplodeTaskModel.forEach((element) {
+        //   print('Student name------- ${element.studentName}');
+        // });
+
+      }).catchError((error) {
+        emit(Ins_Update_Folder_ErrorState());
+        print(error.toString());
+      });
+    }
+  }
+
+
+
   //------------------Add New Task---------------------------
+
   void AddInsNewTask({
     required startDate,
     required endDate,
