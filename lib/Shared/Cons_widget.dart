@@ -162,10 +162,14 @@ void Alrat({required context,required String text,required Function no,required 
                               child:Column(
                                 children: [
 
-                                  Text('$text',style: TextStyle(
-                                      fontSize: 25,
+                                  Text('$text',
+                                    maxLines: 2,
+                                    style: TextStyle(
+
+                                        fontSize: 25,
                                       fontWeight: FontWeight.w800,
-                                      color: Colors.black.withOpacity(.6)
+                                      color: Colors.black.withOpacity(.6),
+                                      overflow: TextOverflow.ellipsis
                                   ),),
                                   Spacer(),
                                   Row(children: [

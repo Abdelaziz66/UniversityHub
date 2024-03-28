@@ -380,6 +380,33 @@ class Ins_Add_Assign_SuccessState extends App_state {
 }
 class Ins_Add_Assign_ErrorState extends App_state {}
 
+//----------add new Folder--------------------
+class Ins_Add_Folder_LoadingState extends App_state {}
+
+class Ins_Add_Folder_SuccessState extends App_state {
+  Ins_Add_Folder_SuccessState();
+}
+class Ins_Add_Folder_ErrorState extends App_state {}
+
+//----------------update folder -------------
+
+class Ins_Update_Folder_LoadingState extends App_state {}
+
+class Ins_Update_Folder_SuccessState extends App_state {
+  Ins_Update_Folder_SuccessState();
+}
+class Ins_Update_Folder_ErrorState extends App_state {}
+
+
+
+//-------------delete folder-------------
+class Ins_Delete_Folder_LoadingState extends App_state {}
+
+class Ins_Delete_Folder_SuccessState extends App_state {
+  Ins_Delete_Folder_SuccessState();
+}
+class Ins_Delete_Folder_ErrorState extends App_state {}
+
 
 
 

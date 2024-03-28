@@ -26,6 +26,7 @@ class INS_Matrial_Screen extends StatelessWidget {
    INS_Matrial_Screen({super.key});
   var scafoldkey1 = GlobalKey<ScaffoldState>();
   var formKey=GlobalKey<FormState>();
+  var folderFormKey=GlobalKey<FormState>();
   var folderController =TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,7 @@ class INS_Matrial_Screen extends StatelessWidget {
               onPressed: (){
                 if(cubit.visiblity==false)
                   {
+                    folderController.text='';
                     scafoldkey1.currentState?.showBottomSheet(
                           (context) => Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -101,7 +103,11 @@ class INS_Matrial_Screen extends StatelessWidget {
                                       SizedBox(height: 15,),
                                       Default_Button(onPressed: (){
                                          if(formKey.currentState!.validate()){
-
+                                           cubit.INS_AddNewMaterialFolder(folderName: folderController.text);
+                                           Navigator.pop(context);
+                                         }
+                                         else{
+                                           flutterToast(msg: 'please enter Folder name', backColor:Colors.red);
                                          }
                                       },text: 'Add Folder',),
                                       const Spacer(),
@@ -269,7 +275,7 @@ class INS_Matrial_Screen extends StatelessWidget {
                   child: GridView.builder(
                     gridDelegate:
                     const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, childAspectRatio: 2.5,),
+                        crossAxisCount: 2, childAspectRatio:1,),
                     itemBuilder: (context, index) => InkWell(
                         onTap: () {
                           cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);
@@ -277,6 +283,8 @@ class INS_Matrial_Screen extends StatelessWidget {
                           navigateTo(context,rol=='Student'? STU_Show_Material_Lec_Or_Sec():INS_Show_Material_Lec_Or_Sec());
                         },
                         child: Matrial_C(
+                          folderFormKey: folderFormKey,
+                          folderController: folderController,
                           context: context,
                           insFolder:lectures[index] ,
                         //  index: index,

@@ -754,35 +754,321 @@ Widget Lecture_C() => InkWell(
     );
 
 Widget Matrial_C(
-        {context,
+        {
+          folderFormKey,
+          TextEditingController? folderController,
+          context,
         GetCourseMaterialsModel? courseMaterial,
         InsAllLecFoldersModel? insFolder,
         index}) =>
     Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 8.0,right: 8,top: 5,bottom: 5),
       child: GlassBoxWithBorder(
         widget: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(8.0),
           child: Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            //height: 150,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                rol=='Doctor'?
+                Row(
+                   children: [
+                     Spacer(),
+                     InkWell(
+                       onTap: () {
+                         folderController?.text='';
+                         showDialog<String>(
+                           context: context,
+                           barrierColor: Colors.black.withOpacity(.3),
+                           useSafeArea: true,
+                           builder: (BuildContext context) => AlertDialog(
+                             insetPadding: const EdgeInsets.all(0.0),
+                             scrollable: false,
+                             shadowColor: Colors.transparent,
+                             content: Center(
+                               child: Container(
+                                 width: MediaQuery.of(context).size.width,
+                                 child: GestureDetector(
+                                   onTap: () {
+                                     Navigator.pop(context);
+                                   },
+                                   child: GlassBox(
+                                       widget: Stack(
+                                         children: [
+                                           Column(
+                                             children: [
+                                               const Spacer(),
+                                               Padding(
+                                                 padding: const EdgeInsets.all(15.0),
+                                                 child: GlassBoxWithBorder(
+                                                   widget: Container(
+                                                     height: 250,
+                                                     child: Padding(
+                                                       padding: const EdgeInsets
+                                                           .only(
+                                                           bottom: 25.0,
+                                                           left: 25,
+                                                           right: 25,
+                                                           top: 20
+                                                       ),
+                                                       child: Form(
+                                                         key: folderFormKey,
+                                                         child: Column(
+                                                           children: [
+
+                                                             Row(
+                                                               children: [
+                                                                 FaIcon(FontAwesomeIcons.folder,size: 30,),
+                                                                 SizedBox(width: 15,),
+                                                                 Container(
+                                                                   width:220,
+                                                                   child: Text(
+                                                                     'Edit ${insFolder?.lectureName} name :',
+                                                                     maxLines: 2,
+                                                                     style:
+                                                                     Theme.of(context)
+                                                                         .textTheme
+                                                                         .subtitle2?.copyWith(
+                                                                         overflow: TextOverflow.ellipsis,
+
+                                                                         fontSize: 18,color: Colors.black),
+                                                                   ),
+                                                                 ),
+                                                               ],
+                                                             ),
+                                                             const Spacer(),
+
+                                                             Container(
+                                                               padding: EdgeInsets
+                                                                   .symmetric(
+                                                                   vertical: 5,
+                                                                   horizontal:
+                                                                   10),
+                                                               alignment:
+                                                               Alignment.center,
+                                                               height: 60,
+                                                               decoration:
+                                                               BoxDecoration(
+                                                                 // border: Border.all(color: Colors.white),
+                                                                 borderRadius:
+                                                                 BorderRadius
+                                                                     .circular(
+                                                                     18),
+                                                                 color: Colors.white
+                                                                     .withOpacity(
+                                                                     .8),
+                                                               ),
+                                                               child: Padding(
+                                                                 padding:
+                                                                 const EdgeInsets
+                                                                     .symmetric(
+                                                                     horizontal:
+                                                                     0.0),
+                                                                 child:
+                                                                 TextFormField(
+                                                                   controller:
+                                                                   folderController,
+                                                                   keyboardType:
+                                                                   TextInputType
+                                                                       .text,
+                                                                   onFieldSubmitted:
+                                                                       (value) {
+                                                                     print(value);
+                                                                   },
+                                                                   validator:
+                                                                       (value) {
+                                                                     if (value!
+                                                                         .isEmpty) {
+                                                                       return 'folder name can\'t be empty';
+                                                                     }
+                                                                     return null;
+                                                                   },
+                                                                   // toolbarOptions:
+                                                                   //     ToolbarOptions(paste: true, copy: true),
+                                                                   cursorColor: c1,
+                                                                   style:
+                                                                   const TextStyle(
+                                                                     fontSize: 18,
+                                                                   ),
+                                                                   decoration:
+                                                                   InputDecoration(
+                                                                     prefixIcon:
+                                                                     Padding(
+                                                                       padding: const EdgeInsets
+                                                                           .symmetric(
+                                                                           horizontal:
+                                                                           10.0,
+                                                                           vertical:
+                                                                           10),
+                                                                       child: FaIcon(
+                                                                         FontAwesomeIcons
+                                                                             .calendar,
+                                                                         color: c1,
+                                                                         size: 25,
+                                                                       ),
+                                                                     ),
+                                                                     hintText:
+                                                                     'Enter folder name',
+                                                                     border:
+                                                                     InputBorder
+                                                                         .none,
+                                                                   ),
+                                                                 ),
+                                                               ),
+                                                             ),
+                                                             SizedBox(
+                                                               height: 15,
+                                                             ),
+                                                             Default_Button(
+                                                                 onPressed: () {
+                                                                   if (folderFormKey.currentState!.validate()) {
+                                                                     App_cubit.get(context).INS_UpdateMaterialFolder(
+                                                                       folderId: insFolder?.lectureId,
+                                                                       newFolderName:folderController?.text,
+                                                                     );
+                                                                     flutterToast(
+                                                                         msg: 'Edit folder name successfully',
+                                                                         backColor: Colors.green);
+                                                                   Navigator.pop(
+                                                                       context);
+                                                                 } else {
+                                                                   flutterToast(
+                                                                       msg: 'please enter the new folder name',
+                                                                       backColor: Colors.red);
+                                                                 }
+                                                                 },
+                                                                 containerHeight: 50,
+                                                                 textFontSize: 20,
+                                                                 text: 'Done'),
+                                                             // SizedBox(
+                                                             //   height: 15,
+                                                             // ),
+                                                           ],
+                                                         ),
+                                                       ),
+                                                     ),
+                                                   ),
+                                                   color: Colors.white
+                                                       .withOpacity(.5),
+                                                   borderRadius: 30,
+                                                   x: 15,
+                                                   y: 15,
+                                                   BorderWidth: 1,
+                                                   BorderColor: Colors.white,
+                                                 ),
+                                               ),
+                                               const Spacer(
+                                                 flex: 1,
+                                               ),
+                                             ],
+                                           ),
+                                         ],
+                                       ),
+                                       color: Colors.transparent,
+                                       borderRadius: 0,
+                                       x: 3,
+                                       y: 3),
+                                 ),
+                               ),
+                             ),
+                             elevation: 0,
+                             clipBehavior: Clip.none,
+                             surfaceTintColor: Colors.transparent,
+                             backgroundColor: Colors.transparent,
+                             contentPadding: EdgeInsets.zero,
+                           ),
+                         );
+
+                         // Alrat(
+                         //     context: context,
+                         //     no: () {
+                         //       Navigator.pop(context);
+                         //     },
+                         //     text: 'Do you want to edit ${insFolder?.lectureName} ?',
+                         //     yes: () {});
+                       },
+                       child: Container(
+                         height: 30,
+                         width: 30,
+                         decoration: BoxDecoration(
+                           // color: Colors.yellow.withOpacity(.9),
+                           border: Border.all(
+                             width: .5,
+                             color: Colors.blue.withOpacity(1),
+                           ),
+                           shape: BoxShape.circle,
+                         ),
+                         child: Center(
+                           child: FaIcon(
+                             FontAwesomeIcons.pen,
+                             size: 13,
+                             color: Colors.blue.withOpacity(1),
+                           ),
+                         ),
+                       ),
+                     ),
+                     SizedBox(
+                       width: 10,
+                     ),
+                     InkWell(
+                       onTap: () {
+                         Alrat(
+                             context: context,
+                             no: () {
+                               Navigator.pop(context);
+                             },
+                             text: 'Do you want to delete ${insFolder?.lectureName} ?',
+                             yes: () {
+                               App_cubit.get(context).INS_DeleteMaterialFolder(folderId: insFolder?.lectureId);
+                               flutterToast(msg:'${insFolder?.lectureName} deleted successfully', backColor: Colors.green);
+                               Navigator.pop(context);
+
+                             });
+                       },
+                       child: Container(
+                         height: 30,
+                         width: 30,
+                         decoration: BoxDecoration(
+                           // color: Colors.red.withOpacity(.6),
+                           border: Border.all(
+                             width: .5,
+                             color: Colors.red.withOpacity(1),
+                           ),
+                           shape: BoxShape.circle,
+                         ),
+                         child: Center(
+                           child: FaIcon(
+                             FontAwesomeIcons.trashCan,
+                             size: 13,
+                             color: Colors.red.withOpacity(1),
+                           ),
+                         ),
+                       ),
+                     ),
+                   ],
+
+                ):const SizedBox(),
+
                 FaIcon(
-                  FontAwesomeIcons.solidFolder,
-                  color: c1.withOpacity(.9),
+                  FontAwesomeIcons.solidFolderClosed,
+                  //color: c1.withOpacity(.9),
+                  color: Colors.blueGrey,
+                  size: 70,
                 ),
                 const SizedBox(
-                  width: 10,
+                  height: 10,
                 ),
                 //   courseMaterial?.type == 'Lecture'
                 Container(
-                  width: 100,
+                 // width: 100,
+                 // height: 80,
                   child: Text(
-                    maxLines: 1,
+                    maxLines: 2,
                     '${App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty ? courseMaterial?.lectureName : insFolder?.lectureName}',
                     style: TextStyle(
                       overflow: TextOverflow.ellipsis,
-                      fontSize: 17,
+                      fontSize: 13,
                       fontWeight: FontWeight.w700,
                       color: c1,
                     ),
