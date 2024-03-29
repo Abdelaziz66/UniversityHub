@@ -29,6 +29,8 @@ class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
 
   var scafoldkey2 = GlobalKey<ScaffoldState>();
   var formKey = GlobalKey<FormState>();
+  var fileFormKey=GlobalKey<FormState>();
+  var fileController =TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit,App_state>(
@@ -47,9 +49,10 @@ class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal: 8),
             child: FloatingActionButton(
               onPressed: (){
+                cubit.makeListNull(cubit.all_assign_files_List);
+
                 if(cubit.visiblity==false)
                 {
-                  cubit.all_assign_files_List=[];
                   scafoldkey2.currentState?.showBottomSheet(
                         (context) => Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -70,7 +73,9 @@ class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
                                      // print('sssss${cubit.all_assign_files_List[0].path.split('/').last}');
                                      cubit.insuploadLecFile(fileName:cubit.all_assign_files_List[0].path.split('/').last ,);
                                    }
-                                 },text:cubit.all_assign_files_List.isEmpty? 'Upload File'
+                                 },
+
+                                   text:cubit.all_assign_files_List.isEmpty? 'Upload File'
                                      :'Done'
 
                                    ,),
@@ -292,10 +297,19 @@ class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (context, index)
                         {
-                          return STU_Build_Lec_View_Widget(
-                              index: index,
-                              context: context,
-                            insFile: insCourseFles[index]
+                          return InkWell(
+                            onTap: (){
+                            //  print(insCourseFles[index].filePath?.split('net/').last);
+                              print(insCourseFles[index].filePath);
+                              cubit.loadPDF(networkfile: insCourseFles[index].filePath);
+                            },
+                            child: STU_Build_Lec_View_Widget(
+                              fileFormKey: fileFormKey,
+                                fileController: fileController,
+                                index: index,
+                                context: context,
+                              insFile: insCourseFles[index]
+                            ),
                           );
                         }
                     ),

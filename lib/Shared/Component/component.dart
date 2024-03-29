@@ -917,7 +917,7 @@ Widget Matrial_C(
                                                                  ),
                                                                ),
                                                              ),
-                                                             SizedBox(
+                                                             const SizedBox(
                                                                height: 15,
                                                              ),
                                                              Default_Button(
@@ -927,9 +927,7 @@ Widget Matrial_C(
                                                                        folderId: insFolder?.lectureId,
                                                                        newFolderName:folderController?.text,
                                                                      );
-                                                                     flutterToast(
-                                                                         msg: 'Edit folder name successfully',
-                                                                         backColor: Colors.green);
+
                                                                    Navigator.pop(
                                                                        context);
                                                                  } else {
@@ -1021,7 +1019,6 @@ Widget Matrial_C(
                              text: 'Do you want to delete ${insFolder?.lectureName} ?',
                              yes: () {
                                App_cubit.get(context).INS_DeleteMaterialFolder(folderId: insFolder?.lectureId);
-                               flutterToast(msg:'${insFolder?.lectureName} deleted successfully', backColor: Colors.green);
                                Navigator.pop(context);
 
                              });
@@ -1842,6 +1839,8 @@ Widget Build_Lec_View_Widget(
 //------------------------------
 
 Widget STU_Build_Lec_View_Widget({
+  fileFormKey,
+  TextEditingController? fileController,
   GetCourseMaterialsModel? courseMaterial,
   GetCourseMaterialFileModel? file,
   InsLecFilesModel? insFile,
@@ -1861,12 +1860,288 @@ Widget STU_Build_Lec_View_Widget({
     ),
     padding: const EdgeInsets.all(6),
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        rol=='Doctor'?
+        Row(
+          children: [
+            Spacer(),
+            InkWell(
+              onTap: () {
+                fileController?.text='';
+                showDialog<String>(
+                  context: context,
+                  barrierColor: Colors.black.withOpacity(.3),
+                  useSafeArea: true,
+                  builder: (BuildContext context) => AlertDialog(
+                    insetPadding: const EdgeInsets.all(0.0),
+                    scrollable: false,
+                    shadowColor: Colors.transparent,
+                    content: Center(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: GlassBox(
+                              widget: Stack(
+                                children: [
+                                  Column(
+                                    children: [
+                                      const Spacer(),
+                                      Padding(
+                                        padding: const EdgeInsets.all(15.0),
+                                        child: GlassBoxWithBorder(
+                                          widget: Container(
+                                            height: 250,
+                                            child: Padding(
+                                              padding: const EdgeInsets
+                                                  .only(
+                                                  bottom: 25.0,
+                                                  left: 25,
+                                                  right: 25,
+                                                  top: 20
+                                              ),
+                                              child: Form(
+                                                key: fileFormKey,
+                                                child: Column(
+                                                  children: [
+
+                                                    Row(
+                                                      children: [
+                                                        FaIcon(FontAwesomeIcons.folder,size: 30,),
+                                                        SizedBox(width: 15,),
+                                                        Container(
+                                                          width:220,
+                                                          child: Text(
+                                                            'Edit ${insFile?.fileName} name :',
+                                                            maxLines: 2,
+                                                            style:
+                                                            Theme.of(context)
+                                                                .textTheme
+                                                                .subtitle2?.copyWith(
+                                                                overflow: TextOverflow.ellipsis,
+
+                                                                fontSize: 18,color: Colors.black),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const Spacer(),
+
+                                                    Container(
+                                                      padding: EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 5,
+                                                          horizontal:
+                                                          10),
+                                                      alignment:
+                                                      Alignment.center,
+                                                      height: 60,
+                                                      decoration:
+                                                      BoxDecoration(
+                                                        // border: Border.all(color: Colors.white),
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(
+                                                            18),
+                                                        color: Colors.white
+                                                            .withOpacity(
+                                                            .8),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                        const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal:
+                                                            0.0),
+                                                        child:
+                                                        TextFormField(
+                                                          controller:
+                                                          fileController,
+                                                          keyboardType:
+                                                          TextInputType
+                                                              .text,
+                                                          onFieldSubmitted:
+                                                              (value) {
+                                                            print(value);
+                                                          },
+                                                          validator:
+                                                              (value) {
+                                                            if (value!
+                                                                .isEmpty) {
+                                                              return 'file name can\'t be empty';
+                                                            }
+                                                            return null;
+                                                          },
+                                                          // toolbarOptions:
+                                                          //     ToolbarOptions(paste: true, copy: true),
+                                                          cursorColor: c1,
+                                                          style:
+                                                          const TextStyle(
+                                                            fontSize: 18,
+                                                          ),
+                                                          decoration:
+                                                          InputDecoration(
+                                                            prefixIcon:
+                                                            Padding(
+                                                              padding: const EdgeInsets
+                                                                  .symmetric(
+                                                                  horizontal:
+                                                                  10.0,
+                                                                  vertical:
+                                                                  10),
+                                                              child: FaIcon(
+                                                                FontAwesomeIcons
+                                                                    .edit,
+                                                                color: c1,
+                                                                size: 25,
+                                                              ),
+                                                            ),
+                                                            hintText:
+                                                            'Enter folder name',
+                                                            border:
+                                                            InputBorder
+                                                                .none,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 15,
+                                                    ),
+                                                    Default_Button(
+                                                        onPressed: () {
+                                                          if (fileFormKey.currentState!.validate()) {
+                                                            App_cubit.get(context).INS_UpdateMaterialFile(
+                                                              fileId: insFile?.lectureFileId,
+                                                              newFileName:fileController?.text,
+                                                            );
+
+                                                            Navigator.pop(
+                                                                context);
+                                                          } else {
+                                                            flutterToast(
+                                                                msg: 'please enter the new folder name',
+                                                                backColor: Colors.red);
+                                                          }
+                                                        },
+                                                        containerHeight: 50,
+                                                        textFontSize: 20,
+                                                        text: 'Done'),
+                                                    // SizedBox(
+                                                    //   height: 15,
+                                                    // ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          color: Colors.white
+                                              .withOpacity(.5),
+                                          borderRadius: 30,
+                                          x: 15,
+                                          y: 15,
+                                          BorderWidth: 1,
+                                          BorderColor: Colors.white,
+                                        ),
+                                      ),
+                                      const Spacer(
+                                        flex: 1,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              color: Colors.transparent,
+                              borderRadius: 0,
+                              x: 3,
+                              y: 3),
+                        ),
+                      ),
+                    ),
+                    elevation: 0,
+                    clipBehavior: Clip.none,
+                    surfaceTintColor: Colors.transparent,
+                    backgroundColor: Colors.transparent,
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                );
+
+                // Alrat(
+                //     context: context,
+                //     no: () {
+                //       Navigator.pop(context);
+                //     },
+                //     text: 'Do you want to edit ${insFolder?.lectureName} ?',
+                //     yes: () {});
+              },
+              child: Container(
+                height: 30,
+                width: 30,
+                decoration: BoxDecoration(
+                  // color: Colors.yellow.withOpacity(.9),
+                  border: Border.all(
+                    width: .5,
+                    color: Colors.blue.withOpacity(1),
+                  ),
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: FaIcon(
+                    FontAwesomeIcons.pen,
+                    size: 13,
+                    color: Colors.blue.withOpacity(1),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            InkWell(
+              onTap: () {
+                Alrat(
+                    context: context,
+                    no: () {
+                      Navigator.pop(context);
+                    },
+                    text: 'Do you want to delete ${insFile?.fileName} ?',
+                    yes: () {
+                      App_cubit.get(context).INS_DeleteMaterialFile(fileId: insFile?.lectureFileId);
+                      Navigator.pop(context);
+
+                    });
+              },
+              child: Container(
+                height: 30,
+                width: 30,
+                decoration: BoxDecoration(
+                  // color: Colors.red.withOpacity(.6),
+                  border: Border.all(
+                    width: .5,
+                    color: Colors.red.withOpacity(1),
+                  ),
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: FaIcon(
+                    FontAwesomeIcons.trashCan,
+                    size: 13,
+                    color: Colors.red.withOpacity(1),
+                  ),
+                ),
+              ),
+            ),
+          ],
+
+        ):const SizedBox(),
+        SizedBox(height: 5,),
         Container(
-          height: 100,
+          height: 80,
           alignment: Alignment.center,
-          width: double.infinity,
+          width: 100,
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(12),
@@ -1877,7 +2152,7 @@ Widget STU_Build_Lec_View_Widget({
                 : '${insFile?.filePath?.split('.').last}',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 28,
+              fontSize: 25,
             ),
           ),
         ),
@@ -1886,7 +2161,7 @@ Widget STU_Build_Lec_View_Widget({
         ),
         Expanded(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty

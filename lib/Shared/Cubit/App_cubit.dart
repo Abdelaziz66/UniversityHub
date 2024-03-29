@@ -386,8 +386,6 @@ class App_cubit extends Cubit<App_state> {
 
   String pathPDF = "";
 
-//https://cse.unl.edu/~cbourke/ComputerScienceOne.pdf
-
    Future<void> loadPDF({
     required networkfile,
 }) async {
@@ -898,6 +896,12 @@ class App_cubit extends Cubit<App_state> {
 
   //------------ins upload file ---------------
  // File? insfile;
+
+  void makeListNull(List list){
+    list=[];
+    emit(makeListNullState());
+  }
+
   String? folderId;
   void insuploadLecFile({
     required String fileName,
@@ -905,7 +909,7 @@ class App_cubit extends Cubit<App_state> {
     // print('All files-------------- ${all_assign_files_List}');
     print('task id : ${taskId}');
     print('All files-------------- ${all_assign_files_List}');
-    all_assign_files_List=[];
+   // all_assign_files_List=[];
     emit(Stu_Submit_Task_LoadingState());
     Dio_Helper.PostListFileData(
         token: token,
@@ -918,14 +922,14 @@ class App_cubit extends Cubit<App_state> {
         //   print(value.data);
         String json = value.data;
         print(json);
-        flutterToast(msg: json, backColor: Colors.blue);
+        flutterToast(msg: 'file uploaded successfully', backColor: Colors.green);
         emit(Stu_Submit_Task_SuccessState());
       }
     }).catchError((Error) {
       print(Error.toString());
       flutterToast(
           msg: 'Error to upload your file , please try again',
-          backColor: Colors.blue);
+          backColor: Colors.red);
 
       emit(Stu_Submit_Task_ErrorState(Error.toString()));
     });
@@ -1374,6 +1378,8 @@ class App_cubit extends Cubit<App_state> {
           // for (var element in Json) {
           //   insAllLecFoldersModel.add(InsStudentUplodeTaskModel.fromJson(element));
           // }
+          flutterToast(msg:'deleted successfully', backColor: Colors.green);
+
           print(Json);
           emit(Ins_Delete_Folder_SuccessState());
         }
@@ -1407,6 +1413,9 @@ class App_cubit extends Cubit<App_state> {
           // for (var element in Json) {
           //   insAllLecFoldersModel.add(InsStudentUplodeTaskModel.fromJson(element));
           // }
+          flutterToast(
+              msg: 'Edit folder name successfully',
+              backColor: Colors.green);
           print(Json);
           emit(Ins_Update_Folder_SuccessState());
         }
@@ -1421,6 +1430,76 @@ class App_cubit extends Cubit<App_state> {
       });
     }
   }
+
+
+  //--------------Update file ------------------
+  void INS_UpdateMaterialFile({
+    required fileId,
+    required newFileName,
+
+  }){
+    if (true) {
+      emit(Ins_Update_Folder_LoadingState());
+      Dio_Helper.updateData(
+        url:'Instructor/UpdateLecturefile?file_Id=$fileId&fileName=$newFileName' ,
+        token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          var Json = value.data;
+          // for (var element in Json) {
+          //   insAllLecFoldersModel.add(InsStudentUplodeTaskModel.fromJson(element));
+          // }
+          flutterToast(
+              msg: 'Edit file name successfully',
+              backColor: Colors.green);
+          print(Json);
+          emit(Ins_Update_Folder_SuccessState());
+        }
+        //  InsertToDataBase_Course_Table();
+        // studentUplodeTaskModel.forEach((element) {
+        //   print('Student name------- ${element.studentName}');
+        // });
+
+      }).catchError((error) {
+        emit(Ins_Update_Folder_ErrorState());
+        print(error.toString());
+      });
+    }
+  }
+  //------------------Delete file from material-----------
+
+  void INS_DeleteMaterialFile({
+    required fileId
+  }){
+    if (true) {
+      emit(Ins_Delete_Folder_LoadingState());
+      Dio_Helper.deleteData(
+        url:'Instructor/DeleteLectureFile?FileId=$fileId' ,
+        token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          var Json = value.data;
+          // for (var element in Json) {
+          //   insAllLecFoldersModel.add(InsStudentUplodeTaskModel.fromJson(element));
+          // }
+          flutterToast(msg:'deleted successfully', backColor: Colors.green);
+
+          print(Json);
+          emit(Ins_Delete_Folder_SuccessState());
+        }
+        //  InsertToDataBase_Course_Table();
+        // studentUplodeTaskModel.forEach((element) {
+        //   print('Student name------- ${element.studentName}');
+        // });
+
+      }).catchError((error) {
+        emit(Ins_Delete_Folder_ErrorState());
+        print(error.toString());
+      });
+    }
+  }
+
+
 
 
 
