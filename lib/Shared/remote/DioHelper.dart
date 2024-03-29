@@ -143,12 +143,12 @@ class Dio_Helper {
     print('from dio $networkfilePath');
     print('from dio $localfilePath');
     dio.options.headers={
-      //   'lang':lang,
-      //   'authorizatio':token??'',
-      // 'Content-Type':'application/json',
-      // 'Accept':'application/json',
-      //  'Authorization':'Bearer $token',
-      // 'responseType': ResponseType.bytes,
+       // 'lang':lang,
+        //'authorizatio':token??'',
+      'Content-Type':'application/json',
+      'Accept':'application/json',
+       'Authorization':'Bearer $token',
+      'responseType': ResponseType.bytes,
     };
     return await dio.download(networkfilePath, localfilePath);
   }

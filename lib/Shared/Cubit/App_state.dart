@@ -30,6 +30,8 @@ class Nav_HomeBar_state extends App_state{}
 
 class stateforDrawer extends App_state{}
 
+class makeListNullState extends App_state{}
+
 
 
 // alfy  --------------------------------------------------------------------
