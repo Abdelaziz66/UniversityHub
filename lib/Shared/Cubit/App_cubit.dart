@@ -494,6 +494,10 @@ class App_cubit extends Cubit<App_state> {
       allowMultiple: false,
       allowedExtensions: ['png', 'cdr', 'psd', 'jpeg', 'png', 'pdf'],
     );
+        //.then((value) {
+
+      //openFile_Fun(filePath:value!.files[0].path!);
+    // });
     if (result != null) {
       result.files.forEach((element) {
         all_assign_files_List.add(File(element.path!));
@@ -897,8 +901,8 @@ class App_cubit extends Cubit<App_state> {
   //------------ins upload file ---------------
  // File? insfile;
 
-  void makeListNull(List list){
-    list=[];
+  void makeListNull(){
+    all_assign_files_List=[];
     emit(makeListNullState());
   }
 
@@ -909,8 +913,9 @@ class App_cubit extends Cubit<App_state> {
     // print('All files-------------- ${all_assign_files_List}');
     print('task id : ${taskId}');
     print('All files-------------- ${all_assign_files_List}');
+    print('folder id-------------- ${folderId}');
    // all_assign_files_List=[];
-    emit(Stu_Submit_Task_LoadingState());
+    emit(Ins_Add_File_LoadingState());
     Dio_Helper.PostListFileData(
         token: token,
         url: 'Instructor/UploadLectureFile?lectureId=$folderId&file_Name=$fileName',
@@ -923,7 +928,7 @@ class App_cubit extends Cubit<App_state> {
         String json = value.data;
         print(json);
         flutterToast(msg: 'file uploaded successfully', backColor: Colors.green);
-        emit(Stu_Submit_Task_SuccessState());
+        emit(Ins_Add_File_SuccessState());
       }
     }).catchError((Error) {
       print(Error.toString());
@@ -931,7 +936,7 @@ class App_cubit extends Cubit<App_state> {
           msg: 'Error to upload your file , please try again',
           backColor: Colors.red);
 
-      emit(Stu_Submit_Task_ErrorState(Error.toString()));
+      emit(Ins_Add_File_ErrorState());
     });
   }
 

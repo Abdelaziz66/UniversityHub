@@ -280,7 +280,9 @@ class INS_Matrial_Screen extends StatelessWidget {
                         onTap: () {
                           cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);
                           cubit.folderId=lectures[index].lectureId;
-                          navigateTo(context,rol=='Student'? STU_Show_Material_Lec_Or_Sec():INS_Show_Material_Lec_Or_Sec());
+                          navigateTo(context,rol=='Student'? STU_Show_Material_Lec_Or_Sec():INS_Show_Material_Lec_Or_Sec(
+                            foldeName: lectures[index].lectureName,
+                          ));
                         },
                         child: Matrial_C(
                           folderFormKey: folderFormKey,

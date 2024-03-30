@@ -131,7 +131,7 @@ class STU_About_Assign_Screen extends StatelessWidget {
                           child:
                           TextButton(
                               onPressed: (){
-                                print('ass new file ');
+                                print('add new file ');
                                 cubit.pick_assign_File();
                               },
                               child: Row(
