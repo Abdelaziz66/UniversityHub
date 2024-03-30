@@ -409,8 +409,14 @@ class Ins_Delete_Folder_SuccessState extends App_state {
 }
 class Ins_Delete_Folder_ErrorState extends App_state {}
 
+//------------add file---------------------
 
+class Ins_Add_File_LoadingState extends App_state {}
 
+class Ins_Add_File_SuccessState extends App_state {
+  Ins_Add_File_SuccessState();
+}
+class Ins_Add_File_ErrorState extends App_state {}
 
 
 

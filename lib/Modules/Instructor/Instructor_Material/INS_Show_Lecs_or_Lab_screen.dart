@@ -15,11 +15,15 @@ import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
 import '../../../Models/INS_Model/CourseModel.dart';
+import '../../Student/Student_Material/fileViewer.dart';
 
 
 
 
 class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
+ final String? foldeName;
+  INS_Show_Material_Lec_Or_Sec({required this.foldeName});
+
   // final List<PlatformFile>files;
   // final ValueChanged<PlatformFile>onOpenedFile;
   // const Show_Material_Lec_Or_Sec({
@@ -44,116 +48,183 @@ class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
 
         bool isvisbile2=false;
         return Scaffold(
+
           key: scafoldkey2,
+
+
           floatingActionButton: Padding(
             padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal: 8),
             child: FloatingActionButton(
               onPressed: (){
-                cubit.makeListNull(cubit.all_assign_files_List);
-
+                cubit.makeListNull();
                 if(cubit.visiblity==false)
                 {
                   scafoldkey2.currentState?.showBottomSheet(
-                        (context) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GlassBoxWithBorder(
-                        widget: Container(
-                          height: 250,
-                          child: Padding(
-                            padding: const EdgeInsets.all(25.0),
-                            child:Column(
-                              children: [
-                                 const Spacer(),
-                                 Default_Button(
+                          (context) {
+                        return StatefulBuilder(builder:(BuildContext context, StateSetter setState){
+                          return  Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: GlassBoxWithBorder(
+                              widget: InkWell(
+                                onTap: (){
+                                  cubit.openFile_Fun(filePath:cubit.all_assign_files_List[0].path);
+                                },
+                                child: Container(
+                                  height: 250,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(25.0),
+                                    child:Column(
+                                      children: [
+                                        //const Spacer(),
 
-                                   onPressed: (){
-                                   if(cubit.all_assign_files_List.isEmpty){
-                                     cubit.pick_assign_File();}
-                                   else{
-                                     // print('sssss${cubit.all_assign_files_List[0].path.split('/').last}');
-                                     cubit.insuploadLecFile(fileName:cubit.all_assign_files_List[0].path.split('/').last ,);
-                                   }
-                                 },
+                                        cubit.all_assign_files_List.isNotEmpty?
 
-                                   text:cubit.all_assign_files_List.isEmpty? 'Upload File'
-                                     :'Done'
+                                        Container(
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color:Colors.white, width: 1),
+                                              borderRadius: BorderRadius.circular(12),
+                                              color: Colors.blueGrey.withOpacity(.15),
+                                            ),
+                                            padding: const EdgeInsets.all(12),
+                                            child:
+                                            Column(
+                                              children: [
+                                                Container(
+                                                  height: 50,
+                                                  alignment: Alignment.center,
+                                                  width: 70,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.blueGrey.withOpacity(.7),
+                                                    borderRadius: BorderRadius.circular(12),
+                                                  ),
+                                                  child: Text(
+                                                    '${cubit.all_assign_files_List[0].path.split('.').last}',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 25,
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
+                                                  '${cubit.all_assign_files_List[0].path.split('.').last}',
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 14,
+                                                  ),
+                                                  overflow: TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                ),
+                                              ],
+                                            ))
 
-                                   ,),
-                                const Spacer(),
-                                   ],
-                           ),
+
+                                            :Spacer(),
+                                        SizedBox(height: 10,),
+                                        Default_Button(
+                                          onPressed: (){
+                                            setState(() {
+                                              // cubit.all_assign_files_List
+                                            });
+                                            if(cubit.all_assign_files_List.isEmpty){
+                                              cubit.pick_assign_File();
+                                              setState(() {});
+
+                                            }
+                                            else{
+                                              setState(() {
+                                                cubit.insuploadLecFile(fileName:cubit.all_assign_files_List[0].path.split('/').last ,);
+                                                Navigator.pop(context);
+                                                cubit.makeListNull();                                       });
+                                              // print('sssss${cubit.all_assign_files_List[0].path.split('/').last}');
+
+                                            }
+
+                                          },
+
+                                          text:cubit.all_assign_files_List.isEmpty? 'Upload File'
+                                              :'Done'
+
+                                          ,),
+                                        const Spacer(),
+                                      ],
+                                    ),
 
 
-                            // Form(
-                            //   key: formKey,
-                            //   child:
-                            //   // Column(
-                            //   //   children: [
-                            //   //     const Spacer(),
-                            //   //     Container(
-                            //   //       alignment: Alignment.center,
-                            //   //       height: 70,
-                            //   //       decoration: BoxDecoration(
-                            //   //         // border: Border.all(color: Colors.white),
-                            //   //         borderRadius: BorderRadius.circular(18),
-                            //   //         color: Colors.white.withOpacity(.8),
-                            //   //       ),
-                            //   //       child: Padding(
-                            //   //         padding:
-                            //   //         const EdgeInsets.symmetric(horizontal: 8.0),
-                            //   //         child: TextFormField(
-                            //   //           controller: folderController,
-                            //   //           keyboardType: TextInputType.text,
-                            //   //           onFieldSubmitted: (value) {
-                            //   //             print(value);
-                            //   //           },
-                            //   //           validator: (value) {
-                            //   //             if (value!.isEmpty) {
-                            //   //               return 'Folder name can\'t be empty';
-                            //   //             }
-                            //   //             return null;
-                            //   //           },
-                            //   //           cursorColor: c1,
-                            //   //           style: const TextStyle(
-                            //   //             fontSize: 25,
-                            //   //           ),
-                            //   //           decoration: InputDecoration(
-                            //   //             prefixIcon: Padding(
-                            //   //               padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 6),
-                            //   //               child: FaIcon(
-                            //   //                 FontAwesomeIcons.solidFolder,
-                            //   //                 color: c1,
-                            //   //                 size: 30,
-                            //   //               ),
-                            //   //             ),
-                            //   //             hintText: 'Folder name',
-                            //   //             border: InputBorder.none,
-                            //   //           ),
-                            //   //         ),
-                            //   //       ),
-                            //   //     ),
-                            //   //     SizedBox(height: 15,),
-                            //   //     Default_Button(onPressed: (){
-                            //   //       if(formKey.currentState!.validate()){
-                            //   //
-                            //   //       }
-                            //   //     },text: 'Add Folder',),
-                            //   //     const Spacer(),
-                            //   //   ],
-                            //   // ),
-                            // ),
-                          ),
-                        ),
-                        color:
-                        Colors.blueGrey.withOpacity(.2),
-                        borderRadius: 30,
-                        x: 15,
-                        y: 15,
-                        BorderWidth: 3,
-                        BorderColor: Colors.blueGrey,),
-                    ),
+                                    // Form(
+                                    //   key: formKey,
+                                    //   child:
+                                    //   // Column(
+                                    //   //   children: [
+                                    //   //     const Spacer(),
+                                    //   //     Container(
+                                    //   //       alignment: Alignment.center,
+                                    //   //       height: 70,
+                                    //   //       decoration: BoxDecoration(
+                                    //   //         // border: Border.all(color: Colors.white),
+                                    //   //         borderRadius: BorderRadius.circular(18),
+                                    //   //         color: Colors.white.withOpacity(.8),
+                                    //   //       ),
+                                    //   //       child: Padding(
+                                    //   //         padding:
+                                    //   //         const EdgeInsets.symmetric(horizontal: 8.0),
+                                    //   //         child: TextFormField(
+                                    //   //           controller: folderController,
+                                    //   //           keyboardType: TextInputType.text,
+                                    //   //           onFieldSubmitted: (value) {
+                                    //   //             print(value);
+                                    //   //           },
+                                    //   //           validator: (value) {
+                                    //   //             if (value!.isEmpty) {
+                                    //   //               return 'Folder name can\'t be empty';
+                                    //   //             }
+                                    //   //             return null;
+                                    //   //           },
+                                    //   //           cursorColor: c1,
+                                    //   //           style: const TextStyle(
+                                    //   //             fontSize: 25,
+                                    //   //           ),
+                                    //   //           decoration: InputDecoration(
+                                    //   //             prefixIcon: Padding(
+                                    //   //               padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 6),
+                                    //   //               child: FaIcon(
+                                    //   //                 FontAwesomeIcons.solidFolder,
+                                    //   //                 color: c1,
+                                    //   //                 size: 30,
+                                    //   //               ),
+                                    //   //             ),
+                                    //   //             hintText: 'Folder name',
+                                    //   //             border: InputBorder.none,
+                                    //   //           ),
+                                    //   //         ),
+                                    //   //       ),
+                                    //   //     ),
+                                    //   //     SizedBox(height: 15,),
+                                    //   //     Default_Button(onPressed: (){
+                                    //   //       if(formKey.currentState!.validate()){
+                                    //   //
+                                    //   //       }
+                                    //   //     },text: 'Add Folder',),
+                                    //   //     const Spacer(),
+                                    //   //   ],
+                                    //   // ),
+                                    // ),
+                                  ),
+                                ),
+                              ),
+                              color:
+                              Colors.blueGrey.withOpacity(.2),
+                              borderRadius: 30,
+                              x: 15,
+                              y: 15,
+                              BorderWidth: 3,
+                              BorderColor: Colors.blueGrey,),
+                          );});}
                   ).closed.then((value) {
                     cubit.ChangeVisibility(isShow: false, icon: FaIcon(FontAwesomeIcons.plus),);
+                    cubit.makeListNull();
                   });
                   cubit.ChangeVisibility(isShow:true,icon:  FaIcon(FontAwesomeIcons.angleDown));
 
@@ -169,6 +240,131 @@ class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
 
             ),
           ),
+
+          // floatingActionButton: Builder(
+          //
+          //   builder: (context){
+          //    return Padding(
+          //     padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 8),
+          //     child: FloatingActionButton(
+          //       onPressed: () {
+          //         cubit.makeListNull();
+          //         if (cubit.visiblity == false) {
+          //           // Show the bottom sheet
+          //           Scaffold.of(context).showBottomSheet(
+          //                 (context) {
+          //               return StatefulBuilder(
+          //                 builder: (BuildContext context, StateSetter setState) {
+          //                   return Padding(
+          //                     padding: const EdgeInsets.all(8.0),
+          //                     child: GlassBoxWithBorder(
+          //                       widget: InkWell(
+          //                         onTap: () {
+          //                           cubit.openFile_Fun(filePath: cubit.all_assign_files_List[0].path);
+          //                         },
+          //                         child: Container(
+          //                           height: 250,
+          //                           child: Padding(
+          //                             padding: const EdgeInsets.all(25.0),
+          //                             child: Column(
+          //                               children: [
+          //                                 cubit.all_assign_files_List.isNotEmpty
+          //                                     ? Container(
+          //                                     decoration: BoxDecoration(
+          //                                       border: Border.all(color: Colors.white, width: 1),
+          //                                       borderRadius: BorderRadius.circular(12),
+          //                                       color: Colors.blueGrey.withOpacity(.15),
+          //                                     ),
+          //                                     padding: const EdgeInsets.all(12),
+          //                                     child: Column(
+          //                                       children: [
+          //                                         Container(
+          //                                           height: 50,
+          //                                           alignment: Alignment.center,
+          //                                           width: 70,
+          //                                           decoration: BoxDecoration(
+          //                                             color: Colors.blueGrey.withOpacity(.7),
+          //                                             borderRadius: BorderRadius.circular(12),
+          //                                           ),
+          //                                           child: Text(
+          //                                             '${cubit.all_assign_files_List[0].path.split('.').last}',
+          //                                             style: TextStyle(
+          //                                               color: Colors.white,
+          //                                               fontSize: 25,
+          //                                             ),
+          //                                           ),
+          //                                         ),
+          //                                         const SizedBox(
+          //                                           height: 5,
+          //                                         ),
+          //                                         Text(
+          //                                           '${cubit.all_assign_files_List[0].path.split('.').last}',
+          //                                           style: TextStyle(
+          //                                             color: Colors.black,
+          //                                             fontSize: 14,
+          //                                           ),
+          //                                           overflow: TextOverflow.ellipsis,
+          //                                           maxLines: 1,
+          //                                         ),
+          //                                       ],
+          //                                     ))
+          //                                     : Spacer(),
+          //                                 SizedBox(height: 10,),
+          //                                 Default_Button(
+          //                                   onPressed: () {
+          //                                     setState(() {
+          //                                       // cubit.all_assign_files_List
+          //                                     });
+          //                                     if (cubit.all_assign_files_List.isEmpty) {
+          //                                       cubit.pick_assign_File();
+          //                                       setState(() {});
+          //                                     } else {
+          //                                       setState(() {
+          //                                         cubit.insuploadLecFile(fileName: cubit.all_assign_files_List[0].path.split('/').last,);
+          //                                         Navigator.pop(context);
+          //                                         cubit.makeListNull();
+          //                                       });
+          //                                     }
+          //                                   },
+          //                                   text: cubit.all_assign_files_List.isEmpty ? 'Upload File' : 'Done',
+          //                                 ),
+          //                                 Spacer(),
+          //                               ],
+          //                             ),
+          //                           ),
+          //                         ),
+          //                       ),
+          //                       color: Colors.blueGrey.withOpacity(.2),
+          //                       borderRadius: 30,
+          //                       x: 15,
+          //                       y: 15,
+          //                       BorderWidth: 3,
+          //                       BorderColor: Colors.blueGrey,
+          //                     ),
+          //                   );
+          //                 },
+          //               );
+          //             },
+          //           ).closed.then((value) {
+          //             cubit.ChangeVisibility(isShow: false, icon: FaIcon(FontAwesomeIcons.plus),);
+          //             cubit.makeListNull();
+          //           });
+          //           cubit.ChangeVisibility(isShow: true, icon: FaIcon(FontAwesomeIcons.angleDown));
+          //         } else {
+          //           Navigator.pop(context);
+          //           cubit.ChangeVisibility(isShow: false, icon: FaIcon(FontAwesomeIcons.plus));
+          //         }
+          //       },
+          //       child: cubit.visiblity == false ? FaIcon(FontAwesomeIcons.plus) : FaIcon(FontAwesomeIcons.angleDown),
+          //     ),
+          //   );}
+          // ),
+
+
+
+
+
+
           // Padding(
           //   padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal: 8),
           //   child: FloatingActionButton(
@@ -241,12 +437,17 @@ class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
                             const SizedBox(
                               width: 10,
                             ),
-                            Text(
-                              'Lecture 1',
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w700,
-                                color: c1,
+                            Container(
+                              width: 80,
+                              child: Text(
+                                maxLines: 1,
+                                foldeName!,
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w700,
+                                  color: c1,
+                                  overflow: TextOverflow.ellipsis
+                                ),
                               ),
                             ),
                             const Spacer(),
@@ -263,7 +464,7 @@ class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              'Items',
+                              'Files',
                               style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w700,
@@ -302,6 +503,9 @@ class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
                             //  print(insCourseFles[index].filePath?.split('net/').last);
                               print(insCourseFles[index].filePath);
                               cubit.loadPDF(networkfile: insCourseFles[index].filePath);
+
+                              navigateTo(context, fileVierwer(pdfUrl:cubit.pathPDF ,));
+                             // cubit.openFile_Fun(filePath:  insCourseFles[index].filePath);
                             },
                             child: STU_Build_Lec_View_Widget(
                               fileFormKey: fileFormKey,
