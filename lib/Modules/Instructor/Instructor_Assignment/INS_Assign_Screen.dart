@@ -378,8 +378,8 @@ class INS_Assign_Screen extends StatelessWidget {
                                     'endDate':insAssign[index].endDate,
                                     'filePath':insAssign[index].filePath,
                                   });
-                                  cubit.insGetStuUploadTasks(assignId:insAssign[index].taskId );
-                                  navigateTo(context,INS_About_Assign_Screen() );
+
+                                  // navigateTo(context,INS_About_Assign_Screen() );
                                 },
                                 child: INS_Task_Card(assign: insAssign[index], context: context,)),
                             separatorBuilder: (context,index)=>const SizedBox(height: 10,),
