@@ -3,10 +3,13 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
+import 'package:day_night_time_picker/lib/state/time.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -3409,6 +3412,17 @@ Widget INS_Quiz_Card({required context}
 
 var taskNamecontroller = TextEditingController();
 var taskGradecontroller = TextEditingController();
+String? startDate;
+String? endDate;
+int? starthours;
+int? startminutes;
+int? endhours;
+int? endminutes;
+int? startd;
+int? endd;
+int? startm;
+int? endm;
+Time _time = Time(hour: 11, minute: 30, second: 0);
 var formkey1 = GlobalKey<FormState>();
 Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
 
@@ -3471,7 +3485,7 @@ Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
                                                   padding: const EdgeInsets.all(15.0),
                                                   child: GlassBoxWithBorder(
                                                     widget: Container(
-                                                      height: 350,
+                                                      height: 420,
                                                       child: Padding(
                                                         padding: const EdgeInsets
                                                             .only(
@@ -3506,7 +3520,7 @@ Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
                                                                       18),
                                                                   color: Colors.white
                                                                       .withOpacity(
-                                                                      .8),
+                                                                      .5),
                                                                 ),
                                                                 child: Padding(
                                                                   padding:
@@ -3587,7 +3601,7 @@ Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
                                                                       18),
                                                                   color: Colors.white
                                                                       .withOpacity(
-                                                                      .8),
+                                                                      .5),
                                                                 ),
                                                                 child: Padding(
                                                                   padding:
@@ -3651,54 +3665,469 @@ Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
                                                                 height: 15,
                                                               ),
                                                               Container(
-                                                                height: 50,
-                                                                child: Row(
-                                                                  children: [
-                                                                    Expanded(
-                                                                        child: Default_Button(
+                                                                height: 60,
+                                                                child: GestureDetector(
+                                                                  onTap: () {
+                                                                    Navigator.of(context)
+                                                                        .push(
+                                                                      showPicker(
+                                                                        context: context,
+                                                                        value: _time,
+                                                                        sunrise: TimeOfDay(
+                                                                            hour: 6,
+                                                                            minute:
+                                                                            0), // optional
+                                                                        sunset: TimeOfDay(
+                                                                            hour: 18,
+                                                                            minute:
+                                                                            0), // optional
+                                                                        duskSpanInMinutes:
+                                                                        120, // optional
 
-                                                                            color: Colors.red.withOpacity(.7),
-                                                                            onPressed: () {
-                                                                              showDatePicker(
-                                                                                context: context,
-                                                                                initialDate: DateTime.now(),
-                                                                                firstDate: DateTime(2022),
-                                                                                lastDate: DateTime(2025),
-                                                                                builder: (BuildContext context, Widget? child) {
-                                                                                  return Theme(
-                                                                                    data: ThemeData.light().copyWith(
-                                                                                      colorScheme: ColorScheme.light().copyWith(
-                                                                                        primary: Colors.blue, // Change the primary color as needed
-                                                                                      ),
+                                                                        borderRadius: 25,
+                                                                        accentColor:
+                                                                        Colors.blue,
+                                                                        blurredBackground:
+                                                                        true,
+                                                                        elevation: 0,
+
+                                                                        is24HrFormat: false,
+                                                                        onCancel: () {
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                        },
+                                                                        onChange: (value) {
+                                                                          startminutes =
+                                                                              value.minute;
+                                                                          starthours =
+                                                                              value.hour;
+                                                                        },
+                                                                        // onChangeDateTime: (){},
+                                                                      ),
+                                                                    )
+                                                                        .then((value) {
+                                                                      showDatePicker(
+                                                                        context: context,
+                                                                        initialDate:
+                                                                        DateTime.now(),
+                                                                        firstDate:
+                                                                        DateTime(2022),
+                                                                        lastDate:
+                                                                        DateTime(2025),
+                                                                        builder:
+                                                                            (BuildContext
+                                                                        context,
+                                                                            Widget?
+                                                                            child) {
+                                                                          return Theme(
+                                                                            data: ThemeData
+                                                                                .light()
+                                                                                .copyWith(
+                                                                              colorScheme:
+                                                                              ColorScheme
+                                                                                  .light()
+                                                                                  .copyWith(
+                                                                                primary: Colors
+                                                                                    .blue, // Change the primary color as needed
+                                                                              ),
+                                                                            ),
+                                                                            child: child!,
+                                                                          );
+                                                                        },
+                                                                      ).then(
+                                                                              (selectedDate) {
+                                                                            if (selectedDate !=
+                                                                                null) {
+                                                                              startm= selectedDate
+                                                                                  .month;
+                                                                              startd= selectedDate
+                                                                                  .day;
+                                                                              DateTime
+                                                                              selectedDateTime =
+                                                                              DateTime(
+                                                                                selectedDate
+                                                                                    .year,
+                                                                                selectedDate
+                                                                                    .month,
+                                                                                selectedDate
+                                                                                    .day,
+                                                                                starthours!,
+                                                                                startminutes!,
+                                                                              );
+                                                                              print(
+                                                                                  'Selected date and time: $selectedDateTime');
+                                                                              startDate = DateFormat(
+                                                                                  "yyyy-MM-ddTHH:mm:ss.SSS")
+                                                                                  .format(
+                                                                                  selectedDateTime);
+                                                                              print(
+                                                                                  '2024-03-23T22:31:30.911Z');
+                                                                              // Handle the selected date and time as needed
+                                                                            }
+                                                                          });
+                                                                    });
+                                                                  },
+                                                                  child: Container(
+                                                                    decoration:
+                                                                    BoxDecoration(
+                                                                      borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(20),
+                                                                      color: Colors.teal
+                                                                          .withOpacity(.5),
+                                                                    ),
+                                                                    child: Padding(
+                                                                      padding:
+                                                                      const EdgeInsets
+                                                                          .symmetric(
+                                                                          horizontal:
+                                                                          15.0),
+                                                                      child: Row(
+                                                                        mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                        children: [
+                                                                          FaIcon(
+                                                                              FontAwesomeIcons
+                                                                                  .clock),
+                                                                          SizedBox(
+                                                                            width: 12,
+                                                                          ),
+                                                                          Text(
+                                                                            'Start',
+                                                                            style:
+                                                                            TextStyle(
+                                                                              fontSize: 22,
+                                                                              color: Colors
+                                                                                  .black
+                                                                                  .withOpacity(
+                                                                                  .7),
+                                                                              fontWeight:
+                                                                              FontWeight
+                                                                                  .w700,
+                                                                            ),
+                                                                          ),
+                                                                          Spacer(),
+                                                                          Container(
+                                                                            decoration:
+                                                                            BoxDecoration(
+                                                                              borderRadius:
+                                                                              BorderRadius
+                                                                                  .circular(
+                                                                                  15),
+                                                                              color: Colors
+                                                                                  .white
+                                                                                  .withOpacity(
+                                                                                  .3),
+                                                                            ),
+                                                                            child: Padding(
+                                                                              padding: const EdgeInsets
+                                                                                  .symmetric(
+                                                                                  vertical:
+                                                                                  8.0,
+                                                                                  horizontal:
+                                                                                  15),
+                                                                              child: Row(
+                                                                                children: [
+                                                                                  Text(
+                                                                                    '8',
+                                                                                    style:
+                                                                                    TextStyle(
+                                                                                      fontSize:
+                                                                                      20,
+                                                                                      color:
+                                                                                      Colors.black,
+                                                                                      fontWeight:
+                                                                                      FontWeight.w600,
                                                                                     ),
-                                                                                    child: child!,
-                                                                                  );
-                                                                                },
-                                                                              ).then((selectedDate) {
-                                                                                if (selectedDate != null) {
-                                                                                  showTimePicker(
-                                                                                    context: context,
-                                                                                    initialTime: TimeOfDay.now(),
-                                                                                  ).then((selectedTime) {
-                                                                                    if (selectedTime != null) {
-                                                                                      DateTime selectedDateTime = DateTime(
-                                                                                        selectedDate.year,
-                                                                                        selectedDate.month,
-                                                                                        selectedDate.day,
-                                                                                        selectedTime.hour,
-                                                                                        selectedTime.minute,
-                                                                                      );
-                                                                                      print('Selected date and time: $selectedDateTime');
+                                                                                  ),
+                                                                                  Text(
+                                                                                    ' PM',
+                                                                                    style:
+                                                                                    TextStyle(
+                                                                                      fontSize:
+                                                                                      15,
+                                                                                      color:
+                                                                                      Colors.black,
+                                                                                      fontWeight:
+                                                                                      FontWeight.w600,
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                          SizedBox(
+                                                                            width: 10,
+                                                                          ),
+                                                                          Container(
+                                                                            decoration:
+                                                                            BoxDecoration(
+                                                                              borderRadius:
+                                                                              BorderRadius
+                                                                                  .circular(
+                                                                                  15),
+                                                                              color: Colors
+                                                                                  .white
+                                                                                  .withOpacity(
+                                                                                  .3),
+                                                                            ),
+                                                                            child: Padding(
+                                                                              padding: const EdgeInsets
+                                                                                  .symmetric(
+                                                                                  vertical:
+                                                                                  8.0,
+                                                                                  horizontal:
+                                                                                  15),
+                                                                              child: FaIcon(
+                                                                                FontAwesomeIcons
+                                                                                    .pencil,
+                                                                                color: Colors
+                                                                                    .black
+                                                                                    .withOpacity(
+                                                                                    .5),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              Container(
+                                                                height: 60,
+                                                                child: GestureDetector(
+                                                                  onTap: () {
+                                                                    Navigator.of(context)
+                                                                        .push(
+                                                                      showPicker(
+                                                                        context: context,
+                                                                        value: _time,
+                                                                        sunrise: TimeOfDay(
+                                                                            hour: 6,
+                                                                            minute:
+                                                                            0), // optional
+                                                                        sunset: TimeOfDay(
+                                                                            hour: 18,
+                                                                            minute:
+                                                                            0), // optional
+                                                                        duskSpanInMinutes:
+                                                                        120, // optional
 
-                                                                                    }
-                                                                                  });
-                                                                                }
-                                                                              });
-                                                                              // );
-                                                                            },
-                                                                            text: 'Change deadline',
-                                                                            textFontSize: 20)),
-                                                                  ],
+                                                                        borderRadius: 25,
+                                                                        accentColor:
+                                                                        Colors.blue,
+                                                                        blurredBackground:
+                                                                        true,
+                                                                        elevation: 0,
+
+                                                                        is24HrFormat: false,
+                                                                        onCancel: () {
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                        },
+                                                                        onChange: (value) {
+                                                                          endminutes =
+                                                                              value.minute;
+                                                                          endhours =
+                                                                              value.hour;
+                                                                        },
+                                                                        // onChangeDateTime: (){},
+                                                                      ),
+                                                                    )
+                                                                        .then((value) {
+                                                                      showDatePicker(
+                                                                        context: context,
+                                                                        initialDate:
+                                                                        DateTime.now(),
+                                                                        firstDate:
+                                                                        DateTime(2022),
+                                                                        lastDate:
+                                                                        DateTime(2025),
+                                                                        builder:
+                                                                            (BuildContext
+                                                                        context,
+                                                                            Widget?
+                                                                            child) {
+                                                                          return Theme(
+                                                                            data: ThemeData
+                                                                                .light()
+                                                                                .copyWith(
+                                                                              colorScheme:
+                                                                              ColorScheme
+                                                                                  .light()
+                                                                                  .copyWith(
+                                                                                primary: Colors
+                                                                                    .blue, // Change the primary color as needed
+                                                                              ),
+                                                                            ),
+                                                                            child: child!,
+                                                                          );
+                                                                        },
+                                                                      ).then(
+                                                                              (selectedDate) {
+                                                                            if (selectedDate !=
+                                                                                null) {
+                                                                              endm= selectedDate
+                                                                                  .month;
+                                                                              endd= selectedDate
+                                                                                  .day;
+                                                                              DateTime
+                                                                              selectedDateTime =
+                                                                              DateTime(
+                                                                                selectedDate
+                                                                                    .year,
+                                                                                selectedDate
+                                                                                    .month,
+                                                                                selectedDate
+                                                                                    .day,
+                                                                                endhours!,
+                                                                                endminutes!,
+                                                                              );
+                                                                              print(
+                                                                                  'Selected date and time: $selectedDateTime');
+                                                                              endDate = DateFormat(
+                                                                                  "yyyy-MM-ddTHH:mm:ss.SSS")
+                                                                                  .format(
+                                                                                  selectedDateTime);
+                                                                              print(
+                                                                                  '2024-03-23T22:31:30.911Z');
+                                                                              print(endDate);
+                                                                              // Handle the selected date and time as needed
+                                                                            }
+                                                                          });
+                                                                    });
+                                                                  },
+                                                                  child: Container(
+                                                                    decoration:
+                                                                    BoxDecoration(
+                                                                      borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(20),
+                                                                      color: Colors.red
+                                                                          .withOpacity(.5),
+                                                                    ),
+                                                                    child: Padding(
+                                                                      padding:
+                                                                      const EdgeInsets
+                                                                          .symmetric(
+                                                                          horizontal:
+                                                                          15.0),
+                                                                      child: Row(
+                                                                        mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                        children: [
+                                                                          FaIcon(
+                                                                              FontAwesomeIcons
+                                                                                  .clock),
+                                                                          SizedBox(
+                                                                            width: 12,
+                                                                          ),
+                                                                          Text(
+                                                                            'End',
+                                                                            style:
+                                                                            TextStyle(
+                                                                              fontSize: 22,
+                                                                              color: Colors
+                                                                                  .black
+                                                                                  .withOpacity(
+                                                                                  .7),
+                                                                              fontWeight:
+                                                                              FontWeight
+                                                                                  .w700,
+                                                                            ),
+                                                                          ),
+                                                                          Spacer(),
+                                                                          Container(
+                                                                            decoration:
+                                                                            BoxDecoration(
+                                                                              borderRadius:
+                                                                              BorderRadius
+                                                                                  .circular(
+                                                                                  15),
+                                                                              color: Colors
+                                                                                  .white
+                                                                                  .withOpacity(
+                                                                                  .3),
+                                                                            ),
+                                                                            child: Padding(
+                                                                              padding: const EdgeInsets
+                                                                                  .symmetric(
+                                                                                  vertical:
+                                                                                  8.0,
+                                                                                  horizontal:
+                                                                                  15),
+                                                                              child: Row(
+                                                                                children: [
+                                                                                  Text(
+                                                                                    '10',
+                                                                                    style:
+                                                                                    TextStyle(
+                                                                                      fontSize:
+                                                                                      20,
+                                                                                      color:
+                                                                                      Colors.black,
+                                                                                      fontWeight:
+                                                                                      FontWeight.w600,
+                                                                                    ),
+                                                                                  ),
+                                                                                  Text(
+                                                                                    ' PM',
+                                                                                    style:
+                                                                                    TextStyle(
+                                                                                      fontSize:
+                                                                                      15,
+                                                                                      color:
+                                                                                      Colors.black,
+                                                                                      fontWeight:
+                                                                                      FontWeight.w600,
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                          SizedBox(
+                                                                            width: 10,
+                                                                          ),
+                                                                          Container(
+                                                                            decoration:
+                                                                            BoxDecoration(
+                                                                              borderRadius:
+                                                                              BorderRadius
+                                                                                  .circular(
+                                                                                  15),
+                                                                              color: Colors
+                                                                                  .white
+                                                                                  .withOpacity(
+                                                                                  .3),
+                                                                            ),
+                                                                            child: Padding(
+                                                                              padding: const EdgeInsets
+                                                                                  .symmetric(
+                                                                                  vertical:
+                                                                                  8.0,
+                                                                                  horizontal:
+                                                                                  15),
+                                                                              child: FaIcon(
+                                                                                FontAwesomeIcons
+                                                                                    .pencil,
+                                                                                color: Colors
+                                                                                    .black
+                                                                                    .withOpacity(
+                                                                                    .5),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
                                                                 ),
                                                               ),
                                                               SizedBox(
@@ -3706,11 +4135,22 @@ Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
                                                               ),
                                                               Default_Button(
                                                                   onPressed: () {
-                                                                    App_cubit.get(context).updateINSAssign(
-                                                                      taskName: taskNamecontroller.text,
-                                                                      // taskGrade: taskGradecontroller.text,
-                                                                    );
-                                                                    Navigator.pop(context);
+
+                                                                    if (formkey1.currentState!
+                                                                        .validate() &&
+                                                                        startDate != null &&
+                                                                        endDate != null ){
+                                                                      App_cubit.get(context).updateINSAssign(
+                                                                        Taskid: assign.taskId,
+                                                                        taskName: taskNamecontroller.text,
+                                                                        taskGrade: taskGradecontroller.text,
+                                                                        startDate: startDate,
+                                                                        endDate: endDate,
+
+                                                                      );
+                                                                      Navigator.pop(context);
+                                                                    }
+
                                                                     //   if (formkey1.currentState!.validate()) {
                                                                     //   cubit.AddEventToCalender(
                                                                     //       startDate: cubit.startTime,
@@ -3799,7 +4239,7 @@ Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
                         },
                         text: 'Do you want to delete Task ?',
                         yes: () {
-                          App_cubit.get(context).INS_Delete_Assign(taskid: assign!.taskId);
+                          App_cubit.get(context).INS_Delete_Assign(Taskid: assign!.taskId);
                           Navigator.pop(context);
 
                         });
@@ -3835,7 +4275,9 @@ Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
                           Navigator.pop(context);
                         },
                         text: 'Do you want to see Task ?',
-                        yes: () {});
+                        yes: () {
+
+                        });
                   },
                   child: Container(
                     height: 30,

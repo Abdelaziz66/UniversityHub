@@ -1587,6 +1587,7 @@ class App_cubit extends Cubit<App_state> {
 
   String? assignId;
   void updateINSAssign({
+    required String? Taskid,
     String? taskName,
     String? taskGrade,
     String? startDate,
@@ -1596,12 +1597,12 @@ class App_cubit extends Cubit<App_state> {
     if (true) {
       emit(Ins_update_Assign_LoadingState());
       Dio_Helper.updateData(
-        url:'Instructor/UpdateAnAssignment?taskId=T001' ,
+        url:'Instructor/UpdateAnAssignment?taskId=$Taskid' ,
         token: token,
         data: {
-          "taskName": assignName,
+          "taskName": taskName,
           "taskGrade": taskGrade,
-          "startDate":taskGrade,
+          "startDate":startDate,
           "endDate": endDate
         }
       ).then((value) {
@@ -1619,18 +1620,22 @@ class App_cubit extends Cubit<App_state> {
   }
 
   void INS_Delete_Assign({
-   required String? taskid,
+   required String? Taskid,
   }){
     if (true) {
       emit(Ins_delete_Assign_LoadingState());
-      Dio_Helper.updateData(
-          url:'Instructor/DeleteAnAssignment?taskId=2130e4c4-75d6-4556-8437-7c8aec71bcf1' ,
+
+
+      Dio_Helper.deleteData(
+          url:'Instructor/DeleteAnAssignment?taskId=${Taskid}',
           token: token,
       ).then((value) {
         if (value.statusCode == 200) {
           var Json = value.data;
           flutterToast(msg:'Delete successfully', backColor: Colors.green);
           print(Json.toString());
+
+
           emit(Ins_delete_Assign_SuccessState());
         }
       }).catchError((error) {
