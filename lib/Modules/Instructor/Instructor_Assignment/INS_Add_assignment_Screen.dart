@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
@@ -139,29 +138,26 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                       },
                       onStepContinue: () {
                         if (_index == 2) {
-
-                          if (formkey.currentState!
-                              .validate() &&
+                          if (formkey.currentState!.validate() &&
                               startDate != null &&
-                              endDate != null && all_files.isNotEmpty) {
+                              endDate != null &&
+                              all_files.isNotEmpty) {
                             cubit.AddInsNewTask(
                               startDate: startDate,
                               endDate: endDate,
-                              taskName:
-                              taskNamecontroller.text,
-                              taskGrade:
-                              taskGradecontroller.text,
+                              taskName: taskNamecontroller.text,
+                              taskGrade: taskGradecontroller.text,
                             );
                             cubit.StuGetCourseAssign();
-                            NavigateAndFinish(context,INS_Assign_Screen(),);
+                            NavigateAndFinish(
+                              context,
+                              INS_Assign_Screen(),
+                            );
                           } else {
                             flutterToast(
-                                msg:
-                                'please add all data about task',
+                                msg: 'please add all data about task',
                                 backColor: Colors.red);
                           }
-
-
                         } else if (_index <= 0 || _index < 2) {
                           setState(() {
                             _index += 1;
@@ -194,18 +190,18 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                       padding: const EdgeInsets.all(10.0),
                                       child: Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                            CrossAxisAlignment.center,
                                         mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                            MainAxisAlignment.center,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: 3.0, horizontal: 8),
                                             child: Row(
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                                  CrossAxisAlignment.center,
                                               mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Expanded(
                                                   child: Text(
@@ -215,7 +211,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                       fontSize: 17,
                                                       color: Colors.black,
                                                       fontWeight:
-                                                      FontWeight.w500,
+                                                          FontWeight.w500,
                                                     ),
                                                   ),
                                                 ),
@@ -230,18 +226,18 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                             decoration: BoxDecoration(
                                               // border: Border.all(color: Colors.white),
                                               borderRadius:
-                                              BorderRadius.circular(18),
+                                                  BorderRadius.circular(18),
                                               color: Colors.blueGrey
                                                   .withOpacity(.1),
                                             ),
                                             child: Padding(
                                               padding:
-                                              const EdgeInsets.symmetric(
-                                                  horizontal: 8.0),
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 8.0),
                                               child: TextFormField(
                                                 controller: taskNamecontroller,
                                                 keyboardType:
-                                                TextInputType.text,
+                                                    TextInputType.text,
                                                 onFieldSubmitted: (value) {
                                                   print(value);
                                                 },
@@ -387,27 +383,27 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                 children: [
                                   Container(
                                     height: 100,
-
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         GlassBoxWithBorder_Gradiant2(
                                             widget: Padding(
                                               padding:
-                                              const EdgeInsets.all(10.0),
+                                                  const EdgeInsets.all(10.0),
                                               child: Row(
                                                 crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                                    CrossAxisAlignment.center,
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                      const EdgeInsets
-                                                          .only(
-                                                          left: 8.0),
+                                                          const EdgeInsets.only(
+                                                              left: 8.0),
                                                       child: Text(
                                                         'What about points ?',
                                                         maxLines: 2,
@@ -415,7 +411,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                           fontSize: 17,
                                                           color: Colors.black,
                                                           fontWeight:
-                                                          FontWeight.w500,
+                                                              FontWeight.w500,
                                                         ),
                                                       ),
                                                     ),
@@ -428,44 +424,41 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                       onTap: () {},
                                                       child: Container(
                                                         decoration:
-                                                        BoxDecoration(
+                                                            BoxDecoration(
                                                           borderRadius:
-                                                          BorderRadius
-                                                              .circular(
-                                                              20),
-                                                          color: Colors
-                                                              .blueGrey
-                                                              .withOpacity(
-                                                              .1),
+                                                              BorderRadius
+                                                                  .circular(20),
+                                                          color: Colors.blueGrey
+                                                              .withOpacity(.1),
                                                         ),
                                                         child: Container(
-                                                          alignment: Alignment
-                                                              .center,
+                                                          alignment:
+                                                              Alignment.center,
                                                           decoration:
-                                                          BoxDecoration(
+                                                              BoxDecoration(
                                                             // border: Border.all(color: Colors.white),
                                                             borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                18),
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        18),
                                                             color: Colors
                                                                 .blueGrey
                                                                 .withOpacity(
-                                                                .1),
+                                                                    .1),
                                                           ),
                                                           child: Padding(
                                                             padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal:
-                                                                8.0),
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                                    horizontal:
+                                                                        8.0),
                                                             child:
-                                                            TextFormField(
+                                                                TextFormField(
                                                               controller:
-                                                              taskGradecontroller,
+                                                                  taskGradecontroller,
                                                               keyboardType:
-                                                              TextInputType
-                                                                  .number,
+                                                                  TextInputType
+                                                                      .number,
                                                               onFieldSubmitted:
                                                                   (value) {
                                                                 print(value);
@@ -486,23 +479,23 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                               //     ToolbarOptions(paste: true, copy: true),
                                                               cursorColor: c1,
                                                               style:
-                                                              const TextStyle(
+                                                                  const TextStyle(
                                                                 fontSize: 20,
                                                               ),
                                                               decoration:
-                                                              InputDecoration(
+                                                                  InputDecoration(
                                                                 prefixIcon:
-                                                                Icon(
+                                                                    Icon(
                                                                   Icons
                                                                       .add_chart,
                                                                   color: c1,
                                                                   size: 30,
                                                                 ),
                                                                 hintText:
-                                                                'Points',
+                                                                    'Points',
                                                                 border:
-                                                                InputBorder
-                                                                    .none,
+                                                                    InputBorder
+                                                                        .none,
                                                               ),
                                                             ),
                                                           ),
@@ -515,8 +508,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                             ),
                                             BorderWidth: 0,
                                             BorderColor: Colors.black,
-                                            color:
-                                            Colors.white.withOpacity(.2),
+                                            color: Colors.white.withOpacity(.2),
                                             borderRadius: 20,
                                             x: 0,
                                             y: 0),
@@ -527,26 +519,22 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                     height: 0,
                                   ),
                                   Container(
-
                                     height: 200,
                                     child: GlassBoxWithBorder_Gradiant2(
                                         widget: Container(
                                           child: Padding(
-                                            padding:
-                                            const EdgeInsets.all(10.0),
+                                            padding: const EdgeInsets.all(10.0),
                                             child: Column(
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                                  CrossAxisAlignment.center,
                                               mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Row(
                                                   crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .center,
+                                                      CrossAxisAlignment.center,
                                                   mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .center,
+                                                      MainAxisAlignment.center,
                                                   children: [
                                                     Text(
                                                       'Determine Time',
@@ -555,7 +543,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                         fontSize: 17,
                                                         color: Colors.black,
                                                         fontWeight:
-                                                        FontWeight.w500,
+                                                            FontWeight.w500,
                                                       ),
                                                     ),
                                                   ],
@@ -566,124 +554,126 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                 Expanded(
                                                   child: GestureDetector(
                                                     onTap: () {
-                                                      Navigator.of(context)
-                                                          .push(
-                                                        showPicker(
-                                                          context: context,
-                                                          value: _time,
-                                                          sunrise: TimeOfDay(
-                                                              hour: 6,
-                                                              minute:
-                                                              0), // optional
-                                                          sunset: TimeOfDay(
-                                                              hour: 18,
-                                                              minute:
-                                                              0), // optional
-                                                          duskSpanInMinutes:
-                                                          120, // optional
-
-                                                          borderRadius: 25,
-                                                          accentColor:
-                                                          Colors.blue,
-                                                          blurredBackground:
-                                                          true,
-                                                          elevation: 0,
-
-                                                          is24HrFormat: false,
-                                                          onCancel: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          onChange: (value) {
-                                                            startminutes =
-                                                                value.minute;
-                                                            starthours =
-                                                                value.hour;
-                                                          },
-                                                          // onChangeDateTime: (){},
-                                                        ),
-                                                      )
-                                                          .then((value) {
-                                                        showDatePicker(
-                                                          context: context,
-                                                          initialDate:
-                                                          DateTime.now(),
-                                                          firstDate:
-                                                          DateTime(2022),
-                                                          lastDate:
-                                                          DateTime(2025),
-                                                          builder:
-                                                              (BuildContext
-                                                          context,
-                                                              Widget?
-                                                              child) {
-                                                            return Theme(
-                                                              data: ThemeData
-                                                                  .light()
+                                                      showDatePicker(
+                                                        context: context,
+                                                        initialDate:
+                                                        DateTime.now(),
+                                                        firstDate:
+                                                        DateTime(2022),
+                                                        lastDate:
+                                                        DateTime(2025),
+                                                        builder: (BuildContext
+                                                        context,
+                                                            Widget? child) {
+                                                          return Theme(
+                                                            data: ThemeData
+                                                                .dark()
+                                                                .copyWith(
+                                                              colorScheme:
+                                                              ColorScheme
+                                                                  .dark()
                                                                   .copyWith(
-                                                                colorScheme:
-                                                                ColorScheme
-                                                                    .light()
-                                                                    .copyWith(
-                                                                  primary: Colors
-                                                                      .blue, // Change the primary color as needed
-                                                                ),
+                                                                primary: Colors
+                                                                    .blue, // Change the primary color as needed
                                                               ),
-                                                              child: child!,
-                                                            );
-                                                          },
-                                                        ).then(
-                                                                (selectedDate) {
-                                                              if (selectedDate !=
-                                                                  null) {
-                                                               startm= selectedDate
+                                                            ),
+                                                            child: child!,
+                                                          );
+                                                        },
+                                                      ).then((selectedDate) {
+                                                        Navigator.of(context)
+                                                            .push(
+                                                          showPicker(
+                                                            context: context,
+                                                            value: _time,
+                                                            sunrise: TimeOfDay(
+                                                                hour: 6,
+                                                                minute:
+                                                                0), // optional
+                                                            sunset: TimeOfDay(
+                                                                hour: 18,
+                                                                minute:
+                                                                0), // optional
+                                                            duskSpanInMinutes:
+                                                            120, // optional
+
+                                                            borderRadius: 25,
+                                                            accentColor:
+                                                            Colors.blue,
+                                                            blurredBackground:
+                                                            true,
+                                                            elevation: 0,
+
+                                                            is24HrFormat:
+                                                            false,
+                                                            onCancel: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            onChange:
+                                                                (value) {
+                                                              startminutes =
+                                                                  value
+                                                                      .minute;
+                                                              starthours =
+                                                                  value.hour;
+                                                            },
+                                                            // onChangeDateTime: (){},
+                                                          ),
+                                                        )
+                                                            .then((value) {
+                                                          if (selectedDate !=
+                                                              null) {
+                                                            startm =
+                                                                selectedDate
                                                                     .month;
-                                                               startd= selectedDate
-                                                                      .day;
-                                                                DateTime
-                                                                selectedDateTime =
-                                                                DateTime(
-                                                                  selectedDate
-                                                                      .year,
-                                                                  selectedDate
-                                                                      .month,
-                                                                  selectedDate
-                                                                      .day,
-                                                                  starthours!,
-                                                                  startminutes!,
-                                                                );
-                                                                print(
-                                                                    'Selected date and time: $selectedDateTime');
-                                                                startDate = DateFormat(
-                                                                    "yyyy-MM-ddTHH:mm:ss.SSS")
-                                                                    .format(
-                                                                    selectedDateTime);
-                                                                print(
-                                                                    '2024-03-23T22:31:30.911Z');
-                                                                // Handle the selected date and time as needed
-                                                              }
-                                                            });
+                                                            startd =
+                                                                selectedDate
+                                                                    .day;
+                                                            DateTime
+                                                            selectedDateTime =
+                                                            DateTime(
+                                                              selectedDate
+                                                                  .year,
+                                                              selectedDate
+                                                                  .month,
+                                                              selectedDate
+                                                                  .day,
+                                                              starthours!,
+                                                              startminutes!,
+                                                            );
+                                                            print(
+                                                                'Selected date and time: $selectedDateTime');
+                                                            startDate = DateFormat(
+                                                                "yyyy-MM-ddTHH:mm:ss.SSS")
+                                                                .format(
+                                                                selectedDateTime);
+                                                            print(
+                                                                '2024-03-23T22:31:30.911Z');
+                                                            // Handle the selected date and time as needed
+                                                          }
+                                                        });
                                                       });
+
                                                     },
                                                     child: Container(
-                                                      decoration:
-                                                      BoxDecoration(
+                                                      decoration: BoxDecoration(
                                                         borderRadius:
-                                                        BorderRadius
-                                                            .circular(20),
+                                                            BorderRadius
+                                                                .circular(20),
                                                         color: Colors.teal
                                                             .withOpacity(.5),
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                        const EdgeInsets
-                                                            .symmetric(
-                                                            horizontal:
-                                                            15.0),
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal:
+                                                                    15.0),
                                                         child: Row(
                                                           mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
+                                                              MainAxisAlignment
+                                                                  .start,
                                                           children: [
                                                             FaIcon(
                                                                 FontAwesomeIcons
@@ -693,62 +683,61 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                             ),
                                                             Text(
                                                               'Start',
-                                                              style:
-                                                              TextStyle(
+                                                              style: TextStyle(
                                                                 fontSize: 22,
                                                                 color: Colors
                                                                     .black
                                                                     .withOpacity(
-                                                                    .7),
+                                                                        .7),
                                                                 fontWeight:
-                                                                FontWeight
-                                                                    .w700,
+                                                                    FontWeight
+                                                                        .w700,
                                                               ),
                                                             ),
                                                             Spacer(),
                                                             Container(
                                                               decoration:
-                                                              BoxDecoration(
+                                                                  BoxDecoration(
                                                                 borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    15),
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15),
                                                                 color: Colors
                                                                     .white
                                                                     .withOpacity(
-                                                                    .3),
+                                                                        .3),
                                                               ),
                                                               child: Padding(
                                                                 padding: const EdgeInsets
                                                                     .symmetric(
                                                                     vertical:
-                                                                    8.0,
+                                                                        8.0,
                                                                     horizontal:
-                                                                    15),
+                                                                        15),
                                                                 child: Row(
                                                                   children: [
                                                                     Text(
-                                                                      '8',
+                                                                      '${starthours ?? '--'} : ${startminutes ?? '--'}',
                                                                       style:
-                                                                      TextStyle(
+                                                                          TextStyle(
                                                                         fontSize:
-                                                                        20,
-                                                                        color:
-                                                                        Colors.black,
+                                                                            18,
+                                                                        color: Colors
+                                                                            .black,
                                                                         fontWeight:
-                                                                        FontWeight.w600,
+                                                                            FontWeight.w600,
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                      ' PM',
+                                                                      '${''}',
                                                                       style:
-                                                                      TextStyle(
+                                                                          TextStyle(
                                                                         fontSize:
-                                                                        15,
-                                                                        color:
-                                                                        Colors.black,
+                                                                            13,
+                                                                        color: Colors
+                                                                            .black,
                                                                         fontWeight:
-                                                                        FontWeight.w600,
+                                                                            FontWeight.w800,
                                                                       ),
                                                                     ),
                                                                   ],
@@ -760,30 +749,38 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                             ),
                                                             Container(
                                                               decoration:
-                                                              BoxDecoration(
+                                                                  BoxDecoration(
                                                                 borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    15),
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15),
                                                                 color: Colors
                                                                     .white
                                                                     .withOpacity(
-                                                                    .3),
+                                                                        .3),
                                                               ),
                                                               child: Padding(
                                                                 padding: const EdgeInsets
                                                                     .symmetric(
                                                                     vertical:
-                                                                    8.0,
+                                                                        8.0,
                                                                     horizontal:
-                                                                    15),
-                                                                child: FaIcon(
-                                                                  FontAwesomeIcons
-                                                                      .pencil,
-                                                                  color: Colors
-                                                                      .black
-                                                                      .withOpacity(
-                                                                      .5),
+                                                                        15),
+                                                                child: Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      '${startd ?? '--'} / ${startm ?? '--'}',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            18,
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight.w600,
+                                                                      ),
+                                                                    ),
+                                                                  ],
                                                                 ),
                                                               ),
                                                             ),
@@ -799,125 +796,128 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                 Expanded(
                                                   child: GestureDetector(
                                                     onTap: () {
-                                                      Navigator.of(context)
-                                                          .push(
-                                                        showPicker(
-                                                          context: context,
-                                                          value: _time,
-                                                          sunrise: TimeOfDay(
-                                                              hour: 6,
-                                                              minute:
-                                                              0), // optional
-                                                          sunset: TimeOfDay(
-                                                              hour: 18,
-                                                              minute:
-                                                              0), // optional
-                                                          duskSpanInMinutes:
-                                                          120, // optional
-
-                                                          borderRadius: 25,
-                                                          accentColor:
-                                                          Colors.blue,
-                                                          blurredBackground:
-                                                          true,
-                                                          elevation: 0,
-
-                                                          is24HrFormat: false,
-                                                          onCancel: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          onChange: (value) {
-                                                            endminutes =
-                                                                value.minute;
-                                                            endhours =
-                                                                value.hour;
-                                                          },
-                                                          // onChangeDateTime: (){},
-                                                        ),
-                                                      )
-                                                          .then((value) {
-                                                        showDatePicker(
-                                                          context: context,
-                                                          initialDate:
-                                                          DateTime.now(),
-                                                          firstDate:
-                                                          DateTime(2022),
-                                                          lastDate:
-                                                          DateTime(2025),
-                                                          builder:
-                                                              (BuildContext
-                                                          context,
-                                                              Widget?
-                                                              child) {
-                                                            return Theme(
-                                                              data: ThemeData
-                                                                  .light()
+                                                      showDatePicker(
+                                                        context: context,
+                                                        initialDate:
+                                                        DateTime.now(),
+                                                        firstDate:
+                                                        DateTime(2022),
+                                                        lastDate:
+                                                        DateTime(2025),
+                                                        builder: (BuildContext
+                                                        context,
+                                                            Widget? child) {
+                                                          return Theme(
+                                                            data: ThemeData
+                                                                .dark()
+                                                                .copyWith(
+                                                              colorScheme:
+                                                              ColorScheme
+                                                                  .dark()
                                                                   .copyWith(
-                                                                colorScheme:
-                                                                ColorScheme
-                                                                    .light()
-                                                                    .copyWith(
-                                                                  primary: Colors
-                                                                      .blue, // Change the primary color as needed
-                                                                ),
+                                                                primary: Colors
+                                                                    .blue,
+
+                                                                // Change the primary color as needed
                                                               ),
-                                                              child: child!,
-                                                            );
-                                                          },
-                                                        ).then(
-                                                                (selectedDate) {
-                                                              if (selectedDate !=
-                                                                  null) {
-                                                                endm= selectedDate
+                                                            ),
+                                                            child: child!,
+                                                          );
+                                                        },
+                                                      ).then((selectedDate) {
+                                                        Navigator.of(context)
+                                                            .push(
+                                                          showPicker(
+                                                            context: context,
+                                                            value: _time,
+                                                            sunrise: TimeOfDay(
+                                                                hour: 6,
+                                                                minute:
+                                                                0), // optional
+                                                            sunset: TimeOfDay(
+                                                                hour: 18,
+                                                                minute:
+                                                                0), // optional
+                                                            duskSpanInMinutes:
+                                                            120, // optional
+
+                                                            borderRadius: 25,
+                                                            accentColor:
+                                                            Colors.blue,
+                                                            blurredBackground:
+                                                            true,
+                                                            elevation: 0,
+
+                                                            is24HrFormat:
+                                                            false,
+                                                            onCancel: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            onChange:
+                                                                (value) {
+                                                              endminutes =
+                                                                  value
+                                                                      .minute;
+                                                              endhours =
+                                                                  value.hour;
+                                                            },
+                                                            // onChangeDateTime: (){},
+                                                          ),
+                                                        )
+                                                            .then((value) {
+                                                          if (selectedDate !=
+                                                              null) {
+                                                            endm =
+                                                                selectedDate
                                                                     .month;
-                                                                endd= selectedDate
+                                                            endd =
+                                                                selectedDate
                                                                     .day;
-                                                                DateTime
-                                                                selectedDateTime =
-                                                                DateTime(
-                                                                  selectedDate
-                                                                      .year,
-                                                                  selectedDate
-                                                                      .month,
-                                                                  selectedDate
-                                                                      .day,
-                                                                  endhours!,
-                                                                  endminutes!,
-                                                                );
-                                                                print(
-                                                                    'Selected date and time: $selectedDateTime');
-                                                                endDate = DateFormat(
-                                                                    "yyyy-MM-ddTHH:mm:ss.SSS")
-                                                                    .format(
-                                                                    selectedDateTime);
-                                                                print(
-                                                                    '2024-03-23T22:31:30.911Z');
-                                                                print(endDate);
-                                                                // Handle the selected date and time as needed
-                                                              }
-                                                            });
+                                                            DateTime
+                                                            selectedDateTime =
+                                                            DateTime(
+                                                              selectedDate
+                                                                  .year,
+                                                              selectedDate
+                                                                  .month,
+                                                              selectedDate
+                                                                  .day,
+                                                              endhours!,
+                                                              endminutes!,
+                                                            );
+                                                            print(
+                                                                'Selected date and time: $selectedDateTime');
+                                                            endDate = DateFormat(
+                                                                "yyyy-MM-ddTHH:mm:ss.SSS")
+                                                                .format(
+                                                                selectedDateTime);
+                                                            print(
+                                                                '2024-03-23T22:31:30.911Z');
+                                                            // Handle the selected date and time as needed
+                                                          }
+                                                        });
                                                       });
+
                                                     },
                                                     child: Container(
-                                                      decoration:
-                                                      BoxDecoration(
+                                                      decoration: BoxDecoration(
                                                         borderRadius:
-                                                        BorderRadius
-                                                            .circular(20),
+                                                            BorderRadius
+                                                                .circular(20),
                                                         color: Colors.red
                                                             .withOpacity(.5),
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                        const EdgeInsets
-                                                            .symmetric(
-                                                            horizontal:
-                                                            15.0),
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal:
+                                                                    15.0),
                                                         child: Row(
                                                           mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
+                                                              MainAxisAlignment
+                                                                  .start,
                                                           children: [
                                                             FaIcon(
                                                                 FontAwesomeIcons
@@ -927,62 +927,61 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                             ),
                                                             Text(
                                                               'End',
-                                                              style:
-                                                              TextStyle(
+                                                              style: TextStyle(
                                                                 fontSize: 22,
                                                                 color: Colors
                                                                     .black
                                                                     .withOpacity(
-                                                                    .7),
+                                                                        .7),
                                                                 fontWeight:
-                                                                FontWeight
-                                                                    .w700,
+                                                                    FontWeight
+                                                                        .w700,
                                                               ),
                                                             ),
                                                             Spacer(),
                                                             Container(
                                                               decoration:
-                                                              BoxDecoration(
+                                                                  BoxDecoration(
                                                                 borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    15),
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15),
                                                                 color: Colors
                                                                     .white
                                                                     .withOpacity(
-                                                                    .3),
+                                                                        .3),
                                                               ),
                                                               child: Padding(
                                                                 padding: const EdgeInsets
                                                                     .symmetric(
                                                                     vertical:
-                                                                    8.0,
+                                                                        8.0,
                                                                     horizontal:
-                                                                    15),
+                                                                        15),
                                                                 child: Row(
                                                                   children: [
                                                                     Text(
-                                                                      '10',
+                                                                      '${endhours ?? '--'} : ${endminutes ?? '--'}',
                                                                       style:
-                                                                      TextStyle(
+                                                                          TextStyle(
                                                                         fontSize:
-                                                                        20,
-                                                                        color:
-                                                                        Colors.black,
+                                                                            18,
+                                                                        color: Colors
+                                                                            .black,
                                                                         fontWeight:
-                                                                        FontWeight.w600,
+                                                                            FontWeight.w600,
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                      ' PM',
+                                                                      '${''}',
                                                                       style:
-                                                                      TextStyle(
+                                                                          TextStyle(
                                                                         fontSize:
-                                                                        15,
-                                                                        color:
-                                                                        Colors.black,
+                                                                            13,
+                                                                        color: Colors
+                                                                            .black,
                                                                         fontWeight:
-                                                                        FontWeight.w600,
+                                                                            FontWeight.w800,
                                                                       ),
                                                                     ),
                                                                   ],
@@ -994,30 +993,38 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                             ),
                                                             Container(
                                                               decoration:
-                                                              BoxDecoration(
+                                                                  BoxDecoration(
                                                                 borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    15),
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15),
                                                                 color: Colors
                                                                     .white
                                                                     .withOpacity(
-                                                                    .3),
+                                                                        .3),
                                                               ),
                                                               child: Padding(
                                                                 padding: const EdgeInsets
                                                                     .symmetric(
                                                                     vertical:
-                                                                    8.0,
+                                                                        8.0,
                                                                     horizontal:
-                                                                    15),
-                                                                child: FaIcon(
-                                                                  FontAwesomeIcons
-                                                                      .pencil,
-                                                                  color: Colors
-                                                                      .black
-                                                                      .withOpacity(
-                                                                      .5),
+                                                                        15),
+                                                                child: Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      '${endd ?? '--'} / ${endm ?? '--'}',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            18,
+                                                                        color: Colors
+                                                                            .black,
+                                                                        fontWeight:
+                                                                            FontWeight.w600,
+                                                                      ),
+                                                                    ),
+                                                                  ],
                                                                 ),
                                                               ),
                                                             ),
@@ -1041,9 +1048,6 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                 ],
                               ),
                             )),
-
-
-
                         Step(
                           isActive: _index == 2,
                           state: _index == 2
@@ -1056,7 +1060,6 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                           ),
                           content: Container(
                             height: 350,
-
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -1068,7 +1071,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                         decoration: BoxDecoration(
                                           // color: Colors.blueGrey.withOpacity(.05),
                                           borderRadius:
-                                          BorderRadius.circular(20),
+                                              BorderRadius.circular(20),
                                           border: Border.all(width: .5),
                                         ),
                                         child: Padding(
@@ -1086,7 +1089,8 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                   SizedBox(
                                                     width: 10,
                                                   ),
-                                                  Text('${taskNamecontroller.text}'),
+                                                  Text(
+                                                      '${taskNamecontroller.text}'),
                                                   Spacer(),
                                                   Container(
                                                     height: 30,
@@ -1178,16 +1182,16 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                       flex: 2,
                                                       child: Padding(
                                                         padding:
-                                                        const EdgeInsets
-                                                            .only(
-                                                            left: 5.0),
+                                                            const EdgeInsets
+                                                                .only(
+                                                                left: 5.0),
                                                         child: Column(
                                                           mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
+                                                              MainAxisAlignment
+                                                                  .start,
                                                           crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
+                                                              CrossAxisAlignment
+                                                                  .center,
                                                           children: [
                                                             Row(
                                                               children: [
@@ -1202,14 +1206,14 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                 Text(
                                                                   'Computer Security',
                                                                   textAlign:
-                                                                  TextAlign
-                                                                      .start,
+                                                                      TextAlign
+                                                                          .start,
                                                                   style: TextStyle(
                                                                       fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
+                                                                          FontWeight
+                                                                              .w700,
                                                                       fontSize:
-                                                                      13),
+                                                                          13),
                                                                 ),
                                                               ],
                                                             ),
@@ -1229,14 +1233,14 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                 Text(
                                                                   '${taskGradecontroller.text} points',
                                                                   textAlign:
-                                                                  TextAlign
-                                                                      .start,
+                                                                      TextAlign
+                                                                          .start,
                                                                   style: TextStyle(
                                                                       fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
+                                                                          FontWeight
+                                                                              .w700,
                                                                       fontSize:
-                                                                      13),
+                                                                          13),
                                                                 ),
                                                               ],
                                                             ),
@@ -1256,14 +1260,14 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                 Text(
                                                                   'Start ${startd}/${startm} at ${starthours}.${startminutes}',
                                                                   textAlign:
-                                                                  TextAlign
-                                                                      .start,
+                                                                      TextAlign
+                                                                          .start,
                                                                   style: TextStyle(
                                                                       fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
+                                                                          FontWeight
+                                                                              .w700,
                                                                       fontSize:
-                                                                      13),
+                                                                          13),
                                                                 ),
                                                               ],
                                                             ),
@@ -1283,14 +1287,14 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                 Text(
                                                                   'End ${endd}/${endm} at ${endhours}.${endminutes}',
                                                                   textAlign:
-                                                                  TextAlign
-                                                                      .start,
+                                                                      TextAlign
+                                                                          .start,
                                                                   style: TextStyle(
                                                                       fontWeight:
-                                                                      FontWeight
-                                                                          .w700,
+                                                                          FontWeight
+                                                                              .w700,
                                                                       fontSize:
-                                                                      13),
+                                                                          13),
                                                                 ),
                                                               ],
                                                             ),
@@ -1301,25 +1305,25 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                     Expanded(
                                                       child: Column(
                                                         mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
+                                                            MainAxisAlignment
+                                                                .center,
                                                         crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
+                                                            CrossAxisAlignment
+                                                                .center,
                                                         children: [
                                                           Container(
                                                             height: 45,
                                                             width:
-                                                            double.infinity,
+                                                                double.infinity,
                                                             decoration:
-                                                            BoxDecoration(
+                                                                BoxDecoration(
                                                               color: Colors.teal
                                                                   .withOpacity(
-                                                                  .6),
+                                                                      .6),
                                                               borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                  12),
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12),
                                                               // border: Border.all(width: .5),
                                                             ),
                                                             child: Center(
@@ -1327,10 +1331,10 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                 'Edit',
                                                                 style: TextStyle(
                                                                     fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
+                                                                        FontWeight
+                                                                            .w700,
                                                                     fontSize:
-                                                                    20,
+                                                                        20,
                                                                     color: Colors
                                                                         .white),
                                                               ),
@@ -1357,98 +1361,80 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                   height: 15,
                                 ),
                                 all_files.isNotEmpty
-
-
                                     ? BuildAssignFileViewWidget(
-                                    0, context, all_files[0])
+                                        0, context, all_files[0])
                                     : InkWell(
-                                  onTap: () {
-                                    if (all_files.isEmpty) {
-                                      cubit.pick_assign_File();
-                                    }
-
-                                  },
-                                  child: GlassBoxWithBorder_Gradiant2(
-                                      widget: Container(
-
-
-                                        height: 150,
-                                        width: 150,
-                                        padding:
-                                        const EdgeInsets.all(8),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment
-                                              .center,
-                                          children: [
-                                            Expanded(
-
-                                                child: Container(
-
-                                                  alignment:
-                                                  Alignment.center,
-                                                  width: double.infinity,
-                                                  decoration:
-                                                  BoxDecoration(
-                                                    color: Colors.blueGrey
-                                                        .withOpacity(.3),
-                                                    borderRadius:
-                                                    BorderRadius
-                                                        .circular(12),
-                                                  ),
-                                                  child: FaIcon(
-                                                    FontAwesomeIcons.plus,
-                                                    size: 35,
-                                                    color: Colors.black,
-                                                  ),
-                                                )),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            Container(
-                                              height: 40,
-                                              child: const Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .center,
+                                        onTap: () {
+                                          if (all_files.isEmpty) {
+                                            cubit.pick_assign_File();
+                                          }
+                                        },
+                                        child: GlassBoxWithBorder_Gradiant2(
+                                            widget: Container(
+                                              height: 150,
+                                              width: 150,
+                                              padding: const EdgeInsets.all(8),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
                                                 children: [
-                                                  Icon(
-                                                    Icons
-                                                        .file_present_rounded,
-                                                    color: Colors
-                                                        .black,
+                                                  Expanded(
+                                                      child: Container(
+                                                    alignment: Alignment.center,
+                                                    width: double.infinity,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.blueGrey
+                                                          .withOpacity(.3),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                    ),
+                                                    child: FaIcon(
+                                                      FontAwesomeIcons.plus,
+                                                      size: 35,
+                                                      color: Colors.black,
+                                                    ),
+                                                  )),
+                                                  const SizedBox(
+                                                    height: 10,
                                                   ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Text(
-                                                    'Attach File', //: 'Done',
-                                                    style:
-                                                    TextStyle(
-                                                      color: Colors
-                                                          .black,
-                                                      fontWeight:
-                                                      FontWeight
-                                                          .bold,
-                                                      fontSize:
-                                                      18,
+                                                  Container(
+                                                    height: 40,
+                                                    child: const Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Icon(
+                                                          Icons
+                                                              .file_present_rounded,
+                                                          color: Colors.black,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 5,
+                                                        ),
+                                                        Text(
+                                                          'Attach File', //: 'Done',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 18,
+                                                          ),
+                                                        )
+                                                      ],
                                                     ),
                                                   )
                                                 ],
                                               ),
-                                            )
-
-                                          ],
-                                        ),
+                                            ),
+                                            BorderWidth: 0,
+                                            BorderColor: Colors.black,
+                                            color: Colors.white.withOpacity(.2),
+                                            borderRadius: 20,
+                                            x: 0,
+                                            y: 0),
                                       ),
-                                      BorderWidth: 0,
-                                      BorderColor: Colors.black,
-                                      color: Colors.white
-                                          .withOpacity(.2),
-                                      borderRadius: 20,
-                                      x: 0,
-                                      y: 0),
-                                ),
                               ],
                             ),
                           ),

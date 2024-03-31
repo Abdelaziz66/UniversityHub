@@ -21,6 +21,7 @@ import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Mo
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
+import 'package:university_hup/Modules/Instructor/Instructor_Assignment/INS_task_result_Screen.dart';
 
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
 
@@ -2672,206 +2673,7 @@ Widget Build_STU_complete_Tasks() => Container(
 //       ),
 //     ));
 
-Widget Build_INS_complete_Tasks() =>Container(
-  height: 200,
-  decoration: BoxDecoration(
-    // color: Colors.blueGrey.withOpacity(.05),
-    borderRadius: BorderRadius.circular(20),
-    border: Border.all(width: .5),
-  ),
-  child: Padding(
-    padding:
-    const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
-    child: Column(
-      children: [
-        Row(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 10,
-            ),
-            Text('Quize 1'),
-            Spacer(),
-            Container(
-              height: 30,
-              width: 30,
-              decoration: BoxDecoration(
-                // color: Colors.yellow.withOpacity(.9),
 
-              ),
-              child: Center(
-                child: FaIcon(
-                  FontAwesomeIcons.circleCheck,
-                  size: 25,
-                  color: Colors.teal.withOpacity(.8),
-                ),
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 7,
-        ),
-        Container(
-          color: Colors.black.withOpacity(.3),
-          height: .5,
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Expanded(
-          child: Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 5.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.bookmark,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            'Computer Security',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.user,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            'Sara shehab',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.chartLine,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            '5 points',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.clock,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            'From 8 PM to 9 PM',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 45,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.teal.withOpacity(.6),
-                        borderRadius: BorderRadius.circular(12),
-                        // border: Border.all(width: .5),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Result',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 20,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          height: 40,
-          child: LinearPercentIndicator(
-            percent: .85,
-            backgroundColor: Colors.blueGrey.withOpacity(.2),
-            progressColor: Colors.teal.withOpacity(.6),
-            barRadius: Radius.circular(20),
-            lineHeight: 12,
-            trailing: Text('125'),
-            leading: Text('120'),
-
-            animation: true,
-            animationDuration: 1500,
-            curve: Curves.easeOutBack,
-
-            // footer: Padding(
-            //   padding: const EdgeInsets.only(top:0.0),
-            //   child: Text('Submited',
-            //     style: TextStyle(
-            //       fontWeight: FontWeight.w600,
-            //       fontSize: 15,
-            //       color: Colors.teal,
-            //     ),
-            //   ),
-            // ),
-          ),
-        ),
-      ],
-    ),
-  ),
-);
 
 Widget BuildAssignFileViewWidget(
   index,
@@ -4601,6 +4403,221 @@ Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
         ),
       ),
     );
+
+Widget INS_complete_Task_Card({required context,required STU_Course_Assign_Model? assign}
+
+    //List<bool> quizState, List<bool> isQuizStart, int index
+    ) =>
+    Container(
+      height: 200,
+      decoration: BoxDecoration(
+        // color: Colors.blueGrey.withOpacity(.05),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(width: .5),
+      ),
+      child: Padding(
+        padding:
+        const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
+        child: Column(
+          children: [
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 10,
+                ),
+                Text('${assign?.taskName}'),
+                Spacer(),
+                Container(
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    // color: Colors.yellow.withOpacity(.9),
+
+                  ),
+                  child: Center(
+                    child: FaIcon(
+                      FontAwesomeIcons.circleCheck,
+                      size: 25,
+                      color: Colors.teal.withOpacity(.8),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 7,
+            ),
+            Container(
+              color: Colors.black.withOpacity(.3),
+              height: .5,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.bookmark,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                '${assign?.courseName}',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.user,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                '${assign?.instructorName}',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.chartLine,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                '${assign?.taskGrade}',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.clock,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Container(
+                                width: 150,
+                                child: Text(
+                                  'From ${assign?.startDate}  to  ${assign?.startDate}',overflow: TextOverflow.ellipsis,maxLines: 1,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700, fontSize: 13),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: (){
+                            App_cubit.get(context).insGetStuUploadTasks(assignId:assign?.taskId );
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => INS_task_result_Screen(),));
+                          },
+                          child: Container(
+                            height: 45,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.teal.withOpacity(.6),
+                              borderRadius: BorderRadius.circular(12),
+                              // border: Border.all(width: .5),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Result',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 40,
+              child: LinearPercentIndicator(
+                percent: .6,
+                backgroundColor: Colors.blueGrey.withOpacity(.2),
+                progressColor: Colors.teal.withOpacity(.6),
+                barRadius: Radius.circular(20),
+                lineHeight: 12,
+                trailing: Text('125'),
+                leading: Text('60'),
+
+                animation: true,
+                animationDuration: 1500,
+                curve: Curves.easeOutBack,
+
+                // footer: Padding(
+                //   padding: const EdgeInsets.only(top:0.0),
+                //   child: Text('Submited',
+                //     style: TextStyle(
+                //       fontWeight: FontWeight.w600,
+                //       fontSize: 15,
+                //       color: Colors.teal,
+                //     ),
+                //   ),
+                // ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
 
 Widget INS_Quiz_Complete_Card(
 
