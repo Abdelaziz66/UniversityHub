@@ -371,13 +371,13 @@ class INS_Assign_Screen extends StatelessWidget {
                                 onTap: (){
                                   // cubit.all_assign_files_List=[];
                                   //cubit.assignFile=null;
-                                  cubit.assignId=insAssign[index].taskId;
-                                  cubit.assignData.addAll({
-                                    'assignName':insAssign[index].taskName,
-                                    'startDate':insAssign[index].startDate,
-                                    'endDate':insAssign[index].endDate,
-                                    'filePath':insAssign[index].filePath,
-                                  });
+                                  // cubit.assignId=insAssign[index].taskId;
+                                  // cubit.assignData.addAll({
+                                  //   'assignName':insAssign[index].taskName,
+                                  //   'startDate':insAssign[index].startDate,
+                                  //   'endDate':insAssign[index].endDate,
+                                  //   'filePath':insAssign[index].filePath,
+                                  // });
 
                                   // navigateTo(context,INS_About_Assign_Screen() );
                                 },
@@ -397,9 +397,9 @@ class INS_Assign_Screen extends StatelessWidget {
                                 onTap: (){
                                   // navigateTo(context,STU_Assign_Screen() );
                                 },
-                                child: Build_INS_complete_Tasks()),
+                                child: INS_complete_Task_Card(assign: insAssign[index], context: context,)),
                             separatorBuilder: (context,index)=>const SizedBox(height: 10,),
-                            itemCount: 2,
+                            itemCount: insAssign.length,
                           ),
 
                         ),
