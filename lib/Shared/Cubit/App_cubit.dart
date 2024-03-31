@@ -354,6 +354,7 @@ class App_cubit extends Cubit<App_state> {
     emit(ShowFile_Loading_State());
     print('file path : $filePath');
     OpenFile.open(file?.path??filePath).then((value) {
+      print(value.message);
       emit(ShowFile_Success_State());
     }).catchError((error) {
       print('opening file error${error}');
@@ -395,14 +396,14 @@ class App_cubit extends Cubit<App_state> {
       String filePath = "${dir.path}/${networkfile.split('/').last}";
       print('from cubit:$networkfile');
       // Download file using Dio
-       Dio_Helper.DownloadFile(
+       DioHelper2.DownloadFile2(
            networkfilePath:networkfile,
            localfilePath:filePath,token: token ).then((value) {
         print('dddd${value.data}');
         pathPDF = filePath;
         emit(DownloadFile_Success_State());
 
-        openFile_Fun(filePath: pathPDF);
+        openFile_Fun(filePath: filePath);
       }).catchError((error){
         print(error);
         emit(DownloadFile_Error_State());

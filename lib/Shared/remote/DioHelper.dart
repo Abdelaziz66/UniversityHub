@@ -13,11 +13,11 @@ class Dio_Helper {
       baseUrl: 'https://lms.runasp.net/api/',//'https://nabilramadan.bsite.net/api/',
       receiveDataWhenStatusError: true,
     ));
-    // (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
-    //   client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
-    //   return client;
-    // };
+
   }
+
+
+
 
   static Future<Response> GetData({
     required String url,
@@ -134,6 +134,7 @@ class Dio_Helper {
     );
   }
 
+
   static Future<Response>DownloadFile({
     required String networkfilePath,
     required String localfilePath,
@@ -152,6 +153,8 @@ class Dio_Helper {
     };
     return await dio.download(networkfilePath, localfilePath);
   }
+
+
 
 
   static Future<Response> updateData({
@@ -190,6 +193,44 @@ class Dio_Helper {
 
     return await dio.delete(
         url, queryParameters: query, data: data);
+  }
+
+}
+
+
+class DioHelper2{
+
+  static late Dio dio2;
+
+  static initDio() {
+    dio2 = Dio(BaseOptions(
+      baseUrl: 'http://www.nabilramadan.runasp.net/',//'https://nabilramadan.bsite.net/api/',
+      receiveDataWhenStatusError: true,
+    ));
+    (dio2.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
+      client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+  }
+
+
+  static Future<Response>DownloadFile2({
+    required String networkfilePath,
+    required String localfilePath,
+    String? token
+
+  })async{
+    print('from dio2 $networkfilePath');
+    print('from dio2 $localfilePath');
+    dio2.options.headers={
+      // 'lang':lang,
+      //'authorizatio':token??'',
+      //'Content-Type':'application/json',
+      //'Accept':'application/json',
+      //'Authorization':'Bearer $token',
+      //'responseType': ResponseType.bytes,
+    };
+    return await dio2.download(networkfilePath, localfilePath);
   }
 
 }
