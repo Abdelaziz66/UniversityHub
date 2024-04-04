@@ -16,6 +16,7 @@ class INS_task_result_Screen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         App_cubit cubit=App_cubit.get(context);
+
         return DefaultTabController(
           length: 2, // Number of tabs
           initialIndex: cubit.Tab_Bar_1_index,
@@ -80,7 +81,7 @@ class INS_task_result_Screen extends StatelessWidget {
                             child: ListView.separated(
                               itemBuilder:(context,index)=> showSTU_UploadeTask(
                                   index: index+1,
-                                  stuAssign: App_cubit.get(context).studentUplodeTaskModel[index]
+                                  stuAssign: cubit.studentUplodeTaskModel[index]
                               ),
                               separatorBuilder: (context,index)=>  Container(
                                 height: 1,
