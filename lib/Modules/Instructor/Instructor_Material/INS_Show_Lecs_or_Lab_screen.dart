@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:university_hup/Models/INS_Model/CourseModel.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
 
 import 'package:university_hup/Shared/Component/component.dart';
@@ -14,7 +15,7 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
-import '../../../Models/INS_Model/CourseModel.dart';
+
 import '../../Student/Student_Material/fileViewer.dart';
 
 

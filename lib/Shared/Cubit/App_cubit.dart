@@ -394,7 +394,7 @@ class App_cubit extends Cubit<App_state> {
       var dir = await getApplicationDocumentsDirectory();
       print(dir);
       String filePath = "${dir.path}/${networkfile.split('/').last}";
-      print('from cubit:$networkfile');
+      print('--------------------from cubit:$networkfile');
       // Download file using Dio
        DioHelper2.DownloadFile2(
            networkfilePath:networkfile,
