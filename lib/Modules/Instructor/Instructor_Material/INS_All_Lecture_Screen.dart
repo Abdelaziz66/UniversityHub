@@ -275,7 +275,7 @@ class INS_Matrial_Screen extends StatelessWidget {
                   child: GridView.builder(
                     gridDelegate:
                     const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, childAspectRatio:1,),
+                        crossAxisCount: 1, childAspectRatio:3,),
                     itemBuilder: (context, index) => InkWell(
                         onTap: () {
                           cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);
