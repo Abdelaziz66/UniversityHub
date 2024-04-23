@@ -40,7 +40,7 @@ class GetCourseMaterialFileModel {
   GetCourseMaterialFileModel({this.fileName, this.filePath, this.createdAt,this.LectureFileId});
 
   GetCourseMaterialFileModel.fromJson(Map<String, dynamic> json) {
-    fileName = json['FileName'];
+    fileName = json['fileName'];
     filePath = json['FilePath'];
     createdAt = json['CreatedAt'];
     LectureFileId=json['LectureFileId'];
@@ -48,7 +48,7 @@ class GetCourseMaterialFileModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['FileName'] = this.fileName;
+    data['fileName'] = this.fileName;
     data['FilePath'] = this.filePath;
     data['CreatedAt'] = this.createdAt;
     data['LectureFileId']=LectureFileId;

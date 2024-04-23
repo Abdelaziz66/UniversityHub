@@ -353,7 +353,7 @@ class App_cubit extends Cubit<App_state> {
   void openFile_Fun({File? file,String? filePath}) {
     emit(ShowFile_Loading_State());
     print('file path : $filePath');
-    OpenFile.open(file?.path??filePath).then((value) {
+    OpenFile.open(file?.path??filePath,).then((value) {
       print(value.message);
       emit(ShowFile_Success_State());
     }).catchError((error) {
@@ -403,7 +403,7 @@ class App_cubit extends Cubit<App_state> {
         pathPDF = filePath;
         emit(DownloadFile_Success_State());
 
-        openFile_Fun(filePath: filePath);
+      //   openFile_Fun(filePath: filePath);
       }).catchError((error){
         print(error);
         emit(DownloadFile_Error_State());
@@ -836,7 +836,7 @@ class App_cubit extends Cubit<App_state> {
     //required token,
     required lecId,
   }) {
-    if(rol=='Studen'){
+    if(rol=='Student'){
     stuCoursesMatrialFileModel = [];
     // print('lecId=${lecId}');
     //if (stuCoursesMatrialModel.isEmpty || isCycleIdChange==true){

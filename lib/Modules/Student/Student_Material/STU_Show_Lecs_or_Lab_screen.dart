@@ -111,7 +111,8 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: ConditionalBuilder(
-                      condition: files.isNotEmpty &&
+                      condition:
+                      files.isNotEmpty &&
                           state is! Stu_Get_Course_Material_File_LoadingState,
                       builder: (context) => GridView.builder(
                           gridDelegate:
@@ -119,7 +120,7 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
                             crossAxisCount: 2,
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 10,
-                            childAspectRatio: .95,
+                            childAspectRatio: .9,
                           ),
                           itemCount: files.length,
                           physics: const BouncingScrollPhysics(),
@@ -128,17 +129,18 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
                               onTap: () {
                                 print(files[index].filePath?.split('net/').last);
                                 print(files[index].filePath);
-                                cubit.loadPDF(networkfile:files[index].filePath);
+                                cubit.loadPDF(networkfile:files[index].filePath ?.split('net/').last);
                                 print('from material ${cubit.pathPDF}');
                                // App_cubit.openURL('${files[index].filePath}');
-                                navigateTo(context, fileVierwer(pdfUrl:cubit.pathPDF ,));
+                              //  navigateTo(context, fileVierwer(pdfUrl:cubit.pathPDF ,));
                                 //cubit.openFile_Fun(filePath:files[index].filePath);
                               },
                               child: STU_Build_Lec_View_Widget(
                                   index: index,
                                   context: context,
-                                  file: files[
-                                      index] //cubit.isLec!?lectures[index]:labs[index]
+                                  file: files[index], //cubit.isLec!?lectures[index]:labs[index]
+
+
                                   ),
                             );
                           }),
