@@ -2152,7 +2152,7 @@ Widget STU_Build_Lec_View_Widget({
           ),
           child: Text(
             App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty
-                ? '${file?.fileName}'
+                ? '${file?.filePath?.split('.').last}'
                 : '${insFile?.filePath?.split('.').last}',
             style: TextStyle(
               color: Colors.white,

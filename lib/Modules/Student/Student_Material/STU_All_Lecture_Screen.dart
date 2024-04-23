@@ -232,7 +232,7 @@ class STU_Matrial_Screen extends StatelessWidget {
                           builder:(context)=>GridView.builder(
                             gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2, childAspectRatio: 2.5),
+                                crossAxisCount: 2, childAspectRatio: 1.1),
                             itemBuilder: (context, index) => InkWell(
                                 onTap: () {
                                   cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);
@@ -242,6 +242,7 @@ class STU_Matrial_Screen extends StatelessWidget {
                                 child: Matrial_C(
                                   courseMaterial: lectures[index],
                                   index: index,
+                                  context: context
                                 )),
                             scrollDirection: Axis.vertical,
                             itemCount: lectures.length,
@@ -258,7 +259,7 @@ class STU_Matrial_Screen extends StatelessWidget {
                         child: GridView.builder(
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2, childAspectRatio: 2.5),
+                                  crossAxisCount: 2, childAspectRatio: 1.1),
                           itemBuilder: (context, index) => InkWell(
                               onTap: () {
                                 print('dddddd');
@@ -269,7 +270,9 @@ class STU_Matrial_Screen extends StatelessWidget {
                               },
                               child: Matrial_C(
                                   courseMaterial: labs[index],
-                                  index: index)),
+                                  index: index,
+                              context: context
+                              )),
                           scrollDirection: Axis.vertical,
                           itemCount: labs.length,
                         ),
