@@ -352,7 +352,7 @@ class App_cubit extends Cubit<App_state> {
 
   void openFile_Fun({File? file,String? filePath}) {
     emit(ShowFile_Loading_State());
-    print('file path : $filePath');
+    print('file path : ${filePath??file}');
     OpenFile.open(file?.path??filePath,).then((value) {
       print(value.message);
       emit(ShowFile_Success_State());
@@ -384,16 +384,32 @@ class App_cubit extends Cubit<App_state> {
 //  //   }
 //   }
 
+  Future<bool> isFileInExternalStorage(String filePath) async {
+    // Get the external storage directory
+    final Directory? externalStorageDir = await getExternalStorageDirectory();
+    if (externalStorageDir == null) {
+      print('Error: Unable to access external storage directory');
+      return false;
+    }
+
+    // Get the directory where the file is located
+    final Directory fileDir = Directory(filePath).parent;
+
+    // Check if the file directory is the same as the external storage directory
+    return fileDir.path == externalStorageDir.path;
+  }
+
 
   String pathPDF = "";
 
    Future<void> loadPDF({
     required networkfile,
 }) async {
+
      emit(DownloadFile_Loading_State());
-      var dir = await getApplicationDocumentsDirectory();
+      var dir = await getExternalStorageDirectory();
       print(dir);
-      String filePath = "${dir.path}/${networkfile.split('/').last}";
+      String filePath = "${dir?.path}/${networkfile.split('/').last}";
       print('--------------------from cubit:$networkfile');
       // Download file using Dio
        DioHelper2.DownloadFile2(
@@ -402,8 +418,7 @@ class App_cubit extends Cubit<App_state> {
         print('dddd${value.data}');
         pathPDF = filePath;
         emit(DownloadFile_Success_State());
-
-      //   openFile_Fun(filePath: filePath);
+        openFile_Fun(filePath: filePath);
       }).catchError((error){
         print(error);
         emit(DownloadFile_Error_State());
@@ -412,6 +427,13 @@ class App_cubit extends Cubit<App_state> {
 
   }
 
+
+
+  void downloadAndOpenFile(String filePath)async{
+     if(await isFileInExternalStorage(filePath)==false){
+
+     }
+  }
 
 
 

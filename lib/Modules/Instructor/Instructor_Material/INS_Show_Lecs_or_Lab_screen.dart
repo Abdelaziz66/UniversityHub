@@ -505,12 +505,14 @@ class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
                               print(insCourseFles[index].filePath);
                               cubit.loadPDF(networkfile: insCourseFles[index].filePath
                               ?.split('net/').last);
-                               print('path : ${cubit.pathPDF}');
-                              if(insCourseFles[index].filePath?.split('.').last=='pdf'){
-                              navigateTo(context, fileVierwer(pdfUrl:cubit.pathPDF ,));}
-                              else{
-                                cubit.openFile_Fun(filePath: cubit.pathPDF);
-                              }
+                               print('path of pdf : ${cubit.pathPDF}');
+                              cubit.openFile_Fun(filePath: cubit.pathPDF);
+
+                              // if(insCourseFles[index].filePath?.split('.').last=='pdf'){
+                              // navigateTo(context, fileVierwer(pdfUrl:cubit.pathPDF ,));}
+                              // else{
+                              //   print(cubit.pathPDF);
+                              // }
                              // cubit.openFile_Fun(filePath:  insCourseFles[index].filePath);
                             },
                             child: STU_Build_Lec_View_Widget(

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class LFLow extends StatefulWidget {
@@ -37,27 +35,24 @@ class _LFLowState extends State<LFLow> with SingleTickerProviderStateMixin {
 
   Widget flowMenuItem(IconData icon) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: RawMaterialButton(
-          fillColor: lastTapped == icon
-              ? Theme.of(context).primaryColor
-              : Theme.of(context).colorScheme.secondary,
-          splashColor: Theme.of(context).colorScheme.primary,
-          shape: const CircleBorder(),
-          constraints: BoxConstraints.tight(const Size(64, 64)),
-          onPressed: () {
-            _updateMenu(icon);
-            menuAnimation.status == AnimationStatus.completed
-                ? menuAnimation.reverse()
-                : menuAnimation.forward();
-          },
-          child: Icon(
-            icon,
-            color: Colors.white,
-            size: 32.0,
-          ),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: RawMaterialButton(
+        fillColor: lastTapped == icon
+            ? Theme.of(context).primaryColor
+            : Theme.of(context).colorScheme.secondary,
+        splashColor: Theme.of(context).colorScheme.primary,
+        shape: const CircleBorder(),
+        constraints: BoxConstraints.tight(const Size(64, 64)),
+        onPressed: () {
+          _updateMenu(icon);
+          menuAnimation.status == AnimationStatus.completed
+              ? menuAnimation.reverse()
+              : menuAnimation.forward();
+        },
+        child: Icon(
+          icon,
+          color: Colors.white,
+          size: 32.0,
         ),
       ),
     );
@@ -88,15 +83,15 @@ class FlowMenuDelegate extends FlowDelegate {
 
   @override
   void paintChildren(FlowPaintingContext context) {
-    double dx = 0.0;
+    double dy = 0.0;
     for (int i = 0; i < context.childCount; ++i) {
-      dx = context.getChildSize(i)!.width * i;
+      dy = context.getChildSize(i)!.height * i;
       context.paintChild(
         i,
         transform: Matrix4.translationValues(
-          dx * menuAnimation.value,
-          dx * menuAnimation.value,
-          dx * menuAnimation.value,
+          dy * menuAnimation.value,
+          0.0, // No translation along the Y-axis
+          0.0, // No translation along the Z-axis
         ),
       );
     }
