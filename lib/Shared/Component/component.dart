@@ -27,6 +27,7 @@ import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dar
 
 import '../../Models/INS_Model/CourseModel.dart';
 import '../../Models/INS_Model/INS_Assign_Model.dart';
+import '../../Models/INS_Model/flowTest.dart';
 import '../../Models/STU_Model/Calender_Model/CalenderMode.dart';
 import '../Cons_widget.dart';
 import '../Cubit/App_cubit.dart';
@@ -764,7 +765,8 @@ Widget Matrial_C(
           context,
         GetCourseMaterialsModel? courseMaterial,
         InsAllLecFoldersModel? insFolder,
-        index}) =>   Padding(
+         // AnimationController? menuAnimation,
+          index}) =>   Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
             decoration: BoxDecoration(
@@ -774,44 +776,15 @@ Widget Matrial_C(
             ),
             child: Padding(
               padding:
-              const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
+              const EdgeInsets.only(top: 5.0, right: 10, bottom: 5, left: 10),
               child: Container(
                 //height: 150,
-                child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+                child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
-
-            FaIcon(
-              FontAwesomeIcons.solidFolderClosed,
-              //color: c1.withOpacity(.9),
-              color: Colors.blueGrey,
-              size: 70,
-            ),
-            const SizedBox(
-              width: 15,
-            ),
-            //   courseMaterial?.type == 'Lecture'
-            Container(
-              // width: 100,
-              // height: 80,
-              child: Text(
-                maxLines: 2,
-                '${App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty ? courseMaterial?.lectureName : insFolder?.lectureName}',
-                style: TextStyle(
-                  overflow: TextOverflow.ellipsis,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w900,
-                  color: c1,
-                ),
-              ),
-            ),
-            Spacer(),
-            rol=='Doctor'?
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            rol=='Doctor'?Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-
                 InkWell(
                   onTap: () {
                     folderController?.text='';
@@ -1044,7 +1017,7 @@ Widget Matrial_C(
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  width: 5,
                 ),
                 InkWell(
                   onTap: () {
@@ -1080,9 +1053,44 @@ Widget Matrial_C(
                     ),
                   ),
                 ),
-              ],
 
-            ):const SizedBox(),
+              ],
+            ):SizedBox(),
+
+            FaIcon(
+              FontAwesomeIcons.solidFolderClosed,
+              //color: c1.withOpacity(.9),
+              color: Colors.blueGrey,
+              size: 80,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            //   courseMaterial?.type == 'Lecture'
+            Container(
+              // width: 100,
+              // height: 80,
+              child: Text(
+                maxLines: 1,
+                '${App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty ? courseMaterial?.lectureName : insFolder?.lectureName}',
+                style: TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w900,
+                  color: c1,
+                ),
+              ),
+            ),
+
+
+            // Column(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //
+            //
+            //   ],
+            //
+            // ):const SizedBox(),
             // : Text(
             //     'Lab ${index + 1}',
             //     style: TextStyle(

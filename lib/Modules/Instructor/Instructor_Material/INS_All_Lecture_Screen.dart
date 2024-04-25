@@ -28,7 +28,8 @@ class INS_Matrial_Screen extends StatelessWidget {
   var formKey=GlobalKey<FormState>();
   var folderFormKey=GlobalKey<FormState>();
   var folderController =TextEditingController();
-  @override
+
+   @override
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit, App_state>(
       listener: (context, state) => {},
@@ -275,7 +276,7 @@ class INS_Matrial_Screen extends StatelessWidget {
                   child: GridView.builder(
                     gridDelegate:
                     const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1, childAspectRatio:3,),
+                        crossAxisCount: 2, childAspectRatio:1,),
                     itemBuilder: (context, index) => InkWell(
                         onTap: () {
                           cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);

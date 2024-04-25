@@ -11,6 +11,7 @@ import 'package:university_hup/Modules/Student/Student_Notification/Notification
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/Local/Cache_helper.dart';
+import '../Models/INS_Model/flowTest.dart';
 import '../Shared/Cubit/App_cubit.dart';
 import '../Shared/Cubit/App_state.dart';
 
@@ -587,7 +588,7 @@ class Layout_Screen extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            const Notification_Screen(),
+                                            const LFLow(),
                                       ));
                                 },
                                 icon: FaIcon(
