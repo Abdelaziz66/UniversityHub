@@ -81,6 +81,7 @@ class INS_task_result_Screen extends StatelessWidget {
                             child: ListView.separated(
                               itemBuilder:(context,index)=> showSTU_UploadeTask(
                                   index: index+1,
+                                  context: context,
                                   stuAssign: cubit.studentUplodeTaskModel[index]
                               ),
                               separatorBuilder: (context,index)=>  Container(

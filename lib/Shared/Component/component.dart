@@ -4304,6 +4304,7 @@ Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
                                                                 child: ListView.separated(
                                                                   itemBuilder:(context,index)=> showSTU_UploadeTask(
                                                                       index: index+1,
+                                                                      context: context,
                                                                       stuAssign: App_cubit.get(context).studentUplodeTaskModel[index]
                                                                   ),
                                                                   separatorBuilder: (context,index)=>  Container(
@@ -5614,6 +5615,7 @@ Widget Build_STU_All_grades(
 
 Widget showSTU_UploadeTask({
   int? index,
+ required context,
   InsStudentUplodeTaskModel? stuAssign,
 }) =>
     Container(
@@ -5638,21 +5640,311 @@ Widget showSTU_UploadeTask({
             textAlign: TextAlign.center,
           ),
           Spacer(),
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.teal,width: 2)
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 6),
-              child: Text(
-                'more',
-                style: TextStyle(
-                  color: Colors.teal,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
+          InkWell(
+            onTap: () {
+              showDialog<String>(
+                context: context,
+                barrierColor: Colors.black.withOpacity(.3),
+                useSafeArea: true,
+                builder: (BuildContext context) => AlertDialog(
+                  insetPadding: const EdgeInsets.all(0.0),
+                  scrollable: false,
+                  shadowColor: Colors.transparent,
+                  content: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: GlassBox(
+                            widget: Stack(
+                              children: [
+                                Column(
+                                  children: [
+                                    const Spacer(),
+                                    Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: GlassBoxWithBorder(
+                                        widget: Container(
+                                          height: 290,
+                                          child: Padding(
+                                            padding: const EdgeInsets
+                                                .only(
+                                                bottom: 25.0,
+                                                left: 25,
+                                                right: 25,
+                                                top: 20
+                                            ),
+                                            child: Form(
+                                              key: formkey1,
+                                              child: Column(
+                                                children: [
+                                                  Text('${stuAssign?.studentName}',style: TextStyle(fontSize: 18,),),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  Container(
+                                                    decoration:  BoxDecoration(
+                                                      // border: Border.all(color: Colors.white),
+                                                      borderRadius:
+                                                      BorderRadius
+                                                          .circular(
+                                                          18),
+                                                      color: Colors.blueGrey
+                                                          .withOpacity(
+                                                          .25),
+                                                    ),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets.all(8.0),
+                                                      child: Row(
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 8,
+                                                          ),
+                                                          FaIcon(FontAwesomeIcons.clock),
+
+                                                          SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Text('${stuAssign?.timeUploaded}',style: TextStyle(fontSize: 13,),),Spacer(),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 15,
+                                                  ),
+
+                                                  Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: Container(
+                                                          // width: 150,
+                                                        
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                              vertical: 5,
+                                                              horizontal:
+                                                              10),
+                                                          alignment:
+                                                          Alignment.center,
+                                                          height: 60,
+                                                          decoration:
+                                                          BoxDecoration(
+                                                            // border: Border.all(color: Colors.white),
+                                                            borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                18),
+                                                            color: Colors.white
+                                                                .withOpacity(
+                                                                .5),
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal:
+                                                                0.0),
+                                                            child:
+                                                            TextFormField(
+                                                              controller:
+                                                              taskGradecontroller,
+                                                              keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                              onFieldSubmitted:
+                                                                  (value) {
+                                                                print(value);
+                                                              },
+                                                              //validator:
+                                                              //     (value) {
+                                                              //   if (value!
+                                                              //       .isEmpty) {
+                                                              //     return 'Event title can\'t be empty';
+                                                              //   }
+                                                              //   return null;
+                                                              // },
+                                                              // toolbarOptions:
+                                                              //     ToolbarOptions(paste: true, copy: true),
+                                                              cursorColor: c1,
+                                                              style:
+                                                              const TextStyle(
+                                                                fontSize: 18,
+                                                              ),
+                                                              decoration:
+                                                              InputDecoration(
+                                                                prefixIcon:
+                                                                Padding(
+                                                                  padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                      10.0,
+                                                                      vertical:
+                                                                      10),
+                                                                  child: FaIcon(
+                                                                    FontAwesomeIcons
+                                                                        .solidEdit,
+                                                                    color: c1,
+                                                                    size: 25,
+                                                                  ),
+                                                                ),
+                                                                hintText:
+                                                                'Points',
+                                                                border:
+                                                                InputBorder
+                                                                    .none,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Expanded(
+                                                        child: Container(
+                                                            
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                              vertical: 5,
+                                                              horizontal:
+                                                              10),
+                                                          alignment:
+                                                          Alignment.center,
+                                                          height: 60,
+                                                          decoration:
+                                                          BoxDecoration(
+                                                            // border: Border.all(color: Colors.white),
+                                                            borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                18),
+                                                            color: Colors.white
+                                                                .withOpacity(
+                                                                .5),
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal:
+                                                                0.0),
+                                                            child:
+                                                            Container(child: Row(
+                                                              children: [
+                                                                SizedBox(
+                                                                  width: 8,
+                                                                ),
+                                                                FaIcon(FontAwesomeIcons.folderOpen),
+
+                                                                SizedBox(
+                                                                  width: 10,
+                                                                ),
+
+                                                                Text('Open File',style: TextStyle(fontSize: 18,),),
+                                                              ],
+                                                            )),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+
+                                                  SizedBox(
+                                                    height: 15,
+                                                  ),
+
+                                                  Default_Button(
+                                                      onPressed: () {
+
+                                                        if (formkey1.currentState!
+                                                            .validate() &&
+                                                            startDate != null &&
+                                                            endDate != null ){
+                                                          // App_cubit.get(context).updateINSAssign(
+                                                          //   Taskid: assign.taskId,
+                                                          //   taskName: taskNamecontroller.text,
+                                                          //   taskGrade: taskGradecontroller.text,
+                                                          //   startDate: startDate,
+                                                          //   endDate: endDate,
+
+                                                          // );
+                                                          Navigator.pop(context);
+                                                        }
+
+                                                        //   if (formkey1.currentState!.validate()) {
+                                                        //   cubit.AddEventToCalender(
+                                                        //       startDate: cubit.startTime,
+                                                        //       endDate: cubit.endTime,
+                                                        //       eventBody: taskGradecontroller.text);
+                                                        //   Navigator.pop(
+                                                        //       context);
+                                                        // } else {
+                                                        //   flutterToast(
+                                                        //       msg: 'please enter the event title',
+                                                        //       backColor: Colors.red);
+                                                        // }
+                                                      },
+                                                      containerHeight: 60,
+                                                      textFontSize: 20,
+                                                      text: 'Confirm changes'),
+                                                  // SizedBox(
+                                                  //   height: 15,
+                                                  // ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        color: Colors.white
+                                            .withOpacity(.5),
+                                        borderRadius: 30,
+                                        x: 15,
+                                        y: 15,
+                                        BorderWidth: 1,
+                                        BorderColor: Colors.white,
+                                      ),
+                                    ),
+                                    const Spacer(
+                                      flex: 1,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            color: Colors.transparent,
+                            borderRadius: 0,
+                            x: 3,
+                            y: 3),
+                      ),
+                    ),
+                  ),
+                  elevation: 0,
+                  clipBehavior: Clip.none,
+                  surfaceTintColor: Colors.transparent,
+                  backgroundColor: Colors.transparent,
+                  contentPadding: EdgeInsets.zero,
                 ),
-                textAlign: TextAlign.center,
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.teal,width: 2)
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 6),
+                child: Text(
+                  'more',
+                  style: TextStyle(
+                    color: Colors.teal,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ),
