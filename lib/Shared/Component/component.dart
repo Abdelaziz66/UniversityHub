@@ -5812,48 +5812,53 @@ Widget showSTU_UploadeTask({
                                                         width: 10,
                                                       ),
                                                       Expanded(
-                                                        child: Container(
-                                                            
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                              vertical: 5,
-                                                              horizontal:
-                                                              10),
-                                                          alignment:
-                                                          Alignment.center,
-                                                          height: 60,
-                                                          decoration:
-                                                          BoxDecoration(
-                                                            // border: Border.all(color: Colors.white),
-                                                            borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                18),
-                                                            color: Colors.white
-                                                                .withOpacity(
-                                                                .5),
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                            const EdgeInsets
+                                                        child: InkWell(
+                                                          onTap: (){
+                                                            App_cubit.get(context).openFile_Fun(filePath:stuAssign?.filePath);
+                                                          },
+                                                          child: Container(
+
+                                                            padding: EdgeInsets
                                                                 .symmetric(
+                                                                vertical: 5,
                                                                 horizontal:
-                                                                0.0),
-                                                            child:
-                                                            Container(child: Row(
-                                                              children: [
-                                                                SizedBox(
-                                                                  width: 8,
-                                                                ),
-                                                                FaIcon(FontAwesomeIcons.folderOpen),
+                                                                10),
+                                                            alignment:
+                                                            Alignment.center,
+                                                            height: 60,
+                                                            decoration:
+                                                            BoxDecoration(
+                                                              // border: Border.all(color: Colors.white),
+                                                              borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                  18),
+                                                              color: Colors.white
+                                                                  .withOpacity(
+                                                                  .5),
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                                  horizontal:
+                                                                  0.0),
+                                                              child:
+                                                              Container(child: Row(
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: 8,
+                                                                  ),
+                                                                  FaIcon(FontAwesomeIcons.folderOpen),
 
-                                                                SizedBox(
-                                                                  width: 10,
-                                                                ),
+                                                                  SizedBox(
+                                                                    width: 10,
+                                                                  ),
 
-                                                                Text('Open File',style: TextStyle(fontSize: 18,),),
-                                                              ],
-                                                            )),
+                                                                  Text('Open File',style: TextStyle(fontSize: 18,),),
+                                                                ],
+                                                              )),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
