@@ -13,7 +13,7 @@ import 'Shared/Cubit/App_cubit.dart';
 import 'Shared/Cubit/App_state.dart';
 import 'Shared/Cubit/bloc_observed.dart';
 import 'Shared/Style/App_Style.dart';
-
+import 'package:hive_flutter/hive_flutter.dart';
 // from ZEKO
 
 // git checkout -b Serious-Branch
@@ -80,6 +80,9 @@ Future<void> main()  async {
 
   Dio_Helper.init();
   DioHelper2.initDio();
+  await Hive.initFlutter();
+
+
 }
 
 class MyApp extends StatelessWidget {

@@ -1852,8 +1852,6 @@ class App_cubit extends Cubit<App_state> {
             await txn.rawInsert(
                 'INSERT INTO Course(cycleId,name,hours,imagePath,instructorFullName)'
                     'VALUES("${element.cycleId}","${element.name}","${element.hours}","${element.imagePath}","${element.instructorFullName}")');
-
-
           }).catchError((onError){print(onError.toString());});
           print('${element.cycleId}');
           print('///////////////////////////////////////////////////');
