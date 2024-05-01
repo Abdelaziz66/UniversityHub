@@ -68,7 +68,7 @@ class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
                             child: GlassBoxWithBorder(
                               widget: InkWell(
                                 onTap: (){
-                                  cubit.openFile_Fun(filePath:cubit.all_assign_files_List[0].path);
+                                  //cubit.openFile_Fun(filePath:cubit.all_assign_files_List[0].path);
                                 },
                                 child: Container(
                                   height: 250,
@@ -505,11 +505,11 @@ class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
                           return InkWell(
                             onTap: (){
                             //  print(insCourseFles[index].filePath?.split('net/').last);
-                              print(insCourseFles[index].filePath);
-                              cubit.loadPDF(networkfile: insCourseFles[index].filePath
-                              ?.split('net/').last);
+                              // cubit.loadPDF(networkfile: insCourseFles[index].filePath
+                              // ?.split('net/').last);
                                print('path of pdf : ${cubit.pathPDF}');
-                              cubit.openFile_Fun(filePath: cubit.pathPDF);
+                              cubit.openFile_Fun(networkFile: insCourseFles[index].filePath
+                                  ?.split('net/').last);
 
                               // if(insCourseFles[index].filePath?.split('.').last=='pdf'){
                               // navigateTo(context, fileVierwer(pdfUrl:cubit.pathPDF ,));}

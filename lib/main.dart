@@ -38,6 +38,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 //--------------------
 
 Future<void> main()  async {
+
+
+
   // new branch
   WidgetsFlutterBinding.ensureInitialized();
 
