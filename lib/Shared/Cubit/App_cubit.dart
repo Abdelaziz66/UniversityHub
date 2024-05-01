@@ -350,16 +350,28 @@ class App_cubit extends Cubit<App_state> {
   //   }
   // }
 
-  void openFile_Fun({File? file,String? filePath}) {
+  void openFile_Fun({File? file,String? filePath,networkFile})async {
     emit(ShowFile_Loading_State());
-    print('file path : ${filePath??file}');
-    OpenFile.open(file?.path??filePath,).then((value) {
+  //  if(filePath!=''){
+    var dir = await getExternalStorageDirectory();
+    print(dir);
+    String testFilePath = "${dir?.path}/${networkFile.split('/').last}";
+    print('file path : ${testFilePath}  ----');
+    print('file path : ${filePath}  ******');
+
+    OpenFile.open(testFilePath,).then((value) {
       print(value.message);
+      if(value.message=='the $testFilePath file does not exists'){
+        loadPDF(networkfile: networkFile);
+      }
       emit(ShowFile_Success_State());
     }).catchError((error) {
+        loadPDF(networkfile: networkFile);
       print('opening file error${error}');
       emit(ShowFile_Error_State());
     });
+
+   // pathPDF='';
   }
 
 
@@ -401,7 +413,6 @@ class App_cubit extends Cubit<App_state> {
 
 
   String pathPDF = "";
-
    Future<void> loadPDF({
     required networkfile,
 }) async {
@@ -412,15 +423,17 @@ class App_cubit extends Cubit<App_state> {
       String filePath = "${dir?.path}/${networkfile.split('/').last}";
       print('--------------------from cubit:$networkfile');
       // Download file using Dio
-       DioHelper2.DownloadFile2(
+    // openFile_Fun(filePath: filePath);
+     DioHelper2.DownloadFile2(
            networkfilePath:networkfile,
            localfilePath:filePath,token: token ).then((value) {
         print('dddd${value.data}');
         pathPDF = filePath;
         emit(DownloadFile_Success_State());
-        openFile_Fun(filePath: filePath);
+        openFile_Fun(networkFile: filePath);
       }).catchError((error){
-        print(error);
+        print('downloading error $error');
+        flutterToast(msg: 'Downloading error', backColor:Colors.red);
         emit(DownloadFile_Error_State());
       });
 
@@ -1852,8 +1865,6 @@ class App_cubit extends Cubit<App_state> {
             await txn.rawInsert(
                 'INSERT INTO Course(cycleId,name,hours,imagePath,instructorFullName)'
                     'VALUES("${element.cycleId}","${element.name}","${element.hours}","${element.imagePath}","${element.instructorFullName}")');
-
-
           }).catchError((onError){print(onError.toString());});
           print('${element.cycleId}');
           print('///////////////////////////////////////////////////');
@@ -1944,6 +1955,16 @@ class App_cubit extends Cubit<App_state> {
     });
   }
 
+
+
+
+  // storing data using HIVE --------------------------------
+
+  void stuStoreLecFolder({
+    required List folders
+}){
+
+  }
 
 
 }

@@ -4089,7 +4089,8 @@ Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
                         },
                         text: 'Do you want to see Task ?',
                         yes: () {
-
+                          App_cubit.get(context).openFile_Fun(networkFile: assign?.filePath
+                              ?.split('net/').last);
                         });
                   },
                   child: Container(
@@ -5814,7 +5815,8 @@ Widget showSTU_UploadeTask({
                                                       Expanded(
                                                         child: InkWell(
                                                           onTap: (){
-                                                            App_cubit.get(context).openFile_Fun(filePath:stuAssign?.filePath);
+                                                            App_cubit.get(context).openFile_Fun(networkFile: stuAssign?.filePath
+                                                                ?.split('net/').last);
                                                           },
                                                           child: Container(
 
