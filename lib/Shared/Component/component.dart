@@ -17,6 +17,7 @@ import 'package:rive/rive.dart';
 
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
 import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
+import 'package:university_hup/Models/INS_Model/INS_create_quiz_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
@@ -5068,470 +5069,582 @@ Widget Build_STU_Quiz_Ques({
       ],
     );
 
-Widget Build_INS_Quiz_Ques(
-    context, List<String> ques, List<String> answers, index) {
-  return Column(
+final GlobalKey<AnimatedListState> ANS_listKey = GlobalKey();
+Widget INS_Quiz_Answer( context, index, Animation<double> animation)=> Padding(
+  padding: const EdgeInsets.only(left: 30.0,top: 5,bottom: 5),
+  child: Row(
     children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const Text(
-            'Question',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          Text(
-            '${index + 1}',
-            style: const TextStyle(
-                fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue),
-          ),
-        ],
-      ),
-      const SizedBox(
-        height: 10,
-      ),
-      Container(
-        height: 200,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
-              bottomRight: Radius.circular(30)),
+      Expanded(
+        child: Container(
+          height: 60,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(35),
+                topRight: Radius.circular(35),
+                bottomRight: Radius.circular(35)),
 
-          // color: Colors.blueGrey.withOpacity(.1),
-          color: Colors.blue.withOpacity(.3),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: TextFormField(
-            keyboardType: TextInputType.text,
-            maxLines: 5,
+            // color: Colors.blueGrey.withOpacity(.1),
+            color: Colors.blue.withOpacity(.2),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: TextFormField(
+              keyboardType: TextInputType.text,
+              maxLines: 1,
+              // controller: App_cubit.get(context).AController[index][ App_cubit.get(context).AController[index].length-1],
 
-            onFieldSubmitted: (value) {
-              print(value);
-            },
-            onChanged: (value) {
-              print(value);
-            },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Question can\'t be empty';
-              }
-              return null;
-            },
-            // toolbarOptions:
-            //     ToolbarOptions(paste: true, copy: true),
-            cursorColor: c1,
-            style: const TextStyle(
-              fontSize: 20,
-            ),
-            decoration: InputDecoration(
-              prefixIcon: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 15,
-                  ),
-                  FaIcon(
-                    FontAwesomeIcons.pencil,
-                    color: c1.withOpacity(.6),
-                    size: 30,
-                  ),
-                ],
+              onFieldSubmitted: (value) {
+                print(value);
+              },
+              onChanged: (value) {
+                print(value);
+              },
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Answer can\'t be empty';
+                }
+                return null;
+              },
+              // toolbarOptions:
+              //     ToolbarOptions(paste: true, copy: true),
+              cursorColor: c1,
+              style: const TextStyle(
+                fontSize: 20,
               ),
-              hintText: 'Add Question',
-              border: InputBorder.none,
+              decoration: InputDecoration(
+                prefixIcon: Column(
+                  children: [
+                    SizedBox(
+                      height: 15,
+                    ),
+                    FaIcon(
+                      FontAwesomeIcons.a,
+                      color: c1.withOpacity(.6),
+                      size: 20,
+                    ),
+                  ],
+                ),
+                suffixIcon: Column(
+                  children: [
+                    SizedBox(
+                      height: 15,
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: FaIcon(
+                        FontAwesomeIcons.circleCheck,
+                        color: Colors.teal,
+                        size: 28,
+                      ),
+                    ),
+                  ],
+                ),
+                hintText: 'Add Answer',
+                border: InputBorder.none,
+              ),
             ),
           ),
         ),
       ),
-      const SizedBox(height: 15.0),
-      Padding(
-        padding: const EdgeInsets.only(left: 30.0),
-        child: Row(
-          children: [
-            Expanded(
-              child: Container(
-                height: 60,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(35),
-                      topRight: Radius.circular(35),
-                      bottomRight: Radius.circular(35)),
-
-                  // color: Colors.blueGrey.withOpacity(.1),
-                  color: Colors.blue.withOpacity(.2),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    maxLines: 1,
-
-                    onFieldSubmitted: (value) {
-                      print(value);
-                    },
-                    onChanged: (value) {
-                      print(value);
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Question can\'t be empty';
-                      }
-                      return null;
-                    },
-                    // toolbarOptions:
-                    //     ToolbarOptions(paste: true, copy: true),
-                    cursorColor: c1,
-                    style: const TextStyle(
-                      fontSize: 20,
-                    ),
-                    decoration: InputDecoration(
-                      prefixIcon: Column(
-                        children: [
-                          SizedBox(
-                            height: 15,
-                          ),
-                          FaIcon(
-                            FontAwesomeIcons.a,
-                            color: c1.withOpacity(.6),
-                            size: 20,
-                          ),
-                        ],
-                      ),
-                      suffixIcon: Column(
-                        children: [
-                          SizedBox(
-                            height: 15,
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: FaIcon(
-                              FontAwesomeIcons.circleCheck,
-                              color: Colors.teal,
-                              size: 28,
-                            ),
-                          ),
-                        ],
-                      ),
-                      hintText: 'Add Answer',
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      SizedBox(
-        height: 10,
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 30.0),
-        child: Row(
-          children: [
-            Expanded(
-              child: Container(
-                height: 60,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(35),
-                      topRight: Radius.circular(35),
-                      bottomRight: Radius.circular(35)),
-
-                  // color: Colors.blueGrey.withOpacity(.1),
-                  color: Colors.blue.withOpacity(.2),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    maxLines: 1,
-
-                    onFieldSubmitted: (value) {
-                      print(value);
-                    },
-                    onChanged: (value) {
-                      print(value);
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Question can\'t be empty';
-                      }
-                      return null;
-                    },
-                    // toolbarOptions:
-                    //     ToolbarOptions(paste: true, copy: true),
-                    cursorColor: c1,
-                    style: const TextStyle(
-                      fontSize: 20,
-                    ),
-                    decoration: InputDecoration(
-                      prefixIcon: Column(
-                        children: [
-                          SizedBox(
-                            height: 15,
-                          ),
-                          FaIcon(
-                            FontAwesomeIcons.b,
-                            color: c1.withOpacity(.6),
-                            size: 20,
-                          ),
-                        ],
-                      ),
-                      suffixIcon: Column(
-                        children: [
-                          SizedBox(
-                            height: 15,
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: FaIcon(
-                              FontAwesomeIcons.circleDot,
-                              color: Colors.black.withOpacity(.4),
-                              size: 28,
-                            ),
-                          ),
-                        ],
-                      ),
-                      hintText: 'Add Answer',
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      ConditionalBuilder(
-          condition: App_cubit.get(context).more >= 3,
-          builder: (context) => Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 30.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 60,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(35),
-                                topRight: Radius.circular(35),
-                                bottomRight: Radius.circular(35)),
-
-                            // color: Colors.blueGrey.withOpacity(.1),
-                            color: Colors.blue.withOpacity(.2),
-                          ),
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: TextFormField(
-                              keyboardType: TextInputType.text,
-                              maxLines: 1,
-
-                              onFieldSubmitted: (value) {
-                                print(value);
-                              },
-                              onChanged: (value) {
-                                print(value);
-                              },
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Question can\'t be empty';
-                                }
-                                return null;
-                              },
-                              // toolbarOptions:
-                              //     ToolbarOptions(paste: true, copy: true),
-                              cursorColor: c1,
-                              style: const TextStyle(
-                                fontSize: 20,
-                              ),
-                              decoration: InputDecoration(
-                                prefixIcon: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    FaIcon(
-                                      FontAwesomeIcons.c,
-                                      color: c1.withOpacity(.6),
-                                      size: 20,
-                                    ),
-                                  ],
-                                ),
-                                suffixIcon: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: FaIcon(
-                                        FontAwesomeIcons.circleDot,
-                                        color: Colors.black.withOpacity(.4),
-                                        size: 28,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                hintText: 'Add Answer',
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-          fallback: (context) => Container(
-                height: 10,
-              )),
-      ConditionalBuilder(
-          condition: App_cubit.get(context).more == 4,
-          builder: (context) => Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 30.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: 60,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(35),
-                                topRight: Radius.circular(35),
-                                bottomRight: Radius.circular(35)),
-
-                            // color: Colors.blueGrey.withOpacity(.1),
-                            color: Colors.blue.withOpacity(.2),
-                          ),
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: TextFormField(
-                              keyboardType: TextInputType.text,
-                              maxLines: 1,
-
-                              onFieldSubmitted: (value) {
-                                print(value);
-                              },
-                              onChanged: (value) {
-                                print(value);
-                              },
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Question can\'t be empty';
-                                }
-                                return null;
-                              },
-                              // toolbarOptions:
-                              //     ToolbarOptions(paste: true, copy: true),
-                              cursorColor: c1,
-                              style: const TextStyle(
-                                fontSize: 20,
-                              ),
-                              decoration: InputDecoration(
-                                prefixIcon: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    FaIcon(
-                                      FontAwesomeIcons.d,
-                                      color: c1.withOpacity(.6),
-                                      size: 20,
-                                    ),
-                                  ],
-                                ),
-                                suffixIcon: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: FaIcon(
-                                        FontAwesomeIcons.circleDot,
-                                        color: Colors.black.withOpacity(.4),
-                                        size: 28,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                hintText: 'Add Answer',
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-          fallback: (context) => Container(
-                height: 10,
-              )),
-      SizedBox(
-        height: 15,
-      ),
-      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        IconButton(
-            onPressed: () {
-              App_cubit.get(context).minusmore();
-            },
-            icon: FaIcon(
-              FontAwesomeIcons.circleMinus,
-              color: Colors.redAccent.withOpacity(.8),
-              size: 50,
-            )),
-        IconButton(
-            onPressed: () {
-              App_cubit.get(context).addmore();
-            },
-            icon: FaIcon(
-              FontAwesomeIcons.circlePlus,
-              color: Colors.teal.withOpacity(.8),
-              size: 50,
-            )),
-      ]),
-
-      // ListView.builder(
-      //   shrinkWrap: true,
-      //   itemCount: App_cubit.get(context).stu_Quiz_Ques_options.length,
-      //   itemBuilder: (context, index) {
-      //     return RadioListTile(
-      //       selectedTileColor: Colors.blue,
-      //       title: Text(
-      //         App_cubit.get(context).stu_Quiz_Ques_options[index],
-      //         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      //       ),
-      //       value: App_cubit.get(context).stu_Quiz_Ques_options[index],
-      //       groupValue: App_cubit.get(context).selectedOption,
-      //       onChanged: (value) {
-      //         App_cubit.get(context).Quiz_Select_answer(value);
-      //       },
-      //     );
-      //   },
-      // ),
     ],
+  ),
+);
+Widget Build_INS_Quiz_Ques(
+    context, index, Animation<double> animation) {
+  return SizeTransition(
+    sizeFactor: animation,
+    axis: Axis.vertical,
+    child: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Text(
+              'Question',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Text(
+              '${index + 1}',
+              style: const TextStyle(
+                  fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Container(
+          height: 200,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+                bottomRight: Radius.circular(30)),
+
+            // color: Colors.blueGrey.withOpacity(.1),
+            color: Colors.blue.withOpacity(.3),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: TextFormField(
+              keyboardType: TextInputType.text,
+              maxLines: 5,
+              controller: App_cubit.get(context).QController[index],
+
+              onFieldSubmitted: (value) {
+                print('onFieldSubmitted');
+                // print(value);
+              },
+              onChanged: (value) {
+                print('onChanged');
+                // Q!.removeAt(index);
+                // Q!.insert(index,value);
+                // print(Q);
+              },
+              onTapOutside: (value) {
+                print('onTapOutside');
+                // print(value);
+              },
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Question can\'t be empty';
+                }
+                return null;
+              },
+              // toolbarOptions:
+              //     ToolbarOptions(paste: true, copy: true),
+              cursorColor: c1,
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+              decoration: InputDecoration(
+                prefixIcon: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 15,
+                    ),
+                    FaIcon(
+                      FontAwesomeIcons.pencil,
+                      color: c1.withOpacity(.6),
+                      size: 30,
+                    ),
+                  ],
+                ),
+                hintText: 'Add Question',
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 15.0),
+        Container(
+          height: 280,
+          child: AnimatedList(
+            physics: BouncingScrollPhysics(),
+            key: ANS_listKey,
+            // controller: controllerforlist,
+            initialItemCount:  1,
+            itemBuilder: (BuildContext context, int index,
+                Animation<double> animation) =>
+                INS_Quiz_Answer(
+                  index,context,
+                    animation),
+          ),
+        ),
+        // Padding(
+        //   padding: const EdgeInsets.only(left: 30.0),
+        //   child: Row(
+        //     children: [
+        //       Expanded(
+        //         child: Container(
+        //           height: 60,
+        //           alignment: Alignment.center,
+        //           decoration: BoxDecoration(
+        //             borderRadius: BorderRadius.only(
+        //                 bottomLeft: Radius.circular(35),
+        //                 topRight: Radius.circular(35),
+        //                 bottomRight: Radius.circular(35)),
+        //
+        //             // color: Colors.blueGrey.withOpacity(.1),
+        //             color: Colors.blue.withOpacity(.2),
+        //           ),
+        //           child: Padding(
+        //             padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        //             child: TextFormField(
+        //               keyboardType: TextInputType.text,
+        //               maxLines: 1,
+        //
+        //               onFieldSubmitted: (value) {
+        //                 print(value);
+        //               },
+        //               onChanged: (value) {
+        //                 print(value);
+        //               },
+        //               validator: (value) {
+        //                 if (value!.isEmpty) {
+        //                   return 'Question can\'t be empty';
+        //                 }
+        //                 return null;
+        //               },
+        //               // toolbarOptions:
+        //               //     ToolbarOptions(paste: true, copy: true),
+        //               cursorColor: c1,
+        //               style: const TextStyle(
+        //                 fontSize: 20,
+        //               ),
+        //               decoration: InputDecoration(
+        //                 prefixIcon: Column(
+        //                   children: [
+        //                     SizedBox(
+        //                       height: 15,
+        //                     ),
+        //                     FaIcon(
+        //                       FontAwesomeIcons.a,
+        //                       color: c1.withOpacity(.6),
+        //                       size: 20,
+        //                     ),
+        //                   ],
+        //                 ),
+        //                 suffixIcon: Column(
+        //                   children: [
+        //                     SizedBox(
+        //                       height: 15,
+        //                     ),
+        //                     GestureDetector(
+        //                       onTap: () {},
+        //                       child: FaIcon(
+        //                         FontAwesomeIcons.circleCheck,
+        //                         color: Colors.teal,
+        //                         size: 28,
+        //                       ),
+        //                     ),
+        //                   ],
+        //                 ),
+        //                 hintText: 'Add Answer',
+        //                 border: InputBorder.none,
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        // SizedBox(
+        //   height: 10,
+        // ),
+        // Padding(
+        //   padding: const EdgeInsets.only(left: 30.0),
+        //   child: Row(
+        //     children: [
+        //       Expanded(
+        //         child: Container(
+        //           height: 60,
+        //           alignment: Alignment.center,
+        //           decoration: BoxDecoration(
+        //             borderRadius: BorderRadius.only(
+        //                 bottomLeft: Radius.circular(35),
+        //                 topRight: Radius.circular(35),
+        //                 bottomRight: Radius.circular(35)),
+        //
+        //             // color: Colors.blueGrey.withOpacity(.1),
+        //             color: Colors.blue.withOpacity(.2),
+        //           ),
+        //           child: Padding(
+        //             padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        //             child: TextFormField(
+        //               keyboardType: TextInputType.text,
+        //               maxLines: 1,
+        //
+        //               onFieldSubmitted: (value) {
+        //                 print(value);
+        //               },
+        //               onChanged: (value) {
+        //                 print(value);
+        //               },
+        //               validator: (value) {
+        //                 if (value!.isEmpty) {
+        //                   return 'Question can\'t be empty';
+        //                 }
+        //                 return null;
+        //               },
+        //               // toolbarOptions:
+        //               //     ToolbarOptions(paste: true, copy: true),
+        //               cursorColor: c1,
+        //               style: const TextStyle(
+        //                 fontSize: 20,
+        //               ),
+        //               decoration: InputDecoration(
+        //                 prefixIcon: Column(
+        //                   children: [
+        //                     SizedBox(
+        //                       height: 15,
+        //                     ),
+        //                     FaIcon(
+        //                       FontAwesomeIcons.b,
+        //                       color: c1.withOpacity(.6),
+        //                       size: 20,
+        //                     ),
+        //                   ],
+        //                 ),
+        //                 suffixIcon: Column(
+        //                   children: [
+        //                     SizedBox(
+        //                       height: 15,
+        //                     ),
+        //                     GestureDetector(
+        //                       onTap: () {},
+        //                       child: FaIcon(
+        //                         FontAwesomeIcons.circleDot,
+        //                         color: Colors.black.withOpacity(.4),
+        //                         size: 28,
+        //                       ),
+        //                     ),
+        //                   ],
+        //                 ),
+        //                 hintText: 'Add Answer',
+        //                 border: InputBorder.none,
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        // ConditionalBuilder(
+        //     condition: App_cubit.get(context).more >= 3,
+        //     builder: (context) => Padding(
+        //           padding: const EdgeInsets.only(top: 10.0),
+        //           child: Padding(
+        //             padding: const EdgeInsets.only(left: 30.0),
+        //             child: Row(
+        //               children: [
+        //                 Expanded(
+        //                   child: Container(
+        //                     height: 60,
+        //                     alignment: Alignment.center,
+        //                     decoration: BoxDecoration(
+        //                       borderRadius: BorderRadius.only(
+        //                           bottomLeft: Radius.circular(35),
+        //                           topRight: Radius.circular(35),
+        //                           bottomRight: Radius.circular(35)),
+        //
+        //                       // color: Colors.blueGrey.withOpacity(.1),
+        //                       color: Colors.blue.withOpacity(.2),
+        //                     ),
+        //                     child: Padding(
+        //                       padding:
+        //                           const EdgeInsets.symmetric(horizontal: 8.0),
+        //                       child: TextFormField(
+        //                         keyboardType: TextInputType.text,
+        //                         maxLines: 1,
+        //
+        //                         onFieldSubmitted: (value) {
+        //                           print(value);
+        //                         },
+        //                         onChanged: (value) {
+        //                           print(value);
+        //                         },
+        //                         validator: (value) {
+        //                           if (value!.isEmpty) {
+        //                             return 'Question can\'t be empty';
+        //                           }
+        //                           return null;
+        //                         },
+        //                         // toolbarOptions:
+        //                         //     ToolbarOptions(paste: true, copy: true),
+        //                         cursorColor: c1,
+        //                         style: const TextStyle(
+        //                           fontSize: 20,
+        //                         ),
+        //                         decoration: InputDecoration(
+        //                           prefixIcon: Column(
+        //                             children: [
+        //                               SizedBox(
+        //                                 height: 15,
+        //                               ),
+        //                               FaIcon(
+        //                                 FontAwesomeIcons.c,
+        //                                 color: c1.withOpacity(.6),
+        //                                 size: 20,
+        //                               ),
+        //                             ],
+        //                           ),
+        //                           suffixIcon: Column(
+        //                             children: [
+        //                               SizedBox(
+        //                                 height: 15,
+        //                               ),
+        //                               GestureDetector(
+        //                                 onTap: () {},
+        //                                 child: FaIcon(
+        //                                   FontAwesomeIcons.circleDot,
+        //                                   color: Colors.black.withOpacity(.4),
+        //                                   size: 28,
+        //                                 ),
+        //                               ),
+        //                             ],
+        //                           ),
+        //                           hintText: 'Add Answer',
+        //                           border: InputBorder.none,
+        //                         ),
+        //                       ),
+        //                     ),
+        //                   ),
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //     fallback: (context) => Container(
+        //           height: 10,
+        //         )),
+        // ConditionalBuilder(
+        //     condition: App_cubit.get(context).more == 4,
+        //     builder: (context) => Padding(
+        //           padding: const EdgeInsets.only(top: 10.0),
+        //           child: Padding(
+        //             padding: const EdgeInsets.only(left: 30.0),
+        //             child: Row(
+        //               children: [
+        //                 Expanded(
+        //                   child: Container(
+        //                     height: 60,
+        //                     alignment: Alignment.center,
+        //                     decoration: BoxDecoration(
+        //                       borderRadius: BorderRadius.only(
+        //                           bottomLeft: Radius.circular(35),
+        //                           topRight: Radius.circular(35),
+        //                           bottomRight: Radius.circular(35)),
+        //
+        //                       // color: Colors.blueGrey.withOpacity(.1),
+        //                       color: Colors.blue.withOpacity(.2),
+        //                     ),
+        //                     child: Padding(
+        //                       padding:
+        //                           const EdgeInsets.symmetric(horizontal: 8.0),
+        //                       child: TextFormField(
+        //                         keyboardType: TextInputType.text,
+        //                         maxLines: 1,
+        //
+        //                         onFieldSubmitted: (value) {
+        //                           print(value);
+        //                         },
+        //                         onChanged: (value) {
+        //                           print(value);
+        //                         },
+        //                         validator: (value) {
+        //                           if (value!.isEmpty) {
+        //                             return 'Question can\'t be empty';
+        //                           }
+        //                           return null;
+        //                         },
+        //                         // toolbarOptions:
+        //                         //     ToolbarOptions(paste: true, copy: true),
+        //                         cursorColor: c1,
+        //                         style: const TextStyle(
+        //                           fontSize: 20,
+        //                         ),
+        //                         decoration: InputDecoration(
+        //                           prefixIcon: Column(
+        //                             children: [
+        //                               SizedBox(
+        //                                 height: 15,
+        //                               ),
+        //                               FaIcon(
+        //                                 FontAwesomeIcons.d,
+        //                                 color: c1.withOpacity(.6),
+        //                                 size: 20,
+        //                               ),
+        //                             ],
+        //                           ),
+        //                           suffixIcon: Column(
+        //                             children: [
+        //                               SizedBox(
+        //                                 height: 15,
+        //                               ),
+        //                               GestureDetector(
+        //                                 onTap: () {},
+        //                                 child: FaIcon(
+        //                                   FontAwesomeIcons.circleDot,
+        //                                   color: Colors.black.withOpacity(.4),
+        //                                   size: 28,
+        //                                 ),
+        //                               ),
+        //                             ],
+        //                           ),
+        //                           hintText: 'Add Answer',
+        //                           border: InputBorder.none,
+        //                         ),
+        //                       ),
+        //                     ),
+        //                   ),
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //     fallback: (context) => Container(
+        //           height: 10,
+        //         )),
+        SizedBox(
+          height: 15,
+        ),
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          IconButton(
+              onPressed: () {
+                App_cubit.get(context).minusmore(ANS_listKey,index);
+              },
+              icon: FaIcon(
+                FontAwesomeIcons.circleMinus,
+                color: Colors.redAccent.withOpacity(.8),
+                size: 50,
+              )),
+          IconButton(
+              onPressed: () {
+                App_cubit.get(context).addmore(ANS_listKey,index);
+              },
+              icon: FaIcon(
+                FontAwesomeIcons.circlePlus,
+                color: Colors.teal.withOpacity(.8),
+                size: 50,
+              )),
+        ]),
+        SizedBox(
+          height: 25,
+        ),
+        Container(height: 1,color: Colors.blueGrey,),
+
+        // ListView.builder(
+        //   shrinkWrap: true,
+        //   itemCount: App_cubit.get(context).stu_Quiz_Ques_options.length,
+        //   itemBuilder: (context, index) {
+        //     return RadioListTile(
+        //       selectedTileColor: Colors.blue,
+        //       title: Text(
+        //         App_cubit.get(context).stu_Quiz_Ques_options[index],
+        //         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        //       ),
+        //       value: App_cubit.get(context).stu_Quiz_Ques_options[index],
+        //       groupValue: App_cubit.get(context).selectedOption,
+        //       onChanged: (value) {
+        //         App_cubit.get(context).Quiz_Select_answer(value);
+        //       },
+        //     );
+        //   },
+        // ),
+      ],
+    ),
   );
 }
 
