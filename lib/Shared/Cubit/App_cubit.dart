@@ -580,52 +580,60 @@ class App_cubit extends Cubit<App_state> {
   Createquiz_model? quizinfo_ins;
   List<TextEditingController> QController=[TextEditingController()];
   List<List<TextEditingController>> AController=[[TextEditingController(),]];
-  void addmore(GlobalKey<AnimatedListState> ANS_listKey,index) {
+  List<GlobalKey<AnimatedListState>> ANS_listKey=[GlobalKey()];
+  void addmore(GlobalKey<AnimatedListState> ANSlistKey,index) {
     if (AController[index].length == 4) {
+      // print(' AController index =  /////////////////////////////');
+      // print(index);
+      // print( AController[index].length);
+      //
+      // print(' AController index /////////////////////////////');
     } else {
-      print('length AController before /////////////////////////////');
-      print(AController[index].length);
-      print('length AController before /////////////////////////////');
+      // print('length AController before /////////////////////////////');
+      // print(AController[index].length);
+      // print('length AController before /////////////////////////////');
+
       AController[index].insert(
           AController[index].length,
           TextEditingController());
-      ANS_listKey.currentState!
+      ANSlistKey.currentState!
           .insertItem(AController[index].length-1);
-      print('length AController after /////////////////////////////');
-      print(AController[index].length);
-      print('length AController after /////////////////////////////');
+      // print('length AController after /////////////////////////////');
+      // print(AController[index].length);
+      // print('length AController after /////////////////////////////');
     }
 
   }
 
-  void minusmore(GlobalKey<AnimatedListState> ANS_listKey,index) {
+  void minusmore(GlobalKey<AnimatedListState> ANSlistKey,index) {
 
       if (AController[index].length == 1) {
 
       }else{
-        print('length AController after /////////////////////////////');
-        print(AController[index].length);
-        print('length AController after /////////////////////////////');
-
-        ANS_listKey.currentState!.removeItem(
+        // print('length AController after /////////////////////////////');
+        // print(AController[index].length);
+        // print('length AController after /////////////////////////////');
+        ANSlistKey.currentState!.removeItem(
           AController[index].length-1,
               (BuildContext context, Animation<double> animation) =>
                   INS_Quiz_Answer(
-                  context,
-                  AController[index].length-1,
-                  animation),
+                  index:index ,
+                  context: context,
+                 index2:  AController[index].length-1,
+    animation: animation),
           duration: const Duration(milliseconds: 250),
         );
         AController[index]
             .removeAt(AController[index].length - 1);
-        print('length AController after /////////////////////////////');
-        print(AController[index].length);
-        print('length AController after /////////////////////////////');
+        // print('length AController after /////////////////////////////');
+        // print(AController[index].length);
+        // print('length AController after /////////////////////////////');
       }
 
 
 
   }
+
   void createquCreateQuiz_Function({
     required String? title,
     required String? notes,

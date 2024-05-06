@@ -201,9 +201,21 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
 
 
       // App_cubit.get(context).Question_create_list!.insert(0, item);
-    print('length QController before /////////////////////////////');
-    print(App_cubit.get(context).QController.length);
-    print('length QController before /////////////////////////////');
+    // print('length QController before /////////////////////////////');
+    // print(App_cubit.get(context).QController.length);
+    // print('length QController before /////////////////////////////');
+    print('/////////////////////////////');
+    App_cubit.get(context).AController.forEach((element) {
+      element.forEach((element2) {
+        print(element2.text);
+      });
+      print('----------------------------');
+
+    });
+    print('/////////////////////////////');
+    App_cubit.get(context).ANS_listKey.insert(
+        App_cubit.get(context).ANS_listKey.length,
+        GlobalKey());
     App_cubit.get(context).AController.insert(
         App_cubit.get(context).QController.length,
         [TextEditingController()]);
@@ -213,18 +225,38 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
           TextEditingController());
       _listKey.currentState!
           .insertItem(App_cubit.get(context).QController.length-1);
-      print('length QController after /////////////////////////////');
-      print(App_cubit.get(context).QController.length);
-      print('length QController after /////////////////////////////');
+      // print('length QController after /////////////////////////////');
+      // print(App_cubit.get(context).QController.length);
+      // print('length QController after /////////////////////////////');
 
 
   }
 
   void _removeLastItem() {
     if(App_cubit.get(context).QController.length !=1 ){
-      print('length QController before remove /////////////////////////////');
-      print(App_cubit.get(context).QController.length);
-      print('length QController before remove /////////////////////////////');
+
+
+      //
+      // print('//////////////////////////////////////////////////////////////////');
+      // print('length ANS_listKey before remove = ${App_cubit.get(context).ANS_listKey.length}');
+      // print('length QController before remove = ${App_cubit.get(context).QController.length}');
+      // print('length AController before remove = ${App_cubit.get(context).AController.length}');
+      // print('//////////////////////////////////////////////////////////////////');
+      App_cubit.get(context)
+          .ANS_listKey
+          .removeAt(App_cubit.get(context).ANS_listKey.length - 1);
+      App_cubit.get(context)
+          .AController
+          .removeAt(App_cubit.get(context).AController.length - 1);
+
+      App_cubit.get(context)
+          .QController
+          .removeAt(App_cubit.get(context).QController.length - 1);
+      // print('//////////////////////////////////////////////////////////////////');
+      // print('length ANS_listKey after remove = ${App_cubit.get(context).ANS_listKey.length}');
+      // print('length QController after remove = ${App_cubit.get(context).QController.length}');
+      // print('length AController after remove = ${App_cubit.get(context).AController.length}');
+      // print('//////////////////////////////////////////////////////////////////');
       _listKey.currentState!.removeItem(
         App_cubit.get(context).QController.length-1,
             (BuildContext context, Animation<double> animation) =>
@@ -233,13 +265,8 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
                 App_cubit.get(context).QController.length-1,
                 animation),
         duration: const Duration(milliseconds: 250),
+
       );
-      App_cubit.get(context)
-          .QController
-          .removeAt(App_cubit.get(context).QController.length - 1);
-      print('length QController before remove /////////////////////////////');
-      print(App_cubit.get(context).QController.length);
-      print('length QController before remove /////////////////////////////');
     }
 
   }

@@ -5070,87 +5070,94 @@ Widget Build_STU_Quiz_Ques({
       ],
     );
 
-final GlobalKey<AnimatedListState> ANS_listKey = GlobalKey();
-Widget INS_Quiz_Answer( context, index, Animation<double> animation)=> Padding(
-  padding: const EdgeInsets.only(left: 30.0,top: 5,bottom: 5),
-  child: Row(
-    children: [
-      Expanded(
-        child: Container(
-          height: 60,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(35),
-                topRight: Radius.circular(35),
-                bottomRight: Radius.circular(35)),
+// final GlobalKey<AnimatedListState> ANS_listKey = GlobalKey();
 
-            // color: Colors.blueGrey.withOpacity(.1),
-            color: Colors.blue.withOpacity(.2),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: TextFormField(
-              keyboardType: TextInputType.text,
-              maxLines: 1,
-              // controller: App_cubit.get(context).AController[index][ App_cubit.get(context).AController[index].length-1],
+Widget INS_Quiz_Answer( {required context,required index2,required Animation<double> animation,required int index}) {
+  // print('//////////////////////////////////////////////////////////////////');
+  // print('element of Key of $index = ${App_cubit.get(context).ANS_listKey[index]}');
+  // print('//////////////////////////////////////////////////////////////////');
+  return Padding(
+    padding: const EdgeInsets.only(left: 30.0,top: 5,bottom: 5),
+    child: Row(
+      children: [
+        Expanded(
+          child: Container(
+            height: 60,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(35),
+                  topRight: Radius.circular(35),
+                  bottomRight: Radius.circular(35)),
 
-              onFieldSubmitted: (value) {
-                print(value);
-              },
-              onChanged: (value) {
-                print(value);
-              },
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Answer can\'t be empty';
-                }
-                return null;
-              },
-              // toolbarOptions:
-              //     ToolbarOptions(paste: true, copy: true),
-              cursorColor: c1,
-              style: const TextStyle(
-                fontSize: 20,
-              ),
-              decoration: InputDecoration(
-                prefixIcon: Column(
-                  children: [
-                    SizedBox(
-                      height: 15,
-                    ),
-                    FaIcon(
-                      FontAwesomeIcons.a,
-                      color: c1.withOpacity(.6),
-                      size: 20,
-                    ),
-                  ],
+              // color: Colors.blueGrey.withOpacity(.1),
+              color: Colors.blue.withOpacity(.2),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: TextFormField(
+                keyboardType: TextInputType.text,
+                maxLines: 1,
+                controller: App_cubit.get(context).AController[index][ App_cubit.get(context).AController[index].length-1],
+
+                onFieldSubmitted: (value) {
+                  print(value);
+                },
+                onChanged: (value) {
+                  print(value);
+                },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Answer can\'t be empty';
+                  }
+                  return null;
+                },
+                // toolbarOptions:
+                //     ToolbarOptions(paste: true, copy: true),
+                cursorColor: c1,
+                style: const TextStyle(
+                  fontSize: 20,
                 ),
-                suffixIcon: Column(
-                  children: [
-                    SizedBox(
-                      height: 15,
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: FaIcon(
-                        FontAwesomeIcons.circleCheck,
-                        color: Colors.teal,
-                        size: 28,
+                decoration: InputDecoration(
+                  prefixIcon: Column(
+                    children: [
+                      SizedBox(
+                        height: 15,
                       ),
-                    ),
-                  ],
+                      FaIcon(
+                        FontAwesomeIcons.a,
+                        color: c1.withOpacity(.6),
+                        size: 20,
+                      ),
+                    ],
+                  ),
+                  suffixIcon: Column(
+                    children: [
+                      SizedBox(
+                        height: 15,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: FaIcon(
+                          FontAwesomeIcons.circleCheck,
+                          color: Colors.teal,
+                          size: 28,
+                        ),
+                      ),
+                    ],
+                  ),
+                  hintText: 'Add Answer',
+                  border: InputBorder.none,
                 ),
-                hintText: 'Add Answer',
-                border: InputBorder.none,
               ),
             ),
           ),
         ),
-      ),
-    ],
-  ),
-);
+      ],
+    ),
+  );
+}
+
 Widget Build_INS_Quiz_Ques(
     context, index, Animation<double> animation) {
   return SizeTransition(
@@ -5251,14 +5258,14 @@ Widget Build_INS_Quiz_Ques(
           height: 280,
           child: AnimatedList(
             physics: BouncingScrollPhysics(),
-            key: ANS_listKey,
+            key: App_cubit.get(context).ANS_listKey[index],
             // controller: controllerforlist,
-            initialItemCount:  1,
-            itemBuilder: (BuildContext context, int index,
+            initialItemCount: App_cubit.get(context).AController[index].length,
+            itemBuilder: (BuildContext context, int index2,
                 Animation<double> animation) =>
-                INS_Quiz_Answer(
-                  index,context,
-                    animation),
+                INS_Quiz_Answer(index: index,
+                  index2: index2,context: context,
+                    animation: animation),
           ),
         ),
         // Padding(
@@ -5604,7 +5611,7 @@ Widget Build_INS_Quiz_Ques(
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           IconButton(
               onPressed: () {
-                App_cubit.get(context).minusmore(ANS_listKey,index);
+                App_cubit.get(context).minusmore(App_cubit.get(context).ANS_listKey[index],index);
               },
               icon: FaIcon(
                 FontAwesomeIcons.circleMinus,
@@ -5613,7 +5620,7 @@ Widget Build_INS_Quiz_Ques(
               )),
           IconButton(
               onPressed: () {
-                App_cubit.get(context).addmore(ANS_listKey,index);
+                App_cubit.get(context).addmore(App_cubit.get(context).ANS_listKey[index],index);
               },
               icon: FaIcon(
                 FontAwesomeIcons.circlePlus,
