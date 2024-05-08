@@ -3,7 +3,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/AllCourcesAdapterModel/Stu_All_Courses_Model.dart';
 import 'package:university_hup/Modules/Student/STU_About_Course.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
@@ -29,6 +29,7 @@ class STU_Lecture_Screen extends StatelessWidget {
       builder: (context, state) {
         App_cubit cubit=App_cubit.get(context);
         List<Stu_GetAllCoursesModel>courses=cubit.stuAllCoursesModel;
+      //  List<Stu_GetAllCoursesModel>allcoursesFromHIVE=cubit.allLECFromHIVE;
         List<INS_Course_Model>insCourses=cubit.ins_Courses_Model;
         return SafeArea(
           child: Scaffold(
@@ -111,8 +112,7 @@ class STU_Lecture_Screen extends StatelessWidget {
                                 } else {
                                   cubit.isCycleIdChange = false;
                                 }
-                                cubit.currentCycleId = courses[index].cycleId!;
-                              }
+                                cubit.currentCycleId = courses[index].cycleId!;}
                               else{
                                 cubit.currentCourseName = insCourses[index].name;
                                 if (cubit.currentCycleId !=
@@ -144,10 +144,13 @@ class STU_Lecture_Screen extends StatelessWidget {
                       fallback:(context)=> ListView.separated(
                         itemBuilder: (context, index) => InkWell(
                             onTap: () {
-                              print(cubit.currentCycleId);
-                              print(courses[index].cycleId);
-                              cubit.currentCourseName=courses[index].name;
-                              if(cubit.currentCycleId!=courses[index].cycleId) {
+                              cubit.currentCycleId=cubit.allLECFromHIVE[index].cycleId!;
+
+                              print(cubit.allLECFromHIVE[0].name);
+                              print('cycle Id : ${cubit.currentCycleId}');
+                            //  print(courses[index].cycleId);
+                              cubit.currentCourseName=cubit.allLECFromHIVE[index].name;
+                              if(cubit.currentCycleId!=cubit.allLECFromHIVE[index].cycleId) {
                                 cubit.stuCoursesMatrialModel=[];
                                 cubit.stuLECTUREModel=[];
                                 cubit.stuLABModel=[];
@@ -159,15 +162,14 @@ class STU_Lecture_Screen extends StatelessWidget {
                               } else {
                                 cubit.isCycleIdChange=false;
                               }
-                              cubit.currentCycleId=courses[index].cycleId!;
                               navigateTo(context,  STU_About_course());
                             },
                             child:rol=='Student'? Build_STU_Lec(
-                              courses:cubit.coursemodel[index],):INS_Course( courses:cubit.ins_Courses_Model[index],)),
+                              courses:cubit.allLECFromHIVE[index],):INS_Course( courses:cubit.ins_Courses_Model[index],)),
                         separatorBuilder: (context, index) => const SizedBox(
                           height: 20,
                         ),
-                        itemCount:rol=='Student'? cubit.coursemodel.length:cubit.ins_Courses_Model.length,
+                        itemCount:rol=='Student'? cubit.allLECFromHIVE.length:cubit.ins_Courses_Model.length,
                       ),
                     ),
 

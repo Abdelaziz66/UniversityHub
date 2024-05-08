@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
@@ -23,8 +24,8 @@ import 'package:university_hup/Models/INS_Model/INS_grade_for_student_Model.dart
 import 'package:university_hup/Models/INS_Model/currentinfo_ins_model.dart';
 import 'package:university_hup/Models/INS_Model/student_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/AllCourcesAdapterModel/Stu_All_Courses_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/materialAdabter/Stu_Course_MaterialModel.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
 import 'package:university_hup/Models/STU_Model/User_Model/STU_Login_Model.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Calendar_Screen.dart';
@@ -49,6 +50,7 @@ import '../../Models/STU_Model/User_Model/CurrentStudentInfoModel.dart';
 
 import '../../Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
 import '../Cons_widget.dart';
+import '../Local/Hive/HiveConstants.dart';
 import 'App_state.dart';
 
 class App_cubit extends Cubit<App_state> {
@@ -59,7 +61,10 @@ class App_cubit extends Cubit<App_state> {
 
   int Nav_Bar_index = 0;
   void Nav_Bar_Function({required int index}) {
-    if (index == 2) {
+    if(!connnection && index == 2){
+      getAllCoursesFromHIVE();
+    }
+   else if (index == 2) {
       if(rol=='Student'){
         if(stuAllCoursesModel.length == 0){
           StuGetAllCourses(
@@ -897,14 +902,17 @@ class App_cubit extends Cubit<App_state> {
             stuAllCoursesModel.add(Stu_GetAllCoursesModel.fromJson(element));
           }
           emit(Stu_Get_All_Courses_SuccessState(stuAllCoursesModel));
-
         }
+        stuStoreAllCourses();
+
         InsertToDataBase_Course_Table();
         // stuAllCoursesModel.forEach((element) {
         //   print('name------- ${element.name}');
         // });
+    //    getAllCoursesFromHIVE();
 
       }).catchError((error) {
+       //getAllCoursesFromHIVE();
         emit(Stu_Get_All_Courses_ErrorState(error.toString()));
         print(error.toString());
       });
@@ -930,7 +938,6 @@ class App_cubit extends Cubit<App_state> {
             ins_Courses_Model.add(INS_Course_Model.fromJson(element));
           }
           emit(INS_Get_All_Courses_SuccessState(ins_Courses_Model));
-
         }
         InsertToDataBase_Course_Table();
         // stuAllCoursesModel.forEach((element) {
@@ -957,12 +964,17 @@ class App_cubit extends Cubit<App_state> {
   List<InsAllLecFoldersModel> insLECTUREModel = [];
   List<InsAllLecFoldersModel> insLABModel = [];
 
+  List<InsAllLecFoldersModel> stuLECTUREModelHIVE = [];
+  List<InsAllLecFoldersModel> stuLABModelHIVE = [];
+
   void GetCourseMaterials() {
         if(rol=='Student') {
+        //  late final Box box;
+
           if (stuCoursesMatrialModel.isEmpty || isCycleIdChange == true) {
             emit(Stu_Get_Course_Material_LoadingState());
             Dio_Helper.GetData(
-              url: 'Students/CurrentCourseMaterial?CycleId=CS101FALL2024',
+              url: 'Students/CurrentCourseMaterial?CycleId=$currentCycleId',
               //STU_COURSE_MATERIAL,
               token: token,
             ).then((value) {
@@ -976,7 +988,7 @@ class App_cubit extends Cubit<App_state> {
                 emit(Stu_Get_Course_Material_SuccessState(
                     stuCoursesMatrialModel));
               }
-              stuCoursesMatrialModel.forEach((element) {
+              stuCoursesMatrialModel.forEach((element) async {
                 if (element.type == 'Lecture') {
                   stuLECTUREModel.add(element);
                 } else if (element.type == 'Lab') {
@@ -986,12 +998,15 @@ class App_cubit extends Cubit<App_state> {
               );
               print('lectures:');
               stuLECTUREModel.forEach((element) {
-                print(element.lectureId);
+                print(element.lectureName);
+
               });
               print('Labs:');
               stuLABModel.forEach((element) {
-                print(element.lectureId);
+                print(element.lectureName);
               });
+              print('cycle id before store$currentCycleId');
+              storeCourseFoldersToHIVE();
             }).catchError((error) {
               emit(Stu_Get_Course_Material_ErrorState(error.toString()));
               print(error.toString());
@@ -2072,9 +2087,9 @@ class App_cubit extends Cubit<App_state> {
 
       }
       else if(tablename == Course_Table){
-        coursemodel=[];
+       coursemodel=[];
         value.forEach((element) {
-          coursemodel.add(Stu_GetAllCoursesModel.fromJson(element));
+         coursemodel.add(Stu_GetAllCoursesModel.fromJson(element));
         });
         // print('Course_from get_________________________________________');
         // // print(value);
@@ -2106,6 +2121,8 @@ class App_cubit extends Cubit<App_state> {
               GetCurrentStudenInfo();
               StuGetAllCourses(token: token);
               GetAllNews();
+              //getAllCoursesFromHIVE();
+              //getCourseFoldersFromHIVE();
             }else{
               GetCurrentInfo_ins_Function();
               INS_GetAllCourses_Function(token: token);
@@ -2134,13 +2151,126 @@ class App_cubit extends Cubit<App_state> {
 
 
 
-  // storing data using HIVE --------------------------------
+  // ---------------------storing data using HIVE --------------------------------
 
-  void stuStoreLecFolder({
-    required List folders
-}){
+  final Box stuAllLecBox3= Hive.box(HiveConstants.allCoursesBox);
 
+  void stuStoreAllCourses(
+  //{
+        // required String cycleId,
+        // required String name,
+        // required int hours,
+        // required String imagePath,
+        // required String instructorFullName,
+//}
+){
+    stuAllLecBox3.delete(HiveConstants.allCoursesList);
+
+    emit(Stu_Add_AllCourses_To_Hive_LoadingState());
+   List<Stu_GetAllCoursesModel>allCourses=List.from(stuAllLecBox3.get(HiveConstants.allCoursesList,defaultValue: [])).cast<Stu_GetAllCoursesModel>();
+   for(int i=0;i<stuAllCoursesModel.length;i++) {
+     allCourses.add(Stu_GetAllCoursesModel(
+       hiveIndex: allCourses.length,
+       cycleId:stuAllCoursesModel[i].cycleId!,
+       name:stuAllCoursesModel[i].name!,
+       hours:stuAllCoursesModel[i].hours!,
+       imagePath:stuAllCoursesModel[i].imagePath!,
+       instructorFullName:stuAllCoursesModel[i].instructorFullName!,
+
+     ));
+   }
+    stuAllLecBox3.put(HiveConstants.allCoursesList, allCourses).then((value){
+      print('Hive Store All Lec Data');
+     emit(Stu_Add_AllCourses_To_Hive_SuccessState());
+   }).catchError((error){
+      print('error to Store All Lec Data');
+      print(error);
+     emit(Stu_Add_AllCourses_To_Hive_ErrorState(error));
+   });
   }
 
+//----------------get all courses from HIVE---------
+
+ List<Stu_GetAllCoursesModel>allLECFromHIVE=[];
+  void getAllCoursesFromHIVE()async{
+    emit(Stu_Get_AllCourses_From_Hive_LoadingState());
+    try {
+      allLECFromHIVE =List.from(stuAllLecBox3.get(HiveConstants.allCoursesList,defaultValue: [])).cast<Stu_GetAllCoursesModel>();
+
+      allLECFromHIVE.forEach((element) {
+        print(element.name);
+      });
+      emit(Stu_Get_AllCourses_From_Hive_SuccessState());
+    } catch (error) {
+      emit(Stu_Get_AllCourses_From_Hive_ErrorState());
+    }
+  }
+
+//-----------------------------Store Folders of materials using HIVE-------------------------------------
+
+
+
+  final Box stuLecFoldersBox2=Hive.box(HiveConstants.lecFoldersBox);
+
+  void storeCourseFoldersToHIVE(){
+    print('////// $currentCycleId');
+    emit(Stu_Add_Course_Folders_To_Hive_LoadingState());
+    stuLecFoldersBox2.delete(currentCycleId);
+    List<GetCourseMaterialsModel>lecFoldersList=List.from(stuLecFoldersBox2.get(currentCycleId,defaultValue: [])).cast<GetCourseMaterialsModel>();
+    for(int i=0;i<stuCoursesMatrialModel.length;i++) {
+      lecFoldersList.add(GetCourseMaterialsModel(
+        hiveIndex: lecFoldersList.length,
+        lectureId:stuCoursesMatrialModel[i].lectureId!,
+        lectureName:stuCoursesMatrialModel[i].lectureName!,
+        semesterName:stuCoursesMatrialModel[i].semesterName!,
+        type:stuCoursesMatrialModel[i].type!,
+        createdAt:stuCoursesMatrialModel[i].createdAt!,
+        path:stuCoursesMatrialModel[i].path!,
+      ));
+    }
+    stuLecFoldersBox2.put(currentCycleId, lecFoldersList).then((value){
+      print(stuLecFoldersBox2.keys);
+      print('-------------${lecFoldersList[0].lectureName}');
+      emit(Stu_Add_Course_Folders_To_Hive_SuccessState());
+    }).catchError((error){
+      print(error);
+      emit(Stu_Add_Course_Folders_To_Hive_ErrorState());
+    });
+  }
+///-----------------get folders from HIVE by cycle  id ---------------------
+
+  List<GetCourseMaterialsModel>currentMaterialLecFolders=[];
+  List<GetCourseMaterialsModel> stuHIVElecModel = [];
+  List<GetCourseMaterialsModel> stuHIVElabModel = [];
+  void getCourseFoldersFromHIVE()async{
+    emit(Stu_Get_lec_Folders_From_Hive_LoadingState());
+    print(currentCycleId);
+    stuHIVElecModel = [];
+    stuHIVElabModel = [];
+    try {
+      currentMaterialLecFolders =List.from(stuLecFoldersBox2.get(currentCycleId,defaultValue: [])).cast<GetCourseMaterialsModel>();
+      print('//////////////////////////');
+      currentMaterialLecFolders.forEach((element) async {
+        if (element.type == 'Lecture') {
+          stuHIVElecModel.add(element);
+        } else if (element.type == 'Lab') {
+          stuHIVElabModel.add(element);
+        }
+      });
+      for (var element in currentMaterialLecFolders) {
+        print(element.type);
+      }
+      for (var element in stuHIVElecModel) {
+        print(element.lectureName);
+      }
+      emit(Stu_Get_lec_Folders_From_Hive_SuccessState());
+    } catch (error) {
+      emit(Stu_Get_lec_Folders_From_Hive_ErrorState());
+    }
+  }
+
+
+  //--------------------Store All Files to HIVE------------------------------
+  final Box stuLecFilesBox=Hive.box(HiveConstants.lecFilesBox);
 
 }

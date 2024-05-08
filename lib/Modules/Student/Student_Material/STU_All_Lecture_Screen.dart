@@ -2,7 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/materialAdabter/Stu_Course_MaterialModel.dart';
 import 'package:university_hup/Modules/Student/Student_Material/STU_Show_Lecs_or_Lab_screen.dart';
 
 import 'package:university_hup/Shared/Cons_widget.dart';
@@ -248,37 +248,92 @@ class STU_Matrial_Screen extends StatelessWidget {
                             itemCount: lectures.length,
                           ),
 
-                          fallback:(context)=> Center(child: CircularProgressIndicator(),),
-                        ),
-
-                      ),
-                    ),
-                    fallback: (context) => Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: GridView.builder(
-                          gridDelegate:
+                          fallback:(context)=>ConditionalBuilder(
+                            condition: cubit.stuHIVElecModel.isNotEmpty&&state is !Stu_Get_lec_Folders_From_Hive_LoadingState ,
+                            builder:(context)=>  GridView.builder(
+                              gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2, childAspectRatio: 1.1),
-                          itemBuilder: (context, index) => InkWell(
-                              onTap: () {
-                                print('dddddd');
-                                cubit.StuGetCourseMaterialFiles(lecId: labs[index].lectureId);
+                              itemBuilder: (context, index) => InkWell(
+                                  onTap: () {
+                                    // cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);
+                                    cubit.isLec=true;
+                                    navigateTo(context, STU_Show_Material_Lec_Or_Sec());
+                                  },
+                                  child: Matrial_C(
+                                      courseMaterial: cubit.stuHIVElecModel[index],
+                                      index: index,
+                                      context: context
+                                  )),
+                              scrollDirection: Axis.vertical,
+                              itemCount: cubit.stuHIVElecModel.length,
+                            ),
 
-                                cubit.isLec=false;
-                                navigateTo(context, STU_Show_Material_Lec_Or_Sec());
-                              },
-                              child: Matrial_C(
-                                  courseMaterial: labs[index],
-                                  index: index,
-                              context: context
-                              )),
-                          scrollDirection: Axis.vertical,
-                          itemCount: labs.length,
+                            fallback:(context)=>Center(child: CircularProgressIndicator())
+                          ),
                         ),
+
                       ),
                     ),
+                    fallback: (context) => ConditionalBuilder(
+                        condition: labs.isNotEmpty&&state is !Stu_Get_Course_Material_LoadingState ,
+                        builder:(context)=> Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: GridView.builder(
+                              gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2, childAspectRatio: 1.1),
+                              itemBuilder: (context, index) => InkWell(
+                                  onTap: () {
+                                    print('dddddd');
+                                    cubit.StuGetCourseMaterialFiles(lecId: labs[index].lectureId);
+
+                                    cubit.isLec=false;
+                                    navigateTo(context, STU_Show_Material_Lec_Or_Sec());
+                                  },
+                                  child: Matrial_C(
+                                      courseMaterial: labs[index],
+                                      index: index,
+                                      context: context
+                                  )),
+                              scrollDirection: Axis.vertical,
+                              itemCount: labs.length,
+                            ),
+                          ),
+                        ),
+                        fallback:(context)=>ConditionalBuilder(
+                            condition: cubit.stuHIVElabModel.isNotEmpty&&state is !Stu_Get_lec_Folders_From_Hive_LoadingState ,
+                            builder:(context)=>  Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: GridView.builder(
+                                  gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2, childAspectRatio: 1.1),
+                                  itemBuilder: (context, index) => InkWell(
+                                      onTap: () {
+                                        // cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);
+                                        cubit.isLec=true;
+                                        navigateTo(context, STU_Show_Material_Lec_Or_Sec());
+                                      },
+                                      child: Matrial_C(
+                                          courseMaterial: cubit.stuHIVElabModel[index],
+                                          index: index,
+                                          context: context
+                                      )),
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: cubit.stuHIVElabModel.length,
+                                ),
+                              ),
+                            ),
+
+                            fallback:(context)=>Center(child: CircularProgressIndicator())
+                        ),
+
+
                   ),
+                  )
                 ],
               ),
             ));
