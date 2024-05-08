@@ -23,7 +23,7 @@ class Home_screen extends StatelessWidget {
       },
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
-        List<bool> image = [true, false, true];
+        List<bool> image = [true, false, true, false,false ];
         List<GetAllNewsModel> news = cubit.allNewsModel;
         return Scaffold(
           backgroundColor: Colors.transparent,

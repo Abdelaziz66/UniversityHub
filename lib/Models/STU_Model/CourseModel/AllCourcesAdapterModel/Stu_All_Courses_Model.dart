@@ -1,4 +1,5 @@
 class Stu_GetAllCoursesModel {
+  int? hiveIndex;
   String? cycleId;
   String? name;
   int? hours;
@@ -6,7 +7,9 @@ class Stu_GetAllCoursesModel {
   String? instructorFullName;
 
   Stu_GetAllCoursesModel(
-      {this.cycleId,
+      {
+        this.hiveIndex,
+        this.cycleId,
         this.name,
         this.hours,
         this.imagePath,

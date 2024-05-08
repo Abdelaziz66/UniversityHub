@@ -18,8 +18,8 @@ import 'package:rive/rive.dart';
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
 import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/AllCourcesAdapterModel/Stu_All_Courses_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/materialAdabter/Stu_Course_MaterialModel.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
 import 'package:university_hup/Modules/Instructor/Instructor_Assignment/INS_task_result_Screen.dart';
 
@@ -1072,7 +1072,7 @@ Widget Matrial_C(
               // height: 80,
               child: Text(
                 maxLines: 1,
-                '${App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty ? courseMaterial?.lectureName : insFolder?.lectureName}',
+                '${App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty||App_cubit.get(context).currentMaterialLecFolders.isNotEmpty ? courseMaterial?.lectureName : insFolder?.lectureName}',
                 style: TextStyle(
                   overflow: TextOverflow.ellipsis,
                   fontSize: 15,

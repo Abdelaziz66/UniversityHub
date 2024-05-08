@@ -1,8 +1,8 @@
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
 import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/Stu_All_Courses_Model.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_MaterialModel.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/AllCourcesAdapterModel/Stu_All_Courses_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/materialAdabter/Stu_Course_MaterialModel.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
 import 'package:university_hup/Models/STU_Model/User_Model/STU_Login_Model.dart';
 
@@ -491,4 +491,46 @@ class GetFromDataBase_state extends App_state{}
 class DeleteFromDataBase_state extends App_state{}
 class UpdataDataBase2_state extends App_state{}
 class UpdataDataBase3_state extends App_state{}
+
+
+
+//--------------------------HIVE States--------------------------
+
+
+class Stu_Add_AllCourses_To_Hive_LoadingState extends App_state {}
+
+class Stu_Add_AllCourses_To_Hive_SuccessState extends App_state {}
+
+class Stu_Add_AllCourses_To_Hive_ErrorState extends App_state {
+  String? error;
+  Stu_Add_AllCourses_To_Hive_ErrorState(this.error);
+}
+
+class Stu_Get_AllCourses_From_Hive_LoadingState extends App_state {}
+
+class Stu_Get_AllCourses_From_Hive_SuccessState extends App_state {}
+
+class Stu_Get_AllCourses_From_Hive_ErrorState extends App_state {
+  Stu_Get_AllCourses_From_Hive_ErrorState();
+}
+
+//-----------------store lec folders using HIVE -------------------
+
+class Stu_Add_Course_Folders_To_Hive_LoadingState extends App_state {}
+
+class Stu_Add_Course_Folders_To_Hive_SuccessState extends App_state {}
+
+class Stu_Add_Course_Folders_To_Hive_ErrorState extends App_state {
+  Stu_Add_Course_Folders_To_Hive_ErrorState();
+}
+
+//-----------------------------------------------
+
+class Stu_Get_lec_Folders_From_Hive_LoadingState extends App_state {}
+
+class Stu_Get_lec_Folders_From_Hive_SuccessState extends App_state {}
+
+class Stu_Get_lec_Folders_From_Hive_ErrorState extends App_state {
+  Stu_Get_lec_Folders_From_Hive_ErrorState();
+}
 

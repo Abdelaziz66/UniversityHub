@@ -57,11 +57,16 @@ class STU_About_course extends StatelessWidget {
                                     Expanded(
                                       child: InkWell(
                                         onTap: (){
-                                          cubit.GetCourseMaterials(
-                                          //  token:App_cubit.get(context).Tokenn,
-                                          //  cycleId: '${courses[index].cycleId}',
-                                          );
-
+                                          print(cubit.connnection);
+                                          if(cubit.connnection) {
+                                            cubit.GetCourseMaterials(
+                                              //  token:App_cubit.get(context).Tokenn,
+                                              //  cycleId: '${courses[index].cycleId}',
+                                            );
+                                          }else{
+                                            cubit.getCourseFoldersFromHIVE();
+                                          }
+                                         // print(cubit.currentMaterialLecFolders[0].lectureName);
                                           navigateTo(context,rol=='Student'? STU_Matrial_Screen():INS_Matrial_Screen() );
                                         },
                                         child: Container(
