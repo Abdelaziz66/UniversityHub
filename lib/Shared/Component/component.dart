@@ -2163,7 +2163,8 @@ Widget STU_Build_Lec_View_Widget({
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
-            App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty
+            App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty ||
+                App_cubit.get(context).MaterialLecFiles.isNotEmpty
                 ? '${file?.filePath?.split('.').last}'
                 : '${insFile?.filePath?.split('.').last}',
             style: TextStyle(
@@ -2180,7 +2181,8 @@ Widget STU_Build_Lec_View_Widget({
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty
+                App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty||
+                    App_cubit.get(context).MaterialLecFiles.isNotEmpty
                     ? '${file?.fileName}'
                     : '${insFile?.fileName}',
                 style: TextStyle(
@@ -2191,7 +2193,8 @@ Widget STU_Build_Lec_View_Widget({
                 maxLines: 2,
               ),
               Text(
-                App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty
+                App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty||
+                    App_cubit.get(context).MaterialLecFiles.isNotEmpty
                     ? '${file?.createdAt?.split('T').first} at ${file?.createdAt?.split('T').last}'
                     : '${insFile?.createdAt?.split('T').first} at ${insFile?.createdAt?.split('T').last}',
                 style: TextStyle(

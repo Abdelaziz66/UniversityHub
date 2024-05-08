@@ -129,8 +129,11 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
                               onTap: () {
                                 print(files[index].filePath?.split('net/').last);
                                 print(files[index].filePath);
-                                cubit.loadPDF(networkfile:files[index].filePath ?.split('net/').last);
+                                cubit.openFile_Fun(networkFile: files[index].filePath
+                                    ?.split('net/').last);
                                 print('from material ${cubit.pathPDF}');
+
+
                                // App_cubit.openURL('${files[index].filePath}');
                               //  navigateTo(context, fileVierwer(pdfUrl:cubit.pathPDF ,));
                                 //cubit.openFile_Fun(filePath:files[index].filePath);
@@ -144,12 +147,46 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
                                   ),
                             );
                           }),
-                      fallback: (context) => Center(
-                        child: CircularProgressIndicator(),
+                      fallback: (context) =>  ConditionalBuilder(
+                          condition:
+                          cubit.MaterialLecFiles.isNotEmpty ,
+                          builder: (context) => GridView.builder(
+                              gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 10,
+                                childAspectRatio: .9,
+                              ),
+                              itemCount:  cubit.MaterialLecFiles.length,
+                              physics: const BouncingScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  onTap: () {
+                                      print(files[index].filePath?.split('net/').last);
+                                      print(files[index].filePath);
+                                      cubit.openFile_Fun(networkFile: cubit.MaterialLecFiles[index].filePath
+                                          ?.split('net/').last);                                      print('from material ${cubit.pathPDF}');
+
+                                    // App_cubit.openURL('${files[index].filePath}');
+                                    //  navigateTo(context, fileVierwer(pdfUrl:cubit.pathPDF ,));
+                                    //cubit.openFile_Fun(filePath:files[index].filePath);
+                                  },
+                                  child: STU_Build_Lec_View_Widget(
+                                    index: index,
+                                    context: context,
+                                    file: cubit.MaterialLecFiles[index], //cubit.isLec!?lectures[index]:labs[index]
+
+
+                                  ),
+                                );
+                              }),
+                          fallback: (context) =>Center(child: CircularProgressIndicator(),)
+                      )
                       ),
                     ),
                   ),
-                ),
+
               ],
             ),
           ),

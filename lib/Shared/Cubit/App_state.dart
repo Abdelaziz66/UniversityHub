@@ -543,3 +543,22 @@ class Stu_Get_lec_Folders_From_Hive_ErrorState extends App_state {
   Stu_Get_lec_Folders_From_Hive_ErrorState();
 }
 
+//------------------store files to HIVE ------------------
+
+class Stu_Add_Course_Files_To_Hive_LoadingState extends App_state {}
+
+class Stu_Add_Course_Files_To_Hive_SuccessState extends App_state {}
+
+class Stu_Add_Course_Files_To_Hive_ErrorState extends App_state {
+  Stu_Add_Course_Files_To_Hive_ErrorState();
+}
+
+//-----------------------------------------------
+
+class Stu_Get_lec_Files_From_Hive_LoadingState extends App_state {}
+
+class Stu_Get_lec_Files_From_Hive_SuccessState extends App_state {}
+
+class Stu_Get_lec_Files_From_Hive_ErrorState extends App_state {
+  Stu_Get_lec_Files_From_Hive_ErrorState();
+}

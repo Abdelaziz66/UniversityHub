@@ -351,8 +351,10 @@ class App_cubit extends Cubit<App_state> {
 
     OpenFile.open(testFilePath,).then((value) {
       print(value.message);
-      if(value.message=='the $testFilePath file does not exists'){
+      if(value.message=='the $testFilePath file does not exists'&&connnection){
         loadPDF(networkfile: networkFile);
+      }else if(value.message=='the $testFilePath file does not exists'&&!connnection){
+        flutterToast(msg: 'file not Found', backColor:Colors.red);
       }
       emit(ShowFile_Success_State());
     }).catchError((error) {
@@ -1086,6 +1088,7 @@ class App_cubit extends Cubit<App_state> {
       stuCoursesMatrialFileModel.forEach((element) {
         print(element.fileName);
       });
+      storeCourseFilesToHIVE(lecId: lecId);
     }).catchError((error) {
       emit(Stu_Get_Course_Material_File_ErrorState(error.toString()));
       print(error.toString());
@@ -2215,7 +2218,7 @@ class App_cubit extends Cubit<App_state> {
   void storeCourseFoldersToHIVE(){
     print('////// $currentCycleId');
     emit(Stu_Add_Course_Folders_To_Hive_LoadingState());
-    stuLecFoldersBox2.delete(currentCycleId);
+   stuLecFoldersBox2.delete(currentCycleId);
     List<GetCourseMaterialsModel>lecFoldersList=List.from(stuLecFoldersBox2.get(currentCycleId,defaultValue: [])).cast<GetCourseMaterialsModel>();
     for(int i=0;i<stuCoursesMatrialModel.length;i++) {
       lecFoldersList.add(GetCourseMaterialsModel(
@@ -2223,6 +2226,7 @@ class App_cubit extends Cubit<App_state> {
         lectureId:stuCoursesMatrialModel[i].lectureId!,
         lectureName:stuCoursesMatrialModel[i].lectureName!,
         semesterName:stuCoursesMatrialModel[i].semesterName!,
+
         type:stuCoursesMatrialModel[i].type!,
         createdAt:stuCoursesMatrialModel[i].createdAt!,
         path:stuCoursesMatrialModel[i].path!,
@@ -2237,6 +2241,10 @@ class App_cubit extends Cubit<App_state> {
       emit(Stu_Add_Course_Folders_To_Hive_ErrorState());
     });
   }
+
+
+
+
 ///-----------------get folders from HIVE by cycle  id ---------------------
 
   List<GetCourseMaterialsModel>currentMaterialLecFolders=[];
@@ -2244,7 +2252,7 @@ class App_cubit extends Cubit<App_state> {
   List<GetCourseMaterialsModel> stuHIVElabModel = [];
   void getCourseFoldersFromHIVE()async{
     emit(Stu_Get_lec_Folders_From_Hive_LoadingState());
-    print(currentCycleId);
+    print('currentCycleId : ----- $currentCycleId');
     stuHIVElecModel = [];
     stuHIVElabModel = [];
     try {
@@ -2271,6 +2279,63 @@ class App_cubit extends Cubit<App_state> {
 
 
   //--------------------Store All Files to HIVE------------------------------
+
+ // String? currentLecId;
   final Box stuLecFilesBox=Hive.box(HiveConstants.lecFilesBox);
+
+  void storeCourseFilesToHIVE({
+    required String lecId,
+}){
+    print('////// $lecId');
+   // currentLecId=lecId;
+    emit(Stu_Add_Course_Files_To_Hive_LoadingState());
+   // stuLecFoldersBox2.delete(lecId);
+    List<GetCourseMaterialFileModel>lecFilesList=List.from(stuLecFilesBox.get(lecId,defaultValue: [])).cast<GetCourseMaterialFileModel>();
+    for(int i=0;i<stuCoursesMatrialFileModel.length;i++) {
+      lecFilesList.add(GetCourseMaterialFileModel(
+        hiveIndex: lecFilesList.length,
+        fileName:stuCoursesMatrialFileModel[i].fileName!,
+        filePath:stuCoursesMatrialFileModel[i].filePath!,
+        createdAt:stuCoursesMatrialFileModel[i].createdAt!,
+        LectureFileId:stuCoursesMatrialFileModel[i].LectureFileId!,
+
+      ));
+    }
+    stuLecFilesBox.put(lecId, lecFilesList).then((value){
+      print('files box keys ${stuLecFilesBox.keys}');
+      print('-------------${lecFilesList[0].fileName}');
+      emit(Stu_Add_Course_Files_To_Hive_SuccessState());
+    }).catchError((error){
+      print(error);
+      emit(Stu_Add_Course_Files_To_Hive_ErrorState());
+    });
+  }
+
+  //------------grt all files from HIVE ----------------
+
+  List<GetCourseMaterialFileModel>MaterialLecFiles=[];
+
+  void getCourseFilesFromHIVE({
+    required String lecId
+}) async {
+    emit(Stu_Get_lec_Files_From_Hive_LoadingState());
+    print('currentLecId : ----- $lecId');
+    try {
+
+      MaterialLecFiles =List.from(stuLecFilesBox.get(lecId,defaultValue: [])).cast<GetCourseMaterialFileModel>();
+      print('//////////////////////////');
+      for (var element in MaterialLecFiles) {
+        print(element.fileName);
+      }
+      emit(Stu_Get_lec_Files_From_Hive_SuccessState());
+    } catch (error) {
+      emit(Stu_Get_lec_Files_From_Hive_ErrorState());
+    }
+  }
+
+
+
+
+
 
 }
