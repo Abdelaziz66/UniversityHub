@@ -144,7 +144,7 @@ class STU_Lecture_Screen extends StatelessWidget {
                       fallback:(context)=> ListView.separated(
                         itemBuilder: (context, index) => InkWell(
                             onTap: () {
-                              cubit.currentCycleId=cubit.allLECFromHIVE[index].cycleId!;
+                              cubit.currentCycleId=cubit.allLECFromHIVE[index].cycleId;
 
                               print(cubit.allLECFromHIVE[0].name);
                               print('cycle Id : ${cubit.currentCycleId}');

@@ -228,7 +228,7 @@ class STU_Matrial_Screen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: ConditionalBuilder(
-                          condition: lectures.isNotEmpty&&state is !Stu_Get_Course_Material_LoadingState ,
+                          condition: lectures.isNotEmpty&&cubit.connnection ,
                           builder:(context)=>GridView.builder(
                             gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
@@ -249,14 +249,14 @@ class STU_Matrial_Screen extends StatelessWidget {
                           ),
 
                           fallback:(context)=>ConditionalBuilder(
-                            condition: cubit.stuHIVElecModel.isNotEmpty&&state is !Stu_Get_lec_Folders_From_Hive_LoadingState ,
+                            condition: cubit.stuHIVElecModel.isNotEmpty ,
                             builder:(context)=>  GridView.builder(
                               gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2, childAspectRatio: 1.1),
                               itemBuilder: (context, index) => InkWell(
                                   onTap: () {
-                                    // cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);
+                                    cubit.getCourseFilesFromHIVE(lecId: cubit.stuHIVElecModel[index].lectureId!);
                                     cubit.isLec=true;
                                     navigateTo(context, STU_Show_Material_Lec_Or_Sec());
                                   },
@@ -313,7 +313,7 @@ class STU_Matrial_Screen extends StatelessWidget {
                                       crossAxisCount: 2, childAspectRatio: 1.1),
                                   itemBuilder: (context, index) => InkWell(
                                       onTap: () {
-                                        // cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);
+                                        cubit.getCourseFilesFromHIVE(lecId: cubit.stuHIVElabModel[index].lectureId!);
                                         cubit.isLec=true;
                                         navigateTo(context, STU_Show_Material_Lec_Or_Sec());
                                       },
