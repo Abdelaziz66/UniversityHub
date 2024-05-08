@@ -472,6 +472,15 @@ class INS_GradeforStudent_ErrorState extends App_state {
 
 
 
+class CreateQuiz_LoadingState extends App_state {
+}
+class CreateQuiz_SuccessState extends App_state {
+}
+
+class CreateQuiz_ErrorState extends App_state {
+}
+
+
 //-----------------Connection---------
 class Connection_success_State extends App_state {
 

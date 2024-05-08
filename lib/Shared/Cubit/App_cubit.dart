@@ -19,6 +19,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
 import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
+import 'package:university_hup/Models/INS_Model/INS_create_quiz_Model.dart';
 import 'package:university_hup/Models/INS_Model/INS_grade_for_student_Model.dart';
 import 'package:university_hup/Models/INS_Model/currentinfo_ins_model.dart';
 import 'package:university_hup/Models/INS_Model/student_Model.dart';
@@ -37,6 +38,7 @@ import 'package:university_hup/Modules/Student/Student_Notification/Assignments_
 import 'package:university_hup/Modules/Student/Student_Notification/Ongoing_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Quizzes_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/UpcomingCourse_Screen.dart';
+import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/constant.dart';
 import 'package:university_hup/Shared/remote/DioHelper.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -105,24 +107,7 @@ class App_cubit extends Cubit<App_state> {
     emit(Tab_Bar_state());
   }
 
-  int more = 2;
-  void addmore() {
-    if (more == 4) {
-    } else {
-      more++;
-    }
 
-    emit(Defulte_state());
-  }
-
-  void minusmore() {
-    if (more == 2) {
-    } else {
-      more--;
-    }
-
-    emit(Defulte_state());
-  }
 
   int Nav_HomeBar_index = 0;
   void nav_home_bar_Function({required int index}) {
@@ -590,6 +575,197 @@ class App_cubit extends Cubit<App_state> {
     allquizAnswers![index] = value;
     //quizAnswerSelected=value;
     emit(Change_Quiz_Answer_State());
+  }
+
+
+
+  //-----------------INS Create Quizzes------------
+
+  List<QuestionINS>? Question_create_list=[];
+  Createquiz_model? quizinfo_ins;
+  List<TextEditingController> QController=[TextEditingController()];
+  List<List<TextEditingController>> AController=[[TextEditingController(),]];
+  List<GlobalKey<AnimatedListState>> ANS_listKey=[GlobalKey()];
+  void addmore(GlobalKey<AnimatedListState> ANSlistKey,index) {
+    if (AController[index].length == 4) {
+      // print(' AController index =  /////////////////////////////');
+      // print(index);
+      // print( AController[index].length);
+      //
+      // print(' AController index /////////////////////////////');
+    } else {
+      // print('length AController before /////////////////////////////');
+      // print(AController[index].length);
+      // print('length AController before /////////////////////////////');
+
+      AController[index].insert(
+          AController[index].length,
+          TextEditingController());
+      ANSlistKey.currentState!
+          .insertItem(AController[index].length-1);
+      // print('length AController after /////////////////////////////');
+      // print(AController[index].length);
+      // print('length AController after /////////////////////////////');
+    }
+
+  }
+
+  void minusmore(GlobalKey<AnimatedListState> ANSlistKey,index) {
+
+      if (AController[index].length == 1) {
+
+      }else{
+        // print('length AController after /////////////////////////////');
+        // print(AController[index].length);
+        // print('length AController after /////////////////////////////');
+        ANSlistKey.currentState!.removeItem(
+          AController[index].length-1,
+              (BuildContext context, Animation<double> animation) =>
+                  INS_Quiz_Answer(
+                  index:index ,
+                  context: context,
+                 index2:  AController[index].length-1,
+    animation: animation),
+          duration: const Duration(milliseconds: 250),
+        );
+        AController[index]
+            .removeAt(AController[index].length - 1);
+        // print('length AController after /////////////////////////////');
+        // print(AController[index].length);
+        // print('length AController after /////////////////////////////');
+      }
+
+
+
+  }
+
+  void createquCreateQuiz_Function({
+    required String? title,
+    required String? notes,
+    required String? startDate,
+    required String? endDate,
+    required double? grade,
+    required String? courseCycleId,
+
+  }){
+    if (true) {
+      emit(CreateQuiz_LoadingState());
+      Dio_Helper.PostData(
+          url:'Instructor/createQuiz' ,
+          token: token,
+          data: {
+            "title": title,
+            "notes": notes,
+            "startDate": startDate,
+            "endDate": endDate,
+            "grade": grade,
+            "courseCycleId": courseCycleId,
+            "questions":[
+              {
+                "text": "quistion 3",
+                "type": "choice",
+                "questionNumber": 3,
+                "grade": 2,
+                "answers": [
+                  {
+                    "text": " answer 1",
+                    "isCorrect": false,
+                    "answerNumber": 1
+                  },
+                  {
+                    "text": " answer 2",
+                    "isCorrect": true,
+                    "answerNumber": 2
+                  },
+                  {
+                    "text": " answer 3",
+                    "isCorrect": false,
+                    "answerNumber": 3
+                  },
+                  {
+                    "text": " answer 4",
+                    "isCorrect": false,
+                    "answerNumber": 4
+                  }
+                ]
+              },
+              {
+                "text": "quistion 3",
+                "type": "choice",
+                "questionNumber": 3,
+                "grade": 2,
+                "answers": [
+                  {
+                    "text": " answer 1",
+                    "isCorrect": false,
+                    "answerNumber": 1
+                  },
+                  {
+                    "text": " answer 2",
+                    "isCorrect": true,
+                    "answerNumber": 2
+                  },
+                  {
+                    "text": " answer 3",
+                    "isCorrect": false,
+                    "answerNumber": 3
+                  },
+                  {
+                    "text": " answer 4",
+                    "isCorrect": false,
+                    "answerNumber": 4
+                  }
+                ]
+              },
+              {
+
+              "text": "quistion 3",
+              "type": "choice",
+              "questionNumber": 3,
+              "grade": 2,
+              "answers": [
+                {
+                  "text": " answer 1",
+                  "isCorrect": false,
+                  "answerNumber": 1
+                },
+                {
+                  "text": " answer 2",
+                  "isCorrect": true,
+                  "answerNumber": 2
+                },
+                {
+                  "text": " answer 3",
+                  "isCorrect": false,
+                  "answerNumber": 3
+                },
+                {
+                  "text": " answer 4",
+                  "isCorrect": false,
+                  "answerNumber": 4
+                }
+              ]
+            },],
+          }
+      ).then((value) {
+
+        if (value.statusCode == 201) {
+
+          quizinfo_ins=  Createquiz_model.fromJson(value.data);
+          quizinfo_ins!.questions!.forEach((element) {
+            Question_create_list!.add(element);
+          });
+          flutterToast(msg:'Created successfully', backColor: Colors.green);
+
+          print(quizinfo_ins!.questions![0].text);
+
+          emit(CreateQuiz_SuccessState());
+        }
+      }).catchError((error) {
+        emit(CreateQuiz_ErrorState());
+        print(error.toString());
+      });
+    }
   }
 
   //----------------------Grades--------------------------

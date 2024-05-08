@@ -35,6 +35,9 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
   String? quiz_ask= '';
   var boardcontroller = PageController();
   var stepcontroller=ScrollController();
+  var titlecontroller = TextEditingController();
+  var noticcontroller = TextEditingController();
+  var pointcontroller = TextEditingController();
   String? startDate;
   String? endDate;
   int? starthours;
@@ -194,6 +197,9 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                             padding:
                                             const EdgeInsets.symmetric(horizontal: 8.0),
                                             child: TextFormField(
+                                              controller: titlecontroller,
+
+
 
                                               keyboardType: TextInputType.text,
                                               onFieldSubmitted: (value) {
@@ -354,7 +360,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                   padding:
                                                   const EdgeInsets.symmetric(horizontal: 8.0),
                                                   child: TextFormField(
-
+                                                    controller: noticcontroller,
                                                     keyboardType: TextInputType.text,
                                                     onFieldSubmitted: (value) {
                                                       print(value);
@@ -475,7 +481,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                           padding:
                                                           const EdgeInsets.symmetric(horizontal: 8.0),
                                                           child: TextFormField(
-
+                                                            controller: pointcontroller,
                                                             keyboardType: TextInputType.number,
                                                             onFieldSubmitted: (value) {
                                                               print(value);
@@ -485,7 +491,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                             },
                                                             validator: (value) {
                                                               if (value!.isEmpty) {
-                                                                return 'Folder name can\'t be empty';
+                                                                return 'points can\'t be empty';
                                                               }
                                                               return null;
                                                             },
@@ -802,7 +808,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                             FontAwesomeIcons
                                                                 .clock),
                                                         SizedBox(
-                                                          width: 12,
+                                                          width: 5,
                                                         ),
                                                         Text(
                                                           'Start',
@@ -836,7 +842,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                                 vertical:
                                                                 8.0,
                                                                 horizontal:
-                                                                15),
+                                                                10),
                                                             child: Row(
                                                               children: [
                                                                 Text(
@@ -888,7 +894,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                                 vertical:
                                                                 8.0,
                                                                 horizontal:
-                                                                15),
+                                                                10),
                                                             child: Row(
                                                               children: [
                                                                 Text(
@@ -1046,7 +1052,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                             FontAwesomeIcons
                                                                 .clock),
                                                         SizedBox(
-                                                          width: 12,
+                                                          width: 5,
                                                         ),
                                                         Text(
                                                           'End',
@@ -1080,7 +1086,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                                 vertical:
                                                                 8.0,
                                                                 horizontal:
-                                                                15),
+                                                                10),
                                                             child: Row(
                                                               children: [
                                                                 Text(
@@ -1132,7 +1138,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                                 vertical:
                                                                 8.0,
                                                                 horizontal:
-                                                                15),
+                                                                10),
                                                             child: Row(
                                                               children: [
                                                                 Text(
@@ -1205,7 +1211,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                           SizedBox(
                                             width: 10,
                                           ),
-                                          Text('Quize 1'),
+                                          Text(titlecontroller.text),
                                           Spacer(),
                                           Container(
                                             height: 30,
@@ -1304,11 +1310,17 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                         SizedBox(
                                                           width: 7,
                                                         ),
-                                                        Text(
-                                                          'Computer Security',
-                                                          textAlign: TextAlign.start,
-                                                          style: TextStyle(
-                                                              fontWeight: FontWeight.w700, fontSize: 13),
+                                                        Expanded(
+                                                          child: Container(
+                                                            child: Text(
+                                                              '${cubit.currentCourseName}',
+                                                              textAlign: TextAlign.start,
+                                                              overflow: TextOverflow.ellipsis,
+                                                              maxLines: 1,
+                                                              style: TextStyle(
+                                                                  fontWeight: FontWeight.w700, fontSize: 13),
+                                                            ),
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
@@ -1325,7 +1337,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                           width: 7,
                                                         ),
                                                         Text(
-                                                          'Sara shehab',
+                                                          '${cubit.instructorInfoModel!.fullName }',
                                                           textAlign: TextAlign.start,
                                                           style: TextStyle(
                                                               fontWeight: FontWeight.w700, fontSize: 13),
@@ -1345,7 +1357,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                           width: 7,
                                                         ),
                                                         Text(
-                                                          '5 points',
+                                                          pointcontroller.text,
                                                           textAlign: TextAlign.start,
                                                           style: TextStyle(
                                                               fontWeight: FontWeight.w700, fontSize: 13),
@@ -1365,7 +1377,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                           width: 7,
                                                         ),
                                                         Text(
-                                                          'From 8 PM to 9 PM',
+                                                          'From ${starthours} PM to ${endhours} ',
                                                           textAlign: TextAlign.start,
                                                           style: TextStyle(
                                                               fontWeight: FontWeight.w700, fontSize: 13),
