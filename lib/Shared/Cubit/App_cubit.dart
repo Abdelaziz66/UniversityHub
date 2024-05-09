@@ -582,184 +582,195 @@ class App_cubit extends Cubit<App_state> {
 
   //-----------------INS Create Quizzes------------
 
-  List<QuestionINS>? Question_create_list=[];
+  // List<QuestionINS>? Question_create_list=[];
+  List<Map<String, dynamic>> Question_create_list_map = [];
+  // List<List<Answer>>? Answer_create_list=[];
+  List<List<Map<String, dynamic>>> Answer_create_list_map = [];
   Createquiz_model? quizinfo_ins;
   List<TextEditingController> QController=[TextEditingController()];
-  List<List<TextEditingController>> AController=[[TextEditingController(),]];
-  List<GlobalKey<AnimatedListState>> ANS_listKey=[GlobalKey()];
-  void addmore(GlobalKey<AnimatedListState> ANSlistKey,index) {
-    if (AController[index].length == 4) {
-      // print(' AController index =  /////////////////////////////');
-      // print(index);
-      // print( AController[index].length);
-      //
-      // print(' AController index /////////////////////////////');
-    } else {
-      // print('length AController before /////////////////////////////');
-      // print(AController[index].length);
-      // print('length AController before /////////////////////////////');
+  List<List<TextEditingController>> AController=[[TextEditingController(),TextEditingController(),TextEditingController(),TextEditingController(),]];
+  List<List<bool>> Acheck=[[true,false,false,false,]];
+  String? startDate_Quiz;
+  String? endDate_Quiz;
+  var titlecontroller = TextEditingController();
+  var noticcontroller = TextEditingController();
+  var pointcontroller = TextEditingController();
 
-      AController[index].insert(
-          AController[index].length,
-          TextEditingController());
-      ANSlistKey.currentState!
-          .insertItem(AController[index].length-1);
-      // print('length AController after /////////////////////////////');
-      // print(AController[index].length);
-      // print('length AController after /////////////////////////////');
-    }
-
+  void Acheck_Function(index,index2)
+  {
+    print(Acheck[index][index2]);
+   Acheck.insert(index,[false,false,false,false]);
+    Acheck[index].insert(index2,true);
+    print(Acheck[index][index2]);
+    emit(Defulte_state());
   }
+  // List<GlobalKey<AnimatedListState>> ANS_listKey=[GlobalKey()];
+  // void addmore(GlobalKey<AnimatedListState> ANSlistKey,index) {
+  //   if (AController[index].length == 4) {
+  //     // print(' AController index =  /////////////////////////////');
+  //     // print(index);
+  //     // print( AController[index].length);
+  //     //
+  //     // print(' AController index /////////////////////////////');
+  //   } else {
+  //     // print('length AController before /////////////////////////////');
+  //     // print(AController[index].length);
+  //     // print('length AController before /////////////////////////////');
+  //
+  //     AController[index].insert(
+  //         AController[index].length,
+  //         TextEditingController());
+  //     ANSlistKey.currentState!
+  //         .insertItem(AController[index].length-1);
+  //     // print('length AController after /////////////////////////////');
+  //     // print(AController[index].length);
+  //     // print('length AController after /////////////////////////////');
+  //   }
+  //
+  // }
+  //
+  // void minusmore(GlobalKey<AnimatedListState> ANSlistKey,index) {
+  //
+  //     if (AController[index].length == 1) {
+  //
+  //     }else{
+  //       // print('length AController after /////////////////////////////');
+  //       // print(AController[index].length);
+  //       // print('length AController after /////////////////////////////');
+  //       ANSlistKey.currentState!.removeItem(
+  //         AController[index].length-1,
+  //             (BuildContext context, Animation<double> animation) =>
+  //                 INS_Quiz_Answer(
+  //                 index:index ,
+  //                 context: context,
+  //                index2:  AController[index].length-1,
+  //   animation: animation),
+  //         duration: const Duration(milliseconds: 250),
+  //       );
+  //       AController[index]
+  //           .removeAt(AController[index].length - 1);
+  //       // print('length AController after /////////////////////////////');
+  //       // print(AController[index].length);
+  //       // print('length AController after /////////////////////////////');
+  //     }
+  //
+  //
+  //
+  // }
 
-  void minusmore(GlobalKey<AnimatedListState> ANSlistKey,index) {
 
-      if (AController[index].length == 1) {
-
-      }else{
-        // print('length AController after /////////////////////////////');
-        // print(AController[index].length);
-        // print('length AController after /////////////////////////////');
-        ANSlistKey.currentState!.removeItem(
-          AController[index].length-1,
-              (BuildContext context, Animation<double> animation) =>
-                  INS_Quiz_Answer(
-                  index:index ,
-                  context: context,
-                 index2:  AController[index].length-1,
-    animation: animation),
-          duration: const Duration(milliseconds: 250),
-        );
-        AController[index]
-            .removeAt(AController[index].length - 1);
-        // print('length AController after /////////////////////////////');
-        // print(AController[index].length);
-        // print('length AController after /////////////////////////////');
-      }
-
-
-
-  }
-
-  void createquCreateQuiz_Function({
-    required String? title,
-    required String? notes,
-    required String? startDate,
-    required String? endDate,
-    required double? grade,
-    required String? courseCycleId,
-
-  }){
+  void createquCreateQuiz_Function(){
     if (true) {
       emit(CreateQuiz_LoadingState());
+      Answer_create_list_map=[];
+      Question_create_list_map=[];
+      for(int i=0;i<AController.length;i++){
+        Answer_create_list_map.add([]);
+        for(int j=0;j<AController[i].length;j++){
+          // print('099999999999999999999999999');
+          // print(AController.length);
+          // print(AController[i].length);
+          // print(AController[i][j].text);
+          // print('099999999999999999999999999');
+          if(AController[i][j].text!=''){
+
+            Answer_create_list_map[i].add({'text': AController[i][j].text, 'isCorrect': Acheck[i][j], 'answerNumber':j+1});
+
+
+          }
+
+
+        }
+      }
+      // for(int i=0;i<AController.length;i++){
+      //   Answer_create_list!.add([]);
+      //   for(int j=0;j<AController[i].length;j++){
+      //     // print('099999999999999999999999999');
+      //     // print(AController.length);
+      //     // print(AController[i].length);
+      //     // print(AController[i][j].text);
+      //     // print('099999999999999999999999999');
+      //     if(AController[i][j].text!=''){
+      //
+      //         Answer_create_list?[i].add(Answer.fromJson({
+      //           "text": AController[i][j].text,
+      //           "isCorrect": Acheck[i][j],
+      //           "answerNumber": j
+      //         },));
+      //
+      //
+      //     }
+      //
+      //
+      //   }
+      // }
+
+      for(int i=0;i<QController.length;i++){
+        Question_create_list_map.add({
+          "text": QController[i].text,
+          "type": "choice",
+          "questionNumber": i+1,
+          "grade": 1,
+          "answers":Answer_create_list_map[i] ,
+        });
+
+
+      }
+      print('099999999999999999999999999');
+      print(Question_create_list_map);
+      print('099999999999999999999999999');
       Dio_Helper.PostData(
           url:'Instructor/createQuiz' ,
           token: token,
           data: {
-            "title": title,
-            "notes": notes,
-            "startDate": startDate,
-            "endDate": endDate,
-            "grade": grade,
-            "courseCycleId": courseCycleId,
-            "questions":[
-              {
-                "text": "quistion 3",
-                "type": "choice",
-                "questionNumber": 3,
-                "grade": 2,
-                "answers": [
-                  {
-                    "text": " answer 1",
-                    "isCorrect": false,
-                    "answerNumber": 1
-                  },
-                  {
-                    "text": " answer 2",
-                    "isCorrect": true,
-                    "answerNumber": 2
-                  },
-                  {
-                    "text": " answer 3",
-                    "isCorrect": false,
-                    "answerNumber": 3
-                  },
-                  {
-                    "text": " answer 4",
-                    "isCorrect": false,
-                    "answerNumber": 4
-                  }
-                ]
-              },
-              {
-                "text": "quistion 3",
-                "type": "choice",
-                "questionNumber": 3,
-                "grade": 2,
-                "answers": [
-                  {
-                    "text": " answer 1",
-                    "isCorrect": false,
-                    "answerNumber": 1
-                  },
-                  {
-                    "text": " answer 2",
-                    "isCorrect": true,
-                    "answerNumber": 2
-                  },
-                  {
-                    "text": " answer 3",
-                    "isCorrect": false,
-                    "answerNumber": 3
-                  },
-                  {
-                    "text": " answer 4",
-                    "isCorrect": false,
-                    "answerNumber": 4
-                  }
-                ]
-              },
-              {
-
-              "text": "quistion 3",
-              "type": "choice",
-              "questionNumber": 3,
-              "grade": 2,
-              "answers": [
-                {
-                  "text": " answer 1",
-                  "isCorrect": false,
-                  "answerNumber": 1
-                },
-                {
-                  "text": " answer 2",
-                  "isCorrect": true,
-                  "answerNumber": 2
-                },
-                {
-                  "text": " answer 3",
-                  "isCorrect": false,
-                  "answerNumber": 3
-                },
-                {
-                  "text": " answer 4",
-                  "isCorrect": false,
-                  "answerNumber": 4
-                }
-              ]
-            },],
+            "title": titlecontroller.text,
+            "notes": noticcontroller.text,
+            "startDate": startDate_Quiz,
+            "endDate": endDate_Quiz,
+            "grade": pointcontroller.text,
+            "courseCycleId": currentCycleId,
+            "questions":Question_create_list_map,
           }
       ).then((value) {
 
         if (value.statusCode == 201) {
 
-          quizinfo_ins=  Createquiz_model.fromJson(value.data);
-          quizinfo_ins!.questions!.forEach((element) {
-            Question_create_list!.add(element);
-          });
+          // quizinfo_ins=  Createquiz_model.fromJson(value.data);
+          // quizinfo_ins!.questions!.forEach((element) {
+          //   print('----------------------------------------');
+          //   print(element.questionNumber);
+          //   print(element.text);
+          //   print('------------------');
+          //   element.answers!.forEach((element4) {
+          //     print(element4.answerNumber);
+          //   });
+          //   print('------------------');
+          //   element.answers!.forEach((element2) {
+          //     print(element2.text);
+          //   });
+          //   print('------------------');
+          //   element.answers!.forEach((element3) {
+          //     print(element3.isCorrect);
+          //   });
+          //   print('----------------------------------------');
+          //
+          //
+          //
+          //
+          // });
           flutterToast(msg:'Created successfully', backColor: Colors.green);
 
-          print(quizinfo_ins!.questions![0].text);
+          // print(quizinfo_ins!.questions![0].text);
 
+
+
+        titlecontroller.text='';
+        noticcontroller.text='';
+        pointcontroller.text='';
+        startDate_Quiz='';
+        endDate_Quiz='';
+        Question_create_list_map=[];
+        Answer_create_list_map=[];
           emit(CreateQuiz_SuccessState());
         }
       }).catchError((error) {
