@@ -129,7 +129,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
                                   yes: () {
                                     cubit.createquCreateQuiz_Function(
                                     );
-                                    if(state is CreateQuiz_SuccessState){
+
                                       Navigator.pop(context);
                                       Navigator.push(
                                           context,
@@ -137,7 +137,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
                                             builder: (context) =>
                                                 INS_Quizes_Screen(),
                                           ));
-                                    }
+
 
                                   });
 
