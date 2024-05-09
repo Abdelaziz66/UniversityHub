@@ -562,3 +562,43 @@ class Stu_Get_lec_Files_From_Hive_SuccessState extends App_state {}
 class Stu_Get_lec_Files_From_Hive_ErrorState extends App_state {
   Stu_Get_lec_Files_From_Hive_ErrorState();
 }
+
+
+//----------------Store all news to HIVE--------------
+
+class Stu_Add_AllNews_To_Hive_LoadingState extends App_state {}
+
+class Stu_Add_AllNews_To_Hive_SuccessState extends App_state {}
+
+class Stu_Add_AllNews_To_Hive_ErrorState extends App_state {
+}
+
+//--------get all news from hive -------------------
+
+class Stu_Get_AllNews_From_Hive_LoadingState extends App_state {}
+
+class Stu_Get_AllNews_From_Hive_SuccessState extends App_state {}
+
+class Stu_Get_AllNews_From_Hive_ErrorState extends App_state {
+  Stu_Get_AllNews_From_Hive_ErrorState();
+}
+
+
+//-----------store user info to HIVE-----------
+class Stu_Add_userInfo_To_Hive_LoadingState extends App_state {}
+
+class Stu_Add_userInfo_To_Hive_SuccessState extends App_state {}
+
+class Stu_Add_userInfo_To_Hive_ErrorState extends App_state {
+}
+
+//-------------get user Info from HIVE-------------
+
+class Stu_Get_userInfo_From_Hive_LoadingState extends App_state {}
+
+class Stu_Get_userInfo_From_Hive_SuccessState extends App_state {}
+
+class Stu_Get_userInfo_From_Hive_ErrorState extends App_state {
+  Stu_Get_userInfo_From_Hive_ErrorState();
+}
+

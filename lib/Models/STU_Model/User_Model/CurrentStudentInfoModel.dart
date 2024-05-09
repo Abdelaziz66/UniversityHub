@@ -1,4 +1,5 @@
 class CurrentStudentInfoModel {
+  int?hiveIndex;
   String? userId;
   String? fullName;
   String? email;
@@ -11,7 +12,9 @@ class CurrentStudentInfoModel {
   String? universityName;
 
   CurrentStudentInfoModel(
-      {this.userId,
+      {
+        this.hiveIndex,
+        this.userId,
         this.fullName,
         this.email,
         this.phone,
@@ -20,7 +23,9 @@ class CurrentStudentInfoModel {
         this.level,
         this.departmentName,
         this.facultyName,
-        this.universityName});
+        this.universityName
+
+      });
 
   CurrentStudentInfoModel.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];

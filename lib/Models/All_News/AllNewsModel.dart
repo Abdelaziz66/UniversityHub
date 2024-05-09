@@ -1,4 +1,5 @@
 class GetAllNewsModel {
+  int? hiveIndex;
   String? newsId;
   String? content;
   String? filePath;
@@ -6,15 +7,22 @@ class GetAllNewsModel {
   String? createdAt;
   String? userId;
   String?userName;
+  String?userImage;
+  String?facultyName;
 
-  GetAllNewsModel(
+  GetAllNewsModel({
+      this.hiveIndex,
       this.newsId,
       this.content,
       this.filePath,
       this.facultyId,
       this.createdAt,
       this.userId,
-      this.userName
+      this.userName,
+      this.userImage,
+      this.facultyName,
+
+  }
       );
 
   GetAllNewsModel.fromJson(Map<String, dynamic> json) {
@@ -25,6 +33,8 @@ class GetAllNewsModel {
     createdAt = json['createdAt'];
     userId = json['userId'];
     userName=json['userName'];
+    userImage=json['userImage'];
+    facultyName=json['facultyName'];
   }
 
 }

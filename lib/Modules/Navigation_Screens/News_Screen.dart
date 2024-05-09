@@ -150,7 +150,7 @@ class Home_screen extends StatelessWidget {
                           ),
                         ),
                         ConditionalBuilder(
-                          condition: cubit.connnection,
+                          condition:cubit.allNEWSFromHIVE.isEmpty || cubit.connnection,
                           builder: (context) {
                             print('Display online list');
                             return  ListView.separated(
@@ -187,13 +187,13 @@ class Home_screen extends StatelessWidget {
                                 child: Post(
                                     image: image[index],
                                     context: context,
-                                    news: cubit.newsmodel[index]),
+                                    news: cubit.allNEWSFromHIVE[index]),
                               ),
                               separatorBuilder: (context, index) => Container(
                                 height: 0,
                                 color: Colors.transparent,
                               ),
-                              itemCount: cubit.newsmodel.length,
+                              itemCount: cubit.allNEWSFromHIVE.length,
                             );
                           },
                         ),

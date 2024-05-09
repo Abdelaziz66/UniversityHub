@@ -653,11 +653,19 @@ class Dashboard_Screen extends StatelessWidget {
           ),
         ];
         return ConditionalBuilder(
-          condition:rol=='Student'? cubit.studentInfoModel != null &&
-                  cubit.connnection == true ||
-              cubit.usermodel.fullName != null && cubit.connnection == false:
-          cubit.instructorInfoModel != null &&
-              cubit.connnection == true
+          condition: cubit.allNEWSFromHIVE.isNotEmpty&&cubit.userInfoFromHIVE?.fullName != null&&rol!='Doctor'||
+                    rol=='Student' && cubit.studentInfoModel != null &&
+                   cubit.connnection == true||
+                    rol=='Doctor'&&
+                   cubit.instructorInfoModel != null
+                   && cubit.connnection == true
+
+          // condition:rol=='Student'? cubit.studentInfoModel != null &&
+          //         cubit.connnection == true ||
+          //     cubit.usermodel.fullName != null && cubit.connnection == false:
+          // cubit.instructorInfoModel != null &&
+          //     cubit.connnection == true
+
               // || cubit.instructorInfo_offline_Model.fullName != null && cubit.connnection == false
           ,
           builder: (context) => Scaffold(
@@ -711,8 +719,9 @@ class Dashboard_Screen extends StatelessWidget {
                                                 // width:200,
                                                 child: Text(
                                                   rol == 'Student'
-                                                      ? 'Hi, ${cubit.connnection == true ? cubit.studentInfoModel!.fullName : cubit.usermodel.fullName} !'
-                                                      : 'Hi, Dr ${cubit.instructorInfoModel!.fullName } !',
+                                                      //? 'Hi, ${cubit.usermodel == null ? cubit.studentInfoModel!.fullName : cubit.usermodel?.fullName} !'
+                                                      ? 'Hi, ${cubit.userInfoFromHIVE == null ? cubit.studentInfoModel!.fullName : cubit.userInfoFromHIVE?.fullName} !'
+                                                      : 'Hi, Dr ${cubit.instructorInfoModel?.fullName } !',
                                                   maxLines: 1,
                                                   overflow:
                                                       TextOverflow.ellipsis,

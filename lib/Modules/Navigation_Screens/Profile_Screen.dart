@@ -39,7 +39,7 @@ class Profile_screen extends StatelessWidget {
             // condition:true,
             condition: cubit.studentInfoModel != null &&
                 cubit.connnection == true ||
-                cubit.usermodel.fullName != null && cubit.connnection == false,
+                cubit.userInfoFromHIVE?.fullName != null && cubit.connnection == false,
             builder: (context) => Column(
               children: [
                 const SizedBox(
@@ -93,7 +93,7 @@ class Profile_screen extends StatelessWidget {
                                                         backgroundColor:
                                                         Colors.white,
                                                         backgroundImage: NetworkImage(
-                                                            '${cubit.connnection == true ? cubit.studentInfoModel!.imagePath : cubit.usermodel!.imagePath}'
+                                                            '${cubit.userInfoFromHIVE == null || cubit.connnection ? cubit.studentInfoModel!.imagePath : cubit.userInfoFromHIVE!.imagePath}'
                                                           //'assets/images/profile.png'
                                                         ),
                                                       ),
@@ -168,7 +168,7 @@ class Profile_screen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  '${cubit.connnection == true ? cubit.studentInfoModel!.departmentName : cubit.usermodel!.departmentName}',
+                                  '${cubit.userInfoFromHIVE == null || cubit.connnection? cubit.studentInfoModel!.departmentName : cubit.userInfoFromHIVE!.departmentName}',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w900,
                                     fontSize: 20,
@@ -193,7 +193,7 @@ class Profile_screen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  '${cubit.connnection == true ? cubit.studentInfoModel!.level : cubit.usermodel.level}',
+                                  '${cubit.userInfoFromHIVE == null || cubit.connnection ? cubit.studentInfoModel!.level : cubit.userInfoFromHIVE?.level}',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w900,
                                     fontSize: 20,
@@ -260,7 +260,7 @@ class Profile_screen extends StatelessWidget {
                           child: Container(
                             width: 300,
                             child: Text(
-                              '${cubit.connnection == true ? cubit.studentInfoModel!.fullName : cubit.usermodel.fullName}',
+                              '${cubit.userInfoFromHIVE == null || cubit.connnection ? cubit.studentInfoModel!.fullName : cubit.userInfoFromHIVE?.fullName}',
                               maxLines: 1,
                               style: TextStyle(
                                 overflow: TextOverflow.ellipsis,
@@ -363,7 +363,7 @@ class Profile_screen extends StatelessWidget {
                                                             child: Column(
                                                               children: [
                                                                 Text(
-                                                                  '${cubit.connnection == true ? cubit.studentInfoModel!.facultyName : cubit.usermodel!.facultyName} - ${cubit.connnection == true ? cubit.studentInfoModel!.universityName : cubit.usermodel!.universityName}',
+                                                                  '${cubit.userInfoFromHIVE==null||cubit.connnection == true ? cubit.studentInfoModel!.facultyName :cubit.userInfoFromHIVE?.facultyName} - ${cubit.connnection == true ||cubit.userInfoFromHIVE==null? cubit.studentInfoModel!.universityName : cubit.userInfoFromHIVE?.universityName}',
                                                                   style:
                                                                   TextStyle(
                                                                     fontWeight:
@@ -432,7 +432,7 @@ class Profile_screen extends StatelessWidget {
                                                                               130,
                                                                               child:
                                                                               Text(
-                                                                                '${cubit.connnection == true ? cubit.studentInfoModel!.fullName : cubit.usermodel!.fullName}',
+                                                                                '${cubit.userInfoFromHIVE==null||cubit.connnection == true? cubit.studentInfoModel!.fullName : cubit.userInfoFromHIVE!.fullName}',
                                                                                 maxLines: 1,
                                                                                 style: TextStyle(
                                                                                   overflow: TextOverflow.ellipsis,
@@ -460,7 +460,7 @@ class Profile_screen extends StatelessWidget {
                                                                               ),
                                                                             ),
                                                                             Text(
-                                                                              '${cubit.connnection == true ? cubit.studentInfoModel!.academicId : cubit.usermodel!.academicId}',
+                                                                              '${cubit.userInfoFromHIVE==null||cubit.connnection == true ? cubit.studentInfoModel!.academicId : cubit.userInfoFromHIVE?.academicId}',
                                                                               style:
                                                                               TextStyle(
                                                                                 fontWeight: FontWeight.w500,
@@ -486,7 +486,7 @@ class Profile_screen extends StatelessWidget {
                                                                               ),
                                                                             ),
                                                                             Text(
-                                                                              '${cubit.connnection == true ? cubit.studentInfoModel!.level : cubit.usermodel!.level} - ${cubit.connnection == true ? cubit.studentInfoModel!.departmentName : cubit.usermodel!.departmentName}',
+                                                                              '${cubit.userInfoFromHIVE==null||cubit.connnection == true ? cubit.studentInfoModel!.level :cubit.userInfoFromHIVE?.level} - ${cubit.userInfoFromHIVE==null||cubit.connnection == true ? cubit.studentInfoModel!.departmentName : cubit.userInfoFromHIVE?.departmentName}',
                                                                               style:
                                                                               TextStyle(
                                                                                 fontWeight: FontWeight.w500,
@@ -512,7 +512,7 @@ class Profile_screen extends StatelessWidget {
                                                                               ),
                                                                             ),
                                                                             Text(
-                                                                              '${cubit.connnection == true ? cubit.studentInfoModel!.phone : cubit.usermodel!.phone}',
+                                                                              '${cubit.userInfoFromHIVE==null||cubit.connnection == true ? cubit.studentInfoModel!.phone : cubit.userInfoFromHIVE?.phone}',
                                                                               maxLines:
                                                                               1,
                                                                               style:

@@ -91,7 +91,7 @@ class STU_Lecture_Screen extends StatelessWidget {
                   const SizedBox(height: 5,),
                   Expanded(
                     child: ConditionalBuilder(
-                      condition: cubit.connnection,
+                      condition: cubit.allLECFromHIVE.isEmpty|| cubit.connnection,
                       builder:(context)=>ListView.separated(
                         itemBuilder: (context, index) => InkWell(
                             onTap: () {
