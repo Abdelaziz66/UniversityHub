@@ -61,21 +61,20 @@ class App_cubit extends Cubit<App_state> {
 
   int Nav_Bar_index = 0;
   void Nav_Bar_Function({required int index}) {
-    if(!connnection && index == 2){
-      getAllCoursesFromHIVE();
-    }
-   else if (index == 2) {
-      if(rol=='Student'){
-        if(stuAllCoursesModel.length == 0){
+    // if(!connnection && index == 2){
+    //   getAllCoursesFromHIVE();
+    // }
+    if (index == 2) {
+      if(rol=='Student'&& connnection){
+      //  if(stuAllCoursesModel.length == 0){
           StuGetAllCourses(
-            token: token,
-          );
+            token: token,);
 
-        }
+     //   }
       }else{
-        if(ins_Courses_Model.length == 0){
+      //  if(ins_Courses_Model.length == 0){
           INS_GetAllCourses_Function( token: token,);
-        }
+     //   }
 
       }
 
@@ -819,13 +818,25 @@ class App_cubit extends Cubit<App_state> {
         print('get Student inf true');
         studentInfoModel = CurrentStudentInfoModel.fromJson(value.data);
         print(studentInfoModel?.facultyName);
+        stuStoreUserInfoToHIVE(
+           userId : studentInfoModel!.userId!,
+           fullName: studentInfoModel!.fullName!,
+           email: studentInfoModel!.email!,
+           phone: studentInfoModel!.phone!,
+           imagePath :studentInfoModel!.imagePath!,
+           academicId :studentInfoModel!.academicId!,
+           level :studentInfoModel!.level!,
+           departmentName :studentInfoModel!.departmentName!,
+           facultyName:studentInfoModel!.facultyName!,
+           universityName :studentInfoModel!.universityName!,
+        );
         emit(Get_STU_Info_SuccessState());
       }
     }).catchError((error) {
       emit(Get_STU_Info_ErrorState(error.toString()));
       print(error.toString());
     });
-    InsertToDataBase_User_Table();
+    //InsertToDataBase_User_Table();
   }
 
   currentinfo_ins_model? instructorInfoModel;
@@ -857,7 +868,7 @@ class App_cubit extends Cubit<App_state> {
     // print('start get news from api ');
     print(allNewsModel.length );
     allNewsModel=[];
-    if (allNewsModel.isEmpty) {
+   // if (allNewsModel.isEmpty) {
       // print('start get news from api -->');
       emit(Get_All_NewsLoadingState());
      await Dio_Helper.GetData(url: NEWS).then((value) {
@@ -867,21 +878,17 @@ class App_cubit extends Cubit<App_state> {
           for (var element in Json) {
             allNewsModel.add(GetAllNewsModel.fromJson(element));
           }
+          stuStoreAllNewstoHIVE();
           emit(Get_All_NewsSuccessState(allNewsModel));
         }
-        allNewsModel.forEach((element) {
-          // print('content 1------------: ${element.content}');
-        });
-
-
       }).catchError((error) {
         emit(Get_All_NewsErrorState(error.toString()));
 
         print(error.toString());
       });
-      InsertToDataBase_News_Table();
+     // InsertToDataBase_News_Table();
 
-    }
+
 
   }
 
@@ -907,7 +914,7 @@ class App_cubit extends Cubit<App_state> {
         }
         stuStoreAllCourses();
 
-        InsertToDataBase_Course_Table();
+        //InsertToDataBase_Course_Table();
         // stuAllCoursesModel.forEach((element) {
         //   print('name------- ${element.name}');
         // });
@@ -941,7 +948,7 @@ class App_cubit extends Cubit<App_state> {
           }
           emit(INS_Get_All_Courses_SuccessState(ins_Courses_Model));
         }
-        InsertToDataBase_Course_Table();
+        //InsertToDataBase_Course_Table();
         // stuAllCoursesModel.forEach((element) {
         //   print('name------- ${element.name}');
         // });
@@ -1997,9 +2004,9 @@ class App_cubit extends Cubit<App_state> {
       onOpen: (database) async {
         print('________________Start Get Data ________________ ');
 
-        GetFromDataBase(database, User_Table!);
-        GetFromDataBase(database, News_Table!);
-        GetFromDataBase(database, Course_Table!);
+        // GetFromDataBase(database, User_Table!);
+        // GetFromDataBase(database, News_Table!);
+        // GetFromDataBase(database, Course_Table!);
 
       },
     );
@@ -2022,7 +2029,7 @@ class App_cubit extends Cubit<App_state> {
                   '"${studentInfoModel!.universityName}","${studentInfoModel!.level}")');
         });
         emit(InsertToDataBase_state());
-        GetFromDataBase(database,'User');
+      //  GetFromDataBase(database,'User');
       });
 
     }
@@ -2042,7 +2049,7 @@ class App_cubit extends Cubit<App_state> {
           });
         });
         emit(InsertToDataBase_state());
-        GetFromDataBase(database,'News');
+        //GetFromDataBase(database,'News');
       });
 
     }
@@ -2065,7 +2072,7 @@ class App_cubit extends Cubit<App_state> {
         });
 
         emit(InsertToDataBase_state());
-        GetFromDataBase(database,'Course');
+      //  GetFromDataBase(database,'Course');
       });
 
     }
@@ -2073,43 +2080,46 @@ class App_cubit extends Cubit<App_state> {
 
   }
 
-  CurrentStudentInfoModel usermodel= CurrentStudentInfoModel();
-  List<GetAllNewsModel> newsmodel=[];
-  List<Stu_GetAllCoursesModel>coursemodel=[];
-  void GetFromDataBase(database, String tablename) {
-    database?.rawQuery('SELECT * FROM $tablename').then((value) {
-      if (tablename == User_Table) {
-        usermodel= CurrentStudentInfoModel();
-        usermodel = CurrentStudentInfoModel.fromJson(value[0]);
-      }
-      else if(tablename == News_Table){
-        newsmodel=[];
-        value.forEach((element) {
-          newsmodel.add(GetAllNewsModel.fromJson(element));
-        });
 
-      }
-      else if(tablename == Course_Table){
-       coursemodel=[];
-        value.forEach((element) {
-         coursemodel.add(Stu_GetAllCoursesModel.fromJson(element));
-        });
-        // print('Course_from get_________________________________________');
-        // // print(value);
-        // print('-----------------------------------------------------');
-        // print(stuAllCoursesModel.length);
-        // print(coursemodel.length);
-        // coursemodel.forEach((element) {
-        //   print(element.name);
-        // });
-        // print('__________________________________________________________________________________');
-      }
-    }).catchError((onError){print(onError.toString());});
-    emit(GetFromDataBase_state());
-  }
 
-  bool connnection=true;
-  Future<void> connection_Function() async {
+
+  // CurrentStudentInfoModel? usermodel;
+  // List<GetAllNewsModel> newsmodel=[];
+  // List<Stu_GetAllCoursesModel>coursemodel=[];
+  // void GetFromDataBase(database, String tablename) {
+  //   database?.rawQuery('SELECT * FROM $tablename').then((value) {
+  //     if (tablename == User_Table) {
+  //       usermodel= CurrentStudentInfoModel();
+  //       usermodel = CurrentStudentInfoModel.fromJson(value[0]);
+  //     }
+  //     else if(tablename == News_Table){
+  //       newsmodel=[];
+  //       value.forEach((element) {
+  //         newsmodel.add(GetAllNewsModel.fromJson(element));
+  //       });
+  //
+  //     }
+  //     else if(tablename == Course_Table){
+  //      coursemodel=[];
+  //       value.forEach((element) {
+  //        coursemodel.add(Stu_GetAllCoursesModel.fromJson(element));
+  //       });
+  //       // print('Course_from get_________________________________________');
+  //       // // print(value);
+  //       // print('-----------------------------------------------------');
+  //       // print(stuAllCoursesModel.length);
+  //       // print(coursemodel.length);
+  //       // coursemodel.forEach((element) {
+  //       //   print(element.name);
+  //       // });
+  //       // print('__________________________________________________________________________________');
+  //     }
+  //   }).catchError((onError){print(onError.toString());});
+  //   emit(GetFromDataBase_state());
+  // }
+
+  bool connnection=false;
+  Future<void> connection_Function()  async {
     InternetConnectionChecker().onStatusChange.listen((state) {
       switch (state) {
         case InternetConnectionStatus.connected:
@@ -2124,6 +2134,8 @@ class App_cubit extends Cubit<App_state> {
               GetCurrentStudenInfo();
               StuGetAllCourses(token: token);
               GetAllNews();
+            //  allNEWSFromHIVE=[];
+            //  usermodel=null;
               //getAllCoursesFromHIVE();
               //getCourseFoldersFromHIVE();
             }else{
@@ -2131,12 +2143,11 @@ class App_cubit extends Cubit<App_state> {
               INS_GetAllCourses_Function(token: token);
               GetAllNews();
             }
-
-
-
           }
 
           connnection=true;
+
+
           emit(Connection_success_State());
           break;
 
@@ -2156,21 +2167,15 @@ class App_cubit extends Cubit<App_state> {
 
   // ---------------------storing data using HIVE --------------------------------
 
-  final Box stuAllLecBox3= Hive.box(HiveConstants.allCoursesBox);
+  final Box navigationScreensBox= Hive.box(HiveConstants.navigationScreenBox);
 
   void stuStoreAllCourses(
-  //{
-        // required String cycleId,
-        // required String name,
-        // required int hours,
-        // required String imagePath,
-        // required String instructorFullName,
-//}
 ){
-    stuAllLecBox3.delete(HiveConstants.allCoursesList);
+
+    navigationScreensBox.delete(HiveConstants.allCoursesList);
 
     emit(Stu_Add_AllCourses_To_Hive_LoadingState());
-   List<Stu_GetAllCoursesModel>allCourses=List.from(stuAllLecBox3.get(HiveConstants.allCoursesList,defaultValue: [])).cast<Stu_GetAllCoursesModel>();
+   List<Stu_GetAllCoursesModel>allCourses=List.from(navigationScreensBox.get(HiveConstants.allCoursesList,defaultValue: [])).cast<Stu_GetAllCoursesModel>();
    for(int i=0;i<stuAllCoursesModel.length;i++) {
      allCourses.add(Stu_GetAllCoursesModel(
        hiveIndex: allCourses.length,
@@ -2182,7 +2187,7 @@ class App_cubit extends Cubit<App_state> {
 
      ));
    }
-    stuAllLecBox3.put(HiveConstants.allCoursesList, allCourses).then((value){
+    navigationScreensBox.put(HiveConstants.allCoursesList, allCourses).then((value){
       print('Hive Store All Lec Data');
      emit(Stu_Add_AllCourses_To_Hive_SuccessState());
    }).catchError((error){
@@ -2198,7 +2203,7 @@ class App_cubit extends Cubit<App_state> {
   void getAllCoursesFromHIVE()async{
     emit(Stu_Get_AllCourses_From_Hive_LoadingState());
     try {
-      allLECFromHIVE =List.from(stuAllLecBox3.get(HiveConstants.allCoursesList,defaultValue: [])).cast<Stu_GetAllCoursesModel>();
+      allLECFromHIVE =List.from(navigationScreensBox.get(HiveConstants.allCoursesList,defaultValue: [])).cast<Stu_GetAllCoursesModel>();
 
       allLECFromHIVE.forEach((element) {
         print(element.name);
@@ -2226,7 +2231,6 @@ class App_cubit extends Cubit<App_state> {
         lectureId:stuCoursesMatrialModel[i].lectureId!,
         lectureName:stuCoursesMatrialModel[i].lectureName!,
         semesterName:stuCoursesMatrialModel[i].semesterName!,
-
         type:stuCoursesMatrialModel[i].type!,
         createdAt:stuCoursesMatrialModel[i].createdAt!,
         path:stuCoursesMatrialModel[i].path!,
@@ -2334,8 +2338,125 @@ class App_cubit extends Cubit<App_state> {
   }
 
 
+  //---------------Store all news to navigation box----------
+
+
+  void stuStoreAllNewstoHIVE(){
+
+   navigationScreensBox.delete(HiveConstants.allNewsList);
+    emit(Stu_Add_AllNews_To_Hive_LoadingState());
+    List<GetAllNewsModel>allNews=List.from(navigationScreensBox.get(HiveConstants.allNewsList,defaultValue: [])).cast<GetAllNewsModel>();
+    for(int i=0;i<allNewsModel.length;i++) {
+      allNews.add(GetAllNewsModel(
+           hiveIndex: allNews.length,
+           newsId:allNewsModel[i].newsId!,
+           content:allNewsModel[i].content!,
+           filePath:allNewsModel[i].filePath??'',
+           facultyId:allNewsModel[i].facultyId!,
+           createdAt:allNewsModel[i].createdAt!,
+           userId:allNewsModel[i].userId!,
+           userName:allNewsModel[i].userName!,
+           userImage:allNewsModel[i].userImage!,
+           facultyName:allNewsModel[i].facultyName!,
+      ));
+    }
+    navigationScreensBox.put(HiveConstants.allNewsList, allNews).then((value){
+      print('Hive Store All News Data');
+      print('Navigation Screen Box Keys ::::: ${navigationScreensBox.keys}');
+
+      emit(Stu_Add_AllNews_To_Hive_SuccessState());
+    }).catchError((error){
+      print('error to Store All News Data');
+      print(error);
+      emit(Stu_Add_AllNews_To_Hive_ErrorState());
+    });
+  }
+
+  //--------Get all news from Hive--------------
 
 
 
+  List<GetAllNewsModel>allNEWSFromHIVE=[];
+  void getAllNewsFromHIVE()async{
+    emit(Stu_Get_AllNews_From_Hive_LoadingState());
+    try {
+      allNEWSFromHIVE =List.from(navigationScreensBox.get(HiveConstants.allNewsList,defaultValue: [])).cast<GetAllNewsModel>();
+      print('get all news from HIVE Success---------------');
+      allNEWSFromHIVE.forEach((element) {
+        print(element.content);
+      });
+      emit(Stu_Get_AllNews_From_Hive_SuccessState());
+    } catch (error) {
+      emit(Stu_Get_AllNews_From_Hive_ErrorState());
+    }
+  }
+
+
+//-----------------Store user info to HIVE-----------------
+
+
+  void stuStoreUserInfoToHIVE(
+    {
+   // required CurrentStudentInfoModel userModel,
+      required String  userId ,
+      required String  fullName ,
+      required String  email ,
+      required String  phone,
+      required String  imagePath ,
+      required String  academicId ,
+      required int     level,
+      required String  departmentName ,
+      required String  facultyName ,
+      required String  universityName ,
+    }
+      ){
+
+   // navigationScreensBox.delete(HiveConstants.allNewsList);
+    emit(Stu_Add_userInfo_To_Hive_LoadingState());
+  // CurrentStudentInfoModel userInfo=navigationScreensBox.get(HiveConstants.allNewsList,defaultValue:'');
+
+    navigationScreensBox.put(HiveConstants.userData,
+        CurrentStudentInfoModel
+    (
+        hiveIndex:0 ,
+        userId :userId,
+        fullName :fullName,
+        email : email,
+        phone:phone,
+        imagePath :imagePath,
+        academicId :academicId,
+        level:level,
+        departmentName :departmentName,
+        facultyName :facultyName,
+        universityName :universityName,
+)
+    ).then((value){
+      print('Hive Store User Data');
+      print('Navigation Screen Box Keys ::::: ${navigationScreensBox.keys}');
+
+      emit(Stu_Add_userInfo_To_Hive_SuccessState());
+    }).catchError((error){
+      print('error to Store User Data');
+      print(error);
+      emit(Stu_Add_userInfo_To_Hive_ErrorState());
+    });
+  }
+
+  //--------------get ser data from HIVE-------------
+
+
+  CurrentStudentInfoModel? userInfoFromHIVE;
+  void getUserInfoFromHIVE()async{
+    emit(Stu_Get_userInfo_From_Hive_LoadingState());
+    try {
+      userInfoFromHIVE =navigationScreensBox.get(HiveConstants.userData,defaultValue: []);
+      print('get user info from HIVE Success---------------');
+        print(userInfoFromHIVE?.fullName);
+
+      emit(Stu_Get_userInfo_From_Hive_SuccessState());
+    } catch (error) {
+      emit(Stu_Get_userInfo_From_Hive_ErrorState());
+    }
+  }
 
 }

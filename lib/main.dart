@@ -10,11 +10,13 @@ import 'package:university_hup/Shared/Local/Cache_helper.dart';
 import 'package:university_hup/Shared/constant.dart';
 
 import 'package:university_hup/Shared/remote/DioHelper.dart';
+import 'Models/All_News/allNewsAdapter.dart';
 import 'Models/STU_Model/CourseModel/AllCourcesAdapterModel/Stu_All_Courses_Model.dart';
 import 'Models/STU_Model/CourseModel/AllCourcesAdapterModel/coursesAdapter.dart';
 import 'Models/STU_Model/CourseModel/materialAdabter/Stu_Course_MaterialModel.dart';
 import 'Models/STU_Model/CourseModel/materialAdabter/materialFilesAdapter.dart';
 import 'Models/STU_Model/CourseModel/materialAdabter/materialFoldersAdapter.dart';
+import 'Models/STU_Model/User_Model/StudentInfoAdapter.dart';
 import 'Shared/Cubit/App_cubit.dart';
 import 'Shared/Cubit/App_state.dart';
 import 'Shared/Cubit/bloc_observed.dart';
@@ -80,8 +82,10 @@ import 'package:hive_flutter/hive_flutter.dart';
   Hive.registerAdapter(Stu_GetAllCoursesAdapter());
   Hive.registerAdapter(materialFolderAdapter());
   Hive.registerAdapter(materialFilesAdapter());
+  Hive.registerAdapter(Stu_GetAllNewsAdapter());
+  Hive.registerAdapter(STU_InfoAdapter());
 
-   await Hive.openBox('allCoursesBox4').then((value){print('allCoursesBox4  box is opened ');}).catchError((error){
+   await Hive.openBox(HiveConstants.navigationScreenBox).then((value){print('allCoursesBox4  box is opened ');}).catchError((error){
      print('allCoursesBox4  box is already opened ');
    });
    await Hive.openBox(HiveConstants.lecFoldersBox).then((value){print('${HiveConstants.lecFoldersBox}  box is opened ');}).catchError((error){
@@ -128,8 +132,8 @@ class MyApp extends StatelessWidget {
       //MultiBlocProvider(
      // providers: [
         BlocProvider(
-          create: (context) => App_cubit()..CreateDateBase()
-            ..connection_Function(),
+          create: (context) => App_cubit()..getUserInfoFromHIVE()..getAllNewsFromHIVE()..getAllCoursesFromHIVE()..connection_Function(),
+    //..CreateDateBase(),
             child:  BlocConsumer<App_cubit, App_state>(
                 listener: (context, state) => () {
                   // InternetConnectionChecker().onStatusChange.listen((state) {
