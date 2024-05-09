@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:university_hup/Models/INS_Model/INS_create_quiz_Model.dart';
 import 'package:university_hup/Modules/Instructor/Instructor_Quizzes/INS_Quiz_Finish_Screen.dart';
+import 'package:university_hup/Modules/Instructor/Instructor_Quizzes/INS_Quizes_Screen.dart';
 
 import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/Cons_widget.dart';
@@ -22,6 +23,8 @@ class INS_Quizes_Ques_Screen extends StatefulWidget {
 }
 
 class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
+  _STU_Quizes_Ques_ScreenState();
+
   bool islast = false;
   bool ismiddle = false;
   String? quiz_ask = '';
@@ -104,7 +107,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
                               // );
                               break;
                             case 2:
-                              cubit.QController.forEach((element) { print(element.text); });
+                              // cubit.QController.forEach((element) { print(element.text); });
 
                               Alrat(
                                   context: context,
@@ -115,14 +118,8 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
                                   yes: () {});
                               break;
                             case 3:
-                              cubit.createquCreateQuiz_Function(
-                                title: 'new quiz',
-                                grade: 3,
-                                startDate: "2024-04-19T15:35:35.614Z",
-                                courseCycleId: 'CS101FALL2024',
-                                endDate: "2024-04-19T15:35:35.614Z",
-                                notes: 'new notes',
-                              );
+
+
                               Alrat(
                                   context: context,
                                   no: () {
@@ -130,12 +127,18 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
                                   },
                                   text: 'Do you want to Publish quiz ?',
                                   yes: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              INS_Quiz_Finish_Screen(),
-                                        ));
+                                    cubit.createquCreateQuiz_Function(
+                                    );
+                                    if(state is CreateQuiz_SuccessState){
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                INS_Quizes_Screen(),
+                                          ));
+                                    }
+
                                   });
 
                               break;
@@ -204,7 +207,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
     // print('length QController before /////////////////////////////');
     // print(App_cubit.get(context).QController.length);
     // print('length QController before /////////////////////////////');
-    print('/////////////////////////////');
+    // print('/////////////////////////////');
     App_cubit.get(context).AController.forEach((element) {
       element.forEach((element2) {
         print(element2.text);
@@ -212,13 +215,16 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
       print('----------------------------');
 
     });
-    print('/////////////////////////////');
-    App_cubit.get(context).ANS_listKey.insert(
-        App_cubit.get(context).ANS_listKey.length,
-        GlobalKey());
+    // print('/////////////////////////////');
+    // App_cubit.get(context).ANS_listKey.insert(
+    //     App_cubit.get(context).ANS_listKey.length,
+    //     GlobalKey());
     App_cubit.get(context).AController.insert(
         App_cubit.get(context).QController.length,
-        [TextEditingController()]);
+        [TextEditingController(),TextEditingController(),TextEditingController(),TextEditingController(),]);
+    App_cubit.get(context).Acheck.insert(
+        App_cubit.get(context).QController.length,
+        [true,false,false,false,]);
 
       App_cubit.get(context).QController.insert(
           App_cubit.get(context).QController.length,
@@ -236,18 +242,17 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
     if(App_cubit.get(context).QController.length !=1 ){
 
 
-      //
+
       // print('//////////////////////////////////////////////////////////////////');
       // print('length ANS_listKey before remove = ${App_cubit.get(context).ANS_listKey.length}');
       // print('length QController before remove = ${App_cubit.get(context).QController.length}');
       // print('length AController before remove = ${App_cubit.get(context).AController.length}');
       // print('//////////////////////////////////////////////////////////////////');
-      App_cubit.get(context)
-          .ANS_listKey
-          .removeAt(App_cubit.get(context).ANS_listKey.length - 1);
-      App_cubit.get(context)
-          .AController
-          .removeAt(App_cubit.get(context).AController.length - 1);
+      // App_cubit.get(context)
+      //     .ANS_listKey
+      //     .removeAt(App_cubit.get(context).ANS_listKey.length - 1);
+
+
 
       App_cubit.get(context)
           .QController
@@ -267,7 +272,17 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
         duration: const Duration(milliseconds: 250),
 
       );
+
+      App_cubit.get(context)
+          .AController
+          .removeAt(App_cubit.get(context).AController.length - 1);
+
+      App_cubit.get(context)
+          .Acheck
+          .removeAt(App_cubit.get(context).Acheck.length - 1);
     }
 
   }
+
+
 }
