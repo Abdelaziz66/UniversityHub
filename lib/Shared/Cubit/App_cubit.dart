@@ -802,8 +802,19 @@ class App_cubit extends Cubit<App_state> {
       // print('token:${token}');
       emit(STU_LoginSuccessState(stu_login_Model!));
       if(rol=='Student'){
-        GetCurrentStudenInfo();
-        GetAllNews();
+        GetCurrentStudenInfo().then((value){
+          getUserInfoFromHIVE();
+        });
+        GetAllNews().then((value) {
+          getAllNewsFromHIVE();
+        });
+        StuGetAllCourses(token:token);
+
+
+
+print('///////////////****************///////////////////');
+        getAllCoursesFromHIVE();
+
       }
       else{
         GetCurrentInfo_ins_Function();
@@ -2025,71 +2036,71 @@ class App_cubit extends Cubit<App_state> {
     emit(CreateDateBase_state());
   }
 
-  Future InsertToDataBase_User_Table() async {
-
-    if(studentInfoModel!=null){
-      print('Start Insert into User table _________________________________');
-      await database?.rawDelete('DELETE FROM User').then((value) {
-        database?.transaction((txn) async {
-          await txn.rawInsert(
-              'INSERT INTO User(userId,fullName,email,phone,imagePath,academicId,departmentName,facultyName,universityName,level)'
-                  'VALUES("${studentInfoModel!.userId}","${studentInfoModel!.fullName}",'
-                  '"${studentInfoModel!.email}","${studentInfoModel!.phone}",'
-                  '"${studentInfoModel!.imagePath}","${studentInfoModel!.academicId}",'
-                  '"${studentInfoModel!.departmentName}","${studentInfoModel!.facultyName}",'
-                  '"${studentInfoModel!.universityName}","${studentInfoModel!.level}")');
-        });
-        emit(InsertToDataBase_state());
-      //  GetFromDataBase(database,'User');
-      });
-
-    }
-
-  }
-
-  Future InsertToDataBase_News_Table() async {
-    if(true){
-      // print('Start Insert into News table _________________________________');
-      await database?.rawDelete('DELETE FROM News').then((value) {
-        allNewsModel.forEach((element) {
-          database?.transaction((txn) async {
-            await txn.rawInsert(
-                'INSERT INTO News(newsId,content,filePath,facultyId,createdAt,userId,userName)'
-                    'VALUES(${element.newsId},"${element.content}","${element.filePath}","${element.facultyId}","${element.createdAt}","${element.userId}","${element.userName}")');
-
-          });
-        });
-        emit(InsertToDataBase_state());
-        //GetFromDataBase(database,'News');
-      });
-
-    }
-
-
-  }
-
-  Future InsertToDataBase_Course_Table() async {
-    if(true){
-      // print('Start Insert into News table _________________________________');
-      await database?.rawDelete('DELETE FROM Course').then((value) {
-        stuAllCoursesModel.forEach((element) {
-          database?.transaction((txn) async {
-            await txn.rawInsert(
-                'INSERT INTO Course(cycleId,name,hours,imagePath,instructorFullName)'
-                    'VALUES("${element.cycleId}","${element.name}","${element.hours}","${element.imagePath}","${element.instructorFullName}")');
-          }).catchError((onError){print(onError.toString());});
-          print('${element.cycleId}');
-          print('///////////////////////////////////////////////////');
-        });
-
-        emit(InsertToDataBase_state());
-      //  GetFromDataBase(database,'Course');
-      });
-
-    }
-
-
-  }
+  // Future InsertToDataBase_User_Table() async {
+  //
+  //   if(studentInfoModel!=null){
+  //     print('Start Insert into User table _________________________________');
+  //     await database?.rawDelete('DELETE FROM User').then((value) {
+  //       database?.transaction((txn) async {
+  //         await txn.rawInsert(
+  //             'INSERT INTO User(userId,fullName,email,phone,imagePath,academicId,departmentName,facultyName,universityName,level)'
+  //                 'VALUES("${studentInfoModel!.userId}","${studentInfoModel!.fullName}",'
+  //                 '"${studentInfoModel!.email}","${studentInfoModel!.phone}",'
+  //                 '"${studentInfoModel!.imagePath}","${studentInfoModel!.academicId}",'
+  //                 '"${studentInfoModel!.departmentName}","${studentInfoModel!.facultyName}",'
+  //                 '"${studentInfoModel!.universityName}","${studentInfoModel!.level}")');
+  //       });
+  //       emit(InsertToDataBase_state());
+  //     //  GetFromDataBase(database,'User');
+  //     });
+  //
+  //   }
+  //
+  // }
+  //
+  // Future InsertToDataBase_News_Table() async {
+  //   if(true){
+  //     // print('Start Insert into News table _________________________________');
+  //     await database?.rawDelete('DELETE FROM News').then((value) {
+  //       allNewsModel.forEach((element) {
+  //         database?.transaction((txn) async {
+  //           await txn.rawInsert(
+  //               'INSERT INTO News(newsId,content,filePath,facultyId,createdAt,userId,userName)'
+  //                   'VALUES(${element.newsId},"${element.content}","${element.filePath}","${element.facultyId}","${element.createdAt}","${element.userId}","${element.userName}")');
+  //
+  //         });
+  //       });
+  //       emit(InsertToDataBase_state());
+  //       //GetFromDataBase(database,'News');
+  //     });
+  //
+  //   }
+  //
+  //
+  // }
+  //
+  // Future InsertToDataBase_Course_Table() async {
+  //   if(true){
+  //     // print('Start Insert into News table _________________________________');
+  //     await database?.rawDelete('DELETE FROM Course').then((value) {
+  //       stuAllCoursesModel.forEach((element) {
+  //         database?.transaction((txn) async {
+  //           await txn.rawInsert(
+  //               'INSERT INTO Course(cycleId,name,hours,imagePath,instructorFullName)'
+  //                   'VALUES("${element.cycleId}","${element.name}","${element.hours}","${element.imagePath}","${element.instructorFullName}")');
+  //         }).catchError((onError){print(onError.toString());});
+  //         print('${element.cycleId}');
+  //         print('///////////////////////////////////////////////////');
+  //       });
+  //
+  //       emit(InsertToDataBase_state());
+  //     //  GetFromDataBase(database,'Course');
+  //     });
+  //
+  //   }
+  //
+  //
+  // }
 
 
 
