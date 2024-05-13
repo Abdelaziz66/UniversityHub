@@ -16,6 +16,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:rive/rive.dart';
 
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
+import 'package:university_hup/Models/INS_Model/INS_GetQuizes_Model.dart';
 import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
 import 'package:university_hup/Models/INS_Model/INS_create_quiz_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
@@ -495,12 +496,12 @@ Widget Post({
                         ],
                       ),
                       const Spacer(),
-                      IconButton(
-                          onPressed: () {},
-                          icon: FaIcon(
-                            FontAwesomeIcons.ellipsisVertical,
-                            color: c1,
-                          )),
+                      // IconButton(
+                      //     onPressed: () {},
+                      //     icon: FaIcon(
+                      //       FontAwesomeIcons.ellipsisVertical,
+                      //       color: c1,
+                      //     )),
                     ],
                   ),
                 ),
@@ -760,27 +761,27 @@ Widget Lecture_C() => InkWell(
     );
 
 Widget Matrial_C(
-        {
-          folderFormKey,
-          TextEditingController? folderController,
-          context,
-        GetCourseMaterialsModel? courseMaterial,
-        InsAllLecFoldersModel? insFolder,
-         // AnimationController? menuAnimation,
-          index}) =>   Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              // color: Colors.blueGrey.withOpacity(.05),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(width: .5),
-            ),
-            child: Padding(
-              padding:
-              const EdgeInsets.only(top: 5.0, right: 10, bottom: 5, left: 10),
-              child: Container(
-                //height: 150,
-                child: Column(
+    {
+      folderFormKey,
+      TextEditingController? folderController,
+      context,
+      GetCourseMaterialsModel? courseMaterial,
+      InsAllLecFoldersModel? insFolder,
+      // AnimationController? menuAnimation,
+      index}) =>   Padding(
+  padding: const EdgeInsets.all(8.0),
+  child: Container(
+    decoration: BoxDecoration(
+      // color: Colors.blueGrey.withOpacity(.05),
+      borderRadius: BorderRadius.circular(20),
+      border: Border.all(width: .5),
+    ),
+    child: Padding(
+      padding:
+      const EdgeInsets.only(top: 5.0, right: 10, bottom: 5, left: 10),
+      child: Container(
+        //height: 150,
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             rol=='Doctor'?Row(
@@ -1101,11 +1102,13 @@ Widget Matrial_C(
             //     ),
             //   ),
           ],
-                ),
-              ),
-            ),
-          ),
-        );
+        ),
+      ),
+    ),
+  ),
+);
+
+
 
 
 Widget OngoingCourse_Card() => GlassBoxWithBorder_notification(
@@ -2414,6 +2417,202 @@ Widget INS_Course({INS_Course_Model? courses}) => Container(
       ),
     );
 //--------------Assignments-----------------------------
+Widget STU_pend_Tasks({STU_Course_Assign_Model? assign}) =>  Container(
+  height: 155,
+  decoration: BoxDecoration(
+    // color: Colors.blueGrey.withOpacity(.05),
+    borderRadius: BorderRadius.circular(20),
+    border: Border.all(width: .5),
+  ),
+  child: Padding(
+    padding:
+    const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
+    child: Column(
+      children: [
+        Row(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 10,
+            ),
+            Text('${assign?.taskName}'),
+            Spacer(),
+            Container(
+              height: 30,
+              width: 30,
+              child: Center(
+                child: FaIcon(
+                  FontAwesomeIcons.circleUp,
+                  size: 26,
+                  color: Colors.teal.withOpacity(.7),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 7,
+            ),
+            Container(
+              height: 30,
+              width: 30,
+              child: Center(
+                child: FaIcon(
+                  FontAwesomeIcons.circleDown,
+                  size: 26,
+                  color: Colors.teal.withOpacity(.7),
+                ),
+              ),
+            ),
+
+
+
+          ],
+        ),
+        SizedBox(
+          height: 7,
+        ),
+        Container(
+          color: Colors.black.withOpacity(.3),
+          height: .5,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.bookmark,
+                            size: 12,
+                          ),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Text(
+                            '${assign?.courseName}',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 13),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Row(
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.user,
+                            size: 12,
+                          ),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Text(
+                            '${assign?.instructorName}',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 13),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Row(
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.chartLine,
+                            size: 12,
+                          ),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Text(
+                            '${assign?.taskGrade}',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 13),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Row(
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.clock,
+                            size: 12,
+                          ),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Container(
+                            width: 150,
+                            child: Text(
+                              'From ${assign?.startDate}  to  ${assign?.startDate}',overflow: TextOverflow.ellipsis,maxLines: 1,
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 13),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+
+
+                      },
+                      child: Container(
+                        height: 45,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.teal.withOpacity(.6),
+                          borderRadius: BorderRadius.circular(12),
+                          // border: Border.all(width: .5),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Available',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+
+      ],
+    ),
+  ),
+);
 Widget Build_STU_pend_Tasks({STU_Course_Assign_Model? assign}) => Container(
     width: double.infinity,
     height: 76.95,
@@ -2506,7 +2705,205 @@ Widget Build_STU_pend_Tasks({STU_Course_Assign_Model? assign}) => Container(
     ));
 
 //----------------------------------------
+Widget STU_complete_Tasks({required STU_Course_Assign_Model? assign}) =>  Container(
+  height: 155,
+  decoration: BoxDecoration(
+    // color: Colors.blueGrey.withOpacity(.05),
+    borderRadius: BorderRadius.circular(20),
+    border: Border.all(width: .5),
+  ),
+  child: Padding(
+    padding:
+    const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
+    child: Column(
+      children: [
+        Row(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 10,
+            ),
+            Text('${assign?.taskName}'),
+            Spacer(),
+            SizedBox(
+              width: 7,
+            ),
+            InkWell(
+              onTap: () {
+                // Alrat(
+                //     context: context,
+                //     no: () {
+                //       Navigator.pop(context);
+                //     },
+                //     text: 'Do you want to delete Task ?',
+                //     yes: () {
+                //       App_cubit.get(context).INS_Delete_Assign(Taskid: assign!.taskId);
+                //       Navigator.pop(context);
+                //
+                //     });
+              },
+              child: Container(
+                height: 30,
+                width: 30,
 
+                child: Center(
+                  child: FaIcon(
+                    FontAwesomeIcons.circleCheck,
+                    size: 26,
+                    color: Colors.teal.withOpacity(.7),
+                  ),
+                ),
+              ),
+            ),
+
+          ],
+        ),
+        SizedBox(
+          height: 7,
+        ),
+        Container(
+          color: Colors.black.withOpacity(.3),
+          height: .5,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.bookmark,
+                            size: 12,
+                          ),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Text(
+                            '${assign?.courseName}',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 13),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Row(
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.user,
+                            size: 12,
+                          ),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Text(
+                            '${assign?.instructorName}',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 13),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Row(
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.chartLine,
+                            size: 12,
+                          ),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Text(
+                            '${assign?.taskGrade}',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 13),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Row(
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.clock,
+                            size: 12,
+                          ),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Container(
+                            width: 150,
+                            child: Text(
+                              'Ended ${assign?.startDate}',overflow: TextOverflow.ellipsis,maxLines: 1,
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 13,color: Colors.red),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+
+
+                      },
+                      child: Container(
+                        height: 45,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.teal.withOpacity(.6),
+                          borderRadius: BorderRadius.circular(12),
+                          // border: Border.all(width: .5),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Completed',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+
+      ],
+    ),
+  ),
+);
 Widget Build_STU_complete_Tasks() => Container(
     width: double.infinity,
     height: 76.95,
@@ -2940,7 +3337,7 @@ Widget Build_Quiz_Data_Widget({
       ),
     );
 
-Widget INS_Quiz_Card({required context}
+Widget INS_Quiz_Card({required context,required GetQuizes_Model quizes}
 
         //List<bool> quizState, List<bool> isQuizStart, int index
         ) =>
@@ -2963,7 +3360,7 @@ Widget INS_Quiz_Card({required context}
                 SizedBox(
                   width: 10,
                 ),
-                Text('Quize 1'),
+                Text(quizes.title!),
                 Spacer(),
                 InkWell(
                   onTap: () {
@@ -2973,7 +3370,9 @@ Widget INS_Quiz_Card({required context}
                           Navigator.pop(context);
                         },
                         text: 'Do you want to edit quiz ?',
-                        yes: () {});
+                        yes: () {
+
+                        });
                   },
                   child: Container(
                     height: 30,
@@ -3006,7 +3405,10 @@ Widget INS_Quiz_Card({required context}
                           Navigator.pop(context);
                         },
                         text: 'Do you want to delete quiz ?',
-                        yes: () {});
+                        yes: () {
+                          Navigator.pop(context);
+                          App_cubit.get(context).INS_Delete_Quiz(quizid: quizes.id);
+                        });
                   },
                   child: Container(
                     height: 30,
@@ -3039,7 +3441,10 @@ Widget INS_Quiz_Card({required context}
                           Navigator.pop(context);
                         },
                         text: 'Do you want to see quiz ?',
-                        yes: () {});
+                        yes: () {
+                          Navigator.pop(context);
+                          App_cubit.get(context).INS_GetQuizeDetails_Function(QuizID:quizes.id, );
+                        });
                   },
                   child: Container(
                     height: 30,

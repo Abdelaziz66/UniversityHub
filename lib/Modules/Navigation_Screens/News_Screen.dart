@@ -113,9 +113,9 @@ class Home_screen extends StatelessWidget {
                                       child: Container(
                                         height: 100,
                                         width: 100,
-                                        child: Image.asset(
-                                          'assets/images/n7.png',
-                                        ),
+                                        // child: Image.asset(
+                                        //   'assets/images/n7.png',
+                                        // ),
                                       ),
                                     ),
                                     // Container(
