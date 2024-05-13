@@ -18,6 +18,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
+import 'package:university_hup/Models/INS_Model/INS_GetQuizbyID_Model.dart';
+import 'package:university_hup/Models/INS_Model/INS_GetQuizes_Model.dart';
 import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
 import 'package:university_hup/Models/INS_Model/INS_create_quiz_Model.dart';
 import 'package:university_hup/Models/INS_Model/INS_grade_for_student_Model.dart';
@@ -105,6 +107,20 @@ class App_cubit extends Cubit<App_state> {
     Tab_Bar_1_index = index;
     emit(Tab_Bar_state());
   }
+
+  int Tab_Bar_2_index = 0;
+  void Tab_Bar_2_Function({required int index}) {
+    Tab_Bar_2_index = index;
+    emit(Tab_Bar_state());
+  }
+
+
+  int Tab_Bar_3_index = 0;
+  void Tab_Bar_3_Function({required int index}) {
+    Tab_Bar_3_index = index;
+    emit(Tab_Bar_state());
+  }
+
 
 
 
@@ -2481,4 +2497,102 @@ print('///////////////****************///////////////////');
     }
   }
 
+  List<GetQuizes_Model>INS_get_QuizesModel=[];
+  void INS_GetQuizes_Function({
+    required CourseID,
+    // required token,
+  }) {
+    INS_get_QuizesModel=[];
+    if (true) {
+      emit(INS_GetQuizes_LoadingState());
+      Dio_Helper.GetData(
+        url:'Instructor/GetAllQuizesForOneCourse?cycleId=$CourseID' ,
+        token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          List Json = value.data;
+          Json.forEach((element) {
+            INS_get_QuizesModel.add(GetQuizes_Model.fromJson(element));
+          });
+
+
+
+
+          emit(INS_GetQuizes_SuccessState());
+        }
+        //  InsertToDataBase_Course_Table();
+        // studentUplodeTaskModel.forEach((element) {
+        //   print('Student name------- ${element.studentName}');
+        // });
+
+      }).catchError((error) {
+        emit(INS_GetQuizes_ErrorState());
+        print(error.toString());
+      });
+    }
+  }
+
+
+  void INS_Delete_Quiz({
+    required String? quizid,
+  }){
+    if (true) {
+      emit(Ins_delete_quiz_LoadingState());
+
+
+      Dio_Helper.deleteData(
+        url:'Instructor/DeleteQuiz?quizId=$quizid',
+        token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          flutterToast(msg:'Delete successfully', backColor: Colors.green);
+
+
+          INS_GetQuizes_Function(CourseID: currentCycleId);
+          emit(Ins_delete_quiz_SuccessState());
+        }
+      }).catchError((error) {
+        emit(Ins_delete_quiz_ErrorState());
+        print(error.toString());
+      });
+    }
+  }
+
+  List<GetQuizebyID_Model>QuizeDetails_List=[];
+  GetQuizebyID_Model QuizeDetails=GetQuizebyID_Model();
+  void INS_GetQuizeDetails_Function({
+    required QuizID,
+    // required token,
+  }) {
+    if (true) {
+      emit(INS_GetQuizeDetails_LoadingState());
+      Dio_Helper.GetData(
+        url:'Instructor/Quiz?quizId=$QuizID' ,
+        token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          QuizeDetails=GetQuizebyID_Model.fromJson(value.data);
+
+          print( QuizeDetails.title!);
+
+
+
+
+          emit(INS_GetQuizeDetails_SuccessState());
+        }
+        //  InsertToDataBase_Course_Table();
+        // studentUplodeTaskModel.forEach((element) {
+        //   print('Student name------- ${element.studentName}');
+        // });
+
+      }).catchError((error) {
+        emit(INS_GetQuizeDetails_ErrorState());
+        print(error.toString());
+      });
+    }
+  }
+
+
+
 }
+

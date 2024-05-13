@@ -196,13 +196,27 @@ class STU_About_course extends StatelessWidget {
                                   Expanded(
                                     child: InkWell(
                                       onTap: (){
-                                        if(cubit.connnection){
-                                          cubit.StuGetCourseQuiz(
-                                            //  token:App_cubit.get(context).Tokenn,
-                                            //   cycleId: '${courses[index].cycleId}',
-                                          );
-                                          navigateTo(context,rol=='Student'? STU_Quizes_Screen():INS_Quizes_Screen() );
-                                        }
+                                        if(rol=='Student'){
+
+                                          if(cubit.connnection){
+                                            cubit.StuGetCourseQuiz(
+                                              //  token:App_cubit.get(context).Tokenn,
+                                              //   cycleId: '${courses[index].cycleId}',
+                                            );
+                                            navigateTo(context, STU_Quizes_Screen() );
+                                          }
+                                        }else
+                                          {
+                                            if(cubit.connnection){
+                                              cubit.INS_GetQuizes_Function(
+                                                CourseID: cubit.currentCycleId
+                                                //  token:App_cubit.get(context).Tokenn,
+                                                //   cycleId: '${courses[index].cycleId}',
+                                              );
+                                              navigateTo(context,INS_Quizes_Screen() );
+                                            }
+                                          }
+
 
                                       },
                                       child: Container(
