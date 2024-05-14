@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/stuAssignAdapter/STU_Course_Assign_Model.dart';
 
 import 'package:university_hup/Modules/Student/Student_Assignment/STU_About_Assign_Screen.dart';
 

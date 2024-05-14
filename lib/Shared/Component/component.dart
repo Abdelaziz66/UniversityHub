@@ -19,10 +19,10 @@ import 'package:university_hup/Models/All_News/AllNewsModel.dart';
 import 'package:university_hup/Models/INS_Model/INS_GetQuizes_Model.dart';
 import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
 import 'package:university_hup/Models/INS_Model/INS_create_quiz_Model.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/stuAssignAdapter/STU_Course_Assign_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/AllCourcesAdapterModel/Stu_All_Courses_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/materialAdabter/Stu_Course_MaterialModel.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/StuQuizAdapter/Stu_Course_Quiz_Model.dart';
 import 'package:university_hup/Modules/Instructor/Instructor_Assignment/INS_task_result_Screen.dart';
 
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';

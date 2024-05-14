@@ -104,6 +104,7 @@ class STU_Course_Assign_Model {
 
 
 class GetTaskDataModel {
+  int? hiveIndex;
   String? taskName;
   int? taskGrade;
   String? startDate;
@@ -113,7 +114,9 @@ class GetTaskDataModel {
   String? createdAt;
 
   GetTaskDataModel(
-      {this.taskName,
+      {
+        this.hiveIndex,
+        this.taskName,
         this.taskGrade,
         this.startDate,
         this.endDate,

@@ -11,11 +11,14 @@ import 'package:university_hup/Shared/constant.dart';
 
 import 'package:university_hup/Shared/remote/DioHelper.dart';
 import 'Models/All_News/allNewsAdapter.dart';
+import 'Models/HistoryModel&Adapter/stuHistoryAdapter.dart';
 import 'Models/STU_Model/CourseModel/AllCourcesAdapterModel/Stu_All_Courses_Model.dart';
 import 'Models/STU_Model/CourseModel/AllCourcesAdapterModel/coursesAdapter.dart';
+import 'Models/STU_Model/CourseModel/StuQuizAdapter/StuQuizAdapter.dart';
 import 'Models/STU_Model/CourseModel/materialAdabter/Stu_Course_MaterialModel.dart';
 import 'Models/STU_Model/CourseModel/materialAdabter/materialFilesAdapter.dart';
 import 'Models/STU_Model/CourseModel/materialAdabter/materialFoldersAdapter.dart';
+import 'Models/STU_Model/CourseModel/stuAssignAdapter/stuAssignAdapter.dart';
 import 'Models/STU_Model/User_Model/StudentInfoAdapter.dart';
 import 'Shared/Cubit/App_cubit.dart';
 import 'Shared/Cubit/App_state.dart';
@@ -84,6 +87,9 @@ import 'package:hive_flutter/hive_flutter.dart';
   Hive.registerAdapter(materialFilesAdapter());
   Hive.registerAdapter(Stu_GetAllNewsAdapter());
   Hive.registerAdapter(STU_InfoAdapter());
+  Hive.registerAdapter(StuTaskDataAdapter());
+  Hive.registerAdapter(GetQuizDataModelAdapter());
+  Hive.registerAdapter(StuHistoryModelAdapter());
 
    await Hive.openBox(HiveConstants.navigationScreenBox).then((value){print('allCoursesBox4  box is opened ');}).catchError((error){
      print('allCoursesBox4  box is already opened ');
@@ -93,6 +99,9 @@ import 'package:hive_flutter/hive_flutter.dart';
    });
    await Hive.openBox(HiveConstants.lecFilesBox).then((value){print('${HiveConstants.lecFilesBox}  box is opened ');}).catchError((error){
      print('${HiveConstants.lecFilesBox}   box is already opened ');
+   });
+   await Hive.openBox(HiveConstants.stuHisroyBox).then((value){print('${HiveConstants.stuHisroyBox}  box is opened ');}).catchError((error){
+     print('${HiveConstants.stuHisroyBox}   box is already opened ');
    });
 
   Bloc.observer = MyBlocObserver();

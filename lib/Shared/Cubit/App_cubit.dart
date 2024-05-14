@@ -25,10 +25,10 @@ import 'package:university_hup/Models/INS_Model/INS_create_quiz_Model.dart';
 import 'package:university_hup/Models/INS_Model/INS_grade_for_student_Model.dart';
 import 'package:university_hup/Models/INS_Model/currentinfo_ins_model.dart';
 import 'package:university_hup/Models/INS_Model/student_Model.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/stuAssignAdapter/STU_Course_Assign_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/AllCourcesAdapterModel/Stu_All_Courses_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/materialAdabter/Stu_Course_MaterialModel.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/StuQuizAdapter/Stu_Course_Quiz_Model.dart';
 import 'package:university_hup/Models/STU_Model/User_Model/STU_Login_Model.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Calendar_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Course_Screen.dart';
@@ -44,6 +44,7 @@ import 'package:university_hup/Shared/Component/component.dart';
 import 'package:university_hup/Shared/constant.dart';
 import 'package:university_hup/Shared/remote/DioHelper.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../Models/HistoryModel&Adapter/historyModel.dart';
 import '../../Models/INS_Model/CourseModel.dart';
 import '../../Models/INS_Model/INS_Assign_Model.dart';
 import '../../Models/STU_Model/Calender_Model/CalenderMode.dart';
@@ -371,6 +372,7 @@ class App_cubit extends Cubit<App_state> {
       }else if(value.message=='the $testFilePath file does not exists'&&!connnection){
         flutterToast(msg: 'file not Found', backColor:Colors.red);
       }
+
       emit(ShowFile_Success_State());
     }).catchError((error) {
         loadPDF(networkfile: networkFile);
@@ -436,6 +438,14 @@ class App_cubit extends Cubit<App_state> {
            localfilePath:filePath,token: token ).then((value) {
         print('dddd${value.data}');
         pathPDF = filePath;
+        stuStoreHistoryToHive(
+            historyKey:HiveConstants.studownloadFIleHisroyBox,
+            //hisryValue: stuAssignDataModel
+            materialName: currentCourseName!,
+            instructorName: currentInstructorName!,
+            historyName:filePath,
+
+        );
         emit(DownloadFile_Success_State());
         openFile_Fun(networkFile: filePath);
       }).catchError((error){
@@ -999,6 +1009,7 @@ print('///////////////****************///////////////////');
 
   String? currentCourseName;
   String? currentCycleId;
+  String? currentInstructorName;
   bool isCycleIdChange = false;
 
   // String? cycleId;
@@ -1326,6 +1337,21 @@ print('///////////////****************///////////////////');
         //   print(value.data);
         String json = value.data;
         print(json);
+
+        print('/////////// HISTORY ///////////');
+        print(HiveConstants.stuAssignHisroyBox);
+        print(currentCourseName);
+        print(currentInstructorName);
+        print(stuAssignDataModel!.taskName);
+
+        stuStoreHistoryToHive(
+            historyKey:HiveConstants.stuAssignHisroyBox,
+            //hisryValue: stuAssignDataModel
+           materialName: currentCourseName!,
+           instructorName: currentInstructorName!,
+          historyName: stuAssignDataModel!.taskName!
+
+        );
         flutterToast(msg: '$json', backColor: Colors.blue);
         emit(Stu_Submit_Task_SuccessState());
       }
@@ -2497,6 +2523,117 @@ print('///////////////****************///////////////////');
     }
   }
 
+<<<<<<< HEAD
+
+  //----------------Store student history in HIVE -----------------
+
+  final Box stuHisroyBox=Hive.box(HiveConstants.stuHisroyBox);
+
+  void stuStoreHistoryToHive ({
+    required String materialName,
+    required String historyName,
+    required String instructorName,
+    required String historyKey,
+    // required var hisryValue,
+  }){
+    print(materialName);
+    print(historyName);
+    print(instructorName);
+    print(historyKey);
+    stuHisroyBox.delete(HiveConstants.stuAssignHisroyBox);
+    emit(Stu_Add_newHistory_To_Hive_LoadingState());
+    if(historyKey==HiveConstants.stuQuizHisroyBox){
+       print('Storing new assign to history');
+      List<StuHistoryModel> stuQuizHistoryList =
+      stuHisroyBox.get(HiveConstants.stuQuizHisroyBox,defaultValue: []).
+      cast<StuHistoryModel>();
+
+      stuQuizHistoryList.add(
+          StuHistoryModel(
+        hiveIndex:stuQuizHistoryList.length,
+        materialName: materialName,
+        historyName: historyName,
+        instructorName: instructorName,
+
+      ));
+       AddToBoxOfHive(historyKey: historyKey,
+         list:stuQuizHistoryList,
+       );
+    }
+  else if(historyKey==HiveConstants.stuAssignHisroyBox){
+
+      List<StuHistoryModel> stuAssignHistoryList =
+      stuHisroyBox.get(HiveConstants.stuAssignHisroyBox,defaultValue: [])
+          .cast<StuHistoryModel>();
+
+      stuAssignHistoryList.add(
+          StuHistoryModel(
+        hiveIndex:stuAssignHistoryList.length,
+        materialName: materialName,
+        historyName: historyName??'',
+        instructorName: instructorName,
+
+      ));
+      AddToBoxOfHive(historyKey: historyKey,
+        list:stuAssignHistoryList,
+      );
+    }
+  else if(historyKey==HiveConstants.studownloadFIleHisroyBox){
+
+      List<StuHistoryModel> stuDownloadFileHistoryList =
+      stuHisroyBox.get(HiveConstants.studownloadFIleHisroyBox,defaultValue: [])
+          .cast<StuHistoryModel>();
+
+      stuDownloadFileHistoryList.add(
+          StuHistoryModel(
+          hiveIndex:stuDownloadFileHistoryList.length,
+          materialName: materialName,
+          historyName: historyName,
+        instructorName: instructorName,
+
+      ));
+      AddToBoxOfHive(historyKey: historyKey,
+        list:stuDownloadFileHistoryList,
+      );
+    }
+  else if(historyKey==HiveConstants.stuAddToCalenderHisroyBox){
+
+      List<StuHistoryModel> stuAddToCalenderHisroyList =
+      stuHisroyBox.get(HiveConstants.stuAddToCalenderHisroyBox,defaultValue: [])
+          .cast<StuHistoryModel>();
+
+      stuAddToCalenderHisroyList.add(
+          StuHistoryModel(
+            hiveIndex:stuAddToCalenderHisroyList.length,
+            materialName: materialName,
+            historyName: historyName,
+            instructorName: instructorName,
+          ));
+      AddToBoxOfHive(historyKey: historyKey,
+      list:stuAddToCalenderHisroyList,
+      );
+
+    }
+  else{
+    print('the type of history not found');
+    return ;
+    }
+
+  }
+
+  void AddToBoxOfHive({
+    String? historyKey,
+    List<StuHistoryModel>?list,
+}){
+    stuHisroyBox.put(historyKey,list).then((value) {
+      print('$historyKey stored to box success');
+      emit(Stu_Add_newHistory_To_Hive_SuccessState());
+    }).catchError((error){
+      print('error to store to history');
+      print(error);
+      emit(Stu_Add_newHistory_To_Hive_ErrorState());
+    });
+=======
   List<GetQuizes_Model>INS_get_QuizesModel=[];
   void INS_GetQuizes_Function({
     required CourseID,
@@ -2590,9 +2727,14 @@ print('///////////////****************///////////////////');
         print(error.toString());
       });
     }
+>>>>>>> e38ca74a5fff14974bdc1517a050a61c20153986
   }
 
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> e38ca74a5fff14974bdc1517a050a61c20153986
 }
 

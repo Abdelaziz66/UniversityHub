@@ -1,9 +1,9 @@
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
 import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/STU_Course_Assign_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/stuAssignAdapter/STU_Course_Assign_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/AllCourcesAdapterModel/Stu_All_Courses_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/materialAdabter/Stu_Course_MaterialModel.dart';
-import 'package:university_hup/Models/STU_Model/CourseModel/Stu_Course_Quiz_Model.dart';
+import 'package:university_hup/Models/STU_Model/CourseModel/StuQuizAdapter/Stu_Course_Quiz_Model.dart';
 import 'package:university_hup/Models/STU_Model/User_Model/STU_Login_Model.dart';
 
 
@@ -619,3 +619,11 @@ class Stu_Get_userInfo_From_Hive_ErrorState extends App_state {
   Stu_Get_userInfo_From_Hive_ErrorState();
 }
 
+//--------- Store History to hive -----------
+
+class Stu_Add_newHistory_To_Hive_LoadingState extends App_state {}
+
+class Stu_Add_newHistory_To_Hive_SuccessState extends App_state {}
+
+class Stu_Add_newHistory_To_Hive_ErrorState extends App_state {
+}

@@ -99,6 +99,7 @@ class STU_Lecture_Screen extends StatelessWidget {
                             //  print(courses[index].cycleId);
                               if(rol=='Student') {
                                 cubit.currentCourseName = courses[index].name;
+                                cubit.currentInstructorName = courses[index].instructorFullName;
                                 if (cubit.currentCycleId !=
                                     courses[index].cycleId) {
                                   cubit.stuCoursesMatrialModel = [];
@@ -115,6 +116,7 @@ class STU_Lecture_Screen extends StatelessWidget {
                                 cubit.currentCycleId = courses[index].cycleId!;}
                               else{
                                 cubit.currentCourseName = insCourses[index].name;
+
                                 if (cubit.currentCycleId !=
                                     insCourses[index].cycleId) {
                                   cubit.ins_Courses_Model= [];
@@ -150,6 +152,8 @@ class STU_Lecture_Screen extends StatelessWidget {
                               print('cycle Id : ${cubit.currentCycleId}');
                             //  print(courses[index].cycleId);
                               cubit.currentCourseName=cubit.allLECFromHIVE[index].name;
+                              cubit.currentInstructorName =cubit.allLECFromHIVE[index].instructorFullName;
+
                               if(cubit.currentCycleId!=cubit.allLECFromHIVE[index].cycleId) {
                                 cubit.stuCoursesMatrialModel=[];
                                 cubit.stuLECTUREModel=[];
