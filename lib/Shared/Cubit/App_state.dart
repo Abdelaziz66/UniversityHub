@@ -61,6 +61,15 @@ class DownloadFile_Loading_State extends App_state{}
 class DownloadFile_Success_State extends App_state{}
 class DownloadFile_Error_State extends App_state{}
 
+class INS_GetQuizes_LoadingState extends App_state{}
+class INS_GetQuizes_SuccessState extends App_state{}
+class INS_GetQuizes_ErrorState extends App_state{}
+
+class INS_GetQuizeDetails_LoadingState extends App_state{}
+class INS_GetQuizeDetails_SuccessState extends App_state{}
+class INS_GetQuizeDetails_ErrorState extends App_state{}
+
+
 class select_item_add_quiz_State extends App_state{}
 
 
@@ -374,6 +383,14 @@ class Ins_delete_Assign_SuccessState extends App_state {
 }
 class Ins_delete_Assign_ErrorState extends App_state {}
 
+//----------delete Quiz---------------
+
+class Ins_delete_quiz_LoadingState extends App_state {}
+
+class Ins_delete_quiz_SuccessState extends App_state {
+
+}
+class Ins_delete_quiz_ErrorState extends App_state {}
 //----------add new task--------------------
 class Ins_Add_Assign_LoadingState extends App_state {}
 

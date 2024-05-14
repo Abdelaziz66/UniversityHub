@@ -27,316 +27,387 @@ class STU_Matrial_Screen extends StatelessWidget {
         List<GetCourseMaterialsModel>courseMaterial=cubit.stuCoursesMatrialModel;
         List<GetCourseMaterialsModel>lectures=cubit.stuLECTUREModel;
         List<GetCourseMaterialsModel>labs=cubit.stuLABModel;
-        return Scaffold(
-            body: SafeArea(
-              child: Column(
-                children: [
-                  const SizedBox(height: 30,),
-                  defaultAppbar(
-                      text: cubit.currentCourseName,
-                      context:context),
-                  const SizedBox(height: 30,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: GlassBox(
-                        widget: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 15),
+        return DefaultTabController(
+          length: 2, // Number of tabs
+          initialIndex: cubit.Tab_Bar_2_index,
+          child: Scaffold(
+              body: SafeArea(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 30,),
+                    defaultAppbar(
+                        text: cubit.currentCourseName,
+                        context:context),
+                    const SizedBox(height: 30,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: GlassBox(
+                          widget: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+
+
+                                FaIcon(
+                                  FontAwesomeIcons.folderOpen,
+                                  color: c1.withOpacity(.9),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'Material',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                    color: c1,
+                                  ),
+                                ),
+                                const Spacer(),
+                                FaIcon(
+                                  FontAwesomeIcons.angleRight,
+                                  color: c1.withOpacity(.9),
+                                ),
+                                const Spacer(),
+                                FaIcon(
+                                  FontAwesomeIcons.solidUser,
+                                  color: c1.withOpacity(.9),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'Instructor',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                    color: c1,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          color: Colors.blueGrey.withOpacity(.15),
+                          borderRadius: 15,
+                          x: 0,
+                          y: 0
+                      ),
+                    ),
+                    const SizedBox(height: 15,),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(15.0),
+                    //   child: Container(
+                    //     decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(15),
+                    //       color: Colors.blue,
+                    //       boxShadow: [BoxShadow(color: Colors.grey,
+                    //         spreadRadius: 2,
+                    //         blurRadius: 10,
+                    //
+                    //       )],),
+                    //     child: Padding(
+                    //       padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 15),
+                    //       child: Row(
+                    //         mainAxisAlignment: MainAxisAlignment.center,
+                    //         children: [
+                    //
+                    //
+                    //           FaIcon(
+                    //             FontAwesomeIcons.folderOpen,
+                    //             color: Colors.white,
+                    //           ),
+                    //           const SizedBox(
+                    //             width: 10,
+                    //           ),
+                    //           Text(
+                    //             'Material',
+                    //             style: TextStyle(
+                    //               fontSize: 17,
+                    //               fontWeight: FontWeight.w700,
+                    //               color: Colors.white,
+                    //             ),
+                    //           ),
+                    //           Spacer(),
+                    //           FaIcon(
+                    //             FontAwesomeIcons.angleRight,
+                    //             color: Colors.white,
+                    //           ),
+                    //           Spacer(),
+                    //           FaIcon(
+                    //             FontAwesomeIcons.solidUser,
+                    //             color: Colors.white,
+                    //           ),
+                    //           const SizedBox(
+                    //             width: 10,
+                    //           ),
+                    //           Text(
+                    //             'Instructor',
+                    //             style: TextStyle(
+                    //               fontSize: 17,
+                    //               fontWeight: FontWeight.w700,
+                    //               color: Colors.white,
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    TabBar(
+                      onTap: (index) {
+                        cubit.Tab_Bar_2_Function(index: index);
+                      },
+                      indicatorColor:
+                      cubit.Tab_Bar_2_index == 0 ? Colors.red : Colors.teal,
+                      indicatorWeight: 5,
+                      splashBorderRadius: BorderRadius.circular(25),
+                      indicatorSize: TabBarIndicatorSize.label,
+                      splashFactory: NoSplash.splashFactory,
+                      tabs: [
+                        Tab(
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-
-
                               FaIcon(
-                                FontAwesomeIcons.folderOpen,
-                                color: c1.withOpacity(.9),
+                                FontAwesomeIcons.book,
+                                color: cubit.Tab_Bar_2_index == 0
+                                    ? Colors.red
+                                    : Colors.black.withOpacity(.6),
+                                size: cubit.Tab_Bar_2_index == 0 ? 25 : 22,
                               ),
-                              const SizedBox(
-                                width: 10,
+                              SizedBox(
+                                width: 15,
                               ),
                               Text(
-                                'Material',
+                                'Lecture',
                                 style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700,
-                                  color: c1,
-                                ),
-                              ),
-                              const Spacer(),
-                              FaIcon(
-                                FontAwesomeIcons.angleRight,
-                                color: c1.withOpacity(.9),
-                              ),
-                              const Spacer(),
-                              FaIcon(
-                                FontAwesomeIcons.solidUser,
-                                color: c1.withOpacity(.9),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Instructor',
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700,
-                                  color: c1,
+                                  fontSize: cubit.Tab_Bar_2_index == 0 ? 20 : 18,
+                                  color: cubit.Tab_Bar_2_index == 0
+                                      ? Colors.red
+                                      : Colors.black.withOpacity(.6),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        color: Colors.blueGrey.withOpacity(.15),
-                        borderRadius: 15,
-                        x: 0,
-                        y: 0
-                    ),
-                  ),
-                  const SizedBox(height: 15,),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(15.0),
-                  //   child: Container(
-                  //     decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(15),
-                  //       color: Colors.blue,
-                  //       boxShadow: [BoxShadow(color: Colors.grey,
-                  //         spreadRadius: 2,
-                  //         blurRadius: 10,
-                  //
-                  //       )],),
-                  //     child: Padding(
-                  //       padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 15),
-                  //       child: Row(
-                  //         mainAxisAlignment: MainAxisAlignment.center,
-                  //         children: [
-                  //
-                  //
-                  //           FaIcon(
-                  //             FontAwesomeIcons.folderOpen,
-                  //             color: Colors.white,
-                  //           ),
-                  //           const SizedBox(
-                  //             width: 10,
-                  //           ),
-                  //           Text(
-                  //             'Material',
-                  //             style: TextStyle(
-                  //               fontSize: 17,
-                  //               fontWeight: FontWeight.w700,
-                  //               color: Colors.white,
-                  //             ),
-                  //           ),
-                  //           Spacer(),
-                  //           FaIcon(
-                  //             FontAwesomeIcons.angleRight,
-                  //             color: Colors.white,
-                  //           ),
-                  //           Spacer(),
-                  //           FaIcon(
-                  //             FontAwesomeIcons.solidUser,
-                  //             color: Colors.white,
-                  //           ),
-                  //           const SizedBox(
-                  //             width: 10,
-                  //           ),
-                  //           Text(
-                  //             'Instructor',
-                  //             style: TextStyle(
-                  //               fontSize: 17,
-                  //               fontWeight: FontWeight.w700,
-                  //               color: Colors.white,
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 10, right: 15),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child: GestureDetector(
-                          onTap: () {
-                            cubit.D_E_Function(de: true);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: cubit.DE ? Colors.blue :  c1.withOpacity(.8),
-
-                              boxShadow: [BoxShadow(color:cubit.DE ? Colors.grey: Colors.white,
-                              spreadRadius: 1,
-                                blurRadius: 7,
-
-                              )],
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Center(
-                                child: Text(
-                                  'Lectures',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: cubit.DE ? c5 : c5,
-                                  ),
+                        Tab(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.laptopCode,
+                                color: cubit.Tab_Bar_2_index == 1
+                                    ? Colors.teal
+                                    : Colors.black.withOpacity(.6),
+                                size: cubit.Tab_Bar_2_index == 1 ? 25 : 22,
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                'Lab',
+                                style: TextStyle(
+                                  fontSize: cubit.Tab_Bar_2_index == 1 ? 20 : 18,
+                                  color: cubit.Tab_Bar_2_index == 1
+                                      ? Colors.teal
+                                      : Colors.black.withOpacity(.6),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
-                        )),
-                        const SizedBox(
-                          width: 15,
                         ),
-                        Expanded(
-                            child: GestureDetector(
-                          onTap: () {
-                            cubit.D_E_Function(de: false);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: cubit.DE ? c1.withOpacity(.8): Colors.blue,
-                              boxShadow: [BoxShadow(color:cubit.DE ? Colors.white: Colors.grey,
-                                spreadRadius: .5,
-                                blurRadius: 10,
-
-                              )],
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Center(
-                                child: Text(
-                                  'Labs',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: cubit.DE ? c5 : c5,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        )),
                       ],
                     ),
-                  ),
-                  ConditionalBuilder(
-                    condition: cubit.DE,
-                    builder: (context) => Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: ConditionalBuilder(
-                          condition: lectures.isNotEmpty&&cubit.connnection ,
-                          builder:(context)=>GridView.builder(
-                            gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2, childAspectRatio: 1.1),
-                            itemBuilder: (context, index) => InkWell(
-                                onTap: () {
-                                  cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);
-                                  cubit.isLec=true;
-                                  navigateTo(context, STU_Show_Material_Lec_Or_Sec());
-                                },
-                                child: Matrial_C(
-                                  courseMaterial: lectures[index],
-                                  index: index,
-                                  context: context
-                                )),
-                            scrollDirection: Axis.vertical,
-                            itemCount: lectures.length,
-                          ),
-
-                          fallback:(context)=>ConditionalBuilder(
-                            condition: cubit.stuHIVElecModel.isNotEmpty ,
-                            builder:(context)=>  GridView.builder(
+                    // Padding(
+                    //   padding: const EdgeInsets.only(left: 15, top: 10, right: 15),
+                    //   child: Row(
+                    //     children: [
+                    //       Expanded(
+                    //           child: GestureDetector(
+                    //         onTap: () {
+                    //           cubit.D_E_Function(de: true);
+                    //         },
+                    //         child: Container(
+                    //           decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(15),
+                    //             color: cubit.DE ? Colors.blue :  c1.withOpacity(.8),
+                    //
+                    //             boxShadow: [BoxShadow(color:cubit.DE ? Colors.grey: Colors.white,
+                    //             spreadRadius: 1,
+                    //               blurRadius: 7,
+                    //
+                    //             )],
+                    //           ),
+                    //           child: Padding(
+                    //             padding: const EdgeInsets.all(15.0),
+                    //             child: Center(
+                    //               child: Text(
+                    //                 'Lectures',
+                    //                 style: TextStyle(
+                    //                   fontSize: 20,
+                    //                   fontWeight: FontWeight.bold,
+                    //                   color: cubit.DE ? c5 : c5,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       )),
+                    //       const SizedBox(
+                    //         width: 15,
+                    //       ),
+                    //       Expanded(
+                    //           child: GestureDetector(
+                    //         onTap: () {
+                    //           cubit.D_E_Function(de: false);
+                    //         },
+                    //         child: Container(
+                    //           decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(15),
+                    //             color: cubit.DE ? c1.withOpacity(.8): Colors.blue,
+                    //             boxShadow: [BoxShadow(color:cubit.DE ? Colors.white: Colors.grey,
+                    //               spreadRadius: .5,
+                    //               blurRadius: 10,
+                    //
+                    //             )],
+                    //           ),
+                    //           child: Padding(
+                    //             padding: const EdgeInsets.all(15.0),
+                    //             child: Center(
+                    //               child: Text(
+                    //                 'Labs',
+                    //                 style: TextStyle(
+                    //                   fontSize: 20,
+                    //                   fontWeight: FontWeight.bold,
+                    //                   color: cubit.DE ? c5 : c5,
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       )),
+                    //     ],
+                    //   ),
+                    // ),
+                    ConditionalBuilder(
+                      condition: cubit.Tab_Bar_2_index == 0,
+                      builder: (context) => Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: ConditionalBuilder(
+                            condition: lectures.isNotEmpty&&cubit.connnection ,
+                            builder:(context)=>GridView.builder(
                               gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2, childAspectRatio: 1.1),
                               itemBuilder: (context, index) => InkWell(
                                   onTap: () {
-                                    cubit.getCourseFilesFromHIVE(lecId: cubit.stuHIVElecModel[index].lectureId!);
+                                    cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);
                                     cubit.isLec=true;
                                     navigateTo(context, STU_Show_Material_Lec_Or_Sec());
                                   },
                                   child: Matrial_C(
-                                      courseMaterial: cubit.stuHIVElecModel[index],
-                                      index: index,
-                                      context: context
+                                    courseMaterial: lectures[index],
+                                    index: index,
+                                    context: context
                                   )),
                               scrollDirection: Axis.vertical,
-                              itemCount: cubit.stuHIVElecModel.length,
+                              itemCount: lectures.length,
                             ),
 
-                            fallback:(context)=>Center(child: CircularProgressIndicator())
-                          ),
-                        ),
+                            fallback:(context)=>ConditionalBuilder(
+                              condition: cubit.stuHIVElecModel.isNotEmpty ,
+                              builder:(context)=>  GridView.builder(
+                                gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2, childAspectRatio: 1.1),
+                                itemBuilder: (context, index) => InkWell(
+                                    onTap: () {
+                                      cubit.getCourseFilesFromHIVE(lecId: cubit.stuHIVElecModel[index].lectureId!);
+                                      cubit.isLec=true;
+                                      navigateTo(context, STU_Show_Material_Lec_Or_Sec());
+                                    },
+                                    child: Matrial_C(
+                                        courseMaterial: cubit.stuHIVElecModel[index],
+                                        index: index,
+                                        context: context
+                                    )),
+                                scrollDirection: Axis.vertical,
+                                itemCount: cubit.stuHIVElecModel.length,
+                              ),
 
+                              fallback:(context)=>Center(child: CircularProgressIndicator())
+                            ),
+                          ),
+
+                        ),
                       ),
-                    ),
-                    fallback: (context) => ConditionalBuilder(
-                        condition: labs.isNotEmpty&&state is !Stu_Get_Course_Material_LoadingState ,
-                        builder:(context)=> Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: GridView.builder(
-                              gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2, childAspectRatio: 1.1),
-                              itemBuilder: (context, index) => InkWell(
-                                  onTap: () {
-                                    print('dddddd');
-                                    cubit.StuGetCourseMaterialFiles(lecId: labs[index].lectureId);
+                      fallback: (context) => ConditionalBuilder(
+                          condition: labs.isNotEmpty&&state is !Stu_Get_Course_Material_LoadingState ,
+                          builder:(context)=> Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: GridView.builder(
+                                gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2, childAspectRatio: 1.1),
+                                itemBuilder: (context, index) => InkWell(
+                                    onTap: () {
+                                      print('dddddd');
+                                      cubit.StuGetCourseMaterialFiles(lecId: labs[index].lectureId);
 
-                                    cubit.isLec=false;
-                                    navigateTo(context, STU_Show_Material_Lec_Or_Sec());
-                                  },
-                                  child: Matrial_C(
-                                      courseMaterial: labs[index],
-                                      index: index,
-                                      context: context
-                                  )),
-                              scrollDirection: Axis.vertical,
-                              itemCount: labs.length,
-                            ),
-                          ),
-                        ),
-                        fallback:(context)=>ConditionalBuilder(
-                            condition: cubit.stuHIVElabModel.isNotEmpty&&state is !Stu_Get_lec_Folders_From_Hive_LoadingState ,
-                            builder:(context)=>  Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: GridView.builder(
-                                  gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2, childAspectRatio: 1.1),
-                                  itemBuilder: (context, index) => InkWell(
-                                      onTap: () {
-                                        cubit.getCourseFilesFromHIVE(lecId: cubit.stuHIVElabModel[index].lectureId!);
-                                        cubit.isLec=true;
-                                        navigateTo(context, STU_Show_Material_Lec_Or_Sec());
-                                      },
-                                      child: Matrial_C(
-                                          courseMaterial: cubit.stuHIVElabModel[index],
-                                          index: index,
-                                          context: context
-                                      )),
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: cubit.stuHIVElabModel.length,
-                                ),
+                                      cubit.isLec=false;
+                                      navigateTo(context, STU_Show_Material_Lec_Or_Sec());
+                                    },
+                                    child: Matrial_C(
+                                        courseMaterial: labs[index],
+                                        index: index,
+                                        context: context
+                                    )),
+                                scrollDirection: Axis.vertical,
+                                itemCount: labs.length,
                               ),
                             ),
+                          ),
+                          fallback:(context)=>ConditionalBuilder(
+                              condition: cubit.stuHIVElabModel.isNotEmpty&&state is !Stu_Get_lec_Folders_From_Hive_LoadingState ,
+                              builder:(context)=>  Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: GridView.builder(
+                                    gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2, childAspectRatio: 1.1),
+                                    itemBuilder: (context, index) => InkWell(
+                                        onTap: () {
+                                          cubit.getCourseFilesFromHIVE(lecId: cubit.stuHIVElabModel[index].lectureId!);
+                                          cubit.isLec=true;
+                                          navigateTo(context, STU_Show_Material_Lec_Or_Sec());
+                                        },
+                                        child: Matrial_C(
+                                            courseMaterial: cubit.stuHIVElabModel[index],
+                                            index: index,
+                                            context: context
+                                        )),
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: cubit.stuHIVElabModel.length,
+                                  ),
+                                ),
+                              ),
 
-                            fallback:(context)=>Center(child: CircularProgressIndicator())
-                        ),
+                              fallback:(context)=>Center(child: CircularProgressIndicator())
+                          ),
 
 
-                  ),
-                  )
-                ],
-              ),
-            ));
+                    ),
+                    )
+                  ],
+                ),
+              )),
+        );
       },
     );
   }
