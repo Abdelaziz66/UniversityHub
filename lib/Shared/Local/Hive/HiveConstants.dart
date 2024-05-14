@@ -11,6 +11,12 @@
 
   //stu history
   static const String stuHisroyBox="stuHisroyBox";
+  static const String stuHisroyList="stuHisroyList";
+
+
+
+
+
   static const String stuQuizHisroyBox="stuQuizHisroyBox";
   static const String stuAssignHisroyBox="stuAssignHisroyBox";
   static const String studownloadFIleHisroyBox="studownloadFIleHisroyBox";

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,6 +21,7 @@ import '../Shared/constant.dart';
 class Layout_Screen extends StatelessWidget {
   Layout_Screen({super.key});
   var scafoldkey = GlobalKey<ScaffoldState>();
+  var dismissibleKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,10 @@ class Layout_Screen extends StatelessWidget {
 
       },
       builder: (context, state) {
+
         App_cubit cubit = App_cubit.get(context);
+        List<String> items = List.generate(cubit.stuHistoryModel.length, (index) => 'Item ${index + 1}');
+
         List<IconData> recent = [
           FontAwesomeIcons.penClip,
           FontAwesomeIcons.bookBookmark,
@@ -486,7 +491,9 @@ class Layout_Screen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 15.0, top: 30),
                         child: IconButton(
-                            onPressed: () => showDialog<String>(
+                            onPressed: () {
+                                cubit.getStuHistoryData();
+                                showDialog<String>(
                                   context: context,
                                   barrierColor: Colors.black.withOpacity(.02),
                                   useSafeArea: true,
@@ -523,35 +530,55 @@ class Layout_Screen extends StatelessWidget {
                                                                 .withOpacity(
                                                                     .7)),
                                                       ),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  top: 40,
-                                                                  left: 15,
-                                                                  bottom: 0,
-                                                                  right: 15),
-                                                          child: ListView
-                                                              .separated(
-                                                            physics:
-                                                                const BouncingScrollPhysics(),
-                                                            itemBuilder: (context,
-                                                                    index) =>
-                                                                Notification_Card(
-                                                                    icon: recent[
-                                                                        index]),
-                                                            separatorBuilder:
-                                                                (context,
-                                                                        index) =>
-                                                                    Container(
-                                                              height: 15,
-                                                              color: Colors
-                                                                  .transparent,
-                                                            ),
-                                                            itemCount: 8,
+                                                     ConditionalBuilder(
+                                                        condition:cubit.stuHistoryModel.isNotEmpty,
+                                                        builder:(context)=> Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    top: 40,
+                                                                    left: 15,
+                                                                    bottom: 0,
+                                                                    right: 15),
+                                                            child:  ListView
+                                                                  .separated(
+                                                                physics:
+                                                                    const BouncingScrollPhysics(),
+                                                                itemBuilder: (context, index) {
+                                                                  final item = items[index];
+                                                                  return Dismissible(
+
+                                                                        key: Key(item),
+
+                                                                        onDismissed: (direction){
+                                                                          items.forEach((element) {print(element);});
+                                                                          items.removeAt(index);
+                                                                          items.forEach((element) {print(element);});
+
+                                                                          cubit.stuDeleteHistory(hisIndex: index);
+                                                                        },
+                                                                    // onUpdate:(value){
+                                                                    //
+                                                                    // }
+                                                                        child:
+                                                                    historyCard(
+                                                                        icon: recent[index],
+                                                                      history: cubit.stuHistoryModel[index],
+                                                                    ) );},
+                                                                separatorBuilder:
+                                                                    (context,
+                                                                            index) =>
+                                                                        Container(
+                                                                  height: 15,
+                                                                  color: Colors
+                                                                      .transparent,
+                                                                ),
+                                                                itemCount: cubit.stuHistoryModel.length,
+                                                              ),
                                                           ),
                                                         ),
+                                                          fallback:(context)=>SizedBox(),
                                                       ),
                                                     ],
                                                   ),
@@ -570,7 +597,7 @@ class Layout_Screen extends StatelessWidget {
                                     backgroundColor: Colors.transparent,
                                     contentPadding: EdgeInsets.zero,
                                   ),
-                                ),
+                                );},
                             icon: FaIcon(
                               FontAwesomeIcons.clockRotateLeft,
                               color: c1,

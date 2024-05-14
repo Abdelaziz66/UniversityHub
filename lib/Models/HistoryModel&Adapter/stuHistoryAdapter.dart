@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 import 'historyModel.dart';
 
-class StuHistoryModelAdapter extends TypeAdapter<StuHistoryModel> {
+class StuHistoryAdapter extends TypeAdapter<StuHistoryModel> {
   @override
   final int typeId = 7; // Unique identifier for this type adapter
 
@@ -12,7 +12,8 @@ class StuHistoryModelAdapter extends TypeAdapter<StuHistoryModel> {
       hiveIndex: reader.readInt(),
       materialName: reader.readString(),
       instructorName: reader.readString(),
-      historyName: reader.readString(),
+      historyMessage: reader.readString(),
+      historyTime: reader.readString(),
     );
   }
 
@@ -21,6 +22,7 @@ class StuHistoryModelAdapter extends TypeAdapter<StuHistoryModel> {
     writer.writeInt(obj.hiveIndex ?? 0);
     writer.writeString(obj.materialName ?? '');
     writer.writeString(obj.instructorName ?? '');
-    writer.writeString(obj.historyName ?? '');
+    writer.writeString(obj.historyMessage ?? '');
+   writer.writeString(obj.historyTime ?? '');
   }
 }
