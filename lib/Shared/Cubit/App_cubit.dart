@@ -2707,11 +2707,11 @@ print('///////////////****************///////////////////');
   void stuDeleteHistory({required int hisIndex}){
     print('-------------------------');
     print(hisIndex);
-    stuHistoryModel.removeAt(hisIndex);
+    //stuHistoryModel.removeAt(hisIndex);
     stuHistoryModel.forEach((element) {print(element.hiveIndex);});
     emit(Stu_Delete_History_From_Hive_LoadingState());
     stuHisroyBox.deleteAt(hisIndex).then((value) {
-      getStuHistoryData();
+      //getStuHistoryData();
       print('deelte history at $hisIndex success' );
       stuHistoryModel.forEach((element) {print(element.hiveIndex);});
 

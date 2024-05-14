@@ -551,11 +551,10 @@ class Layout_Screen extends StatelessWidget {
 
                                                                         key: Key(item),
 
-                                                                        onDismissed: (direction){
+                                                                        onDismissed: (dismiss){
                                                                           items.forEach((element) {print(element);});
                                                                           items.removeAt(index);
                                                                           items.forEach((element) {print(element);});
-
                                                                           cubit.stuDeleteHistory(hisIndex: index);
                                                                         },
                                                                     // onUpdate:(value){
