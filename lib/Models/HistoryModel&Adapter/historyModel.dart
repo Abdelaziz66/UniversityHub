@@ -4,11 +4,13 @@ class StuHistoryModel{
   int ?hiveIndex;
   String? materialName;
   String? instructorName;
-  String? historyName;
+  String? historyMessage;
+  String? historyTime;
       StuHistoryModel({
         this.hiveIndex,
         this.materialName,
         this.instructorName,
-        this.historyName
+        this.historyMessage,
+        this.historyTime,
 });
 }

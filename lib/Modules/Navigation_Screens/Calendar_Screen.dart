@@ -317,13 +317,13 @@ class Calendar_screen extends StatelessWidget {
                                                                             sunrise: TimeOfDay(hour: 6, minute: 0), // optional
                                                                             sunset: TimeOfDay(hour: 18, minute: 0), // optional
                                                                             duskSpanInMinutes: 120, // optional
-                                                                            onChange:(value) {
-                                                                              cubit.endTime = '${DateFormat("yyyy-MM-ddT${value.hour}:${value.minute}:${value.second}0.000").format(cubit.selctedDay)}';
-                                                                              print(cubit.endTime);
-                                                                            },
-                                                                          ),
-                                                                        );
-                                                                      },
+                                                                           onChange:(value) {
+                                                                             cubit.endTime = '${DateFormat("yyyy-MM-ddT${value.hour}:${value.minute}:${value.second}0.000").format(cubit.selctedDay)}';
+                                                                             print(cubit.endTime);
+                                                                           },
+                                                                         ),
+                                                                       );
+                                                                     },
                                                                       text: 'End',
                                                                       textFontSize: 20)),
                                                             ],

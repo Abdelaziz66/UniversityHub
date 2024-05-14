@@ -438,14 +438,16 @@ class App_cubit extends Cubit<App_state> {
            localfilePath:filePath,token: token ).then((value) {
         print('dddd${value.data}');
         pathPDF = filePath;
+        print('ccccccc$currentFileName');
         stuStoreHistoryToHive(
-            historyKey:HiveConstants.studownloadFIleHisroyBox,
+           // historyKey:HiveConstants.studownloadFIleHisroyBox,
             //hisryValue: stuAssignDataModel
             materialName: currentCourseName!,
             instructorName: currentInstructorName!,
-            historyName:filePath,
+            historyMessage:'Download New file :\n${currentFileName}',
 
         );
+
         emit(DownloadFile_Success_State());
         openFile_Fun(networkFile: filePath);
       }).catchError((error){
@@ -1110,7 +1112,7 @@ print('///////////////****************///////////////////');
         //   isCycleIdChange = false;
         // }
   }
-
+  String? currentFileName;
   List<GetCourseMaterialFileModel> stuCoursesMatrialFileModel = [];
   List<InsLecFilesModel> insCoursesMatrialFileModel = [];
   // List<GetCourseMaterialsModel> stuLECTUREModel=[];
@@ -1345,12 +1347,11 @@ print('///////////////****************///////////////////');
         print(stuAssignDataModel!.taskName);
 
         stuStoreHistoryToHive(
-            historyKey:HiveConstants.stuAssignHisroyBox,
+            //historyKey:HiveConstants.stuAssignHisroyBox,
             //hisryValue: stuAssignDataModel
            materialName: currentCourseName!,
            instructorName: currentInstructorName!,
-          historyName: stuAssignDataModel!.taskName!
-
+          historyMessage: 'Upload new Task :${stuAssignDataModel!.taskName!}'
         );
         flutterToast(msg: '$json', backColor: Colors.blue);
         emit(Stu_Submit_Task_SuccessState());
@@ -2523,122 +2524,215 @@ print('///////////////****************///////////////////');
     }
   }
 
-<<<<<<< HEAD
 
-  //----------------Store student history in HIVE -----------------
+  //---------------- Store student history in HIVE ------------------------
+
+
+  // void stuStoreHistoryToHive ({
+  //   required String materialName,
+  //   required String historyName,
+  //   required String instructorName,
+  //   required String historyKey,
+  //   // required var hisryValue,
+  // }){
+  //   print(materialName);
+  //   print(historyName);
+  //   print(instructorName);
+  // //  print(historyKey);
+  //  // stuHisroyBox.delete(HiveConstants.stuAssignHisroyBox);
+  //  // stuHisroyBox.delete(HiveConstants.studownloadFIleHisroyBox);
+  //   emit(Stu_Add_newHistory_To_Hive_LoadingState());
+  //   if(historyKey==HiveConstants.stuQuizHisroyBox){
+  //      print('Storing new assign to history');
+  //     List<StuHistoryModel> stuQuizHistoryList =
+  //     stuHisroyBox.get(HiveConstants.stuQuizHisroyBox,defaultValue: []).
+  //     cast<StuHistoryModel>();
+  //
+  //     stuQuizHistoryList.add(
+  //         StuHistoryModel(
+  //       hiveIndex:stuQuizHistoryList.length,
+  //       materialName: materialName,
+  //       historyName: historyName,
+  //       instructorName: instructorName,
+  //       historyTime: DateFormat("MM-dd :${DateTime.now().hour} "
+  //           ": ${DateTime.now().minute} ").format(DateTime.now()),
+  //
+  //     ));
+  //      AddToBoxOfHive(historyKey: historyKey,
+  //        list:stuQuizHistoryList,
+  //      );
+  //   }
+  // else if(historyKey==HiveConstants.stuAssignHisroyBox){
+  //
+  //     List<StuHistoryModel> stuAssignHistoryList =
+  //     stuHisroyBox.get(HiveConstants.stuAssignHisroyBox,defaultValue: [])
+  //         .cast<StuHistoryModel>();
+  //
+  //     stuAssignHistoryList.add(
+  //         StuHistoryModel(
+  //       hiveIndex:stuAssignHistoryList.length,
+  //       materialName: materialName,
+  //       historyName: historyName??'',
+  //       instructorName: instructorName,
+  //
+  //     ));
+  //     AddToBoxOfHive(historyKey: historyKey,
+  //       list:stuAssignHistoryList,
+  //     );
+  //   }
+  // else if(historyKey==HiveConstants.studownloadFIleHisroyBox){
+  //
+  //     List<StuHistoryModel> stuDownloadFileHistoryList =
+  //     stuHisroyBox.get(HiveConstants.studownloadFIleHisroyBox,defaultValue: [])
+  //         .cast<StuHistoryModel>();
+  //
+  //     stuDownloadFileHistoryList.add(
+  //         StuHistoryModel(
+  //         hiveIndex:stuDownloadFileHistoryList.length,
+  //         materialName: materialName,
+  //         historyName: historyName,
+  //         instructorName: instructorName,
+  //         historyTime: DateFormat("${DateTime.now().month}-${DateTime.now().day} "
+  //             ":${DateTime.now().hour} "
+  //               ": ${DateTime.now().minute} ").format(DateTime.now()),
+  //     ));
+  //     AddToBoxOfHive(historyKey: historyKey,
+  //       list:stuDownloadFileHistoryList,
+  //     );
+  //   }
+  // else if(historyKey==HiveConstants.stuAddToCalenderHisroyBox){
+  //
+  //     List<StuHistoryModel> stuAddToCalenderHisroyList =
+  //     stuHisroyBox.get(HiveConstants.stuAddToCalenderHisroyBox,defaultValue: [])
+  //         .cast<StuHistoryModel>();
+  //
+  //     stuAddToCalenderHisroyList.add(
+  //         StuHistoryModel(
+  //           hiveIndex:stuAddToCalenderHisroyList.length,
+  //           materialName: materialName,
+  //           historyName: historyName,
+  //           instructorName: instructorName,
+  //         ));
+  //     AddToBoxOfHive(historyKey: historyKey,
+  //     list:stuAddToCalenderHisroyList,
+  //     );
+  //
+  //   }
+  // else{
+  //   print('the type of history not found');
+  //   return ;
+  //   }
+  //
+  // }
+
+//   void AddToBoxOfHive({
+//     String? historyKey,
+//     List<StuHistoryModel>?list,
+// }) {
+//     stuHisroyBox.put(historyKey, list).then((value) {
+//       print('$historyKey stored to box success');
+//       print(stuHisroyBox.keys);
+//       emit(Stu_Add_newHistory_To_Hive_SuccessState());
+//     }).catchError((error) {
+//       print('error to store to history');
+//       print(error);
+//       emit(Stu_Add_newHistory_To_Hive_ErrorState());
+//     });
+//   }
 
   final Box stuHisroyBox=Hive.box(HiveConstants.stuHisroyBox);
-
   void stuStoreHistoryToHive ({
     required String materialName,
-    required String historyName,
+    required String historyMessage,
     required String instructorName,
-    required String historyKey,
-    // required var hisryValue,
   }){
+   // stuHisroyBox.delete(HiveConstants.stuHisroyList);
     print(materialName);
-    print(historyName);
+    print(historyMessage);
     print(instructorName);
-    print(historyKey);
-    stuHisroyBox.delete(HiveConstants.stuAssignHisroyBox);
     emit(Stu_Add_newHistory_To_Hive_LoadingState());
-    if(historyKey==HiveConstants.stuQuizHisroyBox){
-       print('Storing new assign to history');
-      List<StuHistoryModel> stuQuizHistoryList =
-      stuHisroyBox.get(HiveConstants.stuQuizHisroyBox,defaultValue: []).
+      print('Storing new history to history box');
+      List<StuHistoryModel> stuHistoryList =
+      stuHisroyBox.get(HiveConstants.stuHisroyList,defaultValue: []).
       cast<StuHistoryModel>();
-
-      stuQuizHistoryList.add(
+    stuHistoryList.add(
           StuHistoryModel(
-        hiveIndex:stuQuizHistoryList.length,
-        materialName: materialName,
-        historyName: historyName,
-        instructorName: instructorName,
-
-      ));
-       AddToBoxOfHive(historyKey: historyKey,
-         list:stuQuizHistoryList,
-       );
-    }
-  else if(historyKey==HiveConstants.stuAssignHisroyBox){
-
-      List<StuHistoryModel> stuAssignHistoryList =
-      stuHisroyBox.get(HiveConstants.stuAssignHisroyBox,defaultValue: [])
-          .cast<StuHistoryModel>();
-
-      stuAssignHistoryList.add(
-          StuHistoryModel(
-        hiveIndex:stuAssignHistoryList.length,
-        materialName: materialName,
-        historyName: historyName??'',
-        instructorName: instructorName,
-
-      ));
-      AddToBoxOfHive(historyKey: historyKey,
-        list:stuAssignHistoryList,
-      );
-    }
-  else if(historyKey==HiveConstants.studownloadFIleHisroyBox){
-
-      List<StuHistoryModel> stuDownloadFileHistoryList =
-      stuHisroyBox.get(HiveConstants.studownloadFIleHisroyBox,defaultValue: [])
-          .cast<StuHistoryModel>();
-
-      stuDownloadFileHistoryList.add(
-          StuHistoryModel(
-          hiveIndex:stuDownloadFileHistoryList.length,
-          materialName: materialName,
-          historyName: historyName,
-        instructorName: instructorName,
-
-      ));
-      AddToBoxOfHive(historyKey: historyKey,
-        list:stuDownloadFileHistoryList,
-      );
-    }
-  else if(historyKey==HiveConstants.stuAddToCalenderHisroyBox){
-
-      List<StuHistoryModel> stuAddToCalenderHisroyList =
-      stuHisroyBox.get(HiveConstants.stuAddToCalenderHisroyBox,defaultValue: [])
-          .cast<StuHistoryModel>();
-
-      stuAddToCalenderHisroyList.add(
-          StuHistoryModel(
-            hiveIndex:stuAddToCalenderHisroyList.length,
+            hiveIndex:stuHistoryList.length,
             materialName: materialName,
-            historyName: historyName,
+            historyMessage: historyMessage,
             instructorName: instructorName,
+            historyTime: DateFormat("${DateTime.now().day} / ${DateTime.now().month}\n${DateTime.now().hour} "
+                ": ${DateTime.now().minute}am ").format(DateTime.now()),
           ));
-      AddToBoxOfHive(historyKey: historyKey,
-      list:stuAddToCalenderHisroyList,
-      );
-
-    }
-  else{
-    print('the type of history not found');
-    return ;
-    }
-
-  }
-
-  void AddToBoxOfHive({
-    String? historyKey,
-    List<StuHistoryModel>?list,
-}){
-    stuHisroyBox.put(historyKey,list).then((value) {
-      print('$historyKey stored to box success');
+    stuHisroyBox.put(HiveConstants.stuHisroyList, stuHistoryList).then((value) {
+      print(stuHisroyBox.keys);
       emit(Stu_Add_newHistory_To_Hive_SuccessState());
-    }).catchError((error){
+    }).catchError((error) {
       print('error to store to history');
       print(error);
       emit(Stu_Add_newHistory_To_Hive_ErrorState());
     });
-=======
+  }
+
+
+  //------------------------- Get STU History Data ----------------------------------------
+
+
+  List<StuHistoryModel> stuHistoryModel=[];
+  void getStuHistoryData(){
+    // stuHisroyBox.delete(HiveConstants.stuHisroyList);
+
+    emit(Stu_Get_History_From_Hive_LoadingState());
+   try {
+     stuHistoryModel = List.from(
+         stuHisroyBox.get(HiveConstants.stuHisroyList, defaultValue: [])).cast<
+         StuHistoryModel>();
+
+     print('get all history from HIVE Success---------------');
+     print(stuHistoryModel.length);
+     stuHistoryModel.forEach((element) {
+       print('heistoryyyyyyyyyyy${element.historyMessage}');
+       print('heistoryyyyyyyyyyy${element.historyTime?.split('/').last}');
+     });
+     emit(Stu_Get_History_From_Hive_SuccessState());
+   }catch(error){
+     print('error to get history data $error');
+     emit(Stu_Get_History_From_Hive_ErrorState());
+   }
+  }
+
+
+  //----------------Delete from history----------------
+
+  void stuDeleteHistory({required int hisIndex}){
+    print('-------------------------');
+    print(hisIndex);
+    //stuHistoryModel.removeAt(hisIndex);
+    stuHistoryModel.forEach((element) {print(element.hiveIndex);});
+    emit(Stu_Delete_History_From_Hive_LoadingState());
+    stuHisroyBox.deleteAt(hisIndex).then((value) {
+      //getStuHistoryData();
+      print('deelte history at $hisIndex success' );
+      stuHistoryModel.forEach((element) {print(element.hiveIndex);});
+
+      emit(Stu_Delete_History_From_Hive_ErrorState());
+    }).catchError((error){
+      print('error to delete history $error');
+      emit(Stu_Delete_History_From_Hive_ErrorState());
+    });
+  }
+
+
+//-----------------------------------------------------------------------
+
   List<GetQuizes_Model>INS_get_QuizesModel=[];
   void INS_GetQuizes_Function({
     required CourseID,
     // required token,
-  }) {
+  })
+
+
+  {
     INS_get_QuizesModel=[];
     if (true) {
       emit(INS_GetQuizes_LoadingState());
@@ -2668,6 +2762,11 @@ print('///////////////****************///////////////////');
       });
     }
   }
+
+
+
+
+
 
 
   void INS_Delete_Quiz({
@@ -2727,14 +2826,7 @@ print('///////////////****************///////////////////');
         print(error.toString());
       });
     }
->>>>>>> e38ca74a5fff14974bdc1517a050a61c20153986
   }
 
-
-
-<<<<<<< HEAD
-
-=======
->>>>>>> e38ca74a5fff14974bdc1517a050a61c20153986
 }
 

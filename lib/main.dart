@@ -89,7 +89,7 @@ import 'package:hive_flutter/hive_flutter.dart';
   Hive.registerAdapter(STU_InfoAdapter());
   Hive.registerAdapter(StuTaskDataAdapter());
   Hive.registerAdapter(GetQuizDataModelAdapter());
-  Hive.registerAdapter(StuHistoryModelAdapter());
+  Hive.registerAdapter(StuHistoryAdapter());
 
    await Hive.openBox(HiveConstants.navigationScreenBox).then((value){print('allCoursesBox4  box is opened ');}).catchError((error){
      print('allCoursesBox4  box is already opened ');
@@ -100,6 +100,7 @@ import 'package:hive_flutter/hive_flutter.dart';
    await Hive.openBox(HiveConstants.lecFilesBox).then((value){print('${HiveConstants.lecFilesBox}  box is opened ');}).catchError((error){
      print('${HiveConstants.lecFilesBox}   box is already opened ');
    });
+   //await  Hive.close();
    await Hive.openBox(HiveConstants.stuHisroyBox).then((value){print('${HiveConstants.stuHisroyBox}  box is opened ');}).catchError((error){
      print('${HiveConstants.stuHisroyBox}   box is already opened ');
    });
@@ -141,7 +142,8 @@ class MyApp extends StatelessWidget {
       //MultiBlocProvider(
      // providers: [
         BlocProvider(
-          create: (context) => App_cubit()..getUserInfoFromHIVE()..getAllNewsFromHIVE()..getAllCoursesFromHIVE()..connection_Function(),
+          create: (context) => App_cubit()..getUserInfoFromHIVE()..getAllNewsFromHIVE()
+            ..getAllCoursesFromHIVE()..connection_Function(),
     //..CreateDateBase(),
             child:  BlocConsumer<App_cubit, App_state>(
                 listener: (context, state) => () {
