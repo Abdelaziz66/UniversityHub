@@ -1219,8 +1219,20 @@ Widget Assignments_Card() => GlassBoxWithBorder_notification(
 Widget historyCard({
   required IconData icon,
   StuHistoryModel? history,
+  context
+}) => App_cubit.get(context).stuHistoryModel.isNotEmpty? Dismissible(
 
-}) =>  GlassBox(
+    key: Key(history!.hiveIndex.toString()),
+    onDismissed: (dismiss){
+    //  print(' his index ---- ${ history.hiveIndex!}');
+    //  cubit.dismissItems.forEach((element) {print(element);});
+     // cubit.dismissItems.removeAt(index);
+     // cubit.dismissItems.forEach((element) {print(element);});
+
+      App_cubit.get(context).stuDeleteHistory(hisIndex: history.hiveIndex!);
+    },
+
+    child: GlassBox(
       widget: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         child: Row(
@@ -1312,7 +1324,101 @@ Widget historyCard({
       color: Colors.white.withOpacity(.5),
       borderRadius: 20,
       x: 10,
-      y: 10);
+      y: 10)):SizedBox(
+  child: GlassBox(
+      widget: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        child: Row(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.blueGrey.withOpacity(.2),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  alignment: Alignment.center,
+                  child: FaIcon(
+                    icon,
+                    color: c1,
+                    size: 30,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 15,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width:200,
+                  child: Text(
+                    '${history?.historyMessage}',
+                    maxLines: 2,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w800, color: c1, fontSize: 15,
+                        overflow:TextOverflow.ellipsis
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 1),
+                Text(
+                  '${history?.materialName}',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500, color: c1, fontSize: 14),
+                ),
+              ],
+            ),
+            Expanded(
+              child: Container(
+                alignment: AlignmentDirectional.centerEnd,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.clock,
+                      color: c1,
+                      size: 20,
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      '${history?.historyTime}',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          color: Colors.black,
+                          fontSize: 12),
+                    ),
+                    // const SizedBox(
+                    //   height: 1,
+                    // ),
+                    // const Text(
+                    //   '9:30 PM',
+                    //   style: TextStyle(
+                    //       fontWeight: FontWeight.w900,
+                    //       color: Colors.black,
+                    //       fontSize: 12),
+                    // ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      color: Colors.white.withOpacity(.5),
+      borderRadius: 20,
+      x: 10,
+      y: 10) ,
+);
 
 
 Widget Quizzes_Card() => GlassBoxWithBorder_notification(
