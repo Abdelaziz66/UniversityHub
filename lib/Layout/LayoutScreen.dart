@@ -32,7 +32,6 @@ class Layout_Screen extends StatelessWidget {
       builder: (context, state) {
 
         App_cubit cubit = App_cubit.get(context);
-        List<String> items = List.generate(cubit.stuHistoryModel.length, (index) => 'Item ${index + 1}');
 
         List<IconData> recent = [
           FontAwesomeIcons.penClip,
@@ -546,25 +545,12 @@ class Layout_Screen extends StatelessWidget {
                                                                 physics:
                                                                     const BouncingScrollPhysics(),
                                                                 itemBuilder: (context, index) {
-                                                                  final item = items[index];
-                                                                  return Dismissible(
-
-                                                                        key: Key(item),
-
-                                                                        onDismissed: (dismiss){
-                                                                          items.forEach((element) {print(element);});
-                                                                          items.removeAt(index);
-                                                                          items.forEach((element) {print(element);});
-                                                                          cubit.stuDeleteHistory(hisIndex: index);
-                                                                        },
-                                                                    // onUpdate:(value){
-                                                                    //
-                                                                    // }
-                                                                        child:
-                                                                    historyCard(
+                                                                  return historyCard(
                                                                         icon: recent[index],
-                                                                      history: cubit.stuHistoryModel[index],
-                                                                    ) );},
+                                                                        history: cubit.stuHistoryModel[index],
+                                                                        context: context
+                                                                     );
+                                                                  },
                                                                 separatorBuilder:
                                                                     (context,
                                                                             index) =>

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 //import 'dart:html';
 import 'dart:io';
 
@@ -2693,6 +2692,7 @@ print('///////////////****************///////////////////');
      stuHistoryModel.forEach((element) {
        print('heistoryyyyyyyyyyy${element.historyMessage}');
        print('heistoryyyyyyyyyyy${element.historyTime?.split('/').last}');
+       print('heistoryyyyyyyyyyy${element.hiveIndex}');
      });
      emit(Stu_Get_History_From_Hive_SuccessState());
    }catch(error){
@@ -2704,19 +2704,27 @@ print('///////////////****************///////////////////');
 
   //----------------Delete from history----------------
 
-  void stuDeleteHistory({required int hisIndex}){
+  void stuDeleteHistory ({required int hisIndex})async{
     print('-------------------------');
     print(hisIndex);
     //stuHistoryModel.removeAt(hisIndex);
     stuHistoryModel.forEach((element) {print(element.hiveIndex);});
     emit(Stu_Delete_History_From_Hive_LoadingState());
-    stuHisroyBox.deleteAt(hisIndex).then((value) {
-      //getStuHistoryData();
-      print('deelte history at $hisIndex success' );
-      stuHistoryModel.forEach((element) {print(element.hiveIndex);});
+    stuHistoryModel.removeAt(hisIndex);
+    await  stuHisroyBox.put(HiveConstants.stuHisroyList, stuHistoryModel)
+        .then((value) {
+      getStuHistoryData();
+      flutterToast(msg:'one item delete from your activity', backColor :Colors.green);
+        emit(Stu_Delete_History_From_Hive_SuccessState());
 
-      emit(Stu_Delete_History_From_Hive_ErrorState());
-    }).catchError((error){
+    })
+    // await stuHisroyBox.deleteAt(hisIndex).then((value) {
+    //   print('deelte history at $hisIndex success' );
+    // //  stuHistoryModel.forEach((element) {print(element.hiveIndex);});
+    //
+    //   emit(Stu_Delete_History_From_Hive_SuccessState());
+    // })
+        .catchError((error){
       print('error to delete history $error');
       emit(Stu_Delete_History_From_Hive_ErrorState());
     });
@@ -2768,6 +2776,7 @@ print('///////////////****************///////////////////');
 
 
 
+  List<String> dismissItems = List.generate(3, (index) => 'Item ${index}');
 
   void INS_Delete_Quiz({
     required String? quizid,
