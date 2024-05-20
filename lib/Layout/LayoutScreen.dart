@@ -491,7 +491,7 @@ class Layout_Screen extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 15.0, top: 30),
                         child: IconButton(
                             onPressed: () {
-                                cubit.getStuHistoryData();
+                              rol=='Student'? cubit.getStuHistoryData():cubit.getInsHistoryData();
                                 showDialog<String>(
                                   context: context,
                                   barrierColor: Colors.black.withOpacity(.02),
@@ -545,11 +545,17 @@ class Layout_Screen extends StatelessWidget {
                                                                 physics:
                                                                     const BouncingScrollPhysics(),
                                                                 itemBuilder: (context, index) {
-                                                                  return historyCard(
+                                                                  return rol=='Student'? historyCard(
                                                                         icon: recent[index],
                                                                         history: cubit.stuHistoryModel[index],
+                                                                      // :cubit.insHistoryModel[index],
                                                                         context: context
-                                                                     );
+                                                                     ): insHistoryCard(
+                                                                      icon: recent[index],
+                                                                      history: cubit.insHistoryModel[index],
+                                                                      // :cubit.insHistoryModel[index],
+                                                                      context: context
+                                                                  );
                                                                   },
                                                                 separatorBuilder:
                                                                     (context,
@@ -559,7 +565,8 @@ class Layout_Screen extends StatelessWidget {
                                                                   color: Colors
                                                                       .transparent,
                                                                 ),
-                                                                itemCount: cubit.stuHistoryModel.length,
+                                                                itemCount: rol=='Student'? cubit.stuHistoryModel.length
+                                                                    :cubit.insHistoryModel.length,
                                                               ),
                                                           ),
                                                         ),

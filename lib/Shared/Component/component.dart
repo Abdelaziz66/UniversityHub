@@ -1220,7 +1220,12 @@ Widget historyCard({
   required IconData icon,
   StuHistoryModel? history,
   context
-}) => App_cubit.get(context).stuHistoryModel.isNotEmpty? Dismissible(
+}) =>
+
+ //  rol=="Student" &&
+       App_cubit.get(context).stuHistoryModel.isNotEmpty?
+     //  || rol=="Doctor" && App_cubit.get(context).insHistoryModel.isNotEmpty  ?
+ Dismissible(
 
     key: Key(history!.hiveIndex.toString()),
     onDismissed: (dismiss){
@@ -1229,6 +1234,7 @@ Widget historyCard({
      // cubit.dismissItems.removeAt(index);
      // cubit.dismissItems.forEach((element) {print(element);});
 
+      //rol=='Student'?App_cubit.get(context).stuDeleteHistory(hisIndex: history.hiveIndex!)
       App_cubit.get(context).stuDeleteHistory(hisIndex: history.hiveIndex!);
     },
 
@@ -1256,7 +1262,7 @@ Widget historyCard({
                 ),
               ),
             ),
-            SizedBox(
+           const SizedBox(
               width: 15,
             ),
             Column(
@@ -1266,7 +1272,7 @@ Widget historyCard({
                 Container(
                   width:200,
                   child: Text(
-                    '${history?.historyMessage}',
+                    '${history.historyMessage}',
                     maxLines: 2,
                     style: TextStyle(
                         fontWeight: FontWeight.w800, color: c1, fontSize: 15,
@@ -1276,7 +1282,7 @@ Widget historyCard({
                 ),
                 const SizedBox(height: 1),
                 Text(
-                  '${history?.materialName}',
+                  '${history.materialName}',
                   style: TextStyle(
                       fontWeight: FontWeight.w500, color: c1, fontSize: 14),
                 ),
@@ -1298,8 +1304,8 @@ Widget historyCard({
                       height: 4,
                     ),
                      Text(
-                      '${history?.historyTime}',
-                      style: TextStyle(
+                      '${history.historyTime}',
+                      style: const TextStyle(
                           fontWeight: FontWeight.w900,
                           color: Colors.black,
                           fontSize: 12),
@@ -1324,8 +1330,132 @@ Widget historyCard({
       color: Colors.white.withOpacity(.5),
       borderRadius: 20,
       x: 10,
-      y: 10)):SizedBox(
-  child: GlassBox(
+      y: 10))
+           :Container(
+  height: 20,
+  width: double.infinity,
+  color :Colors.red,
+  child: Center(
+      child : Text('no recent activity here')),
+
+      // GlassBox(
+      // widget: Padding(
+      //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      //   child: Row(
+      //     children: [
+      //       Container(
+      //         decoration: BoxDecoration(
+      //           borderRadius: BorderRadius.circular(12),
+      //           color: Colors.blueGrey.withOpacity(.2),
+      //         ),
+      //         child: Padding(
+      //           padding: const EdgeInsets.all(10.0),
+      //           child: Container(
+      //             height: 30,
+      //             width: 30,
+      //             alignment: Alignment.center,
+      //             child: FaIcon(
+      //               icon,
+      //               color: c1,
+      //               size: 30,
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //       SizedBox(
+      //         width: 15,
+      //       ),
+      //       Column(
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         crossAxisAlignment: CrossAxisAlignment.start,
+      //         children: [
+      //           Container(
+      //             width:200,
+      //             child: Text(
+      //               '${history?.historyMessage}',
+      //               maxLines: 2,
+      //               style: TextStyle(
+      //                   fontWeight: FontWeight.w800, color: c1, fontSize: 15,
+      //                   overflow:TextOverflow.ellipsis
+      //               ),
+      //             ),
+      //           ),
+      //           const SizedBox(height: 1),
+      //           Text(
+      //             '${history?.materialName}',
+      //             style: TextStyle(
+      //                 fontWeight: FontWeight.w500, color: c1, fontSize: 14),
+      //           ),
+      //         ],
+      //       ),
+      //       Expanded(
+      //         child: Container(
+      //           alignment: AlignmentDirectional.centerEnd,
+      //           child: Column(
+      //             crossAxisAlignment: CrossAxisAlignment.center,
+      //             mainAxisAlignment: MainAxisAlignment.center,
+      //             children: [
+      //               FaIcon(
+      //                 FontAwesomeIcons.clock,
+      //                 color: c1,
+      //                 size: 20,
+      //               ),
+      //               const SizedBox(
+      //                 height: 4,
+      //               ),
+      //               Text(
+      //                 '${history?.historyTime}',
+      //                 style: TextStyle(
+      //                     fontWeight: FontWeight.w900,
+      //                     color: Colors.black,
+      //                     fontSize: 12),
+      //               ),
+      //               // const SizedBox(
+      //               //   height: 1,
+      //               // ),
+      //               // const Text(
+      //               //   '9:30 PM',
+      //               //   style: TextStyle(
+      //               //       fontWeight: FontWeight.w900,
+      //               //       color: Colors.black,
+      //               //       fontSize: 12),
+      //               // ),
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      // color: Colors.white.withOpacity(.5),
+      // borderRadius: 20,
+      // x: 10,
+      // y: 10) ,
+);
+
+Widget insHistoryCard({
+  required IconData icon,
+  StuHistoryModel? history,
+  context
+}) =>
+
+ //  rol=="Student" &&
+    App_cubit.get(context).insHistoryModel.isNotEmpty?
+     //  || rol=="Doctor" && App_cubit.get(context).insHistoryModel.isNotEmpty  ?
+ Dismissible(
+
+    key: Key(history!.hiveIndex.toString()),
+    onDismissed: (dismiss){
+    //  print(' his index ---- ${ history.hiveIndex!}');
+    //  cubit.dismissItems.forEach((element) {print(element);});
+     // cubit.dismissItems.removeAt(index);
+     // cubit.dismissItems.forEach((element) {print(element);});
+
+      //rol=='Student'?App_cubit.get(context).stuDeleteHistory(hisIndex: history.hiveIndex!)
+      App_cubit.get(context).insDeleteHistory(hisIndex: history.hiveIndex!);
+    },
+
+    child: GlassBox(
       widget: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         child: Row(
@@ -1349,7 +1479,7 @@ Widget historyCard({
                 ),
               ),
             ),
-            SizedBox(
+           const SizedBox(
               width: 15,
             ),
             Column(
@@ -1359,7 +1489,7 @@ Widget historyCard({
                 Container(
                   width:200,
                   child: Text(
-                    '${history?.historyMessage}',
+                    '${history.historyMessage}',
                     maxLines: 2,
                     style: TextStyle(
                         fontWeight: FontWeight.w800, color: c1, fontSize: 15,
@@ -1369,7 +1499,7 @@ Widget historyCard({
                 ),
                 const SizedBox(height: 1),
                 Text(
-                  '${history?.materialName}',
+                  '${history.materialName}',
                   style: TextStyle(
                       fontWeight: FontWeight.w500, color: c1, fontSize: 14),
                 ),
@@ -1390,9 +1520,9 @@ Widget historyCard({
                     const SizedBox(
                       height: 4,
                     ),
-                    Text(
-                      '${history?.historyTime}',
-                      style: TextStyle(
+                     Text(
+                      '${history.historyTime}',
+                      style: const TextStyle(
                           fontWeight: FontWeight.w900,
                           color: Colors.black,
                           fontSize: 12),
@@ -1417,7 +1547,106 @@ Widget historyCard({
       color: Colors.white.withOpacity(.5),
       borderRadius: 20,
       x: 10,
-      y: 10) ,
+      y: 10)):Container(
+  height: 20,
+  width: double.infinity,
+  color :Colors.red,
+  child: const Center(
+      child : Text('no recent activity here')),
+
+      // GlassBox(
+      // widget: Padding(
+      //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      //   child: Row(
+      //     children: [
+      //       Container(
+      //         decoration: BoxDecoration(
+      //           borderRadius: BorderRadius.circular(12),
+      //           color: Colors.blueGrey.withOpacity(.2),
+      //         ),
+      //         child: Padding(
+      //           padding: const EdgeInsets.all(10.0),
+      //           child: Container(
+      //             height: 30,
+      //             width: 30,
+      //             alignment: Alignment.center,
+      //             child: FaIcon(
+      //               icon,
+      //               color: c1,
+      //               size: 30,
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //       SizedBox(
+      //         width: 15,
+      //       ),
+      //       Column(
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         crossAxisAlignment: CrossAxisAlignment.start,
+      //         children: [
+      //           Container(
+      //             width:200,
+      //             child: Text(
+      //               '${history?.historyMessage}',
+      //               maxLines: 2,
+      //               style: TextStyle(
+      //                   fontWeight: FontWeight.w800, color: c1, fontSize: 15,
+      //                   overflow:TextOverflow.ellipsis
+      //               ),
+      //             ),
+      //           ),
+      //           const SizedBox(height: 1),
+      //           Text(
+      //             '${history?.materialName}',
+      //             style: TextStyle(
+      //                 fontWeight: FontWeight.w500, color: c1, fontSize: 14),
+      //           ),
+      //         ],
+      //       ),
+      //       Expanded(
+      //         child: Container(
+      //           alignment: AlignmentDirectional.centerEnd,
+      //           child: Column(
+      //             crossAxisAlignment: CrossAxisAlignment.center,
+      //             mainAxisAlignment: MainAxisAlignment.center,
+      //             children: [
+      //               FaIcon(
+      //                 FontAwesomeIcons.clock,
+      //                 color: c1,
+      //                 size: 20,
+      //               ),
+      //               const SizedBox(
+      //                 height: 4,
+      //               ),
+      //               Text(
+      //                 '${history?.historyTime}',
+      //                 style: TextStyle(
+      //                     fontWeight: FontWeight.w900,
+      //                     color: Colors.black,
+      //                     fontSize: 12),
+      //               ),
+      //               // const SizedBox(
+      //               //   height: 1,
+      //               // ),
+      //               // const Text(
+      //               //   '9:30 PM',
+      //               //   style: TextStyle(
+      //               //       fontWeight: FontWeight.w900,
+      //               //       color: Colors.black,
+      //               //       fontSize: 12),
+      //               // ),
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      // color: Colors.white.withOpacity(.5),
+      // borderRadius: 20,
+      // x: 10,
+      // y: 10) ,
 );
 
 
@@ -3416,16 +3645,16 @@ Widget Build_Quiz_Data_Widget({
 
                                       //  App_cubit.get(context).quizAnswerSelected='';
 
-                                      App_cubit.get(context).submitQuizAnswers =
-                                          [];
+                                      App_cubit.get(context).submitQuizAnswers = [];
 
                                       onQuizStart;
 
                                       App_cubit.get(context).currentQuizId =
                                           quiz.id;
 
-                                      App_cubit.get(context)
-                                          .StuGetQuizDataById();
+                                      App_cubit.get(context).StuGetQuizDataById();
+
+                                      App_cubit.get(context).currentQuizName=quiz.title;
 
                                       //  App_cubit.get(context).allquizAnswers[0]=App_cubit.get(context).quizAnswerSelected;
                                       //  App_cubit.get(context).allquizAnswers =  List<String>.filled(App_cubit.get(context).questionModel.length,'');

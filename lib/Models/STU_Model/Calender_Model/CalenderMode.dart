@@ -36,8 +36,8 @@ class GetCalenderDayEventModel {
   GetCalenderDayEventModel({this.startDate, this.endDate, this.body});
 
   GetCalenderDayEventModel.fromJson(Map<String, dynamic> json) {
-    startDate = json['startDate'];
-    endDate = json['endDate'];
+    startDate = json['start'];
+    endDate = json['end'];
     body = json['body'];
   }
 

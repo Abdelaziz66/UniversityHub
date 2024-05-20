@@ -504,7 +504,9 @@ class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
                         {
                           return InkWell(
                             onTap: (){
-                            //  print(insCourseFles[index].filePath?.split('net/').last);
+                              cubit.currentFileName=insCourseFles[index].fileName;
+
+                              //  print(insCourseFles[index].filePath?.split('net/').last);
                               // cubit.loadPDF(networkfile: insCourseFles[index].filePath
                               // ?.split('net/').last);
                                print('path of pdf : ${cubit.pathPDF}');

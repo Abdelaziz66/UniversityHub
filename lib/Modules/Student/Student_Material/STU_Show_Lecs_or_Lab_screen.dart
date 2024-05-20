@@ -127,7 +127,7 @@ class STU_Show_Material_Lec_Or_Sec extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
-                                print('*****************');
+                                print('*************************************');
                                 cubit.currentFileName=files[index].fileName;
                                 print(files[index].fileName);
                                 print(files[index].filePath?.split('net/').last);

@@ -137,14 +137,18 @@ class STU_Lecture_Screen extends StatelessWidget {
                               navigateTo(context,  STU_About_course());
                             },
                             child:rol=='Student'? Build_STU_Lec(
-                              courses:courses[index],):INS_Course( courses:cubit.ins_Courses_Model[index],)),
+                              courses:courses[index],):INS_Course( courses:insCourses[index],)),
                         separatorBuilder: (context, index) => const SizedBox(
                           height: 20,
                         ),
-                        itemCount:rol=='Student'? courses.length:cubit.ins_Courses_Model.length,
+                        itemCount:rol=='Student'? courses.length:insCourses.length,
                       ),
                       fallback:(context)=> ListView.separated(
-                        itemBuilder: (context, index) => InkWell(
+                        itemBuilder: (context, index) {
+                          if(rol=='Doctor'){
+                            cubit.INS_GetAllCourses_Function( token: token,);
+                          }
+                          return  InkWell(
                             onTap: () {
                               cubit.currentCycleId=cubit.allLECFromHIVE[index].cycleId;
 
@@ -169,11 +173,11 @@ class STU_Lecture_Screen extends StatelessWidget {
                               navigateTo(context,  STU_About_course());
                             },
                             child:rol=='Student'? Build_STU_Lec(
-                              courses:cubit.allLECFromHIVE[index],):INS_Course( courses:cubit.ins_Courses_Model[index],)),
+                              courses:cubit.allLECFromHIVE[index],):INS_Course( courses:insCourses[index],));},
                         separatorBuilder: (context, index) => const SizedBox(
                           height: 20,
                         ),
-                        itemCount:rol=='Student'? cubit.allLECFromHIVE.length:cubit.ins_Courses_Model.length,
+                        itemCount:rol=='Student'? cubit.allLECFromHIVE.length:insCourses.length,
                       ),
                     ),
 

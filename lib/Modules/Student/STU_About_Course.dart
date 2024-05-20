@@ -34,7 +34,9 @@ class STU_About_course extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
       App_cubit cubit=App_cubit.get(context);
-        return Scaffold(
+      // cubit.INS_GetAllCourses_Function( token: token,);
+
+      return Scaffold(
           body:SafeArea(
             child: SingleChildScrollView(
               child: Container(
@@ -43,7 +45,11 @@ class STU_About_course extends StatelessWidget {
                       const SizedBox(height: 30,),
                       defaultAppbar(
                           context:context,
-                        text: '${cubit.currentCourseName}'
+                        text: '${cubit.currentCourseName}',
+                        // onTap:(){
+                        //   cubit.INS_GetAllCourses_Function( token: token,);
+                        //   Navigator.pop(context);
+                        // }
                       ),
                       const SizedBox(height: 30,),
                       Padding(

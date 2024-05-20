@@ -105,6 +105,10 @@ import 'package:hive_flutter/hive_flutter.dart';
      print('${HiveConstants.stuHisroyBox}   box is already opened ');
    });
 
+   await Hive.openBox(HiveConstants.insHisroyBox).then((value){print('${HiveConstants.insHisroyBox}  box is opened ');}).catchError((error){
+     print('${HiveConstants.insHisroyBox}   box is already opened ');
+   });
+
   Bloc.observer = MyBlocObserver();
 
   token = CachHelper.getData(key: 'token');
