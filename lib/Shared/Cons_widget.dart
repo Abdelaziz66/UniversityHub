@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 
+import 'Cubit/App_cubit.dart';
 import 'constant.dart';
 
 
@@ -29,7 +30,8 @@ import 'constant.dart';
 
 Widget defaultAppbar({
     String? text,
-    context})=>Stack(
+    context,
+})=>Stack(
   alignment: FractionalOffset.center,
 
   children: [
@@ -38,7 +40,11 @@ Widget defaultAppbar({
         Padding(
           padding: const EdgeInsets.only(left: 30.0),
           child: GestureDetector(
-              onTap: (){
+              onTap:(){
+                print(App_cubit.get(context).ins_Courses_Model);
+                if(App_cubit.get(context).ins_Courses_Model.isEmpty){
+                  App_cubit.get(context).INS_GetAllCourses_Function(token: token);
+                }
                 Navigator.pop(context);
               },
               child: FaIcon(FontAwesomeIcons.angleLeft,size: 30)),

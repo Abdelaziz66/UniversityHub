@@ -63,35 +63,15 @@ class App_cubit extends Cubit<App_state> {
 
   int Nav_Bar_index = 0;
   void Nav_Bar_Function({required int index}) {
-    // if(!connnection && index == 2){
-    //   getAllCoursesFromHIVE();
-    // }
     if (index == 2) {
       if(rol=='Student'&& connnection){
-      //  if(stuAllCoursesModel.length == 0){
           StuGetAllCourses(
             token: token,);
-
-     //   }
       }else{
-      //  if(ins_Courses_Model.length == 0){
           INS_GetAllCourses_Function( token: token,);
-     //   }
-
       }
-
-
-    } else if (index == 4) {
-      // GetCurrentStudenInfo();
-    }
-    else if(index == 1){
-      // print('News_Table_________________________________________');
-      // print(newsmodel.length);
-      // print('-----------------------------------------------------');
-      // newsmodel.forEach((element) {
-      //   print(element.userName);
-      // });
-      // print('__________________________________________________________________________________');
+    } else if(index == 3){
+      GetStuCalenderDayEvent();
     }
     Nav_Bar_index = index;
     emit(Nav_Bar_state());
@@ -404,20 +384,20 @@ class App_cubit extends Cubit<App_state> {
 //  //   }
 //   }
 
-  Future<bool> isFileInExternalStorage(String filePath) async {
-    // Get the external storage directory
-    final Directory? externalStorageDir = await getExternalStorageDirectory();
-    if (externalStorageDir == null) {
-      print('Error: Unable to access external storage directory');
-      return false;
-    }
-
-    // Get the directory where the file is located
-    final Directory fileDir = Directory(filePath).parent;
-
-    // Check if the file directory is the same as the external storage directory
-    return fileDir.path == externalStorageDir.path;
-  }
+  // Future<bool> isFileInExternalStorage(String filePath) async {
+  //   // Get the external storage directory
+  //   final Directory? externalStorageDir = await getExternalStorageDirectory();
+  //   if (externalStorageDir == null) {
+  //     print('Error: Unable to access external storage directory');
+  //     return false;
+  //   }
+  //
+  //   // Get the directory where the file is located
+  //   final Directory fileDir = Directory(filePath).parent;
+  //
+  //   // Check if the file directory is the same as the external storage directory
+  //   return fileDir.path == externalStorageDir.path;
+  // }
 
 
   String pathPDF = "";
@@ -435,18 +415,26 @@ class App_cubit extends Cubit<App_state> {
      DioHelper2.DownloadFile2(
            networkfilePath:networkfile,
            localfilePath:filePath,token: token ).then((value) {
-        print('dddd${value.data}');
+        //print('dddd${value.data}');
         pathPDF = filePath;
-        print('ccccccc$currentFileName');
+        //print('ccccccc$currentFileName');
+        if(rol=='Student'){
         stuStoreHistoryToHive(
            // historyKey:HiveConstants.studownloadFIleHisroyBox,
             //hisryValue: stuAssignDataModel
             materialName: currentCourseName!,
             instructorName: currentInstructorName!,
             historyMessage:'Download New file :\n${currentFileName}',
-
-        );
-
+        );}
+        else {
+          insStoreHistoryToHive(
+            // historyKey:HiveConstants.studownloadFIleHisroyBox,
+            //hisryValue: stuAssignDataModel
+            materialName: currentCourseName!,
+            //instructorName: currentInstructorName!,
+            historyMessage: 'Download New file :\n${currentFileName}',
+          );
+        }
         emit(DownloadFile_Success_State());
         openFile_Fun(networkFile: filePath);
       }).catchError((error){
@@ -459,12 +447,12 @@ class App_cubit extends Cubit<App_state> {
   }
 
 
-
-  void downloadAndOpenFile(String filePath)async{
-     if(await isFileInExternalStorage(filePath)==false){
-
-     }
-  }
+  //
+  // void downloadAndOpenFile(String filePath)async{
+  //    if(await isFileInExternalStorage(filePath)==false){
+  //
+  //    }
+  // }
 
 
 
@@ -836,9 +824,6 @@ class App_cubit extends Cubit<App_state> {
           getAllNewsFromHIVE();
         });
         StuGetAllCourses(token:token);
-
-
-
 print('///////////////****************///////////////////');
         getAllCoursesFromHIVE();
 
@@ -990,7 +975,6 @@ print('///////////////****************///////////////////');
       ).then((value) {
         if (value.statusCode == 200) {
           ins_Courses_Model = [];
-          // print('get course true');
           List Json = value.data;
           for (var element in Json) {
             ins_Courses_Model.add(INS_Course_Model.fromJson(element));
@@ -1368,6 +1352,7 @@ print('///////////////****************///////////////////');
 //-------------Quiz------------------------------
 
   List<STU_Quiz_Model> stuCoursesQuizlModel = [];
+  String? currentQuizName;
   void StuGetCourseQuiz() {
     if (stuCoursesQuizlModel.isEmpty || isCycleIdChange == true) {
       emit(Stu_Get_Course_Quiz_LoadingState());
@@ -1460,6 +1445,11 @@ print('///////////////****************///////////////////');
           }
         }
         print('quiz result :${quizResult}');
+        stuStoreHistoryToHive(
+          materialName: currentCourseName!,
+          instructorName: currentInstructorName!,
+          historyMessage:'Submit New Quiz :\n${currentQuizName}',
+        );
         emit(Stu_Submit_Quiz_SuccessState());
       }
     }).catchError((Error) {
@@ -1512,8 +1502,8 @@ print('///////////////****************///////////////////');
     print('end $endDate');
     emit(Stu_Add_Event_LoadingState());
     Dio_Helper.PostData(token: token, url: ADDEVENT, data: {
-      'startDate': startDate.toString(),//'2024-03-28T04:12:00.000'
-      'endDate': endDate.toString(),
+      'start': startDate.toString(),//'2024-03-28T04:12:00.000'
+      'end': endDate.toString(),
       'body': eventBody,
     }).then((value) {
       if (value.statusCode == 200) {
@@ -1522,6 +1512,31 @@ print('///////////////****************///////////////////');
 
         print(json);
         flutterToast(msg: '${json}', backColor: Colors.green);
+        print('event body ----------$eventBody');
+
+        if(rol=='Student'){
+          print(rol);
+          print(startDate);
+          print(endDate);
+          print(eventBody);
+          stuStoreHistoryToHive(
+            materialName:  'From ${DateTime.parse(startDate!).hour} : ${DateTime.parse(startDate!).minute}'
+                ' to ${DateTime.parse(endDate!).hour} : ${DateTime.parse(endDate!).minute}',
+            instructorName: currentInstructorName!,
+            historyMessage:'Add New Event to calender : $eventBody',
+          );}
+        else {
+          print(rol);
+          print(startDate);
+          print(endDate);
+          print(eventBody);
+          insStoreHistoryToHive(
+            materialName:'From ${DateTime.parse(startDate).hour} : ${DateTime.parse(startDate).minute}'
+                ' to ${DateTime.parse(endDate).hour} : ${DateTime.parse(endDate).minute}',
+            //instructorName: currentInstructorName!,
+            historyMessage:'Add New Event to calender : $eventBody',
+          );
+        }
         emit(Stu_Add_Event_SuccessState());
       }
     }).catchError((Error) {
@@ -1573,7 +1588,7 @@ print('///////////////****************///////////////////');
     // courseGradesModel=[];
     emit(Stu_Get_Calener_Day_Events_LoadingState());
     Dio_Helper.GetData(
-      url: 'Calendar/GetByStartAndEnd?start=$selctedDay&end=$endDate',
+      url: 'Calendar/GetByStartAndEnd?start=$selctedDay&end=${endDate??DateFormat('yyyy-MM-${selctedDay.day+1}THH:mm:ss.SSS').format(selctedDay)}',
       token: token,
     ).then((value) {
       if (value.statusCode == 200) {
@@ -2729,6 +2744,111 @@ print('///////////////****************///////////////////');
       emit(Stu_Delete_History_From_Hive_ErrorState());
     });
   }
+
+//--------------- INS Store History to HIVE-----------------------
+
+
+  final Box insHisroyBox=Hive.box(HiveConstants.insHisroyBox);
+
+  void insStoreHistoryToHive ({
+    required String materialName,
+    required String historyMessage,
+  //  required String instructorName,
+  }){
+    // stuHisroyBox.delete(HiveConstants.stuHisroyList);
+    print('Adding to history ------//////');
+    print(materialName);
+    print(historyMessage);
+   // print(instructorName);
+    emit(Stu_Add_newHistory_To_Hive_LoadingState());
+    print('Storing new history to history box');
+    List<StuHistoryModel> insHistoryList =
+    stuHisroyBox.get(HiveConstants.insHisroyList,defaultValue: []).
+    cast<StuHistoryModel>();
+    insHistoryList.add(
+        StuHistoryModel(
+          hiveIndex:insHistoryList.length,
+          materialName: materialName,
+          historyMessage: historyMessage,
+          //instructorName: instructorName??'',
+          historyTime: DateFormat("${DateTime.now().day} / ${DateTime.now().month}\n${DateTime.now().hour} "
+              ": ${DateTime.now().minute}am ").format(DateTime.now()),
+        ));
+    insHisroyBox.put(HiveConstants.insHisroyList, insHistoryList).then((value) {
+      print(insHisroyBox.keys);
+      emit(Stu_Add_newHistory_To_Hive_SuccessState());
+    }).catchError((error) {
+      print('error to store to history');
+      print(error);
+      emit(Stu_Add_newHistory_To_Hive_ErrorState());
+    });
+  }
+
+
+  //------------------------- Get STU History Data ----------------------------------------
+
+
+  List<StuHistoryModel> insHistoryModel=[];
+  void getInsHistoryData(){
+    // stuHisroyBox.delete(HiveConstants.stuHisroyList);
+
+    emit(Stu_Get_History_From_Hive_LoadingState());
+    try {
+      insHistoryModel = List.from(
+          insHisroyBox.get(HiveConstants.insHisroyList, defaultValue: [])).cast<
+          StuHistoryModel>();
+
+      print('INSS get all history from HIVE Success---------------');
+      print(insHistoryModel.length);
+      insHistoryModel.forEach((element) {
+        print('heistoryyyyyyyyyyy${element.historyMessage}');
+        print('heistoryyyyyyyyyyy${element.historyTime?.split('/').last}');
+        print('heistoryyyyyyyyyyy index ${element.hiveIndex}');
+      });
+      emit(Stu_Get_History_From_Hive_SuccessState());
+    }catch(error){
+      print('error to get history data $error');
+      emit(Stu_Get_History_From_Hive_ErrorState());
+    }
+  }
+
+
+  //----------------Delete from history----------------
+
+  void insDeleteHistory ({required int hisIndex})async{
+    print('-------------------------');
+    print(hisIndex);
+    //stuHistoryModel.removeAt(hisIndex);
+    insHistoryModel.forEach((element) {print(element.hiveIndex);});
+    emit(Stu_Delete_History_From_Hive_LoadingState());
+    insHistoryModel.removeAt(hisIndex);
+    await  insHisroyBox.put(HiveConstants.insHisroyList, insHistoryModel)
+        .then((value) {
+      getInsHistoryData();
+      flutterToast(msg:'one item deleted from your activity', backColor :Colors.green);
+      emit(Stu_Delete_History_From_Hive_SuccessState());
+
+    })
+    // await stuHisroyBox.deleteAt(hisIndex).then((value) {
+    //   print('deelte history at $hisIndex success' );
+    // //  stuHistoryModel.forEach((element) {print(element.hiveIndex);});
+    //
+    //   emit(Stu_Delete_History_From_Hive_SuccessState());
+    // })
+        .catchError((error){
+      print('error to delete history $error');
+      emit(Stu_Delete_History_From_Hive_ErrorState());
+    });
+  }
+
+
+
+
+
+
+
+
+
 
 
 //-----------------------------------------------------------------------

@@ -13,6 +13,9 @@
   static const String stuHisroyBox="stuHisroyBox";
   static const String stuHisroyList="stuHisroyList";
 
+  static const String insHisroyBox="insHisroyBox";
+  static const String insHisroyList="insHisroyList";
+
 
 
 
