@@ -95,65 +95,6 @@ class STU_Matrial_Screen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 15,),
-                    // Padding(
-                    //   padding: const EdgeInsets.all(15.0),
-                    //   child: Container(
-                    //     decoration: BoxDecoration(
-                    //       borderRadius: BorderRadius.circular(15),
-                    //       color: Colors.blue,
-                    //       boxShadow: [BoxShadow(color: Colors.grey,
-                    //         spreadRadius: 2,
-                    //         blurRadius: 10,
-                    //
-                    //       )],),
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 15),
-                    //       child: Row(
-                    //         mainAxisAlignment: MainAxisAlignment.center,
-                    //         children: [
-                    //
-                    //
-                    //           FaIcon(
-                    //             FontAwesomeIcons.folderOpen,
-                    //             color: Colors.white,
-                    //           ),
-                    //           const SizedBox(
-                    //             width: 10,
-                    //           ),
-                    //           Text(
-                    //             'Material',
-                    //             style: TextStyle(
-                    //               fontSize: 17,
-                    //               fontWeight: FontWeight.w700,
-                    //               color: Colors.white,
-                    //             ),
-                    //           ),
-                    //           Spacer(),
-                    //           FaIcon(
-                    //             FontAwesomeIcons.angleRight,
-                    //             color: Colors.white,
-                    //           ),
-                    //           Spacer(),
-                    //           FaIcon(
-                    //             FontAwesomeIcons.solidUser,
-                    //             color: Colors.white,
-                    //           ),
-                    //           const SizedBox(
-                    //             width: 10,
-                    //           ),
-                    //           Text(
-                    //             'Instructor',
-                    //             style: TextStyle(
-                    //               fontSize: 17,
-                    //               fontWeight: FontWeight.w700,
-                    //               color: Colors.white,
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                     TabBar(
                       onTap: (index) {
                         cubit.Tab_Bar_2_Function(index: index);
@@ -221,77 +162,6 @@ class STU_Matrial_Screen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 15, top: 10, right: 15),
-                    //   child: Row(
-                    //     children: [
-                    //       Expanded(
-                    //           child: GestureDetector(
-                    //         onTap: () {
-                    //           cubit.D_E_Function(de: true);
-                    //         },
-                    //         child: Container(
-                    //           decoration: BoxDecoration(
-                    //             borderRadius: BorderRadius.circular(15),
-                    //             color: cubit.DE ? Colors.blue :  c1.withOpacity(.8),
-                    //
-                    //             boxShadow: [BoxShadow(color:cubit.DE ? Colors.grey: Colors.white,
-                    //             spreadRadius: 1,
-                    //               blurRadius: 7,
-                    //
-                    //             )],
-                    //           ),
-                    //           child: Padding(
-                    //             padding: const EdgeInsets.all(15.0),
-                    //             child: Center(
-                    //               child: Text(
-                    //                 'Lectures',
-                    //                 style: TextStyle(
-                    //                   fontSize: 20,
-                    //                   fontWeight: FontWeight.bold,
-                    //                   color: cubit.DE ? c5 : c5,
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       )),
-                    //       const SizedBox(
-                    //         width: 15,
-                    //       ),
-                    //       Expanded(
-                    //           child: GestureDetector(
-                    //         onTap: () {
-                    //           cubit.D_E_Function(de: false);
-                    //         },
-                    //         child: Container(
-                    //           decoration: BoxDecoration(
-                    //             borderRadius: BorderRadius.circular(15),
-                    //             color: cubit.DE ? c1.withOpacity(.8): Colors.blue,
-                    //             boxShadow: [BoxShadow(color:cubit.DE ? Colors.white: Colors.grey,
-                    //               spreadRadius: .5,
-                    //               blurRadius: 10,
-                    //
-                    //             )],
-                    //           ),
-                    //           child: Padding(
-                    //             padding: const EdgeInsets.all(15.0),
-                    //             child: Center(
-                    //               child: Text(
-                    //                 'Labs',
-                    //                 style: TextStyle(
-                    //                   fontSize: 20,
-                    //                   fontWeight: FontWeight.bold,
-                    //                   color: cubit.DE ? c5 : c5,
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //           ),
-                    //         ),
-                    //       )),
-                    //     ],
-                    //   ),
-                    // ),
                     ConditionalBuilder(
                       condition: cubit.Tab_Bar_2_index == 0,
                       builder: (context) => Expanded(
@@ -302,14 +172,14 @@ class STU_Matrial_Screen extends StatelessWidget {
                             builder:(context)=>GridView.builder(
                               gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2, childAspectRatio: 1.1),
+                                  crossAxisCount: 2, childAspectRatio: 2.5),
                               itemBuilder: (context, index) => InkWell(
                                   onTap: () {
                                     cubit.StuGetCourseMaterialFiles(lecId: lectures[index].lectureId);
                                     cubit.isLec=true;
                                     navigateTo(context, STU_Show_Material_Lec_Or_Sec());
                                   },
-                                  child: Matrial_C(
+                                  child: Matrial_STU_C(
                                     courseMaterial: lectures[index],
                                     index: index,
                                     context: context
@@ -323,14 +193,14 @@ class STU_Matrial_Screen extends StatelessWidget {
                               builder:(context)=>  GridView.builder(
                                 gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2, childAspectRatio: 1.1),
+                                    crossAxisCount: 2, childAspectRatio: 2.5),
                                 itemBuilder: (context, index) => InkWell(
                                     onTap: () {
                                       cubit.getCourseFilesFromHIVE(lecId: cubit.stuHIVElecModel[index].lectureId!);
                                       cubit.isLec=true;
                                       navigateTo(context, STU_Show_Material_Lec_Or_Sec());
                                     },
-                                    child: Matrial_C(
+                                    child: Matrial_STU_C(
                                         courseMaterial: cubit.stuHIVElecModel[index],
                                         index: index,
                                         context: context
@@ -353,7 +223,7 @@ class STU_Matrial_Screen extends StatelessWidget {
                               child: GridView.builder(
                                 gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2, childAspectRatio: 1.1),
+                                    crossAxisCount: 2, childAspectRatio: 2.5),
                                 itemBuilder: (context, index) => InkWell(
                                     onTap: () {
                                       print('dddddd');
@@ -362,7 +232,7 @@ class STU_Matrial_Screen extends StatelessWidget {
                                       cubit.isLec=false;
                                       navigateTo(context, STU_Show_Material_Lec_Or_Sec());
                                     },
-                                    child: Matrial_C(
+                                    child: Matrial_STU_C(
                                         courseMaterial: labs[index],
                                         index: index,
                                         context: context
@@ -380,14 +250,14 @@ class STU_Matrial_Screen extends StatelessWidget {
                                   child: GridView.builder(
                                     gridDelegate:
                                     const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2, childAspectRatio: 1.1),
+                                        crossAxisCount: 2, childAspectRatio: 2.5),
                                     itemBuilder: (context, index) => InkWell(
                                         onTap: () {
                                           cubit.getCourseFilesFromHIVE(lecId: cubit.stuHIVElabModel[index].lectureId!);
                                           cubit.isLec=true;
                                           navigateTo(context, STU_Show_Material_Lec_Or_Sec());
                                         },
-                                        child: Matrial_C(
+                                        child: Matrial_STU_C(
                                             courseMaterial: cubit.stuHIVElabModel[index],
                                             index: index,
                                             context: context
