@@ -761,356 +761,451 @@ Widget Lecture_C() => InkWell(
       ),
     );
 
-Widget Matrial_C(
-    {
-      folderFormKey,
+Widget Matrial_INS_C(
+        {folderFormKey,
+        TextEditingController? folderController,
+        context,
+        GetCourseMaterialsModel? courseMaterial,
+        InsAllLecFoldersModel? insFolder,
+        // AnimationController? menuAnimation,
+        index}) =>
+    Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          // color: Colors.blueGrey.withOpacity(.05),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(width: .5),
+        ),
+        child: Padding(
+          padding:
+              const EdgeInsets.only(top: 5.0, right: 10, bottom: 5, left: 10),
+          child: Container(
+            //height: 150,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  width: 15,
+                ),
+                FaIcon(
+                  FontAwesomeIcons.solidFolderClosed,
+                  //color: c1.withOpacity(.9),
+                  color: Colors.blueGrey,
+                  size: 40,
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Container(
+                  // width: 100,
+                  // height: 80,
+                  child: Text(
+                    maxLines: 1,
+                    '${App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty || App_cubit.get(context).currentMaterialLecFolders.isNotEmpty ? courseMaterial?.lectureName : insFolder?.lectureName}',
+                    style: TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w900,
+                      color: c1,
+                    ),
+                  ),
+                ),
+                Spacer(),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        folderController?.text = '';
+                        showDialog<String>(
+                          context: context,
+                          barrierColor: Colors.black.withOpacity(.3),
+                          useSafeArea: true,
+                          builder: (BuildContext context) => AlertDialog(
+                            insetPadding: const EdgeInsets.all(0.0),
+                            scrollable: false,
+                            shadowColor: Colors.transparent,
+                            content: Center(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: GlassBox(
+                                      widget: Stack(
+                                        children: [
+                                          Column(
+                                            children: [
+                                              const Spacer(),
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.all(
+                                                    15.0),
+                                                child: GlassBoxWithBorder(
+                                                  widget: Container(
+                                                    height: 250,
+                                                    child: Padding(
+                                                      padding:
+                                                      const EdgeInsets
+                                                          .only(
+                                                          bottom:
+                                                          25.0,
+                                                          left: 25,
+                                                          right: 25,
+                                                          top: 20),
+                                                      child: Form(
+                                                        key:
+                                                        folderFormKey,
+                                                        child: Column(
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                FaIcon(
+                                                                  FontAwesomeIcons
+                                                                      .folder,
+                                                                  size:
+                                                                  30,
+                                                                ),
+                                                                SizedBox(
+                                                                  width:
+                                                                  15,
+                                                                ),
+                                                                Container(
+                                                                  width:
+                                                                  220,
+                                                                  child:
+                                                                  Text(
+                                                                    'Edit ${insFolder?.lectureName} name :',
+                                                                    maxLines:
+                                                                    2,
+                                                                    style: Theme.of(context).textTheme.subtitle2?.copyWith(
+                                                                        overflow: TextOverflow.ellipsis,
+                                                                        fontSize: 18,
+                                                                        color: Colors.black),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            const Spacer(),
+
+                                                            Container(
+                                                              padding: EdgeInsets.symmetric(
+                                                                  vertical:
+                                                                  5,
+                                                                  horizontal:
+                                                                  10),
+                                                              alignment:
+                                                              Alignment
+                                                                  .center,
+                                                              height: 60,
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                // border: Border.all(color: Colors.white),
+                                                                borderRadius:
+                                                                BorderRadius.circular(
+                                                                    18),
+                                                                color: Colors
+                                                                    .white
+                                                                    .withOpacity(
+                                                                    .8),
+                                                              ),
+                                                              child:
+                                                              Padding(
+                                                                padding: const EdgeInsets
+                                                                    .symmetric(
+                                                                    horizontal:
+                                                                    0.0),
+                                                                child:
+                                                                TextFormField(
+                                                                  controller:
+                                                                  folderController,
+                                                                  keyboardType:
+                                                                  TextInputType.text,
+                                                                  onFieldSubmitted:
+                                                                      (value) {
+                                                                    print(
+                                                                        value);
+                                                                  },
+                                                                  validator:
+                                                                      (value) {
+                                                                    if (value!
+                                                                        .isEmpty) {
+                                                                      return 'folder name can\'t be empty';
+                                                                    }
+                                                                    return null;
+                                                                  },
+                                                                  // toolbarOptions:
+                                                                  //     ToolbarOptions(paste: true, copy: true),
+                                                                  cursorColor:
+                                                                  c1,
+                                                                  style:
+                                                                  const TextStyle(
+                                                                    fontSize:
+                                                                    18,
+                                                                  ),
+                                                                  decoration:
+                                                                  InputDecoration(
+                                                                    prefixIcon:
+                                                                    Padding(
+                                                                      padding:
+                                                                      const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                                                                      child:
+                                                                      FaIcon(
+                                                                        FontAwesomeIcons.calendar,
+                                                                        color: c1,
+                                                                        size: 25,
+                                                                      ),
+                                                                    ),
+                                                                    hintText:
+                                                                    'Enter folder name',
+                                                                    border:
+                                                                    InputBorder.none,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 15,
+                                                            ),
+                                                            Default_Button(
+                                                                onPressed:
+                                                                    () {
+                                                                  if (folderFormKey
+                                                                      .currentState!
+                                                                      .validate()) {
+                                                                    App_cubit.get(context)
+                                                                        .INS_UpdateMaterialFolder(
+                                                                      folderId:
+                                                                      insFolder?.lectureId,
+                                                                      newFolderName:
+                                                                      folderController?.text,
+                                                                    );
+
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  } else {
+                                                                    flutterToast(
+                                                                        msg: 'please enter the new folder name',
+                                                                        backColor: Colors.red);
+                                                                  }
+                                                                },
+                                                                containerHeight:
+                                                                50,
+                                                                textFontSize:
+                                                                20,
+                                                                text:
+                                                                'Done'),
+                                                            // SizedBox(
+                                                            //   height: 15,
+                                                            // ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  color: Colors.white
+                                                      .withOpacity(.5),
+                                                  borderRadius: 30,
+                                                  x: 15,
+                                                  y: 15,
+                                                  BorderWidth: 1,
+                                                  BorderColor:
+                                                  Colors.white,
+                                                ),
+                                              ),
+                                              const Spacer(
+                                                flex: 1,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      color: Colors.transparent,
+                                      borderRadius: 0,
+                                      x: 3,
+                                      y: 3),
+                                ),
+                              ),
+                            ),
+                            elevation: 0,
+                            clipBehavior: Clip.none,
+                            surfaceTintColor: Colors.transparent,
+                            backgroundColor: Colors.transparent,
+                            contentPadding: EdgeInsets.zero,
+                          ),
+                        );
+
+                        // Alrat(
+                        //     context: context,
+                        //     no: () {
+                        //       Navigator.pop(context);
+                        //     },
+                        //     text: 'Do you want to edit ${insFolder?.lectureName} ?',
+                        //     yes: () {});
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          // color: Colors.yellow.withOpacity(.9),
+                          border: Border.all(
+                            width: .5,
+                            color: Colors.blue.withOpacity(1),
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.pen,
+                            size: 13,
+                            color: Colors.blue.withOpacity(1),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Alrat(
+                            context: context,
+                            no: () {
+                              Navigator.pop(context);
+                            },
+                            text:
+                            'Do you want to delete ${insFolder?.lectureName} ?',
+                            yes: () {
+                              App_cubit.get(context)
+                                  .INS_DeleteMaterialFolder(
+                                  folderId: insFolder?.lectureId);
+                              Navigator.pop(context);
+                            });
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          // color: Colors.red.withOpacity(.6),
+                          border: Border.all(
+                            width: .5,
+                            color: Colors.red.withOpacity(1),
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.trashCan,
+                            size: 13,
+                            color: Colors.red.withOpacity(1),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+
+
+                //   courseMaterial?.type == 'Lecture'
+
+
+                // Column(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //
+                //
+                //   ],
+                //
+                // ):const SizedBox(),
+                // : Text(
+                //     'Lab ${index + 1}',
+                //     style: TextStyle(
+                //       fontSize: 17,
+                //       fontWeight: FontWeight.w700,
+                //       color: c1,
+                //     ),
+                //   ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+Widget Matrial_STU_C(
+    {folderFormKey,
       TextEditingController? folderController,
       context,
       GetCourseMaterialsModel? courseMaterial,
       InsAllLecFoldersModel? insFolder,
       // AnimationController? menuAnimation,
-      index}) =>   Padding(
-  padding: const EdgeInsets.all(8.0),
-  child: Container(
-    decoration: BoxDecoration(
-      // color: Colors.blueGrey.withOpacity(.05),
-      borderRadius: BorderRadius.circular(20),
-      border: Border.all(width: .5),
-    ),
-    child: Padding(
-      padding:
-      const EdgeInsets.only(top: 5.0, right: 10, bottom: 5, left: 10),
+      index}) =>
+    Padding(
+      padding: const EdgeInsets.all(8.0),
       child: Container(
-        //height: 150,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            rol=='Doctor'?Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                InkWell(
-                  onTap: () {
-                    folderController?.text='';
-                    showDialog<String>(
-                      context: context,
-                      barrierColor: Colors.black.withOpacity(.3),
-                      useSafeArea: true,
-                      builder: (BuildContext context) => AlertDialog(
-                        insetPadding: const EdgeInsets.all(0.0),
-                        scrollable: false,
-                        shadowColor: Colors.transparent,
-                        content: Center(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: GlassBox(
-                                  widget: Stack(
-                                    children: [
-                                      Column(
-                                        children: [
-                                          const Spacer(),
-                                          Padding(
-                                            padding: const EdgeInsets.all(15.0),
-                                            child: GlassBoxWithBorder(
-                                              widget: Container(
-                                                height: 250,
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .only(
-                                                      bottom: 25.0,
-                                                      left: 25,
-                                                      right: 25,
-                                                      top: 20
-                                                  ),
-                                                  child: Form(
-                                                    key: folderFormKey,
-                                                    child: Column(
-                                                      children: [
-
-                                                        Row(
-                                                          children: [
-                                                            FaIcon(FontAwesomeIcons.folder,size: 30,),
-                                                            SizedBox(width: 15,),
-                                                            Container(
-                                                              width:220,
-                                                              child: Text(
-                                                                'Edit ${insFolder?.lectureName} name :',
-                                                                maxLines: 2,
-                                                                style:
-                                                                Theme.of(context)
-                                                                    .textTheme
-                                                                    .subtitle2?.copyWith(
-                                                                    overflow: TextOverflow.ellipsis,
-
-                                                                    fontSize: 18,color: Colors.black),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        const Spacer(),
-
-                                                        Container(
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                              vertical: 5,
-                                                              horizontal:
-                                                              10),
-                                                          alignment:
-                                                          Alignment.center,
-                                                          height: 60,
-                                                          decoration:
-                                                          BoxDecoration(
-                                                            // border: Border.all(color: Colors.white),
-                                                            borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                18),
-                                                            color: Colors.white
-                                                                .withOpacity(
-                                                                .8),
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal:
-                                                                0.0),
-                                                            child:
-                                                            TextFormField(
-                                                              controller:
-                                                              folderController,
-                                                              keyboardType:
-                                                              TextInputType
-                                                                  .text,
-                                                              onFieldSubmitted:
-                                                                  (value) {
-                                                                print(value);
-                                                              },
-                                                              validator:
-                                                                  (value) {
-                                                                if (value!
-                                                                    .isEmpty) {
-                                                                  return 'folder name can\'t be empty';
-                                                                }
-                                                                return null;
-                                                              },
-                                                              // toolbarOptions:
-                                                              //     ToolbarOptions(paste: true, copy: true),
-                                                              cursorColor: c1,
-                                                              style:
-                                                              const TextStyle(
-                                                                fontSize: 18,
-                                                              ),
-                                                              decoration:
-                                                              InputDecoration(
-                                                                prefixIcon:
-                                                                Padding(
-                                                                  padding: const EdgeInsets
-                                                                      .symmetric(
-                                                                      horizontal:
-                                                                      10.0,
-                                                                      vertical:
-                                                                      10),
-                                                                  child: FaIcon(
-                                                                    FontAwesomeIcons
-                                                                        .calendar,
-                                                                    color: c1,
-                                                                    size: 25,
-                                                                  ),
-                                                                ),
-                                                                hintText:
-                                                                'Enter folder name',
-                                                                border:
-                                                                InputBorder
-                                                                    .none,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                          height: 15,
-                                                        ),
-                                                        Default_Button(
-                                                            onPressed: () {
-                                                              if (folderFormKey.currentState!.validate()) {
-                                                                App_cubit.get(context).INS_UpdateMaterialFolder(
-                                                                  folderId: insFolder?.lectureId,
-                                                                  newFolderName:folderController?.text,
-                                                                );
-
-                                                                Navigator.pop(
-                                                                    context);
-                                                              } else {
-                                                                flutterToast(
-                                                                    msg: 'please enter the new folder name',
-                                                                    backColor: Colors.red);
-                                                              }
-                                                            },
-                                                            containerHeight: 50,
-                                                            textFontSize: 20,
-                                                            text: 'Done'),
-                                                        // SizedBox(
-                                                        //   height: 15,
-                                                        // ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              color: Colors.white
-                                                  .withOpacity(.5),
-                                              borderRadius: 30,
-                                              x: 15,
-                                              y: 15,
-                                              BorderWidth: 1,
-                                              BorderColor: Colors.white,
-                                            ),
-                                          ),
-                                          const Spacer(
-                                            flex: 1,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  color: Colors.transparent,
-                                  borderRadius: 0,
-                                  x: 3,
-                                  y: 3),
-                            ),
-                          ),
-                        ),
-                        elevation: 0,
-                        clipBehavior: Clip.none,
-                        surfaceTintColor: Colors.transparent,
-                        backgroundColor: Colors.transparent,
-                        contentPadding: EdgeInsets.zero,
-                      ),
-                    );
-
-                    // Alrat(
-                    //     context: context,
-                    //     no: () {
-                    //       Navigator.pop(context);
-                    //     },
-                    //     text: 'Do you want to edit ${insFolder?.lectureName} ?',
-                    //     yes: () {});
-                  },
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                      // color: Colors.yellow.withOpacity(.9),
-                      border: Border.all(
-                        width: .5,
-                        color: Colors.blue.withOpacity(1),
-                      ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: FaIcon(
-                        FontAwesomeIcons.pen,
-                        size: 13,
-                        color: Colors.blue.withOpacity(1),
-                      ),
-                    ),
+        decoration: BoxDecoration(
+          // color: Colors.blueGrey.withOpacity(.05),
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(width: .5),
+        ),
+        child: Container(
+          //height: 150,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(width: 20,),
+              FaIcon(
+                FontAwesomeIcons.solidFolderClosed,
+                //color: c1.withOpacity(.9),
+                color: Colors.blueGrey,
+                size: 30,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              //   courseMaterial?.type == 'Lecture'
+              Expanded(
+                child: Text(
+                  maxLines: 2,
+                  '${App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty || App_cubit.get(context).currentMaterialLecFolders.isNotEmpty ? courseMaterial?.lectureName : insFolder?.lectureName}',
+                  style: TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: c1,
                   ),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                InkWell(
-                  onTap: () {
-                    Alrat(
-                        context: context,
-                        no: () {
-                          Navigator.pop(context);
-                        },
-                        text: 'Do you want to delete ${insFolder?.lectureName} ?',
-                        yes: () {
-                          App_cubit.get(context).INS_DeleteMaterialFolder(folderId: insFolder?.lectureId);
-                          Navigator.pop(context);
-
-                        });
-                  },
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                      // color: Colors.red.withOpacity(.6),
-                      border: Border.all(
-                        width: .5,
-                        color: Colors.red.withOpacity(1),
-                      ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: FaIcon(
-                        FontAwesomeIcons.trashCan,
-                        size: 13,
-                        color: Colors.red.withOpacity(1),
-                      ),
-                    ),
-                  ),
-                ),
-
-              ],
-            ):SizedBox(),
-
-            FaIcon(
-              FontAwesomeIcons.solidFolderClosed,
-              //color: c1.withOpacity(.9),
-              color: Colors.blueGrey,
-              size: 80,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            //   courseMaterial?.type == 'Lecture'
-            Container(
-              // width: 100,
-              // height: 80,
-              child: Text(
-                maxLines: 1,
-                '${App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty||App_cubit.get(context).currentMaterialLecFolders.isNotEmpty ? courseMaterial?.lectureName : insFolder?.lectureName}',
-                style: TextStyle(
-                  overflow: TextOverflow.ellipsis,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w900,
-                  color: c1,
                 ),
               ),
-            ),
-
-
-            // Column(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //
-            //
-            //   ],
-            //
-            // ):const SizedBox(),
-            // : Text(
-            //     'Lab ${index + 1}',
-            //     style: TextStyle(
-            //       fontSize: 17,
-            //       fontWeight: FontWeight.w700,
-            //       color: c1,
-            //     ),
-            //   ),
-          ],
+              SizedBox(width: 20,),
+              // Column(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //
+              //
+              //   ],
+              //
+              // ):const SizedBox(),
+              // : Text(
+              //     'Lab ${index + 1}',
+              //     style: TextStyle(
+              //       fontSize: 17,
+              //       fontWeight: FontWeight.w700,
+              //       color: c1,
+              //     ),
+              //   ),
+            ],
+          ),
         ),
       ),
-    ),
-  ),
-);
-
-
-
+    );
 
 Widget OngoingCourse_Card() => GlassBoxWithBorder_notification(
       widget: Padding(
@@ -1216,439 +1311,439 @@ Widget Assignments_Card() => GlassBoxWithBorder_notification(
       BorderWidth: 1.5,
     );
 
-Widget historyCard({
-  required IconData icon,
-  StuHistoryModel? history,
-  context
-}) =>
+Widget historyCard(
+        {required IconData icon, StuHistoryModel? history, context}) =>
 
- //  rol=="Student" &&
-       App_cubit.get(context).stuHistoryModel.isNotEmpty?
-     //  || rol=="Doctor" && App_cubit.get(context).insHistoryModel.isNotEmpty  ?
- Dismissible(
+    //  rol=="Student" &&
+    App_cubit.get(context).stuHistoryModel.isNotEmpty
+        ?
+        //  || rol=="Doctor" && App_cubit.get(context).insHistoryModel.isNotEmpty  ?
+        Dismissible(
+            key: Key(history!.hiveIndex.toString()),
+            onDismissed: (dismiss) {
+              //  print(' his index ---- ${ history.hiveIndex!}');
+              //  cubit.dismissItems.forEach((element) {print(element);});
+              // cubit.dismissItems.removeAt(index);
+              // cubit.dismissItems.forEach((element) {print(element);});
 
-    key: Key(history!.hiveIndex.toString()),
-    onDismissed: (dismiss){
-    //  print(' his index ---- ${ history.hiveIndex!}');
-    //  cubit.dismissItems.forEach((element) {print(element);});
-     // cubit.dismissItems.removeAt(index);
-     // cubit.dismissItems.forEach((element) {print(element);});
-
-      //rol=='Student'?App_cubit.get(context).stuDeleteHistory(hisIndex: history.hiveIndex!)
-      App_cubit.get(context).stuDeleteHistory(hisIndex: history.hiveIndex!);
-    },
-
-    child: GlassBox(
-      widget: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        child: Row(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.blueGrey.withOpacity(.2),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: 30,
-                  width: 30,
-                  alignment: Alignment.center,
-                  child: FaIcon(
-                    icon,
-                    color: c1,
-                    size: 30,
+              //rol=='Student'?App_cubit.get(context).stuDeleteHistory(hisIndex: history.hiveIndex!)
+              App_cubit.get(context)
+                  .stuDeleteHistory(hisIndex: history.hiveIndex!);
+            },
+            child: GlassBox(
+                widget: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.blueGrey.withOpacity(.2),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            height: 30,
+                            width: 30,
+                            alignment: Alignment.center,
+                            child: FaIcon(
+                              icon,
+                              color: c1,
+                              size: 30,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 200,
+                            child: Text(
+                              '${history.historyMessage}',
+                              maxLines: 2,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  color: c1,
+                                  fontSize: 15,
+                                  overflow: TextOverflow.ellipsis),
+                            ),
+                          ),
+                          const SizedBox(height: 1),
+                          Text(
+                            '${history.materialName}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: c1,
+                                fontSize: 14),
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        child: Container(
+                          alignment: AlignmentDirectional.centerEnd,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.clock,
+                                color: c1,
+                                size: 20,
+                              ),
+                              const SizedBox(
+                                height: 4,
+                              ),
+                              Text(
+                                '${history.historyTime}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.black,
+                                    fontSize: 12),
+                              ),
+                              // const SizedBox(
+                              //   height: 1,
+                              // ),
+                              // const Text(
+                              //   '9:30 PM',
+                              //   style: TextStyle(
+                              //       fontWeight: FontWeight.w900,
+                              //       color: Colors.black,
+                              //       fontSize: 12),
+                              // ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ),
-           const SizedBox(
-              width: 15,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width:200,
-                  child: Text(
-                    '${history.historyMessage}',
-                    maxLines: 2,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w800, color: c1, fontSize: 15,
-                        overflow:TextOverflow.ellipsis
-                    ),
+                color: Colors.white.withOpacity(.5),
+                borderRadius: 20,
+                x: 10,
+                y: 10))
+        : Container(
+            height: 20,
+            width: double.infinity,
+            color: Colors.red,
+            child: Center(child: Text('no recent activity here')),
+
+            // GlassBox(
+            // widget: Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            //   child: Row(
+            //     children: [
+            //       Container(
+            //         decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(12),
+            //           color: Colors.blueGrey.withOpacity(.2),
+            //         ),
+            //         child: Padding(
+            //           padding: const EdgeInsets.all(10.0),
+            //           child: Container(
+            //             height: 30,
+            //             width: 30,
+            //             alignment: Alignment.center,
+            //             child: FaIcon(
+            //               icon,
+            //               color: c1,
+            //               size: 30,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //       SizedBox(
+            //         width: 15,
+            //       ),
+            //       Column(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           Container(
+            //             width:200,
+            //             child: Text(
+            //               '${history?.historyMessage}',
+            //               maxLines: 2,
+            //               style: TextStyle(
+            //                   fontWeight: FontWeight.w800, color: c1, fontSize: 15,
+            //                   overflow:TextOverflow.ellipsis
+            //               ),
+            //             ),
+            //           ),
+            //           const SizedBox(height: 1),
+            //           Text(
+            //             '${history?.materialName}',
+            //             style: TextStyle(
+            //                 fontWeight: FontWeight.w500, color: c1, fontSize: 14),
+            //           ),
+            //         ],
+            //       ),
+            //       Expanded(
+            //         child: Container(
+            //           alignment: AlignmentDirectional.centerEnd,
+            //           child: Column(
+            //             crossAxisAlignment: CrossAxisAlignment.center,
+            //             mainAxisAlignment: MainAxisAlignment.center,
+            //             children: [
+            //               FaIcon(
+            //                 FontAwesomeIcons.clock,
+            //                 color: c1,
+            //                 size: 20,
+            //               ),
+            //               const SizedBox(
+            //                 height: 4,
+            //               ),
+            //               Text(
+            //                 '${history?.historyTime}',
+            //                 style: TextStyle(
+            //                     fontWeight: FontWeight.w900,
+            //                     color: Colors.black,
+            //                     fontSize: 12),
+            //               ),
+            //               // const SizedBox(
+            //               //   height: 1,
+            //               // ),
+            //               // const Text(
+            //               //   '9:30 PM',
+            //               //   style: TextStyle(
+            //               //       fontWeight: FontWeight.w900,
+            //               //       color: Colors.black,
+            //               //       fontSize: 12),
+            //               // ),
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // color: Colors.white.withOpacity(.5),
+            // borderRadius: 20,
+            // x: 10,
+            // y: 10) ,
+          );
+
+Widget insHistoryCard(
+        {required IconData icon, StuHistoryModel? history, context}) =>
+
+    //  rol=="Student" &&
+    App_cubit.get(context).insHistoryModel.isNotEmpty
+        ?
+        //  || rol=="Doctor" && App_cubit.get(context).insHistoryModel.isNotEmpty  ?
+        Dismissible(
+            key: Key(history!.hiveIndex.toString()),
+            onDismissed: (dismiss) {
+              //  print(' his index ---- ${ history.hiveIndex!}');
+              //  cubit.dismissItems.forEach((element) {print(element);});
+              // cubit.dismissItems.removeAt(index);
+              // cubit.dismissItems.forEach((element) {print(element);});
+
+              //rol=='Student'?App_cubit.get(context).stuDeleteHistory(hisIndex: history.hiveIndex!)
+              App_cubit.get(context)
+                  .insDeleteHistory(hisIndex: history.hiveIndex!);
+            },
+            child: GlassBox(
+                widget: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  child: Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.blueGrey.withOpacity(.2),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            height: 30,
+                            width: 30,
+                            alignment: Alignment.center,
+                            child: FaIcon(
+                              icon,
+                              color: c1,
+                              size: 30,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 200,
+                            child: Text(
+                              '${history.historyMessage}',
+                              maxLines: 2,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  color: c1,
+                                  fontSize: 15,
+                                  overflow: TextOverflow.ellipsis),
+                            ),
+                          ),
+                          const SizedBox(height: 1),
+                          Text(
+                            '${history.materialName}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: c1,
+                                fontSize: 14),
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        child: Container(
+                          alignment: AlignmentDirectional.centerEnd,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.clock,
+                                color: c1,
+                                size: 20,
+                              ),
+                              const SizedBox(
+                                height: 4,
+                              ),
+                              Text(
+                                '${history.historyTime}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.black,
+                                    fontSize: 12),
+                              ),
+                              // const SizedBox(
+                              //   height: 1,
+                              // ),
+                              // const Text(
+                              //   '9:30 PM',
+                              //   style: TextStyle(
+                              //       fontWeight: FontWeight.w900,
+                              //       color: Colors.black,
+                              //       fontSize: 12),
+                              // ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 1),
-                Text(
-                  '${history.materialName}',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500, color: c1, fontSize: 14),
-                ),
-              ],
-            ),
-            Expanded(
-              child: Container(
-                alignment: AlignmentDirectional.centerEnd,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.clock,
-                      color: c1,
-                      size: 20,
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                     Text(
-                      '${history.historyTime}',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w900,
-                          color: Colors.black,
-                          fontSize: 12),
-                    ),
-                    // const SizedBox(
-                    //   height: 1,
-                    // ),
-                    // const Text(
-                    //   '9:30 PM',
-                    //   style: TextStyle(
-                    //       fontWeight: FontWeight.w900,
-                    //       color: Colors.black,
-                    //       fontSize: 12),
-                    // ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      color: Colors.white.withOpacity(.5),
-      borderRadius: 20,
-      x: 10,
-      y: 10))
-           :Container(
-  height: 20,
-  width: double.infinity,
-  color :Colors.red,
-  child: Center(
-      child : Text('no recent activity here')),
+                color: Colors.white.withOpacity(.5),
+                borderRadius: 20,
+                x: 10,
+                y: 10))
+        : Container(
+            height: 20,
+            width: double.infinity,
+            color: Colors.red,
+            child: const Center(child: Text('no recent activity here')),
 
-      // GlassBox(
-      // widget: Padding(
-      //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      //   child: Row(
-      //     children: [
-      //       Container(
-      //         decoration: BoxDecoration(
-      //           borderRadius: BorderRadius.circular(12),
-      //           color: Colors.blueGrey.withOpacity(.2),
-      //         ),
-      //         child: Padding(
-      //           padding: const EdgeInsets.all(10.0),
-      //           child: Container(
-      //             height: 30,
-      //             width: 30,
-      //             alignment: Alignment.center,
-      //             child: FaIcon(
-      //               icon,
-      //               color: c1,
-      //               size: 30,
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //       SizedBox(
-      //         width: 15,
-      //       ),
-      //       Column(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         crossAxisAlignment: CrossAxisAlignment.start,
-      //         children: [
-      //           Container(
-      //             width:200,
-      //             child: Text(
-      //               '${history?.historyMessage}',
-      //               maxLines: 2,
-      //               style: TextStyle(
-      //                   fontWeight: FontWeight.w800, color: c1, fontSize: 15,
-      //                   overflow:TextOverflow.ellipsis
-      //               ),
-      //             ),
-      //           ),
-      //           const SizedBox(height: 1),
-      //           Text(
-      //             '${history?.materialName}',
-      //             style: TextStyle(
-      //                 fontWeight: FontWeight.w500, color: c1, fontSize: 14),
-      //           ),
-      //         ],
-      //       ),
-      //       Expanded(
-      //         child: Container(
-      //           alignment: AlignmentDirectional.centerEnd,
-      //           child: Column(
-      //             crossAxisAlignment: CrossAxisAlignment.center,
-      //             mainAxisAlignment: MainAxisAlignment.center,
-      //             children: [
-      //               FaIcon(
-      //                 FontAwesomeIcons.clock,
-      //                 color: c1,
-      //                 size: 20,
-      //               ),
-      //               const SizedBox(
-      //                 height: 4,
-      //               ),
-      //               Text(
-      //                 '${history?.historyTime}',
-      //                 style: TextStyle(
-      //                     fontWeight: FontWeight.w900,
-      //                     color: Colors.black,
-      //                     fontSize: 12),
-      //               ),
-      //               // const SizedBox(
-      //               //   height: 1,
-      //               // ),
-      //               // const Text(
-      //               //   '9:30 PM',
-      //               //   style: TextStyle(
-      //               //       fontWeight: FontWeight.w900,
-      //               //       color: Colors.black,
-      //               //       fontSize: 12),
-      //               // ),
-      //             ],
-      //           ),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
-      // color: Colors.white.withOpacity(.5),
-      // borderRadius: 20,
-      // x: 10,
-      // y: 10) ,
-);
-
-Widget insHistoryCard({
-  required IconData icon,
-  StuHistoryModel? history,
-  context
-}) =>
-
- //  rol=="Student" &&
-    App_cubit.get(context).insHistoryModel.isNotEmpty?
-     //  || rol=="Doctor" && App_cubit.get(context).insHistoryModel.isNotEmpty  ?
- Dismissible(
-
-    key: Key(history!.hiveIndex.toString()),
-    onDismissed: (dismiss){
-    //  print(' his index ---- ${ history.hiveIndex!}');
-    //  cubit.dismissItems.forEach((element) {print(element);});
-     // cubit.dismissItems.removeAt(index);
-     // cubit.dismissItems.forEach((element) {print(element);});
-
-      //rol=='Student'?App_cubit.get(context).stuDeleteHistory(hisIndex: history.hiveIndex!)
-      App_cubit.get(context).insDeleteHistory(hisIndex: history.hiveIndex!);
-    },
-
-    child: GlassBox(
-      widget: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        child: Row(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.blueGrey.withOpacity(.2),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: 30,
-                  width: 30,
-                  alignment: Alignment.center,
-                  child: FaIcon(
-                    icon,
-                    color: c1,
-                    size: 30,
-                  ),
-                ),
-              ),
-            ),
-           const SizedBox(
-              width: 15,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width:200,
-                  child: Text(
-                    '${history.historyMessage}',
-                    maxLines: 2,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w800, color: c1, fontSize: 15,
-                        overflow:TextOverflow.ellipsis
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 1),
-                Text(
-                  '${history.materialName}',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500, color: c1, fontSize: 14),
-                ),
-              ],
-            ),
-            Expanded(
-              child: Container(
-                alignment: AlignmentDirectional.centerEnd,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.clock,
-                      color: c1,
-                      size: 20,
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                     Text(
-                      '${history.historyTime}',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w900,
-                          color: Colors.black,
-                          fontSize: 12),
-                    ),
-                    // const SizedBox(
-                    //   height: 1,
-                    // ),
-                    // const Text(
-                    //   '9:30 PM',
-                    //   style: TextStyle(
-                    //       fontWeight: FontWeight.w900,
-                    //       color: Colors.black,
-                    //       fontSize: 12),
-                    // ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      color: Colors.white.withOpacity(.5),
-      borderRadius: 20,
-      x: 10,
-      y: 10)):Container(
-  height: 20,
-  width: double.infinity,
-  color :Colors.red,
-  child: const Center(
-      child : Text('no recent activity here')),
-
-      // GlassBox(
-      // widget: Padding(
-      //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-      //   child: Row(
-      //     children: [
-      //       Container(
-      //         decoration: BoxDecoration(
-      //           borderRadius: BorderRadius.circular(12),
-      //           color: Colors.blueGrey.withOpacity(.2),
-      //         ),
-      //         child: Padding(
-      //           padding: const EdgeInsets.all(10.0),
-      //           child: Container(
-      //             height: 30,
-      //             width: 30,
-      //             alignment: Alignment.center,
-      //             child: FaIcon(
-      //               icon,
-      //               color: c1,
-      //               size: 30,
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //       SizedBox(
-      //         width: 15,
-      //       ),
-      //       Column(
-      //         mainAxisAlignment: MainAxisAlignment.center,
-      //         crossAxisAlignment: CrossAxisAlignment.start,
-      //         children: [
-      //           Container(
-      //             width:200,
-      //             child: Text(
-      //               '${history?.historyMessage}',
-      //               maxLines: 2,
-      //               style: TextStyle(
-      //                   fontWeight: FontWeight.w800, color: c1, fontSize: 15,
-      //                   overflow:TextOverflow.ellipsis
-      //               ),
-      //             ),
-      //           ),
-      //           const SizedBox(height: 1),
-      //           Text(
-      //             '${history?.materialName}',
-      //             style: TextStyle(
-      //                 fontWeight: FontWeight.w500, color: c1, fontSize: 14),
-      //           ),
-      //         ],
-      //       ),
-      //       Expanded(
-      //         child: Container(
-      //           alignment: AlignmentDirectional.centerEnd,
-      //           child: Column(
-      //             crossAxisAlignment: CrossAxisAlignment.center,
-      //             mainAxisAlignment: MainAxisAlignment.center,
-      //             children: [
-      //               FaIcon(
-      //                 FontAwesomeIcons.clock,
-      //                 color: c1,
-      //                 size: 20,
-      //               ),
-      //               const SizedBox(
-      //                 height: 4,
-      //               ),
-      //               Text(
-      //                 '${history?.historyTime}',
-      //                 style: TextStyle(
-      //                     fontWeight: FontWeight.w900,
-      //                     color: Colors.black,
-      //                     fontSize: 12),
-      //               ),
-      //               // const SizedBox(
-      //               //   height: 1,
-      //               // ),
-      //               // const Text(
-      //               //   '9:30 PM',
-      //               //   style: TextStyle(
-      //               //       fontWeight: FontWeight.w900,
-      //               //       color: Colors.black,
-      //               //       fontSize: 12),
-      //               // ),
-      //             ],
-      //           ),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
-      // color: Colors.white.withOpacity(.5),
-      // borderRadius: 20,
-      // x: 10,
-      // y: 10) ,
-);
-
+            // GlassBox(
+            // widget: Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            //   child: Row(
+            //     children: [
+            //       Container(
+            //         decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(12),
+            //           color: Colors.blueGrey.withOpacity(.2),
+            //         ),
+            //         child: Padding(
+            //           padding: const EdgeInsets.all(10.0),
+            //           child: Container(
+            //             height: 30,
+            //             width: 30,
+            //             alignment: Alignment.center,
+            //             child: FaIcon(
+            //               icon,
+            //               color: c1,
+            //               size: 30,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //       SizedBox(
+            //         width: 15,
+            //       ),
+            //       Column(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           Container(
+            //             width:200,
+            //             child: Text(
+            //               '${history?.historyMessage}',
+            //               maxLines: 2,
+            //               style: TextStyle(
+            //                   fontWeight: FontWeight.w800, color: c1, fontSize: 15,
+            //                   overflow:TextOverflow.ellipsis
+            //               ),
+            //             ),
+            //           ),
+            //           const SizedBox(height: 1),
+            //           Text(
+            //             '${history?.materialName}',
+            //             style: TextStyle(
+            //                 fontWeight: FontWeight.w500, color: c1, fontSize: 14),
+            //           ),
+            //         ],
+            //       ),
+            //       Expanded(
+            //         child: Container(
+            //           alignment: AlignmentDirectional.centerEnd,
+            //           child: Column(
+            //             crossAxisAlignment: CrossAxisAlignment.center,
+            //             mainAxisAlignment: MainAxisAlignment.center,
+            //             children: [
+            //               FaIcon(
+            //                 FontAwesomeIcons.clock,
+            //                 color: c1,
+            //                 size: 20,
+            //               ),
+            //               const SizedBox(
+            //                 height: 4,
+            //               ),
+            //               Text(
+            //                 '${history?.historyTime}',
+            //                 style: TextStyle(
+            //                     fontWeight: FontWeight.w900,
+            //                     color: Colors.black,
+            //                     fontSize: 12),
+            //               ),
+            //               // const SizedBox(
+            //               //   height: 1,
+            //               // ),
+            //               // const Text(
+            //               //   '9:30 PM',
+            //               //   style: TextStyle(
+            //               //       fontWeight: FontWeight.w900,
+            //               //       color: Colors.black,
+            //               //       fontSize: 12),
+            //               // ),
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // color: Colors.white.withOpacity(.5),
+            // borderRadius: 20,
+            // x: 10,
+            // y: 10) ,
+          );
 
 Widget Quizzes_Card() => GlassBoxWithBorder_notification(
       widget: Padding(
@@ -2203,8 +2298,7 @@ Widget Build_Lec_View_Widget(
 }
 
 //------------------------------
-
-Widget STU_Build_Lec_View_Widget({
+Widget INS_Build_Lec_View_Widget({
   fileFormKey,
   TextEditingController? fileController,
   GetCourseMaterialsModel? courseMaterial,
@@ -2228,13 +2322,13 @@ Widget STU_Build_Lec_View_Widget({
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        rol=='Doctor'?
-        Row(
+        rol == 'Doctor'
+            ? Row(
           children: [
             Spacer(),
             InkWell(
               onTap: () {
-                fileController?.text='';
+                fileController?.text = '';
                 showDialog<String>(
                   context: context,
                   barrierColor: Colors.black.withOpacity(.3),
@@ -2257,39 +2351,48 @@ Widget STU_Build_Lec_View_Widget({
                                     children: [
                                       const Spacer(),
                                       Padding(
-                                        padding: const EdgeInsets.all(15.0),
+                                        padding:
+                                        const EdgeInsets.all(15.0),
                                         child: GlassBoxWithBorder(
                                           widget: Container(
                                             height: 250,
                                             child: Padding(
-                                              padding: const EdgeInsets
-                                                  .only(
+                                              padding:
+                                              const EdgeInsets.only(
                                                   bottom: 25.0,
                                                   left: 25,
                                                   right: 25,
-                                                  top: 20
-                                              ),
+                                                  top: 20),
                                               child: Form(
                                                 key: fileFormKey,
                                                 child: Column(
                                                   children: [
-
                                                     Row(
                                                       children: [
-                                                        FaIcon(FontAwesomeIcons.folder,size: 30,),
-                                                        SizedBox(width: 15,),
+                                                        FaIcon(
+                                                          FontAwesomeIcons
+                                                              .folder,
+                                                          size: 30,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 15,
+                                                        ),
                                                         Container(
-                                                          width:220,
+                                                          width: 220,
                                                           child: Text(
                                                             'Edit ${insFile?.fileName} name :',
                                                             maxLines: 2,
-                                                            style:
-                                                            Theme.of(context)
+                                                            style: Theme.of(
+                                                                context)
                                                                 .textTheme
-                                                                .subtitle2?.copyWith(
-                                                                overflow: TextOverflow.ellipsis,
-
-                                                                fontSize: 18,color: Colors.black),
+                                                                .subtitle2
+                                                                ?.copyWith(
+                                                                overflow: TextOverflow
+                                                                    .ellipsis,
+                                                                fontSize:
+                                                                18,
+                                                                color:
+                                                                Colors.black),
                                                           ),
                                                         ),
                                                       ],
@@ -2302,8 +2405,8 @@ Widget STU_Build_Lec_View_Widget({
                                                           vertical: 5,
                                                           horizontal:
                                                           10),
-                                                      alignment:
-                                                      Alignment.center,
+                                                      alignment: Alignment
+                                                          .center,
                                                       height: 60,
                                                       decoration:
                                                       BoxDecoration(
@@ -2312,7 +2415,8 @@ Widget STU_Build_Lec_View_Widget({
                                                         BorderRadius
                                                             .circular(
                                                             18),
-                                                        color: Colors.white
+                                                        color: Colors
+                                                            .white
                                                             .withOpacity(
                                                             .8),
                                                       ),
@@ -2358,7 +2462,8 @@ Widget STU_Build_Lec_View_Widget({
                                                                   10.0,
                                                                   vertical:
                                                                   10),
-                                                              child: FaIcon(
+                                                              child:
+                                                              FaIcon(
                                                                 FontAwesomeIcons
                                                                     .edit,
                                                                 color: c1,
@@ -2379,21 +2484,32 @@ Widget STU_Build_Lec_View_Widget({
                                                     ),
                                                     Default_Button(
                                                         onPressed: () {
-                                                          if (fileFormKey.currentState!.validate()) {
-                                                            App_cubit.get(context).INS_UpdateMaterialFile(
-                                                              fileId: insFile?.lectureFileId,
-                                                              newFileName:fileController?.text,
+                                                          if (fileFormKey
+                                                              .currentState!
+                                                              .validate()) {
+                                                            App_cubit.get(
+                                                                context)
+                                                                .INS_UpdateMaterialFile(
+                                                              fileId: insFile
+                                                                  ?.lectureFileId,
+                                                              newFileName:
+                                                              fileController
+                                                                  ?.text,
                                                             );
 
                                                             Navigator.pop(
                                                                 context);
                                                           } else {
                                                             flutterToast(
-                                                                msg: 'please enter the new folder name',
-                                                                backColor: Colors.red);
+                                                                msg:
+                                                                'please enter the new folder name',
+                                                                backColor:
+                                                                Colors
+                                                                    .red);
                                                           }
                                                         },
-                                                        containerHeight: 50,
+                                                        containerHeight:
+                                                        50,
                                                         textFontSize: 20,
                                                         text: 'Done'),
                                                     // SizedBox(
@@ -2475,9 +2591,9 @@ Widget STU_Build_Lec_View_Widget({
                     },
                     text: 'Do you want to delete ${insFile?.fileName} ?',
                     yes: () {
-                      App_cubit.get(context).INS_DeleteMaterialFile(fileId: insFile?.lectureFileId);
+                      App_cubit.get(context).INS_DeleteMaterialFile(
+                          fileId: insFile?.lectureFileId);
                       Navigator.pop(context);
-
                     });
               },
               child: Container(
@@ -2501,13 +2617,14 @@ Widget STU_Build_Lec_View_Widget({
               ),
             ),
           ],
-
-        ):const SizedBox(),
-        SizedBox(height: 5,),
+        )
+            : const SizedBox(),
+        SizedBox(
+          height: 5,
+        ),
         Container(
-          height: 80,
+          height: 100,
           alignment: Alignment.center,
-          width: 100,
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(12),
@@ -2526,33 +2643,124 @@ Widget STU_Build_Lec_View_Widget({
         const SizedBox(
           height: 8,
         ),
-        Expanded(
+        Padding(
+          padding: const EdgeInsets.all(3.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty||
+                App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty ||
                     App_cubit.get(context).MaterialLecFiles.isNotEmpty
                     ? '${file?.fileName}'
                     : '${insFile?.fileName}',
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 14,
+                  fontSize: 12,
                 ),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),
               Text(
-                App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty||
+                App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty ||
                     App_cubit.get(context).MaterialLecFiles.isNotEmpty
                     ? '${file?.createdAt?.split('T').first} at ${file?.createdAt?.split('T').last}'
                     : '${insFile?.createdAt?.split('T').first} at ${insFile?.createdAt?.split('T').last}',
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 10,
                   color: Colors.grey[700],
                 ),
               ),
             ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget STU_Build_Lec_View_Widget({
+  fileFormKey,
+  TextEditingController? fileController,
+  GetCourseMaterialsModel? courseMaterial,
+  GetCourseMaterialFileModel? file,
+  InsLecFilesModel? insFile,
+  index,
+  context,
+}) {
+  // final kb = file.size / 1024;
+  // final mb = kb / 1024;
+  // final fileSize =
+  // mb >= 1 ? '${mb.toStringAsFixed(2)} MB ' : '${kb.toStringAsFixed(2)} KB';
+  // final extension = file.extension ?? 'none';
+  final color = Colors.blueGrey.withOpacity(.7);
+  return Container(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(12),
+      color: Colors.blueGrey.withOpacity(.15),
+    ),
+    padding: const EdgeInsets.all(6),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 5,
+        ),
+        Container(
+          height: 100,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Text(
+            App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty ||
+                    App_cubit.get(context).MaterialLecFiles.isNotEmpty
+                ? '${file?.filePath?.split('.').last}'
+                : '${insFile?.filePath?.split('.').last}',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 25,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: Container(
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty ||
+                          App_cubit.get(context).MaterialLecFiles.isNotEmpty
+                      ? '${file?.fileName}'
+                      : '${insFile?.fileName}',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 12,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+
+                ),
+                Text(
+                  App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty ||
+                          App_cubit.get(context).MaterialLecFiles.isNotEmpty
+                      ? '${file?.createdAt?.split('T').first} at ${file?.createdAt?.split('T').last}'
+                      : '${insFile?.createdAt?.split('T').first} at ${insFile?.createdAt?.split('T').last}',
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.grey[700],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],
@@ -2764,202 +2972,198 @@ Widget INS_Course({INS_Course_Model? courses}) => Container(
       ),
     );
 //--------------Assignments-----------------------------
-Widget STU_pend_Tasks({STU_Course_Assign_Model? assign}) =>  Container(
-  height: 155,
-  decoration: BoxDecoration(
-    // color: Colors.blueGrey.withOpacity(.05),
-    borderRadius: BorderRadius.circular(20),
-    border: Border.all(width: .5),
-  ),
-  child: Padding(
-    padding:
-    const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
-    child: Column(
-      children: [
-        Row(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.start,
+Widget STU_pend_Tasks({STU_Course_Assign_Model? assign}) => Container(
+      height: 155,
+      decoration: BoxDecoration(
+        // color: Colors.blueGrey.withOpacity(.05),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(width: .5),
+      ),
+      child: Padding(
+        padding:
+            const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
+        child: Column(
           children: [
-            SizedBox(
-              width: 10,
-            ),
-            Text('${assign?.taskName}'),
-            Spacer(),
-            Container(
-              height: 30,
-              width: 30,
-              child: Center(
-                child: FaIcon(
-                  FontAwesomeIcons.circleUp,
-                  size: 26,
-                  color: Colors.teal.withOpacity(.7),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 10,
                 ),
-              ),
-            ),
-            SizedBox(
-              width: 7,
-            ),
-            Container(
-              height: 30,
-              width: 30,
-              child: Center(
-                child: FaIcon(
-                  FontAwesomeIcons.circleDown,
-                  size: 26,
-                  color: Colors.teal.withOpacity(.7),
-                ),
-              ),
-            ),
-
-
-
-          ],
-        ),
-        SizedBox(
-          height: 7,
-        ),
-        Container(
-          color: Colors.black.withOpacity(.3),
-          height: .5,
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Expanded(
-          child: Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 5.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.bookmark,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            '${assign?.courseName}',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.user,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            '${assign?.instructorName}',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.chartLine,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            '${assign?.taskGrade}',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.clock,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Container(
-                            width: 150,
-                            child: Text(
-                              'From ${assign?.startDate}  to  ${assign?.startDate}',overflow: TextOverflow.ellipsis,maxLines: 1,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 13),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                Text('${assign?.taskName}'),
+                Spacer(),
+                Container(
+                  height: 30,
+                  width: 30,
+                  child: Center(
+                    child: FaIcon(
+                      FontAwesomeIcons.circleUp,
+                      size: 26,
+                      color: Colors.teal.withOpacity(.7),
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: (){
-
-
-                      },
-                      child: Container(
-                        height: 45,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.teal.withOpacity(.6),
-                          borderRadius: BorderRadius.circular(12),
-                          // border: Border.all(width: .5),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Available',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 20,
-                                color: Colors.white),
+                SizedBox(
+                  width: 7,
+                ),
+                Container(
+                  height: 30,
+                  width: 30,
+                  child: Center(
+                    child: FaIcon(
+                      FontAwesomeIcons.circleDown,
+                      size: 26,
+                      color: Colors.teal.withOpacity(.7),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 7,
+            ),
+            Container(
+              color: Colors.black.withOpacity(.3),
+              height: .5,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.bookmark,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                '${assign?.courseName}',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
                           ),
-                        ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.user,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                '${assign?.instructorName}',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.chartLine,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                '${assign?.taskGrade}',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.clock,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Container(
+                                width: 150,
+                                child: Text(
+                                  'From ${assign?.startDate}  to  ${assign?.startDate}',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 13),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            height: 45,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.teal.withOpacity(.6),
+                              borderRadius: BorderRadius.circular(12),
+                              // border: Border.all(width: .5),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Available',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-
-      ],
-    ),
-  ),
-);
+      ),
+    );
 Widget Build_STU_pend_Tasks({STU_Course_Assign_Model? assign}) => Container(
     width: double.infinity,
     height: 76.95,
@@ -3052,205 +3256,204 @@ Widget Build_STU_pend_Tasks({STU_Course_Assign_Model? assign}) => Container(
     ));
 
 //----------------------------------------
-Widget STU_complete_Tasks({required STU_Course_Assign_Model? assign}) =>  Container(
-  height: 155,
-  decoration: BoxDecoration(
-    // color: Colors.blueGrey.withOpacity(.05),
-    borderRadius: BorderRadius.circular(20),
-    border: Border.all(width: .5),
-  ),
-  child: Padding(
-    padding:
-    const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
-    child: Column(
-      children: [
-        Row(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.start,
+Widget STU_complete_Tasks({required STU_Course_Assign_Model? assign}) =>
+    Container(
+      height: 155,
+      decoration: BoxDecoration(
+        // color: Colors.blueGrey.withOpacity(.05),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(width: .5),
+      ),
+      child: Padding(
+        padding:
+            const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
+        child: Column(
           children: [
-            SizedBox(
-              width: 10,
-            ),
-            Text('${assign?.taskName}'),
-            Spacer(),
-            SizedBox(
-              width: 7,
-            ),
-            InkWell(
-              onTap: () {
-                // Alrat(
-                //     context: context,
-                //     no: () {
-                //       Navigator.pop(context);
-                //     },
-                //     text: 'Do you want to delete Task ?',
-                //     yes: () {
-                //       App_cubit.get(context).INS_Delete_Assign(Taskid: assign!.taskId);
-                //       Navigator.pop(context);
-                //
-                //     });
-              },
-              child: Container(
-                height: 30,
-                width: 30,
-
-                child: Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.circleCheck,
-                    size: 26,
-                    color: Colors.teal.withOpacity(.7),
-                  ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 10,
                 ),
-              ),
-            ),
-
-          ],
-        ),
-        SizedBox(
-          height: 7,
-        ),
-        Container(
-          color: Colors.black.withOpacity(.3),
-          height: .5,
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Expanded(
-          child: Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 5.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.bookmark,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            '${assign?.courseName}',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.user,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            '${assign?.instructorName}',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.chartLine,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            '${assign?.taskGrade}',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.clock,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Container(
-                            width: 150,
-                            child: Text(
-                              'Ended ${assign?.startDate}',overflow: TextOverflow.ellipsis,maxLines: 1,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 13,color: Colors.red),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                Text('${assign?.taskName}'),
+                Spacer(),
+                SizedBox(
+                  width: 7,
                 ),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: (){
-
-
-                      },
-                      child: Container(
-                        height: 45,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.teal.withOpacity(.6),
-                          borderRadius: BorderRadius.circular(12),
-                          // border: Border.all(width: .5),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Completed',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 20,
-                                color: Colors.white),
-                          ),
-                        ),
+                InkWell(
+                  onTap: () {
+                    // Alrat(
+                    //     context: context,
+                    //     no: () {
+                    //       Navigator.pop(context);
+                    //     },
+                    //     text: 'Do you want to delete Task ?',
+                    //     yes: () {
+                    //       App_cubit.get(context).INS_Delete_Assign(Taskid: assign!.taskId);
+                    //       Navigator.pop(context);
+                    //
+                    //     });
+                  },
+                  child: Container(
+                    height: 30,
+                    width: 30,
+                    child: Center(
+                      child: FaIcon(
+                        FontAwesomeIcons.circleCheck,
+                        size: 26,
+                        color: Colors.teal.withOpacity(.7),
                       ),
                     ),
-                  ],
+                  ),
                 ),
+              ],
+            ),
+            SizedBox(
+              height: 7,
+            ),
+            Container(
+              color: Colors.black.withOpacity(.3),
+              height: .5,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.bookmark,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                '${assign?.courseName}',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.user,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                '${assign?.instructorName}',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.chartLine,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                '${assign?.taskGrade}',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.clock,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Container(
+                                width: 150,
+                                child: Text(
+                                  'Ended ${assign?.startDate}',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 13,
+                                      color: Colors.red),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            height: 45,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.teal.withOpacity(.6),
+                              borderRadius: BorderRadius.circular(12),
+                              // border: Border.all(width: .5),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Completed',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-
-      ],
-    ),
-  ),
-);
+      ),
+    );
 Widget Build_STU_complete_Tasks() => Container(
     width: double.infinity,
     height: 76.95,
@@ -3432,8 +3635,6 @@ Widget Build_STU_complete_Tasks() => Container(
 //       ),
 //     ));
 
-
-
 Widget BuildAssignFileViewWidget(
   index,
   context,
@@ -3446,59 +3647,59 @@ Widget BuildAssignFileViewWidget(
   final extension = file.path.split('.').last ?? '';
   final color = Colors.blueGrey.withOpacity(.5);
   return InkWell(
-      onTap: () => App_cubit.get(context).openFile_Fun(file: file),
-      child:GlassBoxWithBorder_Gradiant2(widget:  Container(
-        width: 140,
-        height: 140,
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-                child: Container(
-                  alignment: Alignment.center,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(12),
+    onTap: () => App_cubit.get(context).openFile_Fun(file: file),
+    child: GlassBoxWithBorder_Gradiant2(
+        widget: Container(
+          width: 140,
+          height: 140,
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                  child: Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  '.${extension}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
                   ),
-                  child: Text(
-                    '.${extension}',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                    ),
-                  ),
-                )),
-            const SizedBox(
-              height: 8,
-            ),
-            Text(
-              file.path.split('/').last,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 14,
+                ),
+              )),
+              const SizedBox(
+                height: 8,
               ),
-              overflow: TextOverflow.ellipsis,
-            ),
-            Text(
-              '${fileSize}',
-              //fileSize,
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey[700],
+              Text(
+                file.path.split('/').last,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
-            ),
-          ],
+              Text(
+                '${fileSize}',
+                //fileSize,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey[700],
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-          BorderWidth: 0,
-          BorderColor: Colors.black,
-
-          color: Colors.white.withOpacity(.2),
-          borderRadius: 20,
-          x: 0,
-          y: 0),
+        BorderWidth: 0,
+        BorderColor: Colors.black,
+        color: Colors.white.withOpacity(.2),
+        borderRadius: 20,
+        x: 0,
+        y: 0),
   );
 }
 
@@ -3645,16 +3846,19 @@ Widget Build_Quiz_Data_Widget({
 
                                       //  App_cubit.get(context).quizAnswerSelected='';
 
-                                      App_cubit.get(context).submitQuizAnswers = [];
+                                      App_cubit.get(context).submitQuizAnswers =
+                                          [];
 
                                       onQuizStart;
 
                                       App_cubit.get(context).currentQuizId =
                                           quiz.id;
 
-                                      App_cubit.get(context).StuGetQuizDataById();
+                                      App_cubit.get(context)
+                                          .StuGetQuizDataById();
 
-                                      App_cubit.get(context).currentQuizName=quiz.title;
+                                      App_cubit.get(context).currentQuizName =
+                                          quiz.title;
 
                                       //  App_cubit.get(context).allquizAnswers[0]=App_cubit.get(context).quizAnswerSelected;
                                       //  App_cubit.get(context).allquizAnswers =  List<String>.filled(App_cubit.get(context).questionModel.length,'');
@@ -3684,7 +3888,7 @@ Widget Build_Quiz_Data_Widget({
       ),
     );
 
-Widget INS_Quiz_Card({required context,required GetQuizes_Model quizes}
+Widget INS_Quiz_Card({required context, required GetQuizes_Model quizes}
 
         //List<bool> quizState, List<bool> isQuizStart, int index
         ) =>
@@ -3717,9 +3921,7 @@ Widget INS_Quiz_Card({required context,required GetQuizes_Model quizes}
                           Navigator.pop(context);
                         },
                         text: 'Do you want to edit quiz ?',
-                        yes: () {
-
-                        });
+                        yes: () {});
                   },
                   child: Container(
                     height: 30,
@@ -3754,7 +3956,8 @@ Widget INS_Quiz_Card({required context,required GetQuizes_Model quizes}
                         text: 'Do you want to delete quiz ?',
                         yes: () {
                           Navigator.pop(context);
-                          App_cubit.get(context).INS_Delete_Quiz(quizid: quizes.id);
+                          App_cubit.get(context)
+                              .INS_Delete_Quiz(quizid: quizes.id);
                         });
                   },
                   child: Container(
@@ -3790,7 +3993,9 @@ Widget INS_Quiz_Card({required context,required GetQuizes_Model quizes}
                         text: 'Do you want to see quiz ?',
                         yes: () {
                           Navigator.pop(context);
-                          App_cubit.get(context).INS_GetQuizeDetails_Function(QuizID:quizes.id, );
+                          App_cubit.get(context).INS_GetQuizeDetails_Function(
+                            QuizID: quizes.id,
+                          );
                         });
                   },
                   child: Container(
@@ -3978,7 +4183,6 @@ Widget INS_Quiz_Card({required context,required GetQuizes_Model quizes}
       ),
     );
 
-
 var taskNamecontroller = TextEditingController();
 var taskGradecontroller = TextEditingController();
 String? startDate;
@@ -3993,1190 +4197,1123 @@ int? startm;
 int? endm;
 Time _time = Time(hour: 11, minute: 30, second: 0);
 var formkey1 = GlobalKey<FormState>();
-Widget INS_Task_Card({required context,required STU_Course_Assign_Model? assign}
+Widget
+    INS_Task_Card({required context, required STU_Course_Assign_Model? assign}
 
-    //List<bool> quizState, List<bool> isQuizStart, int index
-    ) =>
-    Container(
-      height: 200,
-      decoration: BoxDecoration(
-        // color: Colors.blueGrey.withOpacity(.05),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(width: .5),
-      ),
-      child: Padding(
-        padding:
-        const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
-        child: Column(
-          children: [
-            Row(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.start,
+            //List<bool> quizState, List<bool> isQuizStart, int index
+            ) =>
+        Container(
+          height: 200,
+          decoration: BoxDecoration(
+            // color: Colors.blueGrey.withOpacity(.05),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(width: .5),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(
+                top: 10.0, right: 15, bottom: 10, left: 15),
+            child: Column(
               children: [
-                SizedBox(
-                  width: 10,
-                ),
-                Text('${assign?.taskName}'),
-                Spacer(),
-                InkWell(
-                  onTap: () {
-                    Alrat(
-                        context: context,
-                        no: () {
-                          Navigator.pop(context);
-                        },
-                        text: 'Do you want to edit Task ?',
-                        yes: () {
-                          Navigator.pop(context);
-                          print(assign!.taskId);
-                          showDialog<String>(
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('${assign?.taskName}'),
+                    Spacer(),
+                    InkWell(
+                      onTap: () {
+                        Alrat(
                             context: context,
-                            barrierColor: Colors.black.withOpacity(.3),
-                            useSafeArea: true,
-                            builder: (BuildContext context) => AlertDialog(
-                              insetPadding: const EdgeInsets.all(0.0),
-                              scrollable: false,
-                              shadowColor: Colors.transparent,
-                              content: Center(
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: GlassBox(
-                                        widget: Stack(
-                                          children: [
-                                            Column(
+                            no: () {
+                              Navigator.pop(context);
+                            },
+                            text: 'Do you want to edit Task ?',
+                            yes: () {
+                              Navigator.pop(context);
+                              print(assign!.taskId);
+                              showDialog<String>(
+                                context: context,
+                                barrierColor: Colors.black.withOpacity(.3),
+                                useSafeArea: true,
+                                builder: (BuildContext context) => AlertDialog(
+                                  insetPadding: const EdgeInsets.all(0.0),
+                                  scrollable: false,
+                                  shadowColor: Colors.transparent,
+                                  content: Center(
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: GlassBox(
+                                            widget: Stack(
                                               children: [
-                                                const Spacer(),
-                                                Padding(
-                                                  padding: const EdgeInsets.all(15.0),
-                                                  child: GlassBoxWithBorder(
-                                                    widget: Container(
-                                                      height: 420,
-                                                      child: Padding(
-                                                        padding: const EdgeInsets
-                                                            .only(
-                                                            bottom: 25.0,
-                                                            left: 25,
-                                                            right: 25,
-                                                            top: 20
-                                                        ),
-                                                        child: Form(
-                                                          key: formkey1,
-                                                          child: Column(
-                                                            children: [
-                                                              const Spacer(),
-                                                              SizedBox(
-                                                                height: 15,
-                                                              ),
-                                                              Container(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                    vertical: 5,
-                                                                    horizontal:
-                                                                    10),
-                                                                alignment:
-                                                                Alignment.center,
-                                                                height: 60,
-                                                                decoration:
-                                                                BoxDecoration(
-                                                                  // border: Border.all(color: Colors.white),
-                                                                  borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                      18),
-                                                                  color: Colors.white
-                                                                      .withOpacity(
-                                                                      .5),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding:
-                                                                  const EdgeInsets
-                                                                      .symmetric(
-                                                                      horizontal:
-                                                                      0.0),
-                                                                  child:
-                                                                  TextFormField(
-                                                                    controller:
-                                                                    taskNamecontroller,
-                                                                    keyboardType:
-                                                                    TextInputType
-                                                                        .text,
-                                                                    onFieldSubmitted:
-                                                                        (value) {
-                                                                      print(value);
-                                                                    },
-                                                                    // validator:
-                                                                    //     (value) {
-                                                                    //   if (value!
-                                                                    //       .isEmpty) {
-                                                                    //     return 'Event title can\'t be empty';
-                                                                    //   }
-                                                                    //   return null;
-                                                                    // },
-                                                                    // toolbarOptions:
-                                                                    //     ToolbarOptions(paste: true, copy: true),
-                                                                    cursorColor: c1,
-                                                                    style:
-                                                                    const TextStyle(
-                                                                      fontSize: 18,
-                                                                    ),
-                                                                    decoration:
-                                                                    InputDecoration(
-                                                                      prefixIcon:
-                                                                      Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .symmetric(
-                                                                            horizontal:
-                                                                            10.0,
-                                                                            vertical:
-                                                                            10),
-                                                                        child: FaIcon(
-                                                                          FontAwesomeIcons
-                                                                              .edit,
-                                                                          color: c1,
-                                                                          size: 25,
-                                                                        ),
-                                                                      ),
-                                                                      hintText:
-                                                                      'Task name',
-                                                                      border:
-                                                                      InputBorder
-                                                                          .none,
-                                                                    ),
+                                                Column(
+                                                  children: [
+                                                    const Spacer(),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              15.0),
+                                                      child: GlassBoxWithBorder(
+                                                        widget: Container(
+                                                          height: 420,
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    bottom:
+                                                                        25.0,
+                                                                    left: 25,
+                                                                    right: 25,
+                                                                    top: 20),
+                                                            child: Form(
+                                                              key: formkey1,
+                                                              child: Column(
+                                                                children: [
+                                                                  const Spacer(),
+                                                                  SizedBox(
+                                                                    height: 15,
                                                                   ),
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                height: 15,
-                                                              ),
-                                                              Container(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
-                                                                    vertical: 5,
-                                                                    horizontal:
-                                                                    10),
-                                                                alignment:
-                                                                Alignment.center,
-                                                                height: 60,
-                                                                decoration:
-                                                                BoxDecoration(
-                                                                  // border: Border.all(color: Colors.white),
-                                                                  borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                      18),
-                                                                  color: Colors.white
-                                                                      .withOpacity(
-                                                                      .5),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding:
-                                                                  const EdgeInsets
-                                                                      .symmetric(
-                                                                      horizontal:
-                                                                      0.0),
-                                                                  child:
-                                                                  TextFormField(
-                                                                    controller:
-                                                                    taskGradecontroller,
-                                                                    keyboardType:
-                                                                    TextInputType
-                                                                        .text,
-                                                                    onFieldSubmitted:
-                                                                        (value) {
-                                                                      print(value);
-                                                                    },
-                                                                    //validator:
-                                                                    //     (value) {
-                                                                    //   if (value!
-                                                                    //       .isEmpty) {
-                                                                    //     return 'Event title can\'t be empty';
-                                                                    //   }
-                                                                    //   return null;
-                                                                    // },
-                                                                    // toolbarOptions:
-                                                                    //     ToolbarOptions(paste: true, copy: true),
-                                                                    cursorColor: c1,
-                                                                    style:
-                                                                    const TextStyle(
-                                                                      fontSize: 18,
-                                                                    ),
-                                                                    decoration:
-                                                                    InputDecoration(
-                                                                      prefixIcon:
-                                                                      Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .symmetric(
-                                                                            horizontal:
-                                                                            10.0,
-                                                                            vertical:
+                                                                  Container(
+                                                                    padding: EdgeInsets.symmetric(
+                                                                        vertical:
+                                                                            5,
+                                                                        horizontal:
                                                                             10),
-                                                                        child: FaIcon(
-                                                                          FontAwesomeIcons
-                                                                              .solidEdit,
-                                                                          color: c1,
-                                                                          size: 25,
-                                                                        ),
-                                                                      ),
-                                                                      hintText:
-                                                                      'Task grade',
-                                                                      border:
-                                                                      InputBorder
-                                                                          .none,
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .center,
+                                                                    height: 60,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      // border: Border.all(color: Colors.white),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              18),
+                                                                      color: Colors
+                                                                          .white
+                                                                          .withOpacity(
+                                                                              .5),
                                                                     ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                height: 15,
-                                                              ),
-                                                              Container(
-                                                                height: 60,
-                                                                child: GestureDetector(
-                                                                  onTap: () {
-                                                                    Navigator.of(context)
-                                                                        .push(
-                                                                      showPicker(
-                                                                        context: context,
-                                                                        value: _time,
-                                                                        sunrise: TimeOfDay(
-                                                                            hour: 6,
-                                                                            minute:
-                                                                            0), // optional
-                                                                        sunset: TimeOfDay(
-                                                                            hour: 18,
-                                                                            minute:
-                                                                            0), // optional
-                                                                        duskSpanInMinutes:
-                                                                        120, // optional
-
-                                                                        borderRadius: 25,
-                                                                        accentColor:
-                                                                        Colors.blue,
-                                                                        blurredBackground:
-                                                                        true,
-                                                                        elevation: 0,
-
-                                                                        is24HrFormat: false,
-                                                                        onCancel: () {
-                                                                          Navigator.pop(
-                                                                              context);
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .symmetric(
+                                                                          horizontal:
+                                                                              0.0),
+                                                                      child:
+                                                                          TextFormField(
+                                                                        controller:
+                                                                            taskNamecontroller,
+                                                                        keyboardType:
+                                                                            TextInputType.text,
+                                                                        onFieldSubmitted:
+                                                                            (value) {
+                                                                          print(
+                                                                              value);
                                                                         },
-                                                                        onChange: (value) {
-                                                                          startminutes =
-                                                                              value.minute;
-                                                                          starthours =
-                                                                              value.hour;
-                                                                        },
-                                                                        // onChangeDateTime: (){},
-                                                                      ),
-                                                                    )
-                                                                        .then((value) {
-                                                                      showDatePicker(
-                                                                        context: context,
-                                                                        initialDate:
-                                                                        DateTime.now(),
-                                                                        firstDate:
-                                                                        DateTime(2022),
-                                                                        lastDate:
-                                                                        DateTime(2025),
-                                                                        builder:
-                                                                            (BuildContext
-                                                                        context,
-                                                                            Widget?
-                                                                            child) {
-                                                                          return Theme(
-                                                                            data: ThemeData
-                                                                                .light()
-                                                                                .copyWith(
-                                                                              colorScheme:
-                                                                              ColorScheme
-                                                                                  .light()
-                                                                                  .copyWith(
-                                                                                primary: Colors
-                                                                                    .blue, // Change the primary color as needed
-                                                                              ),
+                                                                        // validator:
+                                                                        //     (value) {
+                                                                        //   if (value!
+                                                                        //       .isEmpty) {
+                                                                        //     return 'Event title can\'t be empty';
+                                                                        //   }
+                                                                        //   return null;
+                                                                        // },
+                                                                        // toolbarOptions:
+                                                                        //     ToolbarOptions(paste: true, copy: true),
+                                                                        cursorColor:
+                                                                            c1,
+                                                                        style:
+                                                                            const TextStyle(
+                                                                          fontSize:
+                                                                              18,
+                                                                        ),
+                                                                        decoration:
+                                                                            InputDecoration(
+                                                                          prefixIcon:
+                                                                              Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                                                                            child:
+                                                                                FaIcon(
+                                                                              FontAwesomeIcons.edit,
+                                                                              color: c1,
+                                                                              size: 25,
                                                                             ),
-                                                                            child: child!,
-                                                                          );
+                                                                          ),
+                                                                          hintText:
+                                                                              'Task name',
+                                                                          border:
+                                                                              InputBorder.none,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 15,
+                                                                  ),
+                                                                  Container(
+                                                                    padding: EdgeInsets.symmetric(
+                                                                        vertical:
+                                                                            5,
+                                                                        horizontal:
+                                                                            10),
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .center,
+                                                                    height: 60,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      // border: Border.all(color: Colors.white),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              18),
+                                                                      color: Colors
+                                                                          .white
+                                                                          .withOpacity(
+                                                                              .5),
+                                                                    ),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .symmetric(
+                                                                          horizontal:
+                                                                              0.0),
+                                                                      child:
+                                                                          TextFormField(
+                                                                        controller:
+                                                                            taskGradecontroller,
+                                                                        keyboardType:
+                                                                            TextInputType.text,
+                                                                        onFieldSubmitted:
+                                                                            (value) {
+                                                                          print(
+                                                                              value);
                                                                         },
-                                                                      ).then(
+                                                                        //validator:
+                                                                        //     (value) {
+                                                                        //   if (value!
+                                                                        //       .isEmpty) {
+                                                                        //     return 'Event title can\'t be empty';
+                                                                        //   }
+                                                                        //   return null;
+                                                                        // },
+                                                                        // toolbarOptions:
+                                                                        //     ToolbarOptions(paste: true, copy: true),
+                                                                        cursorColor:
+                                                                            c1,
+                                                                        style:
+                                                                            const TextStyle(
+                                                                          fontSize:
+                                                                              18,
+                                                                        ),
+                                                                        decoration:
+                                                                            InputDecoration(
+                                                                          prefixIcon:
+                                                                              Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                                                                            child:
+                                                                                FaIcon(
+                                                                              FontAwesomeIcons.solidEdit,
+                                                                              color: c1,
+                                                                              size: 25,
+                                                                            ),
+                                                                          ),
+                                                                          hintText:
+                                                                              'Task grade',
+                                                                          border:
+                                                                              InputBorder.none,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 15,
+                                                                  ),
+                                                                  Container(
+                                                                    height: 60,
+                                                                    child:
+                                                                        GestureDetector(
+                                                                      onTap:
+                                                                          () {
+                                                                        Navigator.of(context)
+                                                                            .push(
+                                                                          showPicker(
+                                                                            context:
+                                                                                context,
+                                                                            value:
+                                                                                _time,
+                                                                            sunrise:
+                                                                                TimeOfDay(hour: 6, minute: 0), // optional
+                                                                            sunset:
+                                                                                TimeOfDay(hour: 18, minute: 0), // optional
+                                                                            duskSpanInMinutes:
+                                                                                120, // optional
+
+                                                                            borderRadius:
+                                                                                25,
+                                                                            accentColor:
+                                                                                Colors.blue,
+                                                                            blurredBackground:
+                                                                                true,
+                                                                            elevation:
+                                                                                0,
+
+                                                                            is24HrFormat:
+                                                                                false,
+                                                                            onCancel:
+                                                                                () {
+                                                                              Navigator.pop(context);
+                                                                            },
+                                                                            onChange:
+                                                                                (value) {
+                                                                              startminutes = value.minute;
+                                                                              starthours = value.hour;
+                                                                            },
+                                                                            // onChangeDateTime: (){},
+                                                                          ),
+                                                                        )
+                                                                            .then((value) {
+                                                                          showDatePicker(
+                                                                            context:
+                                                                                context,
+                                                                            initialDate:
+                                                                                DateTime.now(),
+                                                                            firstDate:
+                                                                                DateTime(2022),
+                                                                            lastDate:
+                                                                                DateTime(2025),
+                                                                            builder:
+                                                                                (BuildContext context, Widget? child) {
+                                                                              return Theme(
+                                                                                data: ThemeData.light().copyWith(
+                                                                                  colorScheme: ColorScheme.light().copyWith(
+                                                                                    primary: Colors.blue, // Change the primary color as needed
+                                                                                  ),
+                                                                                ),
+                                                                                child: child!,
+                                                                              );
+                                                                            },
+                                                                          ).then(
                                                                               (selectedDate) {
                                                                             if (selectedDate !=
                                                                                 null) {
-                                                                              startm= selectedDate
-                                                                                  .month;
-                                                                              startd= selectedDate
-                                                                                  .day;
-                                                                              DateTime
-                                                                              selectedDateTime =
-                                                                              DateTime(
-                                                                                selectedDate
-                                                                                    .year,
-                                                                                selectedDate
-                                                                                    .month,
-                                                                                selectedDate
-                                                                                    .day,
+                                                                              startm = selectedDate.month;
+                                                                              startd = selectedDate.day;
+                                                                              DateTime selectedDateTime = DateTime(
+                                                                                selectedDate.year,
+                                                                                selectedDate.month,
+                                                                                selectedDate.day,
                                                                                 starthours!,
                                                                                 startminutes!,
                                                                               );
-                                                                              print(
-                                                                                  'Selected date and time: $selectedDateTime');
-                                                                              startDate = DateFormat(
-                                                                                  "yyyy-MM-ddTHH:mm:ss.SSS")
-                                                                                  .format(
-                                                                                  selectedDateTime);
-                                                                              print(
-                                                                                  '2024-03-23T22:31:30.911Z');
+                                                                              print('Selected date and time: $selectedDateTime');
+                                                                              startDate = DateFormat("yyyy-MM-ddTHH:mm:ss.SSS").format(selectedDateTime);
+                                                                              print('2024-03-23T22:31:30.911Z');
                                                                               // Handle the selected date and time as needed
                                                                             }
                                                                           });
-                                                                    });
-                                                                  },
-                                                                  child: Container(
-                                                                    decoration:
-                                                                    BoxDecoration(
-                                                                      borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(20),
-                                                                      color: Colors.teal
-                                                                          .withOpacity(.5),
-                                                                    ),
-                                                                    child: Padding(
-                                                                      padding:
-                                                                      const EdgeInsets
-                                                                          .symmetric(
-                                                                          horizontal:
-                                                                          15.0),
-                                                                      child: Row(
-                                                                        mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .start,
-                                                                        children: [
-                                                                          FaIcon(
-                                                                              FontAwesomeIcons
-                                                                                  .clock),
-                                                                          SizedBox(
-                                                                            width: 12,
-                                                                          ),
-                                                                          Text(
-                                                                            'Start',
-                                                                            style:
-                                                                            TextStyle(
-                                                                              fontSize: 22,
-                                                                              color: Colors
-                                                                                  .black
-                                                                                  .withOpacity(
-                                                                                  .7),
-                                                                              fontWeight:
-                                                                              FontWeight
-                                                                                  .w700,
-                                                                            ),
-                                                                          ),
-                                                                          Spacer(),
+                                                                        });
+                                                                      },
+                                                                      child:
                                                                           Container(
-                                                                            decoration:
+                                                                        decoration:
                                                                             BoxDecoration(
-                                                                              borderRadius:
-                                                                              BorderRadius
-                                                                                  .circular(
-                                                                                  15),
-                                                                              color: Colors
-                                                                                  .white
-                                                                                  .withOpacity(
-                                                                                  .3),
-                                                                            ),
-                                                                            child: Padding(
-                                                                              padding: const EdgeInsets
-                                                                                  .symmetric(
-                                                                                  vertical:
-                                                                                  8.0,
-                                                                                  horizontal:
-                                                                                  15),
-                                                                              child: Row(
-                                                                                children: [
-                                                                                  Text(
-                                                                                    '8',
-                                                                                    style:
-                                                                                    TextStyle(
-                                                                                      fontSize:
-                                                                                      20,
-                                                                                      color:
-                                                                                      Colors.black,
-                                                                                      fontWeight:
-                                                                                      FontWeight.w600,
-                                                                                    ),
-                                                                                  ),
-                                                                                  Text(
-                                                                                    ' PM',
-                                                                                    style:
-                                                                                    TextStyle(
-                                                                                      fontSize:
-                                                                                      15,
-                                                                                      color:
-                                                                                      Colors.black,
-                                                                                      fontWeight:
-                                                                                      FontWeight.w600,
-                                                                                    ),
-                                                                                  ),
-                                                                                ],
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(20),
+                                                                          color: Colors
+                                                                              .teal
+                                                                              .withOpacity(.5),
+                                                                        ),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .symmetric(
+                                                                              horizontal: 15.0),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            children: [
+                                                                              FaIcon(FontAwesomeIcons.clock),
+                                                                              SizedBox(
+                                                                                width: 12,
                                                                               ),
-                                                                            ),
-                                                                          ),
-                                                                          SizedBox(
-                                                                            width: 10,
-                                                                          ),
-                                                                          Container(
-                                                                            decoration:
-                                                                            BoxDecoration(
-                                                                              borderRadius:
-                                                                              BorderRadius
-                                                                                  .circular(
-                                                                                  15),
-                                                                              color: Colors
-                                                                                  .white
-                                                                                  .withOpacity(
-                                                                                  .3),
-                                                                            ),
-                                                                            child: Padding(
-                                                                              padding: const EdgeInsets
-                                                                                  .symmetric(
-                                                                                  vertical:
-                                                                                  8.0,
-                                                                                  horizontal:
-                                                                                  15),
-                                                                              child: FaIcon(
-                                                                                FontAwesomeIcons
-                                                                                    .pencil,
-                                                                                color: Colors
-                                                                                    .black
-                                                                                    .withOpacity(
-                                                                                    .5),
+                                                                              Text(
+                                                                                'Start',
+                                                                                style: TextStyle(
+                                                                                  fontSize: 22,
+                                                                                  color: Colors.black.withOpacity(.7),
+                                                                                  fontWeight: FontWeight.w700,
+                                                                                ),
                                                                               ),
-                                                                            ),
+                                                                              Spacer(),
+                                                                              Container(
+                                                                                decoration: BoxDecoration(
+                                                                                  borderRadius: BorderRadius.circular(15),
+                                                                                  color: Colors.white.withOpacity(.3),
+                                                                                ),
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15),
+                                                                                  child: Row(
+                                                                                    children: [
+                                                                                      Text(
+                                                                                        '8',
+                                                                                        style: TextStyle(
+                                                                                          fontSize: 20,
+                                                                                          color: Colors.black,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                        ),
+                                                                                      ),
+                                                                                      Text(
+                                                                                        ' PM',
+                                                                                        style: TextStyle(
+                                                                                          fontSize: 15,
+                                                                                          color: Colors.black,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 10,
+                                                                              ),
+                                                                              Container(
+                                                                                decoration: BoxDecoration(
+                                                                                  borderRadius: BorderRadius.circular(15),
+                                                                                  color: Colors.white.withOpacity(.3),
+                                                                                ),
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15),
+                                                                                  child: FaIcon(
+                                                                                    FontAwesomeIcons.pencil,
+                                                                                    color: Colors.black.withOpacity(.5),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
                                                                           ),
-                                                                        ],
+                                                                        ),
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                height: 10,
-                                                              ),
-                                                              Container(
-                                                                height: 60,
-                                                                child: GestureDetector(
-                                                                  onTap: () {
-                                                                    Navigator.of(context)
-                                                                        .push(
-                                                                      showPicker(
-                                                                        context: context,
-                                                                        value: _time,
-                                                                        sunrise: TimeOfDay(
-                                                                            hour: 6,
-                                                                            minute:
-                                                                            0), // optional
-                                                                        sunset: TimeOfDay(
-                                                                            hour: 18,
-                                                                            minute:
-                                                                            0), // optional
-                                                                        duskSpanInMinutes:
-                                                                        120, // optional
+                                                                  SizedBox(
+                                                                    height: 10,
+                                                                  ),
+                                                                  Container(
+                                                                    height: 60,
+                                                                    child:
+                                                                        GestureDetector(
+                                                                      onTap:
+                                                                          () {
+                                                                        Navigator.of(context)
+                                                                            .push(
+                                                                          showPicker(
+                                                                            context:
+                                                                                context,
+                                                                            value:
+                                                                                _time,
+                                                                            sunrise:
+                                                                                TimeOfDay(hour: 6, minute: 0), // optional
+                                                                            sunset:
+                                                                                TimeOfDay(hour: 18, minute: 0), // optional
+                                                                            duskSpanInMinutes:
+                                                                                120, // optional
 
-                                                                        borderRadius: 25,
-                                                                        accentColor:
-                                                                        Colors.blue,
-                                                                        blurredBackground:
-                                                                        true,
-                                                                        elevation: 0,
+                                                                            borderRadius:
+                                                                                25,
+                                                                            accentColor:
+                                                                                Colors.blue,
+                                                                            blurredBackground:
+                                                                                true,
+                                                                            elevation:
+                                                                                0,
 
-                                                                        is24HrFormat: false,
-                                                                        onCancel: () {
-                                                                          Navigator.pop(
-                                                                              context);
-                                                                        },
-                                                                        onChange: (value) {
-                                                                          endminutes =
-                                                                              value.minute;
-                                                                          endhours =
-                                                                              value.hour;
-                                                                        },
-                                                                        // onChangeDateTime: (){},
-                                                                      ),
-                                                                    )
-                                                                        .then((value) {
-                                                                      showDatePicker(
-                                                                        context: context,
-                                                                        initialDate:
-                                                                        DateTime.now(),
-                                                                        firstDate:
-                                                                        DateTime(2022),
-                                                                        lastDate:
-                                                                        DateTime(2025),
-                                                                        builder:
-                                                                            (BuildContext
-                                                                        context,
-                                                                            Widget?
-                                                                            child) {
-                                                                          return Theme(
-                                                                            data: ThemeData
-                                                                                .light()
-                                                                                .copyWith(
-                                                                              colorScheme:
-                                                                              ColorScheme
-                                                                                  .light()
-                                                                                  .copyWith(
-                                                                                primary: Colors
-                                                                                    .blue, // Change the primary color as needed
-                                                                              ),
-                                                                            ),
-                                                                            child: child!,
-                                                                          );
-                                                                        },
-                                                                      ).then(
+                                                                            is24HrFormat:
+                                                                                false,
+                                                                            onCancel:
+                                                                                () {
+                                                                              Navigator.pop(context);
+                                                                            },
+                                                                            onChange:
+                                                                                (value) {
+                                                                              endminutes = value.minute;
+                                                                              endhours = value.hour;
+                                                                            },
+                                                                            // onChangeDateTime: (){},
+                                                                          ),
+                                                                        )
+                                                                            .then((value) {
+                                                                          showDatePicker(
+                                                                            context:
+                                                                                context,
+                                                                            initialDate:
+                                                                                DateTime.now(),
+                                                                            firstDate:
+                                                                                DateTime(2022),
+                                                                            lastDate:
+                                                                                DateTime(2025),
+                                                                            builder:
+                                                                                (BuildContext context, Widget? child) {
+                                                                              return Theme(
+                                                                                data: ThemeData.light().copyWith(
+                                                                                  colorScheme: ColorScheme.light().copyWith(
+                                                                                    primary: Colors.blue, // Change the primary color as needed
+                                                                                  ),
+                                                                                ),
+                                                                                child: child!,
+                                                                              );
+                                                                            },
+                                                                          ).then(
                                                                               (selectedDate) {
                                                                             if (selectedDate !=
                                                                                 null) {
-                                                                              endm= selectedDate
-                                                                                  .month;
-                                                                              endd= selectedDate
-                                                                                  .day;
-                                                                              DateTime
-                                                                              selectedDateTime =
-                                                                              DateTime(
-                                                                                selectedDate
-                                                                                    .year,
-                                                                                selectedDate
-                                                                                    .month,
-                                                                                selectedDate
-                                                                                    .day,
+                                                                              endm = selectedDate.month;
+                                                                              endd = selectedDate.day;
+                                                                              DateTime selectedDateTime = DateTime(
+                                                                                selectedDate.year,
+                                                                                selectedDate.month,
+                                                                                selectedDate.day,
                                                                                 endhours!,
                                                                                 endminutes!,
                                                                               );
-                                                                              print(
-                                                                                  'Selected date and time: $selectedDateTime');
-                                                                              endDate = DateFormat(
-                                                                                  "yyyy-MM-ddTHH:mm:ss.SSS")
-                                                                                  .format(
-                                                                                  selectedDateTime);
-                                                                              print(
-                                                                                  '2024-03-23T22:31:30.911Z');
+                                                                              print('Selected date and time: $selectedDateTime');
+                                                                              endDate = DateFormat("yyyy-MM-ddTHH:mm:ss.SSS").format(selectedDateTime);
+                                                                              print('2024-03-23T22:31:30.911Z');
                                                                               print(endDate);
                                                                               // Handle the selected date and time as needed
                                                                             }
                                                                           });
-                                                                    });
-                                                                  },
-                                                                  child: Container(
-                                                                    decoration:
-                                                                    BoxDecoration(
-                                                                      borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(20),
-                                                                      color: Colors.red
-                                                                          .withOpacity(.5),
-                                                                    ),
-                                                                    child: Padding(
-                                                                      padding:
-                                                                      const EdgeInsets
-                                                                          .symmetric(
-                                                                          horizontal:
-                                                                          15.0),
-                                                                      child: Row(
-                                                                        mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .start,
-                                                                        children: [
-                                                                          FaIcon(
-                                                                              FontAwesomeIcons
-                                                                                  .clock),
-                                                                          SizedBox(
-                                                                            width: 12,
-                                                                          ),
-                                                                          Text(
-                                                                            'End',
-                                                                            style:
-                                                                            TextStyle(
-                                                                              fontSize: 22,
-                                                                              color: Colors
-                                                                                  .black
-                                                                                  .withOpacity(
-                                                                                  .7),
-                                                                              fontWeight:
-                                                                              FontWeight
-                                                                                  .w700,
-                                                                            ),
-                                                                          ),
-                                                                          Spacer(),
+                                                                        });
+                                                                      },
+                                                                      child:
                                                                           Container(
-                                                                            decoration:
+                                                                        decoration:
                                                                             BoxDecoration(
-                                                                              borderRadius:
-                                                                              BorderRadius
-                                                                                  .circular(
-                                                                                  15),
-                                                                              color: Colors
-                                                                                  .white
-                                                                                  .withOpacity(
-                                                                                  .3),
-                                                                            ),
-                                                                            child: Padding(
-                                                                              padding: const EdgeInsets
-                                                                                  .symmetric(
-                                                                                  vertical:
-                                                                                  8.0,
-                                                                                  horizontal:
-                                                                                  15),
-                                                                              child: Row(
-                                                                                children: [
-                                                                                  Text(
-                                                                                    '10',
-                                                                                    style:
-                                                                                    TextStyle(
-                                                                                      fontSize:
-                                                                                      20,
-                                                                                      color:
-                                                                                      Colors.black,
-                                                                                      fontWeight:
-                                                                                      FontWeight.w600,
-                                                                                    ),
-                                                                                  ),
-                                                                                  Text(
-                                                                                    ' PM',
-                                                                                    style:
-                                                                                    TextStyle(
-                                                                                      fontSize:
-                                                                                      15,
-                                                                                      color:
-                                                                                      Colors.black,
-                                                                                      fontWeight:
-                                                                                      FontWeight.w600,
-                                                                                    ),
-                                                                                  ),
-                                                                                ],
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(20),
+                                                                          color: Colors
+                                                                              .red
+                                                                              .withOpacity(.5),
+                                                                        ),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .symmetric(
+                                                                              horizontal: 15.0),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            children: [
+                                                                              FaIcon(FontAwesomeIcons.clock),
+                                                                              SizedBox(
+                                                                                width: 12,
                                                                               ),
-                                                                            ),
-                                                                          ),
-                                                                          SizedBox(
-                                                                            width: 10,
-                                                                          ),
-                                                                          Container(
-                                                                            decoration:
-                                                                            BoxDecoration(
-                                                                              borderRadius:
-                                                                              BorderRadius
-                                                                                  .circular(
-                                                                                  15),
-                                                                              color: Colors
-                                                                                  .white
-                                                                                  .withOpacity(
-                                                                                  .3),
-                                                                            ),
-                                                                            child: Padding(
-                                                                              padding: const EdgeInsets
-                                                                                  .symmetric(
-                                                                                  vertical:
-                                                                                  8.0,
-                                                                                  horizontal:
-                                                                                  15),
-                                                                              child: FaIcon(
-                                                                                FontAwesomeIcons
-                                                                                    .pencil,
-                                                                                color: Colors
-                                                                                    .black
-                                                                                    .withOpacity(
-                                                                                    .5),
+                                                                              Text(
+                                                                                'End',
+                                                                                style: TextStyle(
+                                                                                  fontSize: 22,
+                                                                                  color: Colors.black.withOpacity(.7),
+                                                                                  fontWeight: FontWeight.w700,
+                                                                                ),
                                                                               ),
-                                                                            ),
+                                                                              Spacer(),
+                                                                              Container(
+                                                                                decoration: BoxDecoration(
+                                                                                  borderRadius: BorderRadius.circular(15),
+                                                                                  color: Colors.white.withOpacity(.3),
+                                                                                ),
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15),
+                                                                                  child: Row(
+                                                                                    children: [
+                                                                                      Text(
+                                                                                        '10',
+                                                                                        style: TextStyle(
+                                                                                          fontSize: 20,
+                                                                                          color: Colors.black,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                        ),
+                                                                                      ),
+                                                                                      Text(
+                                                                                        ' PM',
+                                                                                        style: TextStyle(
+                                                                                          fontSize: 15,
+                                                                                          color: Colors.black,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              SizedBox(
+                                                                                width: 10,
+                                                                              ),
+                                                                              Container(
+                                                                                decoration: BoxDecoration(
+                                                                                  borderRadius: BorderRadius.circular(15),
+                                                                                  color: Colors.white.withOpacity(.3),
+                                                                                ),
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15),
+                                                                                  child: FaIcon(
+                                                                                    FontAwesomeIcons.pencil,
+                                                                                    color: Colors.black.withOpacity(.5),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
                                                                           ),
-                                                                        ],
+                                                                        ),
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                ),
+                                                                  SizedBox(
+                                                                    height: 15,
+                                                                  ),
+                                                                  Default_Button(
+                                                                      onPressed:
+                                                                          () {
+                                                                        if (formkey1.currentState!.validate() &&
+                                                                            startDate !=
+                                                                                null &&
+                                                                            endDate !=
+                                                                                null) {
+                                                                          App_cubit.get(context)
+                                                                              .updateINSAssign(
+                                                                            Taskid:
+                                                                                assign.taskId,
+                                                                            taskName:
+                                                                                taskNamecontroller.text,
+                                                                            taskGrade:
+                                                                                taskGradecontroller.text,
+                                                                            startDate:
+                                                                                startDate,
+                                                                            endDate:
+                                                                                endDate,
+                                                                          );
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                        }
+
+                                                                        //   if (formkey1.currentState!.validate()) {
+                                                                        //   cubit.AddEventToCalender(
+                                                                        //       startDate: cubit.startTime,
+                                                                        //       endDate: cubit.endTime,
+                                                                        //       eventBody: taskGradecontroller.text);
+                                                                        //   Navigator.pop(
+                                                                        //       context);
+                                                                        // } else {
+                                                                        //   flutterToast(
+                                                                        //       msg: 'please enter the event title',
+                                                                        //       backColor: Colors.red);
+                                                                        // }
+                                                                      },
+                                                                      containerHeight:
+                                                                          50,
+                                                                      textFontSize:
+                                                                          20,
+                                                                      text:
+                                                                          'Confirm changes'),
+                                                                  // SizedBox(
+                                                                  //   height: 15,
+                                                                  // ),
+                                                                ],
                                                               ),
-                                                              SizedBox(
-                                                                height: 15,
-                                                              ),
-                                                              Default_Button(
-                                                                  onPressed: () {
-
-                                                                    if (formkey1.currentState!
-                                                                        .validate() &&
-                                                                        startDate != null &&
-                                                                        endDate != null ){
-                                                                      App_cubit.get(context).updateINSAssign(
-                                                                        Taskid: assign.taskId,
-                                                                        taskName: taskNamecontroller.text,
-                                                                        taskGrade: taskGradecontroller.text,
-                                                                        startDate: startDate,
-                                                                        endDate: endDate,
-
-                                                                      );
-                                                                      Navigator.pop(context);
-                                                                    }
-
-                                                                    //   if (formkey1.currentState!.validate()) {
-                                                                    //   cubit.AddEventToCalender(
-                                                                    //       startDate: cubit.startTime,
-                                                                    //       endDate: cubit.endTime,
-                                                                    //       eventBody: taskGradecontroller.text);
-                                                                    //   Navigator.pop(
-                                                                    //       context);
-                                                                    // } else {
-                                                                    //   flutterToast(
-                                                                    //       msg: 'please enter the event title',
-                                                                    //       backColor: Colors.red);
-                                                                    // }
-                                                                  },
-                                                                  containerHeight: 50,
-                                                                  textFontSize: 20,
-                                                                  text: 'Confirm changes'),
-                                                              // SizedBox(
-                                                              //   height: 15,
-                                                              // ),
-                                                            ],
+                                                            ),
                                                           ),
                                                         ),
+                                                        color: Colors.white
+                                                            .withOpacity(.5),
+                                                        borderRadius: 30,
+                                                        x: 15,
+                                                        y: 15,
+                                                        BorderWidth: 1,
+                                                        BorderColor:
+                                                            Colors.white,
                                                       ),
                                                     ),
-                                                    color: Colors.white
-                                                        .withOpacity(.5),
-                                                    borderRadius: 30,
-                                                    x: 15,
-                                                    y: 15,
-                                                    BorderWidth: 1,
-                                                    BorderColor: Colors.white,
-                                                  ),
-                                                ),
-                                                const Spacer(
-                                                  flex: 1,
+                                                    const Spacer(
+                                                      flex: 1,
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
-                                          ],
-                                        ),
-                                        color: Colors.transparent,
-                                        borderRadius: 0,
-                                        x: 3,
-                                        y: 3),
+                                            color: Colors.transparent,
+                                            borderRadius: 0,
+                                            x: 3,
+                                            y: 3),
+                                      ),
+                                    ),
                                   ),
+                                  elevation: 0,
+                                  clipBehavior: Clip.none,
+                                  surfaceTintColor: Colors.transparent,
+                                  backgroundColor: Colors.transparent,
+                                  contentPadding: EdgeInsets.zero,
                                 ),
-                              ),
-                              elevation: 0,
-                              clipBehavior: Clip.none,
-                              surfaceTintColor: Colors.transparent,
-                              backgroundColor: Colors.transparent,
-                              contentPadding: EdgeInsets.zero,
-                            ),
-                          );
-                        });
-                  },
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                      // color: Colors.yellow.withOpacity(.9),
-                      border: Border.all(
-                        width: .8,
-                        color: Colors.blue.withOpacity(1),
-                      ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: FaIcon(
-                        FontAwesomeIcons.pen,
-                        size: 15,
-                        color: Colors.blue.withOpacity(1),
+                              );
+                            });
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          // color: Colors.yellow.withOpacity(.9),
+                          border: Border.all(
+                            width: .8,
+                            color: Colors.blue.withOpacity(1),
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.pen,
+                            size: 15,
+                            color: Colors.blue.withOpacity(1),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    SizedBox(
+                      width: 7,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Alrat(
+                            context: context,
+                            no: () {
+                              Navigator.pop(context);
+                            },
+                            text: 'Do you want to delete Task ?',
+                            yes: () {
+                              App_cubit.get(context)
+                                  .INS_Delete_Assign(Taskid: assign!.taskId);
+                              Navigator.pop(context);
+                            });
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          // color: Colors.red.withOpacity(.6),
+                          border: Border.all(
+                            width: .8,
+                            color: Colors.red.withOpacity(1),
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.trashCan,
+                            size: 15,
+                            color: Colors.red.withOpacity(1),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 7,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Alrat(
+                            context: context,
+                            no: () {
+                              Navigator.pop(context);
+                            },
+                            text: 'Do you want to see Task ?',
+                            yes: () {
+                              App_cubit.get(context).openFile_Fun(
+                                  networkFile:
+                                      assign?.filePath?.split('net/').last);
+                            });
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          // color: Colors.teal.withOpacity(.6),
+                          border: Border.all(
+                            width: .8,
+                            color: Colors.teal.withOpacity(1),
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.eye,
+                            size: 15,
+                            color: Colors.teal.withOpacity(1),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  width: 7,
+                  height: 7,
                 ),
-                InkWell(
-                  onTap: () {
-                    Alrat(
-                        context: context,
-                        no: () {
-                          Navigator.pop(context);
-                        },
-                        text: 'Do you want to delete Task ?',
-                        yes: () {
-                          App_cubit.get(context).INS_Delete_Assign(Taskid: assign!.taskId);
-                          Navigator.pop(context);
-
-                        });
-                  },
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                      // color: Colors.red.withOpacity(.6),
-                      border: Border.all(
-                        width: .8,
-                        color: Colors.red.withOpacity(1),
-                      ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: FaIcon(
-                        FontAwesomeIcons.trashCan,
-                        size: 15,
-                        color: Colors.red.withOpacity(1),
-                      ),
-                    ),
-                  ),
+                Container(
+                  color: Colors.black.withOpacity(.3),
+                  height: .5,
                 ),
                 SizedBox(
-                  width: 7,
+                  height: 10,
                 ),
-                InkWell(
-                  onTap: () {
-                    Alrat(
-                        context: context,
-                        no: () {
-                          Navigator.pop(context);
-                        },
-                        text: 'Do you want to see Task ?',
-                        yes: () {
-                          App_cubit.get(context).openFile_Fun(networkFile: assign?.filePath
-                              ?.split('net/').last);
-                        });
-                  },
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                      // color: Colors.teal.withOpacity(.6),
-                      border: Border.all(
-                        width: .8,
-                        color: Colors.teal.withOpacity(1),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.bookmark,
+                                    size: 12,
+                                  ),
+                                  SizedBox(
+                                    width: 7,
+                                  ),
+                                  Text(
+                                    '${assign?.courseName}',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 13),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Row(
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.user,
+                                    size: 12,
+                                  ),
+                                  SizedBox(
+                                    width: 7,
+                                  ),
+                                  Text(
+                                    '${assign?.instructorName}',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 13),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Row(
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.chartLine,
+                                    size: 12,
+                                  ),
+                                  SizedBox(
+                                    width: 7,
+                                  ),
+                                  Text(
+                                    '${assign?.taskGrade}',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 13),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 2,
+                              ),
+                              Row(
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.clock,
+                                    size: 12,
+                                  ),
+                                  SizedBox(
+                                    width: 7,
+                                  ),
+                                  Container(
+                                    width: 150,
+                                    child: Text(
+                                      'From ${assign?.startDate}  to  ${assign?.startDate}',
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 13),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: FaIcon(
-                        FontAwesomeIcons.eye,
-                        size: 15,
-                        color: Colors.teal.withOpacity(1),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 7,
-            ),
-            Container(
-              color: Colors.black.withOpacity(.3),
-              height: .5,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 5.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Row(
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.bookmark,
-                                size: 12,
-                              ),
-                              SizedBox(
-                                width: 7,
-                              ),
-                              Text(
-                                '${assign?.courseName}',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 13),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Row(
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.user,
-                                size: 12,
-                              ),
-                              SizedBox(
-                                width: 7,
-                              ),
-                              Text(
-                                '${assign?.instructorName}',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 13),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Row(
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.chartLine,
-                                size: 12,
-                              ),
-                              SizedBox(
-                                width: 7,
-                              ),
-                              Text(
-                                '${assign?.taskGrade}',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 13),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Row(
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.clock,
-                                size: 12,
-                              ),
-                              SizedBox(
-                                width: 7,
-                              ),
-                              Container(
-                                width: 150,
-                                child: Text(
-                                  'From ${assign?.startDate}  to  ${assign?.startDate}',overflow: TextOverflow.ellipsis,maxLines: 1,
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700, fontSize: 13),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: (){
-                            App_cubit.get(context).insGetStuUploadTasks(assignId:assign?.taskId );
-                            showDialog<String>(
-                              context: context,
-                              barrierColor: Colors.black.withOpacity(.3),
-                              useSafeArea: true,
-                              builder: (BuildContext context) => AlertDialog(
-                                insetPadding: const EdgeInsets.all(0.0),
-                                scrollable: false,
-                                shadowColor: Colors.transparent,
-                                content: Center(
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: GlassBox(
-                                          widget: Stack(
-                                            children: [
-                                              Column(
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                App_cubit.get(context).insGetStuUploadTasks(
+                                    assignId: assign?.taskId);
+                                showDialog<String>(
+                                  context: context,
+                                  barrierColor: Colors.black.withOpacity(.3),
+                                  useSafeArea: true,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    insetPadding: const EdgeInsets.all(0.0),
+                                    scrollable: false,
+                                    shadowColor: Colors.transparent,
+                                    content: Center(
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: GlassBox(
+                                              widget: Stack(
                                                 children: [
-                                                  const Spacer(),
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(15.0),
-                                                    child: GlassBoxWithBorder(
-                                                      widget: Container(
-                                                        height: 350,
-                                                        child: Padding(
-                                                          padding: const EdgeInsets
-                                                              .only(
-                                                              bottom: 25.0,
-                                                              left: 25,
-                                                              right: 25,
-                                                              top: 20
-                                                          ),
-                                                          child: Column(
-                                                            children: [
-                                                              Row(
-                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                  Column(
+                                                    children: [
+                                                      const Spacer(),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(15.0),
+                                                        child:
+                                                            GlassBoxWithBorder(
+                                                          widget: Container(
+                                                            height: 350,
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      bottom:
+                                                                          25.0,
+                                                                      left: 25,
+                                                                      right: 25,
+                                                                      top: 20),
+                                                              child: Column(
                                                                 children: [
-                                                                  FaIcon(FontAwesomeIcons.solidUser,color: Colors.teal,size: 18,),
-                                                                  SizedBox(width: 15,),
-                                                                  Container(
-                                                                      child: Text(
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      FaIcon(
+                                                                        FontAwesomeIcons
+                                                                            .solidUser,
+                                                                        color: Colors
+                                                                            .teal,
+                                                                        size:
+                                                                            18,
+                                                                      ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            15,
+                                                                      ),
+                                                                      Container(
+                                                                          child:
+                                                                              Text(
                                                                         'Student name',
-                                                                        textAlign: TextAlign.center,
+                                                                        textAlign:
+                                                                            TextAlign.center,
                                                                         style: Theme.of(context)
                                                                             .textTheme
                                                                             .subtitle1
                                                                             ?.copyWith(
-                                                                          color: Colors.teal,
-                                                                          fontSize: 18,
-                                                                          fontWeight: FontWeight.w900,
-                                                                        ),
+                                                                              color: Colors.teal,
+                                                                              fontSize: 18,
+                                                                              fontWeight: FontWeight.w900,
+                                                                            ),
                                                                       )),
-                                                                  Spacer(),
-                                                                  // Container(
-                                                                  //     child: Text(
-                                                                  //       'Upload at',
-                                                                  //       textAlign: TextAlign.center,
-                                                                  //       style: Theme.of(context)
-                                                                  //           .textTheme
-                                                                  //           .subtitle1
-                                                                  //           ?.copyWith(
-                                                                  //         color: Colors.teal,
-                                                                  //         fontSize: 15,
-                                                                  //         fontWeight: FontWeight.w900,
-                                                                  //       ),
-                                                                  //     )),
+                                                                      Spacer(),
+                                                                      // Container(
+                                                                      //     child: Text(
+                                                                      //       'Upload at',
+                                                                      //       textAlign: TextAlign.center,
+                                                                      //       style: Theme.of(context)
+                                                                      //           .textTheme
+                                                                      //           .subtitle1
+                                                                      //           ?.copyWith(
+                                                                      //         color: Colors.teal,
+                                                                      //         fontSize: 15,
+                                                                      //         fontWeight: FontWeight.w900,
+                                                                      //       ),
+                                                                      //     )),
+                                                                    ],
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 20,
+                                                                  ),
+                                                                  Container(
+                                                                    height: 2,
+                                                                    color: Colors
+                                                                        .teal,
+                                                                    width: double
+                                                                        .infinity,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    height: 20,
+                                                                  ),
+                                                                  Container(
+                                                                    height: 150,
+                                                                    child: ListView
+                                                                        .separated(
+                                                                      itemBuilder: (context, index) => showSTU_UploadeTask(
+                                                                          index: index +
+                                                                              1,
+                                                                          context:
+                                                                              context,
+                                                                          stuAssign:
+                                                                              App_cubit.get(context).studentUplodeTaskModel[index]),
+                                                                      separatorBuilder:
+                                                                          (context, index) =>
+                                                                              Container(
+                                                                        height:
+                                                                            1,
+                                                                        color: Colors
+                                                                            .teal,
+                                                                        width: double
+                                                                            .infinity,
+                                                                      ),
+                                                                      itemCount: App_cubit.get(
+                                                                              context)
+                                                                          .studentUplodeTaskModel
+                                                                          .length,
+                                                                    ),
+                                                                  ),
                                                                 ],
                                                               ),
-                                                              SizedBox(height: 20,),
-                                                              Container(
-                                                                height: 2,
-                                                                color: Colors.teal,
-                                                                width: double.infinity,
-
-                                                              ),
-                                                              SizedBox(height: 20,),
-
-                                                              Container(
-                                                                height: 150,
-                                                                child: ListView.separated(
-                                                                  itemBuilder:(context,index)=> showSTU_UploadeTask(
-                                                                      index: index+1,
-                                                                      context: context,
-                                                                      stuAssign: App_cubit.get(context).studentUplodeTaskModel[index]
-                                                                  ),
-                                                                  separatorBuilder: (context,index)=>  Container(
-                                                                    height: 1,
-                                                                    color: Colors.teal,
-                                                                    width: double.infinity,
-
-                                                                  ),
-                                                                  itemCount: App_cubit.get(context).studentUplodeTaskModel.length,
-                                                                ),
-                                                              ),
-                                                            ],
+                                                            ),
                                                           ),
+                                                          color: Colors.white
+                                                              .withOpacity(.5),
+                                                          borderRadius: 30,
+                                                          x: 15,
+                                                          y: 15,
+                                                          BorderWidth: 1,
+                                                          BorderColor:
+                                                              Colors.white,
                                                         ),
                                                       ),
-                                                      color: Colors.white
-                                                          .withOpacity(.5),
-                                                      borderRadius: 30,
-                                                      x: 15,
-                                                      y: 15,
-                                                      BorderWidth: 1,
-                                                      BorderColor: Colors.white,
-                                                    ),
-                                                  ),
-                                                  const Spacer(
-                                                    flex: 1,
+                                                      const Spacer(
+                                                        flex: 1,
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
-                                            ],
-                                          ),
-                                          color: Colors.transparent,
-                                          borderRadius: 0,
-                                          x: 3,
-                                          y: 3),
+                                              color: Colors.transparent,
+                                              borderRadius: 0,
+                                              x: 3,
+                                              y: 3),
+                                        ),
+                                      ),
                                     ),
+                                    elevation: 0,
+                                    clipBehavior: Clip.none,
+                                    surfaceTintColor: Colors.transparent,
+                                    backgroundColor: Colors.transparent,
+                                    contentPadding: EdgeInsets.zero,
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                height: 45,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Colors.teal.withOpacity(.6),
+                                  borderRadius: BorderRadius.circular(12),
+                                  // border: Border.all(width: .5),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Available',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 20,
+                                        color: Colors.white),
                                   ),
                                 ),
-                                elevation: 0,
-                                clipBehavior: Clip.none,
-                                surfaceTintColor: Colors.transparent,
-                                backgroundColor: Colors.transparent,
-                                contentPadding: EdgeInsets.zero,
-                              ),
-                            );
-                          },
-                          child: Container(
-                            height: 45,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Colors.teal.withOpacity(.6),
-                              borderRadius: BorderRadius.circular(12),
-                              // border: Border.all(width: .5),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Available',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 20,
-                                    color: Colors.white),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                Container(
+                  height: 40,
+                  child: LinearPercentIndicator(
+                    percent: .6,
+                    backgroundColor: Colors.blueGrey.withOpacity(.2),
+                    progressColor: Colors.teal.withOpacity(.6),
+                    barRadius: Radius.circular(20),
+                    lineHeight: 12,
+                    trailing: Text('125'),
+                    leading: Text('60'),
+
+                    animation: true,
+                    animationDuration: 1500,
+                    curve: Curves.easeOutBack,
+
+                    // footer: Padding(
+                    //   padding: const EdgeInsets.only(top:0.0),
+                    //   child: Text('Submited',
+                    //     style: TextStyle(
+                    //       fontWeight: FontWeight.w600,
+                    //       fontSize: 15,
+                    //       color: Colors.teal,
+                    //     ),
+                    //   ),
+                    // ),
+                  ),
+                ),
+              ],
             ),
-            Container(
-              height: 40,
-              child: LinearPercentIndicator(
-                percent: .6,
-                backgroundColor: Colors.blueGrey.withOpacity(.2),
-                progressColor: Colors.teal.withOpacity(.6),
-                barRadius: Radius.circular(20),
-                lineHeight: 12,
-                trailing: Text('125'),
-                leading: Text('60'),
+          ),
+        );
 
-                animation: true,
-                animationDuration: 1500,
-                curve: Curves.easeOutBack,
+Widget INS_complete_Task_Card(
+        {required context, required STU_Course_Assign_Model? assign}
 
-                // footer: Padding(
-                //   padding: const EdgeInsets.only(top:0.0),
-                //   child: Text('Submited',
-                //     style: TextStyle(
-                //       fontWeight: FontWeight.w600,
-                //       fontSize: 15,
-                //       color: Colors.teal,
-                //     ),
-                //   ),
-                // ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-
-Widget INS_complete_Task_Card({required context,required STU_Course_Assign_Model? assign}
-
-    //List<bool> quizState, List<bool> isQuizStart, int index
-    ) =>
+        //List<bool> quizState, List<bool> isQuizStart, int index
+        ) =>
     Container(
       height: 200,
       decoration: BoxDecoration(
@@ -5186,7 +5323,7 @@ Widget INS_complete_Task_Card({required context,required STU_Course_Assign_Model
       ),
       child: Padding(
         padding:
-        const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
+            const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
         child: Column(
           children: [
             Row(
@@ -5202,9 +5339,9 @@ Widget INS_complete_Task_Card({required context,required STU_Course_Assign_Model
                   height: 30,
                   width: 30,
                   decoration: BoxDecoration(
-                    // color: Colors.yellow.withOpacity(.9),
+                      // color: Colors.yellow.withOpacity(.9),
 
-                  ),
+                      ),
                   child: Center(
                     child: FaIcon(
                       FontAwesomeIcons.circleCheck,
@@ -5308,10 +5445,13 @@ Widget INS_complete_Task_Card({required context,required STU_Course_Assign_Model
                               Container(
                                 width: 150,
                                 child: Text(
-                                  'From ${assign?.startDate}  to  ${assign?.startDate}',overflow: TextOverflow.ellipsis,maxLines: 1,
+                                  'From ${assign?.startDate}  to  ${assign?.startDate}',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w700, fontSize: 13),
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 13),
                                 ),
                               ),
                             ],
@@ -5326,9 +5466,15 @@ Widget INS_complete_Task_Card({required context,required STU_Course_Assign_Model
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         GestureDetector(
-                          onTap: (){
-                            App_cubit.get(context).insGetStuUploadTasks(assignId:assign?.taskId );
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => INS_task_result_Screen(),));
+                          onTap: () {
+                            App_cubit.get(context)
+                                .insGetStuUploadTasks(assignId: assign?.taskId);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      INS_task_result_Screen(),
+                                ));
                           },
                           child: Container(
                             height: 45,
@@ -5386,7 +5532,6 @@ Widget INS_complete_Task_Card({required context,required STU_Course_Assign_Model
         ),
       ),
     );
-
 
 Widget INS_Quiz_Complete_Card(
 
@@ -5827,12 +5972,12 @@ Widget Build_STU_Quiz_Ques({
 
 // final GlobalKey<AnimatedListState> ANS_listKey = GlobalKey();
 
-Widget INS_Quiz_Answer( {required context,required index,required index2}) {
+Widget INS_Quiz_Answer({required context, required index, required index2}) {
   // print('//////////////////////////////////////////////////////////////////');
   // print('element of Key of $index = ${App_cubit.get(context).ANS_listKey[index]}');
   // print('//////////////////////////////////////////////////////////////////');
   return Padding(
-    padding: const EdgeInsets.only(left: 30.0,top: 5,bottom: 5),
+    padding: const EdgeInsets.only(left: 30.0, top: 5, bottom: 5),
     child: Row(
       children: [
         Expanded(
@@ -5893,13 +6038,15 @@ Widget INS_Quiz_Answer( {required context,required index,required index2}) {
                       ),
                       GestureDetector(
                         onTap: () {
-                          App_cubit.get(context).Acheck_Function(index,index2);
-
+                          App_cubit.get(context).Acheck_Function(index, index2);
                         },
                         child: FaIcon(
-
-                          App_cubit.get(context).Acheck[index][index2]?  FontAwesomeIcons.circleCheck: FontAwesomeIcons.circleDot,
-                          color:  App_cubit.get(context).Acheck[index][index2]? Colors.teal:Colors.blueGrey.withOpacity(.8),
+                          App_cubit.get(context).Acheck[index][index2]
+                              ? FontAwesomeIcons.circleCheck
+                              : FontAwesomeIcons.circleDot,
+                          color: App_cubit.get(context).Acheck[index][index2]
+                              ? Colors.teal
+                              : Colors.blueGrey.withOpacity(.8),
                           size: 28,
                         ),
                       ),
@@ -5917,8 +6064,7 @@ Widget INS_Quiz_Answer( {required context,required index,required index2}) {
   );
 }
 
-Widget Build_INS_Quiz_Ques(
-    context, index, Animation<double> animation) {
+Widget Build_INS_Quiz_Ques(context, index, Animation<double> animation) {
   return SizeTransition(
     sizeFactor: animation,
     axis: Axis.vertical,
@@ -5940,7 +6086,9 @@ Widget Build_INS_Quiz_Ques(
             Text(
               '${index + 1}',
               style: const TextStyle(
-                  fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue),
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue),
             ),
           ],
         ),
@@ -6021,8 +6169,8 @@ Widget Build_INS_Quiz_Ques(
             // controller: controllerforlist,
             itemCount: 4,
 
-            itemBuilder: (context, index2) =>  INS_Quiz_Answer(index: index,context: context,index2: index2),
-
+            itemBuilder: (context, index2) =>
+                INS_Quiz_Answer(index: index, context: context, index2: index2),
           ),
         ),
         // Container(
@@ -6402,7 +6550,10 @@ Widget Build_INS_Quiz_Ques(
         SizedBox(
           height: 25,
         ),
-        Container(height: 1,color: Colors.blueGrey,),
+        Container(
+          height: 1,
+          color: Colors.blueGrey,
+        ),
 
         // ListView.builder(
         //   shrinkWrap: true,
@@ -6515,7 +6666,7 @@ Widget Build_STU_All_grades(
 
 Widget showSTU_UploadeTask({
   int? index,
- required context,
+  required context,
   InsStudentUplodeTaskModel? stuAssign,
 }) =>
     Container(
@@ -6569,45 +6720,55 @@ Widget showSTU_UploadeTask({
                                         widget: Container(
                                           height: 290,
                                           child: Padding(
-                                            padding: const EdgeInsets
-                                                .only(
+                                            padding: const EdgeInsets.only(
                                                 bottom: 25.0,
                                                 left: 25,
                                                 right: 25,
-                                                top: 20
-                                            ),
+                                                top: 20),
                                             child: Form(
                                               key: formkey1,
                                               child: Column(
                                                 children: [
-                                                  Text('${stuAssign?.studentName}',style: TextStyle(fontSize: 18,),),
+                                                  Text(
+                                                    '${stuAssign?.studentName}',
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                    ),
+                                                  ),
                                                   SizedBox(
                                                     height: 20,
                                                   ),
                                                   Container(
-                                                    decoration:  BoxDecoration(
+                                                    decoration: BoxDecoration(
                                                       // border: Border.all(color: Colors.white),
                                                       borderRadius:
-                                                      BorderRadius
-                                                          .circular(
-                                                          18),
+                                                          BorderRadius.circular(
+                                                              18),
                                                       color: Colors.blueGrey
-                                                          .withOpacity(
-                                                          .25),
+                                                          .withOpacity(.25),
                                                     ),
                                                     child: Padding(
-                                                      padding: const EdgeInsets.all(8.0),
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
                                                       child: Row(
                                                         children: [
                                                           SizedBox(
                                                             width: 8,
                                                           ),
-                                                          FaIcon(FontAwesomeIcons.clock),
-
+                                                          FaIcon(
+                                                              FontAwesomeIcons
+                                                                  .clock),
                                                           SizedBox(
                                                             width: 10,
                                                           ),
-                                                          Text('${stuAssign?.timeUploaded}',style: TextStyle(fontSize: 13,),),Spacer(),
+                                                          Text(
+                                                            '${stuAssign?.timeUploaded}',
+                                                            style: TextStyle(
+                                                              fontSize: 13,
+                                                            ),
+                                                          ),
+                                                          Spacer(),
                                                         ],
                                                       ),
                                                     ),
@@ -6621,39 +6782,39 @@ Widget showSTU_UploadeTask({
                                                       Expanded(
                                                         child: Container(
                                                           // width: 150,
-                                                        
+
                                                           padding: EdgeInsets
                                                               .symmetric(
-                                                              vertical: 5,
-                                                              horizontal:
-                                                              10),
+                                                                  vertical: 5,
+                                                                  horizontal:
+                                                                      10),
                                                           alignment:
-                                                          Alignment.center,
+                                                              Alignment.center,
                                                           height: 60,
                                                           decoration:
-                                                          BoxDecoration(
+                                                              BoxDecoration(
                                                             // border: Border.all(color: Colors.white),
                                                             borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                18),
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        18),
                                                             color: Colors.white
                                                                 .withOpacity(
-                                                                .5),
+                                                                    .5),
                                                           ),
                                                           child: Padding(
                                                             padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal:
-                                                                0.0),
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                                    horizontal:
+                                                                        0.0),
                                                             child:
-                                                            TextFormField(
+                                                                TextFormField(
                                                               controller:
-                                                              taskGradecontroller,
+                                                                  taskGradecontroller,
                                                               keyboardType:
-                                                              TextInputType
-                                                                  .number,
+                                                                  TextInputType
+                                                                      .number,
                                                               onFieldSubmitted:
                                                                   (value) {
                                                                 print(value);
@@ -6670,19 +6831,19 @@ Widget showSTU_UploadeTask({
                                                               //     ToolbarOptions(paste: true, copy: true),
                                                               cursorColor: c1,
                                                               style:
-                                                              const TextStyle(
+                                                                  const TextStyle(
                                                                 fontSize: 18,
                                                               ),
                                                               decoration:
-                                                              InputDecoration(
+                                                                  InputDecoration(
                                                                 prefixIcon:
-                                                                Padding(
+                                                                    Padding(
                                                                   padding: const EdgeInsets
                                                                       .symmetric(
                                                                       horizontal:
-                                                                      10.0,
+                                                                          10.0,
                                                                       vertical:
-                                                                      10),
+                                                                          10),
                                                                   child: FaIcon(
                                                                     FontAwesomeIcons
                                                                         .solidEdit,
@@ -6691,10 +6852,10 @@ Widget showSTU_UploadeTask({
                                                                   ),
                                                                 ),
                                                                 hintText:
-                                                                'Points',
+                                                                    'Points',
                                                                 border:
-                                                                InputBorder
-                                                                    .none,
+                                                                    InputBorder
+                                                                        .none,
                                                               ),
                                                             ),
                                                           ),
@@ -6705,50 +6866,62 @@ Widget showSTU_UploadeTask({
                                                       ),
                                                       Expanded(
                                                         child: InkWell(
-                                                          onTap: (){
-                                                            App_cubit.get(context).openFile_Fun(networkFile: stuAssign?.filePath
-                                                                ?.split('net/').last);
+                                                          onTap: () {
+                                                            App_cubit.get(
+                                                                    context)
+                                                                .openFile_Fun(
+                                                                    networkFile: stuAssign
+                                                                        ?.filePath
+                                                                        ?.split(
+                                                                            'net/')
+                                                                        .last);
                                                           },
                                                           child: Container(
-
                                                             padding: EdgeInsets
                                                                 .symmetric(
-                                                                vertical: 5,
-                                                                horizontal:
-                                                                10),
-                                                            alignment:
-                                                            Alignment.center,
+                                                                    vertical: 5,
+                                                                    horizontal:
+                                                                        10),
+                                                            alignment: Alignment
+                                                                .center,
                                                             height: 60,
                                                             decoration:
-                                                            BoxDecoration(
+                                                                BoxDecoration(
                                                               // border: Border.all(color: Colors.white),
                                                               borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                  18),
-                                                              color: Colors.white
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          18),
+                                                              color: Colors
+                                                                  .white
                                                                   .withOpacity(
-                                                                  .5),
+                                                                      .5),
                                                             ),
                                                             child: Padding(
                                                               padding:
-                                                              const EdgeInsets
-                                                                  .symmetric(
-                                                                  horizontal:
-                                                                  0.0),
-                                                              child:
-                                                              Container(child: Row(
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                          0.0),
+                                                              child: Container(
+                                                                  child: Row(
                                                                 children: [
                                                                   SizedBox(
                                                                     width: 8,
                                                                   ),
-                                                                  FaIcon(FontAwesomeIcons.folderOpen),
-
+                                                                  FaIcon(FontAwesomeIcons
+                                                                      .folderOpen),
                                                                   SizedBox(
                                                                     width: 10,
                                                                   ),
-
-                                                                  Text('Open File',style: TextStyle(fontSize: 18,),),
+                                                                  Text(
+                                                                    'Open File',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          18,
+                                                                    ),
+                                                                  ),
                                                                 ],
                                                               )),
                                                             ),
@@ -6764,11 +6937,11 @@ Widget showSTU_UploadeTask({
 
                                                   Default_Button(
                                                       onPressed: () {
-
-                                                        if (formkey1.currentState!
-                                                            .validate() &&
+                                                        if (formkey1
+                                                                .currentState!
+                                                                .validate() &&
                                                             startDate != null &&
-                                                            endDate != null ){
+                                                            endDate != null) {
                                                           // App_cubit.get(context).updateINSAssign(
                                                           //   Taskid: assign.taskId,
                                                           //   taskName: taskNamecontroller.text,
@@ -6777,7 +6950,8 @@ Widget showSTU_UploadeTask({
                                                           //   endDate: endDate,
 
                                                           // );
-                                                          Navigator.pop(context);
+                                                          Navigator.pop(
+                                                              context);
                                                         }
 
                                                         //   if (formkey1.currentState!.validate()) {
@@ -6804,8 +6978,7 @@ Widget showSTU_UploadeTask({
                                             ),
                                           ),
                                         ),
-                                        color: Colors.white
-                                            .withOpacity(.5),
+                                        color: Colors.white.withOpacity(.5),
                                         borderRadius: 30,
                                         x: 15,
                                         y: 15,
@@ -6838,10 +7011,10 @@ Widget showSTU_UploadeTask({
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.teal,width: 2)
-              ),
+                  border: Border.all(color: Colors.teal, width: 2)),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 1.0,horizontal: 6),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 1.0, horizontal: 6),
                 child: Text(
                   'more',
                   style: TextStyle(
