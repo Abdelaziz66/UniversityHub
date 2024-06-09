@@ -76,9 +76,10 @@ class STU_Quizes_Screen extends StatelessWidget {
                           condition: quiz.isNotEmpty && state is ! Stu_Get_Course_Quiz_LoadingState,
                           builder:(context)=> ListView.separated(
                             physics: const BouncingScrollPhysics(),
-                            itemBuilder:(context,index)=> Build_Quiz_Data_Widget(
+                            itemBuilder:(context,index)=> STU_Quiz_Card(
                             quiz: quiz[index],
                                 quizIsComplete: cubit.stu_Quiz_IsComplete,
+                                context: context,
                                 index:
                                 index),
                             separatorBuilder: (context,index)=>const SizedBox(height: 25,),
