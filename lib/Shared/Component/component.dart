@@ -3703,7 +3703,7 @@ Widget BuildAssignFileViewWidget(
   );
 }
 
-Widget Build_Quiz_Data_Widget({
+Widget Build_Quiz_Data_Widget_({
   STU_Quiz_Model? quiz,
   List<bool>? quizIsComplete,
   List<bool>? isQuizStart,
@@ -3887,6 +3887,223 @@ Widget Build_Quiz_Data_Widget({
         ],
       ),
     );
+
+Widget STU_Quiz_Card({
+  STU_Quiz_Model? quiz,
+  List<bool>? quizIsComplete,
+  List<bool>? isQuizStart,
+  int? index,
+  required context,
+  Function? onQuizStart,
+}
+    //List<bool> quizState, List<bool> isQuizStart, int index
+    ) =>Container(
+  height: 155,
+  decoration: BoxDecoration(
+    // color: Colors.blueGrey.withOpacity(.05),
+    borderRadius: BorderRadius.circular(20),
+    border: Border.all(width: .5),
+  ),
+  child: Padding(
+    padding:
+    const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
+    child: Column(
+      children: [
+        Row(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: 10,
+            ),
+            Text('${quiz?.title}'),
+            Spacer(),
+
+            Container(
+              height: 30,
+              width: 30,
+              child: Center(
+                child: FaIcon(
+                  FontAwesomeIcons.clock,
+                  size: 26,
+                  color: Colors.teal.withOpacity(.7),
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 7,
+        ),
+        Container(
+          color: Colors.black.withOpacity(.3),
+          height: .5,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.bookmark,
+                            size: 12,
+                          ),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Text(
+                            '${quiz?.notes}',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 13),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Row(
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.user,
+                            size: 12,
+                          ),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Text(
+                            '${quiz?.status}',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 13),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Row(
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.chartLine,
+                            size: 12,
+                          ),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Text(
+                            '10 minutes',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700, fontSize: 13),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Row(
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.clock,
+                            size: 12,
+                          ),
+                          SizedBox(
+                            width: 7,
+                          ),
+                          Container(
+                            width: 150,
+                            child: Text(
+                              'From ${DateTime.parse(quiz!.startDate!).hour}:${DateTime.parse(quiz!.startDate!).minute}  to  ${DateTime.parse(quiz!.endDate!).hour}:${DateTime.parse(quiz!.endDate!).minute} ',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 13),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        quiz?.status == 'Available'?
+                          print('Available')  :   print(quiz?.status) ;
+                        //  print(App_cubit.get(context).allquizAnswers![0]);
+
+                        //print(App_cubit.get(context).allquizAnswers![0]);
+
+                        //  App_cubit.get(context).quizAnswerSelected='';
+
+                        App_cubit.get(context).submitQuizAnswers =
+                        [];
+
+                        onQuizStart;
+
+                        App_cubit.get(context).currentQuizId =
+                            quiz.id;
+
+                        App_cubit.get(context)
+                            .StuGetQuizDataById();
+
+                        App_cubit.get(context).currentQuizName =
+                            quiz.title;
+
+                        //  App_cubit.get(context).allquizAnswers[0]=App_cubit.get(context).quizAnswerSelected;
+                        //  App_cubit.get(context).allquizAnswers =  List<String>.filled(App_cubit.get(context).questionModel.length,'');
+
+                        navigateTo(
+                            context, STU_Quizes_Ques_Screen());
+                      },
+                      child: Container(
+                        height: 45,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.teal.withOpacity(.6),
+                          borderRadius: BorderRadius.circular(12),
+                          // border: Border.all(width: .5),
+                        ),
+                        child: Center(
+                          child: Text(
+                            '${ quiz?.status}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  ),
+);
 
 Widget INS_Quiz_Card({required context, required GetQuizes_Model quizes}
 
