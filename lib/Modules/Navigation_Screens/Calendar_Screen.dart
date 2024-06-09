@@ -28,10 +28,6 @@ class Calendar_screen extends StatelessWidget {
     return BlocConsumer<App_cubit, App_state>(
       listener: (context, state) => {},
       builder: (context, state) {
-        int selectedIndex = 0;
-        bool isvisbile = false;
-        var startDate;
-        var endDate;
         Time _time = Time(hour: 11, minute: 30, second: 00000,);
         App_cubit cubit = App_cubit.get(context);
         List Calender_Number = [

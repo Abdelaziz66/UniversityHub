@@ -803,7 +803,11 @@ Widget Matrial_INS_C(
                   // height: 80,
                   child: Text(
                     maxLines: 1,
-                    '${App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty || App_cubit.get(context).currentMaterialLecFolders.isNotEmpty ? courseMaterial?.lectureName : insFolder?.lectureName}',
+                    '${
+                        // App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty
+                        // || App_cubit.get(context).currentMaterialLecFolders.isNotEmpty
+                        // ? courseMaterial?.lectureName :
+                        insFolder?.lectureName}',
                     style: TextStyle(
                       overflow: TextOverflow.ellipsis,
                       fontSize: 15,
@@ -1144,7 +1148,7 @@ Widget Matrial_STU_C(
       TextEditingController? folderController,
       context,
       GetCourseMaterialsModel? courseMaterial,
-      InsAllLecFoldersModel? insFolder,
+    //  InsAllLecFoldersModel? insFolder,
       // AnimationController? menuAnimation,
       index}) =>
     Padding(
@@ -1175,7 +1179,11 @@ Widget Matrial_STU_C(
               Expanded(
                 child: Text(
                   maxLines: 2,
-                  '${App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty || App_cubit.get(context).currentMaterialLecFolders.isNotEmpty ? courseMaterial?.lectureName : insFolder?.lectureName}',
+                  '${
+                  // App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty ?
+                  // App_cubit.get(context).currentMaterialLecFolders.isNotEmpty ?
+                      courseMaterial?.lectureName }',
+                  //   : insFolder?.lectureName}}',
                   style: TextStyle(
                     overflow: TextOverflow.ellipsis,
                     fontSize: 14,
