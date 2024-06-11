@@ -1216,34 +1216,61 @@ print('///////////////****************///////////////////');
   String? assignName;
   String? taskId;
   List<STU_Course_Assign_Model> stuCoursesAssignModel = [];
+  List<STU_Course_Assign_Model> stuCoursesAssign_Completed_Model = [];
+  List<STU_Course_Assign_Model> stuCoursesAssign_Pending_Model = [];
   List<STU_Course_Assign_Model> insCoursesAssignModel = [];
+  List<STU_Course_Assign_Model> insCoursesAssign_Completed_Model = [];
+  List<STU_Course_Assign_Model> insCoursesAssign_Pending_Model = [];
   void StuGetCourseAssign(
       //required token,
       // required cycleId,
       ) {
     // stuCoursesAssignModel=[];
+    stuCoursesAssign_Completed_Model=[];
+    stuCoursesAssign_Pending_Model=[];
+    stuCoursesAssignModel=[];
+    insCoursesAssignModel=[];
     if(rol=='Student') {
-      if (stuCoursesAssignModel.isEmpty || isCycleIdChange == true) {
+      if ( true) {
         emit(Stu_Get_Course_Assign_LoadingState());
+        print('____1____');
         Dio_Helper.GetData(
           url: 'Students/CurrentCourseTasks?CycleId=${currentCycleId}',
           //STU_COURSE_MATERIAL,
           token: token,
         ).then((value) {
           if (value.statusCode == 200) {
-            print(value.data);
+            // print(value.data);
             List Json = value.data;
             //  for (var element in  Json) {
             Json.forEach((element) {
-              stuCoursesAssignModel
-                  .add(STU_Course_Assign_Model.fromJson(element));
+                stuCoursesAssignModel
+                    .add(STU_Course_Assign_Model.fromJson(element));
             });
-            print('get course Assign true');
+            print('____2____');
+            stuCoursesAssignModel.forEach((element) {
+              if(DateTime.now().isBefore(DateTime.parse(element.endDate!))){
+                stuCoursesAssign_Pending_Model.add(element);
+              }
+              else{
+                stuCoursesAssign_Completed_Model.add(element);
+              }
+
+            });
+            print('____3____');
+            print('get course Assign true --');
+            stuCoursesAssign_Pending_Model.forEach((element) {
+              print('Pending end date ------- ${element.startDate}');
+              print('Pending end date ------- ${element.endDate}');
+            });
+            stuCoursesAssign_Completed_Model.forEach((element) {
+              print('Pending end date ------- ${element.startDate}');
+              print('Completed end date ------- ${element.endDate}');
+            });
+            print('____4____');
             emit(Stu_Get_Course_Assign_SuccessState());
           }
-          stuCoursesAssignModel.forEach((element) {
-            print('task name------- ${element.taskName}');
-          });
+
         }).catchError((error) {
           emit(Stu_Get_Course_Assign_ErrorState(error.toString()));
           print(error.toString());
@@ -1252,6 +1279,8 @@ print('///////////////****************///////////////////');
     }else
       {
         insCoursesAssignModel = [];
+        insCoursesAssign_Completed_Model = [];
+        insCoursesAssign_Pending_Model = [];
         emit(Stu_Get_Course_Assign_LoadingState());
         Dio_Helper.GetData(
           url: 'Instructor/GetCurrentCourseTasks?cycleId=${currentCycleId}',
@@ -1265,6 +1294,23 @@ print('///////////////****************///////////////////');
             Json.forEach((element) {
               insCoursesAssignModel
                   .add(STU_Course_Assign_Model.fromJson(element));
+            });
+            insCoursesAssignModel.forEach((element) {
+              if(DateTime.now().isBefore(DateTime.parse(element.endDate!))){
+                insCoursesAssign_Pending_Model.add(element);
+              }
+              else{
+                insCoursesAssign_Completed_Model.add(element);
+              }
+
+            });
+            insCoursesAssign_Pending_Model.forEach((element) {
+              print('Pending start date ------- ${element.startDate}');
+              print('Pending end date ------- ${element.endDate}');
+            });
+            insCoursesAssign_Completed_Model.forEach((element) {
+              print('Completed start date ------- ${element.startDate}');
+              print('Completed end date ------- ${element.endDate}');
             });
             print('get course Assign true');
             emit(Stu_Get_Course_Assign_SuccessState());
@@ -1837,7 +1883,7 @@ print('///////////////****************///////////////////');
     emit(Ins_Add_Assign_LoadingState());
     Dio_Helper.PostListFileData(
         token: token,
-        url: 'Instructor/UploadAssignment?TaskName=$taskName&TaskGrade=$taskGrade&StartDate=$startDate&EndDate=$startDate&CourseCycleId=$currentCycleId',
+        url: 'Instructor/UploadAssignment?TaskName=$taskName&TaskGrade=$taskGrade&StartDate=$startDate&EndDate=$endDate&CourseCycleId=$currentCycleId',
         files: all_assign_files_List,
     ).then((value) {
       if (value.statusCode == 200) {
@@ -2854,6 +2900,9 @@ print('///////////////****************///////////////////');
 //-----------------------------------------------------------------------
 
   List<GetQuizes_Model>INS_get_QuizesModel=[];
+  List<GetQuizes_Model>INS_get_Quizes_Completed_Model=[];
+  List<GetQuizes_Model>INS_get_Quizes_Pending_Model=[];
+
   void INS_GetQuizes_Function({
     required CourseID,
     // required token,
@@ -2862,6 +2911,8 @@ print('///////////////****************///////////////////');
 
   {
     INS_get_QuizesModel=[];
+    INS_get_Quizes_Pending_Model=[];
+    INS_get_Quizes_Completed_Model=[];
     if (true) {
       emit(INS_GetQuizes_LoadingState());
       Dio_Helper.GetData(
@@ -2874,7 +2925,15 @@ print('///////////////****************///////////////////');
             INS_get_QuizesModel.add(GetQuizes_Model.fromJson(element));
           });
 
+          INS_get_QuizesModel.forEach((element) {
+            if(DateTime.now().isBefore(element.endDate!)){
+              INS_get_Quizes_Pending_Model.add(element);
+            }
+            else{
+              INS_get_Quizes_Completed_Model.add(element);
+            }
 
+          });
 
 
           emit(INS_GetQuizes_SuccessState());
