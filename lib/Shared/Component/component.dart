@@ -804,10 +804,10 @@ Widget Matrial_INS_C(
                   child: Text(
                     maxLines: 1,
                     '${
-                        // App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty
-                        // || App_cubit.get(context).currentMaterialLecFolders.isNotEmpty
-                        // ? courseMaterial?.lectureName :
-                        insFolder?.lectureName}',
+                    // App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty
+                    // || App_cubit.get(context).currentMaterialLecFolders.isNotEmpty
+                    // ? courseMaterial?.lectureName :
+                    insFolder?.lectureName}',
                     style: TextStyle(
                       overflow: TextOverflow.ellipsis,
                       fontSize: 15,
@@ -847,23 +847,19 @@ Widget Matrial_INS_C(
                                               const Spacer(),
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.all(
-                                                    15.0),
+                                                    const EdgeInsets.all(15.0),
                                                 child: GlassBoxWithBorder(
                                                   widget: Container(
                                                     height: 250,
                                                     child: Padding(
                                                       padding:
-                                                      const EdgeInsets
-                                                          .only(
-                                                          bottom:
-                                                          25.0,
-                                                          left: 25,
-                                                          right: 25,
-                                                          top: 20),
+                                                          const EdgeInsets.only(
+                                                              bottom: 25.0,
+                                                              left: 25,
+                                                              right: 25,
+                                                              top: 20),
                                                       child: Form(
-                                                        key:
-                                                        folderFormKey,
+                                                        key: folderFormKey,
                                                         child: Column(
                                                           children: [
                                                             Row(
@@ -871,25 +867,27 @@ Widget Matrial_INS_C(
                                                                 FaIcon(
                                                                   FontAwesomeIcons
                                                                       .folder,
-                                                                  size:
-                                                                  30,
+                                                                  size: 30,
                                                                 ),
                                                                 SizedBox(
-                                                                  width:
-                                                                  15,
+                                                                  width: 15,
                                                                 ),
                                                                 Container(
-                                                                  width:
-                                                                  220,
-                                                                  child:
-                                                                  Text(
+                                                                  width: 220,
+                                                                  child: Text(
                                                                     'Edit ${insFolder?.lectureName} name :',
-                                                                    maxLines:
-                                                                    2,
-                                                                    style: Theme.of(context).textTheme.subtitle2?.copyWith(
-                                                                        overflow: TextOverflow.ellipsis,
-                                                                        fontSize: 18,
-                                                                        color: Colors.black),
+                                                                    maxLines: 2,
+                                                                    style: Theme.of(
+                                                                            context)
+                                                                        .textTheme
+                                                                        .subtitle2
+                                                                        ?.copyWith(
+                                                                            overflow: TextOverflow
+                                                                                .ellipsis,
+                                                                            fontSize:
+                                                                                18,
+                                                                            color:
+                                                                                Colors.black),
                                                                   ),
                                                                 ),
                                                               ],
@@ -897,38 +895,40 @@ Widget Matrial_INS_C(
                                                             const Spacer(),
 
                                                             Container(
-                                                              padding: EdgeInsets.symmetric(
-                                                                  vertical:
-                                                                  5,
-                                                                  horizontal:
-                                                                  10),
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      vertical:
+                                                                          5,
+                                                                      horizontal:
+                                                                          10),
                                                               alignment:
-                                                              Alignment
-                                                                  .center,
+                                                                  Alignment
+                                                                      .center,
                                                               height: 60,
                                                               decoration:
-                                                              BoxDecoration(
+                                                                  BoxDecoration(
                                                                 // border: Border.all(color: Colors.white),
                                                                 borderRadius:
-                                                                BorderRadius.circular(
-                                                                    18),
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            18),
                                                                 color: Colors
                                                                     .white
                                                                     .withOpacity(
-                                                                    .8),
+                                                                        .8),
                                                               ),
-                                                              child:
-                                                              Padding(
+                                                              child: Padding(
                                                                 padding: const EdgeInsets
                                                                     .symmetric(
                                                                     horizontal:
-                                                                    0.0),
+                                                                        0.0),
                                                                 child:
-                                                                TextFormField(
+                                                                    TextFormField(
                                                                   controller:
-                                                                  folderController,
+                                                                      folderController,
                                                                   keyboardType:
-                                                                  TextInputType.text,
+                                                                      TextInputType
+                                                                          .text,
                                                                   onFieldSubmitted:
                                                                       (value) {
                                                                     print(
@@ -945,29 +945,37 @@ Widget Matrial_INS_C(
                                                                   // toolbarOptions:
                                                                   //     ToolbarOptions(paste: true, copy: true),
                                                                   cursorColor:
-                                                                  c1,
+                                                                      c1,
                                                                   style:
-                                                                  const TextStyle(
+                                                                      const TextStyle(
                                                                     fontSize:
-                                                                    18,
+                                                                        18,
                                                                   ),
                                                                   decoration:
-                                                                  InputDecoration(
+                                                                      InputDecoration(
                                                                     prefixIcon:
-                                                                    Padding(
-                                                                      padding:
-                                                                      const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                                                                        Padding(
+                                                                      padding: const EdgeInsets
+                                                                          .symmetric(
+                                                                          horizontal:
+                                                                              10.0,
+                                                                          vertical:
+                                                                              10),
                                                                       child:
-                                                                      FaIcon(
-                                                                        FontAwesomeIcons.calendar,
-                                                                        color: c1,
-                                                                        size: 25,
+                                                                          FaIcon(
+                                                                        FontAwesomeIcons
+                                                                            .calendar,
+                                                                        color:
+                                                                            c1,
+                                                                        size:
+                                                                            25,
                                                                       ),
                                                                     ),
                                                                     hintText:
-                                                                    'Enter folder name',
+                                                                        'Enter folder name',
                                                                     border:
-                                                                    InputBorder.none,
+                                                                        InputBorder
+                                                                            .none,
                                                                   ),
                                                                 ),
                                                               ),
@@ -976,33 +984,36 @@ Widget Matrial_INS_C(
                                                               height: 15,
                                                             ),
                                                             Default_Button(
-                                                                onPressed:
-                                                                    () {
+                                                                onPressed: () {
                                                                   if (folderFormKey
                                                                       .currentState!
                                                                       .validate()) {
-                                                                    App_cubit.get(context)
+                                                                    App_cubit.get(
+                                                                            context)
                                                                         .INS_UpdateMaterialFolder(
                                                                       folderId:
-                                                                      insFolder?.lectureId,
+                                                                          insFolder
+                                                                              ?.lectureId,
                                                                       newFolderName:
-                                                                      folderController?.text,
+                                                                          folderController
+                                                                              ?.text,
                                                                     );
 
                                                                     Navigator.pop(
                                                                         context);
                                                                   } else {
                                                                     flutterToast(
-                                                                        msg: 'please enter the new folder name',
-                                                                        backColor: Colors.red);
+                                                                        msg:
+                                                                            'please enter the new folder name',
+                                                                        backColor:
+                                                                            Colors.red);
                                                                   }
                                                                 },
                                                                 containerHeight:
-                                                                50,
+                                                                    50,
                                                                 textFontSize:
-                                                                20,
-                                                                text:
-                                                                'Done'),
+                                                                    20,
+                                                                text: 'Done'),
                                                             // SizedBox(
                                                             //   height: 15,
                                                             // ),
@@ -1017,8 +1028,7 @@ Widget Matrial_INS_C(
                                                   x: 15,
                                                   y: 15,
                                                   BorderWidth: 1,
-                                                  BorderColor:
-                                                  Colors.white,
+                                                  BorderColor: Colors.white,
                                                 ),
                                               ),
                                               const Spacer(
@@ -1082,10 +1092,9 @@ Widget Matrial_INS_C(
                               Navigator.pop(context);
                             },
                             text:
-                            'Do you want to delete ${insFolder?.lectureName} ?',
+                                'Do you want to delete ${insFolder?.lectureName} ?',
                             yes: () {
-                              App_cubit.get(context)
-                                  .INS_DeleteMaterialFolder(
+                              App_cubit.get(context).INS_DeleteMaterialFolder(
                                   folderId: insFolder?.lectureId);
                               Navigator.pop(context);
                             });
@@ -1116,9 +1125,7 @@ Widget Matrial_INS_C(
                   width: 10,
                 ),
 
-
                 //   courseMaterial?.type == 'Lecture'
-
 
                 // Column(
                 //   mainAxisAlignment: MainAxisAlignment.center,
@@ -1144,13 +1151,13 @@ Widget Matrial_INS_C(
     );
 
 Widget Matrial_STU_C(
-    {folderFormKey,
-      TextEditingController? folderController,
-      context,
-      GetCourseMaterialsModel? courseMaterial,
-    //  InsAllLecFoldersModel? insFolder,
-      // AnimationController? menuAnimation,
-      index}) =>
+        {folderFormKey,
+        TextEditingController? folderController,
+        context,
+        GetCourseMaterialsModel? courseMaterial,
+        //  InsAllLecFoldersModel? insFolder,
+        // AnimationController? menuAnimation,
+        index}) =>
     Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -1165,7 +1172,9 @@ Widget Matrial_STU_C(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(width: 20,),
+              SizedBox(
+                width: 20,
+              ),
               FaIcon(
                 FontAwesomeIcons.solidFolderClosed,
                 //color: c1.withOpacity(.9),
@@ -1182,7 +1191,7 @@ Widget Matrial_STU_C(
                   '${
                   // App_cubit.get(context).stuCoursesMatrialModel.isNotEmpty ?
                   // App_cubit.get(context).currentMaterialLecFolders.isNotEmpty ?
-                      courseMaterial?.lectureName }',
+                  courseMaterial?.lectureName}',
                   //   : insFolder?.lectureName}}',
                   style: TextStyle(
                     overflow: TextOverflow.ellipsis,
@@ -1192,7 +1201,9 @@ Widget Matrial_STU_C(
                   ),
                 ),
               ),
-              SizedBox(width: 20,),
+              SizedBox(
+                width: 20,
+              ),
               // Column(
               //   mainAxisAlignment: MainAxisAlignment.center,
               //   children: [
@@ -2332,300 +2343,300 @@ Widget INS_Build_Lec_View_Widget({
       children: [
         rol == 'Doctor'
             ? Row(
-          children: [
-            Spacer(),
-            InkWell(
-              onTap: () {
-                fileController?.text = '';
-                showDialog<String>(
-                  context: context,
-                  barrierColor: Colors.black.withOpacity(.3),
-                  useSafeArea: true,
-                  builder: (BuildContext context) => AlertDialog(
-                    insetPadding: const EdgeInsets.all(0.0),
-                    scrollable: false,
-                    shadowColor: Colors.transparent,
-                    content: Center(
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: GlassBox(
-                              widget: Stack(
-                                children: [
-                                  Column(
-                                    children: [
-                                      const Spacer(),
-                                      Padding(
-                                        padding:
-                                        const EdgeInsets.all(15.0),
-                                        child: GlassBoxWithBorder(
-                                          widget: Container(
-                                            height: 250,
-                                            child: Padding(
+                children: [
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      fileController?.text = '';
+                      showDialog<String>(
+                        context: context,
+                        barrierColor: Colors.black.withOpacity(.3),
+                        useSafeArea: true,
+                        builder: (BuildContext context) => AlertDialog(
+                          insetPadding: const EdgeInsets.all(0.0),
+                          scrollable: false,
+                          shadowColor: Colors.transparent,
+                          content: Center(
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: GlassBox(
+                                    widget: Stack(
+                                      children: [
+                                        Column(
+                                          children: [
+                                            const Spacer(),
+                                            Padding(
                                               padding:
-                                              const EdgeInsets.only(
-                                                  bottom: 25.0,
-                                                  left: 25,
-                                                  right: 25,
-                                                  top: 20),
-                                              child: Form(
-                                                key: fileFormKey,
-                                                child: Column(
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        FaIcon(
-                                                          FontAwesomeIcons
-                                                              .folder,
-                                                          size: 30,
-                                                        ),
-                                                        SizedBox(
-                                                          width: 15,
-                                                        ),
-                                                        Container(
-                                                          width: 220,
-                                                          child: Text(
-                                                            'Edit ${insFile?.fileName} name :',
-                                                            maxLines: 2,
-                                                            style: Theme.of(
-                                                                context)
-                                                                .textTheme
-                                                                .subtitle2
-                                                                ?.copyWith(
-                                                                overflow: TextOverflow
-                                                                    .ellipsis,
-                                                                fontSize:
-                                                                18,
-                                                                color:
-                                                                Colors.black),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const Spacer(),
-
-                                                    Container(
-                                                      padding: EdgeInsets
-                                                          .symmetric(
-                                                          vertical: 5,
-                                                          horizontal:
-                                                          10),
-                                                      alignment: Alignment
-                                                          .center,
-                                                      height: 60,
-                                                      decoration:
-                                                      BoxDecoration(
-                                                        // border: Border.all(color: Colors.white),
-                                                        borderRadius:
-                                                        BorderRadius
-                                                            .circular(
-                                                            18),
-                                                        color: Colors
-                                                            .white
-                                                            .withOpacity(
-                                                            .8),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                        const EdgeInsets
-                                                            .symmetric(
-                                                            horizontal:
-                                                            0.0),
-                                                        child:
-                                                        TextFormField(
-                                                          controller:
-                                                          fileController,
-                                                          keyboardType:
-                                                          TextInputType
-                                                              .text,
-                                                          onFieldSubmitted:
-                                                              (value) {
-                                                            print(value);
-                                                          },
-                                                          validator:
-                                                              (value) {
-                                                            if (value!
-                                                                .isEmpty) {
-                                                              return 'file name can\'t be empty';
-                                                            }
-                                                            return null;
-                                                          },
-                                                          // toolbarOptions:
-                                                          //     ToolbarOptions(paste: true, copy: true),
-                                                          cursorColor: c1,
-                                                          style:
-                                                          const TextStyle(
-                                                            fontSize: 18,
-                                                          ),
-                                                          decoration:
-                                                          InputDecoration(
-                                                            prefixIcon:
-                                                            Padding(
-                                                              padding: const EdgeInsets
-                                                                  .symmetric(
-                                                                  horizontal:
-                                                                  10.0,
-                                                                  vertical:
-                                                                  10),
-                                                              child:
+                                                  const EdgeInsets.all(15.0),
+                                              child: GlassBoxWithBorder(
+                                                widget: Container(
+                                                  height: 250,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            bottom: 25.0,
+                                                            left: 25,
+                                                            right: 25,
+                                                            top: 20),
+                                                    child: Form(
+                                                      key: fileFormKey,
+                                                      child: Column(
+                                                        children: [
+                                                          Row(
+                                                            children: [
                                                               FaIcon(
                                                                 FontAwesomeIcons
-                                                                    .edit,
-                                                                color: c1,
-                                                                size: 25,
+                                                                    .folder,
+                                                                size: 30,
+                                                              ),
+                                                              SizedBox(
+                                                                width: 15,
+                                                              ),
+                                                              Container(
+                                                                width: 220,
+                                                                child: Text(
+                                                                  'Edit ${insFile?.fileName} name :',
+                                                                  maxLines: 2,
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .subtitle2
+                                                                      ?.copyWith(
+                                                                          overflow: TextOverflow
+                                                                              .ellipsis,
+                                                                          fontSize:
+                                                                              18,
+                                                                          color:
+                                                                              Colors.black),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          const Spacer(),
+
+                                                          Container(
+                                                            padding: EdgeInsets
+                                                                .symmetric(
+                                                                    vertical: 5,
+                                                                    horizontal:
+                                                                        10),
+                                                            alignment: Alignment
+                                                                .center,
+                                                            height: 60,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              // border: Border.all(color: Colors.white),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          18),
+                                                              color: Colors
+                                                                  .white
+                                                                  .withOpacity(
+                                                                      .8),
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                          0.0),
+                                                              child:
+                                                                  TextFormField(
+                                                                controller:
+                                                                    fileController,
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .text,
+                                                                onFieldSubmitted:
+                                                                    (value) {
+                                                                  print(value);
+                                                                },
+                                                                validator:
+                                                                    (value) {
+                                                                  if (value!
+                                                                      .isEmpty) {
+                                                                    return 'file name can\'t be empty';
+                                                                  }
+                                                                  return null;
+                                                                },
+                                                                // toolbarOptions:
+                                                                //     ToolbarOptions(paste: true, copy: true),
+                                                                cursorColor: c1,
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontSize: 18,
+                                                                ),
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  prefixIcon:
+                                                                      Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal:
+                                                                            10.0,
+                                                                        vertical:
+                                                                            10),
+                                                                    child:
+                                                                        FaIcon(
+                                                                      FontAwesomeIcons
+                                                                          .edit,
+                                                                      color: c1,
+                                                                      size: 25,
+                                                                    ),
+                                                                  ),
+                                                                  hintText:
+                                                                      'Enter folder name',
+                                                                  border:
+                                                                      InputBorder
+                                                                          .none,
+                                                                ),
                                                               ),
                                                             ),
-                                                            hintText:
-                                                            'Enter folder name',
-                                                            border:
-                                                            InputBorder
-                                                                .none,
                                                           ),
-                                                        ),
+                                                          const SizedBox(
+                                                            height: 15,
+                                                          ),
+                                                          Default_Button(
+                                                              onPressed: () {
+                                                                if (fileFormKey
+                                                                    .currentState!
+                                                                    .validate()) {
+                                                                  App_cubit.get(
+                                                                          context)
+                                                                      .INS_UpdateMaterialFile(
+                                                                    fileId: insFile
+                                                                        ?.lectureFileId,
+                                                                    newFileName:
+                                                                        fileController
+                                                                            ?.text,
+                                                                  );
+
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                } else {
+                                                                  flutterToast(
+                                                                      msg:
+                                                                          'please enter the new folder name',
+                                                                      backColor:
+                                                                          Colors
+                                                                              .red);
+                                                                }
+                                                              },
+                                                              containerHeight:
+                                                                  50,
+                                                              textFontSize: 20,
+                                                              text: 'Done'),
+                                                          // SizedBox(
+                                                          //   height: 15,
+                                                          // ),
+                                                        ],
                                                       ),
                                                     ),
-                                                    const SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    Default_Button(
-                                                        onPressed: () {
-                                                          if (fileFormKey
-                                                              .currentState!
-                                                              .validate()) {
-                                                            App_cubit.get(
-                                                                context)
-                                                                .INS_UpdateMaterialFile(
-                                                              fileId: insFile
-                                                                  ?.lectureFileId,
-                                                              newFileName:
-                                                              fileController
-                                                                  ?.text,
-                                                            );
-
-                                                            Navigator.pop(
-                                                                context);
-                                                          } else {
-                                                            flutterToast(
-                                                                msg:
-                                                                'please enter the new folder name',
-                                                                backColor:
-                                                                Colors
-                                                                    .red);
-                                                          }
-                                                        },
-                                                        containerHeight:
-                                                        50,
-                                                        textFontSize: 20,
-                                                        text: 'Done'),
-                                                    // SizedBox(
-                                                    //   height: 15,
-                                                    // ),
-                                                  ],
+                                                  ),
                                                 ),
+                                                color: Colors.white
+                                                    .withOpacity(.5),
+                                                borderRadius: 30,
+                                                x: 15,
+                                                y: 15,
+                                                BorderWidth: 1,
+                                                BorderColor: Colors.white,
                                               ),
                                             ),
-                                          ),
-                                          color: Colors.white
-                                              .withOpacity(.5),
-                                          borderRadius: 30,
-                                          x: 15,
-                                          y: 15,
-                                          BorderWidth: 1,
-                                          BorderColor: Colors.white,
+                                            const Spacer(
+                                              flex: 1,
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                      const Spacer(
-                                        flex: 1,
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                    color: Colors.transparent,
+                                    borderRadius: 0,
+                                    x: 3,
+                                    y: 3),
                               ),
-                              color: Colors.transparent,
-                              borderRadius: 0,
-                              x: 3,
-                              y: 3),
+                            ),
+                          ),
+                          elevation: 0,
+                          clipBehavior: Clip.none,
+                          surfaceTintColor: Colors.transparent,
+                          backgroundColor: Colors.transparent,
+                          contentPadding: EdgeInsets.zero,
+                        ),
+                      );
+
+                      // Alrat(
+                      //     context: context,
+                      //     no: () {
+                      //       Navigator.pop(context);
+                      //     },
+                      //     text: 'Do you want to edit ${insFolder?.lectureName} ?',
+                      //     yes: () {});
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        // color: Colors.yellow.withOpacity(.9),
+                        border: Border.all(
+                          width: .5,
+                          color: Colors.blue.withOpacity(1),
+                        ),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: FaIcon(
+                          FontAwesomeIcons.pen,
+                          size: 13,
+                          color: Colors.blue.withOpacity(1),
                         ),
                       ),
                     ),
-                    elevation: 0,
-                    clipBehavior: Clip.none,
-                    surfaceTintColor: Colors.transparent,
-                    backgroundColor: Colors.transparent,
-                    contentPadding: EdgeInsets.zero,
                   ),
-                );
-
-                // Alrat(
-                //     context: context,
-                //     no: () {
-                //       Navigator.pop(context);
-                //     },
-                //     text: 'Do you want to edit ${insFolder?.lectureName} ?',
-                //     yes: () {});
-              },
-              child: Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                  // color: Colors.yellow.withOpacity(.9),
-                  border: Border.all(
-                    width: .5,
-                    color: Colors.blue.withOpacity(1),
+                  SizedBox(
+                    width: 10,
                   ),
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.pen,
-                    size: 13,
-                    color: Colors.blue.withOpacity(1),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            InkWell(
-              onTap: () {
-                Alrat(
-                    context: context,
-                    no: () {
-                      Navigator.pop(context);
+                  InkWell(
+                    onTap: () {
+                      Alrat(
+                          context: context,
+                          no: () {
+                            Navigator.pop(context);
+                          },
+                          text: 'Do you want to delete ${insFile?.fileName} ?',
+                          yes: () {
+                            App_cubit.get(context).INS_DeleteMaterialFile(
+                                fileId: insFile?.lectureFileId);
+                            Navigator.pop(context);
+                          });
                     },
-                    text: 'Do you want to delete ${insFile?.fileName} ?',
-                    yes: () {
-                      App_cubit.get(context).INS_DeleteMaterialFile(
-                          fileId: insFile?.lectureFileId);
-                      Navigator.pop(context);
-                    });
-              },
-              child: Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                  // color: Colors.red.withOpacity(.6),
-                  border: Border.all(
-                    width: .5,
-                    color: Colors.red.withOpacity(1),
+                    child: Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        // color: Colors.red.withOpacity(.6),
+                        border: Border.all(
+                          width: .5,
+                          color: Colors.red.withOpacity(1),
+                        ),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: FaIcon(
+                          FontAwesomeIcons.trashCan,
+                          size: 13,
+                          color: Colors.red.withOpacity(1),
+                        ),
+                      ),
+                    ),
                   ),
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: FaIcon(
-                    FontAwesomeIcons.trashCan,
-                    size: 13,
-                    color: Colors.red.withOpacity(1),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        )
+                ],
+              )
             : const SizedBox(),
         SizedBox(
           height: 5,
@@ -2639,7 +2650,7 @@ Widget INS_Build_Lec_View_Widget({
           ),
           child: Text(
             App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty ||
-                App_cubit.get(context).MaterialLecFiles.isNotEmpty
+                    App_cubit.get(context).MaterialLecFiles.isNotEmpty
                 ? '${file?.filePath?.split('.').last}'
                 : '${insFile?.filePath?.split('.').last}',
             style: TextStyle(
@@ -2659,7 +2670,7 @@ Widget INS_Build_Lec_View_Widget({
             children: [
               Text(
                 App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty ||
-                    App_cubit.get(context).MaterialLecFiles.isNotEmpty
+                        App_cubit.get(context).MaterialLecFiles.isNotEmpty
                     ? '${file?.fileName}'
                     : '${insFile?.fileName}',
                 style: TextStyle(
@@ -2671,7 +2682,7 @@ Widget INS_Build_Lec_View_Widget({
               ),
               Text(
                 App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty ||
-                    App_cubit.get(context).MaterialLecFiles.isNotEmpty
+                        App_cubit.get(context).MaterialLecFiles.isNotEmpty
                     ? '${file?.createdAt?.split('T').first} at ${file?.createdAt?.split('T').last}'
                     : '${insFile?.createdAt?.split('T').first} at ${insFile?.createdAt?.split('T').last}',
                 style: TextStyle(
@@ -2745,7 +2756,9 @@ Widget STU_Build_Lec_View_Widget({
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty ||
+                  App_cubit.get(context)
+                              .stuCoursesMatrialFileModel
+                              .isNotEmpty ||
                           App_cubit.get(context).MaterialLecFiles.isNotEmpty
                       ? '${file?.fileName}'
                       : '${insFile?.fileName}',
@@ -2755,10 +2768,11 @@ Widget STU_Build_Lec_View_Widget({
                   ),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
-
                 ),
                 Text(
-                  App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty ||
+                  App_cubit.get(context)
+                              .stuCoursesMatrialFileModel
+                              .isNotEmpty ||
                           App_cubit.get(context).MaterialLecFiles.isNotEmpty
                       ? '${file?.createdAt?.split('T').first} at ${file?.createdAt?.split('T').last}'
                       : '${insFile?.createdAt?.split('T').first} at ${insFile?.createdAt?.split('T').last}',
@@ -3904,214 +3918,225 @@ Widget STU_Quiz_Card({
   required context,
   Function? onQuizStart,
 }
-    //List<bool> quizState, List<bool> isQuizStart, int index
-    ) =>Container(
-  height: 155,
-  decoration: BoxDecoration(
-    // color: Colors.blueGrey.withOpacity(.05),
-    borderRadius: BorderRadius.circular(20),
-    border: Border.all(width: .5),
-  ),
-  child: Padding(
-    padding:
-    const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
-    child: Column(
-      children: [
-        Row(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.start,
+        //List<bool> quizState, List<bool> isQuizStart, int index
+        ) =>
+    Container(
+      height: 155,
+      decoration: BoxDecoration(
+        // color: Colors.blueGrey.withOpacity(.05),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(width: .5),
+      ),
+      child: Padding(
+        padding:
+            const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
+        child: Column(
           children: [
-            SizedBox(
-              width: 10,
-            ),
-            Text('${quiz?.title}'),
-            Spacer(),
-
-            Container(
-              height: 30,
-              width: 30,
-              child: Center(
-                child: FaIcon(
-                  FontAwesomeIcons.clock,
-                  size: 26,
-                  color: Colors.teal.withOpacity(.7),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 10,
                 ),
+                Text('${quiz?.title}'),
+                Spacer(),
+                Container(
+                  height: 30,
+                  width: 30,
+                  child: Center(
+                    child: FaIcon(
+                      FontAwesomeIcons.clock,
+                      size: 26,
+                      color: Colors.teal.withOpacity(.7),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 7,
+            ),
+            Container(
+              color: Colors.black.withOpacity(.3),
+              height: .5,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 5.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.bookmark,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                '${quiz?.notes}',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.user,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                '${quiz?.status}',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.chartLine,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Text(
+                                '10 minutes',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.clock,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Container(
+                                width: 150,
+                                child: Text(
+                                  'From ${DateTime.parse(quiz!.startDate!).hour}:${DateTime.parse(quiz!.startDate!).minute}  to  ${DateTime.parse(quiz!.endDate!).hour}:${DateTime.parse(quiz!.endDate!).minute} ',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 13),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            quiz?.status == 'Available'
+                                ? print('Available')
+                                : print(quiz?.status);
+                            //  print(App_cubit.get(context).allquizAnswers![0]);
+
+                            //print(App_cubit.get(context).allquizAnswers![0]);
+
+                            //  App_cubit.get(context).quizAnswerSelected='';
+
+
+
+                            //  App_cubit.get(context).allquizAnswers[0]=App_cubit.get(context).quizAnswerSelected;
+                            //  App_cubit.get(context).allquizAnswers =  List<String>.filled(App_cubit.get(context).questionModel.length,'');
+                            print('-------------------------------------------------------');
+                            // print(DateTime.now());
+                            // print(DateTime.parse(quiz.startDate!));
+                            // print(DateTime.parse(quiz.endDate!));
+                            if(DateTime.now().isAfter(DateTime.parse(quiz.startDate!))&& DateTime.now().isBefore(DateTime.parse(quiz.endDate!))){
+                              App_cubit.get(context).submitQuizAnswers = [];
+
+                              onQuizStart;
+
+                              App_cubit.get(context).currentQuizId = quiz.id;
+
+                              App_cubit.get(context).StuGetQuizDataById();
+
+                              App_cubit.get(context).currentQuizName = quiz.title;
+                              navigateTo(context, STU_Quizes_Ques_Screen());
+
+                            }
+
+                            print('-------------------------------------------------------');
+
+                          },
+                          child: Container(
+                            height: 45,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: DateTime.now().isAfter(DateTime.parse(quiz.startDate!)) && DateTime.now().isBefore(DateTime.parse(quiz.endDate!))
+
+                                  ? Colors.teal.withOpacity(.6)
+                                  : Colors.red.withOpacity(.6),
+                              borderRadius: BorderRadius.circular(12),
+                              // border: Border.all(width: .5),
+                            ),
+                            child: Center(
+                              child: Text(
+                                DateTime.now().isAfter(DateTime.parse(quiz.startDate!)) && DateTime.now().isBefore(DateTime.parse(quiz.endDate!))?
+                                'Available':'Pending',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
         ),
-        SizedBox(
-          height: 7,
-        ),
-        Container(
-          color: Colors.black.withOpacity(.3),
-          height: .5,
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Expanded(
-          child: Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 5.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.bookmark,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            '${quiz?.notes}',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.user,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            '${quiz?.status}',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.chartLine,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            '10 minutes',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 13),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 2,
-                      ),
-                      Row(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.clock,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Container(
-                            width: 150,
-                            child: Text(
-                              'From ${DateTime.parse(quiz!.startDate!).hour}:${DateTime.parse(quiz!.startDate!).minute}  to  ${DateTime.parse(quiz!.endDate!).hour}:${DateTime.parse(quiz!.endDate!).minute} ',
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 13),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        quiz?.status == 'Available'?
-                          print('Available')  :   print(quiz?.status) ;
-                        //  print(App_cubit.get(context).allquizAnswers![0]);
-
-                        //print(App_cubit.get(context).allquizAnswers![0]);
-
-                        //  App_cubit.get(context).quizAnswerSelected='';
-
-                        App_cubit.get(context).submitQuizAnswers =
-                        [];
-
-                        onQuizStart;
-
-                        App_cubit.get(context).currentQuizId =
-                            quiz.id;
-
-                        App_cubit.get(context)
-                            .StuGetQuizDataById();
-
-                        App_cubit.get(context).currentQuizName =
-                            quiz.title;
-
-                        //  App_cubit.get(context).allquizAnswers[0]=App_cubit.get(context).quizAnswerSelected;
-                        //  App_cubit.get(context).allquizAnswers =  List<String>.filled(App_cubit.get(context).questionModel.length,'');
-
-                        navigateTo(
-                            context, STU_Quizes_Ques_Screen());
-                      },
-                      child: Container(
-                        height: 45,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.teal.withOpacity(.6),
-                          borderRadius: BorderRadius.circular(12),
-                          // border: Border.all(width: .5),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '${ quiz?.status}',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 20,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  ),
-);
+      ),
+    );
 
 Widget INS_Quiz_Card({required context, required GetQuizes_Model quizes}
 
@@ -4336,7 +4361,8 @@ Widget INS_Quiz_Card({required context, required GetQuizes_Model quizes}
                                 width: 7,
                               ),
                               Text(
-                                'From 8 PM to 9 PM',
+                                'From ${quizes?.startDate?.hour}:${quizes?.startDate?.minute}  ${quizes?.startDate?.month}/${quizes?.startDate?.day} To '
+                                    '${quizes?.endDate?.hour}:${quizes?.endDate?.minute} ${quizes?.endDate?.month}/${quizes?.endDate?.day}',
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w700, fontSize: 13),
@@ -5670,12 +5696,12 @@ Widget INS_complete_Task_Card(
                               Container(
                                 width: 150,
                                 child: Text(
-                                  'From ${assign?.startDate}  to  ${assign?.startDate}',
+                                  'Ended  ${DateTime.parse(assign!.endDate!).hour}:${DateTime.parse(assign!.endDate!).minute}  ${DateTime.parse(assign!.endDate!).month}/${DateTime.parse(assign!.endDate!).day}',
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w700,
+                                      fontWeight: FontWeight.w700,color: Colors.red,
                                       fontSize: 13),
                                 ),
                               ),
@@ -5760,7 +5786,7 @@ Widget INS_complete_Task_Card(
 
 Widget INS_Quiz_Complete_Card(
 
-        //List<bool> quizState, List<bool> isQuizStart, int index
+    {required context, required GetQuizes_Model quizes}
         ) =>
     Container(
       height: 200,
@@ -5781,7 +5807,7 @@ Widget INS_Quiz_Complete_Card(
                 SizedBox(
                   width: 10,
                 ),
-                Text('Quize 1'),
+                Text('${quizes.title}'),
                 Spacer(),
                 Container(
                   height: 30,
@@ -5891,10 +5917,11 @@ Widget INS_Quiz_Complete_Card(
                                 width: 7,
                               ),
                               Text(
-                                'From 8 PM to 9 PM',
+                                'Ended  ${quizes?.endDate?.hour}:${quizes?.endDate?.minute}  ${quizes?.endDate?.month}/${quizes?.endDate?.day}',
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 13),
+                                    fontWeight: FontWeight.w700, fontSize: 13,color: Colors.red),
+
                               ),
                             ],
                           ),

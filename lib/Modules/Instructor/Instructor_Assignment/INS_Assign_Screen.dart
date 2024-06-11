@@ -40,7 +40,7 @@ class INS_Assign_Screen extends StatelessWidget {
         App_cubit cubit=App_cubit.get(context);
         bool isvisbile=false;
         Time _time = Time(hour: 11, minute: 30, second: 20);
-        List<STU_Course_Assign_Model> insAssign=cubit.insCoursesAssignModel;
+        List<STU_Course_Assign_Model> insAssign=cubit.insCoursesAssign_Pending_Model;
         return DefaultTabController(
           length: 2, // Number of tabs
           initialIndex: cubit.Tab_Bar_1_index,
@@ -397,9 +397,9 @@ class INS_Assign_Screen extends StatelessWidget {
                                 onTap: (){
                                   // navigateTo(context,STU_Assign_Screen() );
                                 },
-                                child: INS_complete_Task_Card(assign: insAssign[index], context: context,)),
+                                child: INS_complete_Task_Card(assign: cubit.insCoursesAssign_Completed_Model[index], context: context,)),
                             separatorBuilder: (context,index)=>const SizedBox(height: 10,),
-                            itemCount: insAssign.length,
+                            itemCount: cubit.insCoursesAssign_Completed_Model.length,
                           ),
 
                         ),

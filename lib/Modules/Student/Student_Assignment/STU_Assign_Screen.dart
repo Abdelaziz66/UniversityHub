@@ -29,7 +29,7 @@ class STU_Assign_Screen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         App_cubit cubit=App_cubit.get(context);
-        List<STU_Course_Assign_Model>assign=cubit.stuCoursesAssignModel;
+        List<STU_Course_Assign_Model>assign=cubit.stuCoursesAssign_Pending_Model;
         return DefaultTabController(
           length: 2, // Number of tabs
           initialIndex: cubit.Tab_Bar_3_index,
@@ -352,9 +352,9 @@ class STU_Assign_Screen extends StatelessWidget {
                                   onTap: (){
                                     // navigateTo(context,STU_Assign_Screen() );
                                   },
-                                  child: STU_complete_Tasks(assign: assign[index])),
+                                  child: STU_complete_Tasks(assign: cubit.stuCoursesAssign_Completed_Model[index])),
                               separatorBuilder: (context,index)=>const SizedBox(height: 10,),
-                              itemCount: 2,
+                              itemCount: cubit.stuCoursesAssign_Completed_Model.length,
                             ),
                           ),
                         ),

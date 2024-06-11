@@ -257,11 +257,11 @@ class INS_Quizes_Screen extends StatelessWidget {
                             horizontal: 15.0, vertical: 7.5),
                         child: ListView.separated(
                           physics: const BouncingScrollPhysics(),
-                          itemBuilder: (context, index) => INS_Quiz_Card(context: context,quizes:cubit.INS_get_QuizesModel[index]),
+                          itemBuilder: (context, index) => INS_Quiz_Card(context: context,quizes:cubit.INS_get_Quizes_Pending_Model[index]),
                           separatorBuilder: (context, index) => const SizedBox(
                             height: 25,
                           ),
-                          itemCount: cubit.INS_get_QuizesModel.length,
+                          itemCount: cubit.INS_get_Quizes_Pending_Model.length,
                         ),
                       ),
                     ),
@@ -271,11 +271,11 @@ class INS_Quizes_Screen extends StatelessWidget {
                             horizontal: 15.0, vertical: 7.5),
                         child: ListView.separated(
                           physics: const BouncingScrollPhysics(),
-                          itemBuilder: (context, index) => INS_Quiz_Complete_Card(),
+                          itemBuilder: (context, index) => INS_Quiz_Complete_Card(context: context,quizes: cubit.INS_get_Quizes_Completed_Model[index]),
                           separatorBuilder: (context, index) => const SizedBox(
                             height: 25,
                           ),
-                          itemCount: 1,
+                          itemCount: cubit.INS_get_Quizes_Completed_Model.length,
                         ),
                       ),
                     ),
