@@ -5450,7 +5450,7 @@ Widget
                                                                           context:
                                                                               context,
                                                                           stuAssign:
-                                                                              App_cubit.get(context).studentUplodeTaskModel[index]),
+                                                                              App_cubit.get(context).studentUplodeTaskModel[index], taskid: '',),
                                                                       separatorBuilder:
                                                                           (context, index) =>
                                                                               Container(
@@ -5724,7 +5724,7 @@ Widget INS_complete_Task_Card(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      INS_task_result_Screen(),
+                                      INS_task_result_Screen(taskid: assign.taskId!,),
                                 ));
                           },
                           child: Container(
@@ -6915,11 +6915,12 @@ Widget Build_STU_All_grades(
 //---------------------------INSTRUCTOR----------------
 //------------------------------------------------------
 //--------------------------------------------------------
-
+var puttaskGradecontroller = TextEditingController();
 Widget showSTU_UploadeTask({
   int? index,
   required context,
   InsStudentUplodeTaskModel? stuAssign,
+  required String taskid,
 }) =>
     Container(
       child: Row(
@@ -7063,7 +7064,7 @@ Widget showSTU_UploadeTask({
                                                             child:
                                                                 TextFormField(
                                                               controller:
-                                                                  taskGradecontroller,
+                                                                  puttaskGradecontroller,
                                                               keyboardType:
                                                                   TextInputType
                                                                       .number,
@@ -7189,22 +7190,12 @@ Widget showSTU_UploadeTask({
 
                                                   Default_Button(
                                                       onPressed: () {
-                                                        if (formkey1
-                                                                .currentState!
-                                                                .validate() &&
-                                                            startDate != null &&
-                                                            endDate != null) {
-                                                          // App_cubit.get(context).updateINSAssign(
-                                                          //   Taskid: assign.taskId,
-                                                          //   taskName: taskNamecontroller.text,
-                                                          //   taskGrade: taskGradecontroller.text,
-                                                          //   startDate: startDate,
-                                                          //   endDate: endDate,
 
-                                                          // );
+                                                         print('ss');
+                                                         App_cubit.get(context)?.PutgradeINSAssign(grade:int.parse(puttaskGradecontroller.text),examId:taskid ,studentId:stuAssign!.studentId );
                                                           Navigator.pop(
                                                               context);
-                                                        }
+
 
                                                         //   if (formkey1.currentState!.validate()) {
                                                         //   cubit.AddEventToCalender(

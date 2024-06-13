@@ -8,7 +8,8 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 
 class INS_task_result_Screen extends StatelessWidget {
-  const INS_task_result_Screen({super.key});
+   INS_task_result_Screen({required this.taskid,super.key});
+  String taskid;
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +81,9 @@ class INS_task_result_Screen extends StatelessWidget {
                             height: 150,
                             child: ListView.separated(
                               itemBuilder:(context,index)=> showSTU_UploadeTask(
+                                taskid: taskid,
+
+
                                   index: index+1,
                                   context: context,
                                   stuAssign: cubit.studentUplodeTaskModel[index]

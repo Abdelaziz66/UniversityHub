@@ -1947,6 +1947,7 @@ print('///////////////****************///////////////////');
   Map<String,dynamic>assignData={};
 
   String? assignId;
+
   void updateINSAssign({
     required String? Taskid,
     String? taskName,
@@ -1975,6 +1976,32 @@ print('///////////////****************///////////////////');
         }
       }).catchError((error) {
         emit(Ins_update_Assign_ErrorState());
+        print(error.toString());
+      });
+    }
+  }
+
+  void PutgradeINSAssign({
+    required String? studentId,
+    required String? examId,
+    required int? grade,
+
+
+  }){
+    if (true) {
+      emit(Ins_update_gradeAssign_LoadingState());
+      Dio_Helper.updateData(
+          url:'Instructor/editStudentGrade?studentId=$studentId&examId=$examId&grade=$grade' ,
+          token: token,
+      ).then((value) {
+        if (value.statusCode == 200) {
+          var Json = value.data;
+          flutterToast(msg:'Updated successfully', backColor: Colors.green);
+          print(Json.toString());
+          emit(Ins_update_gradeAssign_SuccessState());
+        }
+      }).catchError((error) {
+        emit(Ins_update_gradeAssign_ErrorState());
         print(error.toString());
       });
     }

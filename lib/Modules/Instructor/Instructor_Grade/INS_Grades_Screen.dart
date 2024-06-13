@@ -12,14 +12,19 @@ import '../../../Shared/Cons_widget.dart';
 import 'INS_Course_Grades.dart';
 
 class INSAllGradesScreen extends StatelessWidget {
-  const INSAllGradesScreen({Key? key}) : super(key: key);
-
+   INSAllGradesScreen({Key? key}) : super(key: key);
+  double sum=0;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit, App_state>(
       listener: (context, state) {},
       builder: (context, state) {
+
         App_cubit cubit = App_cubit.get(context);
+        sum=0;
+        cubit.GradeforStudent_list.forEach((element) {
+          sum=sum+element.grade;
+        });
         return Scaffold(
           body: SafeArea(
             child: Column(
@@ -99,7 +104,7 @@ class INSAllGradesScreen extends StatelessWidget {
                                     Spacer(),
                                     Container(
                                         child: Text(
-                                          '125',
+                                          '${cubit.student_list.length}',
                                           textAlign: TextAlign.center,
                                           style: Theme.of(context)
                                               .textTheme
@@ -128,7 +133,9 @@ class INSAllGradesScreen extends StatelessWidget {
                         DataRow(cells: [
                           DataCell(GestureDetector(
                             onTap: () {
+
                               cubit.INS_Get_grade_for_Student(id:cubit.student_list[index].studentId!,);
+                              sum=0;
                               showDialog<String>(
                                 context: context,
                                 barrierColor: Colors.black.withOpacity(.3),
@@ -209,7 +216,7 @@ class INSAllGradesScreen extends StatelessWidget {
                                                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                                                   children: [
                                                                                     Text(
-                                                                                      '25/',
+                                                                                      '${sum.toInt()}/',
                                                                                       style: TextStyle(
                                                                                         color: Colors.teal,
                                                                                         fontSize: 22,
@@ -235,13 +242,13 @@ class INSAllGradesScreen extends StatelessWidget {
                                                                               child: LinearPercentIndicator(
 
 
-                                                                                percent: .25,
+                                                                                percent: sum/100,
                                                                                 backgroundColor: Colors.blueGrey.withOpacity(.2),
                                                                                 progressColor: Colors.teal.withOpacity(.6),
                                                                                 barRadius: Radius.circular(20),
                                                                                 lineHeight: 12,
                                                                                 trailing: Text('100'),
-                                                                                leading: Text('25') ,
+                                                                                leading: Text('${sum.toInt()}'),
 
                                                                                 animation: true,
                                                                                 animationDuration: 1500,
@@ -381,7 +388,7 @@ class INSAllGradesScreen extends StatelessWidget {
                                                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                                                 children: [
                                                                                   Text(
-                                                                                    '5/',
+                                                                                    '${cubit.GradeforStudent_list[index].grade}',
                                                                                     style: TextStyle(
                                                                                       color: Colors.teal,
                                                                                       fontSize: 20,
@@ -389,15 +396,15 @@ class INSAllGradesScreen extends StatelessWidget {
                                                                                     ),
                                                                                     textAlign: TextAlign.center,
                                                                                   ),
-                                                                                  Text(
-                                                                                    '5',
-                                                                                    style: TextStyle(
-                                                                                      color: Colors.black,
-                                                                                      fontSize: 15,
-                                                                                      fontWeight: FontWeight.w700,
-                                                                                    ),
-                                                                                    textAlign: TextAlign.center,
-                                                                                  ),
+                                                                                  // Text(
+                                                                                  //   '--',
+                                                                                  //   style: TextStyle(
+                                                                                  //     color: Colors.black,
+                                                                                  //     fontSize: 15,
+                                                                                  //     fontWeight: FontWeight.w700,
+                                                                                  //   ),
+                                                                                  //   textAlign: TextAlign.center,
+                                                                                  // ),
                                                                                 ],
                                                                               ),),)])//${stuGrades[index].grade!}
                                                                       )

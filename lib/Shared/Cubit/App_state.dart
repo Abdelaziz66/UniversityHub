@@ -375,6 +375,14 @@ class Ins_update_Assign_SuccessState extends App_state {
 }
 class Ins_update_Assign_ErrorState extends App_state {}
 
+//----------update grade assign---------------
+
+class Ins_update_gradeAssign_LoadingState extends App_state {}
+
+class Ins_update_gradeAssign_SuccessState extends App_state {
+}
+class Ins_update_gradeAssign_ErrorState extends App_state {}
+
 //----------delete assign---------------
 class Ins_delete_Assign_LoadingState extends App_state {}
 
