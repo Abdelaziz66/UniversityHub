@@ -169,6 +169,8 @@ class INS_About_Assign_Screen extends StatelessWidget {
                                                                         height: 150,
                                                                         child: ListView.separated(
                                                                             itemBuilder:(context,index)=> showSTU_UploadeTask(
+
+                                                                              taskid: '',
                                                                               index: index+1,
                                                                               context: context,
                                                                               stuAssign: cubit.studentUplodeTaskModel[index]
