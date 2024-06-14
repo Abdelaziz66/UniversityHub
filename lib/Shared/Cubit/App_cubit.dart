@@ -1568,7 +1568,7 @@ print('///////////////****************///////////////////');
           stuStoreHistoryToHive(
             materialName:  'From ${DateTime.parse(startDate!).hour} : ${DateTime.parse(startDate!).minute}'
                 ' to ${DateTime.parse(endDate!).hour} : ${DateTime.parse(endDate!).minute}',
-            instructorName: currentInstructorName!,
+          //  instructorName: currentInstructorName!,
             historyMessage:'Add New Event to calender : $eventBody',
           );}
         else {
@@ -2731,7 +2731,7 @@ print('///////////////****************///////////////////');
   void stuStoreHistoryToHive ({
     required String materialName,
     required String historyMessage,
-    required String instructorName,
+     String? instructorName,
   }){
    // stuHisroyBox.delete(HiveConstants.stuHisroyList);
     print(materialName);
@@ -2742,12 +2742,13 @@ print('///////////////****************///////////////////');
       List<StuHistoryModel> stuHistoryList =
       stuHisroyBox.get(HiveConstants.stuHisroyList,defaultValue: []).
       cast<StuHistoryModel>();
+      print('stuHistoryList  ---------   $stuHistoryList');
     stuHistoryList.add(
           StuHistoryModel(
             hiveIndex:stuHistoryList.length,
             materialName: materialName,
             historyMessage: historyMessage,
-            instructorName: instructorName,
+            instructorName: instructorName??'',
             historyTime: DateFormat("${DateTime.now().day} / ${DateTime.now().month}\n${DateTime.now().hour} "
                 ": ${DateTime.now().minute}am ").format(DateTime.now()),
           ));
@@ -2822,22 +2823,23 @@ print('///////////////****************///////////////////');
 
 
   final Box insHisroyBox=Hive.box(HiveConstants.insHisroyBox);
-
+// insHistoryList =[];
   void insStoreHistoryToHive ({
     required String materialName,
     required String historyMessage,
-  //  required String instructorName,
+   //required String instructorName,
   }){
     // stuHisroyBox.delete(HiveConstants.stuHisroyList);
     print('Adding to history ------//////');
-    print(materialName);
+    print('material name $materialName');
     print(historyMessage);
    // print(instructorName);
-    emit(Stu_Add_newHistory_To_Hive_LoadingState());
-    print('Storing new history to history box');
+    emit(Ins_Add_newHistory_To_Hive_LoadingState());
     List<StuHistoryModel> insHistoryList =
-    stuHisroyBox.get(HiveConstants.insHisroyList,defaultValue: []).
+    insHisroyBox.get(HiveConstants.insHisroyList,defaultValue: []).
     cast<StuHistoryModel>();
+
+     print('insHistoryList  -------- $insHistoryList');
     insHistoryList.add(
         StuHistoryModel(
           hiveIndex:insHistoryList.length,
@@ -2847,13 +2849,16 @@ print('///////////////****************///////////////////');
           historyTime: DateFormat("${DateTime.now().day} / ${DateTime.now().month}\n${DateTime.now().hour} "
               ": ${DateTime.now().minute}am ").format(DateTime.now()),
         ));
+    print('sddddddkjkk${insHistoryModel.length}');
+
     insHisroyBox.put(HiveConstants.insHisroyList, insHistoryList).then((value) {
       print(insHisroyBox.keys);
-      emit(Stu_Add_newHistory_To_Hive_SuccessState());
+      print('sdddd${insHistoryModel.length}');
+      emit(Ins_Add_newHistory_To_Hive_SuccessState());
     }).catchError((error) {
       print('error to store to history');
       print(error);
-      emit(Stu_Add_newHistory_To_Hive_ErrorState());
+      emit(Ins_Add_newHistory_To_Hive_ErrorState());
     });
   }
 
@@ -2863,9 +2868,7 @@ print('///////////////****************///////////////////');
 
   List<StuHistoryModel> insHistoryModel=[];
   void getInsHistoryData(){
-    // stuHisroyBox.delete(HiveConstants.stuHisroyList);
-
-    emit(Stu_Get_History_From_Hive_LoadingState());
+    emit(Ins_Get_History_From_Hive_LoadingState());
     try {
       insHistoryModel = List.from(
           insHisroyBox.get(HiveConstants.insHisroyList, defaultValue: [])).cast<
@@ -2877,11 +2880,12 @@ print('///////////////****************///////////////////');
         print('heistoryyyyyyyyyyy${element.historyMessage}');
         print('heistoryyyyyyyyyyy${element.historyTime?.split('/').last}');
         print('heistoryyyyyyyyyyy index ${element.hiveIndex}');
+        print('heistoryyyyyyyyyyy length ${insHistoryModel.length}');
       });
-      emit(Stu_Get_History_From_Hive_SuccessState());
+      emit(Ins_Get_History_From_Hive_SuccessState());
     }catch(error){
       print('error to get history data $error');
-      emit(Stu_Get_History_From_Hive_ErrorState());
+      emit(Ins_Get_History_From_Hive_ErrorState());
     }
   }
 
