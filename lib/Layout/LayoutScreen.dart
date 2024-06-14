@@ -530,7 +530,7 @@ class Layout_Screen extends StatelessWidget {
                                                                     .7)),
                                                       ),
                                                      ConditionalBuilder(
-                                                        condition:cubit.stuHistoryModel.isNotEmpty,
+                                                        condition:cubit.stuHistoryModel.isNotEmpty||cubit.insHistoryModel.isNotEmpty,
                                                         builder:(context)=> Expanded(
                                                           child: Padding(
                                                             padding:

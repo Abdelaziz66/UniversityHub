@@ -636,6 +636,8 @@ class Stu_Add_newHistory_To_Hive_SuccessState extends App_state {}
 class Stu_Add_newHistory_To_Hive_ErrorState extends App_state {
 }
 
+
+
 //-------------get history from hive----------------
 class Stu_Get_History_From_Hive_LoadingState extends App_state {}
 
@@ -649,3 +651,20 @@ class Stu_Delete_History_From_Hive_LoadingState extends App_state {}
 class Stu_Delete_History_From_Hive_SuccessState extends App_state {}
 
 class Stu_Delete_History_From_Hive_ErrorState extends App_state {}
+
+
+//-----------ins add to history-------------------
+
+class Ins_Add_newHistory_To_Hive_LoadingState extends App_state {}
+
+class Ins_Add_newHistory_To_Hive_SuccessState extends App_state {}
+
+class Ins_Add_newHistory_To_Hive_ErrorState extends App_state {
+}
+
+//-------------ins get history from hive----------------
+class Ins_Get_History_From_Hive_LoadingState extends App_state {}
+
+class Ins_Get_History_From_Hive_SuccessState extends App_state {}
+
+class Ins_Get_History_From_Hive_ErrorState extends App_state {}
