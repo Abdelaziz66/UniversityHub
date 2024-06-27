@@ -146,7 +146,7 @@ class MyApp extends StatelessWidget {
       //MultiBlocProvider(
      // providers: [
         BlocProvider(
-          create: (context) => App_cubit()..getUserInfoFromHIVE()..getAllNewsFromHIVE()
+          create: (context) => App_cubit()..getUserInfoFromHIVE()..NewsDashboard_Function()..Dashboard_ins_Function()..Dashboard_stu_Function()..getAllNewsFromHIVE()
             ..getAllCoursesFromHIVE()..connection_Function(),
     //..CreateDateBase(),
             child:  BlocConsumer<App_cubit, App_state>(

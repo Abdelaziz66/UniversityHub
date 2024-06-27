@@ -16,6 +16,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:rive/rive.dart';
 
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
+import 'package:university_hup/Models/INS_Model/Dashboard_ins_model.dart';
 import 'package:university_hup/Models/INS_Model/INS_GetQuizes_Model.dart';
 import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
 import 'package:university_hup/Models/INS_Model/INS_create_quiz_Model.dart';
@@ -23,6 +24,8 @@ import 'package:university_hup/Models/STU_Model/CourseModel/stuAssignAdapter/STU
 import 'package:university_hup/Models/STU_Model/CourseModel/AllCourcesAdapterModel/Stu_All_Courses_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/materialAdabter/Stu_Course_MaterialModel.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/StuQuizAdapter/Stu_Course_Quiz_Model.dart';
+import 'package:university_hup/Models/STU_Model/Dashboard_stu_model.dart';
+import 'package:university_hup/Models/STU_Model/News_D_model.dart';
 import 'package:university_hup/Modules/Instructor/Instructor_Assignment/INS_task_result_Screen.dart';
 
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
@@ -6911,6 +6914,547 @@ Widget Build_STU_All_grades(
         ],
       ),
     );
+
+Widget Task_D({required Task? task})=>Padding(
+  padding: const EdgeInsets.only(
+      top: 10.0, right: 10, bottom: 3, left: 10),
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Text('Check Task'),
+      SizedBox(
+        height: 7,
+      ),
+      Container(
+        color: Colors.black.withOpacity(.3),
+        height: 1.5,
+      ),
+      Spacer(),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.bookmark,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            '${task?.courseCycle}',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.user,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            '${task?.instructor}',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.chartLine,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            '${task?.grade} points',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.clock,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            'Deadline ${task?.endDate!.day}/${task?.endDate!.month}',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.clock,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            'From ${task?.startDate!.hour} to ${task?.endDate!.hour}',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      Spacer(),
+    ],
+  ),
+);
+Widget Quiz_D({required Quiz? quiz})=>Padding(
+  padding: const EdgeInsets.only(
+      top: 10.0, right: 10, bottom: 3, left: 10),
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Text('Check Quiz'),
+      SizedBox(
+        height: 7,
+      ),
+      Container(
+        color: Colors.black.withOpacity(.3),
+        height: 1.5,
+      ),
+      Spacer(),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.bookmark,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            '${quiz?.courseCycle}',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.user,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            '${quiz?.instructor}',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.chartLine,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            '${quiz?.grade} points',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.clock,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            'Deadline ${quiz?.endDate!.day}/${quiz?.endDate!.month}',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.clock,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            'From ${quiz?.startDate!.hour} to ${quiz?.endDate!.hour}',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      Spacer(),
+    ],
+  ),
+);
+Widget Task_ins_D({required Dashboard_ins_model? task})=>Padding(
+  padding: const EdgeInsets.only(
+      top: 10.0, right: 10, bottom: 3, left: 10),
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Text('Check Task'),
+      SizedBox(
+        height: 7,
+      ),
+      Container(
+        color: Colors.black.withOpacity(.3),
+        height: 1.5,
+      ),
+      Spacer(),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.bookmark,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Expanded(
+            child: Text(
+              '${task?.name}',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.start,
+              style:
+              TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+            ),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.user,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            '${task?.instructorName}',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.chartLine,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            '${task?.grade} points',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.clock,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            'Deadline ${task?.endDate!.day}/${task?.endDate!.month}',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.check,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            '${task?.studentSubmissionCount} Submitted',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      Spacer(),
+    ],
+  ),
+);
+Widget Quiz_ins_D({required Dashboard_ins_model? quiz})=>Padding(
+  padding: const EdgeInsets.only(
+      top: 10.0, right: 10, bottom: 3, left: 10),
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Text('Check Quiz'),
+      SizedBox(
+        height: 7,
+      ),
+      Container(
+        color: Colors.black.withOpacity(.3),
+        height: 1.5,
+      ),
+      Spacer(),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.bookmark,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Expanded(
+            child: Text(
+              '${quiz?.name}',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.start,
+              style:
+              TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+            ),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.user,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            '${quiz?.instructorName}',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.chartLine,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            '${quiz?.grade} points',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.clock,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            'Deadline ${quiz?.endDate!.day}/${quiz?.endDate!.month}',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 2,
+      ),
+      Row(
+        children: [
+          FaIcon(
+            FontAwesomeIcons.check,
+            size: 12,
+          ),
+          SizedBox(
+            width: 7,
+          ),
+          Text(
+            '${quiz?.studentSubmissionCount} Submitted',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          ),
+        ],
+      ),
+      Spacer(),
+    ],
+  ),
+);
+Widget News_D({required News_D_model? news})=>Padding(
+  padding: const EdgeInsets.all(10.0),
+  child: Row(
+    children: [
+      Expanded(
+        child: ConditionalBuilder(
+            condition: true,
+            builder: (context) => Padding(
+              padding:
+              const EdgeInsets.symmetric(horizontal: 5.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          right: 10.0,
+                          top: 15,
+                          bottom: 15,
+                          left: 10),
+                      child: Text(
+                        '${news!.content}',
+                        // 'Congratulations, you have completed your registration ! Lets start your learning journey next.',
+
+                        maxLines: 6,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 13,
+                          color: c1.withOpacity(1),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            fallback: (context) => const SizedBox(
+              height: 0,
+            )),
+      ),
+      Expanded(
+        child: ConditionalBuilder(
+            condition: news?.filePath !=null,
+            builder: (context) => Padding(
+              padding: const EdgeInsets.only(
+                  left: 0, right: 0.0, top: 0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.blue[100],
+                  image:  DecorationImage(
+                    image: NetworkImage('${news!.filePath}'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            fallback: (context) => const SizedBox(
+              height: 0,
+            )),
+      ),
+    ],
+  ),
+);
 
 //---------------------------INSTRUCTOR----------------
 //------------------------------------------------------
