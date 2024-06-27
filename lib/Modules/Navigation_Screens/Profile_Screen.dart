@@ -296,6 +296,10 @@ class Profile_screen extends StatelessWidget {
                       Expanded(
                         child: InkWell(
                           onTap: () {
+                            cubit.resetPassToken=token;
+
+                            print('token from profile ----- $token');
+                            print('token from profile ----- ${cubit.resetPassToken}');
                             navigateTo(context, Edit_Profile_screen());
                           },
                           child: GlassBox(

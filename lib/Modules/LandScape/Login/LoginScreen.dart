@@ -396,6 +396,7 @@ class _loginscreenState extends State<loginscreen> {
                               builder:(context)=> Default_Button(
                                 onPressed: () {
                                   cubit.UserLogin(
+                                    context:context,
                                     email:skip!,
                                     // 'AbdulMajeedSallam@gmail.com',
                                     // 'Sara@gmail.com',

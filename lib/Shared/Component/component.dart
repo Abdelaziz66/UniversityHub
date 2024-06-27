@@ -802,7 +802,7 @@ Widget Matrial_INS_C(
                   width: 15,
                 ),
                 Container(
-                  // width: 100,
+                   width: 150,
                   // height: 80,
                   child: Text(
                     maxLines: 1,
@@ -2681,7 +2681,7 @@ Widget INS_Build_Lec_View_Widget({
                   fontSize: 12,
                 ),
                 overflow: TextOverflow.ellipsis,
-                maxLines: 2,
+                maxLines: 1,
               ),
               Text(
                 App_cubit.get(context).stuCoursesMatrialFileModel.isNotEmpty ||
@@ -4089,7 +4089,7 @@ Widget STU_Quiz_Card({
                             // print(DateTime.now());
                             // print(DateTime.parse(quiz.startDate!));
                             // print(DateTime.parse(quiz.endDate!));
-                            if(DateTime.now().isAfter(DateTime.parse(quiz.startDate!))&& DateTime.now().isBefore(DateTime.parse(quiz.endDate!))){
+                            // if(DateTime.now().isAfter(DateTime.parse(quiz.startDate!))&& DateTime.now().isBefore(DateTime.parse(quiz.endDate!))){
                               App_cubit.get(context).submitQuizAnswers = [];
 
                               onQuizStart;
@@ -4101,7 +4101,7 @@ Widget STU_Quiz_Card({
                               App_cubit.get(context).currentQuizName = quiz.title;
                               navigateTo(context, STU_Quizes_Ques_Screen());
 
-                            }
+                           // }
 
                             print('-------------------------------------------------------');
 

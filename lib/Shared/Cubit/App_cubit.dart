@@ -808,11 +808,14 @@ class App_cubit extends Cubit<App_state> {
 //   String? Tokenn;
   STU_Login_Model? stu_login_Model;
   void UserLogin({
+    context,
     required String email,
     required String password,
   }) {
     emit(STU_LoginLoadingState());
-    Dio_Helper.PostData(url: LOGIN, data: {
+    Dio_Helper.PostData(
+        context: context,
+        url: LOGIN, data: {
       'email': email,
       'password': password,
     }).then((value) {
@@ -1191,6 +1194,7 @@ print('///////////////****************///////////////////');
         }else {
           insAllLecFoldersModel=[];
           insLECTUREModel = [];
+          insLABModel = [];
           //if (insAllLecFoldersModel.isEmpty || isCycleIdChange == true) {
             emit(Ins_Get_All_Lec_Folders_LoadingState());
             Dio_Helper.GetData(
@@ -1830,7 +1834,11 @@ print('///////////////****************///////////////////');
   //------------------------INSTRUCTOR----------------
   //--------------------------------------------------
   //--------------------------------------------------
-
+  String? newFolderType;
+  void selectFolserType(String folderType){
+    newFolderType=folderType;
+    emit(Ins_Select_Folder_Type_State());
+  }
 
   void INS_AddNewMaterialFolder({
     required folderName
@@ -1838,8 +1846,13 @@ print('///////////////****************///////////////////');
     if (true) {
       emit(Ins_Add_Folder_LoadingState());
       Dio_Helper.PostData(
-        url:'Instructor/UploadLectureFolder?title=$folderName&CycleId=$currentCycleId' ,
+        url:'Instructor/UploadLectureFolder' ,
         token: token,
+        data: {
+          "title": folderName,
+          "type": newFolderType,
+          "cycleId": currentCycleId
+        }
       ).then((value) {
         if (value.statusCode == 200) {
           var Json = value.data;
@@ -2024,6 +2037,13 @@ print('///////////////****************///////////////////');
 
         print(json);
         flutterToast(msg: '${json}', backColor: Colors.green);
+        insStoreHistoryToHive(
+          // historyKey:HiveConstants.studownloadFIleHisroyBox,
+          //hisryValue: stuAssignDataModel
+          materialName: currentCourseName!,
+          //instructorName: currentInstructorName!,
+          historyMessage: 'Add new task :\n${taskName}',
+        );
         emit(Ins_Add_Assign_SuccessState());
       }
     }).catchError((Error) {
@@ -3177,6 +3197,36 @@ print('///////////////****************///////////////////');
         print(error.toString());
       });
     }
+  }
+
+
+  //-------------------reset password -------------------
+  String? resetPassToken;
+  void resetPass({
+    context,
+    required String oldPass,
+    required String newPass,
+}){
+    print(oldPass);
+    print(newPass);
+
+   emit(Stu_Reset_Pass_LoadingState());
+    Dio_Helper.PostData(
+        context: context
+        ,
+        url: RESET_PASS,data: {
+     'currentPassword': oldPass,
+     'newPassword': newPass
+   }).then((value) {
+     if(value.statusCode==200){
+       print('reset pass successfully');
+       flutterToast(msg: value.data.toString(), backColor: Colors.green);
+       emit(Stu_Reset_Pass_SuccessState(value.statusCode));
+     }
+   }).catchError((error){
+     print('error to reset pass ----- $error');
+     emit(Stu_Reset_Pass_ErrorState());
+   });
   }
 
 }

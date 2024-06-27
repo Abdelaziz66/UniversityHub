@@ -40,6 +40,11 @@ String INS_COURSES='Instructor/CurrentCoursesInfo';
 String INS_AllStudent='Instructor/GetAllStudentsEnrolledInAcourse?CycleId=';
 String INS_Gradeforstudent='Instructor/GetGradesForCurrentCourseForAstudent?';
 
+
+//--------Reset pass---------------
+String RESET_PASS='Account/UpdatePassword';
+
+
 // String Token='';
 
 

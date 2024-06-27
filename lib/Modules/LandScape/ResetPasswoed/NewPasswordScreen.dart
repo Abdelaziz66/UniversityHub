@@ -2,6 +2,7 @@
 
 import 'dart:ui';
 
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,22 +14,29 @@ import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
 
-class NewPasswordScreen extends StatefulWidget {
-  const NewPasswordScreen({Key? key}) : super(key: key);
+class NewPasswordScreen extends StatelessWidget {
+  NewPasswordScreen({Key? key}) ;
 
-  @override
-  State<NewPasswordScreen> createState() => _loginscreenState();
-}
-
-class _loginscreenState extends State<NewPasswordScreen> {
-  var emailcontroller = TextEditingController();
-  var passwordcontroller = TextEditingController();
-  var formkey = GlobalKey<FormState>();
-  bool passwordcheck = false;
+  var oldPasscontroller = TextEditingController();
+  var newPasscontroller = TextEditingController();
+  var formkey6 = GlobalKey<FormState>();
+  bool oldpasswordcheck = false;
+  bool newpasswordcheck = false;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit,App_state>(
-        listener: (context,state){},
+        listener: (context,state){
+          if(state is Stu_Reset_Pass_SuccessState){
+            if(state.statusCode==200){
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      SuccessfulResetPasswordScreen(),
+                ));
+            }
+          }
+        },
        builder: (context,state){
           App_cubit cubit=App_cubit.get(context);
           return Scaffold(
@@ -62,26 +70,7 @@ class _loginscreenState extends State<NewPasswordScreen> {
                     ),
                   ],
                 ),
-                // Positioned(
-                //   width: MediaQuery.of(context).size.width * 2,
-                //   left: -200,
-                //   bottom: -350,
-                //   child: Image.asset(
-                //     'assets/images/Spline.png',
-                //   ),
-                // ),
-                // Positioned.fill(
-                //   child: BackdropFilter(
-                //     filter: ImageFilter.blur(
-                //       sigmaX: 0,
-                //       sigmaY: 0,
-                //     ),
-                //     child: SizedBox(),
-                //   ),
-                // ),
-                // RiveAnimation.asset(
-                //   "assets/riveassets/shapes.riv",
-                // ),
+
                 Positioned.fill(
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
@@ -94,7 +83,7 @@ class _loginscreenState extends State<NewPasswordScreen> {
                       child: Padding(
                         padding: const EdgeInsets.all(30.0),
                         child: Form(
-                          key: formkey,
+                          key: formkey6,
                           child: Column(
                             children: [
                               Row(children: [
@@ -127,42 +116,6 @@ class _loginscreenState extends State<NewPasswordScreen> {
                               const SizedBox(
                                 height: 15,
                               ),
-                              // Padding(
-                              //   padding: const EdgeInsets.only(right: 15.0, top: 30),
-                              //   child: Row(
-                              //       mainAxisAlignment: MainAxisAlignment.center,
-                              //       crossAxisAlignment: CrossAxisAlignment.center,
-                              //       children: [
-                              //         Text(
-                              //           'E ',
-                              //           style: TextStyle(
-                              //               color: Colors.blue,
-                              //               fontSize: 22,
-                              //               fontWeight: FontWeight.bold),
-                              //         ),
-                              //         Text(
-                              //           'D U T',
-                              //           style: TextStyle(
-                              //               color: Colors.black,
-                              //               fontSize: 22,
-                              //               fontWeight: FontWeight.bold),
-                              //         ),
-                              //         Text(
-                              //           ' E ',
-                              //           style: TextStyle(
-                              //               color: Colors.blue,
-                              //               fontSize: 22,
-                              //               fontWeight: FontWeight.bold),
-                              //         ),
-                              //         Text(
-                              //           'C H ',
-                              //           style: TextStyle(
-                              //               color: Colors.black,
-                              //               fontSize: 22,
-                              //               fontWeight: FontWeight.bold),
-                              //         ),
-                              //       ]),
-                              // ),
                               Text(
                                   'Enter New Password',
                                   style: Theme.of(context).textTheme.subtitle1?.copyWith(
@@ -190,15 +143,13 @@ class _loginscreenState extends State<NewPasswordScreen> {
                                   padding:
                                   const EdgeInsets.symmetric(horizontal: 8.0),
                                   child: TextFormField(
-                                    controller: passwordcontroller,
+                                    controller: oldPasscontroller,
                                     keyboardType: TextInputType.visiblePassword,
-                                    obscureText: passwordcheck ? false : true,
+                                    obscureText: oldpasswordcheck ? false : true,
                                     onFieldSubmitted: (value) {
                                       print(value);
                                     },
-                                    onChanged: (value) {
-                                      print(value);
-                                    },
+
                                     validator: (value) {
                                       if (value!.isEmpty) {
                                         return 'Password can\'t be empty';
@@ -218,19 +169,17 @@ class _loginscreenState extends State<NewPasswordScreen> {
                                       ),
                                       suffixIcon: IconButton(
                                         onPressed: () {
-                                          setState(() {
-                                            passwordcheck = !passwordcheck;
-                                          });
+                                            oldpasswordcheck = !oldpasswordcheck;
                                         },
                                         icon: Icon(
-                                          passwordcheck
+                                          oldpasswordcheck
                                               ? Icons.remove_red_eye
                                               : Icons.visibility_off,
                                           color: c1,
                                           size: 25,
                                         ),
                                       ),
-                                      hintText: ' New Password',
+                                      hintText: ' Old Password',
                                       border: InputBorder.none,
                                     ),
                                   ),
@@ -253,9 +202,9 @@ class _loginscreenState extends State<NewPasswordScreen> {
                                   padding:
                                   const EdgeInsets.symmetric(horizontal: 8.0),
                                   child: TextFormField(
-                                    controller: passwordcontroller,
+                                    controller: newPasscontroller,
                                     keyboardType: TextInputType.visiblePassword,
-                                    obscureText: passwordcheck ? false : true,
+                                    obscureText: newpasswordcheck ? false : true,
                                     onFieldSubmitted: (value) {
                                       print(value);
                                     },
@@ -278,19 +227,17 @@ class _loginscreenState extends State<NewPasswordScreen> {
                                       ),
                                       suffixIcon: IconButton(
                                         onPressed: () {
-                                          setState(() {
-                                            passwordcheck = !passwordcheck;
-                                          });
+                                            newpasswordcheck = !newpasswordcheck;
                                         },
                                         icon: Icon(
-                                          passwordcheck
+                                          newpasswordcheck
                                               ? Icons.remove_red_eye
                                               : Icons.visibility_off,
                                           color: c1,
                                           size: 25,
                                         ),
                                       ),
-                                      hintText: ' Confirm Password',
+                                      hintText: ' New Password',
                                       border: InputBorder.none,
                                     ),
                                   ),
@@ -299,52 +246,25 @@ class _loginscreenState extends State<NewPasswordScreen> {
                               const SizedBox(
                                 height: 15,
                               ),
-                              Default_Button(
+                              ConditionalBuilder(
+                                condition: state is! Stu_Reset_Pass_LoadingState,
+                                builder:(context)=> Default_Button(
+                                  onPressed: (){
+                                    if(formkey6.currentState!.validate()) {
+                                      cubit.resetPass(
+                                        context: context
+                                          ,
+                                          oldPass: oldPasscontroller.text,
+                                          newPass: newPasscontroller.text);
 
-                                onPressed: (){
+                                    }
+                                    print('token from reset  ----- $token');
 
-
-
-
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => SuccessfulResetPasswordScreen(),
-                                        ));
-
-                                },
-                                text:'Submit',
+                                  },
+                                  text:'Submit',
+                                ),
+                                fallback: (context)=>CircularProgressIndicator(),
                               ),
-                              // Container(
-                              //   width: double.infinity,
-                              //   height: 70,
-                              //   decoration: BoxDecoration(
-                              //     borderRadius: BorderRadius.circular(25),
-                              //     color: Colors.blue,
-                              //   ),
-                              //   child: TextButton(
-                              //     onPressed: () {
-                              //       if (formkey.currentState!.validate()) {
-                              //         print(emailcontroller.text);
-                              //         print(passwordcontroller.text);
-                              //       } else {
-                              //         Navigator.push(
-                              //             context,
-                              //             MaterialPageRoute(
-                              //               builder: (context) => Layout_Screen(),
-                              //             ));
-                              //       }
-                              //     },
-                              //     child: Text(
-                              //       'Sign in',
-                              //       style: TextStyle(
-                              //         color: Colors.white,
-                              //         fontWeight: FontWeight.bold,
-                              //         fontSize: 25,
-                              //       ),
-                              //     ),
-                              //   ),
-                              // ),
 
                             ],
                           ),

@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:university_hup/Layout/LayoutScreen.dart';
 
 
 import 'package:university_hup/Modules/LandScape/Login/LoginScreen.dart';
@@ -151,11 +152,11 @@ class _loginscreenState extends State<SuccessfulResetPasswordScreen> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => loginscreen(),
+                                        builder: (context) => Layout_Screen(),
                                       ));
 
                               },
-                              text:'Next',
+                              text:'Done',
                             ),
 
 
