@@ -40,222 +40,223 @@ class Dashboard_Screen extends StatelessWidget {
           _SalesData('Apr', 25),
           _SalesData('May', 40),
         ];
-        List<Widget> listwidget = [
-          Padding(
-            padding: const EdgeInsets.only(
-                top: 10.0, right: 10, bottom: 3, left: 10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text('Check Quiz'),
-                SizedBox(
-                  height: 7,
-                ),
-                Container(
-                  color: Colors.black.withOpacity(.3),
-                  height: 1.5,
-                ),
-                Spacer(),
-                Row(
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.bookmark,
-                      size: 12,
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Text(
-                      'Computer Security',
-                      textAlign: TextAlign.start,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Row(
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.user,
-                      size: 12,
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Text(
-                      'Sara shehab',
-                      textAlign: TextAlign.start,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Row(
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.chartLine,
-                      size: 12,
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Text(
-                      '5 points',
-                      textAlign: TextAlign.start,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Row(
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.clock,
-                      size: 12,
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Text(
-                      'Deadline 1/3',
-                      textAlign: TextAlign.start,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Row(
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.clock,
-                      size: 12,
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Text(
-                      'From 8 PM to 9 PM',
-                      textAlign: TextAlign.start,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-                    ),
-                  ],
-                ),
-                Spacer(),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-                top: 10.0, right: 10, bottom: 3, left: 10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text('Check Assignment'),
-                SizedBox(
-                  height: 7,
-                ),
-                Container(
-                  color: Colors.black.withOpacity(.3),
-                  height: 1.5,
-                ),
-                Spacer(),
-                Row(
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.bookmark,
-                      size: 12,
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Text(
-                      'Computer Security',
-                      textAlign: TextAlign.start,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 7,
-                ),
-                Row(
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.user,
-                      size: 12,
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Text(
-                      'Sara shehab',
-                      textAlign: TextAlign.start,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 7,
-                ),
-                Row(
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.chartLine,
-                      size: 12,
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Text(
-                      '5 points',
-                      textAlign: TextAlign.start,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 7,
-                ),
-                Row(
-                  children: [
-                    FaIcon(
-                      FontAwesomeIcons.clock,
-                      size: 12,
-                    ),
-                    SizedBox(
-                      width: 7,
-                    ),
-                    Text(
-                      'Deadline 1/3, 10 PM',
-                      textAlign: TextAlign.start,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-                    ),
-                  ],
-                ),
-                Spacer(),
-              ],
-            ),
-          ),
-        ];
+        // List<Widget> listwidget = [
+        //   Padding(
+        //     padding: const EdgeInsets.only(
+        //         top: 10.0, right: 10, bottom: 3, left: 10),
+        //     child: Column(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       crossAxisAlignment: CrossAxisAlignment.center,
+        //       children: [
+        //         Text('Check Quiz'),
+        //         SizedBox(
+        //           height: 7,
+        //         ),
+        //         Container(
+        //           color: Colors.black.withOpacity(.3),
+        //           height: 1.5,
+        //         ),
+        //         Spacer(),
+        //         Row(
+        //           children: [
+        //             FaIcon(
+        //               FontAwesomeIcons.bookmark,
+        //               size: 12,
+        //             ),
+        //             SizedBox(
+        //               width: 7,
+        //             ),
+        //             Text(
+        //               'Computer Security',
+        //               textAlign: TextAlign.start,
+        //               style:
+        //                   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+        //             ),
+        //           ],
+        //         ),
+        //         SizedBox(
+        //           height: 2,
+        //         ),
+        //         Row(
+        //           children: [
+        //             FaIcon(
+        //               FontAwesomeIcons.user,
+        //               size: 12,
+        //             ),
+        //             SizedBox(
+        //               width: 7,
+        //             ),
+        //             Text(
+        //               'Sara shehab',
+        //               textAlign: TextAlign.start,
+        //               style:
+        //                   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+        //             ),
+        //           ],
+        //         ),
+        //         SizedBox(
+        //           height: 2,
+        //         ),
+        //         Row(
+        //           children: [
+        //             FaIcon(
+        //               FontAwesomeIcons.chartLine,
+        //               size: 12,
+        //             ),
+        //             SizedBox(
+        //               width: 7,
+        //             ),
+        //             Text(
+        //               '5 points',
+        //               textAlign: TextAlign.start,
+        //               style:
+        //                   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+        //             ),
+        //           ],
+        //         ),
+        //         SizedBox(
+        //           height: 2,
+        //         ),
+        //         Row(
+        //           children: [
+        //             FaIcon(
+        //               FontAwesomeIcons.clock,
+        //               size: 12,
+        //             ),
+        //             SizedBox(
+        //               width: 7,
+        //             ),
+        //             Text(
+        //               'Deadline 1/3',
+        //               textAlign: TextAlign.start,
+        //               style:
+        //                   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+        //             ),
+        //           ],
+        //         ),
+        //         SizedBox(
+        //           height: 2,
+        //         ),
+        //         Row(
+        //           children: [
+        //             FaIcon(
+        //               FontAwesomeIcons.clock,
+        //               size: 12,
+        //             ),
+        //             SizedBox(
+        //               width: 7,
+        //             ),
+        //             Text(
+        //               'From 8 PM to 9 PM',
+        //               textAlign: TextAlign.start,
+        //               style:
+        //                   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+        //             ),
+        //           ],
+        //         ),
+        //         Spacer(),
+        //       ],
+        //     ),
+        //   ),
+        //   Padding(
+        //     padding: const EdgeInsets.only(
+        //         top: 10.0, right: 10, bottom: 3, left: 10),
+        //     child: Column(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       crossAxisAlignment: CrossAxisAlignment.center,
+        //       children: [
+        //         Text('Check Assignment'),
+        //         SizedBox(
+        //           height: 7,
+        //         ),
+        //         Container(
+        //           color: Colors.black.withOpacity(.3),
+        //           height: 1.5,
+        //         ),
+        //         Spacer(),
+        //         Row(
+        //           children: [
+        //             FaIcon(
+        //               FontAwesomeIcons.bookmark,
+        //               size: 12,
+        //             ),
+        //             SizedBox(
+        //               width: 7,
+        //             ),
+        //             Text(
+        //               'Computer Security',
+        //               textAlign: TextAlign.start,
+        //               style:
+        //                   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+        //             ),
+        //           ],
+        //         ),
+        //         SizedBox(
+        //           height: 7,
+        //         ),
+        //         Row(
+        //           children: [
+        //             FaIcon(
+        //               FontAwesomeIcons.user,
+        //               size: 12,
+        //             ),
+        //             SizedBox(
+        //               width: 7,
+        //             ),
+        //             Text(
+        //               'Sara shehab',
+        //               textAlign: TextAlign.start,
+        //               style:
+        //                   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+        //             ),
+        //           ],
+        //         ),
+        //         SizedBox(
+        //           height: 7,
+        //         ),
+        //         Row(
+        //           children: [
+        //             FaIcon(
+        //               FontAwesomeIcons.chartLine,
+        //               size: 12,
+        //             ),
+        //             SizedBox(
+        //               width: 7,
+        //             ),
+        //             Text(
+        //               '5 points',
+        //               textAlign: TextAlign.start,
+        //               style:
+        //                   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+        //             ),
+        //           ],
+        //         ),
+        //         SizedBox(
+        //           height: 7,
+        //         ),
+        //         Row(
+        //           children: [
+        //             FaIcon(
+        //               FontAwesomeIcons.clock,
+        //               size: 12,
+        //             ),
+        //             SizedBox(
+        //               width: 7,
+        //             ),
+        //             Text(
+        //               'Deadline 1/3, 10 PM',
+        //               textAlign: TextAlign.start,
+        //               style:
+        //                   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+        //             ),
+        //           ],
+        //         ),
+        //         Spacer(),
+        //       ],
+        //     ),
+        //   ),
+        // ];
+
         List<Widget> listwidget2 = [
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -653,12 +654,15 @@ class Dashboard_Screen extends StatelessWidget {
           ),
         ];
         return ConditionalBuilder(
-          condition: cubit.allNEWSFromHIVE.isNotEmpty&&cubit.userInfoFromHIVE?.fullName != null&&rol!='Doctor'||
-                    rol=='Student' && cubit.studentInfoModel != null &&
-                   cubit.connnection == true||
-                    rol=='Doctor'&&
-                   cubit.instructorInfoModel != null
-                   && cubit.connnection == true
+          condition: cubit.allNEWSFromHIVE.isNotEmpty &&
+                  cubit.userInfoFromHIVE?.fullName != null &&
+                  rol != 'Doctor' ||
+              rol == 'Student' &&
+                  cubit.studentInfoModel != null &&
+                  cubit.connnection == true ||
+              rol == 'Doctor' &&
+                  cubit.instructorInfoModel != null &&
+                  cubit.connnection == true
 
           // condition:rol=='Student'? cubit.studentInfoModel != null &&
           //         cubit.connnection == true ||
@@ -666,7 +670,7 @@ class Dashboard_Screen extends StatelessWidget {
           // cubit.instructorInfoModel != null &&
           //     cubit.connnection == true
 
-              // || cubit.instructorInfo_offline_Model.fullName != null && cubit.connnection == false
+          // || cubit.instructorInfo_offline_Model.fullName != null && cubit.connnection == false
           ,
           builder: (context) => Scaffold(
             backgroundColor: Colors.transparent,
@@ -721,7 +725,7 @@ class Dashboard_Screen extends StatelessWidget {
                                                   rol == 'Student'
                                                       //? 'Hi, ${cubit.usermodel == null ? cubit.studentInfoModel!.fullName : cubit.usermodel?.fullName} !'
                                                       ? 'Hi, ${cubit.userInfoFromHIVE == null ? cubit.studentInfoModel!.fullName : cubit.userInfoFromHIVE?.fullName} !'
-                                                      : 'Hi, Dr ${cubit.instructorInfoModel?.fullName } !',
+                                                      : 'Hi, Dr ${cubit.instructorInfoModel?.fullName} !',
                                                   maxLines: 1,
                                                   overflow:
                                                       TextOverflow.ellipsis,
@@ -799,26 +803,36 @@ class Dashboard_Screen extends StatelessWidget {
                             child: GlassBoxWithBorder_Gradiant2(
                                 widget: Container(
                                   width: double.infinity,
-                                  child: Container(
-                                    width: double.infinity,
-                                    child: CarouselSlider(
-                                      items: listwidget2,
-                                      options: CarouselOptions(
-                                        height: double.infinity,
-                                        viewportFraction: 1,
-                                        initialPage: 0,
-                                        enableInfiniteScroll: true,
-                                        reverse: false,
-                                        autoPlay: true,
-                                        autoPlayInterval:
+                                  height: double.infinity,
+                                  child:  ConditionalBuilder(
+                                    condition:
+                                    cubit.list_news_D.isNotEmpty,
+                                    builder: (context) =>
+                                        CarouselSlider(
+                                          items: cubit.list_news_D,
+                                          options: CarouselOptions(
+                                            height: double.infinity,
+                                            viewportFraction: 1,
+                                            initialPage: 0,
+                                            enableInfiniteScroll: true,
+                                            reverse: false,
+                                            autoPlay: true,
+                                            autoPlayInterval:
                                             const Duration(seconds: 3),
-                                        autoPlayAnimationDuration:
+                                            autoPlayAnimationDuration:
                                             const Duration(seconds: 1),
-                                        autoPlayCurve: Curves.fastOutSlowIn,
-                                        scrollDirection: Axis.horizontal,
-                                      ),
-                                    ),
-                                  ),
+                                            autoPlayCurve: Curves.fastOutSlowIn,
+                                            scrollDirection: Axis.horizontal,
+                                          ),
+                                        ),
+                                    fallback: (context) =>
+                                        Center(
+                                          child: CircularProgressIndicator(
+                                            color: Colors.blueGrey
+                                                .withOpacity(.4),
+                                          ),
+                                        ),
+                                  )
                                 ),
                                 BorderWidth: .5,
                                 BorderColor: Colors.black.withOpacity(.7),
@@ -887,39 +901,104 @@ class Dashboard_Screen extends StatelessWidget {
                           Expanded(
                             child: Row(
                               children: [
-                                Expanded(
-                                  child: Container(
-                                    child: GlassBoxWithBorder_Gradiant2(
-                                        widget: Container(
-                                          width: double.infinity,
-                                          child: CarouselSlider(
-                                            items: listwidget,
-                                            options: CarouselOptions(
+                                ConditionalBuilder(
+                                  condition: rol == 'Student',
+                                  builder: (context) => Expanded(
+                                    child: Container(
+                                      child: GlassBoxWithBorder_Gradiant2(
+                                          widget: Container(
+                                              width: double.infinity,
                                               height: double.infinity,
-                                              viewportFraction: 1,
-                                              initialPage: 0,
-                                              enableInfiniteScroll: true,
-                                              reverse: false,
-                                              autoPlay: true,
-                                              autoPlayInterval:
-                                                  const Duration(seconds: 3),
-                                              autoPlayAnimationDuration:
-                                                  const Duration(seconds: 1),
-                                              autoPlayCurve:
-                                                  Curves.fastOutSlowIn,
-                                              scrollDirection: Axis.horizontal,
-                                            ),
-                                          ),
-                                        ),
-                                        BorderWidth: .5,
-                                        BorderColor:
-                                            Colors.black.withOpacity(.7),
-                                        color: Colors.white.withOpacity(.2),
-                                        borderRadius: 20,
-                                        x: 0,
-                                        y: 0),
+                                              child: ConditionalBuilder(
+                                                condition:
+                                                    cubit.list_D.isNotEmpty,
+                                                builder: (context) =>
+                                                    CarouselSlider(
+                                                  items: cubit.list_D,
+                                                  options: CarouselOptions(
+                                                    height: double.infinity,
+                                                    viewportFraction: 1,
+                                                    initialPage: 0,
+                                                    enableInfiniteScroll: true,
+                                                    reverse: false,
+                                                    autoPlay: true,
+                                                    autoPlayInterval:
+                                                        const Duration(
+                                                            seconds: 3),
+                                                    autoPlayAnimationDuration:
+                                                        const Duration(
+                                                            seconds: 1),
+                                                    autoPlayCurve:
+                                                        Curves.fastOutSlowIn,
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                  ),
+                                                ),
+                                                fallback: (context) =>
+                                                    Center(
+                                                      child: CircularProgressIndicator(
+                                                                                                        color: Colors.blueGrey
+                                                        .withOpacity(.4),
+                                                                                                      ),
+                                                    ),
+                                              )),
+                                          BorderWidth: .5,
+                                          BorderColor:
+                                              Colors.black.withOpacity(.7),
+                                          color: Colors.white.withOpacity(.2),
+                                          borderRadius: 20,
+                                          x: 0,
+                                          y: 0),
+                                    ),
+                                  ),
+                                  fallback: (context) => Expanded(
+                                    child: Container(
+                                      child: GlassBoxWithBorder_Gradiant2(
+                                          widget: Container(
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                              child: ConditionalBuilder(
+                                                condition:
+                                                    cubit.list_D_ins.isNotEmpty,
+                                                builder: (context) =>
+                                                    CarouselSlider(
+                                                      items: cubit.list_D_ins,
+                                                      options: CarouselOptions(
+                                                        height: double.infinity,
+                                                        viewportFraction: 1,
+                                                        initialPage: 0,
+                                                        enableInfiniteScroll: true,
+                                                        reverse: false,
+                                                        autoPlay: true,
+                                                        autoPlayInterval:
+                                                        const Duration(seconds: 3),
+                                                        autoPlayAnimationDuration:
+                                                        const Duration(seconds: 1),
+                                                        autoPlayCurve:
+                                                        Curves.fastOutSlowIn,
+                                                        scrollDirection:
+                                                        Axis.horizontal,
+                                                      ),
+                                                    ),
+                                                fallback: (context) =>
+                                                    Center(
+                                                      child: CircularProgressIndicator(
+                                                                                                        color: Colors.blueGrey
+                                                        .withOpacity(.4),
+                                                                                                      ),
+                                                    ),
+                                              )),
+                                          BorderWidth: .5,
+                                          BorderColor:
+                                              Colors.black.withOpacity(.7),
+                                          color: Colors.white.withOpacity(.2),
+                                          borderRadius: 20,
+                                          x: 0,
+                                          y: 0),
+                                    ),
                                   ),
                                 ),
+
                                 // Expanded(
                                 //   child: CarouselSlider(
                                 //     items:listwidget,

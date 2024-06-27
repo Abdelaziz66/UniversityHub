@@ -141,6 +141,35 @@ class Get_All_NewsErrorState extends App_state {
   Get_All_NewsErrorState(this.error);
 }
 
+//---------get all news--------------
+
+class Dashboard_stu_LoadingState extends App_state {}
+
+class Dashboard_stu_SuccessState extends App_state {
+
+}
+
+class Dashboard_stu_ErrorState extends App_state {
+}
+
+class Dashboard_ins_LoadingState extends App_state {}
+
+class Dashboard_ins_SuccessState extends App_state {
+
+}
+
+class Dashboard_ins_ErrorState extends App_state {
+}
+
+class NewsDashboard_stu_LoadingState extends App_state {}
+
+class NewsDashboard_stu_SuccessState extends App_state {
+
+}
+
+class NewsDashboard_stu_ErrorState extends App_state {
+}
+
 //------------STU get All courses-----------------
 class Stu_Get_All_Courses_LoadingState extends App_state {}
 

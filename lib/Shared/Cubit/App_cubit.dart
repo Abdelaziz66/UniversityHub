@@ -17,6 +17,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:university_hup/Models/All_News/AllNewsModel.dart';
+import 'package:university_hup/Models/INS_Model/Dashboard_ins_model.dart';
 import 'package:university_hup/Models/INS_Model/INS_GetQuizbyID_Model.dart';
 import 'package:university_hup/Models/INS_Model/INS_GetQuizes_Model.dart';
 import 'package:university_hup/Models/INS_Model/INS_course_model.dart';
@@ -28,6 +29,8 @@ import 'package:university_hup/Models/STU_Model/CourseModel/stuAssignAdapter/STU
 import 'package:university_hup/Models/STU_Model/CourseModel/AllCourcesAdapterModel/Stu_All_Courses_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/materialAdabter/Stu_Course_MaterialModel.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/StuQuizAdapter/Stu_Course_Quiz_Model.dart';
+import 'package:university_hup/Models/STU_Model/Dashboard_stu_model.dart';
+import 'package:university_hup/Models/STU_Model/News_D_model.dart';
 import 'package:university_hup/Models/STU_Model/User_Model/STU_Login_Model.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Calendar_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Course_Screen.dart';
@@ -72,6 +75,8 @@ class App_cubit extends Cubit<App_state> {
       }
     } else if(index == 3){
       GetStuCalenderDayEvent();
+    }else if(index == 0){
+      Dashboard_stu_Function();
     }
     Nav_Bar_index = index;
     emit(Nav_Bar_state());
@@ -921,6 +926,133 @@ print('///////////////****************///////////////////');
         print(error.toString());
       });
      // InsertToDataBase_News_Table();
+
+
+
+  }
+
+  //--------------------- dashboard student ------------------------
+
+  Dashboard_stu_model? Dashboard_s_model=new Dashboard_stu_model() ;
+  List<Widget>list_D=[];
+
+  void Dashboard_stu_Function()  {
+    print('start get Dashboard STU from api ');
+    Dashboard_s_model=Dashboard_stu_model();
+    list_D=[];
+    // if (allNewsModel.isEmpty) {
+    print('start get GetUnsubmittedQuizzesAndTasks from api -->');
+    emit(Dashboard_stu_LoadingState());
+     Dio_Helper.GetData(url: 'StudentDashboard/GetUnsubmittedQuizzesAndTasks',token: token).then((value) {
+      if (value.statusCode == 200) {
+        // print('git news success');
+        // List Json = value.data;
+        // for (var element in Json) {
+        //   Dashboard_s_model?.add(Dashboard_stu_model.fromJson(element));
+        // }
+        Dashboard_s_model=Dashboard_stu_model.fromJson( value.data);
+        print('-------------------');
+        print(Dashboard_s_model!.quizzes![0].grade);
+        print('-------------------');
+        Dashboard_s_model!.tasks!.forEach((element) {
+          list_D.add(Task_D(task: element));
+        });
+        Dashboard_s_model!.quizzes!.forEach((element) {
+          list_D.add(Quiz_D(quiz: element));
+        });
+
+        print(list_D);
+
+        emit(Dashboard_stu_SuccessState());
+      }
+    }).catchError((error) {
+      emit(Dashboard_stu_ErrorState());
+
+      print(error.toString());
+    });
+    // InsertToDataBase_News_Table();
+
+
+
+  }
+
+  List<Dashboard_ins_model>? Dashboard_i_model=[];
+  List<Widget>list_D_ins=[];
+
+  void Dashboard_ins_Function()  {
+    print('start get Dashboard STU from api ');
+    Dashboard_i_model=[];
+    list_D_ins=[];
+    // if (allNewsModel.isEmpty) {
+    // print('start get news from api -->');
+    emit(Dashboard_ins_LoadingState());
+    Dio_Helper.GetData(url: 'InstructorDashboard/Get All Quiz&Task info',token: token).then((value) {
+      if (value.statusCode == 200) {
+        // print('git news success');
+        List Json = value.data;
+        for (var element in Json) {
+          Dashboard_i_model?.add(Dashboard_ins_model.fromJson(element));
+        }
+        // Dashboard_s_model=Dashboard_stu_model.fromJson( value.data);
+        // print('-------------------');
+        // print(Dashboard_s_model!.quizzes![0].grade);
+        // print('-------------------');
+        Dashboard_i_model!.forEach((element) {
+          if(element.type=='Task'){
+            list_D_ins.add(Task_ins_D(task: element));
+          }else{
+            list_D_ins.add(Quiz_ins_D(quiz: element));
+          }
+
+        });
+
+
+        print(list_D_ins);
+
+        emit(Dashboard_ins_SuccessState());
+      }
+    }).catchError((error) {
+      emit(Dashboard_ins_ErrorState());
+
+      print(error.toString());
+    });
+    // InsertToDataBase_News_Table();
+
+
+
+  }
+
+  List<News_D_model>? news_D_model=[] ;
+  List<Widget>list_news_D=[];
+  void NewsDashboard_Function()  {
+    print('start get NewsDashboard  from api ');
+    news_D_model=[];
+    list_news_D=[];
+    // if (allNewsModel.isEmpty) {
+    // print('start get news from api -->');
+    emit(NewsDashboard_stu_LoadingState());
+    Dio_Helper.GetData(url: 'InstructorDashboard/Last3News').then((value) {
+      if (value.statusCode == 200) {
+        // print('git news success');
+        List Json = value.data;
+        for (var element in Json) {
+          news_D_model?.add(News_D_model.fromJson(element));
+        }
+        news_D_model!.forEach((element) {
+          list_news_D.add(News_D(news: element));
+        });
+
+
+        print(news_D_model);
+
+        emit(NewsDashboard_stu_SuccessState());
+      }
+    }).catchError((error) {
+      emit(NewsDashboard_stu_ErrorState());
+
+      print(error.toString());
+    });
+    // InsertToDataBase_News_Table();
 
 
 
