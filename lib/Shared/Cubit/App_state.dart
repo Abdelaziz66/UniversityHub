@@ -415,6 +415,11 @@ class Ins_Add_Folder_SuccessState extends App_state {
 }
 class Ins_Add_Folder_ErrorState extends App_state {}
 
+
+class Ins_Select_Folder_Type_State extends App_state {}
+
+
+
 //----------------update folder -------------
 
 class Ins_Update_Folder_LoadingState extends App_state {}
@@ -668,3 +673,17 @@ class Ins_Get_History_From_Hive_LoadingState extends App_state {}
 class Ins_Get_History_From_Hive_SuccessState extends App_state {}
 
 class Ins_Get_History_From_Hive_ErrorState extends App_state {}
+
+
+//---------------reset pass------------------
+class Stu_Reset_Pass_LoadingState extends App_state {
+
+}
+
+class Stu_Reset_Pass_SuccessState extends App_state {
+  var statusCode;
+  Stu_Reset_Pass_SuccessState(this.statusCode);
+}
+
+class Stu_Reset_Pass_ErrorState extends App_state {}
+

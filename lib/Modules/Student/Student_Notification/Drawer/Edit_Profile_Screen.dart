@@ -14,6 +14,8 @@ import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 import 'package:university_hup/Shared/remote/DioHelper.dart';
 
+import '../../../LandScape/ResetPasswoed/NewPasswordScreen.dart';
+
 class Edit_Profile_screen extends StatelessWidget {
   const Edit_Profile_screen({super.key});
 
@@ -166,12 +168,15 @@ class Edit_Profile_screen extends StatelessWidget {
                         ),
                         child: GestureDetector(
                           onTap: (){
+
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      ForgetPasswordScreen(),
+                                      NewPasswordScreen(),
                                 ));
+                            print('token from forget pass  ----- $token');
+
                           },
                           child: Container(
                             decoration: BoxDecoration(

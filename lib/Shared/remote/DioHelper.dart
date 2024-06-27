@@ -35,6 +35,7 @@ class Dio_Helper {
   }
 
   static Future<Response> PostData({
+    context,
     required String url,
     Map<String, dynamic>? query,
     String? token,
@@ -46,27 +47,17 @@ class Dio_Helper {
 
   }) async {
   //  FormData formData=FormData();
+  //   print('token from dio ---------$token');
+   // print('token from dio ---------${App_cubit.get(context).resetPassToken}');
         dio.options.headers={
-    //   'lang':lang,
-    //   'authorizatio':token??'',
-    //  'Content-Type':'application/json'
-    //'text/plain',
-    //'application/x-www-form-urlencoded',
+
         'Content-Type':'application/json',
-        'Accept':'application/json',
-        'Authorization':'Bearer $token',
+       // 'Accept':'*/*',
+        'Authorization':'Bearer ${token??App_cubit.get(context).resetPassToken}',
     };
-      // formData.files.add(MapEntry(
-      //   'file',
-      // //  file.path
-      //    await MultipartFile.fromFile(
-      //      file!.path, // Replace 'path_to_your_file' with the actual file path
-      //      filename: file.path.split('/').last, // Replace 'file_name' with the desired file name
-      //    ),
-      // )
-      // );
+
     return await dio.post(
-        url, queryParameters: query, data: data);
+        url, queryParameters: query, data: data,);
   }
 
   // static Future<Response> PostFileData({
@@ -204,7 +195,7 @@ class DioHelper2{
 
   static initDio() {
     dio2 = Dio(BaseOptions(
-      baseUrl: 'http://www.nabilramadan.runasp.net/',//'https://nabilramadan.bsite.net/api/',
+      baseUrl: 'https://lms.runasp.net/api/',//'https://nabilramadan.bsite.net/api/',
       receiveDataWhenStatusError: true,
     ));
     (dio2.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
@@ -234,3 +225,4 @@ class DioHelper2{
   }
 
 }
+

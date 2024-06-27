@@ -175,7 +175,9 @@ class INS_Quizes_Screen extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  defaultAppbar(context: context),
+                  defaultAppbar(
+                      text: cubit.currentCourseName,
+                      context: context),
                   const SizedBox(
                     height: 40,
                   ),
