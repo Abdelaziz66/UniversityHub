@@ -24,12 +24,10 @@ import 'package:university_hup/Models/STU_Model/CourseModel/stuAssignAdapter/STU
 import 'package:university_hup/Models/STU_Model/CourseModel/AllCourcesAdapterModel/Stu_All_Courses_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/materialAdabter/Stu_Course_MaterialModel.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/StuQuizAdapter/Stu_Course_Quiz_Model.dart';
-import 'package:university_hup/Models/STU_Model/Dashboard_stu_model.dart';
 import 'package:university_hup/Models/STU_Model/News_D_model.dart';
+import 'package:university_hup/Models/STU_Model/StuDachboardModel&Adapter/Dashboard_stu_model.dart';
 import 'package:university_hup/Modules/Instructor/Instructor_Assignment/INS_task_result_Screen.dart';
-
 import 'package:university_hup/Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
-
 import '../../Models/HistoryModel&Adapter/historyModel.dart';
 import '../../Models/INS_Model/CourseModel.dart';
 import '../../Models/INS_Model/INS_Assign_Model.dart';
@@ -7001,7 +6999,7 @@ Widget Task_D({required Task? task})=>Padding(
             width: 7,
           ),
           Text(
-            'Deadline ${task?.endDate!.day}/${task?.endDate!.month}',
+            'Deadline ${DateTime.parse(task!.endDate!).day}/${DateTime.parse(task!.endDate!).month}',
             textAlign: TextAlign.start,
             style:
             TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
@@ -7021,7 +7019,7 @@ Widget Task_D({required Task? task})=>Padding(
             width: 7,
           ),
           Text(
-            'From ${task?.startDate!.hour} to ${task?.endDate!.hour}',
+            'From ${DateTime.parse(task.startDate!).hour}/${DateTime.parse(task.endDate!).hour}',
             textAlign: TextAlign.start,
             style:
             TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
@@ -7118,7 +7116,7 @@ Widget Quiz_D({required Quiz? quiz})=>Padding(
             width: 7,
           ),
           Text(
-            'Deadline ${quiz?.endDate!.day}/${quiz?.endDate!.month}',
+            'Deadline ${DateTime.parse(quiz!.endDate!).day}/${DateTime.parse(quiz!.endDate!).month}',
             textAlign: TextAlign.start,
             style:
             TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
@@ -7138,7 +7136,7 @@ Widget Quiz_D({required Quiz? quiz})=>Padding(
             width: 7,
           ),
           Text(
-            'From ${quiz?.startDate!.hour} to ${quiz?.endDate!.hour}',
+            'From ${DateTime.parse(quiz!.startDate!).day}/${DateTime.parse(quiz!.endDate!).month}',
             textAlign: TextAlign.start,
             style:
             TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
@@ -7149,6 +7147,8 @@ Widget Quiz_D({required Quiz? quiz})=>Padding(
     ],
   ),
 );
+
+
 Widget Task_ins_D({required Dashboard_ins_model? task})=>Padding(
   padding: const EdgeInsets.only(
       top: 10.0, right: 10, bottom: 3, left: 10),

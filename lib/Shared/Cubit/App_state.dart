@@ -704,6 +704,25 @@ class Ins_Get_History_From_Hive_SuccessState extends App_state {}
 class Ins_Get_History_From_Hive_ErrorState extends App_state {}
 
 
+//-------------------------Store dashboard to hive--------------------
+
+class Stu_Add_Dashboard_To_Hive_LoadingState extends App_state {}
+
+class Stu_Add_quizDashboard_To_Hive_SuccessState extends App_state {}
+class Stu_Add_taskDashboard_To_Hive_SuccessState extends App_state {}
+
+class Stu_Add_quizDashboard__To_Hive_ErrorState extends App_state {}
+class Stu_Add_taskDashboard__To_Hive_ErrorState extends App_state {}
+
+//----------------get dashboard Data ----------------------
+
+
+class Stu_Get_Dashboard_From_Hive_LoadingState extends App_state {}
+
+class Stu_Get_Dashboard_From_Hive_SuccessState extends App_state {}
+class Stu_Get_Dashboard_From_Hive_ErrorState extends App_state {}
+
+
 //---------------reset pass------------------
 class Stu_Reset_Pass_LoadingState extends App_state {
 
