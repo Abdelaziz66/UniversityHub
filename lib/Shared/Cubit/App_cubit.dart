@@ -29,7 +29,6 @@ import 'package:university_hup/Models/STU_Model/CourseModel/stuAssignAdapter/STU
 import 'package:university_hup/Models/STU_Model/CourseModel/AllCourcesAdapterModel/Stu_All_Courses_Model.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/materialAdabter/Stu_Course_MaterialModel.dart';
 import 'package:university_hup/Models/STU_Model/CourseModel/StuQuizAdapter/Stu_Course_Quiz_Model.dart';
-import 'package:university_hup/Models/STU_Model/Dashboard_stu_model.dart';
 import 'package:university_hup/Models/STU_Model/News_D_model.dart';
 import 'package:university_hup/Models/STU_Model/User_Model/STU_Login_Model.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Calendar_Screen.dart';
@@ -51,6 +50,7 @@ import '../../Models/INS_Model/CourseModel.dart';
 import '../../Models/INS_Model/INS_Assign_Model.dart';
 import '../../Models/STU_Model/Calender_Model/CalenderMode.dart';
 import '../../Models/STU_Model/CourseModel/Stu_Course_Grades_model.dart';
+import '../../Models/STU_Model/StuDachboardModel&Adapter/Dashboard_stu_model.dart';
 import '../../Models/STU_Model/User_Model/CurrentStudentInfoModel.dart';
 
 import '../../Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
@@ -944,10 +944,13 @@ print('///////////////****************///////////////////');
     Dashboard_s_model=Dashboard_stu_model();
     list_D=[];
     // if (allNewsModel.isEmpty) {
-    print('start get GetUnsubmittedQuizzesAndTasks from api -->');
     emit(Dashboard_stu_LoadingState());
-     Dio_Helper.GetData(url: 'StudentDashboard/GetUnsubmittedQuizzesAndTasks',token: token).then((value) {
+     Dio_Helper.GetData(url:'StudentDashboard/GetUnsubmittedQuizzesAndTasks',
+         token: token
+     ).then((value) {
+       print(value.statusCode);
       if (value.statusCode == 200) {
+        print('success-----');
         // print('git news success');
         // List Json = value.data;
         // for (var element in Json) {
@@ -963,14 +966,12 @@ print('///////////////****************///////////////////');
         Dashboard_s_model!.quizzes!.forEach((element) {
           list_D.add(Quiz_D(quiz: element));
         });
-
         print(list_D);
-
+        stuStoreDashboardtoHIVE();
         emit(Dashboard_stu_SuccessState());
       }
     }).catchError((error) {
-      emit(Dashboard_stu_ErrorState());
-
+       emit(Dashboard_stu_ErrorState());
       print(error.toString());
     });
     // InsertToDataBase_News_Table();
@@ -1008,8 +1009,6 @@ print('///////////////****************///////////////////');
           }
 
         });
-
-
         print(list_D_ins);
 
         emit(Dashboard_ins_SuccessState());
@@ -2762,6 +2761,102 @@ print('///////////////****************///////////////////');
       emit(Stu_Get_userInfo_From_Hive_ErrorState());
     }
   }
+
+  //------------------------------offline dashboard ------------------
+
+
+  void stuStoreDashboardtoHIVE(){
+
+    navigationScreensBox.delete(HiveConstants.quizDashboard);
+    navigationScreensBox.delete(HiveConstants.taskDashboard);
+    emit(Stu_Add_Dashboard_To_Hive_LoadingState());
+    List<Quiz> quizDashboard=List.from(navigationScreensBox.get(HiveConstants.quizDashboard,defaultValue: []))
+        .cast<Quiz>();
+    List<Task> taskDashboard=List.from(navigationScreensBox.get(HiveConstants.taskDashboard,defaultValue: []))
+        .cast<Task>();
+
+    for(int i=0;i<Dashboard_s_model!.quizzes!.length;i++) {
+      quizDashboard.add(Quiz(
+        hiveIndex: quizDashboard.length,
+        quizId: Dashboard_s_model!.quizzes![i].quizId!,
+        title:  Dashboard_s_model!.quizzes![i].title!,
+        notes:  Dashboard_s_model!.quizzes![i].notes??'',
+        startDate:  Dashboard_s_model!.quizzes![i].startDate!,
+        endDate:  Dashboard_s_model!.quizzes![i].endDate!,
+        grade:  Dashboard_s_model!.quizzes![i].grade!,
+        courseCycleId:  Dashboard_s_model!.quizzes![i].courseCycleId!,
+        instructorId:  Dashboard_s_model!.quizzes![i].instructorId!,
+        createdAt: Dashboard_s_model!.quizzes![i].createdAt!,
+        courseCycle: Dashboard_s_model!.quizzes![i].courseCycle!,
+      instructor: Dashboard_s_model!.quizzes![i].instructor!,
+      ));
+    }
+    for(int i=0;i<Dashboard_s_model!.tasks!.length;i++) {
+      taskDashboard.add(Task(
+        hiveIndex: taskDashboard.length,
+        taskId: Dashboard_s_model!.tasks![i].taskId!,
+        title:  Dashboard_s_model!.tasks![i].title!,
+        filePath:  Dashboard_s_model!.tasks![i].filePath??'',
+        startDate:  Dashboard_s_model!.tasks![i].startDate!,
+        endDate:  Dashboard_s_model!.tasks![i].endDate!,
+        grade:  Dashboard_s_model!.tasks![i].grade!,
+        courseCycleId:  Dashboard_s_model!.tasks![i].courseCycleId!,
+        instructorId:  Dashboard_s_model!.tasks![i].instructorId!,
+        createdAt: Dashboard_s_model!.tasks![i].createdAt!,
+        courseCycle: Dashboard_s_model!.tasks![i].courseCycle!,
+      instructor: Dashboard_s_model!.tasks![i].instructor!,
+      ));
+    }
+    navigationScreensBox.put(HiveConstants.taskDashboard, taskDashboard).then((value){
+      print('Hive Store task dashboard Data');
+      print('Navigation Screen Box Keys ::::: ${navigationScreensBox.keys}');
+
+      emit(Stu_Add_taskDashboard_To_Hive_SuccessState());
+    }).catchError((error){
+      print('error to Store task dashboard Data');
+      print(error);
+      emit(Stu_Add_taskDashboard__To_Hive_ErrorState());
+    });
+
+
+
+    navigationScreensBox.put(HiveConstants.quizDashboard, quizDashboard).then((value){
+      print('Hive Store quiz dashboard Data');
+      print('Navigation Screen Box Keys ::::: ${navigationScreensBox.keys}');
+
+      emit(Stu_Add_quizDashboard_To_Hive_SuccessState());
+    }).catchError((error){
+      print('error to Store quiz dashboard Data');
+      print(error);
+      emit(Stu_Add_quizDashboard__To_Hive_ErrorState());
+    });
+  }
+
+  //--------Get all news from Hive--------------
+
+
+
+  List<Widget>offline_DashboardData=[];
+  void getDashboardFromHIVE()async{
+    emit(Stu_Get_Dashboard_From_Hive_LoadingState());
+    try {
+      List.from(navigationScreensBox.get(HiveConstants.quizDashboard,defaultValue: [])).cast<Quiz>().forEach((element) {
+        offline_DashboardData.add(Quiz_D(quiz: element));
+      });
+      List.from(navigationScreensBox.get(HiveConstants.taskDashboard,defaultValue: [])).cast<Task>().forEach((element) {
+        offline_DashboardData.add(Task_D(task: element));
+      });
+      print('get all news from HIVE Success---------------');
+      allNEWSFromHIVE.forEach((element) {
+        print(element.content);
+      });
+      emit(Stu_Get_Dashboard_From_Hive_SuccessState());
+    } catch (error) {
+      emit(Stu_Get_Dashboard_From_Hive_ErrorState());
+    }
+  }
+
+
 
 
   //---------------- Store student history in HIVE ------------------------

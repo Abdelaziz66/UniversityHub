@@ -6,6 +6,9 @@
 
   static const String userData="UserData";
 
+  static const String quizDashboard="quizDashboard";
+  static const String taskDashboard="taskDashboard";
+
   static const String lecFoldersBox="lecFoldersBox2";
   static const String lecFilesBox="lecFilesBox";
 

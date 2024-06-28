@@ -19,6 +19,7 @@ import 'Models/STU_Model/CourseModel/materialAdabter/Stu_Course_MaterialModel.da
 import 'Models/STU_Model/CourseModel/materialAdabter/materialFilesAdapter.dart';
 import 'Models/STU_Model/CourseModel/materialAdabter/materialFoldersAdapter.dart';
 import 'Models/STU_Model/CourseModel/stuAssignAdapter/stuAssignAdapter.dart';
+import 'Models/STU_Model/StuDachboardModel&Adapter/stuDashboardAdapter.dart';
 import 'Models/STU_Model/User_Model/StudentInfoAdapter.dart';
 import 'Shared/Cubit/App_cubit.dart';
 import 'Shared/Cubit/App_state.dart';
@@ -90,6 +91,8 @@ import 'package:hive_flutter/hive_flutter.dart';
   Hive.registerAdapter(StuTaskDataAdapter());
   Hive.registerAdapter(GetQuizDataModelAdapter());
   Hive.registerAdapter(StuHistoryAdapter());
+  Hive.registerAdapter(StuDashboardQuizAdapter());
+  Hive.registerAdapter(StuDashboardTaskAdapter());
 
    await Hive.openBox(HiveConstants.navigationScreenBox).then((value){print('allCoursesBox4  box is opened ');}).catchError((error){
      print('allCoursesBox4  box is already opened ');

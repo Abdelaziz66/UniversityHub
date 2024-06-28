@@ -20,21 +20,23 @@ class Dashboard_stu_model {
 }
 
 class Quiz {
+  int? hiveIndex;
   String? quizId;
   String? title;
   String? notes;
-  DateTime? startDate;
-  DateTime? endDate;
+  String? startDate;
+  String? endDate;
   int? grade;
   String? courseCycleId;
   String? instructorId;
-  DateTime? createdAt;
+  String? createdAt;
   String? courseCycle;
   String? instructor;
   List<dynamic>? questions;
   List<dynamic>? studentQuizGrades;
 
   Quiz({
+    this.hiveIndex,
     this.quizId,
     this.title,
     this.notes,
@@ -54,12 +56,12 @@ class Quiz {
     quizId: json["quizId"],
     title: json["title"],
     notes: json["notes"],
-    startDate: json["startDate"] == null ? null : DateTime.parse(json["startDate"]),
-    endDate: json["endDate"] == null ? null : DateTime.parse(json["endDate"]),
+    startDate: json["startDate"] == null ? null : json["startDate"],
+    endDate: json["endDate"] == null ? null : json["endDate"],
     grade: json["grade"],
     courseCycleId: json["courseCycleId"],
     instructorId: json["instructorId"],
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    createdAt: json["createdAt"] == null ? null : json["createdAt"],
     courseCycle: json["courseCycle"],
     instructor: json["instructor"],
     questions: json["questions"] == null ? [] : List<dynamic>.from(json["questions"]!.map((x) => x)),
@@ -70,12 +72,12 @@ class Quiz {
     "quizId": quizId,
     "title": title,
     "notes": notes,
-    "startDate": startDate?.toIso8601String(),
-    "endDate": endDate?.toIso8601String(),
+    "startDate": startDate,
+    "endDate": endDate,
     "grade": grade,
     "courseCycleId": courseCycleId,
     "instructorId": instructorId,
-    "createdAt": createdAt?.toIso8601String(),
+    "createdAt": createdAt,
     "courseCycle": courseCycle,
     "instructor": instructor,
     "questions": questions == null ? [] : List<dynamic>.from(questions!.map((x) => x)),
@@ -84,20 +86,22 @@ class Quiz {
 }
 
 class Task {
+  int?hiveIndex;
   String? taskId;
   String? title;
-  DateTime? startDate;
-  DateTime? endDate;
+  String? startDate;
+  String? endDate;
   int? grade;
   String? filePath;
   String? courseCycleId;
   String? instructorId;
-  DateTime? createdAt;
+  String? createdAt;
   String? courseCycle;
   String? instructor;
   List<dynamic>? taskAnswers;
 
   Task({
+    this.hiveIndex,
     this.taskId,
     this.title,
     this.startDate,
@@ -115,13 +119,13 @@ class Task {
   factory Task.fromJson(Map<String, dynamic> json) => Task(
     taskId: json["taskId"],
     title: json["title"],
-    startDate: json["startDate"] == null ? null : DateTime.parse(json["startDate"]),
-    endDate: json["endDate"] == null ? null : DateTime.parse(json["endDate"]),
+    startDate: json["startDate"] == null ? null : json["startDate"],
+    endDate: json["endDate"] == null ? null : json["endDate"],
     grade: json["grade"],
     filePath: json["filePath"],
     courseCycleId: json["courseCycleId"],
     instructorId: json["instructorId"],
-    createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    createdAt: json["createdAt"] == null ? null : json["createdAt"],
     courseCycle: json["courseCycle"],
     instructor: json["instructor"],
     taskAnswers: json["taskAnswers"] == null ? [] : List<dynamic>.from(json["taskAnswers"]!.map((x) => x)),
@@ -130,13 +134,13 @@ class Task {
   Map<String, dynamic> toJson() => {
     "taskId": taskId,
     "title": title,
-    "startDate": startDate?.toIso8601String(),
-    "endDate": endDate?.toIso8601String(),
+    "startDate": startDate,
+    "endDate": endDate,
     "grade": grade,
     "filePath": filePath,
     "courseCycleId": courseCycleId,
     "instructorId": instructorId,
-    "createdAt": createdAt?.toIso8601String(),
+    "createdAt": createdAt,
     "courseCycle": courseCycle,
     "instructor": instructor,
     "taskAnswers": taskAnswers == null ? [] : List<dynamic>.from(taskAnswers!.map((x) => x)),
