@@ -831,6 +831,9 @@ class App_cubit extends Cubit<App_state> {
         GetAllNews().then((value) {
           getAllNewsFromHIVE();
         });
+        Dashboard_stu_Function().then((value) {
+          getDashboardFromHIVE();
+        });
         StuGetAllCourses(token:token);
 print('///////////////****************///////////////////');
         getAllCoursesFromHIVE();
@@ -939,7 +942,7 @@ print('///////////////****************///////////////////');
   Dashboard_stu_model? Dashboard_s_model=new Dashboard_stu_model() ;
   List<Widget>list_D=[];
 
-  void Dashboard_stu_Function()  {
+  Future<void> Dashboard_stu_Function()  async {
     print('start get Dashboard STU from api ');
     Dashboard_s_model=Dashboard_stu_model();
     list_D=[];
@@ -2787,8 +2790,8 @@ print('///////////////****************///////////////////');
         courseCycleId:  Dashboard_s_model!.quizzes![i].courseCycleId!,
         instructorId:  Dashboard_s_model!.quizzes![i].instructorId!,
         createdAt: Dashboard_s_model!.quizzes![i].createdAt!,
-        courseCycle: Dashboard_s_model!.quizzes![i].courseCycle!,
-      instructor: Dashboard_s_model!.quizzes![i].instructor!,
+        courseCycle: Dashboard_s_model!.quizzes![i].courseCycle??'',
+      instructor: Dashboard_s_model!.quizzes![i].instructor??'',
       ));
     }
     for(int i=0;i<Dashboard_s_model!.tasks!.length;i++) {
@@ -2803,8 +2806,8 @@ print('///////////////****************///////////////////');
         courseCycleId:  Dashboard_s_model!.tasks![i].courseCycleId!,
         instructorId:  Dashboard_s_model!.tasks![i].instructorId!,
         createdAt: Dashboard_s_model!.tasks![i].createdAt!,
-        courseCycle: Dashboard_s_model!.tasks![i].courseCycle!,
-      instructor: Dashboard_s_model!.tasks![i].instructor!,
+        courseCycle: Dashboard_s_model!.tasks![i].courseCycle??'',
+      instructor: Dashboard_s_model!.tasks![i].instructor??'',
       ));
     }
     navigationScreensBox.put(HiveConstants.taskDashboard, taskDashboard).then((value){
