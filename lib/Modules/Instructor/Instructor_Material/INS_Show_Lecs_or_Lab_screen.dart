@@ -337,7 +337,7 @@ class INS_Show_Material_Lec_Or_Sec extends StatelessWidget {
                                                         //   // cubit.all_assign_files_List
                                                         // });
                                                         if(cubit.all_assign_files_List.isEmpty){
-                                                          cubit.pick_assign_File();
+                                                          cubit.pick_File();
                                                           // setState(() {});
 
                                                         }

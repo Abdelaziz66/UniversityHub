@@ -96,7 +96,7 @@ class Dio_Helper {
   }) async {
     FormData formData = FormData();
     dio.options.headers = {
-      'Content-Type': 'application/json',
+      //'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     };
@@ -110,14 +110,8 @@ class Dio_Helper {
           filename: fileName,
         ),
       ));
-      // formData.files.add(MapEntry(
-      //   'file',
-      //   await MultipartFile.fromFile(
-      //     file!.path,
-      //     filename: file.path.split('/').last,
-      //   ),
-      // )
-      // );
+      print('fileName$fileName');
+      print('file${file.path}');
 
     }
     return await dio.post(

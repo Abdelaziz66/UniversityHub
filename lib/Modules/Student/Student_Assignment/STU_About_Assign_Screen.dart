@@ -30,7 +30,7 @@ class STU_About_Assign_Screen extends StatelessWidget {
 
 
 
-                Text('${ cubit.stuAssignDataModel?.taskName}',
+                Text('${ cubit.stuAssignDataModel?.taskName??'Task Name'}',
                   style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
@@ -38,10 +38,11 @@ class STU_About_Assign_Screen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20,),
                 Container(
-                  height: 40,
+                  padding: EdgeInsetsDirectional.all(8),
+                  height: 100,
                   width: double.infinity,
                   child: const Text(
-                    'Assignment info',
+                    'please attach one file have your task and submit ....',
                     style: TextStyle(
                       fontSize:20,
                       fontWeight: FontWeight.bold
@@ -84,7 +85,7 @@ class STU_About_Assign_Screen extends StatelessWidget {
                             TextButton(
                                 onPressed: (){
                                   if(all_files.isEmpty) {
-                                    cubit.pick_assign_File();
+                                    cubit.pick_File();
                                   }
                                   else {
                                     cubit.SumitTask();
@@ -120,29 +121,29 @@ class STU_About_Assign_Screen extends StatelessWidget {
                             )
                         ),
                       ),
-                      SizedBox(width:5 ,),
-                      all_files.isNotEmpty? Container(
-                          height: 55,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(.9),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child:
-                          TextButton(
-                              onPressed: (){
-                                print('add new file ');
-                                cubit.pick_assign_File();
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.add,color: Colors.white,),
-                                ],
-                              )
-
-                          )
-                      ):SizedBox(),
+                      // SizedBox(width:5 ,),
+                      // all_files.isNotEmpty? Container(
+                      //     height: 55,
+                      //     width: 50,
+                      //     decoration: BoxDecoration(
+                      //       color: Colors.grey.withOpacity(.9),
+                      //       borderRadius: BorderRadius.circular(20),
+                      //     ),
+                      //     child:
+                      //     TextButton(
+                      //         onPressed: (){
+                      //           print('add new file ');
+                      //           cubit.pick_assign_File();
+                      //         },
+                      //         child: Row(
+                      //           mainAxisAlignment: MainAxisAlignment.center,
+                      //           children: [
+                      //             Icon(Icons.add,color: Colors.white,),
+                      //           ],
+                      //         )
+                      //
+                      //     )
+                      // ):SizedBox(),
 
                     ],
                   ),

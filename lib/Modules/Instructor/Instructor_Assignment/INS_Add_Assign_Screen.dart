@@ -333,7 +333,7 @@ class INS_Add_Assign_Screen extends StatelessWidget {
                             TextButton(
                               onPressed: (){
                                 if(all_files.isEmpty) {
-                                  cubit.pick_assign_File();
+                                  cubit.pick_File();
                                 }
                                 else {
                                   if(formkey2.currentState!.validate()&&startDate!=null&&endDate!=null) {

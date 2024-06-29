@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -77,13 +78,21 @@ class Edit_Profile_screen extends StatelessWidget {
                                     child: CircleAvatar(
                                       radius: 85,
                                       backgroundColor: Colors.blueGrey.withOpacity(.3),
-                                      child: CircleAvatar(
+                                      child:cubit.all_assign_files_List.isNotEmpty?
+
+                                      CircleAvatar(
 
                                         radius: 80,
                                         backgroundColor: Colors.white,
-                                        backgroundImage:
-                                        AssetImage('assets/images/profile.png'),
-                                      ),
+                                        backgroundImage: FileImage(cubit.all_assign_files_List[0]!)
+                                      ):  CircleAvatar(
+
+                                      radius: 80,
+                                      backgroundColor: Colors.white,
+                                     backgroundImage:
+                                     AssetImage('assets/images/profile.png'),
+                                     // FileImage('${}')
+        ),
                                     ),
                                   ),
                                 ),
@@ -120,41 +129,49 @@ class Edit_Profile_screen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                           horizontal: 30.0,
                         ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.transparent,
-                              border: Border.all(color: Colors.black, width: 0)),
-                          alignment: AlignmentDirectional.topStart,
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Row(
-                              children: [
+                        child: GestureDetector(
+                          onTap: (){
+                            cubit.all_assign_files_List.isEmpty? cubit.pick_File()
+                            :cubit.userUpdatePhoto();
+                            
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.transparent,
+                                border: Border.all(color: Colors.black, width: 0)),
+                            alignment: AlignmentDirectional.topStart,
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Row(
+                                children: [
 
-                                const FaIcon(
-                                  FontAwesomeIcons.camera,
-                                  size: 25,
-                                  color: Colors.black,
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  'Change Image',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: c1,
+                                  const FaIcon(
+                                    FontAwesomeIcons.camera,
+                                    size: 25,
+                                    color: Colors.black,
                                   ),
-                                ),
-                                const Spacer(),
-                                const FaIcon(
-                                  FontAwesomeIcons.circleChevronRight,
-                                  size: 25,
-                                  color: Colors.black,
-                                ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  Text(
+                                    cubit.all_assign_files_List.isEmpty?'Change Image'
+                                        :'Confirm Change',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                      color: c1,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  const FaIcon(
+                                    FontAwesomeIcons.circleChevronRight,
+                                    size: 25,
+                                    color: Colors.black,
+                                  ),
 
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),

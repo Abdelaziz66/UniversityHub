@@ -44,6 +44,7 @@ String INS_Gradeforstudent='Instructor/GetGradesForCurrentCourseForAstudent?';
 
 //--------Reset pass---------------
 String RESET_PASS='Account/UpdatePassword';
+String UPDATE_PHOTO='Account/update Photo';
 
 
 // String Token='';

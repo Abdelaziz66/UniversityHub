@@ -7,6 +7,8 @@ import 'package:university_hup/Shared/Cons_widget.dart';
 import '../../../Layout/LayoutScreen.dart';
 import '../../../Shared/Cubit/App_cubit.dart';
 import '../../../Shared/Cubit/App_state.dart';
+import '../STU_About_Course.dart';
+import 'STU_Quizes_Screen.dart';
 
 
 class STU_Quiz_Finish_Screen extends StatelessWidget {
@@ -61,7 +63,7 @@ class STU_Quiz_Finish_Screen extends StatelessWidget {
 
           body: SafeArea(
             child: ConditionalBuilder(
-              condition: cubit.QuizAnswersResponse.isNotEmpty,
+              condition: cubit.quizGrade!=null,
               builder:(context)=> Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -90,7 +92,7 @@ class STU_Quiz_Finish_Screen extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 25.0,bottom: 20),
-                        child: Text('${cubit.quizResult}',style: TextStyle(
+                        child: Text('${cubit.quizGrade}',style: TextStyle(
                           color: Colors.blue,
                           fontSize: 50
                         ),),
@@ -114,6 +116,8 @@ class STU_Quiz_Finish_Screen extends StatelessWidget {
                             print('all answers :${cubit.allquizAnswers}');
 
                             NavigateAndFinish(context, Layout_Screen());
+                            navigateTo(context,STU_About_course ());
+                            navigateTo(context,STU_Quizes_Screen ());
                           },
                           child: const Text('Done',
                             style: TextStyle(
