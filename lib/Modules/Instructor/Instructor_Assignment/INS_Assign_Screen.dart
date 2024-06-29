@@ -22,6 +22,7 @@ import 'package:university_hup/Shared/constant.dart';
 
 import '../../../Models/INS_Model/INS_Assign_Model.dart';
 
+import '../../../Models/INS_Model/INS_Course_Assign_Model.dart';
 import 'INS_About_Assign_Screen.dart';
 
 
@@ -40,7 +41,7 @@ class INS_Assign_Screen extends StatelessWidget {
         App_cubit cubit=App_cubit.get(context);
         bool isvisbile=false;
         Time _time = Time(hour: 11, minute: 30, second: 20);
-        List<STU_Course_Assign_Model> insAssign=cubit.insCoursesAssign_Pending_Model;
+
         return DefaultTabController(
           length: 2, // Number of tabs
           initialIndex: cubit.Tab_Bar_1_index,
@@ -63,110 +64,13 @@ class INS_Assign_Screen extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 30,),
-                    defaultAppbar(context:context),
+                    defaultAppbar(context:context,text: '${cubit.currentCourseName}'),
                     const SizedBox(height: 30,),
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    //   child: GlassBox(
-                    //       widget: Padding(
-                    //         padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 15),
-                    //         child: Row(
-                    //           mainAxisAlignment: MainAxisAlignment.center,
-                    //           children: [
-                    //
-                    //
-                    //             FaIcon(
-                    //               FontAwesomeIcons.featherPointed,
-                    //               color: c1.withOpacity(.9),
-                    //             ),
-                    //             const SizedBox(
-                    //               width: 10,
-                    //             ),
-                    //             Text(
-                    //               'Assignments',
-                    //               style: TextStyle(
-                    //                 fontSize: 17,
-                    //                 fontWeight: FontWeight.w700,
-                    //                 color: c1,
-                    //               ),
-                    //             ),
-                    //             Spacer(),
-                    //             FaIcon(
-                    //               FontAwesomeIcons.angleRight,
-                    //               color: c1.withOpacity(.9),
-                    //             ),
-                    //             Spacer(),
-                    //             FaIcon(
-                    //               Icons.add_task,
-                    //               color: c1.withOpacity(.9),
-                    //             ),
-                    //             const SizedBox(
-                    //               width: 10,
-                    //             ),
-                    //             Text(
-                    //               'State',
-                    //               style: TextStyle(
-                    //                 fontSize: 17,
-                    //                 fontWeight: FontWeight.w700,
-                    //                 color: c1,
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //       color: Colors.blueGrey.withOpacity(.15),
-                    //       borderRadius: 15,
-                    //       x: 0,
-                    //       y: 0
-                    //   ),
-                    // ),
-                    // SizedBox(height: 15,),
-                    // Stack(
-                    //  alignment: Alignment.topRight,
-                    //   children:[
-                    //     Container(
-                    //       height: 250,
-                    //       width: double.infinity,
-                    //       decoration: BoxDecoration(
-                    //         color: Colors.blue,
-                    //         borderRadius: BorderRadius.circular(15),
-                    //       ),
-                    //     ),
-                    //     CircleAvatar(
-                    //        radius:50,
-                    //         backgroundColor:Colors.white,
-                    //     ),
-                    //     Positioned(
-                    //         child: BackdropFilter(
-                    //           blendMode: BlendMode.hardLight,
-                    //           filter: ImageFilter.blur(sigmaX: 120, sigmaY: 120),
-                    //           child:
-                    //             Container(
-                    //             height: 250,
-                    //             width: double.infinity,
-                    //             decoration: BoxDecoration(
-                    //                 // gradient:RadialGradient(
-                    //                 //   radius:.7,
-                    //                 //   center:Alignment.topRight ,
-                    //                 //  colors: [
-                    //                 //       Colors.white,
-                    //                 //       Colors.blue,
-                    //                 //     ],
-                    //                 // ),
-                    //
-                    //             color: Colors.blue,
-                    //               borderRadius: BorderRadius.circular(15),
-                    //             ),
-                    //           ),
-                    //         )),
-                    //
-                    //
-                    //   ]
-                    // )
+
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Container(
-                         height: 200,
+                         height: 150,
                         // width: double.infinity,
                         decoration: BoxDecoration(
                           gradient: const RadialGradient(
@@ -215,7 +119,7 @@ class INS_Assign_Screen extends StatelessWidget {
                                         width: 8,
                                       ),
                                       Text(
-                                        '4 task Running',
+                                        '${cubit.insCoursesAssign_Pending_Model.length} task Running',
                                         style: TextStyle(
                                             color: Colors.grey[300], fontSize: 14,fontWeight: FontWeight.w500),
                                       ),
@@ -243,41 +147,13 @@ class INS_Assign_Screen extends StatelessWidget {
                                         width: 8,
                                       ),
                                       Text(
-                                        '7 task completed',
+                                        '${cubit.insCoursesAssign_Completed_Model.length} task completed',
                                         style: TextStyle(
                                             color: Colors.grey[300], fontSize: 14,fontWeight: FontWeight.w500),
                                       ),
                                     ],
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
                                   ),
 
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 18,
-                                        width: 18,
-                                        decoration: BoxDecoration(
-                                          color: Colors.green,
-                                          borderRadius: BorderRadius.circular(4),
-                                        ),
-                                        child: const Icon(
-                                          FontAwesomeIcons.check,
-                                          size: 14,
-                                          color: Colors.indigo,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text(
-                                        '6 task received to day',
-                                        style: TextStyle(
-                                            color: Colors.grey[300], fontSize: 14,fontWeight: FontWeight.w500),
-                                      ),
-                                    ],
-                                  ),
                                 ],
                               ),
                               const Expanded(
@@ -381,9 +257,9 @@ class INS_Assign_Screen extends StatelessWidget {
 
                                   // navigateTo(context,INS_About_Assign_Screen() );
                                 },
-                                child: INS_Task_Card(assign: insAssign[index], context: context,)),
+                                child: INS_Task_Card(assign: cubit.insCoursesAssign_Pending_Model[index], context: context,)),
                             separatorBuilder: (context,index)=>const SizedBox(height: 10,),
-                            itemCount: insAssign.length,
+                            itemCount: cubit.insCoursesAssign_Pending_Model.length,
                           ),
 
                         ) ,

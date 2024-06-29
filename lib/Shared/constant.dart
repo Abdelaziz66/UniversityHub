@@ -1,3 +1,4 @@
+import 'package:day_night_time_picker/lib/state/time.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -23,7 +24,7 @@ Color p4 =HexColor('#6DBBF3');
 
 
 // Color c1 =Colors.white
-
+Time time = Time(hour: 11, minute: 30, second: 0);
 
 //-----------------End  points for Student ---------------
 String LOGIN='Account/login';

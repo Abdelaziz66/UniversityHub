@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:university_hup/Shared/Component/component.dart';
 
+import '../Modules/Student/STU_About_Course.dart';
 import 'Cubit/App_cubit.dart';
 import 'constant.dart';
 
@@ -56,7 +57,7 @@ Widget defaultAppbar({
       child:Padding(
         padding: const EdgeInsets.only(left: 80.0,right: 40),
         child: Text(
-          text??'Parallel Programming ',overflow: TextOverflow.ellipsis,maxLines: 1,
+          text??'',overflow: TextOverflow.ellipsis,maxLines: 1,
 
           textAlign: TextAlign.center,
           style: TextStyle(

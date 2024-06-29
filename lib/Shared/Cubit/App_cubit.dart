@@ -2,6 +2,7 @@ import 'dart:async';
 //import 'dart:html';
 import 'dart:io';
 
+import 'package:day_night_time_picker/lib/state/time.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -48,6 +49,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../Models/HistoryModel&Adapter/historyModel.dart';
 import '../../Models/INS_Model/CourseModel.dart';
 import '../../Models/INS_Model/INS_Assign_Model.dart';
+import '../../Models/INS_Model/INS_Course_Assign_Model.dart';
 import '../../Models/STU_Model/Calender_Model/CalenderMode.dart';
 import '../../Models/STU_Model/CourseModel/Stu_Course_Grades_model.dart';
 import '../../Models/STU_Model/StuDachboardModel&Adapter/Dashboard_stu_model.dart';
@@ -896,6 +898,7 @@ print('///////////////****************///////////////////');
       if (value.statusCode == 200) {
         print('get Instructor info true');
         instructorInfoModel = currentinfo_ins_model.fromJson(value.data);
+        currentInstructorName=instructorInfoModel?.fullName;
         print(instructorInfoModel?.fullName);
         emit(Get_INS_Info_SuccessState());
       }
@@ -1356,20 +1359,21 @@ print('///////////////****************///////////////////');
   List<STU_Course_Assign_Model> stuCoursesAssignModel = [];
   List<STU_Course_Assign_Model> stuCoursesAssign_Completed_Model = [];
   List<STU_Course_Assign_Model> stuCoursesAssign_Pending_Model = [];
-  List<STU_Course_Assign_Model> insCoursesAssignModel = [];
-  List<STU_Course_Assign_Model> insCoursesAssign_Completed_Model = [];
-  List<STU_Course_Assign_Model> insCoursesAssign_Pending_Model = [];
+  List<INS_Course_Assign_Model> insCoursesAssignModel = [];
+  List<INS_Course_Assign_Model> insCoursesAssign_Completed_Model = [];
+  List<INS_Course_Assign_Model> insCoursesAssign_Pending_Model = [];
   void StuGetCourseAssign(
       //required token,
       // required cycleId,
       ) {
     // stuCoursesAssignModel=[];
-    stuCoursesAssign_Completed_Model=[];
-    stuCoursesAssign_Pending_Model=[];
-    stuCoursesAssignModel=[];
-    insCoursesAssignModel=[];
+
+
     if(rol=='Student') {
       if ( true) {
+        stuCoursesAssign_Completed_Model=[];
+        stuCoursesAssign_Pending_Model=[];
+        stuCoursesAssignModel=[];
         emit(Stu_Get_Course_Assign_LoadingState());
         print('____1____');
         Dio_Helper.GetData(
@@ -1431,10 +1435,10 @@ print('///////////////****************///////////////////');
             //  for (var element in  Json) {
             Json.forEach((element) {
               insCoursesAssignModel
-                  .add(STU_Course_Assign_Model.fromJson(element));
+                  .add(INS_Course_Assign_Model.fromJson(element));
             });
             insCoursesAssignModel.forEach((element) {
-              if(DateTime.now().isBefore(DateTime.parse(element.endDate!))){
+              if(DateTime.now().isBefore(element.endDate!)){
                 insCoursesAssign_Pending_Model.add(element);
               }
               else{
@@ -2046,6 +2050,7 @@ print('///////////////****************///////////////////');
           //instructorName: currentInstructorName!,
           historyMessage: 'Add new task :\n${taskName}',
         );
+        StuGetCourseAssign();
         emit(Ins_Add_Assign_SuccessState());
       }
     }).catchError((Error) {
@@ -2126,6 +2131,7 @@ print('///////////////****************///////////////////');
           var Json = value.data;
           flutterToast(msg:'Updated successfully', backColor: Colors.green);
           print(Json.toString());
+          StuGetCourseAssign();
           emit(Ins_update_Assign_SuccessState());
         }
       }).catchError((error) {
@@ -2177,7 +2183,7 @@ print('///////////////****************///////////////////');
           flutterToast(msg:'Delete successfully', backColor: Colors.green);
           print(Json.toString());
 
-
+          StuGetCourseAssign();
           emit(Ins_delete_Assign_SuccessState());
         }
       }).catchError((error) {
@@ -3325,6 +3331,18 @@ print('///////////////****************///////////////////');
      print('error to reset pass ----- $error');
      emit(Stu_Reset_Pass_ErrorState());
    });
+  }
+
+  String? StartDate;
+  String? EndDate;
+  void StartDate_Function({required var time}){
+    StartDate=time;
+    emit(StartDate_state());
+  }
+
+  void EndDate_Function({required var time}){
+    EndDate=time;
+    emit(EndDate_state());
   }
 
 }

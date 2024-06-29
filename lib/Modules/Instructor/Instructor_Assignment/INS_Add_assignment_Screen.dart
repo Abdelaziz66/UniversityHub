@@ -14,6 +14,10 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
+import '../../../Layout/LayoutScreen.dart';
+import '../../Navigation_Screens/Course_Screen.dart';
+import '../../Student/STU_About_Course.dart';
+
 class INS_add_assignment extends StatefulWidget {
   const INS_add_assignment({super.key});
 
@@ -27,16 +31,6 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
   int _index = 0;
   var taskNamecontroller = TextEditingController();
   var taskGradecontroller = TextEditingController();
-  String? startDate;
-  String? endDate;
-  int? starthours;
-  int? startminutes;
-  int? endhours;
-  int? endminutes;
-  int? startd;
-  int? endd;
-  int? startm;
-  int? endm;
   // String? quiz_ask = '';
   // var boardcontroller = PageController();
   var stepcontroller = ScrollController();
@@ -48,7 +42,11 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
       builder: (context, state) {
         App_cubit cubit = App_cubit.get(context);
         List<File> all_files = cubit.all_assign_files_List;
-        Time _time = Time(hour: 11, minute: 30, second: 0);
+
+
+
+
+
         return Scaffold(
           body: SafeArea(
             child: Column(
@@ -139,20 +137,24 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                       onStepContinue: () {
                         if (_index == 2) {
                           if (formkey.currentState!.validate() &&
-                              startDate != null &&
-                              endDate != null &&
+                              cubit.StartDate != null &&
+                              cubit.EndDate != null &&
                               all_files.isNotEmpty) {
                             cubit.AddInsNewTask(
-                              startDate: startDate,
-                              endDate: endDate,
+                              startDate: cubit.StartDate,
+                              endDate: cubit.EndDate,
                               taskName: taskNamecontroller.text,
                               taskGrade: taskGradecontroller.text,
                             );
-                            cubit.StuGetCourseAssign();
                             NavigateAndFinish(
                               context,
-                              INS_Assign_Screen(),
+                              Layout_Screen(),
                             );
+                            // Navigator.push(context,MaterialPageRoute(builder: (context) => STU_Lecture_Screen(),));
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => STU_About_course(),));
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => INS_Assign_Screen(),));
+                            cubit.StartDate=null;
+                            cubit.EndDate=null;
                           } else {
                             flutterToast(
                                 msg: 'please add all data about task',
@@ -585,7 +587,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                             .push(
                                                           showPicker(
                                                             context: context,
-                                                            value: _time,
+                                                            value: time,
                                                             sunrise: TimeOfDay(
                                                                 hour: 6,
                                                                 minute:
@@ -617,6 +619,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                       .minute;
                                                               starthours =
                                                                   value.hour;
+
                                                             },
                                                             // onChangeDateTime: (){},
                                                           ),
@@ -624,12 +627,6 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                             .then((value) {
                                                           if (selectedDate !=
                                                               null) {
-                                                            startm =
-                                                                selectedDate
-                                                                    .month;
-                                                            startd =
-                                                                selectedDate
-                                                                    .day;
                                                             DateTime
                                                             selectedDateTime =
                                                             DateTime(
@@ -644,10 +641,10 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                             );
                                                             print(
                                                                 'Selected date and time: $selectedDateTime');
-                                                            startDate = DateFormat(
+                                                            cubit.StartDate_Function(time:DateFormat(
                                                                 "yyyy-MM-ddTHH:mm:ss.SSS")
                                                                 .format(
-                                                                selectedDateTime);
+                                                                selectedDateTime) );
                                                             print(
                                                                 '2024-03-23T22:31:30.911Z');
                                                             // Handle the selected date and time as needed
@@ -716,8 +713,8 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                         15),
                                                                 child: Row(
                                                                   children: [
-                                                                    Text(
-                                                                      '${starthours ?? '--'} : ${startminutes ?? '--'}',
+                                                                    Text(        cubit.StartDate==null?'-- : --':
+                                                                      '${DateTime.parse(cubit.StartDate!).hour} / ${DateTime.parse(cubit.StartDate!).minute}',
                                                                       style:
                                                                           TextStyle(
                                                                         fontSize:
@@ -768,8 +765,8 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                         15),
                                                                 child: Row(
                                                                   children: [
-                                                                    Text(
-                                                                      '${startd ?? '--'} / ${startm ?? '--'}',
+                                                                    Text(        cubit.StartDate==null?'-- / --':
+                                                                      '${DateTime.parse(cubit.StartDate!).day} / ${DateTime.parse(cubit.StartDate!).month}',
                                                                       style:
                                                                           TextStyle(
                                                                         fontSize:
@@ -829,7 +826,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                             .push(
                                                           showPicker(
                                                             context: context,
-                                                            value: _time,
+                                                            value: time,
                                                             sunrise: TimeOfDay(
                                                                 hour: 6,
                                                                 minute:
@@ -868,12 +865,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                             .then((value) {
                                                           if (selectedDate !=
                                                               null) {
-                                                            endm =
-                                                                selectedDate
-                                                                    .month;
-                                                            endd =
-                                                                selectedDate
-                                                                    .day;
+
                                                             DateTime
                                                             selectedDateTime =
                                                             DateTime(
@@ -888,10 +880,10 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                             );
                                                             print(
                                                                 'Selected date and time: $selectedDateTime');
-                                                            endDate = DateFormat(
+                                                            cubit.EndDate_Function(time: DateFormat(
                                                                 "yyyy-MM-ddTHH:mm:ss.SSS")
                                                                 .format(
-                                                                selectedDateTime);
+                                                                selectedDateTime) );
                                                             print(
                                                                 '2024-03-23T22:31:30.911Z');
                                                             // Handle the selected date and time as needed
@@ -961,7 +953,8 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                 child: Row(
                                                                   children: [
                                                                     Text(
-                                                                      '${endhours ?? '--'} : ${endminutes ?? '--'}',
+                                                                cubit.EndDate==null?'-- : --':
+                                                                      '${DateTime.parse(cubit.EndDate!).hour } : ${DateTime.parse(cubit.EndDate!).minute}',
                                                                       style:
                                                                           TextStyle(
                                                                         fontSize:
@@ -1012,8 +1005,9 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                         15),
                                                                 child: Row(
                                                                   children: [
-                                                                    Text(
-                                                                      '${endd ?? '--'} / ${endm ?? '--'}',
+
+                                                                    Text( cubit.EndDate==null?'-- / --':
+                                                                      '${DateTime.parse(cubit.EndDate!).day} / ${DateTime.parse(cubit.EndDate!).month}',
                                                                       style:
                                                                           TextStyle(
                                                                         fontSize:
@@ -1204,7 +1198,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                   width: 7,
                                                                 ),
                                                                 Text(
-                                                                  'Computer Security',
+                                                                  '${cubit.currentCourseName}',
                                                                   textAlign:
                                                                       TextAlign
                                                                           .start,
@@ -1257,8 +1251,9 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                 SizedBox(
                                                                   width: 7,
                                                                 ),
-                                                                Text(
-                                                                  'Start ${startd}/${startm} at ${starthours}.${startminutes}',
+                                                                Text(cubit.StartDate==null?'':
+                                                                  'Start   ${DateTime.parse(cubit.StartDate!).day}/${DateTime.parse(cubit.StartDate!).month}'
+                                                                      '   ${DateTime.parse(cubit.StartDate!).hour }:${DateTime.parse(cubit.StartDate!).minute}',
                                                                   textAlign:
                                                                       TextAlign
                                                                           .start,
@@ -1284,8 +1279,9 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                 SizedBox(
                                                                   width: 7,
                                                                 ),
-                                                                Text(
-                                                                  'End ${endd}/${endm} at ${endhours}.${endminutes}',
+                                                                Text( cubit.EndDate==null?'':
+                                                                  'End   ${DateTime.parse(cubit.EndDate!).day}/${DateTime.parse(cubit.EndDate!).month}'
+                                                                      '   ${DateTime.parse(cubit.EndDate!).hour }:${DateTime.parse(cubit.EndDate!).minute}',
                                                                   textAlign:
                                                                       TextAlign
                                                                           .start,
