@@ -533,18 +533,14 @@ class App_cubit extends Cubit<App_state> {
 //--------STU  Upload assignment -------------------
   List<File> all_assign_files_List = [];
   File? assignFile;
-  void pick_assign_File() async {
+  void pick_File() async {
     emit(AddFile_Assign_Loading_State());
 
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowMultiple: false,
-      allowedExtensions: ['png', 'cdr', 'psd', 'jpeg', 'png', 'pdf'],
+      allowedExtensions: ['png', 'cdr', 'psd', 'jpeg', 'png', 'pdf','jpg'],
     );
-        //.then((value) {
-
-      //openFile_Fun(filePath:value!.files[0].path!);
-    // });
     if (result != null) {
       result.files.forEach((element) {
         all_assign_files_List.add(File(element.path!));
@@ -1372,6 +1368,7 @@ print('///////////////****************///////////////////');
       if ( true) {
         emit(Stu_Get_Course_Assign_LoadingState());
         print('____1____');
+        print(currentCycleId);
         Dio_Helper.GetData(
           url: 'Students/CurrentCourseTasks?CycleId=${currentCycleId}',
           //STU_COURSE_MATERIAL,
@@ -1480,7 +1477,8 @@ print('///////////////****************///////////////////');
         print('get course Assign true');
         emit(Stu_Get_Course_Assign_Data_SuccessState());
       }
-      print('task name------- ${stuAssignDataModel?.filePath}');
+      print('task file------- ${stuAssignDataModel?.filePath}');
+      print('task name------- ${stuAssignDataModel?.taskName}');
     }).catchError((error) {
       emit(Stu_Get_Course_Assign_Data_ErrorState(error.toString()));
       print(error.toString());
@@ -1600,10 +1598,12 @@ print('///////////////****************///////////////////');
   }
 
   List<Map<String, dynamic>> submitQuizAnswers = [];
-  int? quizResult = 0;
-  List<Map<String, dynamic>> QuizAnswersResponse = [];
+ // int? quizResult = 0;
+ // List<Map<String, dynamic>> QuizAnswersResponse = [];
+  int? quizGrade;
   void SumitQuiz() {
-    QuizAnswersResponse = [];
+    quizGrade=null;
+    //QuizAnswersResponse = [];
     emit(Stu_Submit_Quiz_LoadingState());
 
     for (int i = 0; i < questionModel.length; i++) {
@@ -1617,18 +1617,20 @@ print('///////////////****************///////////////////');
     }).then((value) {
       if (value.statusCode == 200) {
         print('submit Quiz true');
-        List json = value.data;
+        quizGrade=value.data['totalGrade'];
+        print('gradeeeeeee--****** ${value.data['totalGrade']}');
+       // List json = value.data;
 
-        for (var element in json) {
-          print(element.values);
-          QuizAnswersResponse.add({'${element.keys}': element.values});
-        }
-        for (var item in QuizAnswersResponse) {
-          if (item.values.toString() == '((true))') {
-            quizResult = quizResult! + 1;
-          }
-        }
-        print('quiz result :${quizResult}');
+        // for (var element in json) {
+        //   print(element.values);
+        //   QuizAnswersResponse.add({'${element.keys}': element.values});
+        // }
+        // for (var item in QuizAnswersResponse) {
+        //   if (item.values.toString() == '((true))') {
+        //     quizResult = quizResult! + 1;
+        //   }
+        // }
+     //   print('quiz result :${quizResult}');
         stuStoreHistoryToHive(
           materialName: currentCourseName!,
           instructorName: currentInstructorName!,
@@ -1696,6 +1698,7 @@ print('///////////////****************///////////////////');
 
         print(json);
         flutterToast(msg: '${json}', backColor: Colors.green);
+        GetStuCalenderDayEvent();
         print('event body ----------$eventBody');
 
         if(rol=='Student'){
@@ -1733,32 +1736,32 @@ print('///////////////****************///////////////////');
 
 //---------Get All Events ------------------
   List<GetAllCalenderEvents>getAllCalenderEvents=[];
-  void GetStuCalenderEvents() {
-    // courseGradesModel=[];
-      emit(Stu_Get_Calener_Events_LoadingState());
-      Dio_Helper.GetData(
-        url: GETCALENDER,
-        token: token,
-      ).then((value) {
-        if (value.statusCode == 200) {
-          List Json = value.data;
-          for (var element in Json) {
-            getAllCalenderEvents.add(GetAllCalenderEvents.fromJson(element));
-          }
-          print('Get Calender event successful');
-          print((courseGradesModel.length));
-          getAllCalenderEvents.forEach((element) {
-            print(element.body);
-          });
-          emit(Stu_Get_Calener_Events_SuccessState());
-        }
-      }).catchError((error) {
-        print(error);
-        emit(Stu_Get_Calener_Events_ErrorState(error));
-      });
-      // courseGradesModel=[];
-
-  }
+  // void GetStuCalenderEvents() {
+  //   // courseGradesModel=[];
+  //     emit(Stu_Get_Calener_Events_LoadingState());
+  //     Dio_Helper.GetData(
+  //       url: GETCALENDER,
+  //       token: token,
+  //     ).then((value) {
+  //       if (value.statusCode == 200) {
+  //         List Json = value.data;
+  //         for (var element in Json) {
+  //           getAllCalenderEvents.add(GetAllCalenderEvents.fromJson(element));
+  //         }
+  //         print('Get Calender event successful');
+  //         print((courseGradesModel.length));
+  //         getAllCalenderEvents.forEach((element) {
+  //           print(element.body);
+  //         });
+  //         emit(Stu_Get_Calener_Events_SuccessState());
+  //       }
+  //     }).catchError((error) {
+  //       print(error);
+  //       emit(Stu_Get_Calener_Events_ErrorState(error));
+  //     });
+  //     // courseGradesModel=[];
+  //
+  // }
 
 
   List<GetCalenderDayEventModel>getAllCalenderDayEvent=[];
@@ -1861,8 +1864,11 @@ print('///////////////****************///////////////////');
           // for (var element in Json) {
           //   insAllLecFoldersModel.add(InsStudentUplodeTaskModel.fromJson(element));
           // }
+
           flutterToast(msg: 'add new folder successfully', backColor: Colors.green);
+          GetCourseMaterials();
           print(Json);
+
           emit(Ins_Add_Folder_SuccessState());
         }
         //  InsertToDataBase_Course_Table();
@@ -2683,7 +2689,7 @@ print('///////////////****************///////////////////');
 
 
   List<GetAllNewsModel>allNEWSFromHIVE=[];
-  void getAllNewsFromHIVE()async{
+  void getAllNewsFromHIVE(){
     emit(Stu_Get_AllNews_From_Hive_LoadingState());
     try {
       allNEWSFromHIVE =List.from(navigationScreensBox.get(HiveConstants.allNewsList,defaultValue: [])).cast<GetAllNewsModel>();
@@ -2840,7 +2846,10 @@ print('///////////////****************///////////////////');
 
 
   List<Widget>offline_DashboardData=[];
-  void getDashboardFromHIVE()async{
+
+  void getDashboardFromHIVE(){
+    print('start get all Dashboard from HIVE--------*******-------');
+
     emit(Stu_Get_Dashboard_From_Hive_LoadingState());
     try {
       List.from(navigationScreensBox.get(HiveConstants.quizDashboard,defaultValue: [])).cast<Quiz>().forEach((element) {
@@ -2849,10 +2858,11 @@ print('///////////////****************///////////////////');
       List.from(navigationScreensBox.get(HiveConstants.taskDashboard,defaultValue: [])).cast<Task>().forEach((element) {
         offline_DashboardData.add(Task_D(task: element));
       });
-      print('get all news from HIVE Success---------------');
-      allNEWSFromHIVE.forEach((element) {
-        print(element.content);
+      offline_DashboardData.forEach((element) {
+        print('------------$element');
       });
+      print('get all Dashboard from HIVE Success---------------');
+
       emit(Stu_Get_Dashboard_From_Hive_SuccessState());
     } catch (error) {
       emit(Stu_Get_Dashboard_From_Hive_ErrorState());
@@ -2996,7 +3006,7 @@ print('///////////////****************///////////////////');
     stuHistoryList.add(
           StuHistoryModel(
             hiveIndex:stuHistoryList.length,
-            materialName: materialName,
+            materialName: materialName??'',
             historyMessage: historyMessage,
             instructorName: instructorName??'',
             historyTime: DateFormat("${DateTime.now().day} / ${DateTime.now().month}\n${DateTime.now().hour} "
@@ -3319,12 +3329,60 @@ print('///////////////****************///////////////////');
      if(value.statusCode==200){
        print('reset pass successfully');
        flutterToast(msg: value.data.toString(), backColor: Colors.green);
+       if(rol=='Student'){
+       stuStoreHistoryToHive(
+         //historyKey:HiveConstants.stuAssignHisroyBox,
+         //hisryValue: stuAssignDataModel
+           materialName: '',
+           instructorName: '',
+           historyMessage: 'update your password'
+       );}
+       else{
+         insStoreHistoryToHive(
+           //historyKey:HiveConstants.stuAssignHisroyBox,
+           //hisryValue: stuAssignDataModel
+             materialName: '',
+             historyMessage: 'update your password'
+         );
+       }
        emit(Stu_Reset_Pass_SuccessState(value.statusCode));
      }
    }).catchError((error){
      print('error to reset pass ----- $error');
      emit(Stu_Reset_Pass_ErrorState());
    });
+  }
+
+
+  //----------------update phot------------------
+
+  void userUpdatePhoto(
+  ) {
+    print('All files-------------- ${all_assign_files_List}');
+    // all_assign_files_List=[];
+    emit(User_Update_Photo_LoadingState());
+    Dio_Helper.PostListFileData(
+        token: token,
+        url: UPDATE_PHOTO,
+        files: all_assign_files_List
+    )
+        .then((value) {
+      if (value.statusCode == 200) {
+        print('post photo true');
+        //   print(value.data);
+        String json = value.data;
+        print(json);
+        flutterToast(msg: 'photo updated successfully', backColor: Colors.green);
+        emit(User_Update_Photo_SuccessState());
+      }
+    }).catchError((Error) {
+      print(Error.toString());
+      flutterToast(
+          msg: 'Error to update your photo , please try again',
+          backColor: Colors.red);
+
+      emit(User_Update_Photo_ErrorState());
+    });
   }
 
 }

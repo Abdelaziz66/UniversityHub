@@ -1366,7 +1366,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                     : InkWell(
                                         onTap: () {
                                           if (all_files.isEmpty) {
-                                            cubit.pick_assign_File();
+                                            cubit.pick_File();
                                           }
                                         },
                                         child: GlassBoxWithBorder_Gradiant2(

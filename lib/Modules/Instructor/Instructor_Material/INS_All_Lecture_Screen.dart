@@ -826,7 +826,28 @@ class INS_Matrial_Screen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    fallback: (context) =>CircularProgressIndicator(),
+                    fallback: (context)  {
+                      if (lectures.isEmpty &&
+                        state is! Ins_Get_All_Lec_Folders_LoadingState
+                    ) {
+                      return
+                        Column(
+                          children: [
+                            SizedBox(height: 300,),
+                            Center(child:Text('No Folders here..'),),
+                          ],
+                        );
+                    }else{
+                      return Column(
+                        children: [
+                          SizedBox(height: 300,),
+                          Center(child: CircularProgressIndicator()),
+                        ],
+                      );
+                    }
+
+
+                    }
                   ),
                   fallback: (context) => ConditionalBuilder(
                     condition: labs.isNotEmpty&&state is !Ins_Get_All_Lec_Folders_LoadingState ,
@@ -857,8 +878,27 @@ class INS_Matrial_Screen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    fallback:(context)=>CircularProgressIndicator(),
+                    fallback:(context) {
+                      if (labs.isEmpty &&
+                        state is! Ins_Get_All_Lec_Folders_LoadingState
+                      ) {
+                     return
+                       Column(
+                         children: [
+                           SizedBox(height: 300,),
+                           Center(child:Text('No Folders here..'),),
+                         ],
+                       );
+                    }else{
+                        return Column(
+                          children: [
+                            SizedBox(height: 300,),
+                            Center(child: CircularProgressIndicator()),
+                          ],
+                        );
+                      }
 
+                    }
 
                   ),
                 ),

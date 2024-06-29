@@ -735,3 +735,14 @@ class Stu_Reset_Pass_SuccessState extends App_state {
 
 class Stu_Reset_Pass_ErrorState extends App_state {}
 
+//------------update photo--------------
+class User_Update_Photo_LoadingState extends App_state {
+
+}
+
+class User_Update_Photo_SuccessState extends App_state {
+  User_Update_Photo_SuccessState();
+}
+
+class User_Update_Photo_ErrorState extends App_state {}
+
