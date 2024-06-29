@@ -625,23 +625,23 @@ Widget Calender_Event({
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                const FaIcon(
-                  FontAwesomeIcons.circlePlay,
-                  size: 17,
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                Text('Parallel Programming - Dr Amr Masoud',
-                    style: TextStyle(
-                        color: Colors.black.withOpacity(.8),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 12)),
-              ],
-            ),
-            const SizedBox(
+        Row(
+        children: [
+        const FaIcon(
+        FontAwesomeIcons.circlePlay,
+          size: 17,
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        Text('Event Data ... ',
+            style: TextStyle(
+                color: Colors.black.withOpacity(.8),
+                fontWeight: FontWeight.w600,
+                fontSize: 12)),
+        ],
+      ),
+      const SizedBox(
               height: 5,
             ),
             Row(
@@ -1558,12 +1558,6 @@ Widget insHistoryCard(
         Dismissible(
             key: Key(history!.hiveIndex.toString()),
             onDismissed: (dismiss) {
-              //  print(' his index ---- ${ history.hiveIndex!}');
-              //  cubit.dismissItems.forEach((element) {print(element);});
-              // cubit.dismissItems.removeAt(index);
-              // cubit.dismissItems.forEach((element) {print(element);});
-
-              //rol=='Student'?App_cubit.get(context).stuDeleteHistory(hisIndex: history.hiveIndex!)
               App_cubit.get(context)
                   .insDeleteHistory(hisIndex: history.hiveIndex!);
             },
@@ -1595,34 +1589,40 @@ Widget insHistoryCard(
                       const SizedBox(
                         width: 15,
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 200,
-                            child: Text(
-                              '${history.historyMessage}',
-                              maxLines: 2,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  color: c1,
-                                  fontSize: 15,
-                                  overflow: TextOverflow.ellipsis),
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                             // width: 150,
+                              child: Text(
+                                '${history.historyMessage}',
+                                maxLines: 2,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    color: c1,
+                                    fontSize: 15,
+                                    overflow: TextOverflow.ellipsis),
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 1),
-                          Text(
-                            '${history.materialName}',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: c1,
-                                fontSize: 14),
-                          ),
-                        ],
+                            const SizedBox(height: 1),
+                            Container(
+                              width: 50,
+                              child: Text(
+                                '${history.materialName}',
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: c1,
+                                    fontSize: 14),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      Expanded(
-                        child: Container(
+                         Container(
+                           width: 80,
                           alignment: AlignmentDirectional.centerEnd,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -1656,7 +1656,7 @@ Widget insHistoryCard(
                             ],
                           ),
                         ),
-                      ),
+                      
                     ],
                   ),
                 ),
@@ -3064,23 +3064,23 @@ Widget STU_pend_Tasks({STU_Course_Assign_Model? assign}) => Container(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Row(
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.bookmark,
-                                size: 12,
-                              ),
-                              SizedBox(
-                                width: 7,
-                              ),
-                              Text(
-                                '${assign?.courseName}',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 13),
-                              ),
-                            ],
-                          ),
+                          // Row(
+                          //   children: [
+                          //     FaIcon(
+                          //       FontAwesomeIcons.bookmark,
+                          //       size: 12,
+                          //     ),
+                          //     SizedBox(
+                          //       width: 7,
+                          //     ),
+                          //     Text(
+                          //       '${assign?.courseName}',
+                          //       textAlign: TextAlign.start,
+                          //       style: TextStyle(
+                          //           fontWeight: FontWeight.w700, fontSize: 13),
+                          //     ),
+                          //   ],
+                          // ),
                           SizedBox(
                             height: 2,
                           ),
@@ -3088,26 +3088,6 @@ Widget STU_pend_Tasks({STU_Course_Assign_Model? assign}) => Container(
                             children: [
                               FaIcon(
                                 FontAwesomeIcons.user,
-                                size: 12,
-                              ),
-                              SizedBox(
-                                width: 7,
-                              ),
-                              Text(
-                                '${assign?.instructorName}',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 13),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Row(
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.chartLine,
                                 size: 12,
                               ),
                               SizedBox(
@@ -3127,6 +3107,32 @@ Widget STU_pend_Tasks({STU_Course_Assign_Model? assign}) => Container(
                           Row(
                             children: [
                               FaIcon(
+                                FontAwesomeIcons.chartLine,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 7,
+                              ),
+                              Container(
+                                width: 150,
+                                child: Text(
+                                  'From ${assign?.startDate}',
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 13),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
                                 FontAwesomeIcons.clock,
                                 size: 12,
                               ),
@@ -3136,7 +3142,7 @@ Widget STU_pend_Tasks({STU_Course_Assign_Model? assign}) => Container(
                               Container(
                                 width: 150,
                                 child: Text(
-                                  'From ${assign?.startDate}  to  ${assign?.startDate}',
+                                  'to  ${assign?.endDate}',
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                   textAlign: TextAlign.start,

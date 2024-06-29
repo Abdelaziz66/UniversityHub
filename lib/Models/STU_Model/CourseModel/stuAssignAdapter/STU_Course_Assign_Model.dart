@@ -125,24 +125,24 @@ class GetTaskDataModel {
         this.createdAt});
 
   GetTaskDataModel.fromJson(Map<String, dynamic> json) {
-    taskName = json['TaskName'];
-    taskGrade = json['TaskGrade'];
-    startDate = json['StartDate'];
-    endDate = json['EndDate'];
-    status = json['Status'];
-    filePath = json['FilePath'];
-    createdAt = json['CreatedAt'];
+    taskName = json['taskName'];
+    taskGrade = json['taskGrade'];
+    startDate = json['startDate'];
+    endDate = json['endDate'];
+    status = json['status'];
+    filePath = json['filePath'];
+    createdAt = json['createdAt'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['TaskName'] = this.taskName;
-    data['TaskGrade'] = this.taskGrade;
-    data['StartDate'] = this.startDate;
-    data['EndDate'] = this.endDate;
-    data['Status'] = this.status;
-    data['FilePath'] = this.filePath;
-    data['CreatedAt'] = this.createdAt;
+    data['taskName'] = this.taskName;
+    data['taskGrade'] = this.taskGrade;
+    data['startDate'] = this.startDate;
+    data['endDate'] = this.endDate;
+    data['status'] = this.status;
+    data['filePath'] = this.filePath;
+    data['createdAt'] = this.createdAt;
     return data;
   }
 }

@@ -491,6 +491,7 @@ class Layout_Screen extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 15.0, top: 30),
                         child: IconButton(
                             onPressed: () {
+                              cubit.getDashboardFromHIVE();
                               rol=='Student'? cubit.getStuHistoryData():cubit.getInsHistoryData();
                                 showDialog<String>(
                                   context: context,

@@ -770,9 +770,9 @@ class Calendar_screen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child:
-                            //ConditionalBuilder(
-                            //  condition:cubit.getAllCalenderDayEvent.isNotEmpty ,
-                            //builder:(context)=>
+                            ConditionalBuilder(
+                             condition:cubit.getAllCalenderDayEvent.isNotEmpty &&state is!Stu_Get_Calener_Day_Events_LoadingState,
+                            builder:(context)=>
                             ListView.separated(
                           physics: const BouncingScrollPhysics(),
                           scrollDirection: Axis.vertical,
@@ -798,8 +798,27 @@ class Calendar_screen extends StatelessWidget {
                           ),
                           itemCount: cubit.getAllCalenderDayEvent.length,
                         ),
-                        //  fallback:(context)=>Center(child: Text('No event in this date'),),
-                        //),
+                         fallback:(context) {
+                           if (cubit.getAllCalenderDayEvent.isEmpty &&
+                               state is! Stu_Get_Calener_Day_Events_LoadingState
+                           ) {
+                             return
+                               Column(
+                                 children: [
+                                   SizedBox(height: 300,),
+                                   Center(child: Text('No Event here..'),),
+                                 ],
+                               );
+                           } else {
+                             return Column(
+                               children: [
+                                 SizedBox(height: 300,),
+                                 Center(child: CircularProgressIndicator()),
+                               ],
+                             );
+                           }
+                         }
+                      ),
                       ),
                     ),
                     SizedBox(
