@@ -804,11 +804,12 @@ class Dashboard_Screen extends StatelessWidget {
                                 widget: Container(
                                   width: double.infinity,
                                   height: double.infinity,
-                                  child:  ConditionalBuilder(
-                                    condition:
-                                    cubit.list_news_D.isNotEmpty,
-                                    builder: (context) =>
-                                        CarouselSlider(
+                                  //allNEWSFromHIVE
+                                  child: ConditionalBuilder(
+                                      condition: cubit.allNEWSFromHIVE.isEmpty || cubit.connnection,
+                                      builder: (context){
+                                        print('display online news dashboard');
+                                        return CarouselSlider(
                                           items: cubit.list_news_D,
                                           options: CarouselOptions(
                                             height: double.infinity,
@@ -824,15 +825,29 @@ class Dashboard_Screen extends StatelessWidget {
                                             autoPlayCurve: Curves.fastOutSlowIn,
                                             scrollDirection: Axis.horizontal,
                                           ),
-                                        ),
-                                    fallback: (context) =>
-                                        Center(
-                                          child: CircularProgressIndicator(
-                                            color: Colors.blueGrey
-                                                .withOpacity(.4),
+                                        );
+                                      },
+                                      fallback: (context) {
+                                        print('display offline news dashboard');
+                                        return CarouselSlider(
+                                          items: cubit.offline_News_DashboardData,
+                                          options: CarouselOptions(
+                                            height: double.infinity,
+                                            viewportFraction: 1,
+                                            initialPage: 0,
+                                            enableInfiniteScroll: true,
+                                            reverse: false,
+                                            autoPlay: true,
+                                            autoPlayInterval:
+                                            const Duration(seconds: 3),
+                                            autoPlayAnimationDuration:
+                                            const Duration(seconds: 1),
+                                            autoPlayCurve: Curves.fastOutSlowIn,
+                                            scrollDirection: Axis.horizontal,
                                           ),
-                                        ),
-                                  )
+                                        );
+                                      }
+                                  ),
                                 ),
                                 BorderWidth: .5,
                                 BorderColor: Colors.black.withOpacity(.7),
@@ -903,54 +918,101 @@ class Dashboard_Screen extends StatelessWidget {
                               children: [
                                 ConditionalBuilder(
                                   condition: rol == 'Student',
-                                  builder: (context) => Expanded(
-                                    child: Container(
-                                      child: GlassBoxWithBorder_Gradiant2(
-                                          widget: Container(
-                                              width: double.infinity,
-                                              height: double.infinity,
-                                              child: ConditionalBuilder(
-                                                condition:
-                                                    cubit.list_D.isNotEmpty,
-                                                builder: (context) =>
-                                                    CarouselSlider(
-                                                  items: cubit.list_D,
-                                                  options: CarouselOptions(
+                                  builder: (context) =>
+                                      ConditionalBuilder(
+                                        condition: cubit.offline_DashboardData.isEmpty || cubit.connnection,
+                                        builder: (context){
+                                          print('display online dashboard');
+
+                                          return Expanded(
+                                          child: Container(
+
+                                            child: GlassBoxWithBorder_Gradiant2(
+                                                widget: Container(
+                                                    width: double.infinity,
                                                     height: double.infinity,
-                                                    viewportFraction: 1,
-                                                    initialPage: 0,
-                                                    enableInfiniteScroll: true,
-                                                    reverse: false,
-                                                    autoPlay: true,
-                                                    autoPlayInterval:
-                                                        const Duration(
-                                                            seconds: 3),
-                                                    autoPlayAnimationDuration:
-                                                        const Duration(
-                                                            seconds: 1),
-                                                    autoPlayCurve:
+                                                    child: ConditionalBuilder(
+                                                      condition:
+                                                      cubit.list_D.isNotEmpty,
+                                                      builder: (context) =>
+                                                          CarouselSlider(
+                                                            items: cubit.list_D,
+                                                            options: CarouselOptions(
+                                                              height: double.infinity,
+                                                              viewportFraction: 1,
+                                                              initialPage: 0,
+                                                              enableInfiniteScroll: true,
+                                                              reverse: false,
+                                                              autoPlay: true,
+                                                              autoPlayInterval:
+                                                              const Duration(
+                                                                  seconds: 3),
+                                                              autoPlayAnimationDuration:
+                                                              const Duration(
+                                                                  seconds: 1),
+                                                              autoPlayCurve:
+                                                              Curves.fastOutSlowIn,
+                                                              scrollDirection:
+                                                              Axis.horizontal,
+                                                            ),
+                                                          ),
+                                                      fallback: (context) =>
+                                                          Center(
+                                                            child: CircularProgressIndicator(
+                                                              color: Colors.blueGrey
+                                                                  .withOpacity(.4),
+                                                            ),
+                                                          ),
+                                                    )),
+                                                BorderWidth: .5,
+                                                BorderColor:
+                                                Colors.black.withOpacity(.7),
+                                                color: Colors.white.withOpacity(.2),
+                                                borderRadius: 20,
+                                                x: 0,
+                                                y: 0),
+                                          ),
+                                        );
+                                        },
+
+                                        fallback: (context) {
+                                          print('display offline dashboard');
+                                          cubit.offline_DashboardData[0];
+                                          return Expanded(
+                                          child: Container(
+                                            child: GlassBoxWithBorder_Gradiant2(
+                                                widget: Container(
+                                                    width: double.infinity,
+                                                    height: double.infinity,
+                                                    child:  CarouselSlider(
+                                                      items: cubit.offline_DashboardData,
+                                                      options: CarouselOptions(
+                                                        height: double.infinity,
+                                                        viewportFraction: 1,
+                                                        initialPage: 0,
+                                                        enableInfiniteScroll: true,
+                                                        reverse: false,
+                                                        autoPlay: true,
+                                                        autoPlayInterval:
+                                                        const Duration(seconds: 3),
+                                                        autoPlayAnimationDuration:
+                                                        const Duration(seconds: 1),
+                                                        autoPlayCurve:
                                                         Curves.fastOutSlowIn,
-                                                    scrollDirection:
+                                                        scrollDirection:
                                                         Axis.horizontal,
-                                                  ),
-                                                ),
-                                                fallback: (context) =>
-                                                    Center(
-                                                      child: CircularProgressIndicator(
-                                                                                                        color: Colors.blueGrey
-                                                        .withOpacity(.4),
-                                                                                                      ),
-                                                    ),
-                                              )),
-                                          BorderWidth: .5,
-                                          BorderColor:
-                                              Colors.black.withOpacity(.7),
-                                          color: Colors.white.withOpacity(.2),
-                                          borderRadius: 20,
-                                          x: 0,
-                                          y: 0),
-                                    ),
-                                  ),
+                                                      ),
+                                                    ),),
+                                                BorderWidth: .5,
+                                                BorderColor:
+                                                Colors.black.withOpacity(.7),
+                                                color: Colors.white.withOpacity(.2),
+                                                borderRadius: 20,
+                                                x: 0,
+                                                y: 0),
+                                          ),
+                                        );}
+                                      ),
                                   fallback: (context) => Expanded(
                                     child: Container(
                                       child: GlassBoxWithBorder_Gradiant2(
@@ -1118,8 +1180,9 @@ class Dashboard_Screen extends StatelessWidget {
               ],
             ),
           ),
-          fallback: (context) =>
-              const Center(child: CircularProgressIndicator()),
+          fallback: (context) {
+              return Center(child: CircularProgressIndicator());
+          }
         );
       },
     );

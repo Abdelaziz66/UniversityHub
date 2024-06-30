@@ -74,9 +74,9 @@ class Layout_Screen extends StatelessWidget {
                             height: 15,
                           ),
                           Text(
-                            rol == 'Student'
-                                ? '${cubit.stu_login_Model?.displayName}'
-                                : 'Hi, Dr ${cubit.stu_login_Model?.displayName}',
+                            rol == 'Student'?
+                            '${cubit.userInfoFromHIVE == null ? cubit.studentInfoModel!.fullName : cubit.userInfoFromHIVE?.fullName}':
+                                 'Hi, Dr ${cubit.instructorInfoModel?.fullName}',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(

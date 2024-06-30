@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../Shared/Component/component.dart';
 import '../../../Shared/Cons_widget.dart';
 import '../../../Shared/Cubit/App_cubit.dart';
@@ -39,7 +40,7 @@ class STU_About_Assign_Screen extends StatelessWidget {
                 const SizedBox(height: 20,),
                 Container(
                   padding: EdgeInsetsDirectional.all(8),
-                  height: 100,
+                  height: 70,
                   width: double.infinity,
                   child: const Text(
                     'please attach one file have your task and submit ....',
@@ -49,22 +50,192 @@ class STU_About_Assign_Screen extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(height: 50,),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 155,
+                  decoration: BoxDecoration(
+                    // color: Colors.blueGrey.withOpacity(.05),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(width: .5),
+                  ),
+                  child: Padding(
+                    padding:
+                    const EdgeInsets.only(top: 10.0, right: 15, bottom: 10, left: 15),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text('More about task...'),
+                            Spacer(),
+                            SizedBox(
+                              width: 7,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                // Alrat(
+                                //     context: context,
+                                //     no: () {
+                                //       Navigator.pop(context);
+                                //     },
+                                //     text: 'Do you want to delete Task ?',
+                                //     yes: () {
+                                //       App_cubit.get(context).INS_Delete_Assign(Taskid: assign!.taskId);
+                                //       Navigator.pop(context);
+                                //
+                                //     });
+                              },
+                              child: Container(
+                                height: 30,
+                                width: 30,
+                                child: Center(
+                                  child: FaIcon(
+                                    FontAwesomeIcons.circleCheck,
+                                    size: 26,
+                                    color: Colors.teal.withOpacity(.7),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Container(
+                          color: Colors.black.withOpacity(.3),
+                          height: .5,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 5.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          FaIcon(
+                                            FontAwesomeIcons.bookmark,
+                                            size: 12,
+                                          ),
+                                          SizedBox(
+                                            width: 7,
+                                          ),
+                                          Text(
+                                            'Task grade : ${cubit.stuAssignDataModel?.taskGrade}',
+                                            textAlign: TextAlign.start,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700, fontSize: 13),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      Row(
+                                        children: [
+                                          FaIcon(
+                                            FontAwesomeIcons.clock,
+                                            size: 12,
+                                          ),
+                                          SizedBox(
+                                            width: 7,
+                                          ),
+                                          Container(
+                                            width: 150,
+
+                                            child: Text(
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              'Create at ${cubit.stuAssignDataModel?.createdAt}',
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700, fontSize: 13),
+                                            ),
+
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 2,
+                                      ),
+
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        cubit.openFile_Fun(networkFile:cubit.stuAssignDataModel?.filePath );
+                                      },
+                                      child: Container(
+                                        height: 45,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: Colors.teal.withOpacity(.6),
+                                          borderRadius: BorderRadius.circular(12),
+                                          // border: Border.all(width: .5),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            'Open File',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 20,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
                 const Spacer(),
                 all_files.isNotEmpty?
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
-                    child: GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 6,
-                          crossAxisSpacing: 6,
+                    child: Row(
+
+                      children: [
+                        GridView.builder(
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 6,
+                              crossAxisSpacing: 6,
+                            ),
+                            itemCount: all_files.length,
+                            itemBuilder: (context, index)
+                            {
+                              return BuildAssignFileViewWidget(index,context,all_files[index]);
+                            }
                         ),
-                        itemCount: all_files.length,
-                        itemBuilder: (context, index)
-                        {
-                          return BuildAssignFileViewWidget(index,context,all_files[index]);
-                        }
+                      ],
                     ),
                   ),
                 )
