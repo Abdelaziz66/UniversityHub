@@ -6721,12 +6721,12 @@ Widget Task_D({required Task? task})=>Padding(
           SizedBox(
             width: 7,
           ),
-          Text(
-            '${task?.courseCycle}',
-            textAlign: TextAlign.start,
-            style:
-            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-          ),
+          // Text(
+          //   '${task?.courseCycle}',
+          //   textAlign: TextAlign.start,
+          //   style:
+          //   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          // ),
         ],
       ),
       SizedBox(
@@ -6741,12 +6741,12 @@ Widget Task_D({required Task? task})=>Padding(
           SizedBox(
             width: 7,
           ),
-          Text(
-            '${task?.instructor}',
-            textAlign: TextAlign.start,
-            style:
-            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-          ),
+          // Text(
+          //   '${task?.instructor}',
+          //   textAlign: TextAlign.start,
+          //   style:
+          //   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          // ),
         ],
       ),
       SizedBox(
@@ -6838,12 +6838,12 @@ Widget Quiz_D({required Quiz? quiz})=>Padding(
           SizedBox(
             width: 7,
           ),
-          Text(
-            '${quiz?.courseCycle}',
-            textAlign: TextAlign.start,
-            style:
-            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-          ),
+          // Text(
+          //   '${quiz?.courseCycle}',
+          //   textAlign: TextAlign.start,
+          //   style:
+          //   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          // ),
         ],
       ),
       SizedBox(
@@ -6858,12 +6858,12 @@ Widget Quiz_D({required Quiz? quiz})=>Padding(
           SizedBox(
             width: 7,
           ),
-          Text(
-            '${quiz?.instructor}',
-            textAlign: TextAlign.start,
-            style:
-            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-          ),
+          // Text(
+          //   '${quiz?.instructor}',
+          //   textAlign: TextAlign.start,
+          //   style:
+          //   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          // ),
         ],
       ),
       SizedBox(
@@ -7174,7 +7174,7 @@ Widget Quiz_ins_D({required Dashboard_ins_model? quiz})=>Padding(
     ],
   ),
 );
-Widget News_D({required News_D_model? news})=>Padding(
+Widget News_D({required GetAllNewsModel? news})=>Padding(
   padding: const EdgeInsets.all(10.0),
   child: Row(
     children: [

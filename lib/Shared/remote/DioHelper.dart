@@ -24,14 +24,14 @@ class Dio_Helper {
     Map<String, dynamic>? query,
     String? token
   }) async {
-     dio.options.headers={
-    //   'lang':lang,
-    //   'authorizatio':token??'',
-       'Content-Type':'application/json',
-       'Accept':'application/json',
-       'Authorization':'Bearer $token',
-     };
-     return await dio.get(url, queryParameters: query);
+    dio.options.headers={
+      //   'lang':lang,
+      //   'authorizatio':token??'',
+      'Content-Type':'application/json',
+      'Accept':'application/json',
+      'Authorization':'Bearer $token',
+    };
+    return await dio.get(url, queryParameters: query);
   }
 
   static Future<Response> PostData({
@@ -40,24 +40,24 @@ class Dio_Helper {
     Map<String, dynamic>? query,
     String? token,
 
-     Map<String, dynamic>? data,
+    Map<String, dynamic>? data,
     //String? filePath,
     //String? fileName,
-   // File ? file,
+    // File ? file,
 
   }) async {
-  //  FormData formData=FormData();
-  //   print('token from dio ---------$token');
-   // print('token from dio ---------${App_cubit.get(context).resetPassToken}');
-        dio.options.headers={
+    //  FormData formData=FormData();
+    //   print('token from dio ---------$token');
+    // print('token from dio ---------${App_cubit.get(context).resetPassToken}');
+    dio.options.headers={
 
-        'Content-Type':'application/json',
-       // 'Accept':'*/*',
-        'Authorization':'Bearer ${token??App_cubit.get(context).resetPassToken}',
+      'Content-Type':'application/json',
+      // 'Accept':'*/*',
+      'Authorization':'Bearer ${token??App_cubit.get(context).resetPassToken}',
     };
 
     return await dio.post(
-        url, queryParameters: query, data: data,);
+      url, queryParameters: query, data: data,);
   }
 
   // static Future<Response> PostFileData({
@@ -129,11 +129,11 @@ class Dio_Helper {
     print('from dio $networkfilePath');
     print('from dio $localfilePath');
     dio.options.headers={
-       // 'lang':lang,
-        //'authorizatio':token??'',
+      // 'lang':lang,
+      //'authorizatio':token??'',
       'Content-Type':'application/json',
       'Accept':'application/json',
-       'Authorization':'Bearer $token',
+      'Authorization':'Bearer $token',
       'responseType': ResponseType.bytes,
     };
     return await dio.download(networkfilePath, localfilePath);
@@ -147,7 +147,7 @@ class Dio_Helper {
     Map<String, dynamic>? query,
     String? token,
     Map<String, dynamic>? data,
-
+    File? updateFile,
   }) async {
     //  FormData formData=FormData();
     dio.options.headers={
@@ -155,9 +155,18 @@ class Dio_Helper {
       'Accept':'application/json',
       'Authorization':'Bearer $token',
     };
-
+    FormData formData = FormData();
+    String fileName = updateFile!.path.split('/').last; // Get the file name
+    formData.files.add(MapEntry(
+      'file', // 'file' is the key name expected by the API for each file
+      await MultipartFile.fromFile(
+        updateFile.path,
+        filename: fileName,
+      ),
+    ));
+    print('////////////////////////////////$updateFile');
     return await dio.put(
-        url, queryParameters: query, data: data);
+        url, queryParameters: query, data: data??formData);
   }
 
 
@@ -219,4 +228,3 @@ class DioHelper2{
   }
 
 }
-
