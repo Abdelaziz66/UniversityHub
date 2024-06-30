@@ -6838,37 +6838,41 @@ Widget Quiz_D({required Quiz? quiz})=>Padding(
           SizedBox(
             width: 7,
           ),
-          // Text(
-          //   '${quiz?.courseCycle}',
-          //   textAlign: TextAlign.start,
-          //   style:
-          //   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-          // ),
+          Text(
+            '${quiz?.title}',
+            textAlign: TextAlign.start,
+            style:
+            TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+          ),
         ],
+      ),
+      Container(
+        color: Colors.black.withOpacity(.3),
+        height: .5,
       ),
       SizedBox(
         height: 2,
       ),
-      Row(
-        children: [
-          FaIcon(
-            FontAwesomeIcons.user,
-            size: 12,
-          ),
-          SizedBox(
-            width: 7,
-          ),
-          // Text(
-          //   '${quiz?.instructor}',
-          //   textAlign: TextAlign.start,
-          //   style:
-          //   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-          // ),
-        ],
-      ),
-      SizedBox(
-        height: 2,
-      ),
+      // Row(
+      //   children: [
+      //     FaIcon(
+      //       FontAwesomeIcons.user,
+      //       size: 12,
+      //     ),
+      //     SizedBox(
+      //       width: 7,
+      //     ),
+      //     // Text(
+      //     //   '${quiz?.instructor}',
+      //     //   textAlign: TextAlign.start,
+      //     //   style:
+      //     //   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+      //     // ),
+      //   ],
+      // ),
+      // SizedBox(
+      //   height: 2,
+      // ),
       Row(
         children: [
           FaIcon(
