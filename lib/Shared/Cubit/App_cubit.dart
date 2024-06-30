@@ -35,7 +35,6 @@ import 'package:university_hup/Modules/Navigation_Screens/Calendar_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Course_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/Dashboard_Screen.dart';
 import 'package:university_hup/Modules/Navigation_Screens/News_Screen.dart';
-
 import 'package:university_hup/Modules/Navigation_Screens/Profile_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Assignments_Screen.dart';
 import 'package:university_hup/Modules/Student/Student_Notification/Ongoing_Screen.dart';
@@ -58,8 +57,6 @@ import '../../Modules/Student/Student_Quizzes/STU_Quiz_Ques.dart';
 import '../Cons_widget.dart';
 import '../Local/Hive/HiveConstants.dart';
 import 'App_state.dart';
-
-
 
 class App_cubit extends Cubit<App_state> {
   App_cubit() : super(App_ini_state());
@@ -334,24 +331,7 @@ class App_cubit extends Cubit<App_state> {
     }
   }
 
-  //
-  // void add_NewFile_To_FIles_List() async {
-  //   emit(AddNewFile_Loading_State());
-  //   FilePickerResult? result = await FilePicker.platform.pickFiles(
-  //     type: FileType.custom,
-  //     allowMultiple: true,
-  //     allowedExtensions: ['png', 'cdr', 'psd', 'jpeg', 'png', 'pdf'],
-  //   );
-  //   if (result != null) {
-  //     result.files.forEach((element) {
-  //       all_files_List.add(element);
-  //     });
-  //     emit(AddNewFile_Success_State());
-  //   } else {
-  //     // User canceled the picker
-  //     emit(AddNewFile_Error_State());
-  //   }
-  // }
+
 
   void openFile_Fun({File? file, String? filePath, networkFile}) async {
     emit(ShowFile_Loading_State());
@@ -385,41 +365,8 @@ class App_cubit extends Cubit<App_state> {
   }
 
 
-//   static Future<void> openURL(String url) async {
-//     final Uri _url = Uri.parse(url);
-//
-//     print('ss $_url');
-// print(url);
-//    // bool iscanLaunchUrl = await canLaunchUrl(_url);
-//
-//     //if (iscanLaunchUrl) {
-//       print('ssdd $_url');
-//       await launchUrl(_url).then((value) {
-//         print('success');
-//       }).catchError((error){
-//         print('ddddddddddddddddddddd');
-//         print(error);
-//         print('Could not launch $url');
-//       });
-//   //  } else {
-//
-//  //   }
-//   }
 
-  // Future<bool> isFileInExternalStorage(String filePath) async {
-  //   // Get the external storage directory
-  //   final Directory? externalStorageDir = await getExternalStorageDirectory();
-  //   if (externalStorageDir == null) {
-  //     print('Error: Unable to access external storage directory');
-  //     return false;
-  //   }
-  //
-  //   // Get the directory where the file is located
-  //   final Directory fileDir = Directory(filePath).parent;
-  //
-  //   // Check if the file directory is the same as the external storage directory
-  //   return fileDir.path == externalStorageDir.path;
-  // }
+
 
   String pathPDF = "";
 
@@ -469,34 +416,7 @@ class App_cubit extends Cubit<App_state> {
   }
 
 
-  //
-  // void downloadAndOpenFile(String filePath)async{
-  //    if(await isFileInExternalStorage(filePath)==false){
-  //
-  //    }
-  // }
 
-
-  // Future<File> createFileOfPdfUrl() async {
-  //
-  //   createFileOfPdfUrl().then((f) {
-  //     pathPDF = f.path;
-  //     print(pathPDF);
-  //   });
-  //   final url = "http://africau.edu/images/default/sample.pdf";
-  //   final filename = url.substring(url.lastIndexOf("/") + 1);
-  //   var request = await Dio().get(url);
-  //   var response = await request.close();
-  //   String dir = (await getApplicationDocumentsDirectory()).path;
-  //
-  //   File file = new File('$dir/$filename');
-  //   file.writeAsBytes(request.)
-  //   var bytes = await consolidateHttpClientResponseBytes(response);
-  //
-  //   await file.writeAsBytes(bytes);
-  //
-  //   return file;
-  // }
 
 
   /*-------------add quiz --------------*/
@@ -531,11 +451,7 @@ class App_cubit extends Cubit<App_state> {
     return '$formattedHours:$formattedMinutes:$formattedSeconds';
   }
 
-  // Future<File> saveFile_Fun(PlatformFile file)async{
-  //   final appStorage= await getApplicationDocumentsDirectory();
-  //   final newFIle=File('${appStorage.path}/${file.name}');
-  //   return File(file.path!).copy(newFIle.path);
-  // }
+
 
 /*switch betwean assignment pending or completed*/
 
@@ -623,6 +539,7 @@ class App_cubit extends Cubit<App_state> {
   List<List<Map<String, dynamic>>> Answer_create_list_map = [];
   Createquiz_model? quizinfo_ins;
   List<TextEditingController> QController = [TextEditingController()];
+  List<TextEditingController> GController = [TextEditingController()];
   List<List<TextEditingController>> AController = [
     [
       TextEditingController(),
@@ -632,8 +549,6 @@ class App_cubit extends Cubit<App_state> {
     ]
   ];
   List<List<bool>> Acheck = [[true, false, false, false,]];
-  String? startDate_Quiz;
-  String? endDate_Quiz;
   var titlecontroller = TextEditingController();
   var noticcontroller = TextEditingController();
   var pointcontroller = TextEditingController();
@@ -646,59 +561,7 @@ class App_cubit extends Cubit<App_state> {
     emit(Defulte_state());
   }
 
-  // List<GlobalKey<AnimatedListState>> ANS_listKey=[GlobalKey()];
-  // void addmore(GlobalKey<AnimatedListState> ANSlistKey,index) {
-  //   if (AController[index].length == 4) {
-  //     // print(' AController index =  /////////////////////////////');
-  //     // print(index);
-  //     // print( AController[index].length);
-  //     //
-  //     // print(' AController index /////////////////////////////');
-  //   } else {
-  //     // print('length AController before /////////////////////////////');
-  //     // print(AController[index].length);
-  //     // print('length AController before /////////////////////////////');
-  //
-  //     AController[index].insert(
-  //         AController[index].length,
-  //         TextEditingController());
-  //     ANSlistKey.currentState!
-  //         .insertItem(AController[index].length-1);
-  //     // print('length AController after /////////////////////////////');
-  //     // print(AController[index].length);
-  //     // print('length AController after /////////////////////////////');
-  //   }
-  //
-  // }
-  //
-  // void minusmore(GlobalKey<AnimatedListState> ANSlistKey,index) {
-  //
-  //     if (AController[index].length == 1) {
-  //
-  //     }else{
-  //       // print('length AController after /////////////////////////////');
-  //       // print(AController[index].length);
-  //       // print('length AController after /////////////////////////////');
-  //       ANSlistKey.currentState!.removeItem(
-  //         AController[index].length-1,
-  //             (BuildContext context, Animation<double> animation) =>
-  //                 INS_Quiz_Answer(
-  //                 index:index ,
-  //                 context: context,
-  //                index2:  AController[index].length-1,
-  //   animation: animation),
-  //         duration: const Duration(milliseconds: 250),
-  //       );
-  //       AController[index]
-  //           .removeAt(AController[index].length - 1);
-  //       // print('length AController after /////////////////////////////');
-  //       // print(AController[index].length);
-  //       // print('length AController after /////////////////////////////');
-  //     }
-  //
-  //
-  //
-  // }
+
 
 
   void createquCreateQuiz_Function() {
@@ -723,38 +586,17 @@ class App_cubit extends Cubit<App_state> {
           }
         }
       }
-      // for(int i=0;i<AController.length;i++){
-      //   Answer_create_list!.add([]);
-      //   for(int j=0;j<AController[i].length;j++){
-      //     // print('099999999999999999999999999');
-      //     // print(AController.length);
-      //     // print(AController[i].length);
-      //     // print(AController[i][j].text);
-      //     // print('099999999999999999999999999');
-      //     if(AController[i][j].text!=''){
-      //
-      //         Answer_create_list?[i].add(Answer.fromJson({
-      //           "text": AController[i][j].text,
-      //           "isCorrect": Acheck[i][j],
-      //           "answerNumber": j
-      //         },));
-      //
-      //
-      //     }
-      //
-      //
-      //   }
-      // }
 
       for (int i = 0; i < QController.length; i++) {
         Question_create_list_map.add({
           "text": QController[i].text,
           "type": "choice",
           "questionNumber": i + 1,
-          "grade": 1,
+          "grade": GController[i].text,
           "answers": Answer_create_list_map[i],
         });
       }
+
       print('099999999999999999999999999');
       print(Question_create_list_map);
       print('099999999999999999999999999');
@@ -764,50 +606,28 @@ class App_cubit extends Cubit<App_state> {
           data: {
             "title": titlecontroller.text,
             "notes": noticcontroller.text,
-            "startDate": startDate_Quiz,
-            "endDate": endDate_Quiz,
+            "startDate": StartDate,
+            "endDate": EndDate,
             "grade": pointcontroller.text,
             "courseCycleId": currentCycleId,
             "questions": Question_create_list_map,
           }
       ).then((value) {
         if (value.statusCode == 201) {
-          // quizinfo_ins=  Createquiz_model.fromJson(value.data);
-          // quizinfo_ins!.questions!.forEach((element) {
-          //   print('----------------------------------------');
-          //   print(element.questionNumber);
-          //   print(element.text);
-          //   print('------------------');
-          //   element.answers!.forEach((element4) {
-          //     print(element4.answerNumber);
-          //   });
-          //   print('------------------');
-          //   element.answers!.forEach((element2) {
-          //     print(element2.text);
-          //   });
-          //   print('------------------');
-          //   element.answers!.forEach((element3) {
-          //     print(element3.isCorrect);
-          //   });
-          //   print('----------------------------------------');
-          //
-          //
-          //
-          //
-          // });
           flutterToast(msg: 'Created successfully', backColor: Colors.green);
-
           // print(quizinfo_ins!.questions![0].text);
 
-
+          INS_GetQuizes_Function(
+              CourseID: currentCycleId
+          );
+          emit(CreateQuiz_SuccessState());
           titlecontroller.text = '';
           noticcontroller.text = '';
           pointcontroller.text = '';
-          startDate_Quiz = '';
-          endDate_Quiz = '';
           Question_create_list_map = [];
           Answer_create_list_map = [];
-          emit(CreateQuiz_SuccessState());
+          StartDate=null;
+          EndDate=null;
         }
       }).catchError((error) {
         emit(CreateQuiz_ErrorState());
@@ -844,22 +664,17 @@ class App_cubit extends Cubit<App_state> {
       emit(STU_LoginSuccessState(stu_login_Model!));
       if (rol == 'Student') {
         GetCurrentStudenInfo().then((value) {
-          getUserInfoFromHIVE().then((value) {
-            GetAllNews().then((value) {
-              getAllNewsFromHIVE().then((value) {
-                Dashboard_stu_Function().then((value) {
-                  getDashboardFromHIVE().then((value) {
-                    StuGetAllCourses(token: token).then((value) {
-                      getAllCoursesFromHIVE();
-                    });
-                  });
-                });
-              });
-            });
-          });
+          getUserInfoFromHIVE();
         });
-
+        GetAllNews().then((value) {
+          getAllNewsFromHIVE();
+        });
+        Dashboard_stu_Function().then((value) {
+          getDashboardFromHIVE();
+        });
+        StuGetAllCourses(token: token);
         print('///////////////****************///////////////////');
+        getAllCoursesFromHIVE();
       }
       else {
         GetCurrentInfo_ins_Function();
@@ -993,7 +808,6 @@ class App_cubit extends Cubit<App_state> {
           list_D.add(Quiz_D(quiz: element));
         });
         print(list_D);
-        NewsDashboard_Function();
         stuStoreDashboardtoHIVE();
         emit(Dashboard_stu_SuccessState());
       }
@@ -1050,7 +864,7 @@ class App_cubit extends Cubit<App_state> {
 
   }
 
-  List<GetAllNewsModel>? news_D_model = [];
+  List<News_D_model>? news_D_model = [];
 
   List<Widget>list_news_D = [];
 
@@ -1066,7 +880,7 @@ class App_cubit extends Cubit<App_state> {
         // print('git news success');
         List Json = value.data;
         for (var element in Json) {
-          news_D_model?.add(GetAllNewsModel.fromJson(element));
+          news_D_model?.add(News_D_model.fromJson(element));
         }
         news_D_model!.forEach((element) {
           list_news_D.add(News_D(news: element));
@@ -1089,9 +903,9 @@ class App_cubit extends Cubit<App_state> {
 
   List<Stu_GetAllCoursesModel> stuAllCoursesModel = [];
 
-  Future<void> StuGetAllCourses({
+  void StuGetAllCourses({
     required token,
-  }) async{
+  }) {
     if (true) {
       emit(Stu_Get_All_Courses_LoadingState());
       Dio_Helper.GetData(
@@ -1386,7 +1200,9 @@ class App_cubit extends Cubit<App_state> {
   List<INS_Course_Assign_Model> insCoursesAssign_Completed_Model = [];
   List<INS_Course_Assign_Model> insCoursesAssign_Pending_Model = [];
 
-  void StuGetCourseAssign() {
+  void StuGetCourseAssign(//required token,
+      // required cycleId,
+      ) {
     // stuCoursesAssignModel=[];
 
 
@@ -1781,39 +1597,14 @@ class App_cubit extends Cubit<App_state> {
 
 
 //---------Get All Events ------------------
-  // List<GetAllCalenderEvents>getAllCalenderEvents = [];
+  List<GetAllCalenderEvents>getAllCalenderEvents = [];
 
-  // void GetStuCalenderEvents() {
-  //   // courseGradesModel=[];
-  //     emit(Stu_Get_Calener_Events_LoadingState());
-  //     Dio_Helper.GetData(
-  //       url: GETCALENDER,
-  //       token: token,
-  //     ).then((value) {
-  //       if (value.statusCode == 200) {
-  //         List Json = value.data;
-  //         for (var element in Json) {
-  //           getAllCalenderEvents.add(GetAllCalenderEvents.fromJson(element));
-  //         }
-  //         print('Get Calender event successful');
-  //         print((courseGradesModel.length));
-  //         getAllCalenderEvents.forEach((element) {
-  //           print(element.body);
-  //         });
-  //         emit(Stu_Get_Calener_Events_SuccessState());
-  //       }
-  //     }).catchError((error) {
-  //       print(error);
-  //       emit(Stu_Get_Calener_Events_ErrorState(error));
-  //     });
-  //     // courseGradesModel=[];
-  //
-  // }
 
 
   List<GetCalenderDayEventModel>getAllCalenderDayEvent = [];
 
-  void GetStuCalenderDayEvent(
+  void GetStuCalenderDayEvent(// required start,
+      // required end,
       ) {
     getAllCalenderDayEvent = [];
     print('start date :::::::$selctedDay');
@@ -1955,7 +1746,6 @@ class App_cubit extends Cubit<App_state> {
           //   insAllLecFoldersModel.add(InsStudentUplodeTaskModel.fromJson(element));
           // }
           flutterToast(msg: 'deleted successfully', backColor: Colors.green);
-          GetCourseMaterials();
 
           print(Json);
           emit(Ins_Delete_Folder_SuccessState());
@@ -1993,7 +1783,6 @@ class App_cubit extends Cubit<App_state> {
           flutterToast(
               msg: 'Edit folder name successfully',
               backColor: Colors.green);
-          GetCourseMaterials();
           print(Json);
           emit(Ins_Update_Folder_SuccessState());
         }
@@ -2483,11 +2272,9 @@ class App_cubit extends Cubit<App_state> {
             print('GetUserInfo & News & Course After Connected :)');
             print('********************************************');
             if (rol == 'Student') {
-              Dashboard_stu_Function();
               GetCurrentStudenInfo();
               StuGetAllCourses(token: token);
               GetAllNews();
-
               //  allNEWSFromHIVE=[];
               //  usermodel=null;
               //getAllCoursesFromHIVE();
@@ -2496,7 +2283,6 @@ class App_cubit extends Cubit<App_state> {
               GetCurrentInfo_ins_Function();
               INS_GetAllCourses_Function(token: token);
               GetAllNews();
-              Dashboard_ins_Function();
             }
           }
 
@@ -2741,7 +2527,7 @@ class App_cubit extends Cubit<App_state> {
 
   List<GetAllNewsModel>allNEWSFromHIVE = [];
 
-  Future<void> getAllNewsFromHIVE() async{
+  void getAllNewsFromHIVE() {
     emit(Stu_Get_AllNews_From_Hive_LoadingState());
     try {
       allNEWSFromHIVE = List.from(
@@ -2810,19 +2596,18 @@ class App_cubit extends Cubit<App_state> {
 
   CurrentStudentInfoModel? userInfoFromHIVE;
 
-  Future<void> getUserInfoFromHIVE() async {
+  void getUserInfoFromHIVE() async {
     emit(Stu_Get_userInfo_From_Hive_LoadingState());
     try {
       userInfoFromHIVE =
           navigationScreensBox.get(HiveConstants.userData, defaultValue: []);
       print('get user info from HIVE Success---------------');
       print(userInfoFromHIVE?.fullName);
+
       emit(Stu_Get_userInfo_From_Hive_SuccessState());
     } catch (error) {
       emit(Stu_Get_userInfo_From_Hive_ErrorState());
     }
-    getDashboardFromHIVE();
-
   }
 
   //------------------------------offline dashboard ------------------
@@ -2842,22 +2627,33 @@ class App_cubit extends Cubit<App_state> {
     for (int i = 0; i < Dashboard_s_model!.quizzes!.length; i++) {
       quizDashboard.add(Quiz(
         hiveIndex: quizDashboard.length,
+        quizId: Dashboard_s_model!.quizzes![i].quizId!,
         title: Dashboard_s_model!.quizzes![i].title!,
+        notes: Dashboard_s_model!.quizzes![i].notes ?? '',
         startDate: Dashboard_s_model!.quizzes![i].startDate!,
         endDate: Dashboard_s_model!.quizzes![i].endDate!,
         grade: Dashboard_s_model!.quizzes![i].grade!,
+        courseCycleId: Dashboard_s_model!.quizzes![i].courseCycleId!,
+        instructorId: Dashboard_s_model!.quizzes![i].instructorId!,
         createdAt: Dashboard_s_model!.quizzes![i].createdAt!,
-
+        courseCycle: Dashboard_s_model!.quizzes![i].courseCycle ?? '',
+        instructor: Dashboard_s_model!.quizzes![i].instructor ?? '',
       ));
     }
     for (int i = 0; i < Dashboard_s_model!.tasks!.length; i++) {
       taskDashboard.add(Task(
         hiveIndex: taskDashboard.length,
+        taskId: Dashboard_s_model!.tasks![i].taskId!,
         title: Dashboard_s_model!.tasks![i].title!,
+        filePath: Dashboard_s_model!.tasks![i].filePath ?? '',
         startDate: Dashboard_s_model!.tasks![i].startDate!,
         endDate: Dashboard_s_model!.tasks![i].endDate!,
         grade: Dashboard_s_model!.tasks![i].grade!,
+        courseCycleId: Dashboard_s_model!.tasks![i].courseCycleId!,
+        instructorId: Dashboard_s_model!.tasks![i].instructorId!,
         createdAt: Dashboard_s_model!.tasks![i].createdAt!,
+        courseCycle: Dashboard_s_model!.tasks![i].courseCycle ?? '',
+        instructor: Dashboard_s_model!.tasks![i].instructor ?? '',
       ));
     }
     navigationScreensBox.put(HiveConstants.taskDashboard, taskDashboard).then((
@@ -2890,9 +2686,8 @@ class App_cubit extends Cubit<App_state> {
 
 
   List<Widget>offline_DashboardData = [];
-  List<Widget>offline_News_DashboardData = [];
 
-  Future<void>getDashboardFromHIVE()async {
+  void getDashboardFromHIVE() {
     print('start get all Dashboard from HIVE--------*******-------');
 
     emit(Stu_Get_Dashboard_From_Hive_LoadingState());
@@ -2902,40 +2697,21 @@ class App_cubit extends Cubit<App_state> {
           element) {
         offline_DashboardData.add(Quiz_D(quiz: element));
       });
-
       List.from(navigationScreensBox.get(
           HiveConstants.taskDashboard, defaultValue: [])).cast<Task>().forEach((
           element) {
         offline_DashboardData.add(Task_D(task: element));
       });
-      List.from(
-          navigationScreensBox.get(HiveConstants.allNewsList, defaultValue: []))
-          .cast<GetAllNewsModel>().forEach((element) {
-        offline_News_DashboardData.add(News_D(news:element));
-      });
-      print(allNEWSFromHIVE.length);
       offline_DashboardData.forEach((element) {
         print('------------$element');
-      });
-      // allNEWSFromHIVE.forEach((element) {
-      // });
-      // for(int i=0; i < 1;i++){print(i);
-      //   offline_News_DashboardData.add(News_D(news: allNEWSFromHIVE[i]));
-      // }
-      print('offline news -------------${offline_News_DashboardData.length}');
-
-      offline_News_DashboardData.forEach((element) {
-        print('offline news -------------$element');
       });
       print('get all Dashboard from HIVE Success---------------');
 
       emit(Stu_Get_Dashboard_From_Hive_SuccessState());
     } catch (error) {
-      print(error);
       emit(Stu_Get_Dashboard_From_Hive_ErrorState());
     }
   }
-
 
 
   //---------------- Store student history in HIVE ------------------------
@@ -3443,36 +3219,38 @@ class App_cubit extends Cubit<App_state> {
   void EndDate_Function({required var time}) {
     EndDate = time;
     emit(EndDate_state());
-  }
+
 
     //----------------update phot------------------
 
-    void userUpdatePhoto() {
-      print('All files-------------- ${all_assign_files_List[0]}');
-      // all_assign_files_List=[];
-      emit(User_Update_Photo_LoadingState());
-      Dio_Helper.updateData(
-          token: token,
-          url: UPDATE_PHOTO,
-          updateFile: all_assign_files_List[0]
-      ).then((value) {
-        if (value.statusCode == 200) {
-          print('post photo true');
-          //   print(value.data);
-          String json = value.data;
-          print(json);
-          flutterToast(
-              msg: 'photo updated successfully', backColor: Colors.green);
-          emit(User_Update_Photo_SuccessState());
-        }
-      }).catchError((Error) {
-        print(Error.toString());
-        flutterToast(
-            msg: 'Error to update your photo , please try again',
-            backColor: Colors.red);
 
-        emit(User_Update_Photo_ErrorState());
-      });
-    }
   }
+  void userUpdatePhoto() {
+    print('All files-------------- ${all_assign_files_List}');
+    // all_assign_files_List=[];
+    emit(User_Update_Photo_LoadingState());
+    Dio_Helper.PostListFileData(
+        token: token,
+        url: UPDATE_PHOTO,
+        files: all_assign_files_List
+    )
+        .then((value) {
+      if (value.statusCode == 200) {
+        print('post photo true');
+        //   print(value.data);
+        String json = value.data;
+        print(json);
+        flutterToast(
+            msg: 'photo updated successfully', backColor: Colors.green);
+        emit(User_Update_Photo_SuccessState());
+      }
+    }).catchError((Error) {
+      print(Error.toString());
+      flutterToast(
+          msg: 'Error to update your photo , please try again',
+          backColor: Colors.red);
 
+      emit(User_Update_Photo_ErrorState());
+    });
+  }
+}

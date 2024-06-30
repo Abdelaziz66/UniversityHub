@@ -10,7 +10,6 @@ class GetAllNewsModel {
   String?userImage;
   String?facultyName;
 
-
   GetAllNewsModel({
       this.hiveIndex,
       this.newsId,
@@ -33,7 +32,7 @@ class GetAllNewsModel {
     facultyId = json['facultyId'];
     createdAt = json['createdAt'];
     userId = json['userId'];
-    userName=json['userName']??json['user'];
+    userName=json['userName'];
     userImage=json['userImage'];
     facultyName=json['facultyName'];
   }

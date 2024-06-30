@@ -7,13 +7,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rive/rive.dart';
 
-import 'package:university_hup/Modules/LandScape/ResetPasswoed/ForgetPasswordScreen.dart';
-import 'package:university_hup/Shared/Component/component.dart';
+
 import 'package:university_hup/Shared/Cons_widget.dart';
 import 'package:university_hup/Shared/Cubit/App_cubit.dart';
+
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
-import 'package:university_hup/Shared/remote/DioHelper.dart';
+
+
 
 import '../../../LandScape/ResetPasswoed/NewPasswordScreen.dart';
 
@@ -84,7 +85,7 @@ class Edit_Profile_screen extends StatelessWidget {
 
                                         radius: 80,
                                         backgroundColor: Colors.white,
-                                        backgroundImage: FileImage(cubit.all_assign_files_List[0])
+                                        backgroundImage: FileImage(cubit.all_assign_files_List[0]!)
                                       ):  CircleAvatar(
 
                                       radius: 80,
@@ -131,15 +132,9 @@ class Edit_Profile_screen extends StatelessWidget {
                         ),
                         child: GestureDetector(
                           onTap: (){
-                           if(cubit.all_assign_files_List.isEmpty) {
-                             cubit.pick_File();
-                             print(cubit.all_assign_files_List);
-                           }else{
-                             print('//////////////${cubit.all_assign_files_List}');
-
-                             cubit.userUpdatePhoto();
-                           }
-
+                            cubit.all_assign_files_List.isEmpty? cubit.pick_File()
+                            :cubit.userUpdatePhoto();
+                            
                           },
                           child: Container(
                             decoration: BoxDecoration(

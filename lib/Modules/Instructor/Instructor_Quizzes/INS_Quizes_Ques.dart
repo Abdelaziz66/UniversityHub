@@ -37,21 +37,14 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
   var boardcontroller = PageController();
   var stepcontroller=ScrollController();
   var formkey= GlobalKey<FormState>();
-  int? starthours;
-  int? startminutes;
-  int? endhours;
-  int? endminutes;
-  int? startd;
-  int? endd;
-  int? startm;
-  int? endm;
+
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<App_cubit,App_state>(
       listener: (context,state){},
       builder: (context,state){
         App_cubit cubit =App_cubit.get(context);
-        Time _time = Time(hour: 11, minute: 30, second: 20);
         return Scaffold(
           body: SafeArea(
             child: Column(
@@ -728,7 +721,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                           .push(
                                                         showPicker(
                                                           context: context,
-                                                          value: _time,
+                                                          value: time,
                                                           sunrise: TimeOfDay(
                                                               hour: 6,
                                                               minute:
@@ -760,6 +753,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                                     .minute;
                                                             starthours =
                                                                 value.hour;
+
                                                           },
                                                           // onChangeDateTime: (){},
                                                         ),
@@ -767,12 +761,6 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                           .then((value) {
                                                         if (selectedDate !=
                                                             null) {
-                                                          startm =
-                                                              selectedDate
-                                                                  .month;
-                                                          startd =
-                                                              selectedDate
-                                                                  .day;
                                                           DateTime
                                                           selectedDateTime =
                                                           DateTime(
@@ -787,10 +775,10 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                           );
                                                           print(
                                                               'Selected date and time: $selectedDateTime');
-                                                          cubit.startDate_Quiz = DateFormat(
+                                                          cubit.StartDate_Function(time:DateFormat(
                                                               "yyyy-MM-ddTHH:mm:ss.SSS")
                                                               .format(
-                                                              selectedDateTime);
+                                                              selectedDateTime) );
                                                           print(
                                                               '2024-03-23T22:31:30.911Z');
                                                           // Handle the selected date and time as needed
@@ -822,7 +810,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                               FontAwesomeIcons
                                                                   .clock),
                                                           SizedBox(
-                                                            width: 5,
+                                                            width: 12,
                                                           ),
                                                           Text(
                                                             'Start',
@@ -837,7 +825,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                                   .w700,
                                                             ),
                                                           ),
-                                                          Spacer(),
+                                                          SizedBox(width: 8,),
                                                           Container(
                                                             decoration:
                                                             BoxDecoration(
@@ -856,15 +844,17 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                                   vertical:
                                                                   8.0,
                                                                   horizontal:
-                                                                  10),
+                                                                  12),
                                                               child: Row(
                                                                 children: [
-                                                                  Text(
-                                                                    '${starthours ?? '--'} : ${startminutes ?? '--'}',
+                                                                  Text(        cubit.StartDate==null?'-- : --':
+                                                                  '${DateTime.parse(cubit.StartDate!).hour} : ${DateTime.parse(cubit.StartDate!).minute}',
+                                                                    maxLines: 1,
+                                                                    overflow: TextOverflow.ellipsis,
                                                                     style:
                                                                     TextStyle(
                                                                       fontSize:
-                                                                      18,
+                                                                      15,
                                                                       color: Colors
                                                                           .black,
                                                                       fontWeight:
@@ -888,42 +878,48 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                             ),
                                                           ),
                                                           SizedBox(
-                                                            width: 10,
+                                                            width: 5,
                                                           ),
-                                                          Container(
-                                                            decoration:
-                                                            BoxDecoration(
-                                                              borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                  15),
-                                                              color: Colors
-                                                                  .white
-                                                                  .withOpacity(
-                                                                  .3),
-                                                            ),
-                                                            child: Padding(
-                                                              padding: const EdgeInsets
-                                                                  .symmetric(
-                                                                  vertical:
-                                                                  8.0,
-                                                                  horizontal:
-                                                                  10),
-                                                              child: Row(
-                                                                children: [
-                                                                  Text(
-                                                                    '${startd ?? '--'} / ${startm ?? '--'}',
-                                                                    style:
-                                                                    TextStyle(
-                                                                      fontSize:
-                                                                      18,
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontWeight:
-                                                                      FontWeight.w600,
+                                                          Expanded(
+                                                            child: Container(
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    15),
+                                                                color: Colors
+                                                                    .white
+                                                                    .withOpacity(
+                                                                    .3),
+                                                              ),
+                                                              child: Padding(
+                                                                padding: const EdgeInsets
+                                                                    .symmetric(
+                                                                    vertical:
+                                                                    8.0,
+                                                                    horizontal:
+                                                                    12),
+                                                                child: Row(
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child: Text(        cubit.StartDate==null?'-- / --':
+                                                                      '${DateTime.parse(cubit.StartDate!).day} / ${DateTime.parse(cubit.StartDate!).month}',
+                                                                        overflow: TextOverflow.ellipsis,
+                                                                        maxLines: 1,
+                                                                        style:
+                                                                        TextStyle(
+                                                                          fontSize:
+                                                                          15,
+                                                                          color: Colors
+                                                                              .black,
+                                                                          fontWeight:
+                                                                          FontWeight.w600,
+                                                                        ),
+                                                                      ),
                                                                     ),
-                                                                  ),
-                                                                ],
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
@@ -972,7 +968,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                           .push(
                                                         showPicker(
                                                           context: context,
-                                                          value: _time,
+                                                          value: time,
                                                           sunrise: TimeOfDay(
                                                               hour: 6,
                                                               minute:
@@ -1011,12 +1007,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                           .then((value) {
                                                         if (selectedDate !=
                                                             null) {
-                                                          endm =
-                                                              selectedDate
-                                                                  .month;
-                                                          endd =
-                                                              selectedDate
-                                                                  .day;
+
                                                           DateTime
                                                           selectedDateTime =
                                                           DateTime(
@@ -1031,10 +1022,10 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                           );
                                                           print(
                                                               'Selected date and time: $selectedDateTime');
-                                                          cubit.endDate_Quiz = DateFormat(
+                                                          cubit.EndDate_Function(time: DateFormat(
                                                               "yyyy-MM-ddTHH:mm:ss.SSS")
                                                               .format(
-                                                              selectedDateTime);
+                                                              selectedDateTime) );
                                                           print(
                                                               '2024-03-23T22:31:30.911Z');
                                                           // Handle the selected date and time as needed
@@ -1066,7 +1057,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                               FontAwesomeIcons
                                                                   .clock),
                                                           SizedBox(
-                                                            width: 5,
+                                                            width: 12,
                                                           ),
                                                           Text(
                                                             'End',
@@ -1081,7 +1072,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                                   .w700,
                                                             ),
                                                           ),
-                                                          Spacer(),
+                                                          SizedBox(width: 8,),
                                                           Container(
                                                             decoration:
                                                             BoxDecoration(
@@ -1100,15 +1091,18 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                                   vertical:
                                                                   8.0,
                                                                   horizontal:
-                                                                  10),
+                                                                  12),
                                                               child: Row(
                                                                 children: [
                                                                   Text(
-                                                                    '${endhours ?? '--'} : ${endminutes ?? '--'}',
+                                                                    cubit.EndDate==null?'-- : --':
+                                                                    '${DateTime.parse(cubit.EndDate!).hour } : ${DateTime.parse(cubit.EndDate!).minute}',
+                                                                    overflow: TextOverflow.ellipsis,
+                                                                    maxLines: 1,
                                                                     style:
                                                                     TextStyle(
                                                                       fontSize:
-                                                                      18,
+                                                                      15,
                                                                       color: Colors
                                                                           .black,
                                                                       fontWeight:
@@ -1132,42 +1126,49 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                             ),
                                                           ),
                                                           SizedBox(
-                                                            width: 10,
+                                                            width: 8,
                                                           ),
-                                                          Container(
-                                                            decoration:
-                                                            BoxDecoration(
-                                                              borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                  15),
-                                                              color: Colors
-                                                                  .white
-                                                                  .withOpacity(
-                                                                  .3),
-                                                            ),
-                                                            child: Padding(
-                                                              padding: const EdgeInsets
-                                                                  .symmetric(
-                                                                  vertical:
-                                                                  8.0,
-                                                                  horizontal:
-                                                                  10),
-                                                              child: Row(
-                                                                children: [
-                                                                  Text(
-                                                                    '${endd ?? '--'} / ${endm ?? '--'}',
-                                                                    style:
-                                                                    TextStyle(
-                                                                      fontSize:
-                                                                      18,
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontWeight:
-                                                                      FontWeight.w600,
+                                                          Expanded(
+                                                            child: Container(
+                                                              decoration:
+                                                              BoxDecoration(
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    15),
+                                                                color: Colors
+                                                                    .white
+                                                                    .withOpacity(
+                                                                    .3),
+                                                              ),
+                                                              child: Padding(
+                                                                padding: const EdgeInsets
+                                                                    .symmetric(
+                                                                    vertical:
+                                                                    8.0,
+                                                                    horizontal:
+                                                                    12),
+                                                                child: Row(
+                                                                  children: [
+                                                            
+                                                                    Expanded(
+                                                                      child: Text( cubit.EndDate==null?'-- / --':
+                                                                      '${DateTime.parse(cubit.EndDate!).day} / ${DateTime.parse(cubit.EndDate!).month}',
+                                                                        overflow: TextOverflow.ellipsis,
+                                                                        maxLines: 1,
+                                                                        style:
+                                                                        TextStyle(
+                                                                          fontSize:
+                                                                          15,
+                                                                          color: Colors
+                                                                              .black,
+                                                                          fontWeight:
+                                                                          FontWeight.w600,
+                                                                        ),
+                                                                      ),
                                                                     ),
-                                                                  ),
-                                                                ],
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
@@ -1341,26 +1342,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                       SizedBox(
                                                         height: 2,
                                                       ),
-                                                      Row(
-                                                        children: [
-                                                          FaIcon(
-                                                            FontAwesomeIcons.user,
-                                                            size: 12,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 7,
-                                                          ),
-                                                          Text(
-                                                            '${cubit.instructorInfoModel!.fullName }',
-                                                            textAlign: TextAlign.start,
-                                                            style: TextStyle(
-                                                                fontWeight: FontWeight.w700, fontSize: 13),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height: 2,
-                                                      ),
+
                                                       Row(
                                                         children: [
                                                           FaIcon(
@@ -1384,17 +1366,53 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                                       Row(
                                                         children: [
                                                           FaIcon(
-                                                            FontAwesomeIcons.clock,
+                                                            FontAwesomeIcons
+                                                                .clock,
                                                             size: 12,
                                                           ),
                                                           SizedBox(
                                                             width: 7,
                                                           ),
-                                                          Text(
-                                                            'From ${starthours} PM to ${endhours} ',
-                                                            textAlign: TextAlign.start,
+                                                          Text(cubit.StartDate==null?'':
+                                                          'Start   ${DateTime.parse(cubit.StartDate!).day}/${DateTime.parse(cubit.StartDate!).month}'
+                                                              '   ${DateTime.parse(cubit.StartDate!).hour }:${DateTime.parse(cubit.StartDate!).minute}',
+                                                            textAlign:
+                                                            TextAlign
+                                                                .start,
                                                             style: TextStyle(
-                                                                fontWeight: FontWeight.w700, fontSize: 13),
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w700,
+                                                                fontSize:
+                                                                13),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 2,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          FaIcon(
+                                                            FontAwesomeIcons
+                                                                .clock,
+                                                            size: 12,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 7,
+                                                          ),
+                                                          Text( cubit.EndDate==null?'':
+                                                          'End   ${DateTime.parse(cubit.EndDate!).day}/${DateTime.parse(cubit.EndDate!).month}'
+                                                              '   ${DateTime.parse(cubit.EndDate!).hour }:${DateTime.parse(cubit.EndDate!).minute}',
+                                                            textAlign:
+                                                            TextAlign
+                                                                .start,
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w700,
+                                                                fontSize:
+                                                                13),
                                                           ),
                                                         ],
                                                       ),
@@ -1448,6 +1466,7 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Sceen> {
                                 x: 0,
                                 y: 0),
                           ),
+
                         ),
 
 

@@ -528,15 +528,15 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                             padding: const EdgeInsets.all(10.0),
                                             child: Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              CrossAxisAlignment.center,
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              MainAxisAlignment.center,
                                               children: [
                                                 Row(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
+                                                  CrossAxisAlignment.center,
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                                   children: [
                                                     Text(
                                                       'Determine Time',
@@ -545,7 +545,7 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                         fontSize: 17,
                                                         color: Colors.black,
                                                         fontWeight:
-                                                            FontWeight.w500,
+                                                        FontWeight.w500,
                                                       ),
                                                     ),
                                                   ],
@@ -656,21 +656,21 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                     child: Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(20),
+                                                        BorderRadius
+                                                            .circular(20),
                                                         color: Colors.teal
                                                             .withOpacity(.5),
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal:
-                                                                    15.0),
+                                                        const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal:
+                                                            15.0),
                                                         child: Row(
                                                           mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
+                                                          MainAxisAlignment
+                                                              .start,
                                                           children: [
                                                             FaIcon(
                                                                 FontAwesomeIcons
@@ -685,56 +685,58 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                 color: Colors
                                                                     .black
                                                                     .withOpacity(
-                                                                        .7),
+                                                                    .7),
                                                                 fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
+                                                                FontWeight
+                                                                    .w700,
                                                               ),
                                                             ),
-                                                            Spacer(),
+                                                            SizedBox(width: 8,),
                                                             Container(
                                                               decoration:
-                                                                  BoxDecoration(
+                                                              BoxDecoration(
                                                                 borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            15),
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    15),
                                                                 color: Colors
                                                                     .white
                                                                     .withOpacity(
-                                                                        .3),
+                                                                    .3),
                                                               ),
                                                               child: Padding(
                                                                 padding: const EdgeInsets
                                                                     .symmetric(
                                                                     vertical:
-                                                                        8.0,
+                                                                    8.0,
                                                                     horizontal:
-                                                                        15),
+                                                                    12),
                                                                 child: Row(
                                                                   children: [
                                                                     Text(        cubit.StartDate==null?'-- : --':
-                                                                      '${DateTime.parse(cubit.StartDate!).hour} / ${DateTime.parse(cubit.StartDate!).minute}',
+                                                                    '${DateTime.parse(cubit.StartDate!).hour} : ${DateTime.parse(cubit.StartDate!).minute}',
+                                                                      maxLines: 1,
+                                                                      overflow: TextOverflow.ellipsis,
                                                                       style:
-                                                                          TextStyle(
+                                                                      TextStyle(
                                                                         fontSize:
-                                                                            18,
+                                                                        15,
                                                                         color: Colors
                                                                             .black,
                                                                         fontWeight:
-                                                                            FontWeight.w600,
+                                                                        FontWeight.w600,
                                                                       ),
                                                                     ),
                                                                     Text(
                                                                       '${''}',
                                                                       style:
-                                                                          TextStyle(
+                                                                      TextStyle(
                                                                         fontSize:
-                                                                            13,
+                                                                        13,
                                                                         color: Colors
                                                                             .black,
                                                                         fontWeight:
-                                                                            FontWeight.w800,
+                                                                        FontWeight.w800,
                                                                       ),
                                                                     ),
                                                                   ],
@@ -742,42 +744,48 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                               ),
                                                             ),
                                                             SizedBox(
-                                                              width: 10,
+                                                              width: 5,
                                                             ),
-                                                            Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            15),
-                                                                color: Colors
-                                                                    .white
-                                                                    .withOpacity(
-                                                                        .3),
-                                                              ),
-                                                              child: Padding(
-                                                                padding: const EdgeInsets
-                                                                    .symmetric(
-                                                                    vertical:
-                                                                        8.0,
-                                                                    horizontal:
-                                                                        15),
-                                                                child: Row(
-                                                                  children: [
-                                                                    Text(        cubit.StartDate==null?'-- / --':
-                                                                      '${DateTime.parse(cubit.StartDate!).day} / ${DateTime.parse(cubit.StartDate!).month}',
-                                                                      style:
+                                                            Expanded(
+                                                              child: Container(
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                  borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                      15),
+                                                                  color: Colors
+                                                                      .white
+                                                                      .withOpacity(
+                                                                      .3),
+                                                                ),
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                      vertical:
+                                                                      8.0,
+                                                                      horizontal:
+                                                                      12),
+                                                                  child: Row(
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child: Text(        cubit.StartDate==null?'-- / --':
+                                                                        '${DateTime.parse(cubit.StartDate!).day} / ${DateTime.parse(cubit.StartDate!).month}',
+                                                                          overflow: TextOverflow.ellipsis,
+                                                                          maxLines: 1,
+                                                                          style:
                                                                           TextStyle(
-                                                                        fontSize:
-                                                                            18,
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontWeight:
+                                                                            fontSize:
+                                                                            15,
+                                                                            color: Colors
+                                                                                .black,
+                                                                            fontWeight:
                                                                             FontWeight.w600,
+                                                                          ),
+                                                                        ),
                                                                       ),
-                                                                    ),
-                                                                  ],
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
@@ -895,21 +903,21 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                     child: Container(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(20),
+                                                        BorderRadius
+                                                            .circular(20),
                                                         color: Colors.red
                                                             .withOpacity(.5),
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal:
-                                                                    15.0),
+                                                        const EdgeInsets
+                                                            .symmetric(
+                                                            horizontal:
+                                                            15.0),
                                                         child: Row(
                                                           mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
+                                                          MainAxisAlignment
+                                                              .start,
                                                           children: [
                                                             FaIcon(
                                                                 FontAwesomeIcons
@@ -924,57 +932,59 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                                 color: Colors
                                                                     .black
                                                                     .withOpacity(
-                                                                        .7),
+                                                                    .7),
                                                                 fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
+                                                                FontWeight
+                                                                    .w700,
                                                               ),
                                                             ),
-                                                            Spacer(),
+                                                            SizedBox(width: 8,),
                                                             Container(
                                                               decoration:
-                                                                  BoxDecoration(
+                                                              BoxDecoration(
                                                                 borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            15),
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    15),
                                                                 color: Colors
                                                                     .white
                                                                     .withOpacity(
-                                                                        .3),
+                                                                    .3),
                                                               ),
                                                               child: Padding(
                                                                 padding: const EdgeInsets
                                                                     .symmetric(
                                                                     vertical:
-                                                                        8.0,
+                                                                    8.0,
                                                                     horizontal:
-                                                                        15),
+                                                                    12),
                                                                 child: Row(
                                                                   children: [
                                                                     Text(
-                                                                cubit.EndDate==null?'-- : --':
+                                                                      cubit.EndDate==null?'-- : --':
                                                                       '${DateTime.parse(cubit.EndDate!).hour } : ${DateTime.parse(cubit.EndDate!).minute}',
+                                                                      overflow: TextOverflow.ellipsis,
+                                                                      maxLines: 1,
                                                                       style:
-                                                                          TextStyle(
+                                                                      TextStyle(
                                                                         fontSize:
-                                                                            18,
+                                                                        15,
                                                                         color: Colors
                                                                             .black,
                                                                         fontWeight:
-                                                                            FontWeight.w600,
+                                                                        FontWeight.w600,
                                                                       ),
                                                                     ),
                                                                     Text(
                                                                       '${''}',
                                                                       style:
-                                                                          TextStyle(
+                                                                      TextStyle(
                                                                         fontSize:
-                                                                            13,
+                                                                        13,
                                                                         color: Colors
                                                                             .black,
                                                                         fontWeight:
-                                                                            FontWeight.w800,
+                                                                        FontWeight.w800,
                                                                       ),
                                                                     ),
                                                                   ],
@@ -982,43 +992,49 @@ class _INS_add_assignmentState extends State<INS_add_assignment> {
                                                               ),
                                                             ),
                                                             SizedBox(
-                                                              width: 10,
+                                                              width: 8,
                                                             ),
-                                                            Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            15),
-                                                                color: Colors
-                                                                    .white
-                                                                    .withOpacity(
-                                                                        .3),
-                                                              ),
-                                                              child: Padding(
-                                                                padding: const EdgeInsets
-                                                                    .symmetric(
-                                                                    vertical:
-                                                                        8.0,
-                                                                    horizontal:
-                                                                        15),
-                                                                child: Row(
-                                                                  children: [
+                                                            Expanded(
+                                                              child: Container(
+                                                                decoration:
+                                                                BoxDecoration(
+                                                                  borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                      15),
+                                                                  color: Colors
+                                                                      .white
+                                                                      .withOpacity(
+                                                                      .3),
+                                                                ),
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                      vertical:
+                                                                      8.0,
+                                                                      horizontal:
+                                                                      12),
+                                                                  child: Row(
+                                                                    children: [
 
-                                                                    Text( cubit.EndDate==null?'-- / --':
-                                                                      '${DateTime.parse(cubit.EndDate!).day} / ${DateTime.parse(cubit.EndDate!).month}',
-                                                                      style:
+                                                                      Expanded(
+                                                                        child: Text( cubit.EndDate==null?'-- / --':
+                                                                        '${DateTime.parse(cubit.EndDate!).day} / ${DateTime.parse(cubit.EndDate!).month}',
+                                                                          overflow: TextOverflow.ellipsis,
+                                                                          maxLines: 1,
+                                                                          style:
                                                                           TextStyle(
-                                                                        fontSize:
-                                                                            18,
-                                                                        color: Colors
-                                                                            .black,
-                                                                        fontWeight:
+                                                                            fontSize:
+                                                                            15,
+                                                                            color: Colors
+                                                                                .black,
+                                                                            fontWeight:
                                                                             FontWeight.w600,
+                                                                          ),
+                                                                        ),
                                                                       ),
-                                                                    ),
-                                                                  ],
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),

@@ -32,7 +32,7 @@ class CurrentStudentInfoModel {
     fullName = json['fullName'];
     email = json['email'];
     phone = json['phone'];
-    imagePath = json['imagePath']??'';
+    imagePath = json['imagePath'];
     academicId = json['academicId'];
     level = json['level'];
     departmentName = json['departmentName'];
