@@ -233,188 +233,7 @@ Widget Background(
       ],
     );
 
-// Widget Post({
-//   required bool image,
-//   context,
-//   GetAllNewsModel?news,
-// }) {
-//   return Padding(
-//     padding: const EdgeInsets.symmetric(horizontal: 6.0),
-//     child: GlassBoxWithBorder_Gradiant2(
-//         widget: Container(
-//           width: double.infinity,
-//           child: Padding(
-//             padding: const EdgeInsets.all(10.0),
-//             child: Column(
-//               children: [
-//                 Padding(
-//                   padding: const EdgeInsets.symmetric(horizontal: 5.0),
-//                   child: Row(
-//                     children: [
-//                       Container(
-//                         decoration:
-//                         BoxDecoration(shape: BoxShape.circle, boxShadow: [
-//                           BoxShadow(
-//                             color: c5,
-//                             blurRadius: 2,
-//                             spreadRadius: 2,
-//                           ),
-//                         ]),
-//                         child: const CircleAvatar(
-//                           radius: 25,
-//                           backgroundColor: Colors.blue,
-//                           backgroundImage:
-//                           AssetImage('assets/images/avatar1.png'),
-//                         ),
-//                       ),
-//                       const SizedBox(
-//                         width: 15,
-//                       ),
-//                       Column(
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         mainAxisAlignment: MainAxisAlignment.center,
-//                         children: [
-//                           Row(
-//                             children: [
-//                                Text(
-//                                 '${news?.userName}',),
-//                               Text(
-//                                 'Name Here',
-//                                 style: Theme.of(context).textTheme.subtitle1?.copyWith(
-//                                   color: Colors.black,
-//                                 ),
-//
-//                               ),
-//                               const SizedBox(
-//                                 width: 4,
-//                               ),
-//                               Icon(
-//                                 Icons.verified,
-//                                 size: 18,
-//                                 color: c1.withOpacity(.5),
-//                               ),
-//                             ],
-//                           ),
-//                           Text(
-//                             '${news?.createdAt}',
-//                             style: TextStyle(
-//                               // fontWeight: FontWeight.w800,
-//
-//                               fontSize: 13,
-//
-//                               color: c1,
-//                             ),
-//                           ),
-//                         ],
-//                       ),
-//                       const Spacer(),
-//                       IconButton(
-//                           onPressed: () {},
-//                           icon: FaIcon(
-//                             FontAwesomeIcons.ellipsisVertical,
-//                             color: c1,
-//                           )),
-//                     ],
-//                   ),
-//                 ),
-//                 const SizedBox(
-//                   height: 8,
-//                 ),
-//                 Container(
-//                   color: c1,
-//                   width: double.infinity,
-//                   height: .3,
-//                 ),
-//                 const SizedBox(
-//                   height: 15,
-//                 ),
-//                 ConditionalBuilder(
-//                     condition: true,
-//                     builder: (context) => Padding(
-//                           padding: const EdgeInsets.symmetric(horizontal: 5.0),
-//                           child: Row(
-//                             children: [
-//                               Expanded(
-//                                 child: Padding(
-//                                   padding: const EdgeInsets.only(right: 30.0),
-//                                   child: Text(
-//                                     // 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s.',
-//                                  //   'Congratulations, you have completed your registration ! Lets start your learning journey next.',
-//                                    '${news?.content}',
-//                                     maxLines: 4,
-//                                     overflow: TextOverflow.ellipsis,
-//                                     style: TextStyle(
-//                                       fontWeight: FontWeight.w700,
-//                                       fontSize: 15,
-//                                       color: c1,
-//                                     ),
-//                                   ),
-//
-//                     ] ) ) ),
-//                     fallback: (context) => const SizedBox(
-//                       height: 0,
-//                     )),
-//                 ConditionalBuilder(
-//                     condition: false,
-//                     builder: (context) => Padding(
-//                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
-//                       child: Row(
-//                         children: [
-//                           MaterialButton(
-//                             onPressed: () {},
-//                             minWidth: 1,
-//                             padding: EdgeInsets.zero,
-//                             child: Text(
-//                               '#Tag',
-//                               style: TextStyle(
-//                                 fontWeight: FontWeight.w900,
-//                                 fontSize: 16,
-//                                 color: c1,
-//                               ),
-//                             ),
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                     fallback: (context) => const SizedBox(
-//                       height: 10,
-//                     )),
-//                 ConditionalBuilder(
-//                     condition: image,
-//                     builder: (context) => Padding(
-//                       padding: const EdgeInsets.only(
-//                           left: 0, right: 0.0, top: 5),
-//                       child: Container(
-//                         width: double.infinity,
-//                         height: 200,
-//                         decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(10),
-//                           color: Colors.deepPurple[200],
-//                           // image: const DecorationImage(
-//                           //   image: NetworkImage(
-//                           //     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2PacFBpXBfSh1aCipOEs5Wd0lJqAeBXbx2w&usqp=CAU',
-//                           //   ),
-//                           //   fit: BoxFit.cover,
-//                           // ),
-//                         ),
-//                       ),
-//                     ),
-//                     fallback: (context) => const SizedBox(
-//                       height: 0,
-//                     )),
-//               ],
-//             ),
-//           ),
-//         ),
-//         BorderWidth: 0,
-//         BorderColor: Colors.black,
-//
-//         color: Colors.white.withOpacity(.2),
-//         borderRadius: 20,
-//         x: 0,
-//         y: 0),
-//   );
-// }
+
 Widget Post({
   required bool image,
   context,
@@ -1157,8 +976,7 @@ Widget Matrial_STU_C(
         TextEditingController? folderController,
         context,
         GetCourseMaterialsModel? courseMaterial,
-        //  InsAllLecFoldersModel? insFolder,
-        // AnimationController? menuAnimation,
+
         index}) =>
     Padding(
       padding: const EdgeInsets.all(8.0),
@@ -1994,164 +1812,6 @@ Widget BuildMatrialsWidget() => Padding(
       ),
     );
 
-//---------------------------------------------------------
-
-// Widget BuildCoursesWidget(context) => InkWell(
-//       onTap: () {
-//         navigateTo(context, Show_Material_Lec_Or_Sec());
-//       },
-//       child: Container(
-//           decoration: BoxDecoration(
-//               color: Colors.grey.withOpacity(.5),
-//               borderRadius: BorderRadius.circular(10)),
-//           height: 150,
-//           child: Padding(
-//             padding: const EdgeInsets.all(8.0),
-//             child: Column(
-//               children: [
-//                 Row(
-//                   children: [
-//                     const Text('Lec1'),
-//                     const Spacer(),
-//                     DropdownButton<Widget>(
-//                       elevation: 20,
-//                       menuMaxHeight: 100,
-//                       alignment: AlignmentDirectional.topEnd,
-//                       borderRadius: BorderRadius.circular(5),
-//                       icon: const Icon(Icons.more_vert),
-//                       // Value is the selected item
-//                       // value: AppCubit.get(context).Material_More_selectedItem,
-//                       // List of items for the dropdown
-//                       items: App_cubit.get(context).items.map((Widget item) {
-//                         return DropdownMenuItem<Widget>(
-//                           value: item,
-//                           child: item,
-//                         );
-//                       }).toList(),
-//
-//                       // onChanged callback to update the selected item
-//
-//                       onChanged: (Widget? newValue) {
-//                         App_cubit.get(context)
-//                             .change_more_list_visible(newValue);
-//                       },
-//                     ),
-//
-//                     // IconButton(
-//
-//                     //   icon: Icon(Icons.more_vert),
-//
-//                     //   onPressed: () {
-//
-//                     //     navigateTo(context, MyDropDownMenu());
-//
-//                     //     // AppCubit.get(context).change_more_list_visible();
-//
-//                     //   },
-//
-//                     // ),
-//
-//                     //         Column(
-//
-//                     //   children: [
-//
-//                     //     // Your other widgets here
-//
-//                     //     //         IconButton(
-//
-//                     //     //   icon: Icon(Icons.more_vert),
-//
-//                     //     //   onPressed: () {
-//
-//                     //     //    //navigateTo(context, MoreIconScreen());
-//
-//                     //     //     // AppCubit.get(context).change_more_list_visible();
-//
-//                     //     //   },
-//
-//                     //     // ),
-//
-//                     //     // Visibility(
-//
-//                     //     //   visible: AppCubit.get(context).isListVisible,
-//
-//                     //     //   child: Expanded(
-//
-//                     //     //     child: ListView(
-//
-//                     //     //       children: [
-//
-//                     //     //         // Your list items go here
-//
-//                     //     //         ListTile(
-//
-//                     //     //           leading: Icon(Icons.star),
-//
-//                     //     //           title: Text('Star Icon'),
-//
-//                     //     //         ),
-//
-//                     //     //         ListTile(
-//
-//                     //     //           leading: Icon(Icons.favorite),
-//
-//                     //     //           title: Text('Favorite Icon'),
-//
-//                     //     //         ),
-//
-//                     //     //         ListTile(
-//
-//                     //     //           leading: Icon(Icons.book),
-//
-//                     //     //           title: Text('Book Icon'),
-//
-//                     //     //         ),
-//
-//                     //     //         // Add more items as needed
-//
-//                     //     //       ],
-//
-//                     //     //     ),
-//
-//                     //     //   ),
-//
-//                     //     // ),
-//
-//                     //   ],
-//
-//                     // ),
-//
-//                     // IconButton(
-//
-//                     //     onPressed: (){},
-//
-//                     //     icon: Icon(Icons.more_vert))
-//                   ],
-//                 ),
-//
-//                 const Expanded(
-//                     child: Text(
-//                   'Cyber Security',
-//                   style: TextStyle(fontSize: 20),
-//                 )),
-//
-//                 Expanded(
-//                   child: Container(
-//                       child: const Text(
-//                     'comment',
-//                     style: TextStyle(color: Colors.white),
-//                   )),
-//                 ),
-//
-//                 //Spacer(),
-//
-//                 Container(child: const Text('added at 12/11/2023')),
-//               ],
-//             ),
-//           )),
-//     );
-
-//---------------------------------------------------------
 
 Widget BuildFileViewWidget(
   index,
@@ -2319,6 +1979,7 @@ Widget Build_Lec_View_Widget(
 }
 
 //------------------------------
+
 Widget INS_Build_Lec_View_Widget({
   fileFormKey,
   TextEditingController? fileController,
@@ -2328,11 +1989,6 @@ Widget INS_Build_Lec_View_Widget({
   index,
   context,
 }) {
-  // final kb = file.size / 1024;
-  // final mb = kb / 1024;
-  // final fileSize =
-  // mb >= 1 ? '${mb.toStringAsFixed(2)} MB ' : '${kb.toStringAsFixed(2)} KB';
-  // final extension = file.extension ?? 'none';
   final color = Colors.blueGrey.withOpacity(.7);
   return Container(
     decoration: BoxDecoration(
@@ -3563,107 +3219,6 @@ Widget Build_STU_complete_Tasks() => Container(
       ),
     ));
 
-//-------------------INS Completed tasks---------------
-// Widget Build_INS_complete_Tasks1() => Container(
-//     width: double.infinity,
-//     height: 120,
-//     decoration: ShapeDecoration(
-//       shape: RoundedRectangleBorder(
-//         side: const BorderSide(color: Colors.blue, width: 2),
-//         borderRadius: BorderRadius.circular(15),
-//       ),
-//     ),
-//     child: Padding(
-//       padding: const EdgeInsets.all(10.0),
-//       child: Row(
-//         children: [
-//           Container(
-//             height: 50,
-//             width: 50,
-//             decoration: BoxDecoration(
-//               borderRadius: BorderRadius.circular(10),
-//               // image: DecorationImage(
-//               //
-//               //     image: NetworkImage(
-//               //       '',
-//               //
-//               //     ),
-//               //     fit: BoxFit.cover
-//               // ),
-//               color: Colors.blueGrey.withOpacity(.8),
-//             ),
-//           ),
-//           const SizedBox(
-//             width: 15,
-//           ),
-//           Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               Text(
-//                 'Task name',
-//                 style: TextStyle(
-//                     fontWeight: FontWeight.w700, color: c1, fontSize: 17),
-//               ),
-//               SizedBox(
-//                 height: 10,
-//               ),
-//               Container(
-//                 height: 30,
-//                 width: 200,
-//                 decoration: BoxDecoration(
-//                     color: Colors.teal,
-//                     border: Border.all(
-//                       color: Colors.grey,
-//                       width: .5,
-//                     ),
-//                     borderRadius: BorderRadius.circular(10)),
-//                 child: Center(
-//                     child: Text(
-//                   'Check result',
-//                   style: TextStyle(color: Colors.white),
-//                 )),
-//               ),
-//               SizedBox(
-//                 height: 10,
-//               ),
-//               Row(
-//                 children: [
-//                   Text(
-//                     'Completed',
-//                     style: TextStyle(
-//                       fontWeight: FontWeight.w400,
-//                       color: c1,
-//                       fontSize: 14,
-//                     ),
-//                   ),
-//                   const SizedBox(
-//                     width: 3,
-//                   ),
-//                   Text(
-//                     '3/4/2024',
-//                     style: TextStyle(
-//                       fontWeight: FontWeight.w500,
-//                       color: c1,
-//                       fontSize: 14,
-//                     ),
-//                   )
-//                 ],
-//               ),
-//             ],
-//           ),
-//           const Spacer(),
-//           const Padding(
-//             padding: EdgeInsets.only(right: 10.0),
-//             child: FaIcon(
-//               FontAwesomeIcons.circleCheck,
-//               size: 35,
-//               color: Colors.green,
-//             ),
-//           ),
-//         ],
-//       ),
-//     ));
 
 Widget BuildAssignFileViewWidget(
   index,
@@ -6101,135 +5656,6 @@ Widget INS_Quiz_Complete_Card(
       ),
     );
 
-//
-// Widget Build_Quiz_Data_Widget({
-//   STU_Quiz_Model ?quiz,
-//           List<bool>? quizState,
-//           List<bool> ?isQuizStart,
-//   int? index
-// }) =>
-//     Container(
-//       padding: const EdgeInsetsDirectional.all(12),
-//       decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(15),
-//           border: Border.all(color: Colors.blue)),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         children: [
-//           const SizedBox(
-//             height: 20,
-//           ),
-//           Text(
-//             '${quiz?.title}',
-//             style: TextStyle(
-//                 fontWeight: FontWeight.w700, color: c1, fontSize: 17,
-//             ),
-//           ),
-//           const SizedBox(
-//             height: 10,
-//           ),
-//           Text('10 Points',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
-//           const SizedBox(
-//             height: 20,
-//           ),
-//           ConditionalBuilder(
-//               condition: quizState![index!],
-//               builder: (context) =>  Container(
-//             height: 40,
-//             width: 180,
-//             decoration: BoxDecoration(
-//               color: Colors.blue,
-//               borderRadius: BorderRadius.circular(15),
-//             ),
-//             child: Center(
-//                 child:quiz?.status=='not Available'
-//             ? const Text(
-//                   'Waiting',
-//                   style: TextStyle(
-//                       color: Colors.white,
-//                       fontWeight: FontWeight.bold,
-//                       fontSize: 20),
-//                 )
-//                     : const Text(
-//                   'Finished',
-//                   style: TextStyle(
-//                       color: Colors.white,
-//                       fontWeight: FontWeight.bold,
-//                       fontSize: 20),
-//                 )),
-//           ),
-//
-//               fallback: (context) => Column(
-//                     children: [
-//                       Text('From',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
-//                       const SizedBox(height: 10),
-//                       Row(
-//                         mainAxisAlignment: MainAxisAlignment.center,
-//                         children: [
-//
-//                           Container(
-//                             height: 25,
-//                             width: 60,
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(5),
-//                                 border: Border.all(color: Colors.green)),
-//                             child: const Center(child: Text('8:00')),
-//                           ),
-//                           const SizedBox(
-//                             width: 10,
-//                           ),
-//                           Text('To',style: TextStyle( fontWeight: FontWeight.w400, color: c1, fontSize: 14),),
-//                           const SizedBox(
-//                             width: 10,
-//                           ),
-//                           Container(
-//                             height: 25,
-//                             width: 60,
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(5),
-//                                 border: Border.all(color: Colors.red)),
-//                             child: const Center(child: Text('10:00')),
-//                           ),
-//                         ],
-//                       ),
-//                       const SizedBox(height: 25,),
-//                       Container(
-//                         height: 40,
-//                         width: 180,
-//                         decoration: BoxDecoration(
-//                           color: quiz?.status=='Available'
-//                               ? Colors.green:Colors.blue,
-//                           borderRadius: BorderRadius.circular(15),
-//                         ),
-//                         child: Center(
-//                             child:quiz?.status=='Available'
-//                             //isQuizStart[index]
-//                                 ? TextButton(
-//                                     onPressed: () {
-//                                       navigateTo(
-//                                           context, STU_Quizes_Ques_Screen());
-//                                     },
-//                                     child: const Text(
-//                                       'Start',
-//                                       style: TextStyle(
-//                                           color: Colors.white,
-//                                           fontWeight: FontWeight.bold,
-//                                           fontSize: 20),
-//                                     ),
-//                                   )
-//                                 : const Text(
-//                                     'Waiting',
-//                                     style: TextStyle(
-//                                         color: Colors.white,
-//                                         fontWeight: FontWeight.bold,
-//                                         fontSize: 20),
-//                                   )),
-//                       ),
-//                     ],
-//                   )),
-//         ],
-//       ),
-//     );
 
 Widget Build_STU_Quiz_Ques({
   context,
@@ -6336,9 +5762,7 @@ Widget Build_STU_Quiz_Ques({
 // final GlobalKey<AnimatedListState> ANS_listKey = GlobalKey();
 
 Widget INS_Quiz_Answer({required context, required index, required index2}) {
-  // print('//////////////////////////////////////////////////////////////////');
-  // print('element of Key of $index = ${App_cubit.get(context).ANS_listKey[index]}');
-  // print('//////////////////////////////////////////////////////////////////');
+
   return Padding(
     padding: const EdgeInsets.only(left: 30.0, top: 5, bottom: 5),
     child: Row(
@@ -7048,12 +6472,12 @@ Widget Task_D({required Task? task})=>Padding(
           SizedBox(
             width: 7,
           ),
-          Text(
-            '${task?.courseCycle}',
-            textAlign: TextAlign.start,
-            style:
-            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-          ),
+          // Text(
+          //   '${task?.courseCycle}',
+          //   textAlign: TextAlign.start,
+          //   style:
+          //   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          // ),
         ],
       ),
       SizedBox(
@@ -7068,12 +6492,12 @@ Widget Task_D({required Task? task})=>Padding(
           SizedBox(
             width: 7,
           ),
-          Text(
-            '${task?.instructor}',
-            textAlign: TextAlign.start,
-            style:
-            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-          ),
+          // Text(
+          //   '${task?.instructor}',
+          //   textAlign: TextAlign.start,
+          //   style:
+          //   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          // ),
         ],
       ),
       SizedBox(
@@ -7165,12 +6589,12 @@ Widget Quiz_D({required Quiz? quiz})=>Padding(
           SizedBox(
             width: 7,
           ),
-          Text(
-            '${quiz?.courseCycle}',
-            textAlign: TextAlign.start,
-            style:
-            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-          ),
+          // Text(
+          //   '${quiz?.courseCycle}',
+          //   textAlign: TextAlign.start,
+          //   style:
+          //   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          // ),
         ],
       ),
       SizedBox(
@@ -7185,12 +6609,12 @@ Widget Quiz_D({required Quiz? quiz})=>Padding(
           SizedBox(
             width: 7,
           ),
-          Text(
-            '${quiz?.instructor}',
-            textAlign: TextAlign.start,
-            style:
-            TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-          ),
+          // Text(
+          //   '${quiz?.instructor}',
+          //   textAlign: TextAlign.start,
+          //   style:
+          //   TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+          // ),
         ],
       ),
       SizedBox(
@@ -7501,7 +6925,7 @@ Widget Quiz_ins_D({required Dashboard_ins_model? quiz})=>Padding(
     ],
   ),
 );
-Widget News_D({required News_D_model? news})=>Padding(
+Widget News_D({required GetAllNewsModel? news})=>Padding(
   padding: const EdgeInsets.all(10.0),
   child: Row(
     children: [
@@ -7566,9 +6990,8 @@ Widget News_D({required News_D_model? news})=>Padding(
   ),
 );
 
-//---------------------------INSTRUCTOR----------------
-//------------------------------------------------------
-//--------------------------------------------------------
+
+
 var puttaskGradecontroller = TextEditingController();
 Widget showSTU_UploadeTask({
   int? index,

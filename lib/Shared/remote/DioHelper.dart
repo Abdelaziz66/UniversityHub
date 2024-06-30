@@ -147,7 +147,7 @@ class Dio_Helper {
     Map<String, dynamic>? query,
     String? token,
     Map<String, dynamic>? data,
-
+    File? updateFile,
   }) async {
     //  FormData formData=FormData();
     dio.options.headers={
@@ -155,9 +155,18 @@ class Dio_Helper {
       'Accept':'application/json',
       'Authorization':'Bearer $token',
     };
-
+    FormData formData = FormData();
+    String fileName = updateFile!.path.split('/').last; // Get the file name
+    formData.files.add(MapEntry(
+      'file', // 'file' is the key name expected by the API for each file
+      await MultipartFile.fromFile(
+        updateFile.path,
+        filename: fileName,
+      ),
+    ));
+    print('////////////////////////////////$updateFile');
     return await dio.put(
-        url, queryParameters: query, data: data);
+        url, queryParameters: query, data: data??formData);
   }
 
 

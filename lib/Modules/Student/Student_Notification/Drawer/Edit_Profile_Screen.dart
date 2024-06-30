@@ -84,7 +84,7 @@ class Edit_Profile_screen extends StatelessWidget {
 
                                         radius: 80,
                                         backgroundColor: Colors.white,
-                                        backgroundImage: FileImage(cubit.all_assign_files_List[0]!)
+                                        backgroundImage: FileImage(cubit.all_assign_files_List[0])
                                       ):  CircleAvatar(
 
                                       radius: 80,
@@ -131,9 +131,15 @@ class Edit_Profile_screen extends StatelessWidget {
                         ),
                         child: GestureDetector(
                           onTap: (){
-                            cubit.all_assign_files_List.isEmpty? cubit.pick_File()
-                            :cubit.userUpdatePhoto();
-                            
+                           if(cubit.all_assign_files_List.isEmpty) {
+                             cubit.pick_File();
+                             print(cubit.all_assign_files_List);
+                           }else{
+                             print('//////////////${cubit.all_assign_files_List}');
+
+                             cubit.userUpdatePhoto();
+                           }
+
                           },
                           child: Container(
                             decoration: BoxDecoration(
