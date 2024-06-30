@@ -296,7 +296,7 @@ class Profile_screen extends StatelessWidget {
                       Expanded(
                         child: InkWell(
                           onTap: () {
-                            cubit.all_assign_files_List.clear();
+                            cubit.all_assign_files_List=[];
 
                             cubit.resetPassToken=token;
 
