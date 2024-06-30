@@ -4169,7 +4169,7 @@ Widget INS_Quiz_Card({required context, required GetQuizes_Model quizes}
                 SizedBox(
                   width: 10,
                 ),
-                Text(quizes.title!),
+                Expanded(child: Text(quizes.title!,maxLines: 1,overflow: TextOverflow.ellipsis,)),
                 Spacer(),
                 InkWell(
                   onTap: () {
@@ -4308,11 +4308,14 @@ Widget INS_Quiz_Card({required context, required GetQuizes_Model quizes}
                               SizedBox(
                                 width: 7,
                               ),
-                              Text(
-                                'Computer Security',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              Expanded(
+                                child: Text(
+                                  '${App_cubit.get(context).currentCourseName}',
+                                  maxLines: 1,overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700, fontSize: 13),
+                                ),
                               ),
                             ],
                           ),
@@ -4329,7 +4332,7 @@ Widget INS_Quiz_Card({required context, required GetQuizes_Model quizes}
                                 width: 7,
                               ),
                               Text(
-                                'Sara shehab',
+                                '${App_cubit.get(context).currentInstructorName}',
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w700, fontSize: 13),
@@ -4349,7 +4352,7 @@ Widget INS_Quiz_Card({required context, required GetQuizes_Model quizes}
                                 width: 7,
                               ),
                               Text(
-                                '5 points',
+                                '${quizes.status}',
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w700, fontSize: 13),
@@ -4368,12 +4371,15 @@ Widget INS_Quiz_Card({required context, required GetQuizes_Model quizes}
                               SizedBox(
                                 width: 7,
                               ),
-                              Text(
-                                'From ${quizes?.startDate?.hour}:${quizes?.startDate?.minute}  ${quizes?.startDate?.month}/${quizes?.startDate?.day} To '
-                                    '${quizes?.endDate?.hour}:${quizes?.endDate?.minute} ${quizes?.endDate?.month}/${quizes?.endDate?.day}',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              Expanded(
+                                child: Text(
+                                  'Deadline  ${quizes!.endDate!.hour}:${quizes!.endDate!.minute} - ${quizes!.endDate!.day}/${quizes!.endDate!.month}/${quizes!.endDate!.year}',
+                                  textAlign: TextAlign.start,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700, fontSize: 13),
+                                ),
                               ),
                             ],
                           ),
@@ -4412,14 +4418,14 @@ Widget INS_Quiz_Card({required context, required GetQuizes_Model quizes}
             ),
             Container(
               height: 40,
-              child: LinearPercentIndicator(
-                percent: .6,
+              child:LinearPercentIndicator(
+                percent:quizes.numberOfStudentsSolve!/quizes.numberOfAllStudents!,
                 backgroundColor: Colors.blueGrey.withOpacity(.2),
                 progressColor: Colors.teal.withOpacity(.6),
                 barRadius: Radius.circular(20),
                 lineHeight: 12,
-                trailing: Text('125'),
-                leading: Text('60'),
+                trailing: Text('${quizes.numberOfAllStudents}'),
+                leading: Text('${quizes.numberOfStudentsSolve}'),
 
                 animation: true,
                 animationDuration: 1500,
@@ -5900,7 +5906,7 @@ Widget INS_Quiz_Complete_Card(
     {required context, required GetQuizes_Model quizes}
         ) =>
     Container(
-      height: 200,
+      height: 180,
       decoration: BoxDecoration(
         // color: Colors.blueGrey.withOpacity(.05),
         borderRadius: BorderRadius.circular(20),
@@ -5918,7 +5924,7 @@ Widget INS_Quiz_Complete_Card(
                 SizedBox(
                   width: 10,
                 ),
-                Text('${quizes.title}'),
+                Expanded(child: Text('${quizes.title}',maxLines: 1,overflow: TextOverflow.ellipsis,)),
                 Spacer(),
                 Container(
                   height: 30,
@@ -5967,11 +5973,14 @@ Widget INS_Quiz_Complete_Card(
                               SizedBox(
                                 width: 7,
                               ),
-                              Text(
-                                'Computer Security',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 13),
+                              Expanded(
+                                child: Text(
+                                  '${App_cubit.get(context).currentCourseName}',
+                                  maxLines: 1,overflow: TextOverflow.ellipsis,
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700, fontSize: 13),
+                                ),
                               ),
                             ],
                           ),
@@ -5988,27 +5997,7 @@ Widget INS_Quiz_Complete_Card(
                                 width: 7,
                               ),
                               Text(
-                                'Sara shehab',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 13),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Row(
-                            children: [
-                              FaIcon(
-                                FontAwesomeIcons.chartLine,
-                                size: 12,
-                              ),
-                              SizedBox(
-                                width: 7,
-                              ),
-                              Text(
-                                '5 points',
+                                '${App_cubit.get(context).currentInstructorName}',
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w700, fontSize: 13),
@@ -6027,12 +6016,15 @@ Widget INS_Quiz_Complete_Card(
                               SizedBox(
                                 width: 7,
                               ),
-                              Text(
-                                'Ended  ${quizes?.endDate?.hour}:${quizes?.endDate?.minute}  ${quizes?.endDate?.month}/${quizes?.endDate?.day}',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w700, fontSize: 13,color: Colors.red),
-
+                              Expanded(
+                                child: Text(
+                                  'Ended  ${quizes!.endDate!.hour}:${quizes!.endDate!.minute} - ${quizes!.endDate!.day}/${quizes!.endDate!.month}/${quizes!.endDate!.year}',
+                                  textAlign: TextAlign.start,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w700, fontSize: 13,color: Colors.red),
+                                ),
                               ),
                             ],
                           ),
@@ -6071,14 +6063,14 @@ Widget INS_Quiz_Complete_Card(
             ),
             Container(
               height: 40,
-              child: LinearPercentIndicator(
-                percent: .85,
+              child:LinearPercentIndicator(
+                percent:quizes.numberOfStudentsSolve!/quizes.numberOfAllStudents!,
                 backgroundColor: Colors.blueGrey.withOpacity(.2),
                 progressColor: Colors.teal.withOpacity(.6),
                 barRadius: Radius.circular(20),
                 lineHeight: 12,
-                trailing: Text('125'),
-                leading: Text('120'),
+                trailing: Text('${quizes.numberOfAllStudents}'),
+                leading: Text('${quizes.numberOfStudentsSolve}'),
 
                 animation: true,
                 animationDuration: 1500,
@@ -6523,7 +6515,9 @@ Widget Build_INS_Quiz_Ques(context, index, Animation<double> animation) {
             ),
           ),
         ),
+
         const SizedBox(height: 15.0),
+
         Container(
           height: 280,
           child: ListView.builder(
@@ -6536,406 +6530,85 @@ Widget Build_INS_Quiz_Ques(context, index, Animation<double> animation) {
                 INS_Quiz_Answer(index: index, context: context, index2: index2),
           ),
         ),
-        // Container(
-        //   height: 280,
-        //   child: AnimatedList(
-        //     physics: BouncingScrollPhysics(),
-        //     key: App_cubit.get(context).ANS_listKey[index],
-        //     // controller: controllerforlist,
-        //     initialItemCount: App_cubit.get(context).AController[index].length,
-        //     itemBuilder: (BuildContext context, int index2,
-        //         Animation<double> animation) =>
-        //         INS_Quiz_Answer(index: index,
-        //           index2: index2,context: context,
-        //             animation: animation),
-        //   ),
-        // ),
-        // Padding(
-        //   padding: const EdgeInsets.only(left: 30.0),
-        //   child: Row(
-        //     children: [
-        //       Expanded(
-        //         child: Container(
-        //           height: 60,
-        //           alignment: Alignment.center,
-        //           decoration: BoxDecoration(
-        //             borderRadius: BorderRadius.only(
-        //                 bottomLeft: Radius.circular(35),
-        //                 topRight: Radius.circular(35),
-        //                 bottomRight: Radius.circular(35)),
-        //
-        //             // color: Colors.blueGrey.withOpacity(.1),
-        //             color: Colors.blue.withOpacity(.2),
-        //           ),
-        //           child: Padding(
-        //             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        //             child: TextFormField(
-        //               keyboardType: TextInputType.text,
-        //               maxLines: 1,
-        //
-        //               onFieldSubmitted: (value) {
-        //                 print(value);
-        //               },
-        //               onChanged: (value) {
-        //                 print(value);
-        //               },
-        //               validator: (value) {
-        //                 if (value!.isEmpty) {
-        //                   return 'Question can\'t be empty';
-        //                 }
-        //                 return null;
-        //               },
-        //               // toolbarOptions:
-        //               //     ToolbarOptions(paste: true, copy: true),
-        //               cursorColor: c1,
-        //               style: const TextStyle(
-        //                 fontSize: 20,
-        //               ),
-        //               decoration: InputDecoration(
-        //                 prefixIcon: Column(
-        //                   children: [
-        //                     SizedBox(
-        //                       height: 15,
-        //                     ),
-        //                     FaIcon(
-        //                       FontAwesomeIcons.a,
-        //                       color: c1.withOpacity(.6),
-        //                       size: 20,
-        //                     ),
-        //                   ],
-        //                 ),
-        //                 suffixIcon: Column(
-        //                   children: [
-        //                     SizedBox(
-        //                       height: 15,
-        //                     ),
-        //                     GestureDetector(
-        //                       onTap: () {},
-        //                       child: FaIcon(
-        //                         FontAwesomeIcons.circleCheck,
-        //                         color: Colors.teal,
-        //                         size: 28,
-        //                       ),
-        //                     ),
-        //                   ],
-        //                 ),
-        //                 hintText: 'Add Answer',
-        //                 border: InputBorder.none,
-        //               ),
-        //             ),
-        //           ),
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-        // SizedBox(
-        //   height: 10,
-        // ),
-        // Padding(
-        //   padding: const EdgeInsets.only(left: 30.0),
-        //   child: Row(
-        //     children: [
-        //       Expanded(
-        //         child: Container(
-        //           height: 60,
-        //           alignment: Alignment.center,
-        //           decoration: BoxDecoration(
-        //             borderRadius: BorderRadius.only(
-        //                 bottomLeft: Radius.circular(35),
-        //                 topRight: Radius.circular(35),
-        //                 bottomRight: Radius.circular(35)),
-        //
-        //             // color: Colors.blueGrey.withOpacity(.1),
-        //             color: Colors.blue.withOpacity(.2),
-        //           ),
-        //           child: Padding(
-        //             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        //             child: TextFormField(
-        //               keyboardType: TextInputType.text,
-        //               maxLines: 1,
-        //
-        //               onFieldSubmitted: (value) {
-        //                 print(value);
-        //               },
-        //               onChanged: (value) {
-        //                 print(value);
-        //               },
-        //               validator: (value) {
-        //                 if (value!.isEmpty) {
-        //                   return 'Question can\'t be empty';
-        //                 }
-        //                 return null;
-        //               },
-        //               // toolbarOptions:
-        //               //     ToolbarOptions(paste: true, copy: true),
-        //               cursorColor: c1,
-        //               style: const TextStyle(
-        //                 fontSize: 20,
-        //               ),
-        //               decoration: InputDecoration(
-        //                 prefixIcon: Column(
-        //                   children: [
-        //                     SizedBox(
-        //                       height: 15,
-        //                     ),
-        //                     FaIcon(
-        //                       FontAwesomeIcons.b,
-        //                       color: c1.withOpacity(.6),
-        //                       size: 20,
-        //                     ),
-        //                   ],
-        //                 ),
-        //                 suffixIcon: Column(
-        //                   children: [
-        //                     SizedBox(
-        //                       height: 15,
-        //                     ),
-        //                     GestureDetector(
-        //                       onTap: () {},
-        //                       child: FaIcon(
-        //                         FontAwesomeIcons.circleDot,
-        //                         color: Colors.black.withOpacity(.4),
-        //                         size: 28,
-        //                       ),
-        //                     ),
-        //                   ],
-        //                 ),
-        //                 hintText: 'Add Answer',
-        //                 border: InputBorder.none,
-        //               ),
-        //             ),
-        //           ),
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-        // ConditionalBuilder(
-        //     condition: App_cubit.get(context).more >= 3,
-        //     builder: (context) => Padding(
-        //           padding: const EdgeInsets.only(top: 10.0),
-        //           child: Padding(
-        //             padding: const EdgeInsets.only(left: 30.0),
-        //             child: Row(
-        //               children: [
-        //                 Expanded(
-        //                   child: Container(
-        //                     height: 60,
-        //                     alignment: Alignment.center,
-        //                     decoration: BoxDecoration(
-        //                       borderRadius: BorderRadius.only(
-        //                           bottomLeft: Radius.circular(35),
-        //                           topRight: Radius.circular(35),
-        //                           bottomRight: Radius.circular(35)),
-        //
-        //                       // color: Colors.blueGrey.withOpacity(.1),
-        //                       color: Colors.blue.withOpacity(.2),
-        //                     ),
-        //                     child: Padding(
-        //                       padding:
-        //                           const EdgeInsets.symmetric(horizontal: 8.0),
-        //                       child: TextFormField(
-        //                         keyboardType: TextInputType.text,
-        //                         maxLines: 1,
-        //
-        //                         onFieldSubmitted: (value) {
-        //                           print(value);
-        //                         },
-        //                         onChanged: (value) {
-        //                           print(value);
-        //                         },
-        //                         validator: (value) {
-        //                           if (value!.isEmpty) {
-        //                             return 'Question can\'t be empty';
-        //                           }
-        //                           return null;
-        //                         },
-        //                         // toolbarOptions:
-        //                         //     ToolbarOptions(paste: true, copy: true),
-        //                         cursorColor: c1,
-        //                         style: const TextStyle(
-        //                           fontSize: 20,
-        //                         ),
-        //                         decoration: InputDecoration(
-        //                           prefixIcon: Column(
-        //                             children: [
-        //                               SizedBox(
-        //                                 height: 15,
-        //                               ),
-        //                               FaIcon(
-        //                                 FontAwesomeIcons.c,
-        //                                 color: c1.withOpacity(.6),
-        //                                 size: 20,
-        //                               ),
-        //                             ],
-        //                           ),
-        //                           suffixIcon: Column(
-        //                             children: [
-        //                               SizedBox(
-        //                                 height: 15,
-        //                               ),
-        //                               GestureDetector(
-        //                                 onTap: () {},
-        //                                 child: FaIcon(
-        //                                   FontAwesomeIcons.circleDot,
-        //                                   color: Colors.black.withOpacity(.4),
-        //                                   size: 28,
-        //                                 ),
-        //                               ),
-        //                             ],
-        //                           ),
-        //                           hintText: 'Add Answer',
-        //                           border: InputBorder.none,
-        //                         ),
-        //                       ),
-        //                     ),
-        //                   ),
-        //                 ),
-        //               ],
-        //             ),
-        //           ),
-        //         ),
-        //     fallback: (context) => Container(
-        //           height: 10,
-        //         )),
-        // ConditionalBuilder(
-        //     condition: App_cubit.get(context).more == 4,
-        //     builder: (context) => Padding(
-        //           padding: const EdgeInsets.only(top: 10.0),
-        //           child: Padding(
-        //             padding: const EdgeInsets.only(left: 30.0),
-        //             child: Row(
-        //               children: [
-        //                 Expanded(
-        //                   child: Container(
-        //                     height: 60,
-        //                     alignment: Alignment.center,
-        //                     decoration: BoxDecoration(
-        //                       borderRadius: BorderRadius.only(
-        //                           bottomLeft: Radius.circular(35),
-        //                           topRight: Radius.circular(35),
-        //                           bottomRight: Radius.circular(35)),
-        //
-        //                       // color: Colors.blueGrey.withOpacity(.1),
-        //                       color: Colors.blue.withOpacity(.2),
-        //                     ),
-        //                     child: Padding(
-        //                       padding:
-        //                           const EdgeInsets.symmetric(horizontal: 8.0),
-        //                       child: TextFormField(
-        //                         keyboardType: TextInputType.text,
-        //                         maxLines: 1,
-        //
-        //                         onFieldSubmitted: (value) {
-        //                           print(value);
-        //                         },
-        //                         onChanged: (value) {
-        //                           print(value);
-        //                         },
-        //                         validator: (value) {
-        //                           if (value!.isEmpty) {
-        //                             return 'Question can\'t be empty';
-        //                           }
-        //                           return null;
-        //                         },
-        //                         // toolbarOptions:
-        //                         //     ToolbarOptions(paste: true, copy: true),
-        //                         cursorColor: c1,
-        //                         style: const TextStyle(
-        //                           fontSize: 20,
-        //                         ),
-        //                         decoration: InputDecoration(
-        //                           prefixIcon: Column(
-        //                             children: [
-        //                               SizedBox(
-        //                                 height: 15,
-        //                               ),
-        //                               FaIcon(
-        //                                 FontAwesomeIcons.d,
-        //                                 color: c1.withOpacity(.6),
-        //                                 size: 20,
-        //                               ),
-        //                             ],
-        //                           ),
-        //                           suffixIcon: Column(
-        //                             children: [
-        //                               SizedBox(
-        //                                 height: 15,
-        //                               ),
-        //                               GestureDetector(
-        //                                 onTap: () {},
-        //                                 child: FaIcon(
-        //                                   FontAwesomeIcons.circleDot,
-        //                                   color: Colors.black.withOpacity(.4),
-        //                                   size: 28,
-        //                                 ),
-        //                               ),
-        //                             ],
-        //                           ),
-        //                           hintText: 'Add Answer',
-        //                           border: InputBorder.none,
-        //                         ),
-        //                       ),
-        //                     ),
-        //                   ),
-        //                 ),
-        //               ],
-        //             ),
-        //           ),
-        //         ),
-        //     fallback: (context) => Container(
-        //           height: 10,
-        //         )),
-        // SizedBox(
-        //   height: 15,
-        // ),
-        // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        //   IconButton(
-        //       onPressed: () {
-        //         App_cubit.get(context).minusmore(App_cubit.get(context).ANS_listKey[index],index);
-        //       },
-        //       icon: FaIcon(
-        //         FontAwesomeIcons.circleMinus,
-        //         color: Colors.redAccent.withOpacity(.8),
-        //         size: 50,
-        //       )),
-        //   IconButton(
-        //       onPressed: () {
-        //         App_cubit.get(context).addmore(App_cubit.get(context).ANS_listKey[index],index);
-        //       },
-        //       icon: FaIcon(
-        //         FontAwesomeIcons.circlePlus,
-        //         color: Colors.teal.withOpacity(.8),
-        //         size: 50,
-        //       )),
-        // ]),
+
         SizedBox(
-          height: 25,
+          height: 5,
         ),
+        Padding(
+          padding: const EdgeInsets.only(left:120,right: 0.0),
+          child: Container(
+            height: 55,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                  bottomRight: Radius.circular(30)),
+
+              // color: Colors.blueGrey.withOpacity(.1),
+              color: Colors.blueGrey.withOpacity(.3),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                maxLines: 5,
+                controller: App_cubit.get(context).GController[index],
+
+                onFieldSubmitted: (value) {
+                  print('onFieldSubmitted');
+                  // print(value);
+                },
+                onChanged: (value) {
+                  print('onChanged');
+                  // Q!.removeAt(index);
+                  // Q!.insert(index,value);
+                  // print(Q);
+                },
+                onTapOutside: (value) {
+                  print('onTapOutside');
+                  // print(value);
+                },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Points can\'t be empty';
+                  }
+                  return null;
+                },
+                // toolbarOptions:
+                //     ToolbarOptions(paste: true, copy: true),
+                cursorColor: c1,
+                style: const TextStyle(
+                  fontSize: 20,
+                ),
+                decoration: InputDecoration(
+                  prefixIcon: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 15,
+                      ),
+                      FaIcon(
+                        FontAwesomeIcons.chartSimple,
+                        color: c1.withOpacity(.6),
+                        size: 25,
+                      ),
+                    ],
+                  ),
+                  hintText: 'Points',
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 30,),
         Container(
           height: 1,
           color: Colors.blueGrey,
         ),
 
-        // ListView.builder(
-        //   shrinkWrap: true,
-        //   itemCount: App_cubit.get(context).stu_Quiz_Ques_options.length,
-        //   itemBuilder: (context, index) {
-        //     return RadioListTile(
-        //       selectedTileColor: Colors.blue,
-        //       title: Text(
-        //         App_cubit.get(context).stu_Quiz_Ques_options[index],
-        //         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        //       ),
-        //       value: App_cubit.get(context).stu_Quiz_Ques_options[index],
-        //       groupValue: App_cubit.get(context).selectedOption,
-        //       onChanged: (value) {
-        //         App_cubit.get(context).Quiz_Select_answer(value);
-        //       },
-        //     );
-        //   },
-        // ),
+
       ],
     ),
   );

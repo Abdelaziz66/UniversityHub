@@ -15,6 +15,9 @@ import 'package:university_hup/Shared/Cubit/App_cubit.dart';
 import 'package:university_hup/Shared/Cubit/App_state.dart';
 import 'package:university_hup/Shared/constant.dart';
 
+import '../../../Layout/LayoutScreen.dart';
+import '../../Student/STU_About_Course.dart';
+
 class INS_Quizes_Ques_Screen extends StatefulWidget {
   INS_Quizes_Ques_Screen({super.key});
 
@@ -131,12 +134,19 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
                                     );
 
                                       Navigator.pop(context);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                INS_Quizes_Screen(),
-                                          ));
+                                    NavigateAndFinish(context,Layout_Screen());
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              STU_About_course(),
+                                        ));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              INS_Quizes_Screen(),
+                                        ));
 
 
                                   });
@@ -219,9 +229,11 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
     // App_cubit.get(context).ANS_listKey.insert(
     //     App_cubit.get(context).ANS_listKey.length,
     //     GlobalKey());
+
     App_cubit.get(context).AController.insert(
         App_cubit.get(context).QController.length,
         [TextEditingController(),TextEditingController(),TextEditingController(),TextEditingController(),]);
+
     App_cubit.get(context).Acheck.insert(
         App_cubit.get(context).QController.length,
         [true,false,false,false,]);
@@ -229,7 +241,13 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
       App_cubit.get(context).QController.insert(
           App_cubit.get(context).QController.length,
           TextEditingController());
-      _listKey.currentState!
+
+    App_cubit.get(context).GController.insert(
+        App_cubit.get(context).GController.length,
+        TextEditingController());
+
+
+    _listKey.currentState!
           .insertItem(App_cubit.get(context).QController.length-1);
       // print('length QController after /////////////////////////////');
       // print(App_cubit.get(context).QController.length);
@@ -257,6 +275,9 @@ class _STU_Quizes_Ques_ScreenState extends State<INS_Quizes_Ques_Screen> {
       App_cubit.get(context)
           .QController
           .removeAt(App_cubit.get(context).QController.length - 1);
+      App_cubit.get(context)
+          .GController
+          .removeAt(App_cubit.get(context).GController.length - 1);
       // print('//////////////////////////////////////////////////////////////////');
       // print('length ANS_listKey after remove = ${App_cubit.get(context).ANS_listKey.length}');
       // print('length QController after remove = ${App_cubit.get(context).QController.length}');
