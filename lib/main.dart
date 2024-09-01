@@ -7,7 +7,6 @@ import 'package:universityhup/Modules/LandScape/Login/LoginScreen.dart';
 import 'package:universityhup/Shared/Cons_widget.dart';
 import 'package:universityhup/Shared/Local/Cache_helper.dart';
 import 'package:universityhup/Shared/constant.dart';
-
 import 'package:universityhup/Shared/remote/DioHelper.dart';
 import 'Models/All_News/allNewsAdapter.dart';
 import 'Models/HistoryModel&Adapter/stuHistoryAdapter.dart';
