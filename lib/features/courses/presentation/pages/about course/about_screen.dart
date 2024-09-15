@@ -25,7 +25,7 @@ class AboutCourseScreen extends StatelessWidget {
             height: 30,
           ),
           DefaultAppBar(
-            context: context,
+            context: context,text: 'Title',
             // onTap:(){
             //   cubit.INS_GetAllCourses_Function( token: token,);
             //   Navigator.pop(context);
@@ -37,7 +37,7 @@ class AboutCourseScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: SizedBox(
-              height: screenSize.height / 1.5,
+              height: screenSize.height * .65,
               child: Column(
                 children: [
                   Expanded(
@@ -46,20 +46,18 @@ class AboutCourseScreen extends StatelessWidget {
                         AboutButton(
                           text: 'Material',
                           color: Colors.greenAccent.withOpacity(.25),
-                          image: AssetsData.courseMaterialImage,
+                          image: AssetsData.courseMaterialImage, onTap: () {  },
                         ),
                         const SizedBox(
                           width: 15,
                         ),
-                        InkWell(
-                          onTap: (){
+                        AboutButton(
+                          text: 'Assignment',
+                          color: Colors.deepPurpleAccent.withOpacity(.25),
+                          image: AssetsData.courseAssignImage, onTap: () {
+                            GoRouter.of(context).push(AppRouter.kAssignmentScreen);
+                        },
 
-                          },
-                          child: AboutButton(
-                            text: 'Assignment',
-                            color: Colors.deepPurpleAccent.withOpacity(.25),
-                            image: AssetsData.courseAssignImage,
-                          ),
                         ),
                       ],
                     ),
@@ -73,7 +71,9 @@ class AboutCourseScreen extends StatelessWidget {
                         AboutButton(
                           text: 'Quizzes',
                           color: Colors.pinkAccent.withOpacity(.18),
-                          image: AssetsData.courseQuizImage,
+                          image: AssetsData.courseQuizImage, onTap: () {
+
+                        },
                         ),
                         const SizedBox(
                           width: 15,
@@ -81,7 +81,10 @@ class AboutCourseScreen extends StatelessWidget {
                         AboutButton(
                           text: 'Grades',
                           color: Colors.lightBlueAccent.withOpacity(.25),
-                          image: AssetsData.courseGradesImage,
+                          image: AssetsData.courseGradesImage, onTap: () {
+                          GoRouter.of(context).push(AppRouter.kGrade);
+
+                        },
                         ),
                       ],
                     ),

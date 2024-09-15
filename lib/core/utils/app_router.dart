@@ -5,6 +5,7 @@ import '../../features/layout/presentation/pages/layout.dart';
 import '../../features/login/presentation/pages/login.dart';
 import '../../features/onboarding/presentation/pages/onboarding.dart';
 import '../../features/student_role/assignment/presentation/pages/assignment_screen.dart';
+import '../../features/student_role/grade/presentation/pages/grade_screen.dart';
 
 abstract class AppRouter {
   static const kLayout = '/Layout';
@@ -13,6 +14,8 @@ abstract class AppRouter {
   static const kOnboarding = '/Onboarding';
   static const kAboutCourse= '/AboutCourseScreen';
   static const kAssignmentScreen= '/AssignmentScreen';
+  static const kGrade= '/Grade';
+
 
 
 
@@ -37,6 +40,10 @@ abstract class AppRouter {
       GoRoute(
         path: kAssignmentScreen,
         builder: (context, state) => const AssignmentScreen(),
+      ),
+      GoRoute(
+        path: kGrade,
+        builder: (context, state) => const GradeScreen(),
       ),
 
     ],
