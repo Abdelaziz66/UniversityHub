@@ -34,7 +34,7 @@ Each instructor also benefits from a personalized dashboard tailored to their ac
 
 
 🔗 check the link to see the full video in Linkedin 
-[Linkedin Post](www.linkedin.com/in/abdelaziz-elsayed-aab278252)
+[Linkedin Post](https://www.linkedin.com/posts/abdelaziz-elsayed-aab278252_flutter-flutterdev-mobiledevelopment-activity-7254204822457864192-yTPD?utm_source=share&utm_medium=member_desktop)
 
 
 ![poster](./@Abdelaziz.png)
